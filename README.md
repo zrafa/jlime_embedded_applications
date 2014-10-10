@@ -9,4 +9,4 @@ original sources, to adapt them to tiny screens (320x240) and few
 resources (32MB of RAM and slow MIPSEL CPU).
 
 Some nice work are snesx (might be the fastest super nintendo emulator ever
-we have) and the offline wikireader :)
+we have) and the offline wikireader (humane-nn) :)
