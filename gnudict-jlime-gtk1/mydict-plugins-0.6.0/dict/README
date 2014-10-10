@@ -1,0 +1,11 @@
+1. need libdict package 
+I put it into ../libdict-patch directory
+Original file is libdict-0.9.tar.gz, check http://www.dict.org for more information( contact me , there is bug there ? but I forget )
+
+2. auto generated Makefile.in is not good, please update Makefile.in 
+
+it should 
+$(CXXLINK) $(rfc2229_so_OBJECTS) $(rfc2229_so_LDFLAGS) $(rfc2229_so_LDADD) $(LIBS)
+instead of 
+$(CXXLINK) $(rfc2229_so_LDFLAGS) $(rfc2229_so_OBJECTS) $(rfc2229_so_LDADD) $(LIBS)
+

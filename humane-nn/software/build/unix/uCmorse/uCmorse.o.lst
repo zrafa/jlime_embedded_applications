@@ -1,0 +1,629 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.globl	morse
+  14              		.data
+  15              		.align	2
+  18              	morse:
+  19 0000 3F       		.byte	63
+  20 0001 3E       		.byte	62
+  21 0002 3C       		.byte	60
+  22 0003 38       		.byte	56
+  23 0004 30       		.byte	48
+  24 0005 20       		.byte	32
+  25 0006 21       		.byte	33
+  26 0007 23       		.byte	35
+  27 0008 27       		.byte	39
+  28 0009 2F       		.byte	47
+  29 000a 47       		.byte	71
+  30 000b 55       		.byte	85
+  31 000c 2D       		.byte	45
+  32 000d 31       		.byte	49
+  33 000e 6D       		.byte	109
+  34 000f 4C       		.byte	76
+  35 0010 56       		.byte	86
+  36 0011 06       		.byte	6
+  37 0012 11       		.byte	17
+  38 0013 15       		.byte	21
+  39 0014 09       		.byte	9
+  40 0015 02       		.byte	2
+  41 0016 14       		.byte	20
+  42 0017 0B       		.byte	11
+  43 0018 10       		.byte	16
+  44 0019 04       		.byte	4
+  45 001a 1E       		.byte	30
+  46 001b 0D       		.byte	13
+  47 001c 12       		.byte	18
+  48 001d 07       		.byte	7
+  49 001e 05       		.byte	5
+  50 001f 0F       		.byte	15
+  51 0020 16       		.byte	22
+  52 0021 1B       		.byte	27
+  53 0022 0A       		.byte	10
+  54 0023 08       		.byte	8
+  55 0024 03       		.byte	3
+  56 0025 0C       		.byte	12
+  57 0026 18       		.byte	24
+  58 0027 0E       		.byte	14
+  59 0028 19       		.byte	25
+  60 0029 1D       		.byte	29
+  61 002a 13       		.byte	19
+  62 002b 00000000 		.text
+  62      00
+  63              		.align	2
+  64              		.globl	tapGap
+  65              	$LFB0 = .
+  66              		.file 1 "uCmorse/uCmorse.c"
+   0:uCmorse/uCmorse.c **** #include "uCmorse.h"
+   1:uCmorse/uCmorse.c **** 
+   2:uCmorse/uCmorse.c **** unsigned char morse[] = {0x3f, 0x3e, 0x3c, 0x38, 0x30, 0x20, 0x21, 
+   3:uCmorse/uCmorse.c ****   0x23, 0x27, 0x2f, 0x47, 0x55, 0x2d, 0x31, 0x6d, 0x4c, 0x56, 0x06, 
+   4:uCmorse/uCmorse.c ****   0x11, 0x15, 0x09, 0x02, 0x14, 0x0b, 0x10, 0x04, 0x1e, 0x0d, 0x12, 
+   5:uCmorse/uCmorse.c ****   0x07, 0x05, 0x0f, 0x16, 0x1b, 0x0a, 0x08, 0x03, 0x0c, 0x18, 0x0e, 
+   6:uCmorse/uCmorse.c ****   0x19, 0x1d, 0x13};
+   7:uCmorse/uCmorse.c **** 
+   8:uCmorse/uCmorse.c **** void tapGap(int units) { sounder(0, UNITS2MSEC(units)); }
+  67              		.loc 1 9 0
+  68              		.set	nomips16
+  69              		.ent	tapGap
+  71              	tapGap:
+  72              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+  73              		.mask	0xc0000000,-4
+  74              		.fmask	0x00000000,0
+  75              		.set	noreorder
+  76              		.set	nomacro
+  77              		
+  78 0000 E0FFBD27 		addiu	$sp,$sp,-32
+  79              	$LCFI0:
+  80 0004 1C00BFAF 		sw	$31,28($sp)
+  81              	$LCFI1:
+  82 0008 1800BEAF 		sw	$fp,24($sp)
+  83              	$LCFI2:
+  84 000c 21F0A003 		move	$fp,$sp
+  85              	$LCFI3:
+  86 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  87 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  88 0018 1000BCAF 		.cprestore	16
+  89 001c 2000C4AF 		sw	$4,32($fp)
+  90              		.loc 1 9 0
+  91 0020 2000C28F 		lw	$2,32($fp)
+  92 0024 00000000 		nop
+  93 0028 00110200 		sll	$2,$2,4
+  94 002c 80180200 		sll	$3,$2,2
+  95 0030 21104300 		addu	$2,$2,$3
+  96 0034 00190200 		sll	$3,$2,4
+  97 0038 23106200 		subu	$2,$3,$2
+  98 003c 02004104 		bgez	$2,$L2
+  99 0040 00000000 		nop
+ 100              	
+ 101 0044 07004224 		addiu	$2,$2,7
+ 102              	$L2:
+ 103 0048 C3100200 		sra	$2,$2,3
+ 104 004c 21200000 		move	$4,$0
+ 105 0050 21284000 		move	$5,$2
+ 106 0054 0000828F 		lw	$2,%call16(sounder)($28)
+ 107 0058 00000000 		nop
+ 108 005c 21C84000 		move	$25,$2
+ 109 0060 09F82003 		jalr	$25
+ 110 0064 00000000 		nop
+ 111              	
+ 112 0068 1000DC8F 		lw	$28,16($fp)
+ 113 006c 21E8C003 		move	$sp,$fp
+ 114 0070 1C00BF8F 		lw	$31,28($sp)
+ 115 0074 1800BE8F 		lw	$fp,24($sp)
+ 116 0078 2000BD27 		addiu	$sp,$sp,32
+ 117 007c 0800E003 		j	$31
+ 118 0080 00000000 		nop
+ 119              	
+ 120              		.set	macro
+ 121              		.set	reorder
+ 122              		.end	tapGap
+ 123              	$LFE0:
+ 125              		.align	2
+ 126              		.globl	tapDit
+ 127              	$LFB1 = .
+   9:uCmorse/uCmorse.c **** void tapDit() { sounder(1, UNITS2MSEC(DIT)); }
+ 128              		.loc 1 10 0
+ 129              		.set	nomips16
+ 130              		.ent	tapDit
+ 132              	tapDit:
+ 133              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 134              		.mask	0xc0000000,-4
+ 135              		.fmask	0x00000000,0
+ 136              		.set	noreorder
+ 137              		.set	nomacro
+ 138              		
+ 139 0084 E0FFBD27 		addiu	$sp,$sp,-32
+ 140              	$LCFI4:
+ 141 0088 1C00BFAF 		sw	$31,28($sp)
+ 142              	$LCFI5:
+ 143 008c 1800BEAF 		sw	$fp,24($sp)
+ 144              	$LCFI6:
+ 145 0090 21F0A003 		move	$fp,$sp
+ 146              	$LCFI7:
+ 147 0094 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 148 0098 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 149 009c 1000BCAF 		.cprestore	16
+ 150              		.loc 1 10 0
+ 151 00a0 01000424 		li	$4,1			# 0x1
+ 152 00a4 96000524 		li	$5,150			# 0x96
+ 153 00a8 0000828F 		lw	$2,%call16(sounder)($28)
+ 154 00ac 00000000 		nop
+ 155 00b0 21C84000 		move	$25,$2
+ 156 00b4 09F82003 		jalr	$25
+ 157 00b8 00000000 		nop
+ 158              	
+ 159 00bc 1000DC8F 		lw	$28,16($fp)
+ 160 00c0 21E8C003 		move	$sp,$fp
+ 161 00c4 1C00BF8F 		lw	$31,28($sp)
+ 162 00c8 1800BE8F 		lw	$fp,24($sp)
+ 163 00cc 2000BD27 		addiu	$sp,$sp,32
+ 164 00d0 0800E003 		j	$31
+ 165 00d4 00000000 		nop
+ 166              	
+ 167              		.set	macro
+ 168              		.set	reorder
+ 169              		.end	tapDit
+ 170              	$LFE1:
+ 172              		.align	2
+ 173              		.globl	tapDash
+ 174              	$LFB2 = .
+  10:uCmorse/uCmorse.c **** void tapDash() { sounder(1, UNITS2MSEC(DASH));}
+ 175              		.loc 1 11 0
+ 176              		.set	nomips16
+ 177              		.ent	tapDash
+ 179              	tapDash:
+ 180              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 181              		.mask	0xc0000000,-4
+ 182              		.fmask	0x00000000,0
+ 183              		.set	noreorder
+ 184              		.set	nomacro
+ 185              		
+ 186 00d8 E0FFBD27 		addiu	$sp,$sp,-32
+ 187              	$LCFI8:
+ 188 00dc 1C00BFAF 		sw	$31,28($sp)
+ 189              	$LCFI9:
+ 190 00e0 1800BEAF 		sw	$fp,24($sp)
+ 191              	$LCFI10:
+ 192 00e4 21F0A003 		move	$fp,$sp
+ 193              	$LCFI11:
+ 194 00e8 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 195 00ec 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 196 00f0 1000BCAF 		.cprestore	16
+ 197              		.loc 1 11 0
+ 198 00f4 01000424 		li	$4,1			# 0x1
+ 199 00f8 C2010524 		li	$5,450			# 0x1c2
+ 200 00fc 0000828F 		lw	$2,%call16(sounder)($28)
+ 201 0100 00000000 		nop
+ 202 0104 21C84000 		move	$25,$2
+ 203 0108 09F82003 		jalr	$25
+ 204 010c 00000000 		nop
+ 205              	
+ 206 0110 1000DC8F 		lw	$28,16($fp)
+ 207 0114 21E8C003 		move	$sp,$fp
+ 208 0118 1C00BF8F 		lw	$31,28($sp)
+ 209 011c 1800BE8F 		lw	$fp,24($sp)
+ 210 0120 2000BD27 		addiu	$sp,$sp,32
+ 211 0124 0800E003 		j	$31
+ 212 0128 00000000 		nop
+ 213              	
+ 214              		.set	macro
+ 215              		.set	reorder
+ 216              		.end	tapDash
+ 217              	$LFE2:
+ 219              		.align	2
+ 220              		.globl	tapChar
+ 221              	$LFB3 = .
+  11:uCmorse/uCmorse.c **** 
+  12:uCmorse/uCmorse.c **** void tapChar(char ch) {
+ 222              		.loc 1 13 0
+ 223              		.set	nomips16
+ 224              		.ent	tapChar
+ 226              	tapChar:
+ 227              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 228              		.mask	0xc0000000,-4
+ 229              		.fmask	0x00000000,0
+ 230              		.set	noreorder
+ 231              		.set	nomacro
+ 232              		
+ 233 012c D8FFBD27 		addiu	$sp,$sp,-40
+ 234              	$LCFI12:
+ 235 0130 2400BFAF 		sw	$31,36($sp)
+ 236              	$LCFI13:
+ 237 0134 2000BEAF 		sw	$fp,32($sp)
+ 238              	$LCFI14:
+ 239 0138 21F0A003 		move	$fp,$sp
+ 240              	$LCFI15:
+ 241 013c 21108000 		move	$2,$4
+ 242 0140 2800C2A3 		sb	$2,40($fp)
+  13:uCmorse/uCmorse.c ****   unsigned char c, i, bit;
+  14:uCmorse/uCmorse.c ****   if (ch == ' ') {
+ 243              		.loc 1 15 0
+ 244 0144 2800C383 		lb	$3,40($fp)
+ 245 0148 20000224 		li	$2,32			# 0x20
+ 246 014c 06006214 		bne	$3,$2,$L9
+ 247 0150 00000000 		nop
+ 248              	
+  15:uCmorse/uCmorse.c ****     tapGap(WORD_GAP);
+ 249              		.loc 1 16 0
+ 250 0154 09000424 		li	$4,9			# 0x9
+ 251              		.option	pic0
+ 252 0158 0000000C 		jal	tapGap
+ 253 015c 00000000 		nop
+ 254              	
+ 255              		.option	pic2
+  16:uCmorse/uCmorse.c ****     return;
+ 256              		.loc 1 17 0
+ 257 0160 41000010 		b	$L19
+ 258 0164 00000000 		nop
+ 259              	
+ 260              	$L9:
+  17:uCmorse/uCmorse.c ****   }
+  18:uCmorse/uCmorse.c ****   if ((ch <'0') || (ch > 'Z')) ch = '?';
+ 261              		.loc 1 19 0
+ 262 0168 2800C283 		lb	$2,40($fp)
+ 263 016c 00000000 		nop
+ 264 0170 30004228 		slt	$2,$2,48
+ 265 0174 06004014 		bne	$2,$0,$L11
+ 266 0178 00000000 		nop
+ 267              	
+ 268 017c 2800C283 		lb	$2,40($fp)
+ 269 0180 00000000 		nop
+ 270 0184 5B004228 		slt	$2,$2,91
+ 271 0188 03004014 		bne	$2,$0,$L12
+ 272 018c 00000000 		nop
+ 273              	
+ 274              	$L11:
+ 275 0190 3F000224 		li	$2,63			# 0x3f
+ 276 0194 2800C2A3 		sb	$2,40($fp)
+ 277              	$L12:
+  19:uCmorse/uCmorse.c ****   c = morse[ch - '0'];
+ 278              		.loc 1 20 0
+ 279 0198 2800C283 		lb	$2,40($fp)
+ 280 019c 00000000 		nop
+ 281 01a0 D0FF4324 		addiu	$3,$2,-48
+ 282 01a4 0000023C 		lui	$2,%hi(morse)
+ 283 01a8 00004224 		addiu	$2,$2,%lo(morse)
+ 284 01ac 21106200 		addu	$2,$3,$2
+ 285 01b0 00004290 		lbu	$2,0($2)
+ 286 01b4 00000000 		nop
+ 287 01b8 1A00C2A3 		sb	$2,26($fp)
+  20:uCmorse/uCmorse.c ****   for (i=0; i<8; ++i) {
+ 288              		.loc 1 21 0
+ 289 01bc 1900C0A3 		sb	$0,25($fp)
+ 290 01c0 1E000010 		b	$L13
+ 291 01c4 00000000 		nop
+ 292              	
+ 293              	$L18:
+  21:uCmorse/uCmorse.c ****     bit = c & 0x1;
+ 294              		.loc 1 22 0
+ 295 01c8 1A00C293 		lbu	$2,26($fp)
+ 296 01cc 00000000 		nop
+ 297 01d0 01004230 		andi	$2,$2,0x1
+ 298 01d4 1800C2A3 		sb	$2,24($fp)
+  22:uCmorse/uCmorse.c ****     c >>= 1;
+ 299              		.loc 1 23 0
+ 300 01d8 1A00C293 		lbu	$2,26($fp)
+ 301 01dc 00000000 		nop
+ 302 01e0 42100200 		srl	$2,$2,1
+ 303 01e4 1A00C2A3 		sb	$2,26($fp)
+  23:uCmorse/uCmorse.c ****     if (!c) break; // Character complete, 100.. encountered
+ 304              		.loc 1 24 0
+ 305 01e8 1A00C293 		lbu	$2,26($fp)
+ 306 01ec 00000000 		nop
+ 307 01f0 19004010 		beq	$2,$0,$L20
+ 308 01f4 00000000 		nop
+ 309              	
+ 310              	$L14:
+  24:uCmorse/uCmorse.c ****     bit ? tapDash() : tapDit();
+ 311              		.loc 1 25 0
+ 312 01f8 1800C293 		lbu	$2,24($fp)
+ 313 01fc 00000000 		nop
+ 314 0200 05004010 		beq	$2,$0,$L16
+ 315 0204 00000000 		nop
+ 316              	
+ 317              		.option	pic0
+ 318 0208 0000000C 		jal	tapDash
+ 319 020c 00000000 		nop
+ 320              	
+ 321              		.option	pic2
+ 322 0210 03000010 		b	$L17
+ 323 0214 00000000 		nop
+ 324              	
+ 325              	$L16:
+ 326              		.option	pic0
+ 327 0218 0000000C 		jal	tapDit
+ 328 021c 00000000 		nop
+ 329              	
+ 330              		.option	pic2
+ 331              	$L17:
+  25:uCmorse/uCmorse.c ****     tapGap(CHARACTER_GAP); // even at end, to ensure spacing
+ 332              		.loc 1 26 0
+ 333 0220 01000424 		li	$4,1			# 0x1
+ 334              		.option	pic0
+ 335 0224 0000000C 		jal	tapGap
+ 336 0228 00000000 		nop
+ 337              	
+ 338              		.option	pic2
+  21:uCmorse/uCmorse.c ****   for (i=0; i<8; ++i) {
+ 339              		.loc 1 21 0
+ 340 022c 1900C293 		lbu	$2,25($fp)
+ 341 0230 00000000 		nop
+ 342 0234 01004224 		addiu	$2,$2,1
+ 343 0238 1900C2A3 		sb	$2,25($fp)
+ 344              	$L13:
+ 345 023c 1900C293 		lbu	$2,25($fp)
+ 346 0240 00000000 		nop
+ 347 0244 0800422C 		sltu	$2,$2,8
+ 348 0248 DFFF4014 		bne	$2,$0,$L18
+ 349 024c 00000000 		nop
+ 350              	
+ 351 0250 02000010 		b	$L15
+ 352 0254 00000000 		nop
+ 353              	
+ 354              	$L20:
+  24:uCmorse/uCmorse.c ****     bit ? tapDash() : tapDit();
+ 355              		.loc 1 24 0
+ 356 0258 00000000 		nop
+ 357              	$L15:
+  26:uCmorse/uCmorse.c ****   }
+  27:uCmorse/uCmorse.c ****   tapGap(LETTER_GAP); // even at end, to ensure spacing
+ 358              		.loc 1 28 0
+ 359 025c 05000424 		li	$4,5			# 0x5
+ 360              		.option	pic0
+ 361 0260 0000000C 		jal	tapGap
+ 362 0264 00000000 		nop
+ 363              	
+ 364              		.option	pic2
+ 365              	$L19:
+  28:uCmorse/uCmorse.c **** }
+ 366              		.loc 1 29 0
+ 367 0268 21E8C003 		move	$sp,$fp
+ 368 026c 2400BF8F 		lw	$31,36($sp)
+ 369 0270 2000BE8F 		lw	$fp,32($sp)
+ 370 0274 2800BD27 		addiu	$sp,$sp,40
+ 371 0278 0800E003 		j	$31
+ 372 027c 00000000 		nop
+ 373              	
+ 374              		.set	macro
+ 375              		.set	reorder
+ 376              		.end	tapChar
+ 377              	$LFE3:
+ 379              		.align	2
+ 380              		.globl	tapString
+ 381              	$LFB4 = .
+  29:uCmorse/uCmorse.c **** 
+  30:uCmorse/uCmorse.c **** void tapString(const char *s) {
+ 382              		.loc 1 31 0
+ 383              		.set	nomips16
+ 384              		.ent	tapString
+ 386              	tapString:
+ 387              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 388              		.mask	0xc0000000,-4
+ 389              		.fmask	0x00000000,0
+ 390              		.set	noreorder
+ 391              		.set	nomacro
+ 392              		
+ 393 0280 D8FFBD27 		addiu	$sp,$sp,-40
+ 394              	$LCFI16:
+ 395 0284 2400BFAF 		sw	$31,36($sp)
+ 396              	$LCFI17:
+ 397 0288 2000BEAF 		sw	$fp,32($sp)
+ 398              	$LCFI18:
+ 399 028c 21F0A003 		move	$fp,$sp
+ 400              	$LCFI19:
+ 401 0290 2800C4AF 		sw	$4,40($fp)
+  31:uCmorse/uCmorse.c ****   const char *sp;
+  32:uCmorse/uCmorse.c ****   for(sp = s; *sp; ++sp) 
+ 402              		.loc 1 33 0
+ 403 0294 2800C28F 		lw	$2,40($fp)
+ 404 0298 00000000 		nop
+ 405 029c 1800C2AF 		sw	$2,24($fp)
+ 406 02a0 0C000010 		b	$L22
+ 407 02a4 00000000 		nop
+ 408              	
+ 409              	$L23:
+  33:uCmorse/uCmorse.c ****     tapChar(*sp);
+ 410              		.loc 1 34 0
+ 411 02a8 1800C28F 		lw	$2,24($fp)
+ 412 02ac 00000000 		nop
+ 413 02b0 00004280 		lb	$2,0($2)
+ 414 02b4 00000000 		nop
+ 415 02b8 21204000 		move	$4,$2
+ 416              		.option	pic0
+ 417 02bc 0000000C 		jal	tapChar
+ 418 02c0 00000000 		nop
+ 419              	
+ 420              		.option	pic2
+  33:uCmorse/uCmorse.c ****     tapChar(*sp);
+ 421              		.loc 1 33 0
+ 422 02c4 1800C28F 		lw	$2,24($fp)
+ 423 02c8 00000000 		nop
+ 424 02cc 01004224 		addiu	$2,$2,1
+ 425 02d0 1800C2AF 		sw	$2,24($fp)
+ 426              	$L22:
+ 427 02d4 1800C28F 		lw	$2,24($fp)
+ 428 02d8 00000000 		nop
+ 429 02dc 00004280 		lb	$2,0($2)
+ 430 02e0 00000000 		nop
+ 431 02e4 F0FF4014 		bne	$2,$0,$L23
+ 432 02e8 00000000 		nop
+ 433              	
+  34:uCmorse/uCmorse.c **** }
+ 434              		.loc 1 35 0
+ 435 02ec 21E8C003 		move	$sp,$fp
+ 436 02f0 2400BF8F 		lw	$31,36($sp)
+ 437 02f4 2000BE8F 		lw	$fp,32($sp)
+ 438 02f8 2800BD27 		addiu	$sp,$sp,40
+ 439 02fc 0800E003 		j	$31
+ 440 0300 00000000 		nop
+ 441              	
+ 442              		.set	macro
+ 443              		.set	reorder
+ 444              		.end	tapString
+ 445              	$LFE4:
+ 447              		.align	2
+ 448              		.globl	tapNibbleHex
+ 449              	$LFB5 = .
+  35:uCmorse/uCmorse.c **** 
+  36:uCmorse/uCmorse.c **** void tapNibbleHex(unsigned char v) {
+ 450              		.loc 1 37 0
+ 451              		.set	nomips16
+ 452              		.ent	tapNibbleHex
+ 454              	tapNibbleHex:
+ 455              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 456              		.mask	0xc0000000,-4
+ 457              		.fmask	0x00000000,0
+ 458              		.set	noreorder
+ 459              		.set	nomacro
+ 460              		
+ 461 0304 E0FFBD27 		addiu	$sp,$sp,-32
+ 462              	$LCFI20:
+ 463 0308 1C00BFAF 		sw	$31,28($sp)
+ 464              	$LCFI21:
+ 465 030c 1800BEAF 		sw	$fp,24($sp)
+ 466              	$LCFI22:
+ 467 0310 21F0A003 		move	$fp,$sp
+ 468              	$LCFI23:
+ 469 0314 21108000 		move	$2,$4
+ 470 0318 2000C2A3 		sb	$2,32($fp)
+  37:uCmorse/uCmorse.c ****   v = v & 0xf;
+ 471              		.loc 1 38 0
+ 472 031c 2000C293 		lbu	$2,32($fp)
+ 473 0320 00000000 		nop
+ 474 0324 0F004230 		andi	$2,$2,0xf
+ 475 0328 2000C2A3 		sb	$2,32($fp)
+  38:uCmorse/uCmorse.c ****   if (v < 10) {
+ 476              		.loc 1 39 0
+ 477 032c 2000C293 		lbu	$2,32($fp)
+ 478 0330 00000000 		nop
+ 479 0334 0A00422C 		sltu	$2,$2,10
+ 480 0338 0C004010 		beq	$2,$0,$L26
+ 481 033c 00000000 		nop
+ 482              	
+  39:uCmorse/uCmorse.c ****     tapChar('0' + v);
+ 483              		.loc 1 40 0
+ 484 0340 2000C293 		lbu	$2,32($fp)
+ 485 0344 00000000 		nop
+ 486 0348 30004224 		addiu	$2,$2,48
+ 487 034c FF004230 		andi	$2,$2,0x00ff
+ 488 0350 00160200 		sll	$2,$2,24
+ 489 0354 03160200 		sra	$2,$2,24
+ 490 0358 21204000 		move	$4,$2
+ 491              		.option	pic0
+ 492 035c 0000000C 		jal	tapChar
+ 493 0360 00000000 		nop
+ 494              	
+ 495              		.option	pic2
+ 496 0364 0A000010 		b	$L28
+ 497 0368 00000000 		nop
+ 498              	
+ 499              	$L26:
+  40:uCmorse/uCmorse.c ****   } else {
+  41:uCmorse/uCmorse.c ****     tapChar('A' + (v-10));
+ 500              		.loc 1 42 0
+ 501 036c 2000C293 		lbu	$2,32($fp)
+ 502 0370 00000000 		nop
+ 503 0374 37004224 		addiu	$2,$2,55
+ 504 0378 FF004230 		andi	$2,$2,0x00ff
+ 505 037c 00160200 		sll	$2,$2,24
+ 506 0380 03160200 		sra	$2,$2,24
+ 507 0384 21204000 		move	$4,$2
+ 508              		.option	pic0
+ 509 0388 0000000C 		jal	tapChar
+ 510 038c 00000000 		nop
+ 511              	
+ 512              		.option	pic2
+ 513              	$L28:
+  42:uCmorse/uCmorse.c ****   }
+  43:uCmorse/uCmorse.c **** }
+ 514              		.loc 1 44 0
+ 515 0390 21E8C003 		move	$sp,$fp
+ 516 0394 1C00BF8F 		lw	$31,28($sp)
+ 517 0398 1800BE8F 		lw	$fp,24($sp)
+ 518 039c 2000BD27 		addiu	$sp,$sp,32
+ 519 03a0 0800E003 		j	$31
+ 520 03a4 00000000 		nop
+ 521              	
+ 522              		.set	macro
+ 523              		.set	reorder
+ 524              		.end	tapNibbleHex
+ 525              	$LFE5:
+ 527              		.align	2
+ 528              		.globl	tapByteHex
+ 529              	$LFB6 = .
+  44:uCmorse/uCmorse.c **** 
+  45:uCmorse/uCmorse.c **** void tapByteHex(unsigned char v) {
+ 530              		.loc 1 46 0
+ 531              		.set	nomips16
+ 532              		.ent	tapByteHex
+ 534              	tapByteHex:
+ 535              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 536              		.mask	0xc0000000,-4
+ 537              		.fmask	0x00000000,0
+ 538              		.set	noreorder
+ 539              		.set	nomacro
+ 540              		
+ 541 03a8 E0FFBD27 		addiu	$sp,$sp,-32
+ 542              	$LCFI24:
+ 543 03ac 1C00BFAF 		sw	$31,28($sp)
+ 544              	$LCFI25:
+ 545 03b0 1800BEAF 		sw	$fp,24($sp)
+ 546              	$LCFI26:
+ 547 03b4 21F0A003 		move	$fp,$sp
+ 548              	$LCFI27:
+ 549 03b8 21108000 		move	$2,$4
+ 550 03bc 2000C2A3 		sb	$2,32($fp)
+  46:uCmorse/uCmorse.c ****   tapNibbleHex(v >> 4);
+ 551              		.loc 1 47 0
+ 552 03c0 2000C293 		lbu	$2,32($fp)
+ 553 03c4 00000000 		nop
+ 554 03c8 02110200 		srl	$2,$2,4
+ 555 03cc FF004230 		andi	$2,$2,0x00ff
+ 556 03d0 21204000 		move	$4,$2
+ 557              		.option	pic0
+ 558 03d4 0000000C 		jal	tapNibbleHex
+ 559 03d8 00000000 		nop
+ 560              	
+ 561              		.option	pic2
+  47:uCmorse/uCmorse.c ****   tapNibbleHex(v & 0xf);
+ 562              		.loc 1 48 0
+ 563 03dc 2000C293 		lbu	$2,32($fp)
+ 564 03e0 00000000 		nop
+ 565 03e4 0F004230 		andi	$2,$2,0xf
+ 566 03e8 21204000 		move	$4,$2
+ 567              		.option	pic0
+ 568 03ec 0000000C 		jal	tapNibbleHex
+ 569 03f0 00000000 		nop
+ 570              	
+ 571              		.option	pic2
+  48:uCmorse/uCmorse.c **** }
+ 572              		.loc 1 49 0
+ 573 03f4 21E8C003 		move	$sp,$fp
+ 574 03f8 1C00BF8F 		lw	$31,28($sp)
+ 575 03fc 1800BE8F 		lw	$fp,24($sp)
+ 576 0400 2000BD27 		addiu	$sp,$sp,32
+ 577 0404 0800E003 		j	$31
+ 578 0408 00000000 		nop
+ 579              	
+ 580              		.set	macro
+ 581              		.set	reorder
+ 582              		.end	tapByteHex
+ 583              	$LFE6:
+ 769              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 uCmorse/uCmorse.c
+     /tmp/cc1cPpWb.s:18     .data:0000000000000000 morse
+     /tmp/cc1cPpWb.s:71     .text:0000000000000000 tapGap
+     /tmp/cc1cPpWb.s:132    .text:0000000000000084 tapDit
+     /tmp/cc1cPpWb.s:179    .text:00000000000000d8 tapDash
+     /tmp/cc1cPpWb.s:226    .text:000000000000012c tapChar
+     /tmp/cc1cPpWb.s:386    .text:0000000000000280 tapString
+     /tmp/cc1cPpWb.s:454    .text:0000000000000304 tapNibbleHex
+     /tmp/cc1cPpWb.s:534    .text:00000000000003a8 tapByteHex
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+sounder

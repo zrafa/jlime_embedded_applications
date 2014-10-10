@@ -1,0 +1,363 @@
+player_example-player_example.o: player_example.c ../config.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/stdio.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/features.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/predefs.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/cdefs.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/wordsize.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/gnu/stubs.h \
+ /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/include/stddef.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/types.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/typesizes.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/libio.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/_G_config.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/wchar.h \
+ /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/include/stdarg.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/stdio_lim.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sys_errlist.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/stdio.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/unistd.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/posix_opt.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/environments.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/confname.h \
+ getopt.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/stdlib.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/waitflags.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/waitstatus.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/endian.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/endian.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/byteswap.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/xlocale.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/types.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/time.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/select.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/select.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sigset.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/time.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/sysmacros.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/pthreadtypes.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/alloca.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/string.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/string.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/string2.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/time.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/stat.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/stat.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sgidefs.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/fcntl.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/fcntl.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/uio.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/math.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/huge_val.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/huge_valf.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/huge_vall.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/inf.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/nan.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/mathdef.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/mathcalls.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/mathinline.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/signal.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/signum.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/siginfo.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sigaction.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sigcontext.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sigstack.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/ucontext.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sigthread.h \
+ ../include/theora/theoradec.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ogg/ogg.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ogg/os_types.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ogg/config_types.h \
+ ../include/theora/codec.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/vorbis/codec.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_main.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_stdinc.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_config.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_platform.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/strings.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/inttypes.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/stdint.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/wchar.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ctype.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/iconv.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/errno.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/errno.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/linux/errno.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/asm/errno.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/asm-generic/errno-base.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/begin_code.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/close_code.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_audio.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_error.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_endian.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_mutex.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_thread.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_rwops.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_cdrom.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_cpuinfo.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_events.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_active.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_keyboard.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_keysym.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_mouse.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_video.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_joystick.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_quit.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_loadso.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_timer.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_version.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_mixer.h \
+ /usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_types.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/soundcard.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/linux/soundcard.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/linux/ioctl.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/asm/ioctl.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/asm-generic/ioctl.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/linux/patchkey.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/ioctl.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/ioctls.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/asm/ioctls.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/ioctl-types.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/ttydefaults.h
+
+../config.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/stdio.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/features.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/predefs.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/cdefs.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/wordsize.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/gnu/stubs.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/include/stddef.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/types.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/typesizes.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/libio.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/_G_config.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/wchar.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/include/stdarg.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/stdio_lim.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sys_errlist.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/stdio.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/unistd.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/posix_opt.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/environments.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/confname.h:
+
+getopt.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/stdlib.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/waitflags.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/waitstatus.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/endian.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/endian.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/byteswap.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/xlocale.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/types.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/time.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/select.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/select.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sigset.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/time.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/sysmacros.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/pthreadtypes.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/alloca.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/string.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/string.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/string2.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/time.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/stat.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/stat.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sgidefs.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/fcntl.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/fcntl.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/uio.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/math.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/huge_val.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/huge_valf.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/huge_vall.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/inf.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/nan.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/mathdef.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/mathcalls.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/mathinline.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/signal.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/signum.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/siginfo.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sigaction.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sigcontext.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sigstack.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/ucontext.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sigthread.h:
+
+../include/theora/theoradec.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ogg/ogg.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ogg/os_types.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ogg/config_types.h:
+
+../include/theora/codec.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/vorbis/codec.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_main.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_stdinc.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_config.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_platform.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/strings.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/inttypes.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/stdint.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/wchar.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ctype.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/iconv.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/errno.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/errno.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/linux/errno.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/asm/errno.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/asm-generic/errno-base.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/begin_code.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/close_code.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_audio.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_error.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_endian.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_mutex.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_thread.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_rwops.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_cdrom.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_cpuinfo.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_events.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_active.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_keyboard.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_keysym.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_mouse.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_video.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_joystick.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_quit.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_loadso.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_timer.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_version.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_mixer.h:
+
+/usr/local/jlime/mipsel-toolchain/usr/include/SDL/SDL_types.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/soundcard.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/linux/soundcard.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/linux/ioctl.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/asm/ioctl.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/asm-generic/ioctl.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/linux/patchkey.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/ioctl.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/ioctls.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/asm/ioctls.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/ioctl-types.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/ttydefaults.h:

@@ -1,0 +1,206 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.align	2
+  14              		.globl	CalcCRCBase
+  15              	$LFB0 = .
+  16              		.file 1 "bgtree/crc32.c"
+   0:bgtree/crc32.c **** // Found this posted by "Peret" at
+   1:bgtree/crc32.c **** // http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&t=28214&highlight=crc32
+   2:bgtree/crc32.c **** 
+   3:bgtree/crc32.c **** // CCITT CRC-32 (Autodin II) polynomial:
+   4:bgtree/crc32.c **** // X32+X26+X23+X22+X16+X12+X11+X10+X8+X7+X5+X4+X2+X+1
+   5:bgtree/crc32.c **** 
+   6:bgtree/crc32.c **** unsigned long CalcCRCBase (unsigned long crc, const char *buffer, int length)
+   7:bgtree/crc32.c **** {
+  17              		.loc 1 8 0
+  18              		.set	nomips16
+  19              		.ent	CalcCRCBase
+  21              	CalcCRCBase:
+  22              		.frame	$fp,24,$31		# vars= 8, regs= 1/0, args= 0, gp= 8
+  23              		.mask	0x40000000,-4
+  24              		.fmask	0x00000000,0
+  25              		.set	noreorder
+  26              		.set	nomacro
+  27              		
+  28 0000 E8FFBD27 		addiu	$sp,$sp,-24
+  29              	$LCFI0:
+  30 0004 1400BEAF 		sw	$fp,20($sp)
+  31              	$LCFI1:
+  32 0008 21F0A003 		move	$fp,$sp
+  33              	$LCFI2:
+  34 000c 1800C4AF 		sw	$4,24($fp)
+  35 0010 1C00C5AF 		sw	$5,28($fp)
+  36 0014 2000C6AF 		sw	$6,32($fp)
+   8:bgtree/crc32.c ****   int   i,j ;
+   9:bgtree/crc32.c ****   for (i=0; i<length; i++)
+  37              		.loc 1 10 0
+  38 0018 0C00C0AF 		sw	$0,12($fp)
+  39 001c 2F000010 		b	$L2
+  40 0020 00000000 		nop
+  41              	
+  42              	$L7:
+  10:bgtree/crc32.c ****   {
+  11:bgtree/crc32.c ****     crc = crc ^ *buffer++ ;
+  43              		.loc 1 12 0
+  44 0024 1C00C28F 		lw	$2,28($fp)
+  45 0028 00000000 		nop
+  46 002c 00004280 		lb	$2,0($2)
+  47 0030 1800C38F 		lw	$3,24($fp)
+  48 0034 00000000 		nop
+  49 0038 26106200 		xor	$2,$3,$2
+  50 003c 1800C2AF 		sw	$2,24($fp)
+  51 0040 1C00C28F 		lw	$2,28($fp)
+  52 0044 00000000 		nop
+  53 0048 01004224 		addiu	$2,$2,1
+  54 004c 1C00C2AF 		sw	$2,28($fp)
+  12:bgtree/crc32.c ****     for (j=0; j<8; j++)
+  55              		.loc 1 13 0
+  56 0050 0800C0AF 		sw	$0,8($fp)
+  57 0054 18000010 		b	$L3
+  58 0058 00000000 		nop
+  59              	
+  60              	$L6:
+  13:bgtree/crc32.c ****     {
+  14:bgtree/crc32.c ****       if (crc & 1)
+  61              		.loc 1 15 0
+  62 005c 1800C28F 		lw	$2,24($fp)
+  63 0060 00000000 		nop
+  64 0064 01004230 		andi	$2,$2,0x1
+  65 0068 FF004230 		andi	$2,$2,0x00ff
+  66 006c 0A004010 		beq	$2,$0,$L4
+  67 0070 00000000 		nop
+  68              	
+  15:bgtree/crc32.c ****         crc = (crc>>1) ^ 0xEDB88320 ;
+  69              		.loc 1 16 0
+  70 0074 1800C28F 		lw	$2,24($fp)
+  71 0078 00000000 		nop
+  72 007c 42180200 		srl	$3,$2,1
+  73 0080 B8ED023C 		li	$2,-306708480			# 0xffffffffedb80000
+  74 0084 20834234 		ori	$2,$2,0x8320
+  75 0088 26106200 		xor	$2,$3,$2
+  76 008c 1800C2AF 		sw	$2,24($fp)
+  77 0090 05000010 		b	$L5
+  78 0094 00000000 		nop
+  79              	
+  80              	$L4:
+  16:bgtree/crc32.c ****       else
+  17:bgtree/crc32.c ****         crc = crc >>1 ;
+  81              		.loc 1 18 0
+  82 0098 1800C28F 		lw	$2,24($fp)
+  83 009c 00000000 		nop
+  84 00a0 42100200 		srl	$2,$2,1
+  85 00a4 1800C2AF 		sw	$2,24($fp)
+  86              	$L5:
+  13:bgtree/crc32.c ****     for (j=0; j<8; j++)
+  87              		.loc 1 13 0
+  88 00a8 0800C28F 		lw	$2,8($fp)
+  89 00ac 00000000 		nop
+  90 00b0 01004224 		addiu	$2,$2,1
+  91 00b4 0800C2AF 		sw	$2,8($fp)
+  92              	$L3:
+  93 00b8 0800C28F 		lw	$2,8($fp)
+  94 00bc 00000000 		nop
+  95 00c0 08004228 		slt	$2,$2,8
+  96 00c4 E5FF4014 		bne	$2,$0,$L6
+  97 00c8 00000000 		nop
+  98              	
+  10:bgtree/crc32.c ****   for (i=0; i<length; i++)
+  99              		.loc 1 10 0
+ 100 00cc 0C00C28F 		lw	$2,12($fp)
+ 101 00d0 00000000 		nop
+ 102 00d4 01004224 		addiu	$2,$2,1
+ 103 00d8 0C00C2AF 		sw	$2,12($fp)
+ 104              	$L2:
+ 105 00dc 0C00C38F 		lw	$3,12($fp)
+ 106 00e0 2000C28F 		lw	$2,32($fp)
+ 107 00e4 00000000 		nop
+ 108 00e8 2A106200 		slt	$2,$3,$2
+ 109 00ec CDFF4014 		bne	$2,$0,$L7
+ 110 00f0 00000000 		nop
+ 111              	
+  18:bgtree/crc32.c ****     }
+  19:bgtree/crc32.c ****   }
+  20:bgtree/crc32.c ****   return crc ;
+ 112              		.loc 1 21 0
+ 113 00f4 1800C28F 		lw	$2,24($fp)
+  21:bgtree/crc32.c **** }
+ 114              		.loc 1 22 0
+ 115 00f8 21E8C003 		move	$sp,$fp
+ 116 00fc 1400BE8F 		lw	$fp,20($sp)
+ 117 0100 1800BD27 		addiu	$sp,$sp,24
+ 118 0104 0800E003 		j	$31
+ 119 0108 00000000 		nop
+ 120              	
+ 121              		.set	macro
+ 122              		.set	reorder
+ 123              		.end	CalcCRCBase
+ 124              	$LFE0:
+ 126              		.align	2
+ 127              		.globl	CalcCRC
+ 128              	$LFB1 = .
+  22:bgtree/crc32.c **** 
+  23:bgtree/crc32.c **** unsigned long CalcCRC(const char *buffer, int length) {
+ 129              		.loc 1 24 0
+ 130              		.set	nomips16
+ 131              		.ent	CalcCRC
+ 133              	CalcCRC:
+ 134              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 135              		.mask	0xc0000000,-4
+ 136              		.fmask	0x00000000,0
+ 137              		.set	noreorder
+ 138              		.set	nomacro
+ 139              		
+ 140 010c D8FFBD27 		addiu	$sp,$sp,-40
+ 141              	$LCFI3:
+ 142 0110 2400BFAF 		sw	$31,36($sp)
+ 143              	$LCFI4:
+ 144 0114 2000BEAF 		sw	$fp,32($sp)
+ 145              	$LCFI5:
+ 146 0118 21F0A003 		move	$fp,$sp
+ 147              	$LCFI6:
+ 148 011c 2800C4AF 		sw	$4,40($fp)
+ 149 0120 2C00C5AF 		sw	$5,44($fp)
+  24:bgtree/crc32.c ****   unsigned long k = CalcCRCBase(0xFFFFFFFF, buffer, length);
+ 150              		.loc 1 25 0
+ 151 0124 FFFF0424 		li	$4,-1			# 0xffffffffffffffff
+ 152 0128 2800C58F 		lw	$5,40($fp)
+ 153 012c 2C00C68F 		lw	$6,44($fp)
+ 154              		.option	pic0
+ 155 0130 0000000C 		jal	CalcCRCBase
+ 156 0134 00000000 		nop
+ 157              	
+ 158              		.option	pic2
+ 159 0138 1800C2AF 		sw	$2,24($fp)
+  25:bgtree/crc32.c ****   k ^= 0xffffffff;
+ 160              		.loc 1 26 0
+ 161 013c 1800C28F 		lw	$2,24($fp)
+ 162 0140 00000000 		nop
+ 163 0144 27100200 		nor	$2,$0,$2
+ 164 0148 1800C2AF 		sw	$2,24($fp)
+  26:bgtree/crc32.c ****   k &= 0xffffffff;
+  27:bgtree/crc32.c ****   return k;
+ 165              		.loc 1 28 0
+ 166 014c 1800C28F 		lw	$2,24($fp)
+  28:bgtree/crc32.c **** }
+ 167              		.loc 1 29 0
+ 168 0150 21E8C003 		move	$sp,$fp
+ 169 0154 2400BF8F 		lw	$31,36($sp)
+ 170 0158 2000BE8F 		lw	$fp,32($sp)
+ 171 015c 2800BD27 		addiu	$sp,$sp,40
+ 172 0160 0800E003 		j	$31
+ 173 0164 00000000 		nop
+ 174              	
+ 175              		.set	macro
+ 176              		.set	reorder
+ 177              		.end	CalcCRC
+ 178              	$LFE1:
+ 241              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 bgtree/crc32.c
+     /tmp/ccjBdUuT.s:21     .text:0000000000000000 CalcCRCBase
+     /tmp/ccjBdUuT.s:133    .text:000000000000010c CalcCRC
+
+NO UNDEFINED SYMBOLS

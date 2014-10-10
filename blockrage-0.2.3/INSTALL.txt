@@ -1,0 +1,98 @@
+
+
+                 Block Rage - INSTALLATION INSTRUCTIONS
+	         ======================================
+
+0. BEFORE YOU START
+===================
+
+  UNIX/LINUX
+  ----------
+  To compile and run the game under a UNIX or GNU/Linux system
+  you need:
+  
+    libSDL 1.2.x (just the core library)
+
+  and the usual: gcc, make.
+  
+  NOTE: If you installed libSDL using a prebuilt package, you
+  might also need a development package, such as libsdl-dev.
+  
+  WINDOWS
+  -------
+  To compile for win32 you need a working Cygwin environment.
+  You must also compile and install SDL - from the source!!
+  
+1. CONFIGURING
+==============
+
+  Block Rage uses a 'configure' script that works in a similar way
+  as those created by GNU Autoconf. Thus the default install directories
+  are:
+  
+    bindir: 	/usr/local/bin
+    sysconfdir:	/usr/local/etc
+    datadir:	/usr/local/share
+    mandir:	/usr/local/man
+
+  And the game's files will be installed there (under a blockrage/ subdir).
+  If you feel that's perfectly ok, than you might just type:
+  
+    ./configure
+
+  to configure the game with default directories. BUT, this directory
+  layout is actually quite unusual and doesn't (in my opinion) comply
+  to the FHS. I would recommend that you configure Block Rage using
+  the command:
+  
+    ./configure --bindir=/usr/local/games --sysconfdir=/etc/games\
+--datadir==/usr/local/share/games
+
+  and use a similar configuration for all your games. This is (IMHO)
+  the way games are meant to be installed in the FHS, but
+  the choice is yours alone.
+
+2. COMPILING AND RUNNING
+========================
+
+  To compile, simply type
+  
+    make
+
+  If successful, the file blockrage[.exe] will be created. Try it:
+  
+    ./blockrage[.exe]
+    
+  should run the game.
+  
+  WINDOWS
+  -------
+  To run the game from outside the Cygwin
+  bash shell you need to find a SDL.dll somewhere and copy
+  it to the same directory where blockrage.exe resides.
+
+
+3. INSTALLING INTO UNIX DIRECTORY TREE
+======================================
+
+  Once the game is compiled you can install it into the directory tree
+  by typing:
+  
+    make install
+    
+4. UNINSTALLING FROM THE UNIX DIRECTORY TREE
+============================================
+  Just go to the blockrage-<version>/ directory and type:
+
+    make uninstall
+
+NOTES
+=====
+  This document describes Block Rage version 0.2.3
+
+SEE ALSO
+========
+  - The Block Rage homepage at <http://blockrage.sourceforge.net>.
+  - The manpage 'man blockrage', or blockrage.6 in the blockrage-<version>/
+    directory.
+  - The README file.

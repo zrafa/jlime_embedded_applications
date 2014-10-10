@@ -1,0 +1,908 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.globl	fileName
+  14              		.rdata
+  15              		.align	2
+  16              	$LC0:
+  17 0000 74657374 		.ascii	"test.txt\000"
+  17      2E747874 
+  17      00
+  18              		.section	.data.rel.local,"aw",@progbits
+  19              		.align	2
+  22              	fileName:
+  23 0000 00000000 		.word	$LC0
+  24              		.rdata
+  25 0009 000000   		.align	2
+  26              	$LC1:
+  27 000c 61707073 		.ascii	"apps/Benchmarks.c\000"
+  27      2F42656E 
+  27      63686D61 
+  27      726B732E 
+  27      6300
+  28 001e 0000     		.align	2
+  29              	$LC2:
+  30 0020 3000     		.ascii	"0\000"
+  31 0022 0000     		.align	2
+  32              	$LC3:
+  33 0024 52414E44 		.ascii	"RANDOM SEEK SPEED\012\000"
+  33      4F4D2053 
+  33      45454B20 
+  33      53504545 
+  33      440A00
+  34 0037 00       		.align	2
+  35              	$LC4:
+  36 0038 20736565 		.ascii	" seek&reads of 128 bytes: \000"
+  36      6B267265 
+  36      61647320 
+  36      6F662031 
+  36      32382062 
+  37 0053 00       		.align	2
+  38              	$LC5:
+  39 0054 20427073 		.ascii	" Bps\012\000"
+  39      0A00
+  40              		.text
+  41              		.align	2
+  42              		.globl	RndSeekTest
+  43              	$LFB0 = .
+  44              		.file 1 "apps/Benchmarks.c"
+   0:apps/Benchmarks.c **** #include "Platform.h"
+   1:apps/Benchmarks.c **** 
+   2:apps/Benchmarks.c **** const char *fileName="test.txt";
+   3:apps/Benchmarks.c **** 
+   4:apps/Benchmarks.c **** void RndSeekTest() {
+  45              		.loc 1 5 0
+  46              		.set	nomips16
+  47              		.ent	RndSeekTest
+  49              	RndSeekTest:
+  50              		.frame	$fp,200,$31		# vars= 168, regs= 2/0, args= 16, gp= 8
+  51              		.mask	0xc0000000,-4
+  52              		.fmask	0x00000000,0
+  53              		.set	noreorder
+  54              		.set	nomacro
+  55              		
+  56 0000 38FFBD27 		addiu	$sp,$sp,-200
+  57              	$LCFI0:
+  58 0004 C400BFAF 		sw	$31,196($sp)
+  59              	$LCFI1:
+  60 0008 C000BEAF 		sw	$fp,192($sp)
+  61              	$LCFI2:
+  62 000c 21F0A003 		move	$fp,$sp
+  63              	$LCFI3:
+  64 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  65 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  66 0018 1000BCAF 		.cprestore	16
+   5:apps/Benchmarks.c ****   FileOpenRO(fileName);
+  67              		.loc 1 6 0
+  68 001c 0000023C 		lui	$2,%hi(fileName)
+  69 0020 0000428C 		lw	$2,%lo(fileName)($2)
+  70 0024 00000000 		nop
+  71 0028 21204000 		move	$4,$2
+  72 002c 0000828F 		lw	$2,%call16(FileOpenRO)($28)
+  73 0030 00000000 		nop
+  74 0034 21C84000 		move	$25,$2
+  75 0038 09F82003 		jalr	$25
+  76 003c 00000000 		nop
+  77              	
+  78 0040 1000DC8F 		lw	$28,16($fp)
+  79 0044 00000000 		nop
+   6:apps/Benchmarks.c ****   ERRORassert();
+  80              		.loc 1 7 0
+  81 0048 0000828F 		lw	$2,%got(errorMsg)($28)
+  82 004c 00000000 		nop
+  83 0050 0000428C 		lw	$2,0($2)
+  84 0054 00000000 		nop
+  85 0058 18004010 		beq	$2,$0,$L2
+  86 005c 00000000 		nop
+  87              	
+  88 0060 0000023C 		lui	$2,%hi(__func__.1713)
+  89 0064 B8004424 		addiu	$4,$2,%lo(__func__.1713)
+  90 0068 0000023C 		lui	$2,%hi($LC1)
+  91 006c 0C004524 		addiu	$5,$2,%lo($LC1)
+  92 0070 07000624 		li	$6,7			# 0x7
+  93 0074 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+  94 0078 00000000 		nop
+  95 007c 21C84000 		move	$25,$2
+  96 0080 09F82003 		jalr	$25
+  97 0084 00000000 		nop
+  98              	
+  99 0088 1000DC8F 		lw	$28,16($fp)
+ 100 008c 0000023C 		lui	$2,%hi($LC2)
+ 101 0090 20004424 		addiu	$4,$2,%lo($LC2)
+ 102 0094 0000023C 		lui	$2,%hi($LC1)
+ 103 0098 0C004524 		addiu	$5,$2,%lo($LC1)
+ 104 009c 07000624 		li	$6,7			# 0x7
+ 105 00a0 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1714)
+ 106 00a4 C4004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1714)
+ 107 00a8 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 108 00ac 00000000 		nop
+ 109 00b0 21C84000 		move	$25,$2
+ 110 00b4 09F82003 		jalr	$25
+ 111 00b8 00000000 		nop
+ 112              	
+ 113              	$L2:
+   7:apps/Benchmarks.c ****   
+   8:apps/Benchmarks.c ****   const int posSize=5; 
+ 114              		.loc 1 9 0
+ 115 00bc 05000224 		li	$2,5			# 0x5
+ 116 00c0 2800C2AF 		sw	$2,40($fp)
+   9:apps/Benchmarks.c ****   unsigned long pos[]={27*128, 13*128, 7*128, 0, 21*128};
+ 117              		.loc 1 10 0
+ 118 00c4 800D0224 		li	$2,3456			# 0xd80
+ 119 00c8 2C00C2AF 		sw	$2,44($fp)
+ 120 00cc 80060224 		li	$2,1664			# 0x680
+ 121 00d0 3000C2AF 		sw	$2,48($fp)
+ 122 00d4 80030224 		li	$2,896			# 0x380
+ 123 00d8 3400C2AF 		sw	$2,52($fp)
+ 124 00dc 3800C0AF 		sw	$0,56($fp)
+ 125 00e0 800A0224 		li	$2,2688			# 0xa80
+ 126 00e4 3C00C2AF 		sw	$2,60($fp)
+  10:apps/Benchmarks.c **** 
+  11:apps/Benchmarks.c ****   OutP("RANDOM SEEK SPEED\n");
+ 127              		.loc 1 12 0
+ 128 00e8 0000023C 		lui	$2,%hi($LC3)
+ 129 00ec 24004424 		addiu	$4,$2,%lo($LC3)
+ 130 00f0 0000828F 		lw	$2,%call16(OutS)($28)
+ 131 00f4 00000000 		nop
+ 132 00f8 21C84000 		move	$25,$2
+ 133 00fc 09F82003 		jalr	$25
+ 134 0100 00000000 		nop
+ 135              	
+ 136 0104 1000DC8F 		lw	$28,16($fp)
+  12:apps/Benchmarks.c ****   OutI(posSize); OutP(" seek&reads of 128 bytes: ");
+ 137              		.loc 1 13 0
+ 138 0108 2800C28F 		lw	$2,40($fp)
+ 139 010c 00000000 		nop
+ 140 0110 21204000 		move	$4,$2
+ 141 0114 0000828F 		lw	$2,%call16(OutI)($28)
+ 142 0118 00000000 		nop
+ 143 011c 21C84000 		move	$25,$2
+ 144 0120 09F82003 		jalr	$25
+ 145 0124 00000000 		nop
+ 146              	
+ 147 0128 1000DC8F 		lw	$28,16($fp)
+ 148 012c 0000023C 		lui	$2,%hi($LC4)
+ 149 0130 38004424 		addiu	$4,$2,%lo($LC4)
+ 150 0134 0000828F 		lw	$2,%call16(OutS)($28)
+ 151 0138 00000000 		nop
+ 152 013c 21C84000 		move	$25,$2
+ 153 0140 09F82003 		jalr	$25
+ 154 0144 00000000 		nop
+ 155              	
+ 156 0148 1000DC8F 		lw	$28,16($fp)
+ 157 014c 00000000 		nop
+  13:apps/Benchmarks.c **** 
+  14:apps/Benchmarks.c ****   char buf[128]; // same as node size
+  15:apps/Benchmarks.c ****   unsigned long start = TimerCount();
+ 158              		.loc 1 16 0
+ 159 0150 0000828F 		lw	$2,%call16(TimerCount)($28)
+ 160 0154 00000000 		nop
+ 161 0158 21C84000 		move	$25,$2
+ 162 015c 09F82003 		jalr	$25
+ 163 0160 00000000 		nop
+ 164              	
+ 165 0164 1000DC8F 		lw	$28,16($fp)
+ 166 0168 2400C2AF 		sw	$2,36($fp)
+ 167              	$LBB2 = .
+  16:apps/Benchmarks.c ****   for (int i=0; i<posSize; ++i) {
+ 168              		.loc 1 17 0
+ 169 016c 1800C0AF 		sw	$0,24($fp)
+ 170 0170 1C000010 		b	$L3
+ 171 0174 00000000 		nop
+ 172              	
+ 173              	$L4:
+  17:apps/Benchmarks.c ****     FileSeek(pos[i]);
+ 174              		.loc 1 18 0
+ 175 0178 1800C28F 		lw	$2,24($fp)
+ 176 017c 00000000 		nop
+ 177 0180 80100200 		sll	$2,$2,2
+ 178 0184 1800C327 		addiu	$3,$fp,24
+ 179 0188 21106200 		addu	$2,$3,$2
+ 180 018c 1400428C 		lw	$2,20($2)
+ 181 0190 00000000 		nop
+ 182 0194 21204000 		move	$4,$2
+ 183 0198 0000828F 		lw	$2,%call16(FileSeek)($28)
+ 184 019c 00000000 		nop
+ 185 01a0 21C84000 		move	$25,$2
+ 186 01a4 09F82003 		jalr	$25
+ 187 01a8 00000000 		nop
+ 188              	
+ 189 01ac 1000DC8F 		lw	$28,16($fp)
+  18:apps/Benchmarks.c ****     FileRead(buf, 128);
+ 190              		.loc 1 19 0
+ 191 01b0 4000C227 		addiu	$2,$fp,64
+ 192 01b4 21204000 		move	$4,$2
+ 193 01b8 80000524 		li	$5,128			# 0x80
+ 194 01bc 0000828F 		lw	$2,%call16(FileRead)($28)
+ 195 01c0 00000000 		nop
+ 196 01c4 21C84000 		move	$25,$2
+ 197 01c8 09F82003 		jalr	$25
+ 198 01cc 00000000 		nop
+ 199              	
+ 200 01d0 1000DC8F 		lw	$28,16($fp)
+  17:apps/Benchmarks.c ****     FileSeek(pos[i]);
+ 201              		.loc 1 17 0
+ 202 01d4 1800C28F 		lw	$2,24($fp)
+ 203 01d8 00000000 		nop
+ 204 01dc 01004224 		addiu	$2,$2,1
+ 205 01e0 1800C2AF 		sw	$2,24($fp)
+ 206              	$L3:
+ 207 01e4 1800C38F 		lw	$3,24($fp)
+ 208 01e8 2800C28F 		lw	$2,40($fp)
+ 209 01ec 00000000 		nop
+ 210 01f0 2A106200 		slt	$2,$3,$2
+ 211 01f4 E0FF4014 		bne	$2,$0,$L4
+ 212 01f8 00000000 		nop
+ 213              	
+ 214              	$LBE2 = .
+  19:apps/Benchmarks.c ****   }
+  20:apps/Benchmarks.c ****   unsigned long end = TimerCount();
+ 215              		.loc 1 21 0
+ 216 01fc 0000828F 		lw	$2,%call16(TimerCount)($28)
+ 217 0200 00000000 		nop
+ 218 0204 21C84000 		move	$25,$2
+ 219 0208 09F82003 		jalr	$25
+ 220 020c 00000000 		nop
+ 221              	
+ 222 0210 1000DC8F 		lw	$28,16($fp)
+ 223 0214 2000C2AF 		sw	$2,32($fp)
+  21:apps/Benchmarks.c ****   unsigned long t = ((1000UL*128*TimerCountPerMillisec())/(end - start));
+ 224              		.loc 1 22 0
+ 225 0218 0000828F 		lw	$2,%call16(TimerCountPerMillisec)($28)
+ 226 021c 00000000 		nop
+ 227 0220 21C84000 		move	$25,$2
+ 228 0224 09F82003 		jalr	$25
+ 229 0228 00000000 		nop
+ 230              	
+ 231 022c 1000DC8F 		lw	$28,16($fp)
+ 232 0230 21184000 		move	$3,$2
+ 233 0234 21106000 		move	$2,$3
+ 234 0238 80200200 		sll	$4,$2,2
+ 235 023c 40110400 		sll	$2,$4,5
+ 236 0240 23104400 		subu	$2,$2,$4
+ 237 0244 21104300 		addu	$2,$2,$3
+ 238 0248 80120200 		sll	$2,$2,10
+ 239 024c 21204000 		move	$4,$2
+ 240 0250 2000C38F 		lw	$3,32($fp)
+ 241 0254 2400C28F 		lw	$2,36($fp)
+ 242 0258 00000000 		nop
+ 243 025c 23106200 		subu	$2,$3,$2
+ 244 0260 02004014 		bne	$2,$0,1f
+ 245 0264 1B008200 		divu	$0,$4,$2
+ 246 0268 0D000700 		break	7
+ 247              	1:
+ 248 026c 10180000 		mfhi	$3
+ 249 0270 12100000 		mflo	$2
+ 250 0274 1C00C2AF 		sw	$2,28($fp)
+  22:apps/Benchmarks.c ****   OutI(t); OutP(" Bps\n");
+ 251              		.loc 1 23 0
+ 252 0278 1C00C48F 		lw	$4,28($fp)
+ 253 027c 0000828F 		lw	$2,%call16(OutI)($28)
+ 254 0280 00000000 		nop
+ 255 0284 21C84000 		move	$25,$2
+ 256 0288 09F82003 		jalr	$25
+ 257 028c 00000000 		nop
+ 258              	
+ 259 0290 1000DC8F 		lw	$28,16($fp)
+ 260 0294 0000023C 		lui	$2,%hi($LC5)
+ 261 0298 54004424 		addiu	$4,$2,%lo($LC5)
+ 262 029c 0000828F 		lw	$2,%call16(OutS)($28)
+ 263 02a0 00000000 		nop
+ 264 02a4 21C84000 		move	$25,$2
+ 265 02a8 09F82003 		jalr	$25
+ 266 02ac 00000000 		nop
+ 267              	
+ 268 02b0 1000DC8F 		lw	$28,16($fp)
+  23:apps/Benchmarks.c **** }
+ 269              		.loc 1 24 0
+ 270 02b4 21E8C003 		move	$sp,$fp
+ 271 02b8 C400BF8F 		lw	$31,196($sp)
+ 272 02bc C000BE8F 		lw	$fp,192($sp)
+ 273 02c0 C800BD27 		addiu	$sp,$sp,200
+ 274 02c4 0800E003 		j	$31
+ 275 02c8 00000000 		nop
+ 276              	
+ 277              		.set	macro
+ 278              		.set	reorder
+ 279              		.end	RndSeekTest
+ 280              	$LFE0:
+ 282              		.rdata
+ 283 005a 0000     		.align	2
+ 284              	$LC6:
+ 285 005c 53455155 		.ascii	"SEQUENTIAL READ SPEED TESTS\012\000"
+ 285      454E5449 
+ 285      414C2052 
+ 285      45414420 
+ 285      53504545 
+ 286 0079 000000   		.align	2
+ 287              	$LC7:
+ 288 007c 52642000 		.ascii	"Rd \000"
+ 289              		.align	2
+ 290              	$LC8:
+ 291 0080 20617420 		.ascii	" at a time,\000"
+ 291      61207469 
+ 291      6D652C00 
+ 292              		.align	2
+ 293              	$LC9:
+ 294 008c 20627974 		.ascii	" bytes: \000"
+ 294      65733A20 
+ 294      00
+ 295              		.text
+ 296              		.align	2
+ 297              		.globl	ReadSpeedTest
+ 298              	$LFB1 = .
+  24:apps/Benchmarks.c **** 
+  25:apps/Benchmarks.c **** void ReadSpeedTest() {
+ 299              		.loc 1 26 0
+ 300              		.set	nomips16
+ 301              		.ent	ReadSpeedTest
+ 303              	ReadSpeedTest:
+ 304              		.frame	$fp,176,$31		# vars= 112, regs= 10/0, args= 16, gp= 8
+ 305              		.mask	0xc0ff0000,-4
+ 306              		.fmask	0x00000000,0
+ 307              		.set	noreorder
+ 308              		.set	nomacro
+ 309              		
+ 310 02cc 50FFBD27 		addiu	$sp,$sp,-176
+ 311              	$LCFI4:
+ 312 02d0 AC00BFAF 		sw	$31,172($sp)
+ 313              	$LCFI5:
+ 314 02d4 A800BEAF 		sw	$fp,168($sp)
+ 315              	$LCFI6:
+ 316 02d8 A400B7AF 		sw	$23,164($sp)
+ 317              	$LCFI7:
+ 318 02dc A000B6AF 		sw	$22,160($sp)
+ 319              	$LCFI8:
+ 320 02e0 9C00B5AF 		sw	$21,156($sp)
+ 321              	$LCFI9:
+ 322 02e4 9800B4AF 		sw	$20,152($sp)
+ 323              	$LCFI10:
+ 324 02e8 9400B3AF 		sw	$19,148($sp)
+ 325              	$LCFI11:
+ 326 02ec 9000B2AF 		sw	$18,144($sp)
+ 327              	$LCFI12:
+ 328 02f0 8C00B1AF 		sw	$17,140($sp)
+ 329              	$LCFI13:
+ 330 02f4 8800B0AF 		sw	$16,136($sp)
+ 331              	$LCFI14:
+ 332 02f8 21F0A003 		move	$fp,$sp
+ 333              	$LCFI15:
+ 334 02fc 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 335 0300 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 336 0304 1000BCAF 		.cprestore	16
+  26:apps/Benchmarks.c ****   FileOpenRO(fileName);
+ 337              		.loc 1 27 0
+ 338 0308 0000023C 		lui	$2,%hi(fileName)
+ 339 030c 0000428C 		lw	$2,%lo(fileName)($2)
+ 340 0310 00000000 		nop
+ 341 0314 21204000 		move	$4,$2
+ 342 0318 0000828F 		lw	$2,%call16(FileOpenRO)($28)
+ 343 031c 00000000 		nop
+ 344 0320 21C84000 		move	$25,$2
+ 345 0324 09F82003 		jalr	$25
+ 346 0328 00000000 		nop
+ 347              	
+ 348 032c 1000DC8F 		lw	$28,16($fp)
+ 349 0330 00000000 		nop
+  27:apps/Benchmarks.c ****   ERRORassert();
+ 350              		.loc 1 28 0
+ 351 0334 0000828F 		lw	$2,%got(errorMsg)($28)
+ 352 0338 00000000 		nop
+ 353 033c 0000428C 		lw	$2,0($2)
+ 354 0340 00000000 		nop
+ 355 0344 18004010 		beq	$2,$0,$L7
+ 356 0348 00000000 		nop
+ 357              	
+ 358 034c 0000023C 		lui	$2,%hi(__func__.1739)
+ 359 0350 98004424 		addiu	$4,$2,%lo(__func__.1739)
+ 360 0354 0000023C 		lui	$2,%hi($LC1)
+ 361 0358 0C004524 		addiu	$5,$2,%lo($LC1)
+ 362 035c 1C000624 		li	$6,28			# 0x1c
+ 363 0360 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 364 0364 00000000 		nop
+ 365 0368 21C84000 		move	$25,$2
+ 366 036c 09F82003 		jalr	$25
+ 367 0370 00000000 		nop
+ 368              	
+ 369 0374 1000DC8F 		lw	$28,16($fp)
+ 370 0378 0000023C 		lui	$2,%hi($LC2)
+ 371 037c 20004424 		addiu	$4,$2,%lo($LC2)
+ 372 0380 0000023C 		lui	$2,%hi($LC1)
+ 373 0384 0C004524 		addiu	$5,$2,%lo($LC1)
+ 374 0388 1C000624 		li	$6,28			# 0x1c
+ 375 038c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1740)
+ 376 0390 A8004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1740)
+ 377 0394 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 378 0398 00000000 		nop
+ 379 039c 21C84000 		move	$25,$2
+ 380 03a0 09F82003 		jalr	$25
+ 381 03a4 00000000 		nop
+ 382              	
+ 383              	$L7:
+  28:apps/Benchmarks.c **** 
+  29:apps/Benchmarks.c ****   const int maxSize=600;
+ 384              		.loc 1 30 0
+ 385 03a8 58020224 		li	$2,600			# 0x258
+ 386 03ac 3800C2AF 		sw	$2,56($fp)
+  30:apps/Benchmarks.c ****   int sizes[]={1,10,100,200,500,600};
+ 387              		.loc 1 31 0
+ 388 03b0 01000224 		li	$2,1			# 0x1
+ 389 03b4 4400C2AF 		sw	$2,68($fp)
+ 390 03b8 0A000224 		li	$2,10			# 0xa
+ 391 03bc 4800C2AF 		sw	$2,72($fp)
+ 392 03c0 64000224 		li	$2,100			# 0x64
+ 393 03c4 4C00C2AF 		sw	$2,76($fp)
+ 394 03c8 C8000224 		li	$2,200			# 0xc8
+ 395 03cc 5000C2AF 		sw	$2,80($fp)
+ 396 03d0 F4010224 		li	$2,500			# 0x1f4
+ 397 03d4 5400C2AF 		sw	$2,84($fp)
+ 398 03d8 58020224 		li	$2,600			# 0x258
+ 399 03dc 5800C2AF 		sw	$2,88($fp)
+  31:apps/Benchmarks.c ****   const int numSizes=6;
+ 400              		.loc 1 32 0
+ 401 03e0 06000224 		li	$2,6			# 0x6
+ 402 03e4 3400C2AF 		sw	$2,52($fp)
+  32:apps/Benchmarks.c **** 
+  33:apps/Benchmarks.c ****   OutP("SEQUENTIAL READ SPEED TESTS\n");
+ 403              		.loc 1 34 0
+ 404 03e8 0000023C 		lui	$2,%hi($LC6)
+ 405 03ec 5C004424 		addiu	$4,$2,%lo($LC6)
+ 406 03f0 0000828F 		lw	$2,%call16(OutS)($28)
+ 407 03f4 00000000 		nop
+ 408 03f8 21C84000 		move	$25,$2
+ 409 03fc 09F82003 		jalr	$25
+ 410 0400 00000000 		nop
+ 411              	
+ 412 0404 1000DC8F 		lw	$28,16($fp)
+ 413              	$LBB3 = .
+  34:apps/Benchmarks.c **** 
+  35:apps/Benchmarks.c ****   for (int j = 0; j < numSizes; ++j) {
+ 414              		.loc 1 36 0
+ 415 0408 3000C0AF 		sw	$0,48($fp)
+ 416 040c E7000010 		b	$L8
+ 417 0410 00000000 		nop
+ 418              	
+ 419              	$L12:
+ 420 0414 2110A003 		move	$2,$sp
+ 421 0418 6000C2AF 		sw	$2,96($fp)
+ 422              	$LBB4 = .
+  36:apps/Benchmarks.c ****     int sz = sizes[j];
+ 423              		.loc 1 37 0
+ 424 041c 3000C28F 		lw	$2,48($fp)
+ 425 0420 00000000 		nop
+ 426 0424 80100200 		sll	$2,$2,2
+ 427 0428 1800C327 		addiu	$3,$fp,24
+ 428 042c 21106200 		addu	$2,$3,$2
+ 429 0430 2C00428C 		lw	$2,44($2)
+ 430 0434 00000000 		nop
+ 431 0438 2C00C2AF 		sw	$2,44($fp)
+  37:apps/Benchmarks.c ****     unsigned long start = TimerCount();
+ 432              		.loc 1 38 0
+ 433 043c 0000828F 		lw	$2,%call16(TimerCount)($28)
+ 434 0440 00000000 		nop
+ 435 0444 21C84000 		move	$25,$2
+ 436 0448 09F82003 		jalr	$25
+ 437 044c 00000000 		nop
+ 438              	
+ 439 0450 1000DC8F 		lw	$28,16($fp)
+ 440 0454 2800C2AF 		sw	$2,40($fp)
+  38:apps/Benchmarks.c ****     char buf[maxSize];
+ 441              		.loc 1 39 0
+ 442 0458 3800C28F 		lw	$2,56($fp)
+ 443 045c 00000000 		nop
+ 444 0460 FFFF4224 		addiu	$2,$2,-1
+ 445 0464 4000C2AF 		sw	$2,64($fp)
+ 446 0468 3800C28F 		lw	$2,56($fp)
+ 447 046c 00000000 		nop
+ 448 0470 21904000 		move	$18,$2
+ 449 0474 21980000 		move	$19,$0
+ 450 0478 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 451 047c 24104202 		and	$2,$18,$2
+ 452 0480 6800C2AF 		sw	$2,104($fp)
+ 453 0484 0F006232 		andi	$2,$19,0xf
+ 454 0488 6C00C2AF 		sw	$2,108($fp)
+ 455 048c 6800D28F 		lw	$18,104($fp)
+ 456 0490 6C00D38F 		lw	$19,108($fp)
+ 457 0494 42171200 		srl	$2,$18,29
+ 458 0498 C0B81300 		sll	$23,$19,3
+ 459 049c 25B85700 		or	$23,$2,$23
+ 460 04a0 C0B01200 		sll	$22,$18,3
+ 461 04a4 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 462 04a8 2410C202 		and	$2,$22,$2
+ 463 04ac 7000C2AF 		sw	$2,112($fp)
+ 464 04b0 0F00F932 		andi	$25,$23,0xf
+ 465 04b4 7400D9AF 		sw	$25,116($fp)
+ 466 04b8 7000D68F 		lw	$22,112($fp)
+ 467 04bc 7400D78F 		lw	$23,116($fp)
+ 468 04c0 3800C28F 		lw	$2,56($fp)
+ 469 04c4 00000000 		nop
+ 470 04c8 21804000 		move	$16,$2
+ 471 04cc 21880000 		move	$17,$0
+ 472 04d0 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 473 04d4 24100202 		and	$2,$16,$2
+ 474 04d8 7800C2AF 		sw	$2,120($fp)
+ 475 04dc 0F002232 		andi	$2,$17,0xf
+ 476 04e0 7C00C2AF 		sw	$2,124($fp)
+ 477 04e4 7800D08F 		lw	$16,120($fp)
+ 478 04e8 7C00D18F 		lw	$17,124($fp)
+ 479 04ec 42171000 		srl	$2,$16,29
+ 480 04f0 C0A81100 		sll	$21,$17,3
+ 481 04f4 25A85500 		or	$21,$2,$21
+ 482 04f8 C0A01000 		sll	$20,$16,3
+ 483 04fc FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 484 0500 24108202 		and	$2,$20,$2
+ 485 0504 8000C2AF 		sw	$2,128($fp)
+ 486 0508 0F00B932 		andi	$25,$21,0xf
+ 487 050c 8400D9AF 		sw	$25,132($fp)
+ 488 0510 8000D48F 		lw	$20,128($fp)
+ 489 0514 8400D58F 		lw	$21,132($fp)
+ 490 0518 3800C28F 		lw	$2,56($fp)
+ 491 051c 00000000 		nop
+ 492 0520 07004224 		addiu	$2,$2,7
+ 493 0524 07004224 		addiu	$2,$2,7
+ 494 0528 C2100200 		srl	$2,$2,3
+ 495 052c C0100200 		sll	$2,$2,3
+ 496 0530 23E8A203 		subu	$sp,$sp,$2
+ 497 0534 1000A227 		addiu	$2,$sp,16
+ 498 0538 07004224 		addiu	$2,$2,7
+ 499 053c C2100200 		srl	$2,$2,3
+ 500 0540 C0100200 		sll	$2,$2,3
+ 501 0544 3C00C2AF 		sw	$2,60($fp)
+  39:apps/Benchmarks.c ****     unsigned long i=0;
+ 502              		.loc 1 40 0
+ 503 0548 2400C0AF 		sw	$0,36($fp)
+  40:apps/Benchmarks.c ****     StackPrintInfo(stdout);
+ 504              		.loc 1 41 0
+ 505 054c 0000828F 		lw	$2,%got(stdout)($28)
+ 506 0550 00000000 		nop
+ 507 0554 0000428C 		lw	$2,0($2)
+ 508 0558 00000000 		nop
+ 509 055c 21204000 		move	$4,$2
+ 510 0560 0000828F 		lw	$2,%call16(StackPrintInfo)($28)
+ 511 0564 00000000 		nop
+ 512 0568 21C84000 		move	$25,$2
+ 513 056c 09F82003 		jalr	$25
+ 514 0570 00000000 		nop
+ 515              	
+ 516 0574 1000DC8F 		lw	$28,16($fp)
+  41:apps/Benchmarks.c ****     OutP("Rd "); OutI(sz); OutP(" at a time,"); OutI(maxSize); OutP(" bytes: "); 
+ 517              		.loc 1 42 0
+ 518 0578 0000023C 		lui	$2,%hi($LC7)
+ 519 057c 7C004424 		addiu	$4,$2,%lo($LC7)
+ 520 0580 0000828F 		lw	$2,%call16(OutS)($28)
+ 521 0584 00000000 		nop
+ 522 0588 21C84000 		move	$25,$2
+ 523 058c 09F82003 		jalr	$25
+ 524 0590 00000000 		nop
+ 525              	
+ 526 0594 1000DC8F 		lw	$28,16($fp)
+ 527 0598 2C00C28F 		lw	$2,44($fp)
+ 528 059c 00000000 		nop
+ 529 05a0 21204000 		move	$4,$2
+ 530 05a4 0000828F 		lw	$2,%call16(OutI)($28)
+ 531 05a8 00000000 		nop
+ 532 05ac 21C84000 		move	$25,$2
+ 533 05b0 09F82003 		jalr	$25
+ 534 05b4 00000000 		nop
+ 535              	
+ 536 05b8 1000DC8F 		lw	$28,16($fp)
+ 537 05bc 0000023C 		lui	$2,%hi($LC8)
+ 538 05c0 80004424 		addiu	$4,$2,%lo($LC8)
+ 539 05c4 0000828F 		lw	$2,%call16(OutS)($28)
+ 540 05c8 00000000 		nop
+ 541 05cc 21C84000 		move	$25,$2
+ 542 05d0 09F82003 		jalr	$25
+ 543 05d4 00000000 		nop
+ 544              	
+ 545 05d8 1000DC8F 		lw	$28,16($fp)
+ 546 05dc 3800C28F 		lw	$2,56($fp)
+ 547 05e0 00000000 		nop
+ 548 05e4 21204000 		move	$4,$2
+ 549 05e8 0000828F 		lw	$2,%call16(OutI)($28)
+ 550 05ec 00000000 		nop
+ 551 05f0 21C84000 		move	$25,$2
+ 552 05f4 09F82003 		jalr	$25
+ 553 05f8 00000000 		nop
+ 554              	
+ 555 05fc 1000DC8F 		lw	$28,16($fp)
+ 556 0600 0000023C 		lui	$2,%hi($LC9)
+ 557 0604 8C004424 		addiu	$4,$2,%lo($LC9)
+ 558 0608 0000828F 		lw	$2,%call16(OutS)($28)
+ 559 060c 00000000 		nop
+ 560 0610 21C84000 		move	$25,$2
+ 561 0614 09F82003 		jalr	$25
+ 562 0618 00000000 		nop
+ 563              	
+ 564 061c 1000DC8F 		lw	$28,16($fp)
+  42:apps/Benchmarks.c ****     for (i=0; i<maxSize; i += sz) {
+ 565              		.loc 1 43 0
+ 566 0620 2400C0AF 		sw	$0,36($fp)
+ 567 0624 1D000010 		b	$L9
+ 568 0628 00000000 		nop
+ 569              	
+ 570              	$L11:
+ 571              	$LBB5 = .
+  43:apps/Benchmarks.c ****       int r = FileRead(buf, sz);
+ 572              		.loc 1 44 0
+ 573 062c 3C00C38F 		lw	$3,60($fp)
+ 574 0630 2C00C28F 		lw	$2,44($fp)
+ 575 0634 21206000 		move	$4,$3
+ 576 0638 21284000 		move	$5,$2
+ 577 063c 0000828F 		lw	$2,%call16(FileRead)($28)
+ 578 0640 00000000 		nop
+ 579 0644 21C84000 		move	$25,$2
+ 580 0648 09F82003 		jalr	$25
+ 581 064c 00000000 		nop
+ 582              	
+ 583 0650 1000DC8F 		lw	$28,16($fp)
+ 584 0654 1800C2AF 		sw	$2,24($fp)
+  44:apps/Benchmarks.c ****       if (r < sz || IsError)
+ 585              		.loc 1 45 0
+ 586 0658 1800C38F 		lw	$3,24($fp)
+ 587 065c 2C00C28F 		lw	$2,44($fp)
+ 588 0660 00000000 		nop
+ 589 0664 2A106200 		slt	$2,$3,$2
+ 590 0668 12004014 		bne	$2,$0,$L10
+ 591 066c 00000000 		nop
+ 592              	
+ 593 0670 0000828F 		lw	$2,%got(errorMsg)($28)
+ 594 0674 00000000 		nop
+ 595 0678 0000428C 		lw	$2,0($2)
+ 596 067c 00000000 		nop
+ 597 0680 0C004014 		bne	$2,$0,$L10
+ 598 0684 00000000 		nop
+ 599              	
+ 600              	$LBE5 = .
+  43:apps/Benchmarks.c ****       int r = FileRead(buf, sz);
+ 601              		.loc 1 43 0
+ 602 0688 2C00C28F 		lw	$2,44($fp)
+ 603 068c 2400C38F 		lw	$3,36($fp)
+ 604 0690 00000000 		nop
+ 605 0694 21106200 		addu	$2,$3,$2
+ 606 0698 2400C2AF 		sw	$2,36($fp)
+ 607              	$L9:
+ 608 069c 3800C38F 		lw	$3,56($fp)
+ 609 06a0 2400C28F 		lw	$2,36($fp)
+ 610 06a4 00000000 		nop
+ 611 06a8 2B104300 		sltu	$2,$2,$3
+ 612 06ac DFFF4014 		bne	$2,$0,$L11
+ 613 06b0 00000000 		nop
+ 614              	
+ 615              	$L10:
+  45:apps/Benchmarks.c ****         break;
+  46:apps/Benchmarks.c ****     }
+  47:apps/Benchmarks.c ****     unsigned long end = TimerCount();
+ 616              		.loc 1 48 0
+ 617 06b4 0000828F 		lw	$2,%call16(TimerCount)($28)
+ 618 06b8 00000000 		nop
+ 619 06bc 21C84000 		move	$25,$2
+ 620 06c0 09F82003 		jalr	$25
+ 621 06c4 00000000 		nop
+ 622              	
+ 623 06c8 1000DC8F 		lw	$28,16($fp)
+ 624 06cc 2000C2AF 		sw	$2,32($fp)
+  48:apps/Benchmarks.c ****     //OutP("TimeCounterPerMillisec = "); OutI((unsigned long) TimerCountPerMillisec()); OutP("\n");
+  49:apps/Benchmarks.c ****     //OutP("end - start = "); OutI((unsigned long) end); OutC('-'); OutI(start); 
+  50:apps/Benchmarks.c ****     //OutP(" = "); OutI(end - start); OutP("\n");
+  51:apps/Benchmarks.c ****     unsigned long t = ((1000UL*i*TimerCountPerMillisec())/(end - start));
+ 625              		.loc 1 52 0
+ 626 06d0 0000828F 		lw	$2,%call16(TimerCountPerMillisec)($28)
+ 627 06d4 00000000 		nop
+ 628 06d8 21C84000 		move	$25,$2
+ 629 06dc 09F82003 		jalr	$25
+ 630 06e0 00000000 		nop
+ 631              	
+ 632 06e4 1000DC8F 		lw	$28,16($fp)
+ 633 06e8 21184000 		move	$3,$2
+ 634 06ec 2400C28F 		lw	$2,36($fp)
+ 635 06f0 00000000 		nop
+ 636 06f4 18006200 		mult	$3,$2
+ 637 06f8 12200000 		mflo	$4
+ 638 06fc 21108000 		move	$2,$4
+ 639 0700 80180200 		sll	$3,$2,2
+ 640 0704 40110300 		sll	$2,$3,5
+ 641 0708 23104300 		subu	$2,$2,$3
+ 642 070c 21104400 		addu	$2,$2,$4
+ 643 0710 C0100200 		sll	$2,$2,3
+ 644 0714 21204000 		move	$4,$2
+ 645 0718 2000C38F 		lw	$3,32($fp)
+ 646 071c 2800C28F 		lw	$2,40($fp)
+ 647 0720 00000000 		nop
+ 648 0724 23106200 		subu	$2,$3,$2
+ 649 0728 02004014 		bne	$2,$0,1f
+ 650 072c 1B008200 		divu	$0,$4,$2
+ 651 0730 0D000700 		break	7
+ 652              	1:
+ 653 0734 10180000 		mfhi	$3
+ 654 0738 12100000 		mflo	$2
+ 655 073c 1C00C2AF 		sw	$2,28($fp)
+  52:apps/Benchmarks.c ****     OutI(t); OutP(" Bps\n");
+ 656              		.loc 1 53 0
+ 657 0740 1C00C48F 		lw	$4,28($fp)
+ 658 0744 0000828F 		lw	$2,%call16(OutI)($28)
+ 659 0748 00000000 		nop
+ 660 074c 21C84000 		move	$25,$2
+ 661 0750 09F82003 		jalr	$25
+ 662 0754 00000000 		nop
+ 663              	
+ 664 0758 1000DC8F 		lw	$28,16($fp)
+ 665 075c 0000023C 		lui	$2,%hi($LC5)
+ 666 0760 54004424 		addiu	$4,$2,%lo($LC5)
+ 667 0764 0000828F 		lw	$2,%call16(OutS)($28)
+ 668 0768 00000000 		nop
+ 669 076c 21C84000 		move	$25,$2
+ 670 0770 09F82003 		jalr	$25
+ 671 0774 00000000 		nop
+ 672              	
+ 673 0778 1000DC8F 		lw	$28,16($fp)
+  53:apps/Benchmarks.c **** 
+  54:apps/Benchmarks.c ****     FileSeek(0);
+ 674              		.loc 1 55 0
+ 675 077c 21200000 		move	$4,$0
+ 676 0780 0000828F 		lw	$2,%call16(FileSeek)($28)
+ 677 0784 00000000 		nop
+ 678 0788 21C84000 		move	$25,$2
+ 679 078c 09F82003 		jalr	$25
+ 680 0790 00000000 		nop
+ 681              	
+ 682 0794 1000DC8F 		lw	$28,16($fp)
+ 683 0798 6000DD8F 		lw	$sp,96($fp)
+ 684              	$LBE4 = .
+  36:apps/Benchmarks.c ****   for (int j = 0; j < numSizes; ++j) {
+ 685              		.loc 1 36 0
+ 686 079c 3000C28F 		lw	$2,48($fp)
+ 687 07a0 00000000 		nop
+ 688 07a4 01004224 		addiu	$2,$2,1
+ 689 07a8 3000C2AF 		sw	$2,48($fp)
+ 690              	$L8:
+ 691 07ac 3000C38F 		lw	$3,48($fp)
+ 692 07b0 3400C28F 		lw	$2,52($fp)
+ 693 07b4 00000000 		nop
+ 694 07b8 2A106200 		slt	$2,$3,$2
+ 695 07bc 15FF4014 		bne	$2,$0,$L12
+ 696 07c0 00000000 		nop
+ 697              	
+ 698              	$LBE3 = .
+  55:apps/Benchmarks.c ****   }
+  56:apps/Benchmarks.c **** }
+ 699              		.loc 1 57 0
+ 700 07c4 21E8C003 		move	$sp,$fp
+ 701 07c8 AC00BF8F 		lw	$31,172($sp)
+ 702 07cc A800BE8F 		lw	$fp,168($sp)
+ 703 07d0 A400B78F 		lw	$23,164($sp)
+ 704 07d4 A000B68F 		lw	$22,160($sp)
+ 705 07d8 9C00B58F 		lw	$21,156($sp)
+ 706 07dc 9800B48F 		lw	$20,152($sp)
+ 707 07e0 9400B38F 		lw	$19,148($sp)
+ 708 07e4 9000B28F 		lw	$18,144($sp)
+ 709 07e8 8C00B18F 		lw	$17,140($sp)
+ 710 07ec 8800B08F 		lw	$16,136($sp)
+ 711 07f0 B000BD27 		addiu	$sp,$sp,176
+ 712 07f4 0800E003 		j	$31
+ 713 07f8 00000000 		nop
+ 714              	
+ 715              		.set	macro
+ 716              		.set	reorder
+ 717              		.end	ReadSpeedTest
+ 718              	$LFE1:
+ 720              		.align	2
+ 721              		.globl	main
+ 722              	$LFB2 = .
+  57:apps/Benchmarks.c **** 
+  58:apps/Benchmarks.c **** int main(int argc, char **argv) {
+ 723              		.loc 1 59 0
+ 724              		.set	nomips16
+ 725              		.ent	main
+ 727              	main:
+ 728              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 729              		.mask	0xc0000000,-4
+ 730              		.fmask	0x00000000,0
+ 731              		.set	noreorder
+ 732              		.set	nomacro
+ 733              		
+ 734 07fc E0FFBD27 		addiu	$sp,$sp,-32
+ 735              	$LCFI16:
+ 736 0800 1C00BFAF 		sw	$31,28($sp)
+ 737              	$LCFI17:
+ 738 0804 1800BEAF 		sw	$fp,24($sp)
+ 739              	$LCFI18:
+ 740 0808 21F0A003 		move	$fp,$sp
+ 741              	$LCFI19:
+ 742 080c 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 743 0810 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 744 0814 1000BCAF 		.cprestore	16
+ 745 0818 2000C4AF 		sw	$4,32($fp)
+ 746 081c 2400C5AF 		sw	$5,36($fp)
+  59:apps/Benchmarks.c ****   PlatformInit();
+ 747              		.loc 1 60 0
+ 748 0820 0000828F 		lw	$2,%call16(PlatformInit)($28)
+ 749 0824 00000000 		nop
+ 750 0828 21C84000 		move	$25,$2
+ 751 082c 09F82003 		jalr	$25
+ 752 0830 00000000 		nop
+ 753              	
+ 754 0834 1000DC8F 		lw	$28,16($fp)
+  60:apps/Benchmarks.c ****   RndSeekTest();
+ 755              		.loc 1 61 0
+ 756              		.option	pic0
+ 757 0838 0000000C 		jal	RndSeekTest
+ 758 083c 00000000 		nop
+ 759              	
+ 760              		.option	pic2
+ 761 0840 1000DC8F 		lw	$28,16($fp)
+  61:apps/Benchmarks.c ****   ReadSpeedTest();
+ 762              		.loc 1 62 0
+ 763              		.option	pic0
+ 764 0844 0000000C 		jal	ReadSpeedTest
+ 765 0848 00000000 		nop
+ 766              	
+ 767              		.option	pic2
+ 768 084c 1000DC8F 		lw	$28,16($fp)
+  62:apps/Benchmarks.c ****   return 0;
+ 769              		.loc 1 63 0
+ 770 0850 21100000 		move	$2,$0
+  63:apps/Benchmarks.c **** }
+ 771              		.loc 1 64 0
+ 772 0854 21E8C003 		move	$sp,$fp
+ 773 0858 1C00BF8F 		lw	$31,28($sp)
+ 774 085c 1800BE8F 		lw	$fp,24($sp)
+ 775 0860 2000BD27 		addiu	$sp,$sp,32
+ 776 0864 0800E003 		j	$31
+ 777 0868 00000000 		nop
+ 778              	
+ 779              		.set	macro
+ 780              		.set	reorder
+ 781              		.end	main
+ 782              	$LFE2:
+ 784              		.rdata
+ 785 0095 000000   		.align	2
+ 788              	__func__.1739:
+ 789 0098 52656164 		.ascii	"ReadSpeedTest\000"
+ 789      53706565 
+ 789      64546573 
+ 789      7400
+ 790 00a6 0000     		.align	2
+ 793              	__PRETTY_FUNCTION__.1740:
+ 794 00a8 52656164 		.ascii	"ReadSpeedTest\000"
+ 794      53706565 
+ 794      64546573 
+ 794      7400
+ 795 00b6 0000     		.align	2
+ 798              	__func__.1713:
+ 799 00b8 526E6453 		.ascii	"RndSeekTest\000"
+ 799      65656B54 
+ 799      65737400 
+ 800              		.align	2
+ 803              	__PRETTY_FUNCTION__.1714:
+ 804 00c4 526E6453 		.ascii	"RndSeekTest\000"
+ 804      65656B54 
+ 804      65737400 
+ 917              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 apps/Benchmarks.c
+     /tmp/ccBuctna.s:23     .data.rel.local:0000000000000000 fileName
+     /tmp/ccBuctna.s:49     .text:0000000000000000 RndSeekTest
+     /tmp/ccBuctna.s:798    .rodata:00000000000000b8 __func__.1713
+     /tmp/ccBuctna.s:803    .rodata:00000000000000c4 __PRETTY_FUNCTION__.1714
+     /tmp/ccBuctna.s:303    .text:00000000000002cc ReadSpeedTest
+     /tmp/ccBuctna.s:788    .rodata:0000000000000098 __func__.1739
+     /tmp/ccBuctna.s:793    .rodata:00000000000000a8 __PRETTY_FUNCTION__.1740
+     /tmp/ccBuctna.s:727    .text:00000000000007fc main
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+FileOpenRO
+errorMsg
+ERRORprint2
+__assert_fail
+OutS
+OutI
+TimerCount
+FileSeek
+FileRead
+TimerCountPerMillisec
+stdout
+StackPrintInfo
+PlatformInit

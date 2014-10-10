@@ -1,0 +1,614 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.rdata
+  14              		.align	2
+  15              	$LC0:
+  16 0000 55534147 		.ascii	"USAGE: %s <archive>\012\000"
+  16      453A2025 
+  16      73203C61 
+  16      72636869 
+  16      76653E0A 
+  17 0015 000000   		.align	2
+  18              	$LC1:
+  19 0018 726200   		.ascii	"rb\000"
+  20 001b 00       		.align	2
+  21              	$LC2:
+  22 001c 4661696C 		.ascii	"Failed to open archive %s\012\000"
+  22      65642074 
+  22      6F206F70 
+  22      656E2061 
+  22      72636869 
+  23 0037 00       		.align	2
+  24              	$LC3:
+  25 0038 5072656D 		.ascii	"Premature end of archive during header read\012\000"
+  25      61747572 
+  25      6520656E 
+  25      64206F66 
+  25      20617263 
+  26 0065 000000   		.align	2
+  27              	$LC4:
+  28 0068 2532693A 		.ascii	"%2i: sz=%10u pos=%10u name=%s\012\000"
+  28      20737A3D 
+  28      25313075 
+  28      20706F73 
+  28      3D253130 
+  29 0087 00       		.align	2
+  30              	$LC5:
+  31 0088 41747465 		.ascii	"Attempted seek in archive failed\012\000"
+  31      6D707465 
+  31      64207365 
+  31      656B2069 
+  31      6E206172 
+  32 00aa 00000000 		.text
+  32      0000
+  33              		.align	2
+  34              		.globl	main
+  35              	$LFB0 = .
+  36              		.file 1 "bgtree/artest.c"
+   0:bgtree/artest.c **** #include "ar.h"
+   1:bgtree/artest.c **** #include <stdio.h>
+   2:bgtree/artest.c **** 
+   3:bgtree/artest.c **** int main(int argc, char **argv) {
+  37              		.loc 1 4 0
+  38              		.set	nomips16
+  39              		.ent	main
+  41              	main:
+  42              		.frame	$fp,216,$31		# vars= 144, regs= 10/0, args= 24, gp= 8
+  43              		.mask	0xc0ff0000,-4
+  44              		.fmask	0x00000000,0
+  45              		.set	noreorder
+  46              		.set	nomacro
+  47              		
+  48 0000 28FFBD27 		addiu	$sp,$sp,-216
+  49              	$LCFI0:
+  50 0004 D400BFAF 		sw	$31,212($sp)
+  51              	$LCFI1:
+  52 0008 D000BEAF 		sw	$fp,208($sp)
+  53              	$LCFI2:
+  54 000c CC00B7AF 		sw	$23,204($sp)
+  55              	$LCFI3:
+  56 0010 C800B6AF 		sw	$22,200($sp)
+  57              	$LCFI4:
+  58 0014 C400B5AF 		sw	$21,196($sp)
+  59              	$LCFI5:
+  60 0018 C000B4AF 		sw	$20,192($sp)
+  61              	$LCFI6:
+  62 001c BC00B3AF 		sw	$19,188($sp)
+  63              	$LCFI7:
+  64 0020 B800B2AF 		sw	$18,184($sp)
+  65              	$LCFI8:
+  66 0024 B400B1AF 		sw	$17,180($sp)
+  67              	$LCFI9:
+  68 0028 B000B0AF 		sw	$16,176($sp)
+  69              	$LCFI10:
+  70 002c 21F0A003 		move	$fp,$sp
+  71              	$LCFI11:
+  72 0030 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  73 0034 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  74 0038 1800BCAF 		.cprestore	24
+  75 003c D800C4AF 		sw	$4,216($fp)
+  76 0040 DC00C5AF 		sw	$5,220($fp)
+  77              		.loc 1 4 0
+  78 0044 2110A003 		move	$2,$sp
+  79 0048 7800C2AF 		sw	$2,120($fp)
+   4:bgtree/artest.c ****   if (argc < 3) {
+  80              		.loc 1 5 0
+  81 004c D800C28F 		lw	$2,216($fp)
+  82 0050 00000000 		nop
+  83 0054 03004228 		slt	$2,$2,3
+  84 0058 16004010 		beq	$2,$0,$L2
+  85 005c 00000000 		nop
+  86              	
+   5:bgtree/artest.c ****     fprintf(stderr, "USAGE: %s <archive>\n", argv[0]);
+  87              		.loc 1 6 0
+  88 0060 0000828F 		lw	$2,%got(stderr)($28)
+  89 0064 00000000 		nop
+  90 0068 0000428C 		lw	$2,0($2)
+  91 006c 00000000 		nop
+  92 0070 21204000 		move	$4,$2
+  93 0074 0000023C 		lui	$2,%hi($LC0)
+  94 0078 00004324 		addiu	$3,$2,%lo($LC0)
+  95 007c DC00C28F 		lw	$2,220($fp)
+  96 0080 00000000 		nop
+  97 0084 0000428C 		lw	$2,0($2)
+  98 0088 21286000 		move	$5,$3
+  99 008c 21304000 		move	$6,$2
+ 100 0090 0000828F 		lw	$2,%call16(fprintf)($28)
+ 101 0094 00000000 		nop
+ 102 0098 21C84000 		move	$25,$2
+ 103 009c 09F82003 		jalr	$25
+ 104 00a0 00000000 		nop
+ 105              	
+ 106 00a4 1800DC8F 		lw	$28,24($fp)
+   6:bgtree/artest.c ****     //fprintf(stderr, "       %s x <archive> <filename>\n", argv[0]);
+   7:bgtree/artest.c ****     return -1;
+ 107              		.loc 1 8 0
+ 108 00a8 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 109 00ac 44010010 		b	$L3
+ 110 00b0 00000000 		nop
+ 111              	
+ 112              	$L2:
+   8:bgtree/artest.c ****   }
+   9:bgtree/artest.c **** 
+  10:bgtree/artest.c ****   FILE *f = fopen(argv[2],"rb");
+ 113              		.loc 1 11 0
+ 114 00b4 DC00C28F 		lw	$2,220($fp)
+ 115 00b8 00000000 		nop
+ 116 00bc 08004224 		addiu	$2,$2,8
+ 117 00c0 0000428C 		lw	$2,0($2)
+ 118 00c4 00000000 		nop
+ 119 00c8 21184000 		move	$3,$2
+ 120 00cc 0000023C 		lui	$2,%hi($LC1)
+ 121 00d0 18004224 		addiu	$2,$2,%lo($LC1)
+ 122 00d4 21206000 		move	$4,$3
+ 123 00d8 21284000 		move	$5,$2
+ 124 00dc 0000828F 		lw	$2,%call16(fopen)($28)
+ 125 00e0 00000000 		nop
+ 126 00e4 21C84000 		move	$25,$2
+ 127 00e8 09F82003 		jalr	$25
+ 128 00ec 00000000 		nop
+ 129              	
+ 130 00f0 1800DC8F 		lw	$28,24($fp)
+ 131 00f4 2C00C2AF 		sw	$2,44($fp)
+  11:bgtree/artest.c ****   if (!f) {
+ 132              		.loc 1 12 0
+ 133 00f8 2C00C28F 		lw	$2,44($fp)
+ 134 00fc 00000000 		nop
+ 135 0100 17004014 		bne	$2,$0,$L4
+ 136 0104 00000000 		nop
+ 137              	
+  12:bgtree/artest.c ****     fprintf(stderr, "Failed to open archive %s\n", argv[2]);
+ 138              		.loc 1 13 0
+ 139 0108 0000828F 		lw	$2,%got(stderr)($28)
+ 140 010c 00000000 		nop
+ 141 0110 0000428C 		lw	$2,0($2)
+ 142 0114 00000000 		nop
+ 143 0118 21204000 		move	$4,$2
+ 144 011c 0000023C 		lui	$2,%hi($LC2)
+ 145 0120 1C004324 		addiu	$3,$2,%lo($LC2)
+ 146 0124 DC00C28F 		lw	$2,220($fp)
+ 147 0128 00000000 		nop
+ 148 012c 08004224 		addiu	$2,$2,8
+ 149 0130 0000428C 		lw	$2,0($2)
+ 150 0134 21286000 		move	$5,$3
+ 151 0138 21304000 		move	$6,$2
+ 152 013c 0000828F 		lw	$2,%call16(fprintf)($28)
+ 153 0140 00000000 		nop
+ 154 0144 21C84000 		move	$25,$2
+ 155 0148 09F82003 		jalr	$25
+ 156 014c 00000000 		nop
+ 157              	
+ 158 0150 1800DC8F 		lw	$28,24($fp)
+  13:bgtree/artest.c ****     return -1;
+ 159              		.loc 1 14 0
+ 160 0154 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 161 0158 19010010 		b	$L3
+ 162 015c 00000000 		nop
+ 163              	
+ 164              	$L4:
+  14:bgtree/artest.c ****   }
+  15:bgtree/artest.c **** 
+  16:bgtree/artest.c ****   /* Read headers */
+  17:bgtree/artest.c ****   const int maxRecords = 8;
+ 165              		.loc 1 18 0
+ 166 0160 08000224 		li	$2,8			# 0x8
+ 167 0164 2800C2AF 		sw	$2,40($fp)
+  18:bgtree/artest.c ****   ArFileRecord records[maxRecords];
+ 168              		.loc 1 19 0
+ 169 0168 2800C28F 		lw	$2,40($fp)
+ 170 016c 00000000 		nop
+ 171 0170 FFFF4224 		addiu	$2,$2,-1
+ 172 0174 3400C2AF 		sw	$2,52($fp)
+ 173 0178 2800C28F 		lw	$2,40($fp)
+ 174 017c 00000000 		nop
+ 175 0180 8800C2AF 		sw	$2,136($fp)
+ 176 0184 21100000 		move	$2,$0
+ 177 0188 8C00C2AF 		sw	$2,140($fp)
+ 178 018c FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 179 0190 8800C38F 		lw	$3,136($fp)
+ 180 0194 00000000 		nop
+ 181 0198 24186200 		and	$3,$3,$2
+ 182 019c 9000C3AF 		sw	$3,144($fp)
+ 183 01a0 8C00C48F 		lw	$4,140($fp)
+ 184 01a4 00000000 		nop
+ 185 01a8 0F008430 		andi	$4,$4,0xf
+ 186 01ac 9400C4AF 		sw	$4,148($fp)
+ 187 01b0 9000C28F 		lw	$2,144($fp)
+ 188 01b4 9400C38F 		lw	$3,148($fp)
+ 189 01b8 8800C2AF 		sw	$2,136($fp)
+ 190 01bc 8C00C3AF 		sw	$3,140($fp)
+ 191 01c0 8800C28F 		lw	$2,136($fp)
+ 192 01c4 8C00C38F 		lw	$3,140($fp)
+ 193 01c8 82260200 		srl	$4,$2,26
+ 194 01cc 80990300 		sll	$19,$3,6
+ 195 01d0 25989300 		or	$19,$4,$19
+ 196 01d4 80910200 		sll	$18,$2,6
+ 197 01d8 82171200 		srl	$2,$18,30
+ 198 01dc 80B81300 		sll	$23,$19,2
+ 199 01e0 25B85700 		or	$23,$2,$23
+ 200 01e4 80B01200 		sll	$22,$18,2
+ 201 01e8 2310D202 		subu	$2,$22,$18
+ 202 01ec 2B20C202 		sltu	$4,$22,$2
+ 203 01f0 2318F302 		subu	$3,$23,$19
+ 204 01f4 23206400 		subu	$4,$3,$4
+ 205 01f8 21188000 		move	$3,$4
+ 206 01fc FFFF0424 		li	$4,-1			# 0xffffffffffffffff
+ 207 0200 24204400 		and	$4,$2,$4
+ 208 0204 9800C4AF 		sw	$4,152($fp)
+ 209 0208 0F006430 		andi	$4,$3,0xf
+ 210 020c 9C00C4AF 		sw	$4,156($fp)
+ 211 0210 9800C28F 		lw	$2,152($fp)
+ 212 0214 9C00C38F 		lw	$3,156($fp)
+ 213 0218 2800C28F 		lw	$2,40($fp)
+ 214 021c 00000000 		nop
+ 215 0220 8000C2AF 		sw	$2,128($fp)
+ 216 0224 21C80000 		move	$25,$0
+ 217 0228 8400D9AF 		sw	$25,132($fp)
+ 218 022c FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 219 0230 8000C38F 		lw	$3,128($fp)
+ 220 0234 00000000 		nop
+ 221 0238 24186200 		and	$3,$3,$2
+ 222 023c A000C3AF 		sw	$3,160($fp)
+ 223 0240 8400C48F 		lw	$4,132($fp)
+ 224 0244 00000000 		nop
+ 225 0248 0F008430 		andi	$4,$4,0xf
+ 226 024c A400C4AF 		sw	$4,164($fp)
+ 227 0250 A000C28F 		lw	$2,160($fp)
+ 228 0254 A400C38F 		lw	$3,164($fp)
+ 229 0258 8000C2AF 		sw	$2,128($fp)
+ 230 025c 8400C3AF 		sw	$3,132($fp)
+ 231 0260 8000C28F 		lw	$2,128($fp)
+ 232 0264 8400C38F 		lw	$3,132($fp)
+ 233 0268 82260200 		srl	$4,$2,26
+ 234 026c 80890300 		sll	$17,$3,6
+ 235 0270 25889100 		or	$17,$4,$17
+ 236 0274 80810200 		sll	$16,$2,6
+ 237 0278 82171000 		srl	$2,$16,30
+ 238 027c 80A81100 		sll	$21,$17,2
+ 239 0280 25A85500 		or	$21,$2,$21
+ 240 0284 80A01000 		sll	$20,$16,2
+ 241 0288 23109002 		subu	$2,$20,$16
+ 242 028c 2B208202 		sltu	$4,$20,$2
+ 243 0290 2318B102 		subu	$3,$21,$17
+ 244 0294 23206400 		subu	$4,$3,$4
+ 245 0298 21188000 		move	$3,$4
+ 246 029c FFFF0424 		li	$4,-1			# 0xffffffffffffffff
+ 247 02a0 24204400 		and	$4,$2,$4
+ 248 02a4 A800C4AF 		sw	$4,168($fp)
+ 249 02a8 0F006430 		andi	$4,$3,0xf
+ 250 02ac AC00C4AF 		sw	$4,172($fp)
+ 251 02b0 A800C28F 		lw	$2,168($fp)
+ 252 02b4 AC00C38F 		lw	$3,172($fp)
+ 253 02b8 2800C28F 		lw	$2,40($fp)
+ 254 02bc 00000000 		nop
+ 255 02c0 C0100200 		sll	$2,$2,3
+ 256 02c4 80180200 		sll	$3,$2,2
+ 257 02c8 23106200 		subu	$2,$3,$2
+ 258 02cc 07004224 		addiu	$2,$2,7
+ 259 02d0 07004224 		addiu	$2,$2,7
+ 260 02d4 C2100200 		srl	$2,$2,3
+ 261 02d8 C0100200 		sll	$2,$2,3
+ 262 02dc 23E8A203 		subu	$sp,$sp,$2
+ 263 02e0 1800A227 		addiu	$2,$sp,24
+ 264 02e4 07004224 		addiu	$2,$2,7
+ 265 02e8 C2100200 		srl	$2,$2,3
+ 266 02ec C0100200 		sll	$2,$2,3
+ 267 02f0 3000C2AF 		sw	$2,48($fp)
+  19:bgtree/artest.c ****   int numRecords=0;
+ 268              		.loc 1 20 0
+ 269 02f4 2400C0AF 		sw	$0,36($fp)
+  20:bgtree/artest.c ****   char buf[60];
+  21:bgtree/artest.c ****   uint32_t position=0;
+ 270              		.loc 1 22 0
+ 271 02f8 7400C0AF 		sw	$0,116($fp)
+ 272              	$L5:
+  22:bgtree/artest.c **** 
+  23:bgtree/artest.c ****   /* Read global header */
+  24:bgtree/artest.c ****   do {
+  25:bgtree/artest.c ****     ++position; // eat first line
+ 273              		.loc 1 26 0
+ 274 02fc 7400C28F 		lw	$2,116($fp)
+ 275 0300 00000000 		nop
+ 276 0304 01004224 		addiu	$2,$2,1
+ 277 0308 7400C2AF 		sw	$2,116($fp)
+  26:bgtree/artest.c ****   } while (fgetc(f) != '\n');
+ 278              		.loc 1 27 0
+ 279 030c 2C00C48F 		lw	$4,44($fp)
+ 280 0310 0000828F 		lw	$2,%call16(fgetc)($28)
+ 281 0314 00000000 		nop
+ 282 0318 21C84000 		move	$25,$2
+ 283 031c 09F82003 		jalr	$25
+ 284 0320 00000000 		nop
+ 285              	
+ 286 0324 1800DC8F 		lw	$28,24($fp)
+ 287 0328 21184000 		move	$3,$2
+ 288 032c 0A000224 		li	$2,10			# 0xa
+ 289 0330 F2FF6214 		bne	$3,$2,$L5
+ 290 0334 00000000 		nop
+ 291              	
+ 292 0338 02000010 		b	$L11
+ 293 033c 00000000 		nop
+ 294              	
+ 295              	$L15:
+  27:bgtree/artest.c **** 
+  28:bgtree/artest.c ****   do {
+  29:bgtree/artest.c ****     int n = fread(buf, 1, 1, f);
+  30:bgtree/artest.c ****     if (n != 1) //end of archive
+  31:bgtree/artest.c ****       break;
+  32:bgtree/artest.c ****     if (buf[0] == '\n') // record terminator
+  33:bgtree/artest.c ****       break;
+  34:bgtree/artest.c **** 
+  35:bgtree/artest.c ****     n = fread(buf+1, 1, 59, f);
+  36:bgtree/artest.c ****     if (n < 59) {
+  37:bgtree/artest.c ****       fprintf(stderr, "Premature end of archive during header read\n");
+  38:bgtree/artest.c ****       return -4;
+  39:bgtree/artest.c ****     }
+  40:bgtree/artest.c ****     ArParseHeader(&records[numRecords++], buf, &position);
+  41:bgtree/artest.c ****     fprintf(stdout, "%2i: sz=%10u pos=%10u name=%s\n", numRecords, records[numRecords-1].sz, record
+  42:bgtree/artest.c ****     n = fseek(f, position, SEEK_SET);
+  43:bgtree/artest.c ****     if (n != 0) {
+  44:bgtree/artest.c ****       fprintf(stderr, "Attempted seek in archive failed\n");
+  45:bgtree/artest.c ****       return -4;
+  46:bgtree/artest.c ****     }
+  47:bgtree/artest.c ****   } while (1); 
+ 296              		.loc 1 48 0
+ 297 0340 00000000 		nop
+ 298              	$L11:
+ 299              	$LBB2 = .
+  30:bgtree/artest.c ****     int n = fread(buf, 1, 1, f);
+ 300              		.loc 1 30 0
+ 301 0344 3800C227 		addiu	$2,$fp,56
+ 302 0348 21204000 		move	$4,$2
+ 303 034c 01000524 		li	$5,1			# 0x1
+ 304 0350 01000624 		li	$6,1			# 0x1
+ 305 0354 2C00C78F 		lw	$7,44($fp)
+ 306 0358 0000828F 		lw	$2,%call16(fread)($28)
+ 307 035c 00000000 		nop
+ 308 0360 21C84000 		move	$25,$2
+ 309 0364 09F82003 		jalr	$25
+ 310 0368 00000000 		nop
+ 311              	
+ 312 036c 1800DC8F 		lw	$28,24($fp)
+ 313 0370 2000C2AF 		sw	$2,32($fp)
+  31:bgtree/artest.c ****     if (n != 1) //end of archive
+ 314              		.loc 1 31 0
+ 315 0374 2000C38F 		lw	$3,32($fp)
+ 316 0378 01000224 		li	$2,1			# 0x1
+ 317 037c 8B006214 		bne	$3,$2,$L13
+ 318 0380 00000000 		nop
+ 319              	
+ 320              	$L6:
+  33:bgtree/artest.c ****     if (buf[0] == '\n') // record terminator
+ 321              		.loc 1 33 0
+ 322 0384 3800C383 		lb	$3,56($fp)
+ 323 0388 0A000224 		li	$2,10			# 0xa
+ 324 038c 8A006210 		beq	$3,$2,$L14
+ 325 0390 00000000 		nop
+ 326              	
+ 327              	$L8:
+  36:bgtree/artest.c ****     n = fread(buf+1, 1, 59, f);
+ 328              		.loc 1 36 0
+ 329 0394 3800C227 		addiu	$2,$fp,56
+ 330 0398 01004224 		addiu	$2,$2,1
+ 331 039c 21204000 		move	$4,$2
+ 332 03a0 01000524 		li	$5,1			# 0x1
+ 333 03a4 3B000624 		li	$6,59			# 0x3b
+ 334 03a8 2C00C78F 		lw	$7,44($fp)
+ 335 03ac 0000828F 		lw	$2,%call16(fread)($28)
+ 336 03b0 00000000 		nop
+ 337 03b4 21C84000 		move	$25,$2
+ 338 03b8 09F82003 		jalr	$25
+ 339 03bc 00000000 		nop
+ 340              	
+ 341 03c0 1800DC8F 		lw	$28,24($fp)
+ 342 03c4 2000C2AF 		sw	$2,32($fp)
+  37:bgtree/artest.c ****     if (n < 59) {
+ 343              		.loc 1 37 0
+ 344 03c8 2000C28F 		lw	$2,32($fp)
+ 345 03cc 00000000 		nop
+ 346 03d0 3B004228 		slt	$2,$2,59
+ 347 03d4 13004010 		beq	$2,$0,$L9
+ 348 03d8 00000000 		nop
+ 349              	
+  38:bgtree/artest.c ****       fprintf(stderr, "Premature end of archive during header read\n");
+ 350              		.loc 1 38 0
+ 351 03dc 0000023C 		lui	$2,%hi($LC3)
+ 352 03e0 38004324 		addiu	$3,$2,%lo($LC3)
+ 353 03e4 0000828F 		lw	$2,%got(stderr)($28)
+ 354 03e8 00000000 		nop
+ 355 03ec 0000428C 		lw	$2,0($2)
+ 356 03f0 21206000 		move	$4,$3
+ 357 03f4 01000524 		li	$5,1			# 0x1
+ 358 03f8 2C000624 		li	$6,44			# 0x2c
+ 359 03fc 21384000 		move	$7,$2
+ 360 0400 0000828F 		lw	$2,%call16(fwrite)($28)
+ 361 0404 00000000 		nop
+ 362 0408 21C84000 		move	$25,$2
+ 363 040c 09F82003 		jalr	$25
+ 364 0410 00000000 		nop
+ 365              	
+ 366 0414 1800DC8F 		lw	$28,24($fp)
+  39:bgtree/artest.c ****       return -4;
+ 367              		.loc 1 39 0
+ 368 0418 FCFF0224 		li	$2,-4			# 0xfffffffffffffffc
+ 369 041c 68000010 		b	$L3
+ 370 0420 00000000 		nop
+ 371              	
+ 372              	$L9:
+  41:bgtree/artest.c ****     ArParseHeader(&records[numRecords++], buf, &position);
+ 373              		.loc 1 41 0
+ 374 0424 3000C38F 		lw	$3,48($fp)
+ 375 0428 2400C28F 		lw	$2,36($fp)
+ 376 042c 00000000 		nop
+ 377 0430 C0100200 		sll	$2,$2,3
+ 378 0434 80200200 		sll	$4,$2,2
+ 379 0438 23108200 		subu	$2,$4,$2
+ 380 043c 21206200 		addu	$4,$3,$2
+ 381 0440 2400C28F 		lw	$2,36($fp)
+ 382 0444 00000000 		nop
+ 383 0448 01004224 		addiu	$2,$2,1
+ 384 044c 2400C2AF 		sw	$2,36($fp)
+ 385 0450 3800C327 		addiu	$3,$fp,56
+ 386 0454 7400C227 		addiu	$2,$fp,116
+ 387 0458 21286000 		move	$5,$3
+ 388 045c 21304000 		move	$6,$2
+ 389 0460 0000828F 		lw	$2,%call16(ArParseHeader)($28)
+ 390 0464 00000000 		nop
+ 391 0468 21C84000 		move	$25,$2
+ 392 046c 09F82003 		jalr	$25
+ 393 0470 00000000 		nop
+ 394              	
+ 395 0474 1800DC8F 		lw	$28,24($fp)
+ 396 0478 00000000 		nop
+  42:bgtree/artest.c ****     fprintf(stdout, "%2i: sz=%10u pos=%10u name=%s\n", numRecords, records[numRecords-1].sz, record
+ 397              		.loc 1 42 0
+ 398 047c 0000828F 		lw	$2,%got(stdout)($28)
+ 399 0480 00000000 		nop
+ 400 0484 0000428C 		lw	$2,0($2)
+ 401 0488 00000000 		nop
+ 402 048c 21204000 		move	$4,$2
+ 403 0490 0000023C 		lui	$2,%hi($LC4)
+ 404 0494 68004524 		addiu	$5,$2,%lo($LC4)
+ 405 0498 2400C28F 		lw	$2,36($fp)
+ 406 049c 00000000 		nop
+ 407 04a0 FFFF4224 		addiu	$2,$2,-1
+ 408 04a4 3000C38F 		lw	$3,48($fp)
+ 409 04a8 C0100200 		sll	$2,$2,3
+ 410 04ac 80300200 		sll	$6,$2,2
+ 411 04b0 2310C200 		subu	$2,$6,$2
+ 412 04b4 21106200 		addu	$2,$3,$2
+ 413 04b8 1400478C 		lw	$7,20($2)
+ 414 04bc 2400C28F 		lw	$2,36($fp)
+ 415 04c0 00000000 		nop
+ 416 04c4 FFFF4224 		addiu	$2,$2,-1
+ 417 04c8 3000C38F 		lw	$3,48($fp)
+ 418 04cc C0100200 		sll	$2,$2,3
+ 419 04d0 80300200 		sll	$6,$2,2
+ 420 04d4 2310C200 		subu	$2,$6,$2
+ 421 04d8 21106200 		addu	$2,$3,$2
+ 422 04dc 1000468C 		lw	$6,16($2)
+ 423 04e0 2400C28F 		lw	$2,36($fp)
+ 424 04e4 00000000 		nop
+ 425 04e8 FFFF4224 		addiu	$2,$2,-1
+ 426 04ec C0180200 		sll	$3,$2,3
+ 427 04f0 80100300 		sll	$2,$3,2
+ 428 04f4 23104300 		subu	$2,$2,$3
+ 429 04f8 3000C38F 		lw	$3,48($fp)
+ 430 04fc 00000000 		nop
+ 431 0500 21106200 		addu	$2,$3,$2
+ 432 0504 1000A6AF 		sw	$6,16($sp)
+ 433 0508 1400A2AF 		sw	$2,20($sp)
+ 434 050c 2400C68F 		lw	$6,36($fp)
+ 435 0510 0000828F 		lw	$2,%call16(fprintf)($28)
+ 436 0514 00000000 		nop
+ 437 0518 21C84000 		move	$25,$2
+ 438 051c 09F82003 		jalr	$25
+ 439 0520 00000000 		nop
+ 440              	
+ 441 0524 1800DC8F 		lw	$28,24($fp)
+  43:bgtree/artest.c ****     n = fseek(f, position, SEEK_SET);
+ 442              		.loc 1 43 0
+ 443 0528 7400C28F 		lw	$2,116($fp)
+ 444 052c 2C00C48F 		lw	$4,44($fp)
+ 445 0530 21284000 		move	$5,$2
+ 446 0534 21300000 		move	$6,$0
+ 447 0538 0000828F 		lw	$2,%call16(fseek)($28)
+ 448 053c 00000000 		nop
+ 449 0540 21C84000 		move	$25,$2
+ 450 0544 09F82003 		jalr	$25
+ 451 0548 00000000 		nop
+ 452              	
+ 453 054c 1800DC8F 		lw	$28,24($fp)
+ 454 0550 2000C2AF 		sw	$2,32($fp)
+  44:bgtree/artest.c ****     if (n != 0) {
+ 455              		.loc 1 44 0
+ 456 0554 2000C28F 		lw	$2,32($fp)
+ 457 0558 00000000 		nop
+ 458 055c 78FF4010 		beq	$2,$0,$L15
+ 459 0560 00000000 		nop
+ 460              	
+  45:bgtree/artest.c ****       fprintf(stderr, "Attempted seek in archive failed\n");
+ 461              		.loc 1 45 0
+ 462 0564 0000023C 		lui	$2,%hi($LC5)
+ 463 0568 88004324 		addiu	$3,$2,%lo($LC5)
+ 464 056c 0000828F 		lw	$2,%got(stderr)($28)
+ 465 0570 00000000 		nop
+ 466 0574 0000428C 		lw	$2,0($2)
+ 467 0578 21206000 		move	$4,$3
+ 468 057c 01000524 		li	$5,1			# 0x1
+ 469 0580 21000624 		li	$6,33			# 0x21
+ 470 0584 21384000 		move	$7,$2
+ 471 0588 0000828F 		lw	$2,%call16(fwrite)($28)
+ 472 058c 00000000 		nop
+ 473 0590 21C84000 		move	$25,$2
+ 474 0594 09F82003 		jalr	$25
+ 475 0598 00000000 		nop
+ 476              	
+ 477 059c 1800DC8F 		lw	$28,24($fp)
+  46:bgtree/artest.c ****       return -4;
+ 478              		.loc 1 46 0
+ 479 05a0 FCFF0224 		li	$2,-4			# 0xfffffffffffffffc
+ 480 05a4 06000010 		b	$L3
+ 481 05a8 00000000 		nop
+ 482              	
+ 483              	$L13:
+  32:bgtree/artest.c ****       break;
+ 484              		.loc 1 32 0
+ 485 05ac 00000000 		nop
+ 486 05b0 02000010 		b	$L7
+ 487 05b4 00000000 		nop
+ 488              	
+ 489              	$L14:
+  34:bgtree/artest.c ****       break;
+ 490              		.loc 1 34 0
+ 491 05b8 00000000 		nop
+ 492              	$L7:
+ 493              	$LBE2 = .
+  48:bgtree/artest.c **** 
+  49:bgtree/artest.c ****   if (argv[1][0] == 't') { // archive listing
+  50:bgtree/artest.c ****   }
+  51:bgtree/artest.c ****   return 0;
+ 494              		.loc 1 52 0
+ 495 05bc 21100000 		move	$2,$0
+ 496              	$L3:
+ 497 05c0 7800DD8F 		lw	$sp,120($fp)
+  52:bgtree/artest.c **** }
+ 498              		.loc 1 53 0
+ 499 05c4 21E8C003 		move	$sp,$fp
+ 500 05c8 D400BF8F 		lw	$31,212($sp)
+ 501 05cc D000BE8F 		lw	$fp,208($sp)
+ 502 05d0 CC00B78F 		lw	$23,204($sp)
+ 503 05d4 C800B68F 		lw	$22,200($sp)
+ 504 05d8 C400B58F 		lw	$21,196($sp)
+ 505 05dc C000B48F 		lw	$20,192($sp)
+ 506 05e0 BC00B38F 		lw	$19,188($sp)
+ 507 05e4 B800B28F 		lw	$18,184($sp)
+ 508 05e8 B400B18F 		lw	$17,180($sp)
+ 509 05ec B000B08F 		lw	$16,176($sp)
+ 510 05f0 D800BD27 		addiu	$sp,$sp,216
+ 511 05f4 0800E003 		j	$31
+ 512 05f8 00000000 		nop
+ 513              	
+ 514              		.set	macro
+ 515              		.set	reorder
+ 516              		.end	main
+ 517              	$LFE0:
+ 583              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 bgtree/artest.c
+     /tmp/cc5NyFvE.s:41     .text:0000000000000000 main
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+stderr
+fprintf
+fopen
+fgetc
+fread
+fwrite
+ArParseHeader
+stdout
+fseek

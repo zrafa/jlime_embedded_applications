@@ -1,0 +1,344 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              	
+  14              		.comm	errorFile,4,4
+  15              	
+  16              		.comm	errorLine,4,4
+  17              	
+  18              		.comm	errorFunc,4,4
+  19              	
+  20              		.comm	errorMsg,4,4
+  21              		.rdata
+  22              		.align	2
+  23              	$LC0:
+  24 0000 0A455252 		.ascii	"\012ERROR: \000"
+  24      4F523A20 
+  24      00
+  25 0009 000000   		.align	2
+  26              	$LC1:
+  27 000c 554E4B00 		.ascii	"UNK\000"
+  28              		.align	2
+  29              	$LC2:
+  30 0010 20696E20 		.ascii	" in %s()\012 %s:%i,\012 reported from %s()\012 %s:%i\012"
+  30      25732829 
+  30      0A202573 
+  30      3A25692C 
+  30      0A207265 
+  31 003c 00       		.ascii	"\000"
+  32 003d 000000   		.align	2
+  33              	$LC3:
+  34 0040 4E6F2045 		.ascii	"No Error\012\000"
+  34      72726F72 
+  34      0A00
+  35 004a 00000000 		.text
+  35      0000
+  36              		.align	2
+  37              		.globl	ERRORprint2
+  38              	$LFB0 = .
+  39              		.file 1 "Errors.c"
+   0:Errors.c      **** #include "Errors.h"
+   1:Errors.c      **** #include <stdio.h>
+   2:Errors.c      **** 
+   3:Errors.c      **** #ifdef AVR
+   4:Errors.c      **** #  include <avr/pgmspace.h>
+   5:Errors.c      **** #else
+   6:Errors.c      **** #  define PSTR(x) (x)
+   7:Errors.c      **** #  define fprintf_P fprintf
+   8:Errors.c      **** #endif
+   9:Errors.c      **** 
+  10:Errors.c      **** 
+  11:Errors.c      **** const char* errorFile;
+  12:Errors.c      **** int errorLine;
+  13:Errors.c      **** const char* errorFunc;
+  14:Errors.c      **** const char* errorMsg;
+  15:Errors.c      **** 
+  16:Errors.c      **** void ERRORprint2(const char *func, const char *file, int line) {
+  40              		.loc 1 17 0
+  41              		.set	nomips16
+  42              		.ent	ERRORprint2
+  44              	ERRORprint2:
+  45              		.frame	$fp,48,$31		# vars= 0, regs= 2/0, args= 32, gp= 8
+  46              		.mask	0xc0000000,-4
+  47              		.fmask	0x00000000,0
+  48              		.set	noreorder
+  49              		.set	nomacro
+  50              		
+  51 0000 D0FFBD27 		addiu	$sp,$sp,-48
+  52              	$LCFI0:
+  53 0004 2C00BFAF 		sw	$31,44($sp)
+  54              	$LCFI1:
+  55 0008 2800BEAF 		sw	$fp,40($sp)
+  56              	$LCFI2:
+  57 000c 21F0A003 		move	$fp,$sp
+  58              	$LCFI3:
+  59 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  60 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  61 0018 2000BCAF 		.cprestore	32
+  62 001c 3000C4AF 		sw	$4,48($fp)
+  63 0020 3400C5AF 		sw	$5,52($fp)
+  64 0024 3800C6AF 		sw	$6,56($fp)
+  17:Errors.c      ****   if (IsError) {
+  65              		.loc 1 18 0
+  66 0028 0000828F 		lw	$2,%got(errorMsg)($28)
+  67 002c 00000000 		nop
+  68 0030 0000428C 		lw	$2,0($2)
+  69 0034 00000000 		nop
+  70 0038 74004010 		beq	$2,$0,$L2
+  71 003c 00000000 		nop
+  72              	
+  18:Errors.c      ****     //fprintf_P(stderr,PSTR("\nERROR: %s in %s()\n %s:%i,\n reported from %s()\n %s:%i\n"), 
+  19:Errors.c      ****     //    errorMsg ? errorMsg : "UNK", errorFunc ? errorFunc : "UNK", errorFile ? errorFile : "UNK"
+  20:Errors.c      ****     //    func ? func : "UNK", file ? file : "UNK", line);
+  21:Errors.c      ****     fprintf_P(stderr,PSTR("\nERROR: "));
+  73              		.loc 1 22 0
+  74 0040 0000023C 		lui	$2,%hi($LC0)
+  75 0044 00004324 		addiu	$3,$2,%lo($LC0)
+  76 0048 0000828F 		lw	$2,%got(stderr)($28)
+  77 004c 00000000 		nop
+  78 0050 0000428C 		lw	$2,0($2)
+  79 0054 21206000 		move	$4,$3
+  80 0058 01000524 		li	$5,1			# 0x1
+  81 005c 08000624 		li	$6,8			# 0x8
+  82 0060 21384000 		move	$7,$2
+  83 0064 0000828F 		lw	$2,%call16(fwrite)($28)
+  84 0068 00000000 		nop
+  85 006c 21C84000 		move	$25,$2
+  86 0070 09F82003 		jalr	$25
+  87 0074 00000000 		nop
+  88              	
+  89 0078 2000DC8F 		lw	$28,32($fp)
+  90 007c 00000000 		nop
+  22:Errors.c      ****     fprintf_P(stderr, errorMsg ? errorMsg : PSTR("UNK"));
+  91              		.loc 1 23 0
+  92 0080 0000828F 		lw	$2,%got(stderr)($28)
+  93 0084 00000000 		nop
+  94 0088 0000428C 		lw	$2,0($2)
+  95 008c 00000000 		nop
+  96 0090 21184000 		move	$3,$2
+  97 0094 0000828F 		lw	$2,%got(errorMsg)($28)
+  98 0098 00000000 		nop
+  99 009c 0000428C 		lw	$2,0($2)
+ 100 00a0 00000000 		nop
+ 101 00a4 06004010 		beq	$2,$0,$L3
+ 102 00a8 00000000 		nop
+ 103              	
+ 104 00ac 0000828F 		lw	$2,%got(errorMsg)($28)
+ 105 00b0 00000000 		nop
+ 106 00b4 0000428C 		lw	$2,0($2)
+ 107 00b8 03000010 		b	$L4
+ 108 00bc 00000000 		nop
+ 109              	
+ 110              	$L3:
+ 111 00c0 0000023C 		lui	$2,%hi($LC1)
+ 112 00c4 0C004224 		addiu	$2,$2,%lo($LC1)
+ 113              	$L4:
+ 114 00c8 21206000 		move	$4,$3
+ 115 00cc 21284000 		move	$5,$2
+ 116 00d0 0000828F 		lw	$2,%call16(fprintf)($28)
+ 117 00d4 00000000 		nop
+ 118 00d8 21C84000 		move	$25,$2
+ 119 00dc 09F82003 		jalr	$25
+ 120 00e0 00000000 		nop
+ 121              	
+ 122 00e4 2000DC8F 		lw	$28,32($fp)
+ 123 00e8 00000000 		nop
+  23:Errors.c      ****     fprintf_P(stderr, PSTR(" in %s()\n %s:%i,\n reported from %s()\n %s:%i\n"), 
+ 124              		.loc 1 24 0
+ 125 00ec 0000828F 		lw	$2,%got(stderr)($28)
+ 126 00f0 00000000 		nop
+ 127 00f4 0000428C 		lw	$2,0($2)
+ 128 00f8 00000000 		nop
+ 129 00fc 21384000 		move	$7,$2
+ 130 0100 0000023C 		lui	$2,%hi($LC2)
+ 131 0104 10004624 		addiu	$6,$2,%lo($LC2)
+  24:Errors.c      ****         errorFunc ? errorFunc : "UNK", errorFile ? errorFile : "UNK", errorLine, 
+ 132              		.loc 1 25 0
+ 133 0108 0000828F 		lw	$2,%got(errorFunc)($28)
+ 134 010c 00000000 		nop
+ 135 0110 0000428C 		lw	$2,0($2)
+ 136 0114 00000000 		nop
+  24:Errors.c      ****         errorFunc ? errorFunc : "UNK", errorFile ? errorFile : "UNK", errorLine, 
+ 137              		.loc 1 24 0
+ 138 0118 06004010 		beq	$2,$0,$L5
+ 139 011c 00000000 		nop
+ 140              	
+ 141 0120 0000828F 		lw	$2,%got(errorFunc)($28)
+ 142 0124 00000000 		nop
+ 143 0128 0000438C 		lw	$3,0($2)
+ 144 012c 03000010 		b	$L6
+ 145 0130 00000000 		nop
+ 146              	
+ 147              	$L5:
+ 148 0134 0000023C 		lui	$2,%hi($LC1)
+ 149 0138 0C004324 		addiu	$3,$2,%lo($LC1)
+ 150              	$L6:
+ 151              		.loc 1 25 0
+ 152 013c 0000828F 		lw	$2,%got(errorFile)($28)
+ 153 0140 00000000 		nop
+ 154 0144 0000428C 		lw	$2,0($2)
+ 155 0148 00000000 		nop
+  24:Errors.c      ****         errorFunc ? errorFunc : "UNK", errorFile ? errorFile : "UNK", errorLine, 
+ 156              		.loc 1 24 0
+ 157 014c 06004010 		beq	$2,$0,$L7
+ 158 0150 00000000 		nop
+ 159              	
+ 160 0154 0000828F 		lw	$2,%got(errorFile)($28)
+ 161 0158 00000000 		nop
+ 162 015c 0000428C 		lw	$2,0($2)
+ 163 0160 03000010 		b	$L8
+ 164 0164 00000000 		nop
+ 165              	
+ 166              	$L7:
+ 167 0168 0000023C 		lui	$2,%hi($LC1)
+ 168 016c 0C004224 		addiu	$2,$2,%lo($LC1)
+ 169              	$L8:
+ 170 0170 0000848F 		lw	$4,%got(errorLine)($28)
+ 171 0174 00000000 		nop
+ 172 0178 0000888C 		lw	$8,0($4)
+ 173 017c 3000C48F 		lw	$4,48($fp)
+ 174 0180 00000000 		nop
+ 175 0184 04008010 		beq	$4,$0,$L9
+ 176 0188 00000000 		nop
+ 177              	
+ 178 018c 3000C58F 		lw	$5,48($fp)
+ 179 0190 03000010 		b	$L10
+ 180 0194 00000000 		nop
+ 181              	
+ 182              	$L9:
+ 183 0198 0000043C 		lui	$4,%hi($LC1)
+ 184 019c 0C008524 		addiu	$5,$4,%lo($LC1)
+ 185              	$L10:
+ 186 01a0 3400C48F 		lw	$4,52($fp)
+ 187 01a4 00000000 		nop
+ 188 01a8 04008010 		beq	$4,$0,$L11
+ 189 01ac 00000000 		nop
+ 190              	
+ 191 01b0 3400C48F 		lw	$4,52($fp)
+ 192 01b4 03000010 		b	$L12
+ 193 01b8 00000000 		nop
+ 194              	
+ 195              	$L11:
+ 196 01bc 0000043C 		lui	$4,%hi($LC1)
+ 197 01c0 0C008424 		addiu	$4,$4,%lo($LC1)
+ 198              	$L12:
+ 199 01c4 1000A8AF 		sw	$8,16($sp)
+ 200 01c8 1400A5AF 		sw	$5,20($sp)
+ 201 01cc 1800A4AF 		sw	$4,24($sp)
+ 202 01d0 3800C48F 		lw	$4,56($fp)
+ 203 01d4 00000000 		nop
+ 204 01d8 1C00A4AF 		sw	$4,28($sp)
+ 205 01dc 2120E000 		move	$4,$7
+ 206 01e0 2128C000 		move	$5,$6
+ 207 01e4 21306000 		move	$6,$3
+ 208 01e8 21384000 		move	$7,$2
+ 209 01ec 0000828F 		lw	$2,%call16(fprintf)($28)
+ 210 01f0 00000000 		nop
+ 211 01f4 21C84000 		move	$25,$2
+ 212 01f8 09F82003 		jalr	$25
+ 213 01fc 00000000 		nop
+ 214              	
+ 215 0200 2000DC8F 		lw	$28,32($fp)
+ 216 0204 10000010 		b	$L14
+ 217 0208 00000000 		nop
+ 218              	
+ 219              	$L2:
+  25:Errors.c      ****         func ? func : "UNK", file ? file : "UNK", line);
+  26:Errors.c      ****   } else {
+  27:Errors.c      ****     fprintf_P(stderr,PSTR("No Error\n"));
+ 220              		.loc 1 28 0
+ 221 020c 0000023C 		lui	$2,%hi($LC3)
+ 222 0210 40004324 		addiu	$3,$2,%lo($LC3)
+ 223 0214 0000828F 		lw	$2,%got(stderr)($28)
+ 224 0218 00000000 		nop
+ 225 021c 0000428C 		lw	$2,0($2)
+ 226 0220 21206000 		move	$4,$3
+ 227 0224 01000524 		li	$5,1			# 0x1
+ 228 0228 09000624 		li	$6,9			# 0x9
+ 229 022c 21384000 		move	$7,$2
+ 230 0230 0000828F 		lw	$2,%call16(fwrite)($28)
+ 231 0234 00000000 		nop
+ 232 0238 21C84000 		move	$25,$2
+ 233 023c 09F82003 		jalr	$25
+ 234 0240 00000000 		nop
+ 235              	
+ 236 0244 2000DC8F 		lw	$28,32($fp)
+ 237              	$L14:
+  28:Errors.c      ****   }
+  29:Errors.c      **** }
+ 238              		.loc 1 30 0
+ 239 0248 21E8C003 		move	$sp,$fp
+ 240 024c 2C00BF8F 		lw	$31,44($sp)
+ 241 0250 2800BE8F 		lw	$fp,40($sp)
+ 242 0254 3000BD27 		addiu	$sp,$sp,48
+ 243 0258 0800E003 		j	$31
+ 244 025c 00000000 		nop
+ 245              	
+ 246              		.set	macro
+ 247              		.set	reorder
+ 248              		.end	ERRORprint2
+ 249              	$LFE0:
+ 251              		.align	2
+ 252              		.globl	ERRORprint3
+ 253              	$LFB1 = .
+  30:Errors.c      **** 
+  31:Errors.c      **** void ERRORprint3(int line) {
+ 254              		.loc 1 32 0
+ 255              		.set	nomips16
+ 256              		.ent	ERRORprint3
+ 258              	ERRORprint3:
+ 259              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 260              		.mask	0xc0000000,-4
+ 261              		.fmask	0x00000000,0
+ 262              		.set	noreorder
+ 263              		.set	nomacro
+ 264              		
+ 265 0260 E0FFBD27 		addiu	$sp,$sp,-32
+ 266              	$LCFI4:
+ 267 0264 1C00BFAF 		sw	$31,28($sp)
+ 268              	$LCFI5:
+ 269 0268 1800BEAF 		sw	$fp,24($sp)
+ 270              	$LCFI6:
+ 271 026c 21F0A003 		move	$fp,$sp
+ 272              	$LCFI7:
+ 273 0270 2000C4AF 		sw	$4,32($fp)
+  32:Errors.c      ****   ERRORprint2(0x0, 0x0, line);
+ 274              		.loc 1 33 0
+ 275 0274 21200000 		move	$4,$0
+ 276 0278 21280000 		move	$5,$0
+ 277 027c 2000C68F 		lw	$6,32($fp)
+ 278              		.option	pic0
+ 279 0280 0000000C 		jal	ERRORprint2
+ 280 0284 00000000 		nop
+ 281              	
+ 282              		.option	pic2
+  33:Errors.c      **** }
+ 283              		.loc 1 34 0
+ 284 0288 21E8C003 		move	$sp,$fp
+ 285 028c 1C00BF8F 		lw	$31,28($sp)
+ 286 0290 1800BE8F 		lw	$fp,24($sp)
+ 287 0294 2000BD27 		addiu	$sp,$sp,32
+ 288 0298 0800E003 		j	$31
+ 289 029c 00000000 		nop
+ 290              	
+ 291              		.set	macro
+ 292              		.set	reorder
+ 293              		.end	ERRORprint3
+ 294              	$LFE1:
+ 360              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Errors.c
+                            *COM*:0000000000000004 errorFile
+                            *COM*:0000000000000004 errorLine
+                            *COM*:0000000000000004 errorFunc
+                            *COM*:0000000000000004 errorMsg
+     /tmp/ccS6SOTe.s:44     .text:0000000000000000 ERRORprint2
+     /tmp/ccS6SOTe.s:258    .text:0000000000000260 ERRORprint3
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+stderr
+fwrite
+fprintf

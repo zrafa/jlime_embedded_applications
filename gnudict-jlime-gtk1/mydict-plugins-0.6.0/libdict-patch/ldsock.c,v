@@ -1,0 +1,793 @@
+head	1.14;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.14
+date	2002.07.04.01.49.56;	author sdyoung;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2002.03.15.18.37.36;	author sdyoung;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2002.03.15.18.33.37;	author sdyoung;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2002.03.15.18.17.25;	author sdyoung;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2002.03.13.21.08.02;	author sdyoung;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2002.03.12.18.13.34;	author sdyoung;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2002.03.12.17.58.49;	author sdyoung;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2001.11.09.06.28.07;	author sdyoung;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2001.11.09.06.14.32;	author sdyoung;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2001.11.01.23.45.50;	author sdyoung;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2001.10.18.21.53.42;	author sdyoung;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2001.10.18.00.59.57;	author sdyoung;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2001.10.18.00.51.42;	author sdyoung;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2001.03.03.10.06.41;	author sdyoung;	state Exp;
+branches;
+next	;
+
+
+desc
+@libdict socket code.
+@
+
+
+1.14
+log
+@The Great Function Renaming - internal functions now start
+with _ld_, external functions start with ld_.
+@
+text
+@/* ldsock.c
+ * sdyoung@@well.com
+ *
+ * This is where all the nitty-gritty socket code goes. 
+ *
+ *   Copyright (c) 2001, 2002 Steven Young
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * $Header: /home/sdyoung/cstuff/libdict-1.0-pre/src/ldsock.c,v 1.13 2002/03/15 18:37:36 sdyoung Exp sdyoung $
+ * $Log: ldsock.c,v $
+ * Revision 1.13  2002/03/15 18:37:36  sdyoung
+ * Added licensing information to header.
+ *
+ * Revision 1.12  2002/03/15 18:33:37  sdyoung
+ * More error checking in tcpopen.
+ *
+ * Revision 1.11  2002/03/15 18:17:25  sdyoung
+ * Fixed tcpopen's error handling.
+ *
+ * Revision 1.10  2002/03/13 21:08:02  sdyoung
+ * Made changes to support ld_errno being in dictconn structure now instead of global.
+ *
+ * Revision 1.9  2002/03/12 18:13:34  sdyoung
+ * changed true/false to ld_true/ld_false.
+ *
+ * Revision 1.8  2002/03/12 17:58:49  sdyoung
+ * Changed all bool's to ld_bools (to avoid C++ conflict)
+ *
+ * Revision 1.7  2001/11/09 06:28:07  sdyoung
+ * Added comments.
+ *
+ * Revision 1.6  2001/11/09 06:14:32  sdyoung
+ * Made fixes to timeout code.
+ *
+ * Revision 1.5  2001/11/01 23:45:50  sdyoung
+ * Added missing include for time.h.
+ *
+ * Revision 1.4  2001/10/18 21:53:42  sdyoung
+ * Fixed the block memory allocation scheme used in readline.
+ * Fixed another problem in readline where *sptr was not being set to NULL.
+ *
+ * Revision 1.3  2001/10/18 00:59:57  sdyoung
+ * ld_readline no longer allocates a single byte at a time,
+ * instead allocating memory in increments of LD_READBLOCK.
+ *
+ * Revision 1.2  2001/10/18 00:51:42  sdyoung
+ * Added timeout support.
+ *
+ * Revision 1.1  2001/03/03 10:06:41  sdyoung
+ * libdict socket code
+ *
+ */
+#include <stdio.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <stdarg.h>
+#include <string.h>
+#include <time.h>
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+#include "libdict.h"
+#include "ldsock.h"
+#include "ldutil.h"
+
+/* open a TCP connection to ld_host on ld_port from the conn structure.
+ * return true on success, false/dicterrno on fail. */
+ld_bool _ld_tcpopen(struct ld_conn *conn) {
+	struct hostent *hptr;
+	struct protoent *pptr;
+	struct sockaddr_in saddr;
+	int sockfd, proto, sockparms, selret;
+	struct timeval timeout;
+	fd_set writefds;
+	char tmpbuf;
+
+	conn->ld_errno = LDOK;
+
+	/* resolve the host */
+	if(!(hptr = gethostbyname(conn->ld_host))) {
+		conn->ld_errno = LDERRNO;
+		return(LD_False);
+	}
+
+	/* fill out ld_host with the 'real' hostname.  This is not necessarily
+	 * required but may be useful in the future. */
+	_ld_xfree(conn->ld_host);
+	conn->ld_host = _ld_xstrdup(hptr->h_name);
+
+	/* find the protocol */
+	if(!(pptr = getprotobyname("tcp"))) {
+		proto = 6;
+	} else {
+		proto = pptr->p_proto;
+	}
+
+	if((sockfd = socket(AF_INET, SOCK_STREAM, proto)) == -1) {
+		conn->ld_errno = LDERRNO;
+		return(LD_False);
+	}
+
+	memcpy(&saddr.sin_addr, hptr->h_addr, hptr->h_length);
+	saddr.sin_port = htons(conn->ld_port);
+	saddr.sin_family = AF_INET;
+
+	/* Temporarily set the socket blocking .. */
+	sockparms = fcntl(sockfd, F_GETFL);
+	fcntl(sockfd, F_SETFL, sockparms | O_NONBLOCK);
+
+	if(connect(sockfd, (struct sockaddr *)&saddr, sizeof(struct sockaddr_in)) != 0) {
+		if(errno != EINPROGRESS) {
+			conn->ld_errno = LDERRNO;
+			return(LD_False);
+		}
+	}
+
+	if(conn->ld_timeout) {
+		timeout.tv_sec = conn->ld_timeout;
+		timeout.tv_usec = 0;
+	}
+
+	FD_ZERO(&writefds);
+	FD_SET(sockfd, &writefds);
+
+	selret = select(sockfd+1, &writefds, NULL, NULL, conn->ld_timeout ? &timeout : NULL);
+
+	if(selret == 0) {
+		conn->ld_errno = LDTIMEOUT;
+		return(LD_False);
+	} else if(selret < 0) {
+		conn->ld_errno = LDERRNO;
+		return(LD_False);
+	}
+
+	/* Reset the socket to blocking. */
+	fcntl(sockfd, F_SETFL, sockparms);
+
+	if(read(sockfd, &tmpbuf, 0) == -1) {
+		conn->ld_errno = LDERRNO;
+		return(LD_False);
+	}
+
+	conn->ld_srvfd = sockfd;
+	conn->ld_srvreply = NULL;
+
+	return(LD_True);
+}
+
+/* Print a string to a socket; just like printf */
+ld_bool _ld_sockprintf(struct ld_conn *conn, char *fmt, ...) {
+	va_list args;
+	/* this limitation shouldn't be a problem */
+	char outbuf[BUFSIZ];
+	int wrcount=0, offset = 0;
+	struct timeval timeout;
+	fd_set writefds;
+	time_t starttime = time(NULL);
+	
+	conn->ld_errno = LDOK;
+
+	va_start(args, fmt);
+	vsnprintf(outbuf, BUFSIZ, fmt, args);
+	va_end(args);
+
+	while(offset < strlen(outbuf)) {
+		/* First, check if we are using a timeout, and if so, has it 
+		 * expired? */
+		if(conn->ld_timeout) {
+			timeout.tv_sec = (starttime + conn->ld_timeout) - time(NULL);
+			timeout.tv_usec = 0;
+		}
+		/* We don't bother checking for an error on this select because
+		 * we will catch them on the write below anyway without duplicating
+		 * code */
+		FD_ZERO(&writefds);
+		FD_SET(conn->ld_srvfd, &writefds);
+		if((select(conn->ld_srvfd+1, NULL, &writefds, NULL, conn->ld_timeout ? &timeout : NULL)) == 0) {
+			/* timeout expired */
+			conn->ld_errno = LDTIMEOUT;
+			return(LD_False);
+		}
+
+		wrcount = write(conn->ld_srvfd, outbuf + offset, strlen(outbuf) - offset);
+		if(wrcount < 0) {
+			conn->ld_errno = LDERRNO;
+			return(LD_False);
+		}
+		offset += wrcount;
+		/* Check again for timeout */
+		if(conn->ld_timeout) {
+			if(time(NULL) > starttime + conn->ld_timeout) {
+				conn->ld_errno = LDTIMEOUT;
+				return(LD_False);
+			}
+		}
+	}
+
+	if(conn->ld_debug) 
+		fprintf(stderr, "> %s", outbuf);
+	return(LD_True);
+}
+
+/* read in a line of text from fd to sptr.  sptr is a pointer to where the
+ * pointer to the input line is.  we also don't care how many bytes were
+ * read, only that it worked or not.  this may allocate a byte or two
+ * more than it needs in *sptr. */
+ld_bool _ld_readline(struct ld_conn *conn, char **sptr) {
+	int slen = 0, soffset = 0;
+	ld_bool readok = LD_False;
+	struct timeval timeout;
+	fd_set readfds;
+	time_t starttime = time(NULL);
+	unsigned int allocs = 1;
+
+	conn->ld_errno = LDERRNO;
+
+	/* we always deal with slen + 1 to accomodate the trailing NULL */
+	*sptr = _ld_xmalloc(LD_READBLOCK + 1);
+
+	/* read a byte into the newest char of the buffer, unless socket
+	 * goes bad, or ... */
+	while(1) {
+		/* Have we timed out? */
+		if(conn->ld_timeout) {
+			if(time(NULL) > (starttime + conn->ld_timeout)) 
+				break;
+			
+			timeout.tv_sec = starttime + conn->ld_timeout - time(NULL);
+			timeout.tv_usec = 0;
+		}
+		FD_ZERO(&readfds);
+		FD_SET(conn->ld_srvfd, &readfds);
+		if(select(conn->ld_srvfd+1, &readfds, NULL, NULL, conn->ld_timeout ? &timeout : NULL) == 0) {
+			/* timed out */
+			conn->ld_errno = LDTIMEOUT;
+			break;
+		}
+		/* Data available, read a single byte.  This is lame. 
+		 * Data should be dumped into a pool as fast as it can be read
+		 * (i.e. in 8k blocks or somesuch) and scanned over instead. */
+		if(read(conn->ld_srvfd, *sptr + slen, 1) < 1) 
+			break;
+		/* ... we see a \r\n or a \n. */
+		if(*(*sptr + slen) == '\n') {
+			if(slen) {
+				if(*(*sptr + slen - 1) == '\r') {
+					soffset = -1;
+				}
+			}
+			*(*sptr + slen + soffset) = '\0';
+			readok = LD_True;
+			break;
+		}
+		slen++;
+		if((LD_READBLOCK * allocs) - slen == 1) 
+			*sptr = _ld_xrealloc(*sptr, LD_READBLOCK * (allocs++) + 1);
+	}
+		
+	if(conn->ld_timeout) {
+		if(time(NULL) > starttime + conn->ld_timeout) {
+			conn->ld_errno = LDTIMEOUT;
+			readok = LD_False;
+		}
+	}
+
+	if(!readok) {
+		_ld_xfree(*sptr);
+		*sptr = NULL;
+	} else {
+		conn->ld_errno = LDOK;
+	}
+
+	if(conn->ld_debug) {
+		if(readok) 
+			fprintf(stderr, "< %s\n", *sptr);
+		else
+			fprintf(stderr, "< (libdict: read error)\n");
+	}
+
+	return(readok ? LD_True : LD_False);
+}
+
+/* this is just a wrapper for ld_readline that calls ld_xfree on the previous
+ * string first */
+ld_bool _ld_xreadline(struct ld_conn *conn, char **sptr) {
+	if(*sptr) {
+		_ld_xfree(*sptr);
+		*sptr = NULL;
+	}
+
+	return(_ld_readline(conn, sptr));
+}
+@
+
+
+1.13
+log
+@Added licensing information to header.
+@
+text
+@d27 1
+a27 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.9/src/ldsock.c,v 1.12 2002/03/15 18:33:37 sdyoung Exp sdyoung $
+d29 3
+d91 1
+a91 1
+ld_bool ld_tcpopen(struct ld_conn *conn) {
+d110 2
+a111 2
+	ld_xfree(conn->ld_host);
+	conn->ld_host = ld_xstrdup(hptr->h_name);
+d173 1
+a173 1
+ld_bool ld_sockprintf(struct ld_conn *conn, char *fmt, ...) {
+d230 1
+a230 1
+ld_bool ld_readline(struct ld_conn *conn, char **sptr) {
+d241 1
+a241 1
+	*sptr = ld_xmalloc(LD_READBLOCK + 1);
+d279 1
+a279 1
+			*sptr = ld_xrealloc(*sptr, LD_READBLOCK * (allocs++) + 1);
+d290 1
+a290 1
+		ld_xfree(*sptr);
+d308 1
+a308 1
+ld_bool ld_xreadline(struct ld_conn *conn, char **sptr) {
+d310 1
+a310 1
+		ld_xfree(*sptr);
+d314 1
+a314 1
+	return(ld_readline(conn, sptr));
+@
+
+
+1.12
+log
+@More error checking in tcpopen.
+@
+text
+@d6 22
+a27 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.9/src/ldsock.c,v 1.11 2002/03/15 18:17:25 sdyoung Exp $
+d29 3
+@
+
+
+1.11
+log
+@Fixed tcpopen's error handling.
+@
+text
+@d6 1
+a6 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.9/src/ldsock.c,v 1.10 2002/03/13 21:08:02 sdyoung Exp sdyoung $
+d8 3
+d71 1
+d133 5
+@
+
+
+1.10
+log
+@Made changes to support ld_errno being in dictconn structure now instead of global.
+@
+text
+@d6 1
+a6 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/ldsock.c,v 1.9 2002/03/12 18:13:34 sdyoung Exp $
+d8 3
+d65 1
+a65 1
+	int sockfd, proto, sockparms;
+d116 4
+a119 1
+	if(select(sockfd+1, &writefds, NULL, NULL, conn->ld_timeout ? &timeout : NULL) == 0) {
+d121 3
+@
+
+
+1.9
+log
+@changed true/false to ld_true/ld_false.
+@
+text
+@d6 1
+a6 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/ldsock.c,v 1.8 2002/03/12 17:58:49 sdyoung Exp $
+d8 3
+d66 1
+a66 1
+	ld_errno = LDOK;
+d70 1
+a70 1
+		ld_errno = LDERRNO;
+d87 1
+a87 1
+		ld_errno = LDERRNO;
+d101 1
+a101 1
+			ld_errno = LDERRNO;
+d114 1
+a114 1
+		ld_errno = LDTIMEOUT;
+d137 1
+a137 1
+	ld_errno = LDOK;
+d157 1
+a157 1
+			ld_errno = LDTIMEOUT;
+d163 1
+a163 1
+			ld_errno = LDERRNO;
+d170 1
+a170 1
+				ld_errno = LDTIMEOUT;
+d193 1
+a193 1
+	ld_errno = LDERRNO;
+d213 1
+a213 1
+			ld_errno = LDTIMEOUT;
+d239 1
+a239 1
+			ld_errno = LDTIMEOUT;
+d248 1
+a248 1
+		ld_errno = LDOK;
+@
+
+
+1.8
+log
+@Changed all bool's to ld_bools (to avoid C++ conflict)
+@
+text
+@d6 1
+a6 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/ldsock.c,v 1.7 2001/11/09 06:28:07 sdyoung Exp sdyoung $
+d8 3
+d68 1
+a68 1
+		return(False);
+d85 1
+a85 1
+		return(False);
+d99 1
+a99 1
+			return(False);
+d112 1
+a112 1
+		return(False);
+d121 1
+a121 1
+	return(True);
+d155 1
+a155 1
+			return(False);
+d161 1
+a161 1
+			return(False);
+d168 1
+a168 1
+				return(False);
+d175 1
+a175 1
+	return(True);
+d184 1
+a184 1
+	ld_bool readok = False;
+d226 1
+a226 1
+			readok = True;
+d237 1
+a237 1
+			readok = False;
+d255 1
+a255 1
+	return(readok ? True : False);
+@
+
+
+1.7
+log
+@Added comments.
+@
+text
+@d6 1
+a6 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/ldsock.c,v 1.6 2001/11/09 06:14:32 sdyoung Exp sdyoung $
+d8 3
+d52 1
+a52 1
+bool ld_tcpopen(struct ld_conn *conn) {
+d122 1
+a122 1
+bool ld_sockprintf(struct ld_conn *conn, char *fmt, ...) {
+d179 1
+a179 1
+bool ld_readline(struct ld_conn *conn, char **sptr) {
+d181 1
+a181 1
+	bool readok = False;
+d257 1
+a257 1
+bool ld_xreadline(struct ld_conn *conn, char **sptr) {
+@
+
+
+1.6
+log
+@Made fixes to timeout code.
+@
+text
+@d6 1
+a6 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/ldsock.c,v 1.5 2001/11/01 23:45:50 sdyoung Exp $
+d8 3
+d65 2
+a66 2
+	/* fill out ld_host with the 'real' hostname.  we do this to 
+	 * be nice. */
+d86 1
+d109 1
+d118 1
+d158 1
+a175 2
+/* XXX make this routine allocate memory in blocks of 512 bytes to reduce 
+ * overhead */
+d178 1
+a178 1
+	bool readok = False, cont = True;
+d191 2
+a192 1
+	while(cont == True) {
+d207 3
+@
+
+
+1.5
+log
+@Added missing include for time.h.
+@
+text
+@d6 1
+a6 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/ldsock.c,v 1.4 2001/10/18 21:53:42 sdyoung Exp sdyoung $
+d8 3
+d93 4
+a96 2
+	timeout.tv_sec = conn->ld_timeout;
+	timeout.tv_usec = 0;
+d100 1
+a100 1
+	if(select(sockfd+1, &writefds, NULL, NULL, &timeout) == 0) {
+d128 7
+a134 1
+	while((offset < strlen(outbuf)) && (time(NULL) - starttime < conn->ld_timeout)) {
+d140 1
+a140 3
+		timeout.tv_sec = (starttime + conn->ld_timeout) - time(NULL);
+		timeout.tv_usec = 0;
+		if(select(conn->ld_srvfd+1, NULL, &writefds, NULL, &timeout) == 0) {
+d152 5
+a156 3
+		if(time(NULL) > starttime + conn->ld_timeout) {
+			ld_errno = LDTIMEOUT;
+			return(False);
+d173 1
+a173 1
+	bool readok = False;
+d186 8
+a193 1
+	while(time(NULL) < (starttime + conn->ld_timeout)) {
+d196 1
+a196 2
+		timeout.tv_sec = starttime + conn->ld_timeout - time(NULL);
+		if(select(conn->ld_srvfd+1, &readfds, NULL, NULL, &timeout) == 0) {
+d219 5
+a223 3
+	if(time(NULL) >= starttime + conn->ld_timeout) {
+		ld_errno = LDTIMEOUT;
+		readok = False;
+@
+
+
+1.4
+log
+@Fixed the block memory allocation scheme used in readline.
+Fixed another problem in readline where *sptr was not being set to NULL.
+@
+text
+@d6 1
+a6 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/ldsock.c,v 1.3 2001/10/18 00:59:57 sdyoung Exp sdyoung $
+d8 4
+d30 1
+@
+
+
+1.3
+log
+@ld_readline no longer allocates a single byte at a time,
+instead allocating memory in increments of LD_READBLOCK.
+@
+text
+@d6 1
+a6 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/ldsock.c,v 1.2 2001/10/18 00:51:42 sdyoung Exp sdyoung $
+d8 4
+d193 1
+a193 1
+		if(LD_READBLOCK % slen == 1) 
+d222 1
+a222 1
+	if(*sptr) 
+d224 3
+@
+
+
+1.2
+log
+@Added timeout support.
+@
+text
+@d6 1
+a6 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.2-pre/src/ldsock.c,v 1.1 2001/03/03 10:06:41 sdyoung Exp sdyoung $
+d8 3
+d157 1
+d162 1
+a162 1
+	*sptr = ld_xmalloc(slen + 1);
+d189 2
+a190 1
+		*sptr = ld_xrealloc(*sptr, slen + 1);
+@
+
+
+1.1
+log
+@libdict socket code
+@
+text
+@d6 5
+a10 2
+ * $Header$
+ * $Log$
+d13 2
+d20 1
+d35 3
+a37 1
+	int sockfd, proto;
+d68 3
+d72 13
+a84 1
+		ld_errno = LDERRNO;
+d88 2
+d100 4
+a103 1
+	int wrcount, offset = 0;
+d111 15
+a125 1
+	while((wrcount = write(conn->ld_srvfd, outbuf + offset, strlen(outbuf) - offset)) < strlen(outbuf) - offset) {
+d131 4
+d146 2
+d151 3
+d155 1
+a155 1
+	ld_errno = LDOK;
+d162 11
+a172 1
+	while(read(conn->ld_srvfd, *sptr + slen, 1) > 0) {
+d188 5
+a193 1
+		ld_errno = LDERRNO;
+d196 2
+@

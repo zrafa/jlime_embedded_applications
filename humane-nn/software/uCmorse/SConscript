@@ -1,0 +1,21 @@
+Import('env', 'ARCH', 'ObjCopyHexCmd')
+
+if ARCH == 'avr':
+  env.Library('uCmorse', source = ["uCmorse.c", "morse_asm.s"])
+else:
+  env.Library('uCmorse', "uCmorse.c")
+env.Library('inmorse', "inmorse.c")
+env.Program('test_morse.c', LIBS='uCmorse', LIBPATH='.')
+env.Program('test_inmorse.c', LIBS='inmorse', LIBPATH='.')
+
+if ARCH == 'avr':
+  elfObj = env.Program('test_avr_morse.c', LIBS='uCmorse', LIBPATH='.')
+  env.AddPostAction(elfObj, ObjCopyHexCmd + elfObj[0].abspath + " " + elfObj[0].abspath.replace(".o","") + ".hex")
+
+  elfObj = env.Object(source='morse_asm.s')
+  env.AddPostAction(elfObj, ObjCopyHexCmd + elfObj[0].abspath + " " + elfObj[0].abspath.replace(".o","") + ".hex")
+
+  elfObj = env.Program('test_morse_asm', source=['test_morse_asm.c','morse_asm.o'])
+  env.AddPostAction(elfObj, ObjCopyHexCmd + elfObj[0].abspath + " " + elfObj[0].abspath.replace(".o","") + ".hex")
+
+

@@ -1,0 +1,216 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:584: checking for a BSD compatible install
+configure:637: checking whether build environment is sane
+configure:694: checking whether make sets ${MAKE}
+configure:740: checking for working aclocal
+configure:753: checking for working autoconf
+configure:766: checking for working automake
+configure:779: checking for working autoheader
+configure:792: checking for working makeinfo
+configure:812: checking host system type
+configure:833: checking target system type
+configure:882: checking for gcc
+configure:995: checking whether the C compiler (mipsel-linux-uclibc-gcc -mips32 -O3 ) works
+configure:1011: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3   conftest.c  1>&5
+configure:1037: checking whether the C compiler (mipsel-linux-uclibc-gcc -mips32 -O3 ) is a cross-compiler
+configure:1042: checking whether we are using GNU C
+configure:1051: mipsel-linux-uclibc-gcc -mips32 -E conftest.c
+configure:1070: checking whether mipsel-linux-uclibc-gcc -mips32 accepts -g
+configure:1171: checking build system type
+configure:1191: checking for ranlib
+configure:1230: checking for ld used by GCC
+configure:1292: checking if the linker (/usr/local/jlime/mipsel-toolchain/usr/mipsel-linux/bin/ld) is GNU ld
+GNU ld (GNU Binutils) 2.20
+configure:1308: checking for BSD-compatible nm
+configure:1344: checking whether ln -s works
+ltconfig:603: checking for object suffix
+ltconfig:604: mipsel-linux-uclibc-gcc -mips32 -c -O3  conftest.c 1>&5
+ltconfig:629: checking for executable suffix
+ltconfig:630: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3   conftest.c  1>&5
+ltconfig:776: checking if mipsel-linux-uclibc-gcc PIC flag -fPIC works
+ltconfig:777: mipsel-linux-uclibc-gcc -mips32 -c -O3 -fPIC -DPIC  conftest.c 1>&5
+ltconfig:829: checking if mipsel-linux-uclibc-gcc supports -c -o file.o
+ltconfig:830: mipsel-linux-uclibc-gcc -mips32 -c -O3 -o out/conftest2.o  conftest.c 1>&5
+ltconfig:862: checking if mipsel-linux-uclibc-gcc supports -c -o file.lo
+ltconfig:863: mipsel-linux-uclibc-gcc -mips32 -c -O3 -c -o conftest.lo  conftest.c 1>&5
+ltconfig:914: checking if mipsel-linux-uclibc-gcc supports -fno-rtti -fno-exceptions
+ltconfig:915: mipsel-linux-uclibc-gcc -mips32 -c -O3 -fno-rtti -fno-exceptions -c conftest.c  conftest.c 1>&5
+ltconfig:958: checking if mipsel-linux-uclibc-gcc static flag -static works
+ltconfig:959: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3   -static conftest.c  1>&5
+GNU ld (GNU Binutils) 2.20
+ltconfig:1653: checking if global_symbol_pipe works
+ltconfig:1654: mipsel-linux-uclibc-gcc -mips32 -c -O3  conftest.c 1>&5
+ltconfig:1657: eval "/usr/bin/nm -B conftest.o | sed -n -e 's/^.*[ 	]\([ABCDGISTW]\)[ 	][ 	]*\(\)\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2\3 \3/p' > conftest.nm"
+ltconfig:1709: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3 -fno-builtin   conftest.c conftstm.o 1>&5
+configure:1529: checking whether make sets ${MAKE}
+configure:1567: checking for a BSD compatible install
+configure:1624: checking for uname
+configure:1655: checking for uname
+configure:1684: checking how to run the C preprocessor
+configure:1705: mipsel-linux-uclibc-gcc -mips32 -E  conftest.c >/dev/null 2>conftest.out
+configure:1764: checking for ANSI C header files
+configure:1777: mipsel-linux-uclibc-gcc -mips32 -E  conftest.c >/dev/null 2>conftest.out
+configure:1868: checking for pow in -lm
+configure:1887: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3   conftest.c -lm   1>&5
+configure:1880: warning: conflicting types for built-in function 'pow'
+configure:1988: checking for X
+configure:2055: mipsel-linux-uclibc-gcc -mips32 -E  conftest.c >/dev/null 2>conftest.out
+configure:2131: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3   conftest.c -lXt -lm  1>&5
+configure:2302: checking for dnet_ntoa in -ldnet
+configure:2321: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3   conftest.c -ldnet  -lm  1>&5
+/usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/bin/ld: cannot find -ldnet
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 2310 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char dnet_ntoa();
+
+int main() {
+dnet_ntoa()
+; return 0; }
+configure:2343: checking for dnet_ntoa in -ldnet_stub
+configure:2362: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3   conftest.c -ldnet_stub  -lm  1>&5
+/usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/bin/ld: cannot find -ldnet_stub
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 2351 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char dnet_ntoa();
+
+int main() {
+dnet_ntoa()
+; return 0; }
+configure:2391: checking for gethostbyname
+configure:2419: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3   conftest.c -lm  1>&5
+configure:2489: checking for connect
+configure:2517: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3   conftest.c -lm  1>&5
+configure:2581: checking for remove
+configure:2609: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3   conftest.c -lm  1>&5
+configure:2673: checking for shmat
+configure:2701: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3   conftest.c -lm  1>&5
+configure:2774: checking for IceConnectionNumber in -lICE
+configure:2793: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3   conftest.c -lICE  -lm  1>&5
+configure:2831: checking for Gpm_Repeat in -lgpm
+configure:2850: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3    conftest.c -lgpm  -lm    -lX11 1>&5
+/usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/bin/ld: cannot find -lgpm
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 2839 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char Gpm_Repeat();
+
+int main() {
+Gpm_Repeat()
+; return 0; }
+configure:3010: checking for SLsmg_init_smg in -lslang
+configure:3029: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3    conftest.c -lslang  -lm    -lX11  1>&5
+configure:3941: checking for ANSI C header files
+configure:4048: checking for fcntl.h
+configure:4058: mipsel-linux-uclibc-gcc -mips32 -E  conftest.c >/dev/null 2>conftest.out
+configure:4048: checking for limits.h
+configure:4058: mipsel-linux-uclibc-gcc -mips32 -E  conftest.c >/dev/null 2>conftest.out
+configure:4048: checking for malloc.h
+configure:4058: mipsel-linux-uclibc-gcc -mips32 -E  conftest.c >/dev/null 2>conftest.out
+configure:4048: checking for sys/ioctl.h
+configure:4058: mipsel-linux-uclibc-gcc -mips32 -E  conftest.c >/dev/null 2>conftest.out
+configure:4048: checking for sys/time.h
+configure:4058: mipsel-linux-uclibc-gcc -mips32 -E  conftest.c >/dev/null 2>conftest.out
+configure:4048: checking for unistd.h
+configure:4058: mipsel-linux-uclibc-gcc -mips32 -E  conftest.c >/dev/null 2>conftest.out
+configure:4086: checking for st_rdev in struct stat
+configure:4099: mipsel-linux-uclibc-gcc -mips32 -c -O3  -I/usr/include   conftest.c 1>&5
+CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include
+cc1: internal compiler error: in add_path, at incpath.c:429
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <http://gcc.gnu.org/bugs.html> for instructions.
+configure: failed program was:
+#line 4091 "configure"
+#include "confdefs.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+int main() {
+struct stat s; s.st_rdev;
+; return 0; }
+configure:4120: checking whether time.h and sys/time.h may both be included
+configure:4134: mipsel-linux-uclibc-gcc -mips32 -c -O3  -I/usr/include   conftest.c 1>&5
+CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include
+cc1: internal compiler error: in add_path, at incpath.c:429
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <http://gcc.gnu.org/bugs.html> for instructions.
+configure: failed program was:
+#line 4125 "configure"
+#include "confdefs.h"
+#include <sys/types.h>
+#include <sys/time.h>
+#include <time.h>
+int main() {
+struct tm *tp;
+; return 0; }
+configure:4157: checking whether mipsel-linux-uclibc-gcc -mips32 needs -traditional
+configure:4203: checking return type of signal handlers
+configure:4225: mipsel-linux-uclibc-gcc -mips32 -c -O3  -I/usr/include   conftest.c 1>&5
+CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include
+cc1: internal compiler error: in add_path, at incpath.c:429
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <http://gcc.gnu.org/bugs.html> for instructions.
+configure: failed program was:
+#line 4208 "configure"
+#include "confdefs.h"
+#include <sys/types.h>
+#include <signal.h>
+#ifdef signal
+#undef signal
+#endif
+#ifdef __cplusplus
+extern "C" void (*signal (int, void (*)(int)))(int);
+#else
+void (*signal ()) ();
+#endif
+
+int main() {
+int i;
+; return 0; }
+configure:4246: checking for strdup
+configure:4274: mipsel-linux-uclibc-gcc -mips32 -o conftest -O3  -I/usr/include    conftest.c -lslang -lm    -lX11   1>&5
+CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include
+cc1: internal compiler error: in add_path, at incpath.c:429
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <http://gcc.gnu.org/bugs.html> for instructions.
+configure: failed program was:
+#line 4251 "configure"
+#include "confdefs.h"
+/* System header to define __stub macros and hopefully few prototypes,
+    which can conflict with char strdup(); below.  */
+#include <assert.h>
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char strdup();
+
+int main() {
+
+/* The GNU C library defines this for functions which it implements
+    to always fail with ENOSYS.  Some functions are actually named
+    something starting with __ and the normal name is an alias.  */
+#if defined (__stub_strdup) || defined (__stub___strdup)
+choke me
+#else
+strdup();
+#endif
+
+; return 0; }

@@ -1,0 +1,30 @@
+libshell_a-vterm.o: vterm.cpp \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/string.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/features.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/predefs.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sys/cdefs.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/wordsize.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/gnu/stubs.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/include/stddef.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/xlocale.h \
+ vterm.h type.h
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/string.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/features.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/predefs.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sys/cdefs.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/wordsize.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/gnu/stubs.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/include/stddef.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/xlocale.h:
+
+vterm.h:
+
+type.h:

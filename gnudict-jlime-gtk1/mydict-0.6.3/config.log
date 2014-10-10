@@ -1,0 +1,115 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:568: checking for a BSD compatible install
+configure:621: checking whether build environment is sane
+configure:678: checking whether make sets ${MAKE}
+configure:724: checking for working aclocal
+configure:737: checking for working autoconf
+configure:750: checking for working automake
+configure:763: checking for working autoheader
+configure:776: checking for working makeinfo
+configure:797: checking host system type
+configure:833: checking for gcc
+configure:946: checking whether the C compiler (gcc  ) works
+configure:962: gcc -o conftest    conftest.c  1>&5
+configure:988: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:993: checking whether we are using GNU C
+configure:1002: gcc -E conftest.c
+configure:1021: checking whether gcc accepts -g
+configure:1053: checking for POSIXized ISC
+configure:1076: checking for gcc
+configure:1189: checking whether the C compiler (gcc -g -O2 ) works
+configure:1205: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1231: checking whether the C compiler (gcc -g -O2 ) is a cross-compiler
+configure:1236: checking whether we are using GNU C
+configure:1264: checking whether gcc accepts -g
+configure:1296: checking how to run the C preprocessor
+configure:1317: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1376: checking for ANSI C header files
+configure:1389: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1456: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:1451: warning: incompatible implicit declaration of built-in function 'exit'
+configure:1530: checking for gtk-config
+configure:1565: checking for GTK - version >= 1.2.0
+configure:1666: gcc -o conftest -g -O2 -I/usr/include/gtk-1.2 -I/usr/include/glib-1.2 -I/usr/lib/glib/include   conftest.c -L/usr/lib -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm  1>&5
+configure:1753: checking for ranlib
+configure:1781: checking for working const
+configure:1835: gcc -c -g -O2  conftest.c 1>&5
+configure:1856: checking for inline
+configure:1870: gcc -c -g -O2  conftest.c 1>&5
+configure:1896: checking for off_t
+configure:1929: checking for size_t
+configure:1964: checking for working alloca.h
+configure:1976: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1997: checking for alloca
+configure:2030: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2199: checking for unistd.h
+configure:2209: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2238: checking for getpagesize
+configure:2266: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2291: checking for working mmap
+configure:2439: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2370: warning: conflicting types for built-in function 'malloc'
+configure: In function 'main':
+configure:2387: warning: incompatible implicit declaration of built-in function 'exit'
+configure:2467: checking for argz.h
+configure:2477: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2467: checking for limits.h
+configure:2477: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2467: checking for locale.h
+configure:2477: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2467: checking for nl_types.h
+configure:2477: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2467: checking for malloc.h
+configure:2477: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2467: checking for string.h
+configure:2477: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2467: checking for unistd.h
+configure:2467: checking for sys/param.h
+configure:2477: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2507: checking for getcwd
+configure:2535: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2507: checking for munmap
+configure:2535: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2507: checking for putenv
+configure:2535: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2507: checking for setenv
+configure:2535: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2507: checking for setlocale
+configure:2535: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2507: checking for strchr
+configure:2535: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2519: warning: conflicting types for built-in function 'strchr'
+configure:2507: checking for strcasecmp
+configure:2535: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2519: warning: conflicting types for built-in function 'strcasecmp'
+configure:2507: checking for strdup
+configure:2535: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2519: warning: conflicting types for built-in function 'strdup'
+configure:2507: checking for __argz_count
+configure:2535: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2507: checking for __argz_stringify
+configure:2535: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2507: checking for __argz_next
+configure:2535: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2564: checking for stpcpy
+configure:2592: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2576: warning: conflicting types for built-in function 'stpcpy'
+configure:2626: checking for LC_MESSAGES
+configure:2638: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2659: checking whether NLS is requested
+configure:2679: checking whether included gettext is requested
+configure:2698: checking for libintl.h
+configure:2708: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2725: checking for gettext in libc
+configure:2737: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2851: checking for msgfmt
+configure:2885: checking for dcgettext
+configure:2913: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2897: warning: conflicting types for built-in function 'dcgettext'
+configure:2940: checking for gmsgfmt
+configure:2976: checking for xgettext
+configure:3016: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3474: checking for catalogs to be installed

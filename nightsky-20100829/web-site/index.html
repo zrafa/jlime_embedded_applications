@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Nightsky</title>
+    <style type="text/css">
+
+html * {
+  border:  0;
+  margin:  0;
+  padding: 0;
+}
+
+body {
+  background: #eee;
+}
+
+p {
+  margin-left:    1em;
+  margin-bottom:  0.7em;
+}
+
+h1, h2 {
+  font-family:    sans-serif;
+  margin-bottom:  0.2em;
+}
+
+h1 {
+  font-size:  2em;
+  color:      #c33;
+}
+
+h2 {
+  margin-top:  1em;
+  font-size:   1.1em;
+  color:       #999;
+}
+
+ul {
+  margin-left: 2em;
+}
+
+li {
+  list-style-type: square;
+}
+
+#page {
+  background:  white;
+  border:      0.1em solid #ccc;
+  margin:      1em 20%;
+  padding:     1em;
+}
+
+#validated {
+  text-align: center;
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="page">
+
+  <h1>Nightsky</h1>
+
+  <p>Nightsky is a very basic rendering of the stars in the sky for devices that aren't powerful enough to run Stellarium.  It runs on The <a href="http://nanonote.cc/">Ben NanoNote</a>, which has only 32 MB of RAM and a 336 MHz MIPS CPU.</p>
+
+  <p>It's written in C and depends on SDL_image.  It builds and runs on Linux but should be readily portable to other POSIX systems.</p>
+
+  <img src="screenshot.png" alt="A screenshot of Nightsky">
+
+
+  <h2>LIMITATIONS</h2>
+
+  <ul>
+    <li>It renders only stars.  The Sun and the planets are not shown</li>
+    <li>The positions in the sky are slightly inaccurate</li>
+    <li>It requires you to know your latitude and longitude</li>
+  </ul>
+
+
+  <h2>FEATURES</h2>
+
+  <ul>
+    <li>Shows the brightest 10,000 or so stars in the sky</li>
+    <li>The view can be zoomed in &amp; out and panned around</li>
+    <li>Optionally shows the constellations and their names</li>
+    <li>Shows the configured location and time</li>
+    <li>Shows common names of stars</li>
+  </ul>
+
+
+  <h2>GETTING STARTED</h2>
+
+  <ul>
+    <li>Download the source from the <a href="https://sourceforge.net/projects/nightsky/">SourceForge project page</a></li>
+    <li>Build it</li>
+    <li>Copy <tt>/usr/share/nightsky/example-nightsky.yml</tt> to <tt>~/.nightsky.yml</tt> and edit it to reflect your location</li>
+    <li>Run <tt>nightsky</tt> and press <tt>F1</tt> to see the key bindings</li>
+  </ul>
+
+
+    </div>
+
+    <p id="validated"><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01 Strict" height="31" width="88"></a></p>
+
+  </body>
+</html>

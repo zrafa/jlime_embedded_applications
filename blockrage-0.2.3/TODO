@@ -1,0 +1,13 @@
+Blockrage TODO LIST
+===================
+
+    - completely new theme, graphics, font, tiles, sounds
+      (TrueColor? transparency?)
+    
+    - fades
+    - music
+    - score gain fx
+
+    - fix all unsafe string handling and clean up other dirty code
+
+    - add missing commmand line arguments and config file entries

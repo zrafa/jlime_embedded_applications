@@ -1,0 +1,1736 @@
+head	1.21;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.21
+date	2002.07.04.01.54.39;	author sdyoung;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2002.07.04.01.49.56;	author sdyoung;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2002.07.04.00.45.27;	author sdyoung;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2002.03.15.19.09.07;	author steve;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2002.03.15.18.39.03;	author sdyoung;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2002.03.15.18.34.13;	author sdyoung;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2002.03.15.18.17.55;	author sdyoung;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2002.03.14.05.23.08;	author sdyoung;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2002.03.13.21.08.20;	author sdyoung;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2002.03.12.18.13.26;	author sdyoung;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2002.03.12.17.59.16;	author sdyoung;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2001.11.13.00.01.58;	author sdyoung;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2001.11.12.21.52.41;	author sdyoung;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2001.11.09.06.35.45;	author sdyoung;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2001.11.02.00.11.26;	author sdyoung;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2001.11.01.20.16.22;	author sdyoung;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2001.10.18.21.54.17;	author sdyoung;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2001.03.08.20.28.45;	author sdyoung;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2001.03.05.16.23.00;	author sdyoung;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2001.03.03.23.16.04;	author sdyoung;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2001.03.03.10.07.02;	author sdyoung;	state Exp;
+branches;
+next	;
+
+
+desc
+@libdict exported api functions and support functions.
+@
+
+
+1.21
+log
+@Changed all calls to strcmp/strcasecmp to use our own
+_ld_qstrcmp function.
+@
+text
+@/* libdict.c
+ * sdyoung@@well.com
+ *
+ * This is where the higher-level functions are handled.  Low-level
+ * (and mostly internal) functions are in ldsock.c and
+ * ldutil.c.
+ *
+ * The guideline is that this file is where all exported functions
+ * go.  This guideline is gleefully violated with considerable frequency.
+ *
+ *   Copyright (c) 2001, 2002 Steven Young
+ *
+ *   Permission is hereby granted, free of charge, to any person obtaining
+ *   a copy of this software and associated documentation files (the
+ *   "Software"), to deal in the Software without restriction, including
+ *   without limitation the rights to use, copy, modify, merge, publish,
+ *   distribute, sublicense, and/or sell copies of the Software, and to
+ *   permit persons to whom the Software is furnished to do so, subject to
+ *   the following conditions:
+ *
+ *   The above copyright notice and this permission notice shall be
+ *   included in all copies or substantial portions of the Software.
+ *
+ *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ *   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ *   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ *   IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ *   CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ *   TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ *   SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * $Header: /home/sdyoung/cstuff/libdict-1.0-pre/src/libdict.c,v 1.20 2002/07/04 01:49:56 sdyoung Exp sdyoung $
+ * $Log: libdict.c,v $
+ * Revision 1.20  2002/07/04 01:49:56  sdyoung
+ * The Great Function Renaming - internal functions now start
+ * with _ld_, external functions start with ld_.
+ *
+ * Revision 1.19  2002/07/04 00:45:27  sdyoung
+ * Changes to support caching.
+ *
+ * Revision 1.18  2002/03/15 19:09:07  steve
+ * One last bugfix to ld_newconn.
+ *
+ * Revision 1.17  2002/03/15 18:39:03  sdyoung
+ * Added license to the comment header.
+ *
+ * Revision 1.16  2002/03/15 18:34:13  sdyoung
+ * Moved some stuff around in newconn to give better error reporting.
+ *
+ * Revision 1.15  2002/03/15 18:17:55  sdyoung
+ * Made ld_newconn always return something so we can return error
+ * status of connection attempt in dictconn->ld_errno.
+ *
+ * Revision 1.14  2002/03/14 05:23:08  sdyoung
+ * Added support for ld_manswers/danswers - we can free it ourselves now.
+ *
+ * Revision 1.13  2002/03/13 21:08:20  sdyoung
+ * Added ld_geterrno function; also made changes to support ld_errno being
+ * in dictconn structure now.
+ *
+ * Revision 1.12  2002/03/12 18:13:26  sdyoung
+ * Change true/false to ld_true/ld_false.
+ *
+ * Revision 1.11  2002/03/12 17:59:16  sdyoung
+ * Changed all bool's to ld_bools (to avoid C++ conflict)
+ *
+ * Revision 1.10  2001/11/13 00:01:58  sdyoung
+ * Made all functions that deal with quoted server replies automatically
+ * unquote (eg, ld_match).
+ *
+ * Revision 1.9  2001/11/12 21:52:41  sdyoung
+ * ld_newconn now gets the database and strategy lists automatically;
+ * ld_getdbs and ld_getstrats just return pointers to the lists which
+ * are stored in ld_conn structures.  This means that the library can
+ * now automatically take care of ld_freedbs.
+ *
+ * Revision 1.8  2001/11/09 06:35:45  sdyoung
+ * Added some comments.
+ *
+ * Revision 1.7  2001/11/02 00:11:26  sdyoung
+ * Added capability to specify what CLIENT greeting will be used.
+ *
+ * Revision 1.6  2001/11/01 20:16:22  sdyoung
+ * Added support for enum ld_servcode.
+ *
+ * Revision 1.5  2001/10/18 21:54:17  sdyoung
+ * Corrected a whack of fairly serious memory leaks.
+ *
+ * Revision 1.4  2001/03/08 20:28:45  sdyoung
+ * Fixed a memory leak in ld_define.
+ *
+ * Revision 1.3  2001/03/05 16:23:00  sdyoung
+ * Added a few missing ld_xfrees to ld_freeconn().
+ *
+ * Revision 1.2  2001/03/03 23:16:04  sdyoung
+ * Added ld_getsrvreply.
+ *
+ * Revision 1.1  2001/03/03 10:07:02  sdyoung
+ * Initial revision
+ *
+ */
+#include <stdio.h>
+#include <netdb.h>
+#include <string.h>
+#include <errno.h>
+#include <unistd.h>
+#include <ctype.h>
+#include <stdarg.h>
+
+#include "libdict.h"
+#include "ldutil.h"
+#include "ldsock.h"
+#include "ldcache.h"
+
+/* get server response number.  returns 0 on error with ld_errno set. */
+/* note: now uses the ld_servcode enumerated type.  see ldservcodes.h */
+enum ld_servcode ld_getrespno(char *msg) {
+	char num[4];
+
+	if((strlen(msg) < 3) || ((!isdigit(msg[0])) || (!isdigit(msg[1])) || (!isdigit(msg[2])))) {
+		return(LD_None);
+	} 
+
+	memcpy(num, msg, 3);
+	num[3] = '\0';
+
+	return((enum ld_servcode) atoi(num));
+}
+
+/* ld_checkok will take an integer response number and simplify it for
+ * you: is it success (LD_True), failure (LD_False), or was it an intermittent
+ * failure (Maybe). */
+ld_bool ld_checkok(int respno) {
+	if(respno < 300)
+		return(LD_True);
+	if(respno > 399)
+		return(LD_False);
+	return(LD_Maybe);
+}
+
+/* free a database list */
+void _ld_freedbs(struct ld_dbs **dbs) {
+	int i = 0;
+
+	if(!dbs) return;
+
+	while(dbs[i]) {
+		if(dbs[i]->ld_dbname) _ld_xfree(dbs[i]->ld_dbname);
+		if(dbs[i]->ld_dbdesc) _ld_xfree(dbs[i]->ld_dbdesc);
+		_ld_xfree(dbs[i]);
+		i++;
+	}
+
+	_ld_xfree(dbs);
+}
+	
+/* get a server reply; check it for okayness.  this is used by some
+ * of the simpler commands that don't deal with variable-length
+ * responses */
+ld_bool _ld_docommand(struct ld_conn *conn, ld_bool getr, char *fmt, ...) {
+	ld_bool retv = LD_True;
+	va_list args;
+	/* sorry guys - 8k command limit */
+	char buf[BUFSIZ];
+
+	/* first, send the command */
+	va_start(args, fmt);
+	vsnprintf(buf, BUFSIZ, fmt, args);
+	va_end(args);
+
+	if((_ld_sockprintf(conn, buf) == LD_False)) {
+		retv = LD_False;
+		/* getr tells us if we need to grab and do minimal processing
+		 * on the return string ourselves.  this can save a lot of 
+		 * time. */
+	} else if(getr == LD_True && _ld_xreadline(conn, &conn->ld_srvreply) == LD_False) {
+		retv = LD_False;
+	} else if(getr == LD_True) {
+		retv = ld_checkok(ld_getrespno(conn->ld_srvreply));
+	}
+
+	return(retv);
+}
+
+/* send the CLIENT info to the server */
+ld_bool _ld_sendclient(struct ld_conn *conn, char *client) {
+	if(client) 
+		return(_ld_docommand(conn, LD_True, "CLIENT %s\r\n", client));
+	return(_ld_docommand(conn, LD_True, "CLIENT %s\r\n", LD_VERSION));
+}
+
+/* get database list.  also used to retrieve strategies */
+struct ld_dbs **_ld_getdblist(struct ld_conn *conn, char *cmd) {
+    char *tmpbuf = NULL;
+    struct ld_dbs **retv = NULL;
+    int dbcount = 0;
+    char *p;
+    ld_bool readok;
+
+    /* execute the command (show db or show strat) */
+    if(_ld_docommand(conn, LD_True, "%s\r\n", cmd) == LD_False)
+        return(NULL);
+
+    while((readok = _ld_xreadline(conn, &tmpbuf)) == LD_True) {
+        /* while the data hasn't ended ... */
+        if(!_ld_qstrcmp(tmpbuf, ".")) break;
+
+        /* create an array to hold our answer's attributes.
+         * or, resize it upwards for new entries */
+        retv = _ld_xrealloc(retv, sizeof(struct ld_dbs *) * (dbcount + 2));
+        /* point our array slot to attribute structure */
+        retv[dbcount] = _ld_xmalloc(sizeof(struct ld_dbs));
+        bzero(retv[dbcount], sizeof(struct ld_dbs));
+
+        if((p = strchr(tmpbuf, ' '))) {
+            *p = '\0';
+            retv[dbcount]->ld_dbname = _ld_xstrdup(_ld_unquote(tmpbuf));
+            retv[dbcount]->ld_dbdesc = _ld_xstrdup(_ld_unquote(p+1));
+        } else {
+            retv[dbcount]->ld_dbname = _ld_xstrdup(_ld_unquote(tmpbuf));
+        }
+        dbcount++;
+    }
+
+    retv[dbcount] = NULL;
+
+    if(!readok) {
+        _ld_freedbs(retv);
+        return(NULL);
+    } else {
+        if(_ld_xreadline(conn, &conn->ld_srvreply) == LD_False) {
+            _ld_freedbs(retv);
+            return(NULL);
+        }
+    }
+
+    if(tmpbuf) {
+        _ld_xfree(tmpbuf);
+        tmpbuf = NULL;
+    }
+
+    return(retv);
+}
+
+/* get a list of databases (internal) */
+struct ld_dbs **_ld_igetdbs(struct ld_conn *conn) {
+    return(_ld_getdblist(conn, "SHOW DB"));
+}
+
+/* get a list of strategies (internal) */
+struct ld_dbs **_ld_igetstrats(struct ld_conn *conn) {
+    return(_ld_getdblist(conn, "SHOW STRAT"));
+}
+
+/* connect to a dict server.  everything except the host argument is optional
+ * and can be set to 0 or NULL (whichever is appropriate).
+ * this will spit you back a filled out ld_conn structure, or NULL upon
+ * error. */
+struct ld_conn *ld_newconn(char *host, int port, int timeout, char *client, int defcachesz, int matchcachesz, ld_bool debug) {
+	struct ld_conn *srvhandle;
+	struct servent *dictport;
+
+	srvhandle = _ld_xmalloc(sizeof(struct ld_conn));
+	bzero(srvhandle, sizeof(struct ld_conn));
+	
+	srvhandle->ld_host = _ld_xstrdup(host);
+	srvhandle->ld_timeout = timeout;
+	srvhandle->ld_debug = debug;
+
+	/* try and work out the port number for ourselves if it's not passed. */
+	if(!port) {
+		if(!(dictport = getservbyname("dict", "tcp"))) {
+			port = LD_DEFPORT;
+		} else {
+			port = dictport->s_port;
+		}
+	}
+	
+	srvhandle->ld_port = port;
+
+	if(_ld_tcpopen(srvhandle) == LD_False) 
+		return(srvhandle);
+
+	/* ld_tcpopen has filled out ld_srvfd for us */
+	
+	/* now we just slurp the banner and we're done. */
+	if(_ld_readline(srvhandle, &srvhandle->ld_srvbanner) == LD_False) {
+		srvhandle->ld_errno = LDERRNO;
+		close(srvhandle->ld_srvfd);
+		srvhandle->ld_srvfd = 0;
+		return(srvhandle);
+	}
+
+	if((ld_checkok(ld_getrespno(srvhandle->ld_srvbanner)) != LD_True) ||
+	   (_ld_sendclient(srvhandle, client) == LD_False)) {
+		srvhandle->ld_errno = LDBADPROTO;
+		return(srvhandle);
+	}
+
+	/* get databases */
+	if((srvhandle->ld_dbs = _ld_igetdbs(srvhandle))) 
+		srvhandle->ld_strats = _ld_igetstrats(srvhandle);
+
+	/* initialize the caches */
+	srvhandle->ld_dconncache = _ld_newcache(defcachesz ? defcachesz : DEFAULT_DCACHE);
+	srvhandle->ld_mconncache = _ld_newcache(matchcachesz ? matchcachesz : DEFAULT_MCACHE);
+
+	return(srvhandle);
+}
+
+/* free the memory structures for conn */
+void ld_freeconn(struct ld_conn *conn) {
+	/* this does NOT set ld_errno because it is called after
+	 * ld_errno has been set all over the place. */
+	if(!conn) return;
+	if(conn->ld_srvfd) 
+		ld_closeconn(conn);
+	if(conn->ld_host)
+		_ld_xfree(conn->ld_host);
+	if(conn->ld_srvreply)
+		_ld_xfree(conn->ld_srvreply);
+	if(conn->ld_srvbanner)
+		_ld_xfree(conn->ld_srvbanner);
+	if(conn->ld_srchdb)
+		_ld_xfree(conn->ld_srchdb);
+	if(conn->ld_srchstrat)
+		_ld_xfree(conn->ld_srchstrat);
+	if(conn->ld_dbs) 
+		if(*conn->ld_dbs) 
+			_ld_freedbs(conn->ld_dbs);
+	if(conn->ld_strats) 
+		if(*conn->ld_strats)
+			_ld_freedbs(conn->ld_strats);
+	if(conn->ld_manswers)
+		_ld_freematans(conn->ld_manswers);
+	if(conn->ld_danswers)
+		_ld_freedefans(conn->ld_danswers);
+	if(conn->ld_mconncache)
+		_ld_freecache(conn->ld_mconncache, LD_False);
+	if(conn->ld_dconncache)
+		_ld_freecache(conn->ld_dconncache, LD_True);
+
+	_ld_xfree(conn);
+}
+
+/* Perform the protocol-level teardown of connection conn.  We don't
+ * check a lot of return values here since we don't really care. 
+ * it will return true if the disconnect went smoothly and 
+ * conn->ld_srvreply has the server's goodbye message in it.
+ * false if things didn't go so well in which case conn->srvreply
+ * is unspecified. */
+ld_bool ld_closeconn(struct ld_conn *conn) {
+	ld_bool retv = LD_False;
+	/* tell the server we want to quit */
+	if(conn && (_ld_sockprintf(conn, "QUIT\r\n") == LD_True)) {
+		/* the server connection is still open, so we
+		 * politely wait for the server to say goodbye */
+		_ld_xreadline(conn, &conn->ld_srvreply); 
+		retv = LD_True;
+		if(conn->ld_srvfd) {
+			close(conn->ld_srvfd);
+			conn->ld_srvfd = 0;
+		}
+	}
+	return(retv);
+}
+
+/* authenticate user with the server */
+ld_bool ld_auth(struct ld_conn *conn, char *user, char *pw) {
+	return(_ld_docommand(conn, LD_True, "AUTH %s %s\r\n", user, pw));
+}
+
+/* return server banner */
+char *ld_serverinfo(struct ld_conn *conn) {
+	return(conn->ld_srvbanner);
+}
+
+struct ld_dbs **ld_getdbs(struct ld_conn *conn) {
+	return(conn->ld_dbs);
+}
+
+struct ld_dbs **ld_getstrats(struct ld_conn *conn) {
+	return(conn->ld_strats);
+}
+
+/* set the strategy to use */
+ld_bool ld_setstrat(struct ld_conn *conn, char *strat) {
+	int x = 0;
+	ld_bool stratok = LD_False;
+
+	while(conn->ld_strats[x]) {
+		if(!_ld_qstrcmp(conn->ld_strats[x]->ld_dbname, strat)) {
+			stratok = LD_True;
+			break;
+		}
+		x++;
+	}
+
+	if(stratok == LD_False) {
+		conn->ld_errno = LDBADARG;
+		return(LD_False);
+	}
+
+	if(conn->ld_srchstrat) _ld_xfree(conn->ld_srchstrat);
+
+	conn->ld_srchstrat = _ld_xstrdup(strat);
+
+	_ld_resetcache(conn);
+
+	return(LD_True);
+}
+
+/* set the current db to be searched */
+ld_bool ld_setdb(struct ld_conn *conn, char *db) {
+	int x = 0;
+	ld_bool dbok = LD_False;
+
+	if(_ld_qstrcmp(db, "*")) {
+		while(conn->ld_dbs[x]) {
+			if(!_ld_qstrcmp(conn->ld_dbs[x]->ld_dbname, db)) {
+				dbok = LD_True;
+				break;
+			}
+			x++;
+		}
+	} else {
+		dbok = LD_True;
+	}
+
+	if(dbok == LD_False) {
+		conn->ld_errno = LDBADARG;
+		return(LD_False);
+	}
+
+	if(conn->ld_srchdb) _ld_xfree(conn->ld_srchdb);
+	
+	conn->ld_srchdb = _ld_xstrdup(db);
+
+	_ld_resetcache(conn);
+
+	return(LD_True);
+}
+
+/* define a word.  we're not as paranoid as we should be here */
+struct ld_defanswer **ld_define(struct ld_conn *conn, char *word) {
+	char *tmpbuf = NULL, *p, *p2;
+	int anscount = 0, anssz, cmdret;
+	ld_bool readok;
+
+	if(conn->ld_danswers) {
+		_ld_freedefans(conn->ld_danswers);
+		conn->ld_danswers = NULL;
+	}
+
+	if(_ld_isdefinecached(conn, word)) {
+		conn->ld_danswers = _ld_getdefinecache(conn, word);
+		return(conn->ld_danswers);
+	}
+
+	/* send the initial command */
+	if(_ld_docommand(conn, LD_False, "DEFINE %s %s\r\n", 
+	                conn->ld_srchdb ? conn->ld_srchdb : "*",
+					word) == LD_False) 
+		return(NULL);
+	
+	/* get response.. */
+	if(_ld_xreadline(conn, &tmpbuf) == LD_False) 
+		return(NULL);
+
+	cmdret = ld_getrespno(tmpbuf);
+
+	/* check there are some answers */
+	if(cmdret != LD_DefsFollow) {
+		conn->ld_errno = LDNOMATCH;
+		_ld_xfree(tmpbuf);
+		tmpbuf = NULL;
+		return(NULL);
+	}
+
+	/* read in all the defs */
+	while((readok = _ld_xreadline(conn, &tmpbuf)) == LD_True) {
+		if(ld_getrespno(tmpbuf) == LD_OK)
+			break;
+		anssz = 0;
+		conn->ld_danswers = _ld_xrealloc(conn->ld_danswers, sizeof(struct ld_defanswer *) * (anscount + 2));
+		conn->ld_danswers[anscount] = _ld_xmalloc(sizeof(struct ld_defanswer));
+		bzero(conn->ld_danswers[anscount], sizeof(struct ld_defanswer));
+
+		if(ld_getrespno(tmpbuf) != LD_WordDBName) {
+			readok = LD_False;
+			conn->ld_errno = LDBADPROTO;
+			break;
+		}
+
+		/* ok, let's deal with the 151 line */
+		if(!(p=strchr(tmpbuf + 4, ' '))) {
+			readok = LD_False;
+			conn->ld_errno = LDBADPROTO;
+			break;
+		}
+
+		if(!(p2=strchr(p + 1, ' '))) {
+			readok = LD_False;
+			conn->ld_errno = LDBADPROTO;
+			break;
+		}
+
+		*p2 = '\0';
+
+		conn->ld_danswers[anscount]->ld_ansdict = _ld_xstrdup(_ld_unquote(p + 1));
+
+		*p = '\0';
+
+		conn->ld_danswers[anscount]->ld_answord = _ld_xstrdup(_ld_unquote(tmpbuf + 4));
+
+		while((readok = _ld_xreadline(conn, &tmpbuf)) == LD_True) {
+			if(!_ld_qstrcmp(tmpbuf, ".")) {
+				break;
+			}
+			if(conn->ld_danswers[anscount]->ld_ansdef) {
+				conn->ld_danswers[anscount]->ld_ansdef = _ld_xrealloc(conn->ld_danswers[anscount]->ld_ansdef, strlen(conn->ld_danswers[anscount]->ld_ansdef) + strlen(tmpbuf) + 3);
+				strcat(conn->ld_danswers[anscount]->ld_ansdef, "\r\n");
+				strcat(conn->ld_danswers[anscount]->ld_ansdef, tmpbuf);
+			} else {
+				conn->ld_danswers[anscount]->ld_ansdef = _ld_xstrdup(tmpbuf);
+			}
+		}
+
+		if(readok == LD_False)
+			break;
+
+		anscount++;
+	}
+
+	if(readok == LD_False) {
+		if(conn->ld_danswers[anscount]) {
+			if(conn->ld_danswers[anscount]->ld_ansdict) _ld_xfree(conn->ld_danswers[anscount]->ld_ansdict);
+			if(conn->ld_danswers[anscount]->ld_answord) _ld_xfree(conn->ld_danswers[anscount]->ld_answord);
+			if(conn->ld_danswers[anscount]->ld_ansdef) _ld_xfree(conn->ld_danswers[anscount]->ld_ansdef);
+			_ld_xfree(conn->ld_danswers[anscount]);
+			conn->ld_danswers[anscount] = NULL;
+		}
+		_ld_freedefans(conn->ld_danswers);
+		conn->ld_danswers = NULL;
+	}
+
+	if(readok) {
+		conn->ld_danswers[anscount] = NULL;
+	}
+
+	if(tmpbuf) {
+		_ld_xfree(tmpbuf);
+		tmpbuf = NULL;
+	}
+
+	_ld_adddefinecache(conn, word, conn->ld_danswers);
+
+	return(conn->ld_danswers);
+}
+
+/* free an answer */
+void _ld_freedefans(struct ld_defanswer **answers) {
+	int x = 0;
+
+	if(!answers) return;
+
+	while(answers[x]) {
+		if(answers[x]->ld_ansdict) _ld_xfree(answers[x]->ld_ansdict);
+		if(answers[x]->ld_answord) _ld_xfree(answers[x]->ld_answord);
+		if(answers[x]->ld_ansdef) _ld_xfree(answers[x]->ld_ansdef);
+		_ld_xfree(answers[x]);
+		x++;
+	}
+
+	_ld_xfree(answers);
+}
+
+/* free the answer to a match */
+void _ld_freematans(struct ld_matchanswer **answers) {
+	int x=0;
+
+	if(!answers) return;
+
+	while(answers[x]) {
+		if(answers[x]->ld_ansdict) _ld_xfree(answers[x]->ld_ansdict);
+		if(answers[x]->ld_answord) _ld_xfree(answers[x]->ld_answord);
+		_ld_xfree(answers[x]);
+		x++;
+	}
+
+	_ld_xfree(answers);
+}
+
+/* this kind of shames me .. watch out for some casting */
+struct ld_matchanswer **ld_match(struct ld_conn *conn, char *word) {
+	char tmpbuf[BUFSIZ];
+
+	if(conn->ld_manswers) {
+		_ld_freematans(conn->ld_manswers);
+		conn->ld_manswers = NULL;
+	}
+
+	if(_ld_ismatchcached(conn, word)) {
+		conn->ld_manswers = _ld_getmatchcache(conn, word);
+		return(conn->ld_manswers);
+	}
+
+	snprintf(tmpbuf, BUFSIZ, "MATCH %s %s %s", 
+		     conn->ld_srchdb ? conn->ld_srchdb : "*",
+		     conn->ld_srchstrat ? conn->ld_srchstrat : "exact",
+		     word);
+
+	conn->ld_manswers = (struct ld_matchanswer **)_ld_getdblist(conn, tmpbuf);
+
+	_ld_addmatchcache(conn, word, conn->ld_manswers);
+
+	return(conn->ld_manswers);
+}
+
+/* this will return the server's response to the last command */
+char *ld_getsrvreply(struct ld_conn *conn) {
+	return(conn->ld_srvreply);
+}
+
+/* return error value from a connection */
+int ld_geterrno(struct ld_conn *conn) {
+	return(conn->ld_errno);
+}
+@
+
+
+1.20
+log
+@The Great Function Renaming - internal functions now start
+with _ld_, external functions start with ld_.
+@
+text
+@d32 1
+a32 1
+ * $Header: /home/sdyoung/cstuff/libdict-1.0-pre/src/libdict.c,v 1.19 2002/07/04 00:45:27 sdyoung Exp sdyoung $
+d34 4
+d206 1
+a206 1
+        if(!strcmp(tmpbuf, ".")) break;
+d392 1
+a392 1
+		if(!strcasecmp(conn->ld_strats[x]->ld_dbname, strat)) {
+d418 1
+a418 1
+	if(strcmp(db, "*")) {
+d420 1
+a420 1
+			if(!strcasecmp(conn->ld_dbs[x]->ld_dbname, db)) {
+d517 1
+a517 1
+			if(!strcmp(tmpbuf, ".")) {
+@
+
+
+1.19
+log
+@Changes to support caching.
+@
+text
+@d32 1
+a32 1
+ * $Header: /home/sdyoung/cstuff/libdict-1.0-pre/src/libdict.c,v 1.18 2002/03/15 19:09:07 steve Exp sdyoung $
+d34 3
+d137 16
+d156 1
+a156 1
+ld_bool ld_docommand(struct ld_conn *conn, ld_bool getr, char *fmt, ...) {
+d167 1
+a167 1
+	if((ld_sockprintf(conn, buf) == LD_False)) {
+d172 1
+a172 1
+	} else if(getr == LD_True && ld_xreadline(conn, &conn->ld_srvreply) == LD_False) {
+d182 1
+a182 1
+ld_bool ld_sendclient(struct ld_conn *conn, char *client) {
+d184 2
+a185 2
+		return(ld_docommand(conn, LD_True, "CLIENT %s\r\n", client));
+	return(ld_docommand(conn, LD_True, "CLIENT %s\r\n", LD_VERSION));
+d189 1
+a189 1
+struct ld_dbs **ld_getdblist(struct ld_conn *conn, char *cmd) {
+d197 1
+a197 1
+    if(ld_docommand(conn, LD_True, "%s\r\n", cmd) == LD_False)
+d200 1
+a200 1
+    while((readok = ld_xreadline(conn, &tmpbuf)) == LD_True) {
+d206 1
+a206 1
+        retv = ld_xrealloc(retv, sizeof(struct ld_dbs *) * (dbcount + 2));
+d208 1
+a208 1
+        retv[dbcount] = ld_xmalloc(sizeof(struct ld_dbs));
+d213 2
+a214 2
+            retv[dbcount]->ld_dbname = ld_xstrdup(ld_unquote(tmpbuf));
+            retv[dbcount]->ld_dbdesc = ld_xstrdup(ld_unquote(p+1));
+d216 1
+a216 1
+            retv[dbcount]->ld_dbname = ld_xstrdup(ld_unquote(tmpbuf));
+d224 1
+a224 1
+        ld_freedbs(retv);
+d227 2
+a228 2
+        if(ld_xreadline(conn, &conn->ld_srvreply) == LD_False) {
+            ld_freedbs(retv);
+d234 1
+a234 1
+        ld_xfree(tmpbuf);
+d242 2
+a243 2
+struct ld_dbs **ld_igetdbs(struct ld_conn *conn) {
+    return(ld_getdblist(conn, "SHOW DB"));
+d247 2
+a248 2
+struct ld_dbs **ld_igetstrats(struct ld_conn *conn) {
+    return(ld_getdblist(conn, "SHOW STRAT"));
+d259 1
+a259 1
+	srvhandle = ld_xmalloc(sizeof(struct ld_conn));
+d262 1
+a262 1
+	srvhandle->ld_host = ld_xstrdup(host);
+d277 1
+a277 1
+	if(ld_tcpopen(srvhandle) == LD_False) 
+d283 1
+a283 1
+	if(ld_readline(srvhandle, &srvhandle->ld_srvbanner) == LD_False) {
+d291 1
+a291 1
+		(ld_sendclient(srvhandle, client) == LD_False)) {
+d297 2
+a298 2
+	if((srvhandle->ld_dbs = ld_igetdbs(srvhandle))) 
+		srvhandle->ld_strats = ld_igetstrats(srvhandle);
+d300 3
+a302 3
+	/* initialize the cache */
+	srvhandle->ld_dconncache = ld_newcache(defcachesz ? defcachesz : DEFAULT_DCACHE);
+	srvhandle->ld_mconncache = ld_newcache(matchcachesz ? matchcachesz : DEFAULT_MCACHE);
+d315 1
+a315 1
+		ld_xfree(conn->ld_host);
+d317 1
+a317 1
+		ld_xfree(conn->ld_srvreply);
+d319 1
+a319 1
+		ld_xfree(conn->ld_srvbanner);
+d321 1
+a321 1
+		ld_xfree(conn->ld_srchdb);
+d323 1
+a323 1
+		ld_xfree(conn->ld_srchstrat);
+d326 1
+a326 1
+			ld_freedbs(conn->ld_dbs);
+d329 1
+a329 1
+			ld_freedbs(conn->ld_strats);
+d331 1
+a331 1
+		ld_freematans(conn->ld_manswers);
+d333 1
+a333 1
+		ld_freedefans(conn->ld_danswers);
+d335 1
+a335 1
+		freecache(conn->ld_mconncache, LD_False);
+d337 1
+a337 1
+		freecache(conn->ld_dconncache, LD_True);
+d339 1
+a339 1
+	ld_xfree(conn);
+d351 1
+a351 1
+	if(conn && (ld_sockprintf(conn, "QUIT\r\n") == LD_True)) {
+d354 1
+a354 1
+		ld_xreadline(conn, &conn->ld_srvreply); 
+d366 1
+a366 1
+	return(ld_docommand(conn, LD_True, "AUTH %s %s\r\n", user, pw));
+a373 16
+/* free a database list */
+void ld_freedbs(struct ld_dbs **dbs) {
+	int i = 0;
+
+	if(!dbs) return;
+
+	while(dbs[i]) {
+		if(dbs[i]->ld_dbname) ld_xfree(dbs[i]->ld_dbname);
+		if(dbs[i]->ld_dbdesc) ld_xfree(dbs[i]->ld_dbdesc);
+		ld_xfree(dbs[i]);
+		i++;
+	}
+
+	ld_xfree(dbs);
+}
+	
+d400 1
+a400 1
+	if(conn->ld_srchstrat) ld_xfree(conn->ld_srchstrat);
+d402 1
+a402 1
+	conn->ld_srchstrat = ld_xstrdup(strat);
+d404 1
+a404 1
+	resetcache(conn);
+d431 1
+a431 1
+	if(conn->ld_srchdb) ld_xfree(conn->ld_srchdb);
+d433 1
+a433 1
+	conn->ld_srchdb = ld_xstrdup(db);
+d435 1
+a435 1
+	resetcache(conn);
+d447 1
+a447 1
+		ld_freedefans(conn->ld_danswers);
+d451 2
+a452 2
+	if(isdefinecached(conn, word)) {
+		conn->ld_danswers = getdefinecache(conn, word);
+d457 1
+a457 1
+	if(ld_docommand(conn, LD_False, "DEFINE %s %s\r\n", 
+d463 1
+a463 1
+	if(ld_xreadline(conn, &tmpbuf) == LD_False) 
+d471 1
+a471 1
+		ld_xfree(tmpbuf);
+d477 1
+a477 1
+	while((readok = ld_xreadline(conn, &tmpbuf)) == LD_True) {
+d481 2
+a482 2
+		conn->ld_danswers = ld_xrealloc(conn->ld_danswers, sizeof(struct ld_defanswer *) * (anscount + 2));
+		conn->ld_danswers[anscount] = ld_xmalloc(sizeof(struct ld_defanswer));
+d506 1
+a506 1
+		conn->ld_danswers[anscount]->ld_ansdict = ld_xstrdup(ld_unquote(p + 1));
+d510 1
+a510 1
+		conn->ld_danswers[anscount]->ld_answord = ld_xstrdup(ld_unquote(tmpbuf + 4));
+d512 1
+a512 1
+		while((readok = ld_xreadline(conn, &tmpbuf)) == LD_True) {
+d517 1
+a517 1
+				conn->ld_danswers[anscount]->ld_ansdef = ld_xrealloc(conn->ld_danswers[anscount]->ld_ansdef, strlen(conn->ld_danswers[anscount]->ld_ansdef) + strlen(tmpbuf) + 3);
+d521 1
+a521 1
+				conn->ld_danswers[anscount]->ld_ansdef = ld_xstrdup(tmpbuf);
+d533 4
+a536 4
+			if(conn->ld_danswers[anscount]->ld_ansdict) ld_xfree(conn->ld_danswers[anscount]->ld_ansdict);
+			if(conn->ld_danswers[anscount]->ld_answord) ld_xfree(conn->ld_danswers[anscount]->ld_answord);
+			if(conn->ld_danswers[anscount]->ld_ansdef) ld_xfree(conn->ld_danswers[anscount]->ld_ansdef);
+			ld_xfree(conn->ld_danswers[anscount]);
+d539 1
+a539 1
+		ld_freedefans(conn->ld_danswers);
+d548 1
+a548 1
+		ld_xfree(tmpbuf);
+d552 1
+a552 1
+	adddefinecache(conn, word, conn->ld_danswers);
+d558 1
+a558 1
+void ld_freedefans(struct ld_defanswer **answers) {
+d564 4
+a567 4
+		if(answers[x]->ld_ansdict) ld_xfree(answers[x]->ld_ansdict);
+		if(answers[x]->ld_answord) ld_xfree(answers[x]->ld_answord);
+		if(answers[x]->ld_ansdef) ld_xfree(answers[x]->ld_ansdef);
+		ld_xfree(answers[x]);
+d571 1
+a571 1
+	ld_xfree(answers);
+d575 1
+a575 1
+void ld_freematans(struct ld_matchanswer **answers) {
+d581 3
+a583 3
+		if(answers[x]->ld_ansdict) ld_xfree(answers[x]->ld_ansdict);
+		if(answers[x]->ld_answord) ld_xfree(answers[x]->ld_answord);
+		ld_xfree(answers[x]);
+d587 1
+a587 1
+	ld_xfree(answers);
+d595 1
+a595 1
+		ld_freematans(conn->ld_manswers);
+d599 2
+a600 2
+	if(ismatchcached(conn, word)) {
+		conn->ld_manswers = getmatchcache(conn, word);
+d609 1
+a609 1
+	conn->ld_manswers = (struct ld_matchanswer **)ld_getdblist(conn, tmpbuf);
+d611 1
+a611 1
+	addmatchcache(conn, word, conn->ld_manswers);
+@
+
+
+1.18
+log
+@One last bugfix to ld_newconn.
+@
+text
+@d32 1
+a32 1
+ * $Header: /home/steve/libdict-0.9/src/libdict.c,v 1.17 2002/03/15 18:39:03 sdyoung Exp steve $
+d34 3
+d106 1
+d236 1
+a236 1
+struct ld_conn *ld_newconn(char *host, int port, int timeout, char *client, ld_bool debug) {
+d281 4
+d315 5
+d400 3
+d431 3
+d448 5
+d549 2
+d595 6
+d605 6
+a610 1
+	return(conn->ld_manswers = (struct ld_matchanswer **)ld_getdblist(conn, tmpbuf));
+@
+
+
+1.17
+log
+@Added license to the comment header.
+@
+text
+@d32 1
+a32 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.9/src/libdict.c,v 1.16 2002/03/15 18:34:13 sdyoung Exp sdyoung $
+d34 3
+d262 2
+@
+
+
+1.16
+log
+@Moved some stuff around in newconn to give better error reporting.
+@
+text
+@d11 22
+a32 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.9/src/libdict.c,v 1.15 2002/03/15 18:17:55 sdyoung Exp $
+d34 3
+@
+
+
+1.15
+log
+@Made ld_newconn always return something so we can return error
+status of connection attempt in dictconn->ld_errno.
+@
+text
+@d11 1
+a11 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.9/src/libdict.c,v 1.14 2002/03/14 05:23:08 sdyoung Exp sdyoung $
+d13 4
+a207 1
+	ld_bool bannerok;
+d233 2
+a234 1
+	if(ld_readline(srvhandle, &srvhandle->ld_srvbanner) == LD_False) 
+d236 1
+d238 3
+a240 4
+	bannerok = ld_checkok(ld_getrespno(srvhandle->ld_srvbanner));
+
+	/* maybe = intermittent failure */
+	if((bannerok != LD_True) || (ld_sendclient(srvhandle, client) == LD_False))
+d242 1
+@
+
+
+1.14
+log
+@Added support for ld_manswers/danswers - we can free it ourselves now.
+@
+text
+@d11 1
+a11 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.9/src/libdict.c,v 1.13 2002/03/13 21:08:20 sdyoung Exp sdyoung $
+d13 3
+d96 1
+a96 1
+	return(Maybe);
+d224 2
+a225 5
+	if(ld_tcpopen(srvhandle) == LD_False) {
+		ld_freeconn(srvhandle);
+		/* tcpopen sets ld_errno */
+		return(NULL);
+	}
+d230 2
+a231 5
+	if(ld_readline(srvhandle, &srvhandle->ld_srvbanner) == LD_False) {
+		ld_freeconn(srvhandle);
+		/* ld_readline sets errno */
+		return(NULL);
+	}
+d236 2
+a237 4
+	if((bannerok != LD_True) || (ld_sendclient(srvhandle, client) == LD_False)) {
+		ld_freeconn(srvhandle);
+		srvhandle = NULL;
+	} 
+d240 2
+a241 7
+	if(!(srvhandle->ld_dbs = ld_igetdbs(srvhandle))) {
+		ld_freeconn(srvhandle);
+		srvhandle = NULL;
+	} else if(!(srvhandle->ld_strats = ld_igetstrats(srvhandle))) {
+		ld_freeconn(srvhandle);
+		srvhandle = NULL;
+	}
+@
+
+
+1.13
+log
+@Added ld_geterrno function; also made changes to support ld_errno being
+in dictconn structure now.
+@
+text
+@d11 1
+a11 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/libdict.c,v 1.12 2002/03/12 18:13:26 sdyoung Exp $
+d13 4
+d279 4
+a396 1
+	struct ld_defanswer **retv = NULL;
+d400 5
+d430 3
+a432 3
+		retv = ld_xrealloc(retv, sizeof(struct ld_defanswer *) * (anscount + 2));
+		retv[anscount] = ld_xmalloc(sizeof(struct ld_defanswer));
+		bzero(retv[anscount], sizeof(struct ld_defanswer));
+d455 1
+a455 1
+		retv[anscount]->ld_ansdict = ld_xstrdup(ld_unquote(p + 1));
+d459 1
+a459 1
+		retv[anscount]->ld_answord = ld_xstrdup(ld_unquote(tmpbuf + 4));
+d465 4
+a468 4
+			if(retv[anscount]->ld_ansdef) {
+				retv[anscount]->ld_ansdef = ld_xrealloc(retv[anscount]->ld_ansdef, strlen(retv[anscount]->ld_ansdef) + strlen(tmpbuf) + 3);
+				strcat(retv[anscount]->ld_ansdef, "\r\n");
+				strcat(retv[anscount]->ld_ansdef, tmpbuf);
+d470 1
+a470 1
+				retv[anscount]->ld_ansdef = ld_xstrdup(tmpbuf);
+d481 6
+a486 6
+		if(retv[anscount]) {
+			if(retv[anscount]->ld_ansdict) ld_xfree(retv[anscount]->ld_ansdict);
+			if(retv[anscount]->ld_answord) ld_xfree(retv[anscount]->ld_answord);
+			if(retv[anscount]->ld_ansdef) ld_xfree(retv[anscount]->ld_ansdef);
+			ld_xfree(retv[anscount]);
+			retv[anscount] = NULL;
+d488 2
+a489 2
+		ld_freedefans(retv);
+		retv = NULL;
+d493 1
+a493 1
+		retv[anscount] = NULL;
+d501 1
+a501 1
+	return(retv);
+d541 4
+d549 1
+a549 1
+	return((struct ld_matchanswer **)ld_getdblist(conn, tmpbuf));
+@
+
+
+1.12
+log
+@Change true/false to ld_true/ld_false.
+@
+text
+@d11 1
+a11 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/libdict.c,v 1.11 2002/03/12 17:59:16 sdyoung Exp $
+d13 3
+a71 1
+		ld_errno = LDBADARG;
+a198 2
+	ld_errno = LDOK;
+
+d348 1
+a348 1
+		ld_errno = LDBADARG;
+d376 1
+a376 1
+		ld_errno = LDBADARG;
+d407 1
+a407 1
+		ld_errno = LDNOMATCH;
+d424 1
+a424 1
+			ld_errno = LDBADPROTO;
+d431 1
+a431 1
+			ld_errno = LDBADPROTO;
+d437 1
+a437 1
+			ld_errno = LDBADPROTO;
+d539 5
+@
+
+
+1.11
+log
+@Changed all bool's to ld_bools (to avoid C++ conflict)
+@
+text
+@d11 1
+a11 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/libdict.c,v 1.10 2001/11/13 00:01:58 sdyoung Exp sdyoung $
+d13 3
+d80 1
+a80 1
+ * you: is it success (True), failure (False), or was it an intermittent
+d84 1
+a84 1
+		return(True);
+d86 1
+a86 1
+		return(False);
+d94 1
+a94 1
+	ld_bool retv = True;
+d104 2
+a105 2
+	if((ld_sockprintf(conn, buf) == False)) {
+		retv = False;
+d109 3
+a111 3
+	} else if(getr == True && ld_xreadline(conn, &conn->ld_srvreply) == False) {
+		retv = False;
+	} else if(getr == True) {
+d121 2
+a122 2
+		return(ld_docommand(conn, True, "CLIENT %s\r\n", client));
+	return(ld_docommand(conn, True, "CLIENT %s\r\n", LD_VERSION));
+d134 1
+a134 1
+    if(ld_docommand(conn, True, "%s\r\n", cmd) == False)
+d137 1
+a137 1
+    while((readok = ld_xreadline(conn, &tmpbuf)) == True) {
+d164 1
+a164 1
+        if(ld_xreadline(conn, &conn->ld_srvreply) == False) {
+d217 1
+a217 1
+	if(ld_tcpopen(srvhandle) == False) {
+d226 1
+a226 1
+	if(ld_readline(srvhandle, &srvhandle->ld_srvbanner) == False) {
+d235 1
+a235 1
+	if((bannerok != True) || (ld_sendclient(srvhandle, client) == False)) {
+d285 1
+a285 1
+	ld_bool retv = False;
+d287 1
+a287 1
+	if(conn && (ld_sockprintf(conn, "QUIT\r\n") == True)) {
+d291 1
+a291 1
+		retv = True;
+d302 1
+a302 1
+	return(ld_docommand(conn, True, "AUTH %s %s\r\n", user, pw));
+d337 1
+a337 1
+	ld_bool stratok = False;
+d341 1
+a341 1
+			stratok = True;
+d347 1
+a347 1
+	if(stratok == False) {
+d349 1
+a349 1
+		return(False);
+d355 1
+a355 1
+	return(True);
+d361 1
+a361 1
+	ld_bool dbok = False;
+d366 1
+a366 1
+				dbok = True;
+d372 1
+a372 1
+		dbok = True;
+d375 1
+a375 1
+	if(dbok == False) {
+d377 1
+a377 1
+		return(False);
+d383 1
+a383 1
+	return(True);
+d394 1
+a394 1
+	if(ld_docommand(conn, False, "DEFINE %s %s\r\n", 
+d396 1
+a396 1
+					word) == False) 
+d400 1
+a400 1
+	if(ld_xreadline(conn, &tmpbuf) == False) 
+d414 1
+a414 1
+	while((readok = ld_xreadline(conn, &tmpbuf)) == True) {
+d423 1
+a423 1
+			readok = False;
+d430 1
+a430 1
+			readok = False;
+d436 1
+a436 1
+			readok = False;
+d449 1
+a449 1
+		while((readok = ld_xreadline(conn, &tmpbuf)) == True) {
+d462 1
+a462 1
+		if(readok == False)
+d468 1
+a468 1
+	if(readok == False) {
+@
+
+
+1.10
+log
+@Made all functions that deal with quoted server replies automatically
+unquote (eg, ld_match).
+@
+text
+@d11 1
+a11 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/libdict.c,v 1.9 2001/11/12 21:52:41 sdyoung Exp sdyoung $
+d13 4
+d79 1
+a79 1
+bool ld_checkok(int respno) {
+d90 2
+a91 2
+bool ld_docommand(struct ld_conn *conn, bool getr, char *fmt, ...) {
+	bool retv = True;
+d116 1
+a116 1
+bool ld_sendclient(struct ld_conn *conn, char *client) {
+d128 1
+a128 1
+    bool readok;
+d189 1
+a189 1
+struct ld_conn *ld_newconn(char *host, int port, int timeout, char *client, bool debug) {
+d192 1
+a192 1
+	bool bannerok;
+d281 2
+a282 2
+bool ld_closeconn(struct ld_conn *conn) {
+	bool retv = False;
+d298 1
+a298 1
+bool ld_auth(struct ld_conn *conn, char *user, char *pw) {
+d332 1
+a332 1
+bool ld_setstrat(struct ld_conn *conn, char *strat) {
+d334 1
+a334 1
+	bool stratok = False;
+d356 1
+a356 1
+bool ld_setdb(struct ld_conn *conn, char *db) {
+d358 1
+a358 1
+	bool dbok = False;
+d388 1
+a388 1
+	bool readok;
+@
+
+
+1.9
+log
+@ld_newconn now gets the database and strategy lists automatically;
+ld_getdbs and ld_getstrats just return pointers to the lists which
+are stored in ld_conn structures.  This means that the library can
+now automatically take care of ld_freedbs.
+@
+text
+@d11 1
+a11 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/libdict.c,v 1.8 2001/11/09 06:35:45 sdyoung Exp sdyoung $
+d13 6
+d143 2
+a144 2
+            retv[dbcount]->ld_dbname = ld_xstrdup(tmpbuf);
+            retv[dbcount]->ld_dbdesc = ld_xstrdup(p+1);
+d146 1
+a146 1
+            retv[dbcount]->ld_dbname = ld_xstrdup(tmpbuf);
+d436 1
+a436 1
+		retv[anscount]->ld_ansdict = ld_xstrdup(p + 1);
+d440 1
+a440 1
+		retv[anscount]->ld_answord = ld_xstrdup(tmpbuf + 4);
+@
+
+
+1.8
+log
+@Added some comments.
+@
+text
+@d11 1
+a11 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/libdict.c,v 1.7 2001/11/02 00:11:26 sdyoung Exp sdyoung $
+d13 3
+d112 63
+d227 9
+d256 6
+d313 3
+a315 7
+/* get database list.  also used to retrieve strategies */
+struct ld_dbs **ld_getdblist(struct ld_conn *conn, char *cmd) {
+	char *tmpbuf = NULL;
+	struct ld_dbs **retv = NULL;
+	int dbcount = 0;
+	char *p;
+	bool readok;
+d317 3
+a319 24
+	/* execute the command (show db or show strat) */
+	if(ld_docommand(conn, True, "%s\r\n", cmd) == False) 
+		return(NULL);
+	
+	while((readok = ld_xreadline(conn, &tmpbuf)) == True) {
+		/* while the data hasn't ended ... */
+		if(!strcmp(tmpbuf, ".")) break;
+
+		/* create an array to hold our answer's attributes. 
+		 * or, resize it upwards for new entries */
+		retv = ld_xrealloc(retv, sizeof(struct ld_dbs *) * (dbcount + 2));
+		/* point our array slot to attribute structure */
+		retv[dbcount] = ld_xmalloc(sizeof(struct ld_dbs));
+		bzero(retv[dbcount], sizeof(struct ld_dbs));
+
+		if((p = strchr(tmpbuf, ' '))) {
+			*p = '\0';
+			retv[dbcount]->ld_dbname = ld_xstrdup(tmpbuf);
+			retv[dbcount]->ld_dbdesc = ld_xstrdup(p+1);
+		} else {
+			retv[dbcount]->ld_dbname = ld_xstrdup(tmpbuf);
+		}
+		dbcount++;
+	}
+d321 9
+a329 9
+	retv[dbcount] = NULL;
+	
+	if(!readok) {
+		ld_freedbs(retv);
+		return(NULL);
+	} else {
+		if(ld_xreadline(conn, &conn->ld_srvreply) == False) {
+			ld_freedbs(retv);
+			return(NULL);
+d331 1
+d334 3
+a336 3
+	if(tmpbuf) {
+		ld_xfree(tmpbuf);
+		tmpbuf = NULL;
+a338 15
+	return(retv);
+}
+
+/* get a list of databases */
+struct ld_dbs **ld_getdbs(struct ld_conn *conn) {
+	return(ld_getdblist(conn, "SHOW DB"));
+}
+
+/* get a list of strategies */
+struct ld_dbs **ld_getstrats(struct ld_conn *conn) {
+	return(ld_getdblist(conn, "SHOW STRAT"));
+}
+
+/* set the strategy to use */
+void ld_setstrat(struct ld_conn *conn, char *strat) {
+d342 1
+d346 21
+a366 1
+void ld_setdb(struct ld_conn *conn, char *db) {
+d370 1
+@
+
+
+1.7
+log
+@Added capability to specify what CLIENT greeting will be used.
+@
+text
+@a7 5
+ * Note that some serious attention needs to be paid to the way in
+ * which error conditions are reported; right now it's very crude
+ * and a client can't even tell if it should retry or not.  this
+ * wouldn't be too hard to fix but may require some re-organizing.
+ *
+d11 1
+a11 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/libdict.c,v 1.6 2001/11/01 20:16:22 sdyoung Exp sdyoung $
+d13 3
+d48 1
+d69 3
+a71 1
+	return(False);
+d90 3
+d232 1
+a232 1
+/* get database list.. pretty simple */
+d240 1
+d245 1
+d248 2
+d251 1
+d295 1
+@
+
+
+1.6
+log
+@Added support for enum ld_servcode.
+@
+text
+@d16 1
+a16 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/libdict.c,v 1.5 2001/10/18 21:54:17 sdyoung Exp sdyoung $
+d18 3
+d99 4
+a102 2
+bool ld_sendclient(struct ld_conn *conn) {
+	return(ld_docommand(conn, True, "CLIENT libdict %s\r\n", LD_VERSION));
+d109 1
+a109 1
+struct ld_conn *ld_newconn(char *host, int port, int timeout, bool debug) {
+d152 1
+a152 1
+	if((bannerok != True) || (ld_sendclient(srvhandle) == False)) {
+@
+
+
+1.5
+log
+@Corrected a whack of fairly serious memory leaks.
+@
+text
+@d16 1
+a16 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.2-pre/src/libdict.c,v 1.4 2001/03/08 20:28:45 sdyoung Exp $
+d18 3
+d47 1
+a47 1
+int ld_getrespno(char *msg) {
+d49 1
+d52 1
+a52 1
+		return(0);
+d57 2
+a58 1
+	return(atoi(num));
+d314 1
+a314 1
+	if(cmdret != 150) {
+d323 1
+a323 1
+		if(ld_getrespno(tmpbuf) == 250)
+d330 1
+a330 1
+		if(ld_getrespno(tmpbuf) != 151) {
+@
+
+
+1.4
+log
+@Fixed a memory leak in ld_define.
+@
+text
+@d16 1
+a16 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.2-pre/src/libdict.c,v 1.3 2001/03/05 16:23:00 sdyoung Exp sdyoung $
+d18 3
+a146 1
+	/* hooray! All your base are belong to us. */
+a245 1
+	ld_xfree(tmpbuf);
+d258 5
+d293 1
+a293 1
+	int anscount = 0, anssz;
+d306 2
+d309 2
+a310 1
+	if(ld_getrespno(tmpbuf) != 150) {
+d312 1
+a312 1
+		ld_errno = LDNOMATCH;
+d353 1
+a353 1
+			if(!strcmp(tmpbuf, "."))
+d355 1
+d365 1
+a365 2
+		if(readok == False) {
+			ld_xfree(tmpbuf);
+a366 1
+		}
+d376 2
+d379 2
+d383 3
+a385 1
+	retv[anscount] = NULL;
+d387 3
+a389 3
+	if(!readok) {
+		ld_freedefans(retv);
+		retv = NULL;
+@
+
+
+1.3
+log
+@Added a few missing ld_xfrees to ld_freeconn().
+@
+text
+@d16 1
+a16 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.01-pre/src/libdict.c,v 1.2 2001/03/03 23:16:04 sdyoung Exp sdyoung $
+d18 3
+d355 2
+a356 1
+		if(readok == False)
+d358 1
+d373 1
+a373 1
+	if(!readok) 
+d375 2
+@
+
+
+1.2
+log
+@Added ld_getsrvreply.
+@
+text
+@d16 1
+a16 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.01-pre/src/libdict.c,v 1.1 2001/03/03 10:07:02 sdyoung Exp sdyoung $
+d18 3
+d156 6
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d16 5
+a20 2
+ * $Header$
+ * $Log$
+d407 5
+@

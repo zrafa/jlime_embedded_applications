@@ -1,0 +1,145 @@
+--- mplayer.c	2010-01-16 09:09:53.000000000 +0900
++++ mplayer_mod.c	2010-01-15 21:28:46.000000000 +0900
+@@ -302,7 +302,7 @@
+ 
+ #define AUDIO_BUFF_SIZE 0x40000
+ 
+-int frame_dropping=0; // option  0=no drop  1= drop vo  2= drop decode
++int frame_dropping=2; // option  0=no drop  1= drop vo  2= drop decode
+ 
+ static int softsleep=0;
+ 
+@@ -391,6 +391,13 @@
+ 
+ #define mp_basename2(s) (strrchr(s,'/')==NULL?(char*)s:(strrchr(s,'/')+1))
+ 
++#ifndef JZ4740_IPU
++void drop_image(void)
++{
++}
++#endif
++
++
+ static void wait_audio_empty()
+ {
+ 	int timeoutcount = 100;
+@@ -1676,7 +1683,7 @@
+ 
+ static float timing_sleep(float time_frame)
+ {
+-#ifdef HAVE_RTC
++#if 0
+     if (rtc_fd >= 0){
+ 	// -------- RTC -----------
+ 	current_module="sleep_rtc";
+@@ -1869,10 +1876,14 @@
+     int frame_time_remaining = 0;
+     current_module="calc_sleep_time";
+ 
+-    *time_frame -= GetRelativeTime(); // reset timer
++	// *time_frame -= GetRelativeTime();
++//	if (verbose > 0)
++//		printf("time_frame = %f\n",*time_frame);	
+ 
+     if (mpctx->sh_audio && !mpctx->d_audio->eof) {
+ 	float delay = mpctx->audio_out->get_delay();
++
++
+ 	mp_dbg(MSGT_AVSYNC, MSGL_DBG2, "delay=%f\n", delay);
+ 
+ 	if (autosync) {
+@@ -1890,7 +1901,11 @@
+ 	    delay = predicted + difference / (float)autosync;
+ 	}
+ 
+-	*time_frame = delay - mpctx->delay / playback_speed;
++	// if (verbose > 0)
++	//	printf("delay = %f\n",delay);
++
++	// *time_frame = delay - mpctx->delay;
++	//*time_frame = delay - mpctx->delay / playback_speed;
+ 
+ 	// delay = amount of audio buffered in soundcard/driver
+ 	if (delay > 0.25) delay=0.25; else
+@@ -1898,8 +1913,9 @@
+ 	if (*time_frame > delay*0.6) {
+ 	    // sleep time too big - may cause audio drops (buffer underrun)
+ 	    frame_time_remaining = 1;
+-	    *time_frame = delay*0.5;
++//	    *time_frame = delay*0.5;
+ 	}
++  
+     } else {
+ 	// If we're lagging more than 200 ms behind the right playback rate,
+ 	// don't try to "catch up".
+@@ -2058,9 +2074,11 @@
+ 		}
+ 		extern int drop_visual;
+ 		
++#ifdef JZ4740_IPU
+ 		if(av_drop) {
+ 			drop_image();
+ 		} 	
++#endif	
+ 
+ 	}else
+ 	in_size = video_read_frame(sh_video, &sh_video->next_frame_time,
+@@ -2380,7 +2398,9 @@
+ 	  printf("deblock is not set\n");
+ #endif
+ 
++#ifdef JZ4740_IPU
+ ipu_image_start();
++#endif
+ 
+ #ifdef JZ47_ANL_TIME
+    {
+@@ -3178,6 +3198,8 @@
+ 	   );
+ 
+     /* need to set fps here for output encoders to pick it up in their init */
++      mpctx->sh_video->frametime=1.0f/mpctx->sh_video->fps;
++
+     if(force_fps){
+       mpctx->sh_video->fps=force_fps;
+       mpctx->sh_video->frametime=1.0f/mpctx->sh_video->fps;
+@@ -3380,6 +3402,7 @@
+   if (! ignore_start)
+     audio_delay -= mpctx->sh_audio->stream_delay;
+   mpctx->delay=-audio_delay;
++  mpctx->delay = 0;
+ }
+ 
+ if(!mpctx->sh_audio){
+@@ -3488,7 +3511,9 @@
+   if (!mpctx->num_buffered_frames) {
+ 
+       double frame_time = update_video(&blit_frame);
+-      mp_dbg(MSGT_AVSYNC,MSGL_DBG2,"*** ftime=%5.3f ***\n",frame_time);
++	//if (verbose > 0)
++	//	printf("*** ftime=%5.3f ***\n",frame_time);
++
+       if (mpctx->sh_video->vf_inited < 0) {
+ 	  mp_msg(MSGT_CPLAYER,MSGL_FATAL, MSGTR_NotInitializeVOPorVO);
+ 	  mpctx->eof = 1; goto goto_next_file;
+@@ -3504,6 +3529,8 @@
+ 
+ // ==========================================================================
+     
++  update_osd_msg();
++    
+ //    current_module="draw_osd";
+ //    if(vo_config_count) mpctx->video_out->draw_osd();
+ 
+@@ -3534,6 +3561,11 @@
+ 
+ 	   vout_time_usage += (GetTimer() - t2) * 0.000001;
+         }
++	else
++	{
++	  if(verbose > 0)
++		printf("skip frame\n");
++	}
+ //====================== A-V TIMESTAMP CORRECTION: =========================
+ 
+   adjust_sync_and_print_status(frame_time_remaining, time_frame);

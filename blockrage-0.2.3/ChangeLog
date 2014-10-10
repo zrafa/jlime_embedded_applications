@@ -1,0 +1,126 @@
+Block Rage Changelog
+
+    version 0.2.3
+    -------------
+
+    - Redrew the tiles!
+    - Created an ugly title screen
+    - Moved timing functions to a separate 'timer' module.
+    - Removed possible race condition in sound module.
+    - Command line option to use 8-bit audio instead of 16-bit.
+      Also automatically tried if 16-bit audio fails.
+    - Fixed CapsLock handling.
+    - Common handling of memory allocation errors.
+    - Sound mixer now supports big endian.
+    - Print error message on some missing files instead of crashing.
+    - Set window caption.
+    - NEXT labels
+    - P1,P2 labels in 2-player mode
+
+    version 0.2.2
+    -------------
+    
+    Updated the documentation.
+    
+    blockrage-fhs.rc is not in the sources anymore. It is created by
+    configure to reflect the directories for which the game is configured.
+    
+    The behavior of 'configure' is now closer to standard GNU configure
+    scripts. Now supports configuring installation directories,
+    and has same default ones.
+    
+    Makefile now supports DESTDIR to install into other location than
+    the root dir (support for Gentoo ebuild)
+    
+    FIX: 'inst' script now handles multiple successive slashes in pathnames
+    correctly (e.g /usr//local)
+    
+    BUGFIX: The SDL_QUIT event is now recognised, sets quit=1 (like ALT-X),
+    quit==1 handling corrected, now you can exit from any place in the game
+    using the cross buttonin window caption, by pressing ALT-X or by sending
+    a SIGABRT to the game. -- thanks to Matej
+		  
+    BUGFIX: fix several getenv(<VAR>) calls not being checked for NULL result.
+    This cased for example the hall of fame to crash when you gained a high
+    score and the USERNAME environment variable was not set. (Which is
+    LIKELY to happen!)
+		  
+    FIX several other getenv(<VAR>)s, safer handling of most pathnames
+		  
+    FIXED name editing in topscores, now using a simple US
+    key-to-character mapping.
+		  
+    BUGFIX: block fall speed would not be updated on level advance until
+    you pressed the drop key. -- thanks to ericsp
+    
+    FIX: Makefile fixes
+
+    version 0.2.1
+    -------------
+    
+    16th Sep 2005 Reorganised the directory structure - moved
+                  'configure', README and co. out of src/
+    
+    15th Sep 2005 Changes to graphics due to the upcoming release,
+                  also replaced the sound effect with some new ones
+		  (quick and dirty.)
+
+    12th Sep 2005 Updated inst.	Updated the documentation, added a manpage.
+                  FIX: add -lm link flag: math lib used by
+		  bg.c, needed on non-GNU systems.
+
+    11th Sep 2005 Revised installation procedure: replaced
+                  mkinstalldirs (a public domain script) by
+		  a more clever "inst".
+    
+    10th Sep 2005 Applied new name to the source code. Updated
+                  the copyright notices.
+    
+    25th Aug 2005 Registered the game as a SourceForge project
+                  and renamed it to Block Rage.
+    
+    23rd Aug 2005 Added a simple configure script to detect
+                  Cygwin automatically (detects executable suffix
+		  and whether it's necessary to use -lwinmm)
+		  
+		  Idea to rename the game to HotBlock
+
+    22nd Aug 2005 Started adding 16bit directcolor support
+                  to avoid palette management during graphics
+		  development.
+    
+    13th May 2005 Starting to work on completely new graphics.
+		  
+    12th May 2005 Added windows timer, now it runs on Win32 too.
+
+    22th Dec 2004 Yes! It runs on Solaris!
+                  Added Alt-Backslash doublesize toggling.
+		  Created mkpacksrc and mkpackbin shell scripts
+		  to make the source and binary tarballs automatically.
+
+    18th Dec 2004 Renamed types from UPPERCASE to lowercase_t.
+                  New (better) text renderer.
+                  Removed fntedit.
+		  Made pcx_load/save portable.
+		  Other cleanups.
+
+    1st Dec 2004  Continued work on moving the code.
+                  Added doublesize mode.
+
+    26th Nov 2004 Reworked configuration files.
+                  Added Alt-Enter Fullscreen toggling.
+		  Added gfxout.c, menus.c and moving some code there.
+
+    25th Nov 2004 Starting to revive the game!
+                  Ported graphics output from svgalib to SDL.
+
+    pre-Block-Rage releases
+    -----------------------
+    (Oct 2000)
+    0.2.0	- the pause menu now has a bitmap bg
+		- added two more fire backgrounds
+		- added a .pcx screenshot writer
+		- removed some corrupted testing blockset
+
+    0.1.0	first released version of Uni's Columns
+

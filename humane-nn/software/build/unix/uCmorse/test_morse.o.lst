@@ -1,0 +1,285 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.rdata
+  14              		.align	2
+  15              	$LC0:
+  16 0000 736F756E 		.ascii	"sounder(%i, %i)\012\000"
+  16      64657228 
+  16      25692C20 
+  16      2569290A 
+  16      00
+  17              		.text
+  18              		.align	2
+  19              		.globl	sounder
+  20              	$LFB0 = .
+  21              		.file 1 "uCmorse/test_morse.c"
+   0:uCmorse/test_morse.c **** #include <stdio.h>
+   1:uCmorse/test_morse.c **** #include "uCmorse.h"
+   2:uCmorse/test_morse.c **** 
+   3:uCmorse/test_morse.c **** void sounder(int onOrOff, int msec) {
+  22              		.loc 1 4 0
+  23              		.set	nomips16
+  24              		.ent	sounder
+  26              	sounder:
+  27              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+  28              		.mask	0xc0000000,-4
+  29              		.fmask	0x00000000,0
+  30              		.set	noreorder
+  31              		.set	nomacro
+  32              		
+  33 0000 D8FFBD27 		addiu	$sp,$sp,-40
+  34              	$LCFI0:
+  35 0004 2400BFAF 		sw	$31,36($sp)
+  36              	$LCFI1:
+  37 0008 2000BEAF 		sw	$fp,32($sp)
+  38              	$LCFI2:
+  39 000c 21F0A003 		move	$fp,$sp
+  40              	$LCFI3:
+  41 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  42 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  43 0018 1000BCAF 		.cprestore	16
+  44 001c 2800C4AF 		sw	$4,40($fp)
+  45 0020 2C00C5AF 		sw	$5,44($fp)
+   4:uCmorse/test_morse.c ****   int i;
+   5:uCmorse/test_morse.c ****   int units = MSEC2UNITS(msec);
+  46              		.loc 1 6 0
+  47 0024 2C00C28F 		lw	$2,44($fp)
+  48 0028 00000000 		nop
+  49 002c C0180200 		sll	$3,$2,3
+  50 0030 B0040224 		li	$2,1200			# 0x4b0
+  51 0034 02004014 		bne	$2,$0,1f
+  52 0038 1A006200 		div	$0,$3,$2
+  53 003c 0D000700 		break	7
+  54              	1:
+  55 0040 10180000 		mfhi	$3
+  56 0044 12100000 		mflo	$2
+  57 0048 1800C2AF 		sw	$2,24($fp)
+   6:uCmorse/test_morse.c ****   fprintf(stderr, "sounder(%i, %i)\n", onOrOff, msec);
+  58              		.loc 1 7 0
+  59 004c 0000828F 		lw	$2,%got(stderr)($28)
+  60 0050 00000000 		nop
+  61 0054 0000428C 		lw	$2,0($2)
+  62 0058 00000000 		nop
+  63 005c 21184000 		move	$3,$2
+  64 0060 0000023C 		lui	$2,%hi($LC0)
+  65 0064 00004224 		addiu	$2,$2,%lo($LC0)
+  66 0068 21206000 		move	$4,$3
+  67 006c 21284000 		move	$5,$2
+  68 0070 2800C68F 		lw	$6,40($fp)
+  69 0074 2C00C78F 		lw	$7,44($fp)
+  70 0078 0000828F 		lw	$2,%call16(fprintf)($28)
+  71 007c 00000000 		nop
+  72 0080 21C84000 		move	$25,$2
+  73 0084 09F82003 		jalr	$25
+  74 0088 00000000 		nop
+  75              	
+  76 008c 1000DC8F 		lw	$28,16($fp)
+   7:uCmorse/test_morse.c ****   if (onOrOff && (units == DIT))
+  77              		.loc 1 8 0
+  78 0090 2800C28F 		lw	$2,40($fp)
+  79 0094 00000000 		nop
+  80 0098 0E004010 		beq	$2,$0,$L2
+  81 009c 00000000 		nop
+  82              	
+  83 00a0 1800C38F 		lw	$3,24($fp)
+  84 00a4 01000224 		li	$2,1			# 0x1
+  85 00a8 0A006214 		bne	$3,$2,$L2
+  86 00ac 00000000 		nop
+  87              	
+   8:uCmorse/test_morse.c ****     printf(".");
+  88              		.loc 1 9 0
+  89 00b0 2E000424 		li	$4,46			# 0x2e
+  90 00b4 0000828F 		lw	$2,%call16(putchar)($28)
+  91 00b8 00000000 		nop
+  92 00bc 21C84000 		move	$25,$2
+  93 00c0 09F82003 		jalr	$25
+  94 00c4 00000000 		nop
+  95              	
+  96 00c8 1000DC8F 		lw	$28,16($fp)
+   8:uCmorse/test_morse.c ****     printf(".");
+  97              		.loc 1 8 0
+  98 00cc 28000010 		b	$L7
+  99 00d0 00000000 		nop
+ 100              	
+ 101              	$L2:
+   9:uCmorse/test_morse.c ****   else if (onOrOff && (units == DASH))
+ 102              		.loc 1 10 0
+ 103 00d4 2800C28F 		lw	$2,40($fp)
+ 104 00d8 00000000 		nop
+ 105 00dc 0E004010 		beq	$2,$0,$L4
+ 106 00e0 00000000 		nop
+ 107              	
+ 108 00e4 1800C38F 		lw	$3,24($fp)
+ 109 00e8 03000224 		li	$2,3			# 0x3
+ 110 00ec 0A006214 		bne	$3,$2,$L4
+ 111 00f0 00000000 		nop
+ 112              	
+  10:uCmorse/test_morse.c ****     printf("-");
+ 113              		.loc 1 11 0
+ 114 00f4 2D000424 		li	$4,45			# 0x2d
+ 115 00f8 0000828F 		lw	$2,%call16(putchar)($28)
+ 116 00fc 00000000 		nop
+ 117 0100 21C84000 		move	$25,$2
+ 118 0104 09F82003 		jalr	$25
+ 119 0108 00000000 		nop
+ 120              	
+ 121 010c 1000DC8F 		lw	$28,16($fp)
+  10:uCmorse/test_morse.c ****     printf("-");
+ 122              		.loc 1 10 0
+ 123 0110 17000010 		b	$L7
+ 124 0114 00000000 		nop
+ 125              	
+ 126              	$L4:
+  11:uCmorse/test_morse.c ****   else
+  12:uCmorse/test_morse.c ****     for (i = 0; i< units - 1; ++i) printf(" ");
+ 127              		.loc 1 13 0
+ 128 0118 1C00C0AF 		sw	$0,28($fp)
+ 129 011c 0C000010 		b	$L5
+ 130 0120 00000000 		nop
+ 131              	
+ 132              	$L6:
+ 133 0124 20000424 		li	$4,32			# 0x20
+ 134 0128 0000828F 		lw	$2,%call16(putchar)($28)
+ 135 012c 00000000 		nop
+ 136 0130 21C84000 		move	$25,$2
+ 137 0134 09F82003 		jalr	$25
+ 138 0138 00000000 		nop
+ 139              	
+ 140 013c 1000DC8F 		lw	$28,16($fp)
+ 141 0140 1C00C28F 		lw	$2,28($fp)
+ 142 0144 00000000 		nop
+ 143 0148 01004224 		addiu	$2,$2,1
+ 144 014c 1C00C2AF 		sw	$2,28($fp)
+ 145              	$L5:
+ 146 0150 1800C28F 		lw	$2,24($fp)
+ 147 0154 00000000 		nop
+ 148 0158 FFFF4324 		addiu	$3,$2,-1
+ 149 015c 1C00C28F 		lw	$2,28($fp)
+ 150 0160 00000000 		nop
+ 151 0164 2A104300 		slt	$2,$2,$3
+ 152 0168 EEFF4014 		bne	$2,$0,$L6
+ 153 016c 00000000 		nop
+ 154              	
+ 155              	$L7:
+  13:uCmorse/test_morse.c **** }
+ 156              		.loc 1 14 0
+ 157 0170 21E8C003 		move	$sp,$fp
+ 158 0174 2400BF8F 		lw	$31,36($sp)
+ 159 0178 2000BE8F 		lw	$fp,32($sp)
+ 160 017c 2800BD27 		addiu	$sp,$sp,40
+ 161 0180 0800E003 		j	$31
+ 162 0184 00000000 		nop
+ 163              	
+ 164              		.set	macro
+ 165              		.set	reorder
+ 166              		.end	sounder
+ 167              	$LFE0:
+ 169              		.rdata
+ 170 0011 000000   		.align	2
+ 171              	$LC1:
+ 172 0014 48454C4C 		.ascii	"HELLO WORLD\000"
+ 172      4F20574F 
+ 172      524C4400 
+ 173              		.align	2
+ 174              	$LC2:
+ 175 0020 20307861 		.ascii	" 0xab = \000"
+ 175      62203D20 
+ 175      00
+ 176 0029 00000000 		.text
+ 176      000000
+ 177              		.align	2
+ 178              		.globl	main
+ 179              	$LFB1 = .
+  14:uCmorse/test_morse.c **** 
+  15:uCmorse/test_morse.c **** void tapString(const char *s);
+  16:uCmorse/test_morse.c **** 
+  17:uCmorse/test_morse.c **** int main() {
+ 180              		.loc 1 18 0
+ 181              		.set	nomips16
+ 182              		.ent	main
+ 184              	main:
+ 185              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 186              		.mask	0xc0000000,-4
+ 187              		.fmask	0x00000000,0
+ 188              		.set	noreorder
+ 189              		.set	nomacro
+ 190              		
+ 191 0188 D8FFBD27 		addiu	$sp,$sp,-40
+ 192              	$LCFI4:
+ 193 018c 2400BFAF 		sw	$31,36($sp)
+ 194              	$LCFI5:
+ 195 0190 2000BEAF 		sw	$fp,32($sp)
+ 196              	$LCFI6:
+ 197 0194 21F0A003 		move	$fp,$sp
+ 198              	$LCFI7:
+ 199 0198 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 200 019c 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 201 01a0 1000BCAF 		.cprestore	16
+  18:uCmorse/test_morse.c ****   const char *s="HELLO WORLD";
+ 202              		.loc 1 19 0
+ 203 01a4 0000023C 		lui	$2,%hi($LC1)
+ 204 01a8 14004224 		addiu	$2,$2,%lo($LC1)
+ 205 01ac 1800C2AF 		sw	$2,24($fp)
+  19:uCmorse/test_morse.c ****   tapString(s);
+ 206              		.loc 1 20 0
+ 207 01b0 1800C48F 		lw	$4,24($fp)
+ 208 01b4 0000828F 		lw	$2,%call16(tapString)($28)
+ 209 01b8 00000000 		nop
+ 210 01bc 21C84000 		move	$25,$2
+ 211 01c0 09F82003 		jalr	$25
+ 212 01c4 00000000 		nop
+ 213              	
+ 214 01c8 1000DC8F 		lw	$28,16($fp)
+  20:uCmorse/test_morse.c ****   printf(" 0xab = ");
+ 215              		.loc 1 21 0
+ 216 01cc 0000023C 		lui	$2,%hi($LC2)
+ 217 01d0 20004224 		addiu	$2,$2,%lo($LC2)
+ 218 01d4 21204000 		move	$4,$2
+ 219 01d8 0000828F 		lw	$2,%call16(printf)($28)
+ 220 01dc 00000000 		nop
+ 221 01e0 21C84000 		move	$25,$2
+ 222 01e4 09F82003 		jalr	$25
+ 223 01e8 00000000 		nop
+ 224              	
+ 225 01ec 1000DC8F 		lw	$28,16($fp)
+  21:uCmorse/test_morse.c ****   tapByteHex(0xab);
+ 226              		.loc 1 22 0
+ 227 01f0 AB000424 		li	$4,171			# 0xab
+ 228 01f4 0000828F 		lw	$2,%call16(tapByteHex)($28)
+ 229 01f8 00000000 		nop
+ 230 01fc 21C84000 		move	$25,$2
+ 231 0200 09F82003 		jalr	$25
+ 232 0204 00000000 		nop
+ 233              	
+ 234 0208 1000DC8F 		lw	$28,16($fp)
+ 235 020c 21100000 		move	$2,$0
+  22:uCmorse/test_morse.c **** }
+ 236              		.loc 1 23 0
+ 237 0210 21E8C003 		move	$sp,$fp
+ 238 0214 2400BF8F 		lw	$31,36($sp)
+ 239 0218 2000BE8F 		lw	$fp,32($sp)
+ 240 021c 2800BD27 		addiu	$sp,$sp,40
+ 241 0220 0800E003 		j	$31
+ 242 0224 00000000 		nop
+ 243              	
+ 244              		.set	macro
+ 245              		.set	reorder
+ 246              		.end	main
+ 247              	$LFE1:
+ 313              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 uCmorse/test_morse.c
+     /tmp/ccAYWJ4M.s:26     .text:0000000000000000 sounder
+     /tmp/ccAYWJ4M.s:184    .text:0000000000000188 main
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+stderr
+fprintf
+putchar
+tapString
+printf
+tapByteHex

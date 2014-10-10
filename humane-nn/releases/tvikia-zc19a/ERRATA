@@ -1,0 +1,37 @@
+ERRATA - TVIKIA zc19a - 1/9/10
+
+-Pin 1 on Atmegas is not marked except for covered dot.
+
+-Via clearance with pads could be better
+
+-L1/L2 cathode not marked
+
+-3.3V Regulator smoke - incorrect footprint
+
+-Crystal 8pf driving 22pf caps, Atmega datasheet recommends
+12-22 pF.
+
+-Add tantalum power cap?
+
+-Fix Video/Audio color coding to RCA connector.
+
+-Find RCA connector without panel screwhole protrusion.
+
+-Both Audio Out and button S4 are on DIO5, leading to a clicking noise
+and conflict.
+
+-LED1 is on the SPI SCK line, which makes it pretty much useless if using the
+SD Card.  This is the same line the Arduino uses, but should be changed to make
+the LED useful for Tvikia.
+
+-Check SD Chip Select line for compatability with the various Arduino Ethernet
+and Wifi shields (most seem to hog the SS line).
+
+-Insufficient clearance around drill holes for spacers or nuts.
+
+-Odd size of drill holes (bit bigger than #4, smaller than #8 - maybe
+#6 screws??)
+
+-Only three drill holes, need four.
+
+----

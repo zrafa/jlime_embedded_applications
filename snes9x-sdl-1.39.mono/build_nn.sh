@@ -1,0 +1,1 @@
+g++  -o snes9x cpuops.o cpuexec.o   cpu.o tile.o gfx.o clip.o memmap.o ppu.o dma.o unix/unix.o spc700.o soundux.o apu.o unix/svga.o dsp1.o snes9x.o snapshot.o data.o globals.o  loadzip.o unzip/unzip.o unzip/explode.o unzip/unreduce.o unzip/unshrink.o -lpthread   -lz -lpthread -lSDL

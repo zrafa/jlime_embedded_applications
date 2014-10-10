@@ -1,0 +1,538 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.rdata
+  14              		.align	2
+  15              	$LC0:
+  16 0000 1B5B324A 		.ascii	"\033[2J\033[H\000"
+  16      1B5B4800 
+  17              		.align	2
+  18              	$LC1:
+  19 0008 257800   		.ascii	"%x\000"
+  20 000b 00       		.align	2
+  21              	$LC2:
+  22 000c 1B5B4800 		.ascii	"\033[H\000"
+  23              		.align	2
+  24              	$LC3:
+  25 0010 484F4D45 		.ascii	"HOME\000"
+  25      00
+  26 0015 000000   		.align	2
+  27              	$LC4:
+  28 0018 1B5B4200 		.ascii	"\033[B\000"
+  29              		.align	2
+  30              	$LC5:
+  31 001c 444F574E 		.ascii	"DOWN\000"
+  31      00
+  32 0021 000000   		.align	2
+  33              	$LC6:
+  34 0024 53544F52 		.ascii	"STORE\000"
+  34      4500
+  35 002a 0000     		.align	2
+  36              	$LC7:
+  37 002c 1B5B7300 		.ascii	"\033[s\000"
+  38              		.align	2
+  39              	$LC8:
+  40 0030 1B5B4100 		.ascii	"\033[A\000"
+  41              		.align	2
+  42              	$LC9:
+  43 0034 55502000 		.ascii	"UP \000"
+  44              		.align	2
+  45              	$LC10:
+  46 0038 52494748 		.ascii	"RIGHT\033[CRIGHT\000"
+  46      541B5B43 
+  46      52494748 
+  46      5400
+  47 0046 0000     		.align	2
+  48              	$LC11:
+  49 0048 594F5520 		.ascii	"YOU SHOULD NOT SEE THIS LINE\000"
+  49      53484F55 
+  49      4C44204E 
+  49      4F542053 
+  49      45452054 
+  50 0065 000000   		.align	2
+  51              	$LC12:
+  52 0068 444F4E54 		.ascii	"DONT SEE THIS LINE\000"
+  52      20534545 
+  52      20544849 
+  52      53204C49 
+  52      4E4500
+  53 007b 00       		.align	2
+  54              	$LC13:
+  55 007c 31302C31 		.ascii	"10,10\000"
+  55      3000
+  56 0082 0000     		.align	2
+  57              	$LC14:
+  58 0084 31332C32 		.ascii	"13,20\000"
+  58      3000
+  59 008a 0000     		.align	2
+  60              	$LC15:
+  61 008c 1B5B7552 		.ascii	"\033[uRESTORE\000"
+  61      4553544F 
+  61      524500
+  62 0097 00000000 		.text
+  62      00000000 
+  62      00
+  63              		.align	2
+  64              		.globl	main
+  65              	$LFB0 = .
+  66              		.file 1 "tests/test_vt52.c"
+   0:tests/test_vt52.c **** #include <stdio.h>
+   1:tests/test_vt52.c **** #include "vt52.h"
+   2:tests/test_vt52.c **** #include "Platform.h"
+   3:tests/test_vt52.c **** 
+   4:tests/test_vt52.c **** int main(int argc, char **argv) {
+  67              		.loc 1 5 0
+  68              		.set	nomips16
+  69              		.ent	main
+  71              	main:
+  72              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+  73              		.mask	0xc0000000,-4
+  74              		.fmask	0x00000000,0
+  75              		.set	noreorder
+  76              		.set	nomacro
+  77              		
+  78 0000 D8FFBD27 		addiu	$sp,$sp,-40
+  79              	$LCFI0:
+  80 0004 2400BFAF 		sw	$31,36($sp)
+  81              	$LCFI1:
+  82 0008 2000BEAF 		sw	$fp,32($sp)
+  83              	$LCFI2:
+  84 000c 21F0A003 		move	$fp,$sp
+  85              	$LCFI3:
+  86 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  87 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  88 0018 1000BCAF 		.cprestore	16
+  89 001c 2800C4AF 		sw	$4,40($fp)
+  90 0020 2C00C5AF 		sw	$5,44($fp)
+   5:tests/test_vt52.c ****   PlatformInit();
+  91              		.loc 1 6 0
+  92 0024 0000828F 		lw	$2,%call16(PlatformInit)($28)
+  93 0028 00000000 		nop
+  94 002c 21C84000 		move	$25,$2
+  95 0030 09F82003 		jalr	$25
+  96 0034 00000000 		nop
+  97              	
+  98 0038 1000DC8F 		lw	$28,16($fp)
+   6:tests/test_vt52.c ****   printf(VERASE_SCR);
+  99              		.loc 1 7 0
+ 100 003c 0000023C 		lui	$2,%hi($LC0)
+ 101 0040 00004224 		addiu	$2,$2,%lo($LC0)
+ 102 0044 21204000 		move	$4,$2
+ 103 0048 0000828F 		lw	$2,%call16(printf)($28)
+ 104 004c 00000000 		nop
+ 105 0050 21C84000 		move	$25,$2
+ 106 0054 09F82003 		jalr	$25
+ 107 0058 00000000 		nop
+ 108              	
+ 109 005c 1000DC8F 		lw	$28,16($fp)
+ 110              	$LBB2 = .
+   7:tests/test_vt52.c ****   for (int i=0; i<16; ++i) {
+ 111              		.loc 1 8 0
+ 112 0060 1C00C0AF 		sw	$0,28($fp)
+ 113 0064 1C000010 		b	$L2
+ 114 0068 00000000 		nop
+ 115              	
+ 116              	$L3:
+   8:tests/test_vt52.c ****     vposition(stdout, i, 0);
+ 117              		.loc 1 9 0
+ 118 006c 0000828F 		lw	$2,%got(stdout)($28)
+ 119 0070 00000000 		nop
+ 120 0074 0000428C 		lw	$2,0($2)
+ 121 0078 00000000 		nop
+ 122 007c 21204000 		move	$4,$2
+ 123 0080 1C00C58F 		lw	$5,28($fp)
+ 124 0084 21300000 		move	$6,$0
+ 125 0088 0000828F 		lw	$2,%call16(vposition)($28)
+ 126 008c 00000000 		nop
+ 127 0090 21C84000 		move	$25,$2
+ 128 0094 09F82003 		jalr	$25
+ 129 0098 00000000 		nop
+ 130              	
+ 131 009c 1000DC8F 		lw	$28,16($fp)
+   9:tests/test_vt52.c ****     printf("%x",i);
+ 132              		.loc 1 10 0
+ 133 00a0 0000023C 		lui	$2,%hi($LC1)
+ 134 00a4 08004224 		addiu	$2,$2,%lo($LC1)
+ 135 00a8 21204000 		move	$4,$2
+ 136 00ac 1C00C58F 		lw	$5,28($fp)
+ 137 00b0 0000828F 		lw	$2,%call16(printf)($28)
+ 138 00b4 00000000 		nop
+ 139 00b8 21C84000 		move	$25,$2
+ 140 00bc 09F82003 		jalr	$25
+ 141 00c0 00000000 		nop
+ 142              	
+ 143 00c4 1000DC8F 		lw	$28,16($fp)
+   8:tests/test_vt52.c ****     vposition(stdout, i, 0);
+ 144              		.loc 1 8 0
+ 145 00c8 1C00C28F 		lw	$2,28($fp)
+ 146 00cc 00000000 		nop
+ 147 00d0 01004224 		addiu	$2,$2,1
+ 148 00d4 1C00C2AF 		sw	$2,28($fp)
+ 149              	$L2:
+ 150 00d8 1C00C28F 		lw	$2,28($fp)
+ 151 00dc 00000000 		nop
+ 152 00e0 10004228 		slt	$2,$2,16
+ 153 00e4 E1FF4014 		bne	$2,$0,$L3
+ 154 00e8 00000000 		nop
+ 155              	
+ 156              	$LBE2 = .
+ 157              	$LBB3 = .
+  10:tests/test_vt52.c ****   }
+  11:tests/test_vt52.c ****   for (int i=0; i<16; ++i) {
+ 158              		.loc 1 12 0
+ 159 00ec 1800C0AF 		sw	$0,24($fp)
+ 160 00f0 1C000010 		b	$L4
+ 161 00f4 00000000 		nop
+ 162              	
+ 163              	$L5:
+  12:tests/test_vt52.c ****     vposition(stdout, 0, i);
+ 164              		.loc 1 13 0
+ 165 00f8 0000828F 		lw	$2,%got(stdout)($28)
+ 166 00fc 00000000 		nop
+ 167 0100 0000428C 		lw	$2,0($2)
+ 168 0104 00000000 		nop
+ 169 0108 21204000 		move	$4,$2
+ 170 010c 21280000 		move	$5,$0
+ 171 0110 1800C68F 		lw	$6,24($fp)
+ 172 0114 0000828F 		lw	$2,%call16(vposition)($28)
+ 173 0118 00000000 		nop
+ 174 011c 21C84000 		move	$25,$2
+ 175 0120 09F82003 		jalr	$25
+ 176 0124 00000000 		nop
+ 177              	
+ 178 0128 1000DC8F 		lw	$28,16($fp)
+  13:tests/test_vt52.c ****     printf("%x",i);
+ 179              		.loc 1 14 0
+ 180 012c 0000023C 		lui	$2,%hi($LC1)
+ 181 0130 08004224 		addiu	$2,$2,%lo($LC1)
+ 182 0134 21204000 		move	$4,$2
+ 183 0138 1800C58F 		lw	$5,24($fp)
+ 184 013c 0000828F 		lw	$2,%call16(printf)($28)
+ 185 0140 00000000 		nop
+ 186 0144 21C84000 		move	$25,$2
+ 187 0148 09F82003 		jalr	$25
+ 188 014c 00000000 		nop
+ 189              	
+ 190 0150 1000DC8F 		lw	$28,16($fp)
+  12:tests/test_vt52.c ****     vposition(stdout, 0, i);
+ 191              		.loc 1 12 0
+ 192 0154 1800C28F 		lw	$2,24($fp)
+ 193 0158 00000000 		nop
+ 194 015c 01004224 		addiu	$2,$2,1
+ 195 0160 1800C2AF 		sw	$2,24($fp)
+ 196              	$L4:
+ 197 0164 1800C28F 		lw	$2,24($fp)
+ 198 0168 00000000 		nop
+ 199 016c 10004228 		slt	$2,$2,16
+ 200 0170 E1FF4014 		bne	$2,$0,$L5
+ 201 0174 00000000 		nop
+ 202              	
+ 203              	$LBE3 = .
+  14:tests/test_vt52.c ****   }
+  15:tests/test_vt52.c **** 
+  16:tests/test_vt52.c ****   printf(VHOME);
+ 204              		.loc 1 17 0
+ 205 0178 0000023C 		lui	$2,%hi($LC2)
+ 206 017c 0C004224 		addiu	$2,$2,%lo($LC2)
+ 207 0180 21204000 		move	$4,$2
+ 208 0184 0000828F 		lw	$2,%call16(printf)($28)
+ 209 0188 00000000 		nop
+ 210 018c 21C84000 		move	$25,$2
+ 211 0190 09F82003 		jalr	$25
+ 212 0194 00000000 		nop
+ 213              	
+ 214 0198 1000DC8F 		lw	$28,16($fp)
+  17:tests/test_vt52.c ****   printf("HOME");
+ 215              		.loc 1 18 0
+ 216 019c 0000023C 		lui	$2,%hi($LC3)
+ 217 01a0 10004224 		addiu	$2,$2,%lo($LC3)
+ 218 01a4 21204000 		move	$4,$2
+ 219 01a8 0000828F 		lw	$2,%call16(printf)($28)
+ 220 01ac 00000000 		nop
+ 221 01b0 21C84000 		move	$25,$2
+ 222 01b4 09F82003 		jalr	$25
+ 223 01b8 00000000 		nop
+ 224              	
+ 225 01bc 1000DC8F 		lw	$28,16($fp)
+  18:tests/test_vt52.c ****   printf(VDOWN);
+ 226              		.loc 1 19 0
+ 227 01c0 0000023C 		lui	$2,%hi($LC4)
+ 228 01c4 18004224 		addiu	$2,$2,%lo($LC4)
+ 229 01c8 21204000 		move	$4,$2
+ 230 01cc 0000828F 		lw	$2,%call16(printf)($28)
+ 231 01d0 00000000 		nop
+ 232 01d4 21C84000 		move	$25,$2
+ 233 01d8 09F82003 		jalr	$25
+ 234 01dc 00000000 		nop
+ 235              	
+ 236 01e0 1000DC8F 		lw	$28,16($fp)
+  19:tests/test_vt52.c ****   printf("DOWN");
+ 237              		.loc 1 20 0
+ 238 01e4 0000023C 		lui	$2,%hi($LC5)
+ 239 01e8 1C004224 		addiu	$2,$2,%lo($LC5)
+ 240 01ec 21204000 		move	$4,$2
+ 241 01f0 0000828F 		lw	$2,%call16(printf)($28)
+ 242 01f4 00000000 		nop
+ 243 01f8 21C84000 		move	$25,$2
+ 244 01fc 09F82003 		jalr	$25
+ 245 0200 00000000 		nop
+ 246              	
+ 247 0204 1000DC8F 		lw	$28,16($fp)
+  20:tests/test_vt52.c ****   printf(VDOWN);
+ 248              		.loc 1 21 0
+ 249 0208 0000023C 		lui	$2,%hi($LC4)
+ 250 020c 18004224 		addiu	$2,$2,%lo($LC4)
+ 251 0210 21204000 		move	$4,$2
+ 252 0214 0000828F 		lw	$2,%call16(printf)($28)
+ 253 0218 00000000 		nop
+ 254 021c 21C84000 		move	$25,$2
+ 255 0220 09F82003 		jalr	$25
+ 256 0224 00000000 		nop
+ 257              	
+ 258 0228 1000DC8F 		lw	$28,16($fp)
+  21:tests/test_vt52.c ****   printf("STORE");
+ 259              		.loc 1 22 0
+ 260 022c 0000023C 		lui	$2,%hi($LC6)
+ 261 0230 24004224 		addiu	$2,$2,%lo($LC6)
+ 262 0234 21204000 		move	$4,$2
+ 263 0238 0000828F 		lw	$2,%call16(printf)($28)
+ 264 023c 00000000 		nop
+ 265 0240 21C84000 		move	$25,$2
+ 266 0244 09F82003 		jalr	$25
+ 267 0248 00000000 		nop
+ 268              	
+ 269 024c 1000DC8F 		lw	$28,16($fp)
+  22:tests/test_vt52.c ****   printf(VDOWN);
+ 270              		.loc 1 23 0
+ 271 0250 0000023C 		lui	$2,%hi($LC4)
+ 272 0254 18004224 		addiu	$2,$2,%lo($LC4)
+ 273 0258 21204000 		move	$4,$2
+ 274 025c 0000828F 		lw	$2,%call16(printf)($28)
+ 275 0260 00000000 		nop
+ 276 0264 21C84000 		move	$25,$2
+ 277 0268 09F82003 		jalr	$25
+ 278 026c 00000000 		nop
+ 279              	
+ 280 0270 1000DC8F 		lw	$28,16($fp)
+  23:tests/test_vt52.c ****   printf(VSTORE);
+ 281              		.loc 1 24 0
+ 282 0274 0000023C 		lui	$2,%hi($LC7)
+ 283 0278 2C004224 		addiu	$2,$2,%lo($LC7)
+ 284 027c 21204000 		move	$4,$2
+ 285 0280 0000828F 		lw	$2,%call16(printf)($28)
+ 286 0284 00000000 		nop
+ 287 0288 21C84000 		move	$25,$2
+ 288 028c 09F82003 		jalr	$25
+ 289 0290 00000000 		nop
+ 290              	
+ 291 0294 1000DC8F 		lw	$28,16($fp)
+  24:tests/test_vt52.c ****   printf(VUP);
+ 292              		.loc 1 25 0
+ 293 0298 0000023C 		lui	$2,%hi($LC8)
+ 294 029c 30004224 		addiu	$2,$2,%lo($LC8)
+ 295 02a0 21204000 		move	$4,$2
+ 296 02a4 0000828F 		lw	$2,%call16(printf)($28)
+ 297 02a8 00000000 		nop
+ 298 02ac 21C84000 		move	$25,$2
+ 299 02b0 09F82003 		jalr	$25
+ 300 02b4 00000000 		nop
+ 301              	
+ 302 02b8 1000DC8F 		lw	$28,16($fp)
+  25:tests/test_vt52.c ****   printf("UP ");
+ 303              		.loc 1 26 0
+ 304 02bc 0000023C 		lui	$2,%hi($LC9)
+ 305 02c0 34004224 		addiu	$2,$2,%lo($LC9)
+ 306 02c4 21204000 		move	$4,$2
+ 307 02c8 0000828F 		lw	$2,%call16(printf)($28)
+ 308 02cc 00000000 		nop
+ 309 02d0 21C84000 		move	$25,$2
+ 310 02d4 09F82003 		jalr	$25
+ 311 02d8 00000000 		nop
+ 312              	
+ 313 02dc 1000DC8F 		lw	$28,16($fp)
+  26:tests/test_vt52.c ****   printf("RIGHT" VRIGHT "RIGHT");
+ 314              		.loc 1 27 0
+ 315 02e0 0000023C 		lui	$2,%hi($LC10)
+ 316 02e4 38004224 		addiu	$2,$2,%lo($LC10)
+ 317 02e8 21204000 		move	$4,$2
+ 318 02ec 0000828F 		lw	$2,%call16(printf)($28)
+ 319 02f0 00000000 		nop
+ 320 02f4 21C84000 		move	$25,$2
+ 321 02f8 09F82003 		jalr	$25
+ 322 02fc 00000000 		nop
+ 323              	
+ 324 0300 1000DC8F 		lw	$28,16($fp)
+ 325 0304 00000000 		nop
+  27:tests/test_vt52.c **** 
+  28:tests/test_vt52.c ****   vposition(stdout, 7, 0);
+ 326              		.loc 1 29 0
+ 327 0308 0000828F 		lw	$2,%got(stdout)($28)
+ 328 030c 00000000 		nop
+ 329 0310 0000428C 		lw	$2,0($2)
+ 330 0314 00000000 		nop
+ 331 0318 21204000 		move	$4,$2
+ 332 031c 07000524 		li	$5,7			# 0x7
+ 333 0320 21300000 		move	$6,$0
+ 334 0324 0000828F 		lw	$2,%call16(vposition)($28)
+ 335 0328 00000000 		nop
+ 336 032c 21C84000 		move	$25,$2
+ 337 0330 09F82003 		jalr	$25
+ 338 0334 00000000 		nop
+ 339              	
+ 340 0338 1000DC8F 		lw	$28,16($fp)
+  29:tests/test_vt52.c ****   printf("YOU SHOULD NOT SEE THIS LINE\n");
+ 341              		.loc 1 30 0
+ 342 033c 0000023C 		lui	$2,%hi($LC11)
+ 343 0340 48004424 		addiu	$4,$2,%lo($LC11)
+ 344 0344 0000828F 		lw	$2,%call16(puts)($28)
+ 345 0348 00000000 		nop
+ 346 034c 21C84000 		move	$25,$2
+ 347 0350 09F82003 		jalr	$25
+ 348 0354 00000000 		nop
+ 349              	
+ 350 0358 1000DC8F 		lw	$28,16($fp)
+  30:tests/test_vt52.c ****   printf("DONT SEE THIS LINE");
+ 351              		.loc 1 31 0
+ 352 035c 0000023C 		lui	$2,%hi($LC12)
+ 353 0360 68004224 		addiu	$2,$2,%lo($LC12)
+ 354 0364 21204000 		move	$4,$2
+ 355 0368 0000828F 		lw	$2,%call16(printf)($28)
+ 356 036c 00000000 		nop
+ 357 0370 21C84000 		move	$25,$2
+ 358 0374 09F82003 		jalr	$25
+ 359 0378 00000000 		nop
+ 360              	
+ 361 037c 1000DC8F 		lw	$28,16($fp)
+ 362 0380 00000000 		nop
+  31:tests/test_vt52.c ****   vclearlines(stdout, 7, 8);
+ 363              		.loc 1 32 0
+ 364 0384 0000828F 		lw	$2,%got(stdout)($28)
+ 365 0388 00000000 		nop
+ 366 038c 0000428C 		lw	$2,0($2)
+ 367 0390 00000000 		nop
+ 368 0394 21204000 		move	$4,$2
+ 369 0398 07000524 		li	$5,7			# 0x7
+ 370 039c 08000624 		li	$6,8			# 0x8
+ 371 03a0 0000828F 		lw	$2,%call16(vclearlines)($28)
+ 372 03a4 00000000 		nop
+ 373 03a8 21C84000 		move	$25,$2
+ 374 03ac 09F82003 		jalr	$25
+ 375 03b0 00000000 		nop
+ 376              	
+ 377 03b4 1000DC8F 		lw	$28,16($fp)
+ 378 03b8 00000000 		nop
+  32:tests/test_vt52.c **** 
+  33:tests/test_vt52.c ****   vposition(stdout, 10, 10);
+ 379              		.loc 1 34 0
+ 380 03bc 0000828F 		lw	$2,%got(stdout)($28)
+ 381 03c0 00000000 		nop
+ 382 03c4 0000428C 		lw	$2,0($2)
+ 383 03c8 00000000 		nop
+ 384 03cc 21204000 		move	$4,$2
+ 385 03d0 0A000524 		li	$5,10			# 0xa
+ 386 03d4 0A000624 		li	$6,10			# 0xa
+ 387 03d8 0000828F 		lw	$2,%call16(vposition)($28)
+ 388 03dc 00000000 		nop
+ 389 03e0 21C84000 		move	$25,$2
+ 390 03e4 09F82003 		jalr	$25
+ 391 03e8 00000000 		nop
+ 392              	
+ 393 03ec 1000DC8F 		lw	$28,16($fp)
+  34:tests/test_vt52.c ****   printf("10,10");
+ 394              		.loc 1 35 0
+ 395 03f0 0000023C 		lui	$2,%hi($LC13)
+ 396 03f4 7C004224 		addiu	$2,$2,%lo($LC13)
+ 397 03f8 21204000 		move	$4,$2
+ 398 03fc 0000828F 		lw	$2,%call16(printf)($28)
+ 399 0400 00000000 		nop
+ 400 0404 21C84000 		move	$25,$2
+ 401 0408 09F82003 		jalr	$25
+ 402 040c 00000000 		nop
+ 403              	
+ 404 0410 1000DC8F 		lw	$28,16($fp)
+ 405 0414 00000000 		nop
+  35:tests/test_vt52.c ****   vposition(stdout, 13, 20);
+ 406              		.loc 1 36 0
+ 407 0418 0000828F 		lw	$2,%got(stdout)($28)
+ 408 041c 00000000 		nop
+ 409 0420 0000428C 		lw	$2,0($2)
+ 410 0424 00000000 		nop
+ 411 0428 21204000 		move	$4,$2
+ 412 042c 0D000524 		li	$5,13			# 0xd
+ 413 0430 14000624 		li	$6,20			# 0x14
+ 414 0434 0000828F 		lw	$2,%call16(vposition)($28)
+ 415 0438 00000000 		nop
+ 416 043c 21C84000 		move	$25,$2
+ 417 0440 09F82003 		jalr	$25
+ 418 0444 00000000 		nop
+ 419              	
+ 420 0448 1000DC8F 		lw	$28,16($fp)
+  36:tests/test_vt52.c ****   printf("13,20");
+ 421              		.loc 1 37 0
+ 422 044c 0000023C 		lui	$2,%hi($LC14)
+ 423 0450 84004224 		addiu	$2,$2,%lo($LC14)
+ 424 0454 21204000 		move	$4,$2
+ 425 0458 0000828F 		lw	$2,%call16(printf)($28)
+ 426 045c 00000000 		nop
+ 427 0460 21C84000 		move	$25,$2
+ 428 0464 09F82003 		jalr	$25
+ 429 0468 00000000 		nop
+ 430              	
+ 431 046c 1000DC8F 		lw	$28,16($fp)
+  37:tests/test_vt52.c ****   printf(VRESTORE"RESTORE\n");
+ 432              		.loc 1 38 0
+ 433 0470 0000023C 		lui	$2,%hi($LC15)
+ 434 0474 8C004424 		addiu	$4,$2,%lo($LC15)
+ 435 0478 0000828F 		lw	$2,%call16(puts)($28)
+ 436 047c 00000000 		nop
+ 437 0480 21C84000 		move	$25,$2
+ 438 0484 09F82003 		jalr	$25
+ 439 0488 00000000 		nop
+ 440              	
+ 441 048c 1000DC8F 		lw	$28,16($fp)
+ 442 0490 00000000 		nop
+  38:tests/test_vt52.c ****   vposition(stdout, 15, 0);
+ 443              		.loc 1 39 0
+ 444 0494 0000828F 		lw	$2,%got(stdout)($28)
+ 445 0498 00000000 		nop
+ 446 049c 0000428C 		lw	$2,0($2)
+ 447 04a0 00000000 		nop
+ 448 04a4 21204000 		move	$4,$2
+ 449 04a8 0F000524 		li	$5,15			# 0xf
+ 450 04ac 21300000 		move	$6,$0
+ 451 04b0 0000828F 		lw	$2,%call16(vposition)($28)
+ 452 04b4 00000000 		nop
+ 453 04b8 21C84000 		move	$25,$2
+ 454 04bc 09F82003 		jalr	$25
+ 455 04c0 00000000 		nop
+ 456              	
+ 457 04c4 1000DC8F 		lw	$28,16($fp)
+ 458 04c8 21100000 		move	$2,$0
+  39:tests/test_vt52.c **** }
+ 459              		.loc 1 40 0
+ 460 04cc 21E8C003 		move	$sp,$fp
+ 461 04d0 2400BF8F 		lw	$31,36($sp)
+ 462 04d4 2000BE8F 		lw	$fp,32($sp)
+ 463 04d8 2800BD27 		addiu	$sp,$sp,40
+ 464 04dc 0800E003 		j	$31
+ 465 04e0 00000000 		nop
+ 466              	
+ 467              		.set	macro
+ 468              		.set	reorder
+ 469              		.end	main
+ 470              	$LFE0:
+ 512              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 tests/test_vt52.c
+     /tmp/ccSXcQ7x.s:71     .text:0000000000000000 main
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+PlatformInit
+printf
+stdout
+vposition
+puts
+vclearlines

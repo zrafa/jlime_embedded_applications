@@ -1,0 +1,3741 @@
+<!--
+a little help:
+1. every rule starts with <rule> and ends with </rule>
+2. every rule needs a condition
+3. line attributes
+		- width absolute width in pixel in every zoom level
+		- realwidth relative width which will be scaled in meters, integer
+		- colour
+4. area attributes
+		- colour
+5. icon attributes
+		- icon path to icon , relative from where this file is
+6. routing attributes
+		- any of the keys under 'Map_Features#Restrictions' together
+		  with an integer for the km/h. 'roundabout' is special.
+
+Using both area and line attributes for the same key/value pair doesn't work!
+
+The colours can consist of the two components - name and hex code (e.g. water#0000ff).
+If both are given, the color name is introduced in preferences with that value. If only
+code is given (e.g. #0000ff), it is used directly. If only name is given, either user
+modified preferences or previous value is used.
+
+BEWARE: If a key/value pair matches more than one rule, the "rule that wins" is unpredicted!
+-->
+
+<rules>
+
+	<!-- mark some specials that should be fixed - they are already the default and therefore shouldn't be tagged -->
+    <rule>
+       <condition k="oneway"/>
+	   <!-- no line or area, as this is a highway=xy, railway=xy, .... -->
+       <icon annotate="true" src="misc/deprecated.png" />
+       <scale_min>1</scale_min>
+       <scale_max>40000</scale_max>
+     </rule>
+    <rule>
+       <condition k="bridge" v="yes"/>
+	   <!-- no line or area, as this is a highway=xy, railway=xy, .... -->
+       <icon annotate="true" src="vehicle/viaduct.png" />
+       <scale_min>1</scale_min>
+       <scale_max>8000</scale_max>
+     </rule>
+    <rule>
+       <condition k="bridge" v="no"/>
+       <line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+       <icon annotate="true" src="misc/deprecated.png" />
+       <scale_min>1</scale_min>
+       <scale_max>40000</scale_max>
+     </rule>
+    <rule>
+       <condition k="bridge" v="viaduct"/>
+	   <!-- no line or area, as this is a highway=xy, railway=xy, .... -->
+       <icon annotate="true" src="vehicle/viaduct.png" />
+       <scale_min>1</scale_min>
+       <scale_max>8000</scale_max>
+     </rule>
+    <rule>
+       <condition k="bridge" v="aqueduct"/>
+	   <!-- no line or area, as this is a highway=xy, railway=xy, .... -->
+       <icon annotate="true" src="nautical/aqueduct.png" />
+       <scale_min>1</scale_min>
+       <scale_max>8000</scale_max>
+     </rule>
+    <rule>
+       <condition k="bridge" v="swing"/>
+	   <!-- no line or area, as this is a highway=xy, railway=xy, .... -->
+       <icon annotate="true" src="vehicle/viaduct.png" />
+       <scale_min>1</scale_min>
+       <scale_max>8000</scale_max>
+     </rule>
+    <rule>
+       <condition k="tunnel" v="yes"/>
+	   <!-- no line or area, as this is a highway=xy, railway=xy, .... -->
+		<icon annotate="true" src="vehicle/tunnel.png" />
+       <scale_min>1</scale_min>
+       <scale_max>8000</scale_max>
+     </rule>
+    <rule>
+       <condition k="tunnel" v="no"/>
+       <line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+       <icon annotate="true" src="misc/deprecated.png" />
+       <scale_min>1</scale_min>
+       <scale_max>40000</scale_max>
+     </rule>
+    <rule>
+       <condition k="cutting" v="false"/>
+       <line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+       <icon annotate="true" src="misc/deprecated.png" />
+       <scale_min>1</scale_min>
+       <scale_max>40000</scale_max>
+     </rule>
+    <rule>
+       <condition k="embankment" v="false"/>
+       <line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+       <icon annotate="true" src="misc/deprecated.png" />
+       <scale_min>1</scale_min>
+       <scale_max>40000</scale_max>
+     </rule>
+
+<!--restrictions tags -->
+<!--the restrictions rules should be placed before the path rule! -->
+	<rule>
+		<!-- New tag that designates a road with motorway access restrictions
+			(replacement for trunk outside the UK) -->
+		<condition k="motorroad" v="yes" />
+		<icon src="misc/deprecated.png" />
+		<scale_min>1</scale_min>
+		<scale_max>5000</scale_max>
+		<routing goods="80" hgv="80" motorcycle="90" motorcar="90" psv="90" />
+	</rule>
+
+	<rule>
+		<condition k="access" v="no" />
+		<icon src="vehicle/restriction/access.png" />
+        	<scale_min>1</scale_min>
+        	<scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="bicycle" v="no" />
+		<icon src="vehicle/restriction/bicycle.png" />
+		<scale_min>1</scale_min>
+		<scale_max>5000</scale_max>
+	</rule>
+	<rule>
+		<condition k="bicycle" v="designated"/>
+		<line width="1" realwidth="2" colour="#ff00ff"/>
+		<icon annotate="true" src="vehicle/restriction/bicycle-designated.png" />
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+                <routing bicycle="23"/> <!-- Also see cycleway -->
+	</rule>
+
+	<rule>
+		<condition k="foot" v="no" />
+		<icon src="vehicle/restriction/foot.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+	<rule>
+		<condition k="foot" v="designated"/>
+		<line width="1" realwidth="1" colour="#00ff00" />
+		<icon annotate="true" src="vehicle/restriction/foot-designated.png" />
+		<scale_min>1</scale_min>
+		<scale_max>10000</scale_max>
+                <routing bicycle="5" foot="5"/> <!-- Usually you can push
+                your bicycle on one of these. Also see footway -->
+	</rule>
+	<rule>
+		<condition k="cyclenetfoot" v="designated"/>
+		<line width="1" realwidth="1" colour="#00ff00" />
+		<icon annotate="true" src="vehicle/restriction/foot-designated.png" />
+		<scale_min>1</scale_min>
+		<scale_max>10000</scale_max>
+                <routing bicycle="20" foot="5"/> 
+	</rule>
+
+	<rule>
+		<condition k="goods" v="no" />
+		<icon src="vehicle/restriction/goods.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="hgv" v="no" />
+		<icon src="vehicle/restriction/goods.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="horse" v="no" />
+		<icon src="vehicle/restriction/horse.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+	<rule>
+		<condition k="horse" v="designated"/>
+		<line width="1" realwidth="2" colour="#c08000" />
+		<icon src="vehicle/restriction/horse-designated.png" />
+		<scale_min>1</scale_min>
+		<scale_max>30000</scale_max>
+                <routing bicycle="20" foot="5" horse="10"/> <!-- Also see bridleway -->
+	</rule>
+
+	<rule>
+		<condition k="motorcycle" v="no" />
+		<icon src="vehicle/restriction/motorbike.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="motorcar" v="no" />
+		<icon src="vehicle/restriction/motorcar.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="psv" v="no" />
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="motorboat" v="no" />
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="boat" v="no" />
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="noexit" v="yes" />
+		<icon src="vehicle/restriction/dead_end.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="maxweight" v="yes" />
+		<icon src="vehicle/restriction/maxweight.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="maxheight" v="yes" />
+		<icon src="vehicle/restriction/maxheight.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="maxwidth" v="yes" />
+		<icon src="vehicle/restriction/maxwidth.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="maxlength" v="yes" />
+		<icon src="vehicle/restriction/maxlength.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="maxspeed" v="yes" />
+		<icon src="vehicle/restriction/speed.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="minspeed" v="yes" />
+		<icon src="vehicle/restriction/minspeed.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="maxstay" v="yes" />
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="toll" v="yes" />
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="barrier" v="bollard" />
+		<icon annotate="true" src="vehicle/restriction/bollard.png" />
+		<scale_min>1</scale_min>
+		<scale_max>5000</scale_max>
+        <routing bicycle="1" foot="1" horse="1" motorcycle="1"/>
+	</rule>
+	<rule>
+		<condition k="barrier" v="gate" />
+		<icon annotate="true" src="vehicle/gate.png" />
+		<scale_min>1</scale_min>
+		<scale_max>5000</scale_max>
+        <routing/>
+	</rule>
+	<rule>
+		<condition k="barrier" v="stile" />
+		<icon annotate="true" src="vehicle/stile.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+        <routing bicycle="1" foot="1"/>
+	</rule>
+	
+	<rule>
+		<condition k="barrier" v="cattle_grid" />
+		<icon annotate="true" src="vehicle/cattle_grid.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+        <routing bicycle="1" foot="1" goods="1" hgv="1" motorcycle="1" motorcar="1" psv="1"/>
+	</rule>
+	
+	<rule>
+		<condition k="barrier" v="toll_booth" />
+		<icon annotate="true" src="vehicle/toll_booth.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+        <routing bicycle="1" foot="1" goods="1" hgv="1" motorcycle="1" motorcar="1" psv="1"/>
+	</rule>
+	
+	<rule>
+		<condition k="barrier" v="speed_bump" />
+		<icon annotate="true" src="misc/no_icon.png" />
+		<scale_min>1</scale_min>
+		<scale_max>2000</scale_max>
+	</rule>
+
+<!-- highway tags -->
+	<rule>
+		<condition k="highway" v="motorway"/>
+        <line width="3" realwidth="8" colour="#809bc0"  width_bg="5" colour_bg="#FFFF00"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>20000000</scale_max>
+        <routing goods="110" hgv="110" motorcycle="110" motorcar="110" psv="110" oneway="1"/>
+	</rule>
+	<rule>
+		<condition k="cyclenethighway" v="motorway"/>
+        <line width="3" realwidth="8" colour="#809bc0"  width_bg="5" colour_bg="#FFFF00"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>20000000</scale_max>
+        <routing goods="110" hgv="110" motorcycle="110" motorcar="110" psv="110" bicyle="20" oneway="1"/>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="motorway_link"/>
+        <line width="3" colour="#809bc0"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+        <routing goods="50" hgv="50" motorcycle="50" motorcar="50" psv="50" oneway="1"/>
+	</rule>
+	<rule>
+		<condition k="cyclenethighway" v="motorway_link"/>
+        <line width="3" colour="#809bc0"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+        <routing goods="50" hgv="50" motorcycle="50" motorcar="50" psv="50" bicycle="20" oneway="1"/>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="trunk"/>
+		<line width="3" colour="#7fc97f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>500000</scale_max>
+        <routing bicycle="20" foot="5" goods="110" hgv="110" motorcycle="110" motorcar="110" psv="110"/>
+	</rule>
+	<rule>
+		<condition k="cyclenethighway" v="trunk"/>
+		<line width="3" colour="#7fc97f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>500000</scale_max>
+        <routing goods="110" hgv="110" motorcycle="110" motorcar="110" psv="110" bicyle="20"/>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="trunk_link"/>
+        <line width="3" colour="#7fc97f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+        <routing bicycle="20" foot="5" goods="50" hgv="50" motorcycle="50" motorcar="50" psv="50"/>
+	</rule>
+	<rule>
+		<condition k="cyclenethighway" v="trunk_link"/>
+        <line width="3" colour="#7fc97f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+        <routing goods="50" hgv="50" motorcycle="50" motorcar="50" psv="50" bicyle="20"/>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="primary"/>
+		<line width="3" realwidth="8" colour="#fb805f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>700000</scale_max>
+        <routing bicycle="10" foot="5" goods="70" hgv="70" motorcycle="70" motorcar="70" psv="70"/>
+	</rule>
+	<rule>
+		<condition k="cyclenethighway" v="primary"/>
+		<line width="3" realwidth="8" colour="#fb805f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>700000</scale_max>
+        <routing bicycle="20" foot="5" goods="70" hgv="70" motorcycle="70" motorcar="70" psv="70"/>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="primary_link"/>
+        <line width="3" colour="#fb805f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+                <scale_min>1</scale_min>
+                <scale_max>40000</scale_max>
+                <routing bicycle="10" foot="5" goods="70" hgv="70" motorcycle="70" motorcar="70" psv="70"/>
+	</rule>
+	<rule>
+		<condition k="cyclenethighway" v="primary_link"/>
+        <line width="3" colour="#fb805f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+                <scale_min>1</scale_min>
+                <scale_max>40000</scale_max>
+                <routing bicycle="20" foot="5" goods="70" hgv="70" motorcycle="70" motorcar="70" psv="70"/>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="secondary"/>
+		<line width="3" realwidth="6" colour="#fdbf6f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+		<scale_min>1</scale_min>
+		<scale_max>300000</scale_max>
+                <routing bicycle="11" foot="5" goods="60" hgv="60" motorcycle="60" motorcar="60" psv="60"/>
+	</rule>
+	<rule>
+		<condition k="cyclenethighway" v="secondary"/>
+		<line width="3" realwidth="6" colour="#fdbf6f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+		<scale_min>1</scale_min>
+		<scale_max>300000</scale_max>
+                <routing bicycle="20" foot="5" goods="60" hgv="60" motorcycle="60" motorcar="60" psv="60"/>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="secondary_link"/>
+		<line width="3" realwidth="6" colour="#fdbf6f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+		<scale_min>1</scale_min>
+		<scale_max>300000</scale_max>
+                <routing bicycle="11" foot="5" goods="60" hgv="60" motorcycle="60" motorcar="60" psv="60"/>
+	</rule>
+	<rule>
+		<condition k="cyclenethighway" v="secondary_link"/>
+		<line width="3" realwidth="6" colour="#fdbf6f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+		<scale_min>1</scale_min>
+		<scale_max>300000</scale_max>
+                <routing bicycle="20" foot="5" goods="60" hgv="60" motorcycle="60" motorcar="60" psv="60"/>
+	</rule>
+
+        <rule>
+        <condition k="highway" v="tertiary"/>
+        <line width="2" realwidth="5" colour="#f7f496"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+        <routing bicycle="12" foot="5" goods="50" hgv="50" motorcycle="50" motorcar="50" psv="50"/>
+	</rule>
+        <rule>
+        <condition k="cyclenethighway" v="tertiary"/>
+        <line width="2" realwidth="5" colour="#f7f496"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+        <routing bicycle="20" foot="5" goods="50" hgv="50" motorcycle="50" motorcar="50" psv="50"/>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="unclassified"/>
+		<line width="2" realwidth="5" colour="#c0c0c0"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+        <routing bicycle="18" foot="5" goods="40" hgv="40" motorcycle="40" motorcar="40" psv="40"/>
+    </rule>
+	<rule>
+		<condition k="cyclenethighway" v="unclassified"/>
+		<line width="2" realwidth="5" colour="#c0c0c0"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+        <routing bicycle="20" foot="5" goods="40" hgv="40" motorcycle="40" motorcar="40" psv="40"/>
+    </rule>
+
+	<rule>
+		<condition k="highway" v="road"/>
+		<line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+        <routing bicycle="20" foot="5" goods="40" hgv="40" motorcycle="40" motorcar="40" psv="40"/>
+    </rule>
+
+	<rule>
+		<condition k="highway" v="unsurfaced"/>
+		<line width="1" realwidth="3" colour="#c0c0c0"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+        <routing bicycle="20" foot="5" goods="30" hgv="30" motorcycle="30" motorcar="30" psv="30"/>
+	</rule>
+
+    <rule>
+        <condition k="highway" v="track"/>
+        <line width="1" realwidth="3" colour="#006600"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+        <routing bicycle="20" foot="5" />
+<!-- Germany contains hunderds of thousands of tracks and motorcars aren't
+     allowed on the majority of them. I hope the rest of the world will also
+     adopt this default. When motorcar=yes, it will be as fast as the
+     fastest other road user, namely bicycles. -->
+	</rule>
+    <rule>
+        <condition k="highway" v="byway"/>
+        <line width="1" realwidth="3" colour="#809bc0"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+        <routing bicycle="5" foot="5" motorcycle="5" motorcar="5"/>
+    </rule>
+
+                                   
+	<rule>
+		<condition k="highway" v="residential"/>
+		<line width="2" realwidth="5" colour="#c0c0c0"/> 
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+        <routing bicycle="20" foot="5" goods="30" hgv="30" motorcycle="30" motorcar="30" psv="30"/>
+    </rule>
+
+	<rule>
+		<condition k="highway" v="living_street"/>
+		<line width="1" realwidth="3" colour="#c0c0c0"/> 
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+        <routing bicycle="20" foot="5" goods="10" hgv="10" motorcycle="10" motorcar="10" psv="10"/>
+    </rule>
+
+    <rule>
+        <condition k="highway" v="service"/>
+        <line width="1" realwidth="3" colour="#809bc0"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+        <routing bicycle="5" foot="5" goods="5" hgv="5" motorcycle="5" motorcar="5" psv="5"/>
+	</rule>
+    <rule>
+        <condition k="cyclenethighway" v="service"/>
+        <line width="1" realwidth="3" colour="#809bc0"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+        <routing bicycle="20" foot="5" goods="5" hgv="5" motorcycle="5" motorcar="5" psv="5"/>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="bridleway"/>
+		<line width="1" realwidth="2" colour="#c08000" />
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+        <routing bicycle="20" foot="5" horse="10"/> <!-- Also see horse=designated -->
+	</rule>
+
+	<rule>
+		<condition k="highway" v="cycleway"/>
+		<line width="1" realwidth="2" colour="#ff00ff"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+        <routing bicycle="23"/> <!-- Also see bicyle=designated -->
+	</rule>
+
+	<rule>
+		<condition k="highway" v="footway"/>
+		<line width="1" realwidth="1" colour="#00ff00" />
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+        <routing bicycle="5" foot="5"/> <!-- Usually you can push
+                your bicycle on one of these. Also see foot=designated -->
+	</rule>
+	<rule>
+		<condition k="cyclenethighway" v="footway"/>
+		<line width="1" realwidth="1" colour="#00ff00" />
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+        <routing bicycle="20" foot="5"/> <!-- Usually you can push
+                your bicycle on one of these. Also see foot=designated -->
+	</rule>
+
+	<rule>
+		<condition k="highway" v="path"/>
+		<line width="1" realwidth="1" dashed="true" colour="#00ff00" />
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+        <routing bicycle="20" foot="5"/>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="pedestrian"/>
+		<line width="3" realwidth="5" colour="#00ff00"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+        <routing bicycle="20" foot="5"/>
+    </rule>
+
+    <rule>
+        <condition k="highway" v="steps"/>
+        <line width="1" realwidth="1" colour="#00ff00"/>
+		<icon annotate="true" src="transport/steps.png" />
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+        <routing foot="2"/>
+	</rule>
+    <rule>
+        <condition k="cyclenethighway" v="steps"/>
+        <line width="1" realwidth="1" colour="#00ff00"/>
+		<icon annotate="true" src="transport/steps.png" />
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+        <routing bicyle="2" foot="2"/>
+	</rule>
+
+    <rule>
+        <condition k="highway" v="bus_guideway"/>
+        <line width="1" realwidth="1" colour="#00ff00"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="mini_roundabout" />
+		<icon annotate="true" src="vehicle/restriction/roundabout_left.png" />
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="stop" />
+		<icon annotate="true" src="vehicle/restriction/stop.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="traffic_signals" />
+		<icon annotate="true" src="vehicle/restriction/traffic-light.png" />
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="highway" v="crossing" />
+		<icon annotate="true" src="vehicle/zebra_crossing.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="traffic_calming" v="bump" />
+		<icon annotate="true" src="vehicle/bump.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="traffic_calming" v="table" />
+		<icon annotate="true" src="vehicle/bump.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="gate" />
+		<icon annotate="true" src="vehicle/gate.png" />
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="highway" v="stile" />
+		<icon annotate="true" src="vehicle/stile.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="highway" v="cattle_grid" />
+		<icon annotate="true" src="vehicle/cattle_grid.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="highway" v="toll_booth" />
+		<icon annotate="true" src="vehicle/toll_booth.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="highway" v="incline" />
+		<icon annotate="true" src="vehicle/restriction/incline.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="incline_steep" />
+		<icon annotate="true" src="vehicle/restriction/incline.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="viaduct" />
+		<line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="motorway_junction" />
+		<icon annotate="true" src="vehicle/exit.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="services" />
+		<icon annotate="true" src="vehicle/services.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="highway" v="ford" />
+		<icon annotate="true" src="vehicle/ford.png" />
+        <scale_min>1</scale_min>
+        <scale_max>5000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="bus_stop" />
+		<icon annotate="true" src="transport/bus_small.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="highway" v="turning_circle" />
+		<icon annotate="true" src="vehicle/turning_circle.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="highway" v="construction" />
+		<line width="2" realwidth="5" colour="#FFFF00" dashed="true"/>
+		<icon src="misc/construction.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+<!-- junction tag --> 
+
+	<rule>
+		<condition k="junction" v="roundabout" /> 
+		<!-- this overwrites the "underlying" highway tag, so comment it out until we have a better way to display this -->
+		<!--area width="1" colour="#eeeeee" /--> 
+		<!-- tagging a node makes no real sense, a roundabout should be tagged with several nodes, or a highway=mini_roundabout should probably be used -->
+		<icon annotate="true" src="misc/deprecated.png" /> 
+		<scale_min>1</scale_min> 
+		<scale_max>50000</scale_max> 
+	</rule> 
+
+<!-- cycleway tags -->
+
+	<rule>
+		<condition k="cycleway" v="lane"/>
+		<line width="1" realwidth="2" colour="#ff00ff"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+        <routing bicycle="20"/>
+	</rule>
+
+	<rule>
+		<condition k="cycleway" v="track"/>
+		<line width="1" realwidth="2" colour="#ff00ff"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+        <routing bicycle="20"/>
+	</rule>
+	
+	<rule>
+		<condition k="cycleway" v="opposite_lane"/>
+		<line width="1" realwidth="2" colour="#ff00ff"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+        <routing bicycle="20"/>
+	</rule>
+	
+	<rule>
+		<condition k="cycleway" v="opposite_track"/>
+		<line width="1" realwidth="2" colour="#ff00ff"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+        <routing bicycle="20"/>
+	</rule>
+	
+	<rule>
+		<condition k="cycleway" v="opposite"/>
+		<line width="1" realwidth="2" colour="#ff00ff"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+        <routing bicycle="20"/>
+	</rule>
+	
+<!-- tracktype tags -->
+
+	<rule>
+		<condition k="tracktype" v="grade1"/>
+        <line width="1" realwidth="3" dashed="true" colour="#006600"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="tracktype" v="grade2"/>
+        <line width="1" realwidth="3" dashed="true" colour="#006600"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="tracktype" v="grade3"/>
+        <line width="1" realwidth="3" dashed="true" colour="#006600"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="tracktype" v="grade4"/>
+        <line width="1" realwidth="3" dashed="true" colour="#006600"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="tracktype" v="grade5"/>
+        <line width="1" realwidth="3" dashed="true" colour="#006600"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+<!--waterway tags -->
+	<rule>
+		<condition k="waterway" v="river"/>
+        <line width="2" realwidth="10" colour="#0000ff" width_bg="3" colour_bg="#00001f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="waterway" v="riverbank"/>
+        <line width="1" colour="#00005f" width_bg="1" colour_bg="#00001f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="waterway" v="canal"/>
+        <line width="2" colour="#0000ff" width_bg="2" colour_bg="#00001f"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+	</rule>
+
+    <rule>
+        <condition k="waterway" v="stream"/>
+        <line width="1" colour="#6600cc" />
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>35000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="waterway" v="drain"/>
+        <line width="1" colour="#0000ff"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+    </rule>
+
+    <rule>
+        <condition k="waterway" v="dock"/>
+        <line width="1" colour="#0000cf"/>
+		<icon annotate="true" src="nautical/boatyard.png" />
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+    </rule>
+
+	<rule>
+		<condition k="waterway" v="lock_gate" />
+		<icon annotate="true" src="nautical/lock_gate.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="waterway" v="turning_point" />
+		<icon annotate="true" src="nautical/turning.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="waterway" v="aqueduct" />
+		<line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="waterway" v="boatyard" />
+		<icon annotate="true" src="nautical/boatyard.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="waterway" v="water_point" />
+		<icon annotate="true" src="accommodation/camping/water.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="waterway" v="waste_disposal" />
+		<icon annotate="true" src="accommodation/camping/wastewater.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="waterway" v="mooring" />
+		<icon annotate="true" src="nautical/marina.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="waterway" v="weir" />
+		<icon annotate="true" src="nautical/weir.png" />
+        <line width="2" colour="#D8D8D8" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="waterway" v="dam" />
+		<icon annotate="true" src="misc/no_icon.png" />
+        <line width="2" colour="#D8D8D8" />
+		<!-- it's not possible to have both line and area, line seems more likely -->
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="waterway" v="waterfall" />
+		<icon annotate="true" src="misc/no_icon.png" />
+        <line width="2" colour="#D8D8D8" />
+		<!-- it's not possible to have both line and area, line seems more likely -->
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+<!-- railway tags -->
+	<rule>
+		<condition k="railway" v="station" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="transport/railway_station.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="railway" v="halt" />
+		<icon annotate="true" src="transport/railway_small.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="railway" v="tram_station" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="transport/railway_station.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="railway" v="tram_stop" />
+		<icon annotate="true" src="transport/railway_small.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+    <rule>
+        <condition k="railway" v="subway_entrance"/>
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="transport/underground.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+	<rule>
+		<condition k="railway" v="viaduct" />
+		<line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="railway" v="crossing" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="vehicle/crossing_small.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="railway" v="level_crossing" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="vehicle/crossing.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="railway" v="rail"/>
+		<line width="2" colour="#808080" dashed="true"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+    <rule>
+        <condition k="railway" v="tram"/>
+        <line width="1" colour="#808080" dashed="true"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+
+    <rule>
+        <condition k="railway" v="light_rail"/>
+        <line width="2" colour="#808080" dashed="true"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="railway" v="subway"/>
+        <line width="1" colour="#606060" dashed="true"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="railway" v="preserved"/>
+        <line width="1" colour="#202020" dashed="true"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="railway" v="disused"/>
+        <line width="1" colour="#202020" dashed="true"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="railway" v="abandoned"/>
+        <line width="1" colour="#202020" dashed="true"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="railway" v="narrow_gauge"/>
+        <line width="1" colour="#202020" dashed="true"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="railway" v="monorail"/>
+        <line width="1" colour="#202020" dashed="true"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="railway" v="turntable"/>
+		<icon annotate="true" src="transport/turntable.png" />
+        <area colour="#202020" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+	<rule>
+		<condition k="service" v="yard" />
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="service" v="siding" />
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="service" v="spur" />
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+<!--aeroway tags -->
+
+    <rule>
+        <condition k="aeroway" v="aerodrome"/>
+        <line width="2" colour="#660000" dashed="true"/>
+		<icon annotate="true" src="transport/airport.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="aeroway" v="terminal"/>
+        <area colour="#BB0000" />
+		<icon annotate="true" src="transport/airport/terminal.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="aeroway" v="helipad"/>
+        <area colour="#330000" />
+		<icon annotate="true" src="transport/airport/helipad.png" />
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="aeroway" v="runway"/>
+        <line width="3" colour="#330000" />
+		<icon annotate="true" src="transport/airport.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="aeroway" v="taxiway"/>
+        <line width="2" colour="#660000" />
+		<icon annotate="true" src="transport/airport.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="aeroway" v="apron"/>
+        <area colour="#990000" />
+		<icon annotate="true" src="transport/airport.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+<!--aerialway tags -->
+    <rule>
+        <condition k="aerialway" v="cable_car"/>
+		<line width="1" colour="#663300" dashed="true"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="aerialway" v="chair_lift"/>
+		<line width="1" colour="#663300" dashed="true"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="aerialway" v="drag_lift"/>
+		<line width="1" colour="#663300" dashed="true"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+	<rule>
+		<condition k="aerialway" v="station"/>
+		<line width="1" colour="#663300" dashed="true"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+
+<!-- piste tags -->
+
+	<rule>
+		<condition k="piste:difficulty" v="easy"/>
+		<line width="6" colour="#0000FF"/>
+		<icon src="sport/skiing.png" />
+		<scale_min>1</scale_min>
+		<scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="piste:difficulty" v="intermediate"/>
+		<line width="6" colour="#FF0000"/>
+		<icon src="sport/skiing.png" />
+		<scale_min>1</scale_min>
+		<scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="piste:difficulty" v="advanced"/>
+		<line width="6" colour="#606060"/>
+		<icon src="sport/skiing.png" />
+		<scale_min>1</scale_min>
+		<scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="piste:difficulty" v="freeride"/>
+		<line width="6" colour="#FFFF00"/>
+		<icon src="sport/skiing.png" />
+		<scale_min>1</scale_min>
+		<scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="piste:difficulty" v="novice"/>
+		<line width="6" colour="#00FF00"/>
+		<icon src="sport/skiing.png" />
+		<scale_min>1</scale_min>
+		<scale_max>300000</scale_max>
+	</rule>
+
+<!--power tags -->
+
+	<rule>
+		<condition k="power" v="tower" />
+		<icon annotate="true" src="misc/landmark/power/tower.png" />
+        <area width="1" colour="#eeeeee" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="power" v="line" />
+        <line width="1" colour="#eeeeee" />
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="power" v="sub_station" />
+		<icon annotate="true" src="misc/landmark/power.png" />
+        <area width="1" colour="#eeeeee" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<!--the power_source rules must be placed before the power=generator rule! -->
+	<rule>
+		<condition k="power_source" v="wind" />
+		<icon annotate="true" src="misc/landmark/power/wind.png" />
+        <area width="1" colour="#eeeeee" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="power_source" v="hydro" />
+		<icon annotate="true" src="misc/landmark/power/hydro.png" />
+        <area width="1" colour="#eeeeee" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="power_source" v="fossil" />
+		<icon annotate="true" src="misc/landmark/power/fossil.png" />
+        <area width="1" colour="#eeeeee" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="power_source" v="nuclear" />
+		<icon annotate="true" src="misc/landmark/power/nuclear.png" />
+        <area width="1" colour="#eeeeee" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="power" v="generator" />
+		<icon annotate="true" src="misc/landmark/power.png" />
+        <area width="1" colour="#eeeeee" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+<!--man_made tags -->
+	<rule>
+		<condition k="man_made" v="works" />
+		<icon annotate="true" src="misc/landmark/works.png" />
+        <area colour="#D8D8D8" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="beacon" />
+		<icon annotate="true" src="misc/landmark/beacon.png" />
+        <area colour="#D8D8D8" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="survey_point" />
+		<icon annotate="true" src="misc/landmark/survey_point.png" />
+        <area colour="#D8D8D8" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="tower" />
+		<icon annotate="true" src="misc/landmark/tower.png" />
+        <area colour="#D8D8D8" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="water_tower" />
+		<icon annotate="true" src="misc/landmark/water_tower.png" />
+        <area colour="#D8D8D8" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="gasometer" />
+		<icon annotate="true" src="misc/landmark/gasometer.png" />
+        <area colour="#D8D8D8" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="reservoir_covered" />
+		<icon annotate="true" src="misc/landmark/reservoir_covered.png" />
+        <area colour="#D8D8D8" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="lighthouse" />
+		<icon annotate="true" src="misc/landmark/lighthouse.png" />
+        <area colour="#D8D8D8" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="windmill" />
+		<icon annotate="true" src="misc/landmark/windmill.png" />
+        <area colour="#D8D8D8" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="pier" />
+        <line width="2" colour="#660000" />
+		<icon annotate="true" src="nautical/pier.png" />
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="pipeline" />
+        <line width="2" colour="#660000" />
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="wastewater_plant" />
+        <area colour="#D8D8D8" />
+		<icon annotate="true" src="misc/landmark/wastewater_plant.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="crane" />
+        <area colour="#D8D8D8" />
+		<icon annotate="true" src="misc/landmark/crane.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+<!--leisure tags -->
+	<rule>
+		<condition k="leisure" v="sports_centre" />
+		<icon annotate="true" src="sport/centre.png" />
+        <area colour="#c7f1a3" />		
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="golf_course" />
+		<icon annotate="true" src="sport/golf.png" />
+        <area colour="#c7f1a3" />		
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="stadium" />
+		<icon annotate="true" src="sport/stadium.png" />
+        <area colour="#c7f1a3" />		
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="track" />
+		<icon annotate="true" src="sport/track.png" />
+        <area colour="#c7f1a3" />		
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="pitch" />
+		<icon annotate="true" src="sport/pitch.png" />
+        <area colour="#c7f1a3" />		
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="water_park" />
+		<icon annotate="true" src="leisure/water_park.png" />
+        <area colour="#c7f1a3" />		
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="marina" />
+		<icon annotate="true" src="nautical/marina.png" />
+        <area colour="#c7f1a3" />		
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="slipway" />
+		<icon annotate="true" src="nautical/slipway.png" />
+        <area colour="#c7f1a3" />		
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="fishing" />
+		<icon annotate="true" src="sport/fishing.png" />
+        <area colour="#c7f1a3" />		
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="nature_reserve" />
+		<icon annotate="true" src="leisure/nature_reserve.png" />
+        <area colour="#c7f1a3" />		
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="park"/>
+		<icon annotate="true" src="leisure/park.png" />
+		<area colour="#c7f1a3"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="playground"/>
+		<icon annotate="true" src="leisure/playground.png" />
+		<area colour="#c7f1a3"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="dog_park"/>
+		<icon annotate="true" src="leisure/dog.png" />
+		<area colour="#c7f1a3"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="garden" />
+		<icon annotate="true" src="leisure/garden.png" />
+        <area colour="#c7f1a3" />		
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="common" />
+		<icon annotate="true" src="leisure/common.png" />
+		<area colour="#c7f1a3"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="swimming_pool" />
+		<icon annotate="true" src="sport/pool.png" />
+		<area colour="#c7f1a3"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="leisure" v="miniature_golf" />
+		<icon annotate="true" src="sport/golf.png" />
+		<area colour="#c7f1a3"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+<!--amenity tags -->
+	<rule>
+		<condition k="amenity" v="pub" />
+		<icon annotate="true" src="food/pub.png"  />
+		<area colour="#ecba52"/>
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="biergarten" />
+		<icon annotate="true" src="food/biergarten.png"  />
+		<area colour="#ecba52"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="nightclub" />
+		<icon annotate="true" src="leisure/nightclub.png"  />
+		<area colour="#ecba52"/>
+        <scale_min>1</scale_min>
+        <scale_max>25000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="cafe" />
+		<icon annotate="true" src="food/cafe.png"  />
+		<area colour="#ecba52"/>
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="restaurant" />
+		<icon annotate="true" src="food/restaurant.png" />
+		<area colour="#ecba52"/>
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="fast_food" />
+		<icon annotate="true" src="food/fastfood.png" />
+		<area colour="#ecba52"/>
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="bar" />
+		<icon annotate="true" src="food/bar.png" />
+		<area colour="#ecba52"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="amenity" v="ice_cream" />
+		<icon annotate="true" src="food/icecream.png" />
+		<area colour="#ecba52"/>
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="amenity" v="parking" />
+		<icon annotate="true" src="vehicle/parking.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>15000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="bicycle_parking" />
+		<icon annotate="true" src="vehicle/parking/bicycle.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="bicycle_rental" />
+		<icon annotate="true" src="vehicle/rental/bicycle.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="car_rental" />
+		<icon annotate="true" src="vehicle/rental.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="car_sharing" />
+		<icon annotate="true" src="vehicle/car_sharing.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="car_wash" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="transport/car.png" />
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="amenity" v="taxi" />
+		<icon annotate="true" src="transport/taxi.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="fuel" />
+		<icon annotate="true" src="vehicle/fuel.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="telephone" />
+		<icon annotate="true" src="service/telephone.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="toilets" />
+		<icon annotate="true" src="service/toilets.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="recycling" />
+		<icon annotate="true" src="service/recycling.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="public_building" />
+		<icon annotate="true" src="public.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="townhall" />
+		<icon annotate="true" src="public.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="drinking_water" />
+		<icon annotate="true" src="food/drinking_water.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	  	
+	<rule>
+		<condition k="amenity" v="fountain"/>
+		<icon annotate="true" src="misc/landmark/spring.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<!--the religion rules must be placed before the place_of_worship rule! -->
+	<rule>
+		<condition k="religion" v="bahai" />
+		<icon annotate="true" src="religion/bahai.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="religion" v="buddhist" />
+		<icon annotate="true" src="religion/buddhism.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="religion" v="christian" />
+		<icon annotate="true" src="religion/church.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="religion" v="hindu" />
+		<icon annotate="true" src="religion/hinduism.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="religion" v="jain" />
+		<icon annotate="true" src="religion/jainism.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="religion" v="jewish" />
+		<icon annotate="true" src="religion/synagogue.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="religion" v="muslim" />
+		<icon annotate="true" src="religion/mosque.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="religion" v="sikh" />
+		<icon annotate="true" src="religion/sikhism.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="religion" v="shinto" />
+		<icon annotate="true" src="religion/shinto.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="religion" v="taoist" />
+		<icon annotate="true" src="religion/taoism.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="place_of_worship" />
+		<icon annotate="true" src="religion.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="grave_yard" />
+		<icon annotate="true" src="rendering/landuse/cemetery.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="crematorium" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="post_office" />
+		<icon annotate="true" src="service/post_office.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="post_box" />
+		<icon annotate="true" src="service/post_box.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="school" />
+		<icon annotate="true" src="education/school.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="university" />
+		<icon annotate="true" src="education/university.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="college" />
+		<icon annotate="true" src="education/college.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="kindergarten" />
+		<icon annotate="true" src="education/kindergarten.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="pharmacy" />
+        <area colour="#eeeeee" />
+		<icon annotate="true" src="health/pharmacy.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="hospital" />
+        <area colour="#eeeeee" />
+		<icon annotate="true" src="health/hospital.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="nursery" />
+        <area colour="#eeeeee" />
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="dentist" />
+        <area colour="#eeeeee" />
+		<icon annotate="true" src="misc/no_icon.png" />
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="amenity" v="library" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="shop/rental/library.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="police" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="service/police.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="fire_station" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="service/firebrigade.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="bus_station" />
+		<icon annotate="true" src="transport/bus.png" />
+		<area colour="#f7efb7"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="theatre" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="leisure/theater.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="cinema" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="leisure/cinema.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="arts_centre" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="service/arts_centre.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="courthouse" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="service/administration/court_of_law.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="prison" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="service/administration/prison.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="bank" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="money/bank.png" />
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="bureau_de_change" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="money/exchange.png" />
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="atm" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="money/atm.png" />
+        <scale_min>1</scale_min>
+        <scale_max>10000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="park_bench" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="amenity" v="shelter" />
+		<area colour="#f7efb7"/>
+		<icon annotate="true" src="accommodation/shelter.png" />
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+	
+<!--shop tags -->
+
+	<rule>
+		<condition k="shop" v="supermarket" />
+		<icon annotate="true" src="shop/supermarket.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="convenience" />
+		<icon annotate="true" src="shop/supermarket.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="bakery" />
+		<icon annotate="true" src="shop/groceries/bakery.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="butcher" />
+		<icon annotate="true" src="shop/groceries/butcher.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="bicycle" />
+		<icon annotate="true" src="sport/bicycle.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="doityourself" />
+		<icon annotate="true" src="shop/diy_store.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="dry_cleaning" />
+		<icon annotate="true" src="shop/laundry.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="laundry" />
+		<icon annotate="true" src="shop/laundry.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>15000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="outdoor" />
+		<icon annotate="true" src="shop/sports/outdoor.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="kiosk" />
+		<icon annotate="true" src="shop/kiosk.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="beverages" />
+		<icon annotate="true" src="shop/beverages.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="books" />
+		<icon annotate="true" src="shop/rental/library.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="car" />
+		<icon annotate="true" src="transport/car.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="car_dealer" />
+		<icon annotate="true" src="transport/car.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="car_repair" />
+		<icon annotate="true" src="transport/car.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="chemist" />
+		<icon annotate="true" src="shop/chemist.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="clothes" />
+		<icon annotate="true" src="shop/clothes.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="computer" />
+		<icon annotate="true" src="shop/computer.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="cycle_repair" />
+		<icon annotate="true" src="sport/bicycle.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="department_store" />
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="electronics" />
+		<icon annotate="true" src="shop/electronics.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="furniture" />
+		<icon annotate="true" src="shop/furniture.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="florist" />
+		<icon annotate="true" src="shop/florist.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="groceries" />
+		<icon annotate="true" src="shop/groceries/fruits.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="garden_centre" />
+		<icon annotate="true" src="shop/garden_centre.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="hairdresser" />
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="hardware" />
+		<icon annotate="true" src="shop/diy_store.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="hifi" />
+		<icon annotate="true" src="shop/hifi.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="jewelry" />
+		<icon annotate="true" src="shop/jewelry.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="mall" />
+		<icon annotate="true" src="shop/mall.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="motorcycle" />
+		<icon annotate="true" src="vehicle/motorbike.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="newsagent" />
+		<icon annotate="true" src="shop/kiosk.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="organic" />
+		<icon annotate="true" src="shop/groceries/fruits.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="optician" />
+		<icon annotate="true" src="shop/optician.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="shoes" />
+		<icon annotate="true" src="shop/shoes.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="tailor" />
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="travel_agency" />
+		<icon annotate="true" src="place/island.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="toys" />
+		<icon annotate="true" src="shop/toys.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="shop" v="video" />
+		<icon annotate="true" src="shop/video.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>20000</scale_max>
+	</rule>
+
+	<!-- duplicate of shopping_centre? -->
+	<rule>
+		<condition k="shop" v="shopping_center" />
+		<icon annotate="true" src="shop/mall.png" />
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+<!--tourism tags -->
+	<rule>
+		<condition k="tourism" v="information" />
+		<icon annotate="true" src="misc/information.png" />
+		<area colour="#e180a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="tourism" v="hotel" />
+		<icon annotate="true" src="accommodation.png" />
+		<area colour="#e1a0a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="tourism" v="motel" />
+		<icon annotate="true" src="accommodation/motel.png" />
+		<area colour="#e1a0a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="tourism" v="guest_house" />
+		<icon annotate="true" src="accommodation/guest_house.png" />
+		<area colour="#e1a0a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="tourism" v="hostel" />
+		<icon annotate="true" src="accommodation/hostel.png" />
+		<area colour="#e1a0a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="tourism" v="chalet" />
+		<icon annotate="true" src="accommodation/chalet.png" />
+		<area colour="#e1a0a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="tourism" v="camp_site" />
+		<icon annotate="true" src="accommodation/camping.png" />
+		<area colour="#e1a0a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="tourism" v="caravan_site" />
+		<icon annotate="true" src="accommodation/camping/caravan.png" />
+		<area colour="#e1a0a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="tourism" v="picnic_site" />
+		<icon annotate="true" src="leisure/picnic.png" />
+		<area colour="#e180a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="tourism" v="viewpoint" />
+		<icon annotate="true" src="sightseeing/viewpoint.png" />
+		<area colour="#e180a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="tourism" v="theme_park" />
+		<icon annotate="true" src="leisure/theme_park.png" />
+		<area colour="#e180a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+    <rule>
+        <condition k="tourism" v="attraction"/>
+        <icon annotate="true" src="sightseeing.png"/>
+		<area colour="#e180a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+
+    <rule>
+        <condition k="tourism" v="zoo"/>
+        <icon annotate="true" src="leisure/zoo.png"/>
+		<area colour="#e180a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+
+    <rule>
+        <condition k="tourism" v="artwork"/>
+        <icon annotate="true" src="service/arts_centre.png"/>
+		<area colour="#e180a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+
+	<rule>
+		<condition k="tourism" v="museum" />
+		<icon annotate="true" src="sightseeing/museum.png" />
+		<area colour="#e180a2" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+<!--historic tags -->
+	<rule>
+		<condition k="historic" v="castle" />
+		<icon annotate="true" src="sightseeing/castle.png" />
+        <area colour="#663300" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="historic" v="monument" />
+		<icon annotate="true" src="sightseeing/monument.png" />
+        <area colour="#663300" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="historic" v="memorial" />
+		<icon annotate="true" src="sightseeing/memorial.png" />
+        <area colour="#663300" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="historic" v="archaeological_site" />
+		<icon annotate="true" src="sightseeing/archaeological.png" />
+        <area colour="#663300" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="historic" v="ruins" />
+		<icon annotate="true" src="sightseeing/ruins.png" />
+        <area colour="#663300" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="historic" v="battlefield" />
+		<icon annotate="true" src="sightseeing/battlefield.png" />
+        <area colour="#663300" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="historic" v="wayside_cross" />
+		<icon annotate="true" src="misc/no_icon.png" />
+        <area colour="#663300" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="historic" v="wayside_shrine" />
+		<icon annotate="true" src="misc/no_icon.png" />
+        <area colour="#663300" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+<!--landuse tags -->
+	<rule>
+		<condition k="landuse" v="farm" />
+		<area colour="#b1e0c2" />
+		<icon annotate="true" src="misc/landmark/farm.png"  />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="farmland" />
+		<area colour="#b1e0c2" />
+		<icon annotate="true" src="misc/landmark/farm.png"  />
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+
+    <rule>
+        <condition k="landuse" v="quarry"/>
+        <area colour="#888888" />
+		<icon src="misc/landmark/mine.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="landuse" v="landfill"/>
+        <area colour="#663300" />
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+
+	<rule>
+		<condition k="landuse" v="basin"/>
+		<area colour="#0000bf" />
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="landuse" v="reservoir"/>
+		<area colour="#0000bf" />
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="landuse" v="forest"/>
+		<area colour="#b1efc8" />
+		<icon src="misc/landmark/trees.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="allotments"/>
+		<area colour="#b1e0c2" />
+		<icon src="misc/landmark/plant.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="residential"/>
+		<area colour="#f0f0f0"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="farmyard"/>
+		<area colour="#f0f0f0"/>
+		<icon src="misc/no_icon.png" />
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+
+
+	<rule>
+		<condition k="landuse" v="retail"/>
+		<area colour="#dbdbdb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="commercial"/>
+		<area colour="#dbdbdb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="industrial"/>
+		<area colour="#ecd8ff"/>
+		<icon src="misc/landmark/works.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="brownfield"/>
+		<area colour="#ecba32"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="greenfield"/>
+		<area colour="#b1ec5c"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="railway"/>
+		<area colour="#888888"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="construction"/>
+		<area colour="#FFFF00" dashed="true"/>
+		<icon src="misc/construction.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="military"/>
+		<area colour="#b62c2c"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="cemetery"/>
+		<area colour="#b1efc8" />
+		<icon src="rendering/landuse/cemetery.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="village_green"/>
+		<area colour="#b1e0c2" />
+		<icon src="leisure/common.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="landuse" v="recreation_ground"/>
+		<area colour="#b1e0c2" />
+		<icon src="leisure/common.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+<!--military tags -->
+	<rule>
+		<condition k="military" v="airfield" />
+		<icon src="transport/airport/airfield.png" />
+		<area colour="#b62c2c"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="military" v="bunker" />
+		<icon src="misc/landmark/bunker.png" />
+		<area colour="#b62c2c"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="military" v="barracks" />
+		<icon src="misc/no_icon.png" />
+		<area colour="#b62c2c"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="military" v="danger_area" />
+		<icon src="misc/danger.png" />
+		<area colour="#b62c2c"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="military" v="range" />
+		<icon src="misc/landmark/range.png" />
+		<area colour="#b62c2c"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+<!--natural tags -->
+    <rule>
+        <condition k="natural" v="spring"/>
+        <icon annotate="true" src="misc/landmark/spring.png"/>
+		<area colour="#00005f"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="natural" v="peak"/>
+        <area colour="#663300" />
+        <icon annotate="true" src="misc/landmark/peak_small.png"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="natural" v="glacier"/>
+        <icon annotate="true" src="misc/no_icon.png"/>
+		<area colour="#ffffff"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="natural" v="volcano"/>
+        <icon annotate="true" src="misc/no_icon.png"/>
+		<area colour="#5f0000"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="natural" v="cliff"/>
+		<icon src="misc/no_icon.png" />
+        <area colour="#002f00"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+
+    <rule>
+        <condition k="natural" v="scree"/>
+		<icon src="misc/no_icon.png" />
+        <area colour="#002f00"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+
+	<rule>
+        <condition k="natural" v="scrub" />
+		<icon src="misc/no_icon.png" />
+        <area colour="#007000" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+        <condition k="natural" v="fell"/>
+		<icon src="misc/no_icon.png" />
+        <area colour="#002f00"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+
+    <rule>
+		<condition k="natural" v="heath"/>
+		<icon src="misc/no_icon.png" />
+        <area colour="#ffffc0"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+        <condition k="natural" v="wood"/>
+		<icon src="misc/landmark/trees.png" />
+        <area colour="#008000" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+    </rule>
+    
+    <rule>
+		<condition k="natural" v="marsh"/>
+		<icon src="misc/no_icon.png" />
+		<area colour="#4f4ff3"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+    <rule>
+		<condition k="natural" v="water"/>
+		<icon src="misc/no_icon.png" />
+		<area colour="#0000ff"/>
+        <scale_min>1</scale_min>
+        <scale_max>60000</scale_max>
+	</rule>
+	
+    <rule>
+        <condition k="natural" v="coastline"/>
+		<icon src="misc/no_icon.png" />
+        <line width="1" colour="#0000ff"/>
+        <scale_min>1</scale_min>
+        <scale_max>200000000</scale_max>
+    </rule>
+    
+    <rule>
+		<condition k="natural" v="mud"/>
+		<icon src="misc/no_icon.png" />
+		<area colour="#cba762"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+    <rule>
+		<condition k="natural" v="beach"/>
+		<icon src="misc/no_icon.png" />
+		<area colour="#f8dba2"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+    <rule>
+		<condition k="natural" v="bay"/>
+		<icon src="misc/no_icon.png" />
+		<area colour="#002f00"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+    <rule>
+		<condition k="natural" v="land"/>
+		<icon src="misc/no_icon.png" />
+		<area colour="#002f00"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+    <rule>
+		<condition k="natural" v="cave_entrance"/>
+		<icon src="misc/no_icon.png" />
+		<area colour="#002f00"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+<!--route tags -->
+
+	<rule>
+		<condition k="route" v="bus"/>
+        <line width="1" colour="#809bc0" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="route" v="ferry"/>
+        <line width="1" colour="#809bc0" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+        <routing bicycle="3" foot="3" goods="3" hgv="3" motorcycle="3" motorcar="3" psv="3"/>
+	</rule>
+
+	<rule>
+		<condition k="route" v="flight"/>
+        <line width="1" colour="#809bc0" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="route" v="ncn"/>
+        <line width="1" colour="#809bc0" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="route" v="subsea"/>
+        <line width="1" colour="#809bc0" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="route" v="ski"/>
+        <line width="1" colour="#809bc0" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="route" v="tour"/>
+        <line width="1" colour="#809bc0" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="route" v="pub_crawl"/>
+        <line width="1" colour="#809bc0" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+<!--boundary tags -->
+
+	<rule>
+		<condition k="boundary" v="national"/>
+        <line width="1" colour="#8de3cb" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="boundary" v="administrative"/>
+        <line width="1" colour="#8de3cb" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="boundary" v="civil"/>
+        <line width="1" colour="#8de3cb" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="boundary" v="political"/>
+        <line width="1" colour="#8de3cb" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="boundary" v="national_park"/>
+        <line width="1" colour="#8de3cb" dashed="true"/>
+        <icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+<!--sport tags -->
+	<rule>
+		<condition k="sport" v="10pin" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="athletics" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="australian_football" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/football.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="baseball" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/baseball.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="basketball" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/basketball.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="boules" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="bowls" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="climbing" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="cricket" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/cricket.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="cricket_nets" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="croquet" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="cycling" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/cycling.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="dog_racing" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="equestrian" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/riding.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="football" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/football.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="golf" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/golf.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="gymnastics" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="hockey" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="horse_racing" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/riding.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="motor" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="multi" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="pelota" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="racquet" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="rugby" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/football.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="skating" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="skateboard" />
+		<area colour="#bde3cb"/>
+		<icon src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="soccer" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/soccer.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="swimming" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/pool.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="skiing" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/skiing.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="table_tennis" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/table_tennis.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="tennis" />
+		<area colour="#bde3cb"/>
+		<icon src="sport/tennis.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="sport" v="paintball" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="sport" v="squash" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="sport" v="shooting" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="sport" v="volleyball" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="sport/volleyball.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="sport" v="beachvolleyball" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="sport" v="bowling" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="sport" v="handball" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="sport" v="rowing" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="sport" v="sailing" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="sport" v="diving" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="sport/diving.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="sport" v="badminton" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="sport" v="archery" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+	<rule>
+		<condition k="sport" v="fishing" />
+		<area colour="#bde3cb"/>
+		<icon annotate="true" src="sport/fishing.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	
+<!--abutters tags -->
+
+<!--accessories tags -->
+
+<!--properties tags -->
+
+	<rule>
+		<condition k="mountain_pass" v="yes" />
+		<icon src="misc/landmark/mountain_pass.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<!-- this will badly display otherwise well tagged footways and alike, so comment it out until we have better ways to display this in JOSM!
+	<rule>
+		<condition k="surface" v="paved"/>
+		<line width="1" realwidth="3" colour="#c0c0c0"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+    </rule>
+
+	<rule>
+		<condition k="surface" v="cobblestone"/>
+		<line width="1" realwidth="3" colour="#c0c0c0"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+    </rule>
+
+	<rule>
+		<condition k="surface" v="unpaved"/>
+		<line width="1" realwidth="3" colour="#c0c0c0"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+        <scale_min>1</scale_min>
+        <scale_max>40000</scale_max>
+    </rule>
+	-->
+
+<!--name tags -->
+
+<!--preferences tags -->
+
+<!--place tags -->
+	<rule>
+		<condition k="place" v="continent" />
+		<icon annotate="true" src="place/settlement/capital.png" />
+		<area colour="#8de3cb"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="place" v="country" />
+		<icon annotate="true" src="place/settlement/capital.png" />
+		<area colour="#8de3cb"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="place" v="state" />
+		<icon annotate="true" src="place/settlement/capital.png" />
+		<area colour="#8de3cb"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="place" v="region" />
+		<icon annotate="true" src="place/settlement/capital.png" />
+		<area colour="#8de3cb"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="place" v="county" />
+		<icon annotate="true" src="place/settlement/capital.png" />
+		<area colour="#8de3cb"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="place" v="city" />
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#8de3cb"/>
+        <scale_min>1</scale_min>
+        <scale_max>9000000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="place" v="town" />
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#8de3cb"/>
+        <scale_min>1</scale_min>
+        <scale_max>100000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="place" v="village" />
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#8de3cb"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="place" v="hamlet" />
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#8de3cb"/>
+        <scale_min>1</scale_min>
+        <scale_max>100000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="place" v="suburb" />
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#8de3cb"/>
+        <scale_min>1</scale_min>
+        <scale_max>300000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="place" v="locality" />
+		<icon annotate="true" src="place/locality.png" />
+		<area colour="#8de3cb"/>
+        <scale_min>1</scale_min>
+        <scale_max>100000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="place" v="island" />
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#8de3cb"/>
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<!-- lot's of "openGeoDB:..." tags can be found in germany -->
+	<rule>
+		<condition k="openGeoDB:type" v="Stadt" />
+		<icon annotate="true" src="place/settlement/town.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="openGeoDB:type" v="Kreis" />
+		<icon annotate="true" src="place/settlement/town.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="openGeoDB:type" v="Gemeinde" />
+		<icon annotate="true" src="place/settlement/town.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="openGeoDB:type" v="Ort" />
+		<icon annotate="true" src="place/settlement/town.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="openGeoDB:type" v="District" />
+		<icon annotate="true" src="place/settlement/town.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="openGeoDB:location" v="locality" />
+		<icon annotate="true" src="place/settlement/town.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+<!--annotation tags -->
+
+<!--"work in progress" tags -->
+
+	<!-- keep this generic rules at the end of the file, so more specialised rules fit first -->
+	<rule>
+		<condition k="building" v="yes"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#cb9999"/>
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+	<rule>
+		<condition k="building" v="true"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#cb9999"/>
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+	<rule>
+		<condition k="building" v="church"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#cb9999"/>
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+	<rule>
+		<condition k="building" v="museum"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#cb9999"/>
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+	<rule>
+		<condition k="building" v="tower"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#cb9999"/>
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+	<rule>
+		<condition k="building" v="station"/>
+		<icon annotate="true" src="misc/no_icon.png" />
+		<area colour="#cb9999"/>
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+
+<!--"deprecated" tags -->
+	<rule>
+		<condition k="historic" v="museum" />
+		<line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="power_wind" />
+		<line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="power_hydro" />
+		<line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="power_fossil" />
+		<line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+	<rule>
+		<condition k="man_made" v="power_nuclear" />
+		<line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+
+    <rule>
+       <condition k="highway" v="minor"/>
+       <line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+       <icon annotate="true" src="misc/deprecated.png" />
+       <scale_min>1</scale_min>
+       <scale_max>40000</scale_max>
+     </rule>
+
+	<!-- there's a bit confusion about this tag, the proposal says leisure, map features say tourism ?!? -->
+	<rule>
+		<condition k="leisure" v="zoo" />
+		<line width="2" realwidth="5" dashed="true" colour="#ff0000"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>50000</scale_max>
+	</rule>
+	<rule>
+		<condition k="addr:housenumber"/>
+		<icon annotate="true" src="misc/deprecated.png" />
+        <scale_min>1</scale_min>
+        <scale_max>7000</scale_max>
+	</rule>
+	<rule>
+		<condition k="contour_ext" v="elevation_major"/>
+		<line width="1" realwidth="1" colour="#a0a060"/>
+        <scale_min>1</scale_min>
+        <scale_max>300000</scale_max>
+	</rule>
+	<rule>
+		<condition k="contour_ext" v="elevation_minor"/>
+		<line width="1" realwidth="1" colour="#a0a060"/>
+        <scale_min>1</scale_min>
+        <scale_max>150000</scale_max>
+	</rule>
+	<rule>
+		<condition k="contour" v="elevation"/>
+		<line width="1" realwidth="1" colour="#a0a060"/>
+        <scale_min>1</scale_min>
+        <scale_max>30000</scale_max>
+	</rule>
+	<rule>
+		<condition k="gosmore_note" v="yes"/>
+		<line width="1" realwidth="1" colour="#ff0000"/>
+		<icon annotate="true" src="misc/note.png" />
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+	<rule>
+		<condition k="openstreetbug" v="yes"/>
+		<line width="1" realwidth="1" colour="#ff0000"/>
+		<icon annotate="true" src="misc/error.png" />
+		<scale_min>1</scale_min>
+		<scale_max>50000</scale_max>
+	</rule>
+
+</rules>

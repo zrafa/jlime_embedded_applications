@@ -1,0 +1,9 @@
+Import("env","ARCH", 'ObjCopyHexCmd', 'Platforms')
+
+#env.Append(CCFLAGS = '-D_USE_LSEEK -D_WRITE_FUNC')
+env.Append(CCFLAGS = '-D_USE_LSEEK')
+
+if ARCH == 'avr':
+  env.Library(target='pfatfs', source=['mmc.c', 'pff.c', '../../../TvikiaSDCard.c'])
+  elfObj = env.Program("pfatconsole", ["main.c", "xitoa.S"], LIBS=Platforms['Default'])
+  env.AddPostAction(elfObj, ObjCopyHexCmd + elfObj[0].abspath + " " + elfObj[0].abspath.replace(".o","") + ".hex")

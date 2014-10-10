@@ -1,0 +1,46 @@
+Gosmore
+=======
+
+Gosmore is a viewer of the OpenStreetmap.org XML data such as the
+planet.
+
+The project home page is at
+<URL:http://wiki.openstreetmap.org/index.php/Gosmore>
+
+Usage information
+-----------------
+
+Fetch planet file from OpenStreetmap and feed it to gosmore
+
+  bzcat planet-...osm.bz2 | gosmore rebuild
+
+The rebuild process uses a lot of memory and free disk space for osm files
+with a compressed size greater than a few mega bytes. Rebuilding the
+complete planet take around 3 hours on a dual core 64 bit machine with 2 GB
+of RAM and 20 GB of free disk space.
+
+Downloading latest version
+--------------------------
+
+The source is available from subversion.  Use
+
+  svn co http://svn.openstreetmap.org/applications/rendering/gosmore/
+
+to download it.
+
+Reporting bugs and improvements
+-------------------------------
+
+Send them to nroets@gmail.com
+
+License
+-------
+
+elemstyle.xml, icons.csv and icons.xpm comes from JOSM / gpsdrive and are
+licensed under the Gnu Public License v2 or later.
+
+ConvertUTF.c and ConvertUTF.h comes under a BSD-style license. They are
+only used when builting the Windows CE executable.
+
+Everything else are placed by in the public domain by its authors.
+Written by Nic Roets with contribution(s) from Dave Hansen.

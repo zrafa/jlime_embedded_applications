@@ -1,0 +1,1350 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              	
+  14              		.comm	tios,52,4
+  15              	
+  16              		.comm	orig_tios,52,4
+  17              		.rdata
+  18              		.align	2
+  19              	$LC0:
+  20 0000 4572726F 		.ascii	"Error getting tios terminal settings\012\000"
+  20      72206765 
+  20      7474696E 
+  20      67207469 
+  20      6F732074 
+  21 0026 0000     		.align	2
+  22              	$LC1:
+  23 0028 4572726F 		.ascii	"Error applying terminal settings\000"
+  23      72206170 
+  23      706C7969 
+  23      6E672074 
+  23      65726D69 
+  24 0049 000000   		.align	2
+  25              	$LC2:
+  26 004c 4572726F 		.ascii	"Error while asserting terminal settings\000"
+  26      72207768 
+  26      696C6520 
+  26      61737365 
+  26      7274696E 
+  27              		.align	2
+  28              	$LC3:
+  29 0074 436F756C 		.ascii	"Could not apply all terminal settings\000"
+  29      64206E6F 
+  29      74206170 
+  29      706C7920 
+  29      616C6C20 
+  30              		.text
+  31              		.align	2
+  32              		.globl	SetupTerminal
+  33              	$LFB0 = .
+  34              		.file 1 "uCmorse/test_inmorse.c"
+   0:uCmorse/test_inmorse.c **** #include <stdio.h>
+   1:uCmorse/test_inmorse.c **** #include "inmorse.h"
+   2:uCmorse/test_inmorse.c **** 
+   3:uCmorse/test_inmorse.c **** #ifndef AVR
+   4:uCmorse/test_inmorse.c **** #include <termios.h>
+   5:uCmorse/test_inmorse.c **** #include <unistd.h>
+   6:uCmorse/test_inmorse.c **** struct termios tios, orig_tios;
+   7:uCmorse/test_inmorse.c **** 
+   8:uCmorse/test_inmorse.c **** int SetupTerminal() { // VT52 interactive mode 
+  35              		.loc 1 9 0
+  36              		.set	nomips16
+  37              		.ent	SetupTerminal
+  39              	SetupTerminal:
+  40              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+  41              		.mask	0xc0000000,-4
+  42              		.fmask	0x00000000,0
+  43              		.set	noreorder
+  44              		.set	nomacro
+  45              		
+  46 0000 E0FFBD27 		addiu	$sp,$sp,-32
+  47              	$LCFI0:
+  48 0004 1C00BFAF 		sw	$31,28($sp)
+  49              	$LCFI1:
+  50 0008 1800BEAF 		sw	$fp,24($sp)
+  51              	$LCFI2:
+  52 000c 21F0A003 		move	$fp,$sp
+  53              	$LCFI3:
+  54 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  55 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  56 0018 1000BCAF 		.cprestore	16
+   9:uCmorse/test_inmorse.c ****   if (tcgetattr(0, &orig_tios)) {
+  57              		.loc 1 10 0
+  58 001c 21200000 		move	$4,$0
+  59 0020 0000858F 		lw	$5,%got(orig_tios)($28)
+  60 0024 0000828F 		lw	$2,%call16(tcgetattr)($28)
+  61 0028 00000000 		nop
+  62 002c 21C84000 		move	$25,$2
+  63 0030 09F82003 		jalr	$25
+  64 0034 00000000 		nop
+  65              	
+  66 0038 1000DC8F 		lw	$28,16($fp)
+  67 003c 13004010 		beq	$2,$0,$L2
+  68 0040 00000000 		nop
+  69              	
+  10:uCmorse/test_inmorse.c ****     fprintf(stderr,"Error getting tios terminal settings\n");
+  70              		.loc 1 11 0
+  71 0044 0000023C 		lui	$2,%hi($LC0)
+  72 0048 00004324 		addiu	$3,$2,%lo($LC0)
+  73 004c 0000828F 		lw	$2,%got(stderr)($28)
+  74 0050 00000000 		nop
+  75 0054 0000428C 		lw	$2,0($2)
+  76 0058 21206000 		move	$4,$3
+  77 005c 01000524 		li	$5,1			# 0x1
+  78 0060 25000624 		li	$6,37			# 0x25
+  79 0064 21384000 		move	$7,$2
+  80 0068 0000828F 		lw	$2,%call16(fwrite)($28)
+  81 006c 00000000 		nop
+  82 0070 21C84000 		move	$25,$2
+  83 0074 09F82003 		jalr	$25
+  84 0078 00000000 		nop
+  85              	
+  86 007c 1000DC8F 		lw	$28,16($fp)
+  11:uCmorse/test_inmorse.c ****     return -3;
+  87              		.loc 1 12 0
+  88 0080 FDFF0224 		li	$2,-3			# 0xfffffffffffffffd
+  89 0084 76000010 		b	$L3
+  90 0088 00000000 		nop
+  91              	
+  92              	$L2:
+  12:uCmorse/test_inmorse.c ****   }
+  13:uCmorse/test_inmorse.c **** 
+  14:uCmorse/test_inmorse.c ****   /* copy that to tios and play with it */
+  15:uCmorse/test_inmorse.c ****   tios = orig_tios;
+  93              		.loc 1 16 0
+  94 008c 0000838F 		lw	$3,%got(tios)($28)
+  95 0090 0000828F 		lw	$2,%got(orig_tios)($28)
+  96 0094 21206000 		move	$4,$3
+  97 0098 21184000 		move	$3,$2
+  98 009c 34000224 		li	$2,52			# 0x34
+  99 00a0 21286000 		move	$5,$3
+ 100 00a4 21304000 		move	$6,$2
+ 101 00a8 0000828F 		lw	$2,%call16(memcpy)($28)
+ 102 00ac 00000000 		nop
+ 103 00b0 21C84000 		move	$25,$2
+ 104 00b4 09F82003 		jalr	$25
+ 105 00b8 00000000 		nop
+ 106              	
+ 107 00bc 1000DC8F 		lw	$28,16($fp)
+ 108 00c0 00000000 		nop
+  16:uCmorse/test_inmorse.c **** 
+  17:uCmorse/test_inmorse.c ****   /* We want to disable the canonical mode */
+  18:uCmorse/test_inmorse.c ****   tios.c_lflag &= ~ICANON;
+ 109              		.loc 1 19 0
+ 110 00c4 0000828F 		lw	$2,%got(tios)($28)
+ 111 00c8 00000000 		nop
+ 112 00cc 0C00438C 		lw	$3,12($2)
+ 113 00d0 FDFF0224 		li	$2,-3			# 0xfffffffffffffffd
+ 114 00d4 24186200 		and	$3,$3,$2
+ 115 00d8 0000828F 		lw	$2,%got(tios)($28)
+ 116 00dc 00000000 		nop
+ 117 00e0 0C0043AC 		sw	$3,12($2)
+  19:uCmorse/test_inmorse.c **** 
+  20:uCmorse/test_inmorse.c ****   /* And make sure ECHO is disabled */
+  21:uCmorse/test_inmorse.c ****   tios.c_lflag &= ~ECHO;
+ 118              		.loc 1 22 0
+ 119 00e4 0000828F 		lw	$2,%got(tios)($28)
+ 120 00e8 00000000 		nop
+ 121 00ec 0C00438C 		lw	$3,12($2)
+ 122 00f0 F7FF0224 		li	$2,-9			# 0xfffffffffffffff7
+ 123 00f4 24186200 		and	$3,$3,$2
+ 124 00f8 0000828F 		lw	$2,%got(tios)($28)
+ 125 00fc 00000000 		nop
+ 126 0100 0C0043AC 		sw	$3,12($2)
+  22:uCmorse/test_inmorse.c **** 
+  23:uCmorse/test_inmorse.c ****   /* Apply our settings */
+  24:uCmorse/test_inmorse.c ****   if (tcsetattr(0, TCSANOW, &tios)){
+ 127              		.loc 1 25 0
+ 128 0104 21200000 		move	$4,$0
+ 129 0108 0E540524 		li	$5,21518			# 0x540e
+ 130 010c 0000868F 		lw	$6,%got(tios)($28)
+ 131 0110 0000828F 		lw	$2,%call16(tcsetattr)($28)
+ 132 0114 00000000 		nop
+ 133 0118 21C84000 		move	$25,$2
+ 134 011c 09F82003 		jalr	$25
+ 135 0120 00000000 		nop
+ 136              	
+ 137 0124 1000DC8F 		lw	$28,16($fp)
+ 138 0128 0C004010 		beq	$2,$0,$L4
+ 139 012c 00000000 		nop
+ 140              	
+  25:uCmorse/test_inmorse.c ****     printf("Error applying terminal settings\n");
+ 141              		.loc 1 26 0
+ 142 0130 0000023C 		lui	$2,%hi($LC1)
+ 143 0134 28004424 		addiu	$4,$2,%lo($LC1)
+ 144 0138 0000828F 		lw	$2,%call16(puts)($28)
+ 145 013c 00000000 		nop
+ 146 0140 21C84000 		move	$25,$2
+ 147 0144 09F82003 		jalr	$25
+ 148 0148 00000000 		nop
+ 149              	
+ 150 014c 1000DC8F 		lw	$28,16($fp)
+  26:uCmorse/test_inmorse.c ****     return 3;
+ 151              		.loc 1 27 0
+ 152 0150 03000224 		li	$2,3			# 0x3
+ 153 0154 42000010 		b	$L3
+ 154 0158 00000000 		nop
+ 155              	
+ 156              	$L4:
+  27:uCmorse/test_inmorse.c ****   }
+  28:uCmorse/test_inmorse.c **** 
+  29:uCmorse/test_inmorse.c ****   /* Check whether our settings were correctly applied */
+  30:uCmorse/test_inmorse.c ****   if (tcgetattr(0, &tios)){
+ 157              		.loc 1 31 0
+ 158 015c 21200000 		move	$4,$0
+ 159 0160 0000858F 		lw	$5,%got(tios)($28)
+ 160 0164 0000828F 		lw	$2,%call16(tcgetattr)($28)
+ 161 0168 00000000 		nop
+ 162 016c 21C84000 		move	$25,$2
+ 163 0170 09F82003 		jalr	$25
+ 164 0174 00000000 		nop
+ 165              	
+ 166 0178 1000DC8F 		lw	$28,16($fp)
+ 167 017c 15004010 		beq	$2,$0,$L5
+ 168 0180 00000000 		nop
+ 169              	
+  31:uCmorse/test_inmorse.c ****     tcsetattr(0, TCSANOW, &orig_tios);
+ 170              		.loc 1 32 0
+ 171 0184 21200000 		move	$4,$0
+ 172 0188 0E540524 		li	$5,21518			# 0x540e
+ 173 018c 0000868F 		lw	$6,%got(orig_tios)($28)
+ 174 0190 0000828F 		lw	$2,%call16(tcsetattr)($28)
+ 175 0194 00000000 		nop
+ 176 0198 21C84000 		move	$25,$2
+ 177 019c 09F82003 		jalr	$25
+ 178 01a0 00000000 		nop
+ 179              	
+ 180 01a4 1000DC8F 		lw	$28,16($fp)
+  32:uCmorse/test_inmorse.c ****     printf("Error while asserting terminal settings\n");
+ 181              		.loc 1 33 0
+ 182 01a8 0000023C 		lui	$2,%hi($LC2)
+ 183 01ac 4C004424 		addiu	$4,$2,%lo($LC2)
+ 184 01b0 0000828F 		lw	$2,%call16(puts)($28)
+ 185 01b4 00000000 		nop
+ 186 01b8 21C84000 		move	$25,$2
+ 187 01bc 09F82003 		jalr	$25
+ 188 01c0 00000000 		nop
+ 189              	
+ 190 01c4 1000DC8F 		lw	$28,16($fp)
+  33:uCmorse/test_inmorse.c ****     return 3;
+ 191              		.loc 1 34 0
+ 192 01c8 03000224 		li	$2,3			# 0x3
+ 193 01cc 24000010 		b	$L3
+ 194 01d0 00000000 		nop
+ 195              	
+ 196              	$L5:
+  34:uCmorse/test_inmorse.c ****   }
+  35:uCmorse/test_inmorse.c **** 
+  36:uCmorse/test_inmorse.c ****   if ((tios.c_lflag & ICANON) || (tios.c_lflag & ECHO)) {
+ 197              		.loc 1 37 0
+ 198 01d4 0000828F 		lw	$2,%got(tios)($28)
+ 199 01d8 00000000 		nop
+ 200 01dc 0C00428C 		lw	$2,12($2)
+ 201 01e0 00000000 		nop
+ 202 01e4 02004230 		andi	$2,$2,0x2
+ 203 01e8 08004014 		bne	$2,$0,$L6
+ 204 01ec 00000000 		nop
+ 205              	
+ 206 01f0 0000828F 		lw	$2,%got(tios)($28)
+ 207 01f4 00000000 		nop
+ 208 01f8 0C00428C 		lw	$2,12($2)
+ 209 01fc 00000000 		nop
+ 210 0200 08004230 		andi	$2,$2,0x8
+ 211 0204 15004010 		beq	$2,$0,$L7
+ 212 0208 00000000 		nop
+ 213              	
+ 214              	$L6:
+  37:uCmorse/test_inmorse.c ****     tcsetattr(0, TCSANOW, &orig_tios);
+ 215              		.loc 1 38 0
+ 216 020c 21200000 		move	$4,$0
+ 217 0210 0E540524 		li	$5,21518			# 0x540e
+ 218 0214 0000868F 		lw	$6,%got(orig_tios)($28)
+ 219 0218 0000828F 		lw	$2,%call16(tcsetattr)($28)
+ 220 021c 00000000 		nop
+ 221 0220 21C84000 		move	$25,$2
+ 222 0224 09F82003 		jalr	$25
+ 223 0228 00000000 		nop
+ 224              	
+ 225 022c 1000DC8F 		lw	$28,16($fp)
+  38:uCmorse/test_inmorse.c ****     printf("Could not apply all terminal settings\n");
+ 226              		.loc 1 39 0
+ 227 0230 0000023C 		lui	$2,%hi($LC3)
+ 228 0234 74004424 		addiu	$4,$2,%lo($LC3)
+ 229 0238 0000828F 		lw	$2,%call16(puts)($28)
+ 230 023c 00000000 		nop
+ 231 0240 21C84000 		move	$25,$2
+ 232 0244 09F82003 		jalr	$25
+ 233 0248 00000000 		nop
+ 234              	
+ 235 024c 1000DC8F 		lw	$28,16($fp)
+  39:uCmorse/test_inmorse.c ****     return 3;
+ 236              		.loc 1 40 0
+ 237 0250 03000224 		li	$2,3			# 0x3
+ 238 0254 02000010 		b	$L3
+ 239 0258 00000000 		nop
+ 240              	
+ 241              	$L7:
+  40:uCmorse/test_inmorse.c ****   }
+  41:uCmorse/test_inmorse.c ****   return 0;
+ 242              		.loc 1 42 0
+ 243 025c 21100000 		move	$2,$0
+ 244              	$L3:
+  42:uCmorse/test_inmorse.c **** }
+ 245              		.loc 1 43 0
+ 246 0260 21E8C003 		move	$sp,$fp
+ 247 0264 1C00BF8F 		lw	$31,28($sp)
+ 248 0268 1800BE8F 		lw	$fp,24($sp)
+ 249 026c 2000BD27 		addiu	$sp,$sp,32
+ 250 0270 0800E003 		j	$31
+ 251 0274 00000000 		nop
+ 252              	
+ 253              		.set	macro
+ 254              		.set	reorder
+ 255              		.end	SetupTerminal
+ 256              	$LFE0:
+ 258              		.align	2
+ 259              		.globl	RestoreTerminal
+ 260              	$LFB1 = .
+  43:uCmorse/test_inmorse.c **** 
+  44:uCmorse/test_inmorse.c **** void RestoreTerminal() {
+ 261              		.loc 1 45 0
+ 262              		.set	nomips16
+ 263              		.ent	RestoreTerminal
+ 265              	RestoreTerminal:
+ 266              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 267              		.mask	0xc0000000,-4
+ 268              		.fmask	0x00000000,0
+ 269              		.set	noreorder
+ 270              		.set	nomacro
+ 271              		
+ 272 0278 E0FFBD27 		addiu	$sp,$sp,-32
+ 273              	$LCFI4:
+ 274 027c 1C00BFAF 		sw	$31,28($sp)
+ 275              	$LCFI5:
+ 276 0280 1800BEAF 		sw	$fp,24($sp)
+ 277              	$LCFI6:
+ 278 0284 21F0A003 		move	$fp,$sp
+ 279              	$LCFI7:
+ 280 0288 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 281 028c 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 282 0290 1000BCAF 		.cprestore	16
+  45:uCmorse/test_inmorse.c ****   /* Restore terminal settings */
+  46:uCmorse/test_inmorse.c ****   tcsetattr(0, TCSANOW, &orig_tios);
+ 283              		.loc 1 47 0
+ 284 0294 21200000 		move	$4,$0
+ 285 0298 0E540524 		li	$5,21518			# 0x540e
+ 286 029c 0000868F 		lw	$6,%got(orig_tios)($28)
+ 287 02a0 0000828F 		lw	$2,%call16(tcsetattr)($28)
+ 288 02a4 00000000 		nop
+ 289 02a8 21C84000 		move	$25,$2
+ 290 02ac 09F82003 		jalr	$25
+ 291 02b0 00000000 		nop
+ 292              	
+ 293 02b4 1000DC8F 		lw	$28,16($fp)
+  47:uCmorse/test_inmorse.c **** }
+ 294              		.loc 1 48 0
+ 295 02b8 21E8C003 		move	$sp,$fp
+ 296 02bc 1C00BF8F 		lw	$31,28($sp)
+ 297 02c0 1800BE8F 		lw	$fp,24($sp)
+ 298 02c4 2000BD27 		addiu	$sp,$sp,32
+ 299 02c8 0800E003 		j	$31
+ 300 02cc 00000000 		nop
+ 301              	
+ 302              		.set	macro
+ 303              		.set	reorder
+ 304              		.end	RestoreTerminal
+ 305              	$LFE1:
+ 307              		.rdata
+ 308 009a 0000     		.align	2
+ 309              	$LC4:
+ 310 009c 55534147 		.ascii	"USAGE: %s <code>\012EXAMPLE: %s .--\012\000"
+ 310      453A2025 
+ 310      73203C63 
+ 310      6F64653E 
+ 310      0A455841 
+ 311 00be 0000     		.align	2
+ 312              	$LC5:
+ 313 00c0 4552524F 		.ascii	"ERROR: expected a dot or a dash, but got a '%c' == %i\012"
+ 313      523A2065 
+ 313      78706563 
+ 313      74656420 
+ 313      6120646F 
+ 314 00f6 00       		.ascii	"\000"
+ 315 00f7 00       		.align	2
+ 316              	$LC6:
+ 317 00f8 4552524F 		.ascii	"ERROR: sequence too long\012\000"
+ 317      523A2073 
+ 317      65717565 
+ 317      6E636520 
+ 317      746F6F20 
+ 318 0112 0000     		.align	2
+ 319              	$LC7:
+ 320 0114 52455320 		.ascii	"RES = %c\012\000"
+ 320      3D202563 
+ 320      0A00
+ 321 011e 0000     		.align	2
+ 322              	$LC8:
+ 323 0120 5E00     		.ascii	"^\000"
+ 324 0122 0000     		.align	2
+ 325              	$LC9:
+ 326 0124 596F7520 		.ascii	"You selected a %c, p=%li\012\000"
+ 326      73656C65 
+ 326      63746564 
+ 326      20612025 
+ 326      632C2070 
+ 327 013e 0000     		.align	2
+ 328              	$LC10:
+ 329 0140 1B5B324B 		.ascii	"\033[2K\015\000"
+ 329      0D00
+ 330 0146 0000     		.align	2
+ 331              	$LC11:
+ 332 0148 1B5B3141 		.ascii	"\033[1A\000"
+ 332      00
+ 333 014d 000000   		.align	2
+ 334              	$LC12:
+ 335 0150 1B5B376D 		.ascii	"\033[7m\000"
+ 335      00
+ 336 0155 000000   		.align	2
+ 337              	$LC13:
+ 338 0158 1B5B306D 		.ascii	"\033[0m\000"
+ 338      00
+ 339 015d 000000   		.align	2
+ 340              	$LC14:
+ 341 0160 0A3E2000 		.ascii	"\012> \000"
+ 342 0164 00000000 		.text
+ 342      00000000 
+ 342      00000000 
+ 343              		.align	2
+ 344              		.globl	main
+ 345              	$LFB2 = .
+  48:uCmorse/test_inmorse.c **** #else
+  49:uCmorse/test_inmorse.c **** int SetupTerminal() {return 0;}
+  50:uCmorse/test_inmorse.c **** void RestoreTerminal() {}
+  51:uCmorse/test_inmorse.c **** #endif
+  52:uCmorse/test_inmorse.c **** 
+  53:uCmorse/test_inmorse.c **** #if 000
+  54:uCmorse/test_inmorse.c ****     printf("Type something!\n");
+  55:uCmorse/test_inmorse.c ****     fflush(stdout);
+  56:uCmorse/test_inmorse.c ****     for (int i=0; i<10; ++i) {
+  57:uCmorse/test_inmorse.c ****       char c;
+  58:uCmorse/test_inmorse.c ****       read(0, &c, 1);
+  59:uCmorse/test_inmorse.c ****       printf("\ngot %c\n", c);
+  60:uCmorse/test_inmorse.c ****     }
+  61:uCmorse/test_inmorse.c **** #endif
+  62:uCmorse/test_inmorse.c **** 
+  63:uCmorse/test_inmorse.c **** int main(int argc, char **argv) {
+ 346              		.loc 1 64 0
+ 347              		.set	nomips16
+ 348              		.ent	main
+ 350              	main:
+ 351              		.frame	$fp,136,$31		# vars= 104, regs= 2/0, args= 16, gp= 8
+ 352              		.mask	0xc0000000,-4
+ 353              		.fmask	0x00000000,0
+ 354              		.set	noreorder
+ 355              		.set	nomacro
+ 356              		
+ 357 02d0 78FFBD27 		addiu	$sp,$sp,-136
+ 358              	$LCFI8:
+ 359 02d4 8400BFAF 		sw	$31,132($sp)
+ 360              	$LCFI9:
+ 361 02d8 8000BEAF 		sw	$fp,128($sp)
+ 362              	$LCFI10:
+ 363 02dc 21F0A003 		move	$fp,$sp
+ 364              	$LCFI11:
+ 365 02e0 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 366 02e4 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 367 02e8 1000BCAF 		.cprestore	16
+ 368 02ec 8800C4AF 		sw	$4,136($fp)
+ 369 02f0 8C00C5AF 		sw	$5,140($fp)
+  64:uCmorse/test_inmorse.c ****   if (argc < 2) {
+ 370              		.loc 1 65 0
+ 371 02f4 8800C28F 		lw	$2,136($fp)
+ 372 02f8 00000000 		nop
+ 373 02fc 02004228 		slt	$2,$2,2
+ 374 0300 19004010 		beq	$2,$0,$L12
+ 375 0304 00000000 		nop
+ 376              	
+  65:uCmorse/test_inmorse.c ****     fprintf(stderr,"USAGE: %s <code>\nEXAMPLE: %s .--\n",argv[0],argv[0]);
+ 377              		.loc 1 66 0
+ 378 0308 0000828F 		lw	$2,%got(stderr)($28)
+ 379 030c 00000000 		nop
+ 380 0310 0000428C 		lw	$2,0($2)
+ 381 0314 00000000 		nop
+ 382 0318 21204000 		move	$4,$2
+ 383 031c 0000023C 		lui	$2,%hi($LC4)
+ 384 0320 9C004524 		addiu	$5,$2,%lo($LC4)
+ 385 0324 8C00C28F 		lw	$2,140($fp)
+ 386 0328 00000000 		nop
+ 387 032c 0000438C 		lw	$3,0($2)
+ 388 0330 8C00C28F 		lw	$2,140($fp)
+ 389 0334 00000000 		nop
+ 390 0338 0000428C 		lw	$2,0($2)
+ 391 033c 21306000 		move	$6,$3
+ 392 0340 21384000 		move	$7,$2
+ 393 0344 0000828F 		lw	$2,%call16(fprintf)($28)
+ 394 0348 00000000 		nop
+ 395 034c 21C84000 		move	$25,$2
+ 396 0350 09F82003 		jalr	$25
+ 397 0354 00000000 		nop
+ 398              	
+ 399 0358 1000DC8F 		lw	$28,16($fp)
+  66:uCmorse/test_inmorse.c ****     return 0;
+ 400              		.loc 1 67 0
+ 401 035c 21100000 		move	$2,$0
+ 402 0360 FB010010 		b	$L13
+ 403 0364 00000000 		nop
+ 404              	
+ 405              	$L12:
+  67:uCmorse/test_inmorse.c ****   }
+  68:uCmorse/test_inmorse.c ****   char *c = argv[1];
+ 406              		.loc 1 69 0
+ 407 0368 8C00C28F 		lw	$2,140($fp)
+ 408 036c 00000000 		nop
+ 409 0370 04004224 		addiu	$2,$2,4
+ 410 0374 0000428C 		lw	$2,0($2)
+ 411 0378 00000000 		nop
+ 412 037c 4000C2AF 		sw	$2,64($fp)
+  69:uCmorse/test_inmorse.c ****   char *p=0x0;
+ 413              		.loc 1 70 0
+ 414 0380 4400C0AF 		sw	$0,68($fp)
+  70:uCmorse/test_inmorse.c ****   int pLen=63;
+ 415              		.loc 1 71 0
+ 416 0384 3F000224 		li	$2,63			# 0x3f
+ 417 0388 4800C2AF 		sw	$2,72($fp)
+  71:uCmorse/test_inmorse.c ****   if (argv[1][1] != 'i') {
+ 418              		.loc 1 72 0
+ 419 038c 8C00C28F 		lw	$2,140($fp)
+ 420 0390 00000000 		nop
+ 421 0394 04004224 		addiu	$2,$2,4
+ 422 0398 0000428C 		lw	$2,0($2)
+ 423 039c 00000000 		nop
+ 424 03a0 01004224 		addiu	$2,$2,1
+ 425 03a4 00004380 		lb	$3,0($2)
+ 426 03a8 69000224 		li	$2,105			# 0x69
+ 427 03ac C8006210 		beq	$3,$2,$L14
+ 428 03b0 00000000 		nop
+ 429              	
+  72:uCmorse/test_inmorse.c ****     while (*c != 0x0) {
+ 430              		.loc 1 73 0
+ 431 03b4 A2000010 		b	$L15
+ 432 03b8 00000000 		nop
+ 433              	
+ 434              	$L22:
+ 435              	$LBB2 = .
+  73:uCmorse/test_inmorse.c ****       char res = InMorseNext(*c, &p, &pLen);
+ 436              		.loc 1 74 0
+ 437 03bc 4000C28F 		lw	$2,64($fp)
+ 438 03c0 00000000 		nop
+ 439 03c4 00004280 		lb	$2,0($2)
+ 440 03c8 00000000 		nop
+ 441 03cc 21204000 		move	$4,$2
+ 442 03d0 4400C327 		addiu	$3,$fp,68
+ 443 03d4 4800C227 		addiu	$2,$fp,72
+ 444 03d8 21286000 		move	$5,$3
+ 445 03dc 21304000 		move	$6,$2
+ 446 03e0 0000828F 		lw	$2,%call16(InMorseNext)($28)
+ 447 03e4 00000000 		nop
+ 448 03e8 21C84000 		move	$25,$2
+ 449 03ec 09F82003 		jalr	$25
+ 450 03f0 00000000 		nop
+ 451              	
+ 452 03f4 1000DC8F 		lw	$28,16($fp)
+ 453 03f8 3C00C2A3 		sb	$2,60($fp)
+  74:uCmorse/test_inmorse.c ****       if (res == -1) {
+ 454              		.loc 1 75 0
+ 455 03fc 3C00C383 		lb	$3,60($fp)
+ 456 0400 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 457 0404 1B006214 		bne	$3,$2,$L16
+ 458 0408 00000000 		nop
+ 459              	
+  75:uCmorse/test_inmorse.c ****         fprintf(stderr, "ERROR: expected a dot or a dash, but got a '%c' == %i\n", *c, *c);
+ 460              		.loc 1 76 0
+ 461 040c 0000828F 		lw	$2,%got(stderr)($28)
+ 462 0410 00000000 		nop
+ 463 0414 0000428C 		lw	$2,0($2)
+ 464 0418 00000000 		nop
+ 465 041c 21204000 		move	$4,$2
+ 466 0420 0000023C 		lui	$2,%hi($LC5)
+ 467 0424 C0004524 		addiu	$5,$2,%lo($LC5)
+ 468 0428 4000C28F 		lw	$2,64($fp)
+ 469 042c 00000000 		nop
+ 470 0430 00004280 		lb	$2,0($2)
+ 471 0434 00000000 		nop
+ 472 0438 21184000 		move	$3,$2
+ 473 043c 4000C28F 		lw	$2,64($fp)
+ 474 0440 00000000 		nop
+ 475 0444 00004280 		lb	$2,0($2)
+ 476 0448 21306000 		move	$6,$3
+ 477 044c 21384000 		move	$7,$2
+ 478 0450 0000828F 		lw	$2,%call16(fprintf)($28)
+ 479 0454 00000000 		nop
+ 480 0458 21C84000 		move	$25,$2
+ 481 045c 09F82003 		jalr	$25
+ 482 0460 00000000 		nop
+ 483              	
+ 484 0464 1000DC8F 		lw	$28,16($fp)
+  76:uCmorse/test_inmorse.c ****         return -1;
+ 485              		.loc 1 77 0
+ 486 0468 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 487 046c B8010010 		b	$L13
+ 488 0470 00000000 		nop
+ 489              	
+ 490              	$L16:
+  77:uCmorse/test_inmorse.c ****       } else if (res == -2) {
+ 491              		.loc 1 78 0
+ 492 0474 3C00C383 		lb	$3,60($fp)
+ 493 0478 FEFF0224 		li	$2,-2			# 0xfffffffffffffffe
+ 494 047c 13006214 		bne	$3,$2,$L17
+ 495 0480 00000000 		nop
+ 496              	
+  78:uCmorse/test_inmorse.c ****         fprintf(stderr, "ERROR: sequence too long\n");
+ 497              		.loc 1 79 0
+ 498 0484 0000023C 		lui	$2,%hi($LC6)
+ 499 0488 F8004324 		addiu	$3,$2,%lo($LC6)
+ 500 048c 0000828F 		lw	$2,%got(stderr)($28)
+ 501 0490 00000000 		nop
+ 502 0494 0000428C 		lw	$2,0($2)
+ 503 0498 21206000 		move	$4,$3
+ 504 049c 01000524 		li	$5,1			# 0x1
+ 505 04a0 19000624 		li	$6,25			# 0x19
+ 506 04a4 21384000 		move	$7,$2
+ 507 04a8 0000828F 		lw	$2,%call16(fwrite)($28)
+ 508 04ac 00000000 		nop
+ 509 04b0 21C84000 		move	$25,$2
+ 510 04b4 09F82003 		jalr	$25
+ 511 04b8 00000000 		nop
+ 512              	
+ 513 04bc 1000DC8F 		lw	$28,16($fp)
+  79:uCmorse/test_inmorse.c ****         return -2;
+ 514              		.loc 1 80 0
+ 515 04c0 FEFF0224 		li	$2,-2			# 0xfffffffffffffffe
+ 516 04c4 A2010010 		b	$L13
+ 517 04c8 00000000 		nop
+ 518              	
+ 519              	$L17:
+  80:uCmorse/test_inmorse.c ****       }
+  81:uCmorse/test_inmorse.c ****       printf("RES = %c\n", res);
+ 520              		.loc 1 82 0
+ 521 04cc 0000023C 		lui	$2,%hi($LC7)
+ 522 04d0 14014324 		addiu	$3,$2,%lo($LC7)
+ 523 04d4 3C00C283 		lb	$2,60($fp)
+ 524 04d8 21206000 		move	$4,$3
+ 525 04dc 21284000 		move	$5,$2
+ 526 04e0 0000828F 		lw	$2,%call16(printf)($28)
+ 527 04e4 00000000 		nop
+ 528 04e8 21C84000 		move	$25,$2
+ 529 04ec 09F82003 		jalr	$25
+ 530 04f0 00000000 		nop
+ 531              	
+ 532 04f4 1000DC8F 		lw	$28,16($fp)
+ 533              	$LBB3 = .
+  82:uCmorse/test_inmorse.c ****       for (int i=0; i<pLen; ++i) 
+ 534              		.loc 1 83 0
+ 535 04f8 3800C0AF 		sw	$0,56($fp)
+ 536 04fc 12000010 		b	$L18
+ 537 0500 00000000 		nop
+ 538              	
+ 539              	$L19:
+  83:uCmorse/test_inmorse.c ****         printf("%c", *(p + i));
+ 540              		.loc 1 84 0
+ 541 0504 4400C38F 		lw	$3,68($fp)
+ 542 0508 3800C28F 		lw	$2,56($fp)
+ 543 050c 00000000 		nop
+ 544 0510 21106200 		addu	$2,$3,$2
+ 545 0514 00004280 		lb	$2,0($2)
+ 546 0518 00000000 		nop
+ 547 051c 21204000 		move	$4,$2
+ 548 0520 0000828F 		lw	$2,%call16(putchar)($28)
+ 549 0524 00000000 		nop
+ 550 0528 21C84000 		move	$25,$2
+ 551 052c 09F82003 		jalr	$25
+ 552 0530 00000000 		nop
+ 553              	
+ 554 0534 1000DC8F 		lw	$28,16($fp)
+  83:uCmorse/test_inmorse.c ****         printf("%c", *(p + i));
+ 555              		.loc 1 83 0
+ 556 0538 3800C28F 		lw	$2,56($fp)
+ 557 053c 00000000 		nop
+ 558 0540 01004224 		addiu	$2,$2,1
+ 559 0544 3800C2AF 		sw	$2,56($fp)
+ 560              	$L18:
+ 561 0548 4800C28F 		lw	$2,72($fp)
+ 562 054c 3800C38F 		lw	$3,56($fp)
+ 563 0550 00000000 		nop
+ 564 0554 2A106200 		slt	$2,$3,$2
+ 565 0558 EAFF4014 		bne	$2,$0,$L19
+ 566 055c 00000000 		nop
+ 567              	
+ 568              	$LBE3 = .
+  84:uCmorse/test_inmorse.c ****       printf("\n");
+ 569              		.loc 1 85 0
+ 570 0560 0A000424 		li	$4,10			# 0xa
+ 571 0564 0000828F 		lw	$2,%call16(putchar)($28)
+ 572 0568 00000000 		nop
+ 573 056c 21C84000 		move	$25,$2
+ 574 0570 09F82003 		jalr	$25
+ 575 0574 00000000 		nop
+ 576              	
+ 577 0578 1000DC8F 		lw	$28,16($fp)
+  85:uCmorse/test_inmorse.c ****       printf("%c",*c);
+ 578              		.loc 1 86 0
+ 579 057c 4000C28F 		lw	$2,64($fp)
+ 580 0580 00000000 		nop
+ 581 0584 00004280 		lb	$2,0($2)
+ 582 0588 00000000 		nop
+ 583 058c 21204000 		move	$4,$2
+ 584 0590 0000828F 		lw	$2,%call16(putchar)($28)
+ 585 0594 00000000 		nop
+ 586 0598 21C84000 		move	$25,$2
+ 587 059c 09F82003 		jalr	$25
+ 588 05a0 00000000 		nop
+ 589              	
+ 590 05a4 1000DC8F 		lw	$28,16($fp)
+ 591              	$LBB4 = .
+  86:uCmorse/test_inmorse.c ****       for (int i=0; i<(pLen-1)/2 - 1; ++i) 
+ 592              		.loc 1 87 0
+ 593 05a8 3400C0AF 		sw	$0,52($fp)
+ 594 05ac 0C000010 		b	$L20
+ 595 05b0 00000000 		nop
+ 596              	
+ 597              	$L21:
+  87:uCmorse/test_inmorse.c ****         printf(" ");
+ 598              		.loc 1 88 0
+ 599 05b4 20000424 		li	$4,32			# 0x20
+ 600 05b8 0000828F 		lw	$2,%call16(putchar)($28)
+ 601 05bc 00000000 		nop
+ 602 05c0 21C84000 		move	$25,$2
+ 603 05c4 09F82003 		jalr	$25
+ 604 05c8 00000000 		nop
+ 605              	
+ 606 05cc 1000DC8F 		lw	$28,16($fp)
+  87:uCmorse/test_inmorse.c ****         printf(" ");
+ 607              		.loc 1 87 0
+ 608 05d0 3400C28F 		lw	$2,52($fp)
+ 609 05d4 00000000 		nop
+ 610 05d8 01004224 		addiu	$2,$2,1
+ 611 05dc 3400C2AF 		sw	$2,52($fp)
+ 612              	$L20:
+ 613 05e0 4800C28F 		lw	$2,72($fp)
+ 614 05e4 00000000 		nop
+ 615 05e8 FFFF4224 		addiu	$2,$2,-1
+ 616 05ec C21F0200 		srl	$3,$2,31
+ 617 05f0 21106200 		addu	$2,$3,$2
+ 618 05f4 43100200 		sra	$2,$2,1
+ 619 05f8 FFFF4324 		addiu	$3,$2,-1
+ 620 05fc 3400C28F 		lw	$2,52($fp)
+ 621 0600 00000000 		nop
+ 622 0604 2A104300 		slt	$2,$2,$3
+ 623 0608 EAFF4014 		bne	$2,$0,$L21
+ 624 060c 00000000 		nop
+ 625              	
+ 626              	$LBE4 = .
+  88:uCmorse/test_inmorse.c ****       printf("^\n");
+ 627              		.loc 1 89 0
+ 628 0610 0000023C 		lui	$2,%hi($LC8)
+ 629 0614 20014424 		addiu	$4,$2,%lo($LC8)
+ 630 0618 0000828F 		lw	$2,%call16(puts)($28)
+ 631 061c 00000000 		nop
+ 632 0620 21C84000 		move	$25,$2
+ 633 0624 09F82003 		jalr	$25
+ 634 0628 00000000 		nop
+ 635              	
+ 636 062c 1000DC8F 		lw	$28,16($fp)
+  89:uCmorse/test_inmorse.c **** 
+  90:uCmorse/test_inmorse.c ****       c++;
+ 637              		.loc 1 91 0
+ 638 0630 4000C28F 		lw	$2,64($fp)
+ 639 0634 00000000 		nop
+ 640 0638 01004224 		addiu	$2,$2,1
+ 641 063c 4000C2AF 		sw	$2,64($fp)
+ 642              	$L15:
+ 643              	$LBE2 = .
+  73:uCmorse/test_inmorse.c ****     while (*c != 0x0) {
+ 644              		.loc 1 73 0
+ 645 0640 4000C28F 		lw	$2,64($fp)
+ 646 0644 00000000 		nop
+ 647 0648 00004280 		lb	$2,0($2)
+ 648 064c 00000000 		nop
+ 649 0650 5AFF4014 		bne	$2,$0,$L22
+ 650 0654 00000000 		nop
+ 651              	
+  91:uCmorse/test_inmorse.c ****     }
+  92:uCmorse/test_inmorse.c **** 
+  93:uCmorse/test_inmorse.c ****     printf("You selected a %c, p=%li\n",  *(p + (pLen -1)/2), (long int) (p - codetree));
+ 652              		.loc 1 94 0
+ 653 0658 0000023C 		lui	$2,%hi($LC9)
+ 654 065c 24014424 		addiu	$4,$2,%lo($LC9)
+ 655 0660 4400C38F 		lw	$3,68($fp)
+ 656 0664 4800C28F 		lw	$2,72($fp)
+ 657 0668 00000000 		nop
+ 658 066c FFFF4224 		addiu	$2,$2,-1
+ 659 0670 C22F0200 		srl	$5,$2,31
+ 660 0674 2110A200 		addu	$2,$5,$2
+ 661 0678 43100200 		sra	$2,$2,1
+ 662 067c 21106200 		addu	$2,$3,$2
+ 663 0680 00004280 		lb	$2,0($2)
+ 664 0684 00000000 		nop
+ 665 0688 21184000 		move	$3,$2
+ 666 068c 4400C28F 		lw	$2,68($fp)
+ 667 0690 00000000 		nop
+ 668 0694 21284000 		move	$5,$2
+ 669 0698 0000828F 		lw	$2,%got(codetree)($28)
+ 670 069c 00000000 		nop
+ 671 06a0 2310A200 		subu	$2,$5,$2
+ 672 06a4 21286000 		move	$5,$3
+ 673 06a8 21304000 		move	$6,$2
+ 674 06ac 0000828F 		lw	$2,%call16(printf)($28)
+ 675 06b0 00000000 		nop
+ 676 06b4 21C84000 		move	$25,$2
+ 677 06b8 09F82003 		jalr	$25
+ 678 06bc 00000000 		nop
+ 679              	
+ 680 06c0 1000DC8F 		lw	$28,16($fp)
+  94:uCmorse/test_inmorse.c ****   } else  { // vt52 interactive mode
+  95:uCmorse/test_inmorse.c ****     int res = SetupTerminal();
+  96:uCmorse/test_inmorse.c ****     if (res != 0) return res;
+  97:uCmorse/test_inmorse.c **** 
+  98:uCmorse/test_inmorse.c ****     // 2-line output format.  
+  99:uCmorse/test_inmorse.c ****     // First line is codetree state, second line is accumulated output
+ 100:uCmorse/test_inmorse.c ****     char input[40]; // accumulated input
+ 101:uCmorse/test_inmorse.c ****     int inputLen=0;
+ 102:uCmorse/test_inmorse.c ****     for (int i=0; i<40; ++i) 
+ 103:uCmorse/test_inmorse.c ****       input[i] = 0x0;
+ 104:uCmorse/test_inmorse.c ****     printf("\n"); // move to lower line, so that we can clear
+ 105:uCmorse/test_inmorse.c ****     while (1) {
+ 106:uCmorse/test_inmorse.c ****       // Get New Character
+ 107:uCmorse/test_inmorse.c ****       char *p = codetree;
+ 108:uCmorse/test_inmorse.c ****       int pLen = 63;
+ 109:uCmorse/test_inmorse.c ****       while (1) {
+ 110:uCmorse/test_inmorse.c ****         // Move up and clear to home position
+ 111:uCmorse/test_inmorse.c ****         printf("\033[2K\r"); // clear second line, move to col 0
+ 112:uCmorse/test_inmorse.c ****         printf("\033[1A"); // cursor up
+ 113:uCmorse/test_inmorse.c ****         printf("\033[2K\r"); // clear first line, move to col 0
+ 114:uCmorse/test_inmorse.c ****         // Print codetree status
+ 115:uCmorse/test_inmorse.c ****         for (int i=0; i<(p - codetree); ++i)
+ 116:uCmorse/test_inmorse.c ****           printf(" ");
+ 117:uCmorse/test_inmorse.c ****         for (int i=0; i<pLen; ++i) {
+ 118:uCmorse/test_inmorse.c ****           if (i == (pLen - 1)/2)
+ 119:uCmorse/test_inmorse.c ****             printf("\033[7m"); // reverse video
+ 120:uCmorse/test_inmorse.c ****           printf("%c", p[i]);
+ 121:uCmorse/test_inmorse.c ****           if (i == (pLen - 1)/2)
+ 122:uCmorse/test_inmorse.c ****             printf("\033[0m"); // normal video
+ 123:uCmorse/test_inmorse.c ****         }
+ 124:uCmorse/test_inmorse.c ****         // Print accumulated input
+ 125:uCmorse/test_inmorse.c ****         printf("\n> ");
+ 126:uCmorse/test_inmorse.c ****         for (int i=0; i<inputLen; ++i)
+ 127:uCmorse/test_inmorse.c ****           printf("%c", input[i]);
+ 128:uCmorse/test_inmorse.c ****         fflush(stdout);
+ 129:uCmorse/test_inmorse.c ****         // Get new input
+ 130:uCmorse/test_inmorse.c ****         char c;
+ 131:uCmorse/test_inmorse.c ****         fread(&c, 1, 1, stdin);
+ 132:uCmorse/test_inmorse.c ****         if (c == '[') c = '.';
+ 133:uCmorse/test_inmorse.c ****         if (c == ']') c = '-';
+ 134:uCmorse/test_inmorse.c ****         if (c == '.' || c == '-') {
+ 135:uCmorse/test_inmorse.c ****           int res = InMorseNext(c, &p, &pLen);
+ 136:uCmorse/test_inmorse.c ****           if (res < 0)
+ 137:uCmorse/test_inmorse.c ****             break; // start over
+ 138:uCmorse/test_inmorse.c ****         } else if (c == '\n') {
+ 139:uCmorse/test_inmorse.c ****           input[inputLen++] = *(p + (pLen - 1)/2);
+ 140:uCmorse/test_inmorse.c ****           break;
+ 141:uCmorse/test_inmorse.c ****         } else {
+ 142:uCmorse/test_inmorse.c ****           break;
+ 143:uCmorse/test_inmorse.c ****         }
+ 144:uCmorse/test_inmorse.c ****       }
+ 145:uCmorse/test_inmorse.c **** 
+ 146:uCmorse/test_inmorse.c ****     }
+ 147:uCmorse/test_inmorse.c **** 
+ 148:uCmorse/test_inmorse.c ****     RestoreTerminal();
+ 149:uCmorse/test_inmorse.c ****   }
+ 150:uCmorse/test_inmorse.c ****   return 0;
+ 681              		.loc 1 151 0
+ 682 06c4 21100000 		move	$2,$0
+ 683 06c8 21010010 		b	$L13
+ 684 06cc 00000000 		nop
+ 685              	
+ 686              	$L14:
+ 687              	$LBB5 = .
+  96:uCmorse/test_inmorse.c ****     int res = SetupTerminal();
+ 688              		.loc 1 96 0
+ 689              		.option	pic0
+ 690 06d0 0000000C 		jal	SetupTerminal
+ 691 06d4 00000000 		nop
+ 692              	
+ 693              		.option	pic2
+ 694 06d8 1000DC8F 		lw	$28,16($fp)
+ 695 06dc 3000C2AF 		sw	$2,48($fp)
+  97:uCmorse/test_inmorse.c ****     if (res != 0) return res;
+ 696              		.loc 1 97 0
+ 697 06e0 3000C28F 		lw	$2,48($fp)
+ 698 06e4 00000000 		nop
+ 699 06e8 04004010 		beq	$2,$0,$L23
+ 700 06ec 00000000 		nop
+ 701              	
+ 702 06f0 3000C28F 		lw	$2,48($fp)
+ 703 06f4 16010010 		b	$L13
+ 704 06f8 00000000 		nop
+ 705              	
+ 706              	$L23:
+ 102:uCmorse/test_inmorse.c ****     int inputLen=0;
+ 707              		.loc 1 102 0
+ 708 06fc 2C00C0AF 		sw	$0,44($fp)
+ 709              	$LBB6 = .
+ 103:uCmorse/test_inmorse.c ****     for (int i=0; i<40; ++i) 
+ 710              		.loc 1 103 0
+ 711 0700 2800C0AF 		sw	$0,40($fp)
+ 712 0704 09000010 		b	$L24
+ 713 0708 00000000 		nop
+ 714              	
+ 715              	$L25:
+ 104:uCmorse/test_inmorse.c ****       input[i] = 0x0;
+ 716              		.loc 1 104 0
+ 717 070c 2800C28F 		lw	$2,40($fp)
+ 718 0710 1800C327 		addiu	$3,$fp,24
+ 719 0714 21106200 		addu	$2,$3,$2
+ 720 0718 400040A0 		sb	$0,64($2)
+ 103:uCmorse/test_inmorse.c ****     for (int i=0; i<40; ++i) 
+ 721              		.loc 1 103 0
+ 722 071c 2800C28F 		lw	$2,40($fp)
+ 723 0720 00000000 		nop
+ 724 0724 01004224 		addiu	$2,$2,1
+ 725 0728 2800C2AF 		sw	$2,40($fp)
+ 726              	$L24:
+ 727 072c 2800C28F 		lw	$2,40($fp)
+ 728 0730 00000000 		nop
+ 729 0734 28004228 		slt	$2,$2,40
+ 730 0738 F4FF4014 		bne	$2,$0,$L25
+ 731 073c 00000000 		nop
+ 732              	
+ 733              	$LBE6 = .
+ 105:uCmorse/test_inmorse.c ****     printf("\n"); // move to lower line, so that we can clear
+ 734              		.loc 1 105 0
+ 735 0740 0A000424 		li	$4,10			# 0xa
+ 736 0744 0000828F 		lw	$2,%call16(putchar)($28)
+ 737 0748 00000000 		nop
+ 738 074c 21C84000 		move	$25,$2
+ 739 0750 09F82003 		jalr	$25
+ 740 0754 00000000 		nop
+ 741              	
+ 742 0758 1000DC8F 		lw	$28,16($fp)
+ 743 075c 00000000 		nop
+ 744              	$L42:
+ 745              	$LBB7 = .
+ 108:uCmorse/test_inmorse.c ****       char *p = codetree;
+ 746              		.loc 1 108 0
+ 747 0760 0000828F 		lw	$2,%got(codetree)($28)
+ 748 0764 00000000 		nop
+ 749 0768 4C00C2AF 		sw	$2,76($fp)
+ 109:uCmorse/test_inmorse.c ****       int pLen = 63;
+ 750              		.loc 1 109 0
+ 751 076c 3F000224 		li	$2,63			# 0x3f
+ 752 0770 5000C2AF 		sw	$2,80($fp)
+ 753 0774 02000010 		b	$L40
+ 754 0778 00000000 		nop
+ 755              	
+ 756              	$L44:
+ 145:uCmorse/test_inmorse.c ****       }
+ 757              		.loc 1 145 0
+ 758 077c 00000000 		nop
+ 759              	$L40:
+ 760              	$LBB8 = .
+ 112:uCmorse/test_inmorse.c ****         printf("\033[2K\r"); // clear second line, move to col 0
+ 761              		.loc 1 112 0
+ 762 0780 0000023C 		lui	$2,%hi($LC10)
+ 763 0784 40014224 		addiu	$2,$2,%lo($LC10)
+ 764 0788 21204000 		move	$4,$2
+ 765 078c 0000828F 		lw	$2,%call16(printf)($28)
+ 766 0790 00000000 		nop
+ 767 0794 21C84000 		move	$25,$2
+ 768 0798 09F82003 		jalr	$25
+ 769 079c 00000000 		nop
+ 770              	
+ 771 07a0 1000DC8F 		lw	$28,16($fp)
+ 113:uCmorse/test_inmorse.c ****         printf("\033[1A"); // cursor up
+ 772              		.loc 1 113 0
+ 773 07a4 0000023C 		lui	$2,%hi($LC11)
+ 774 07a8 48014224 		addiu	$2,$2,%lo($LC11)
+ 775 07ac 21204000 		move	$4,$2
+ 776 07b0 0000828F 		lw	$2,%call16(printf)($28)
+ 777 07b4 00000000 		nop
+ 778 07b8 21C84000 		move	$25,$2
+ 779 07bc 09F82003 		jalr	$25
+ 780 07c0 00000000 		nop
+ 781              	
+ 782 07c4 1000DC8F 		lw	$28,16($fp)
+ 114:uCmorse/test_inmorse.c ****         printf("\033[2K\r"); // clear first line, move to col 0
+ 783              		.loc 1 114 0
+ 784 07c8 0000023C 		lui	$2,%hi($LC10)
+ 785 07cc 40014224 		addiu	$2,$2,%lo($LC10)
+ 786 07d0 21204000 		move	$4,$2
+ 787 07d4 0000828F 		lw	$2,%call16(printf)($28)
+ 788 07d8 00000000 		nop
+ 789 07dc 21C84000 		move	$25,$2
+ 790 07e0 09F82003 		jalr	$25
+ 791 07e4 00000000 		nop
+ 792              	
+ 793 07e8 1000DC8F 		lw	$28,16($fp)
+ 794              	$LBB9 = .
+ 116:uCmorse/test_inmorse.c ****         for (int i=0; i<(p - codetree); ++i)
+ 795              		.loc 1 116 0
+ 796 07ec 2400C0AF 		sw	$0,36($fp)
+ 797 07f0 0C000010 		b	$L26
+ 798 07f4 00000000 		nop
+ 799              	
+ 800              	$L27:
+ 117:uCmorse/test_inmorse.c ****           printf(" ");
+ 801              		.loc 1 117 0
+ 802 07f8 20000424 		li	$4,32			# 0x20
+ 803 07fc 0000828F 		lw	$2,%call16(putchar)($28)
+ 804 0800 00000000 		nop
+ 805 0804 21C84000 		move	$25,$2
+ 806 0808 09F82003 		jalr	$25
+ 807 080c 00000000 		nop
+ 808              	
+ 809 0810 1000DC8F 		lw	$28,16($fp)
+ 116:uCmorse/test_inmorse.c ****         for (int i=0; i<(p - codetree); ++i)
+ 810              		.loc 1 116 0
+ 811 0814 2400C28F 		lw	$2,36($fp)
+ 812 0818 00000000 		nop
+ 813 081c 01004224 		addiu	$2,$2,1
+ 814 0820 2400C2AF 		sw	$2,36($fp)
+ 815              	$L26:
+ 816 0824 4C00C28F 		lw	$2,76($fp)
+ 817 0828 00000000 		nop
+ 818 082c 21184000 		move	$3,$2
+ 819 0830 0000828F 		lw	$2,%got(codetree)($28)
+ 820 0834 00000000 		nop
+ 821 0838 23186200 		subu	$3,$3,$2
+ 822 083c 2400C28F 		lw	$2,36($fp)
+ 823 0840 00000000 		nop
+ 824 0844 2A104300 		slt	$2,$2,$3
+ 825 0848 EBFF4014 		bne	$2,$0,$L27
+ 826 084c 00000000 		nop
+ 827              	
+ 828              	$LBE9 = .
+ 829              	$LBB10 = .
+ 118:uCmorse/test_inmorse.c ****         for (int i=0; i<pLen; ++i) {
+ 830              		.loc 1 118 0
+ 831 0850 2000C0AF 		sw	$0,32($fp)
+ 832 0854 3A000010 		b	$L28
+ 833 0858 00000000 		nop
+ 834              	
+ 835              	$L31:
+ 119:uCmorse/test_inmorse.c ****           if (i == (pLen - 1)/2)
+ 836              		.loc 1 119 0
+ 837 085c 5000C28F 		lw	$2,80($fp)
+ 838 0860 00000000 		nop
+ 839 0864 FFFF4224 		addiu	$2,$2,-1
+ 840 0868 C21F0200 		srl	$3,$2,31
+ 841 086c 21106200 		addu	$2,$3,$2
+ 842 0870 43100200 		sra	$2,$2,1
+ 843 0874 21184000 		move	$3,$2
+ 844 0878 2000C28F 		lw	$2,32($fp)
+ 845 087c 00000000 		nop
+ 846 0880 0A006214 		bne	$3,$2,$L29
+ 847 0884 00000000 		nop
+ 848              	
+ 120:uCmorse/test_inmorse.c ****             printf("\033[7m"); // reverse video
+ 849              		.loc 1 120 0
+ 850 0888 0000023C 		lui	$2,%hi($LC12)
+ 851 088c 50014224 		addiu	$2,$2,%lo($LC12)
+ 852 0890 21204000 		move	$4,$2
+ 853 0894 0000828F 		lw	$2,%call16(printf)($28)
+ 854 0898 00000000 		nop
+ 855 089c 21C84000 		move	$25,$2
+ 856 08a0 09F82003 		jalr	$25
+ 857 08a4 00000000 		nop
+ 858              	
+ 859 08a8 1000DC8F 		lw	$28,16($fp)
+ 860              	$L29:
+ 121:uCmorse/test_inmorse.c ****           printf("%c", p[i]);
+ 861              		.loc 1 121 0
+ 862 08ac 4C00C38F 		lw	$3,76($fp)
+ 863 08b0 2000C28F 		lw	$2,32($fp)
+ 864 08b4 00000000 		nop
+ 865 08b8 21106200 		addu	$2,$3,$2
+ 866 08bc 00004280 		lb	$2,0($2)
+ 867 08c0 00000000 		nop
+ 868 08c4 21204000 		move	$4,$2
+ 869 08c8 0000828F 		lw	$2,%call16(putchar)($28)
+ 870 08cc 00000000 		nop
+ 871 08d0 21C84000 		move	$25,$2
+ 872 08d4 09F82003 		jalr	$25
+ 873 08d8 00000000 		nop
+ 874              	
+ 875 08dc 1000DC8F 		lw	$28,16($fp)
+ 122:uCmorse/test_inmorse.c ****           if (i == (pLen - 1)/2)
+ 876              		.loc 1 122 0
+ 877 08e0 5000C28F 		lw	$2,80($fp)
+ 878 08e4 00000000 		nop
+ 879 08e8 FFFF4224 		addiu	$2,$2,-1
+ 880 08ec C21F0200 		srl	$3,$2,31
+ 881 08f0 21106200 		addu	$2,$3,$2
+ 882 08f4 43100200 		sra	$2,$2,1
+ 883 08f8 21184000 		move	$3,$2
+ 884 08fc 2000C28F 		lw	$2,32($fp)
+ 885 0900 00000000 		nop
+ 886 0904 0A006214 		bne	$3,$2,$L30
+ 887 0908 00000000 		nop
+ 888              	
+ 123:uCmorse/test_inmorse.c ****             printf("\033[0m"); // normal video
+ 889              		.loc 1 123 0
+ 890 090c 0000023C 		lui	$2,%hi($LC13)
+ 891 0910 58014224 		addiu	$2,$2,%lo($LC13)
+ 892 0914 21204000 		move	$4,$2
+ 893 0918 0000828F 		lw	$2,%call16(printf)($28)
+ 894 091c 00000000 		nop
+ 895 0920 21C84000 		move	$25,$2
+ 896 0924 09F82003 		jalr	$25
+ 897 0928 00000000 		nop
+ 898              	
+ 899 092c 1000DC8F 		lw	$28,16($fp)
+ 900              	$L30:
+ 118:uCmorse/test_inmorse.c ****         for (int i=0; i<pLen; ++i) {
+ 901              		.loc 1 118 0
+ 902 0930 2000C28F 		lw	$2,32($fp)
+ 903 0934 00000000 		nop
+ 904 0938 01004224 		addiu	$2,$2,1
+ 905 093c 2000C2AF 		sw	$2,32($fp)
+ 906              	$L28:
+ 907 0940 5000C28F 		lw	$2,80($fp)
+ 908 0944 2000C38F 		lw	$3,32($fp)
+ 909 0948 00000000 		nop
+ 910 094c 2A106200 		slt	$2,$3,$2
+ 911 0950 C2FF4014 		bne	$2,$0,$L31
+ 912 0954 00000000 		nop
+ 913              	
+ 914              	$LBE10 = .
+ 126:uCmorse/test_inmorse.c ****         printf("\n> ");
+ 915              		.loc 1 126 0
+ 916 0958 0000023C 		lui	$2,%hi($LC14)
+ 917 095c 60014224 		addiu	$2,$2,%lo($LC14)
+ 918 0960 21204000 		move	$4,$2
+ 919 0964 0000828F 		lw	$2,%call16(printf)($28)
+ 920 0968 00000000 		nop
+ 921 096c 21C84000 		move	$25,$2
+ 922 0970 09F82003 		jalr	$25
+ 923 0974 00000000 		nop
+ 924              	
+ 925 0978 1000DC8F 		lw	$28,16($fp)
+ 926              	$LBB11 = .
+ 127:uCmorse/test_inmorse.c ****         for (int i=0; i<inputLen; ++i)
+ 927              		.loc 1 127 0
+ 928 097c 1C00C0AF 		sw	$0,28($fp)
+ 929 0980 11000010 		b	$L32
+ 930 0984 00000000 		nop
+ 931              	
+ 932              	$L33:
+ 128:uCmorse/test_inmorse.c ****           printf("%c", input[i]);
+ 933              		.loc 1 128 0
+ 934 0988 1C00C28F 		lw	$2,28($fp)
+ 935 098c 1800C327 		addiu	$3,$fp,24
+ 936 0990 21106200 		addu	$2,$3,$2
+ 937 0994 40004280 		lb	$2,64($2)
+ 938 0998 00000000 		nop
+ 939 099c 21204000 		move	$4,$2
+ 940 09a0 0000828F 		lw	$2,%call16(putchar)($28)
+ 941 09a4 00000000 		nop
+ 942 09a8 21C84000 		move	$25,$2
+ 943 09ac 09F82003 		jalr	$25
+ 944 09b0 00000000 		nop
+ 945              	
+ 946 09b4 1000DC8F 		lw	$28,16($fp)
+ 127:uCmorse/test_inmorse.c ****         for (int i=0; i<inputLen; ++i)
+ 947              		.loc 1 127 0
+ 948 09b8 1C00C28F 		lw	$2,28($fp)
+ 949 09bc 00000000 		nop
+ 950 09c0 01004224 		addiu	$2,$2,1
+ 951 09c4 1C00C2AF 		sw	$2,28($fp)
+ 952              	$L32:
+ 953 09c8 1C00C38F 		lw	$3,28($fp)
+ 954 09cc 2C00C28F 		lw	$2,44($fp)
+ 955 09d0 00000000 		nop
+ 956 09d4 2A106200 		slt	$2,$3,$2
+ 957 09d8 EBFF4014 		bne	$2,$0,$L33
+ 958 09dc 00000000 		nop
+ 959              	
+ 960              	$LBE11 = .
+ 129:uCmorse/test_inmorse.c ****         fflush(stdout);
+ 961              		.loc 1 129 0
+ 962 09e0 0000828F 		lw	$2,%got(stdout)($28)
+ 963 09e4 00000000 		nop
+ 964 09e8 0000428C 		lw	$2,0($2)
+ 965 09ec 00000000 		nop
+ 966 09f0 21204000 		move	$4,$2
+ 967 09f4 0000828F 		lw	$2,%call16(fflush)($28)
+ 968 09f8 00000000 		nop
+ 969 09fc 21C84000 		move	$25,$2
+ 970 0a00 09F82003 		jalr	$25
+ 971 0a04 00000000 		nop
+ 972              	
+ 973 0a08 1000DC8F 		lw	$28,16($fp)
+ 974 0a0c 00000000 		nop
+ 132:uCmorse/test_inmorse.c ****         fread(&c, 1, 1, stdin);
+ 975              		.loc 1 132 0
+ 976 0a10 0000828F 		lw	$2,%got(stdin)($28)
+ 977 0a14 00000000 		nop
+ 978 0a18 0000428C 		lw	$2,0($2)
+ 979 0a1c 5400C327 		addiu	$3,$fp,84
+ 980 0a20 21206000 		move	$4,$3
+ 981 0a24 01000524 		li	$5,1			# 0x1
+ 982 0a28 01000624 		li	$6,1			# 0x1
+ 983 0a2c 21384000 		move	$7,$2
+ 984 0a30 0000828F 		lw	$2,%call16(fread)($28)
+ 985 0a34 00000000 		nop
+ 986 0a38 21C84000 		move	$25,$2
+ 987 0a3c 09F82003 		jalr	$25
+ 988 0a40 00000000 		nop
+ 989              	
+ 990 0a44 1000DC8F 		lw	$28,16($fp)
+ 133:uCmorse/test_inmorse.c ****         if (c == '[') c = '.';
+ 991              		.loc 1 133 0
+ 992 0a48 5400C383 		lb	$3,84($fp)
+ 993 0a4c 5B000224 		li	$2,91			# 0x5b
+ 994 0a50 03006214 		bne	$3,$2,$L34
+ 995 0a54 00000000 		nop
+ 996              	
+ 997 0a58 2E000224 		li	$2,46			# 0x2e
+ 998 0a5c 5400C2A3 		sb	$2,84($fp)
+ 999              	$L34:
+ 134:uCmorse/test_inmorse.c ****         if (c == ']') c = '-';
+ 1000              		.loc 1 134 0
+ 1001 0a60 5400C383 		lb	$3,84($fp)
+ 1002 0a64 5D000224 		li	$2,93			# 0x5d
+ 1003 0a68 03006214 		bne	$3,$2,$L35
+ 1004 0a6c 00000000 		nop
+ 1005              	
+ 1006 0a70 2D000224 		li	$2,45			# 0x2d
+ 1007 0a74 5400C2A3 		sb	$2,84($fp)
+ 1008              	$L35:
+ 135:uCmorse/test_inmorse.c ****         if (c == '.' || c == '-') {
+ 1009              		.loc 1 135 0
+ 1010 0a78 5400C383 		lb	$3,84($fp)
+ 1011 0a7c 2E000224 		li	$2,46			# 0x2e
+ 1012 0a80 05006210 		beq	$3,$2,$L36
+ 1013 0a84 00000000 		nop
+ 1014              	
+ 1015 0a88 5400C383 		lb	$3,84($fp)
+ 1016 0a8c 2D000224 		li	$2,45			# 0x2d
+ 1017 0a90 15006214 		bne	$3,$2,$L37
+ 1018 0a94 00000000 		nop
+ 1019              	
+ 1020              	$L36:
+ 1021              	$LBB12 = .
+ 136:uCmorse/test_inmorse.c ****           int res = InMorseNext(c, &p, &pLen);
+ 1022              		.loc 1 136 0
+ 1023 0a98 5400C283 		lb	$2,84($fp)
+ 1024 0a9c 00000000 		nop
+ 1025 0aa0 21204000 		move	$4,$2
+ 1026 0aa4 4C00C327 		addiu	$3,$fp,76
+ 1027 0aa8 5000C227 		addiu	$2,$fp,80
+ 1028 0aac 21286000 		move	$5,$3
+ 1029 0ab0 21304000 		move	$6,$2
+ 1030 0ab4 0000828F 		lw	$2,%call16(InMorseNext)($28)
+ 1031 0ab8 00000000 		nop
+ 1032 0abc 21C84000 		move	$25,$2
+ 1033 0ac0 09F82003 		jalr	$25
+ 1034 0ac4 00000000 		nop
+ 1035              	
+ 1036 0ac8 1000DC8F 		lw	$28,16($fp)
+ 1037 0acc 1800C2AF 		sw	$2,24($fp)
+ 137:uCmorse/test_inmorse.c ****           if (res < 0)
+ 1038              		.loc 1 137 0
+ 1039 0ad0 1800C28F 		lw	$2,24($fp)
+ 1040 0ad4 00000000 		nop
+ 1041 0ad8 28FF4104 		bgez	$2,$L44
+ 1042 0adc 00000000 		nop
+ 1043              	
+ 138:uCmorse/test_inmorse.c ****             break; // start over
+ 1044              		.loc 1 138 0
+ 1045 0ae0 19000010 		b	$L39
+ 1046 0ae4 00000000 		nop
+ 1047              	
+ 1048              	$L37:
+ 1049              	$LBE12 = .
+ 139:uCmorse/test_inmorse.c ****         } else if (c == '\n') {
+ 1050              		.loc 1 139 0
+ 1051 0ae8 5400C383 		lb	$3,84($fp)
+ 1052 0aec 0A000224 		li	$2,10			# 0xa
+ 1053 0af0 14006214 		bne	$3,$2,$L41
+ 1054 0af4 00000000 		nop
+ 1055              	
+ 140:uCmorse/test_inmorse.c ****           input[inputLen++] = *(p + (pLen - 1)/2);
+ 1056              		.loc 1 140 0
+ 1057 0af8 2C00C48F 		lw	$4,44($fp)
+ 1058 0afc 4C00C38F 		lw	$3,76($fp)
+ 1059 0b00 5000C28F 		lw	$2,80($fp)
+ 1060 0b04 00000000 		nop
+ 1061 0b08 FFFF4224 		addiu	$2,$2,-1
+ 1062 0b0c C22F0200 		srl	$5,$2,31
+ 1063 0b10 2110A200 		addu	$2,$5,$2
+ 1064 0b14 43100200 		sra	$2,$2,1
+ 1065 0b18 21106200 		addu	$2,$3,$2
+ 1066 0b1c 00004380 		lb	$3,0($2)
+ 1067 0b20 1800C227 		addiu	$2,$fp,24
+ 1068 0b24 21104400 		addu	$2,$2,$4
+ 1069 0b28 400043A0 		sb	$3,64($2)
+ 1070 0b2c 2C00C28F 		lw	$2,44($fp)
+ 1071 0b30 00000000 		nop
+ 1072 0b34 01004224 		addiu	$2,$2,1
+ 1073 0b38 2C00C2AF 		sw	$2,44($fp)
+ 141:uCmorse/test_inmorse.c ****           break;
+ 1074              		.loc 1 141 0
+ 1075 0b3c 02000010 		b	$L39
+ 1076 0b40 00000000 		nop
+ 1077              	
+ 1078              	$L41:
+ 143:uCmorse/test_inmorse.c ****           break;
+ 1079              		.loc 1 143 0
+ 1080 0b44 00000000 		nop
+ 1081              	$L39:
+ 1082              	$LBE8 = .
+ 1083              	$LBE7 = .
+ 147:uCmorse/test_inmorse.c ****     }
+ 1084              		.loc 1 147 0
+ 1085 0b48 05FF0010 		b	$L42
+ 1086 0b4c 00000000 		nop
+ 1087              	
+ 1088              	$L13:
+ 1089              	$LBE5 = .
+ 151:uCmorse/test_inmorse.c **** }
+ 1090              		.loc 1 152 0
+ 1091 0b50 21E8C003 		move	$sp,$fp
+ 1092 0b54 8400BF8F 		lw	$31,132($sp)
+ 1093 0b58 8000BE8F 		lw	$fp,128($sp)
+ 1094 0b5c 8800BD27 		addiu	$sp,$sp,136
+ 1095 0b60 0800E003 		j	$31
+ 1096 0b64 00000000 		nop
+ 1097              	
+ 1098              		.set	macro
+ 1099              		.set	reorder
+ 1100              		.end	main
+ 1101              	$LFE2:
+ 1191              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 uCmorse/test_inmorse.c
+                            *COM*:0000000000000034 tios
+                            *COM*:0000000000000034 orig_tios
+     /tmp/ccUDfk4F.s:39     .text:0000000000000000 SetupTerminal
+     /tmp/ccUDfk4F.s:265    .text:0000000000000278 RestoreTerminal
+     /tmp/ccUDfk4F.s:350    .text:00000000000002d0 main
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+tcgetattr
+stderr
+fwrite
+memcpy
+tcsetattr
+puts
+fprintf
+InMorseNext
+printf
+putchar
+codetree
+stdout
+fflush
+stdin
+fread

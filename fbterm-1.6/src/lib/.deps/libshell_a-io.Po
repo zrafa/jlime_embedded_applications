@@ -1,0 +1,134 @@
+libshell_a-io.o: io.cpp \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/string.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/features.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/predefs.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sys/cdefs.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/wordsize.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/gnu/stubs.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/include/stddef.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/xlocale.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/locale.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/locale.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/langinfo.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/nl_types.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/iconv.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/errno.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/errno.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/linux/errno.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/asm/errno.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/asm-generic/errno-base.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/fcntl.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/fcntl.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sgidefs.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sys/types.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/types.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/typesizes.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/time.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/endian.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/endian.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/byteswap.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sys/select.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/select.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/sigset.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/time.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sys/sysmacros.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/pthreadtypes.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/uio.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sys/stat.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/stat.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/unistd.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/posix_opt.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/environments.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/confname.h \
+ /mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/getopt.h \
+ io.h type.h instance.h
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/string.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/features.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/predefs.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sys/cdefs.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/wordsize.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/gnu/stubs.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/include/stddef.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/xlocale.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/locale.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/locale.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/langinfo.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/nl_types.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/iconv.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/errno.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/errno.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/linux/errno.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/asm/errno.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/asm-generic/errno-base.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/fcntl.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/fcntl.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sgidefs.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sys/types.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/types.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/typesizes.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/time.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/endian.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/endian.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/byteswap.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sys/select.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/select.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/sigset.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/time.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sys/sysmacros.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/pthreadtypes.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/uio.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/sys/stat.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/stat.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/unistd.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/posix_opt.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/environments.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/bits/confname.h:
+
+/mnt/sda5/rafa/programas/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/include/getopt.h:
+
+io.h:
+
+type.h:
+
+instance.h:

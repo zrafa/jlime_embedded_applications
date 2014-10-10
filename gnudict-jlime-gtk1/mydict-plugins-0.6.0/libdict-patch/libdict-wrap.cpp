@@ -1,0 +1,124 @@
+// libdict.cpp
+// sdyoung@well.com
+//
+// This is the wrapper code for the dictConn C++ class.
+//
+//   Copyright (c) 2001, 2002 Steven Young
+//
+//   Permission is hereby granted, free of charge, to any person obtaining
+//   a copy of this software and associated documentation files (the
+//   "Software"), to deal in the Software without restriction, including
+//   without limitation the rights to use, copy, modify, merge, publish,
+//   distribute, sublicense, and/or sell copies of the Software, and to
+//   permit persons to whom the Software is furnished to do so, subject to
+//   the following conditions:
+//
+//   The above copyright notice and this permission notice shall be
+//   included in all copies or substantial portions of the Software.
+//
+//   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+//   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+//   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+//   IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+//   CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+//   TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+//   SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+// $History$
+// $Log: libdict-wrap.cpp,v $
+// Revision 1.4  2002/07/04 01:56:55  sdyoung
+// Updated to call ld_newconn with cache size arguments.
+//
+// Revision 1.3  2002/03/15 18:40:54  sdyoung
+// Added license information to comment header.
+//
+// Revision 1.2  2002/03/13 21:09:12  sdyoung
+// Added getError and strError functions.
+//
+// Revision 1.1  2002/03/12 18:42:25  sdyoung
+// Initial revision
+//
+#include <iostream>
+#include "libdict-wrap.hpp"
+
+dictConn::dictConn() {
+	ldconn = NULL;
+}
+
+dictConn::~dictConn() {
+	if(ldconn) 
+		ld_freeconn(ldconn);
+}
+
+int dictConn::getRespNo(char *msg) {
+	return(ld_getrespno(msg));
+}
+
+bool dictConn::checkOk(int respno) {
+	return(convToBool(ld_checkok(respno)));
+}
+
+bool dictConn::newConn(char *host, int port, int timeout, char *client, int defcachesz, int matchcachesz, bool debug) {
+	ldconn = ld_newconn(host, port, timeout, client, defcachesz, matchcachesz, convToLDBool(debug));
+	if(!ldconn)
+		return(false);
+	return(true);
+}
+
+bool dictConn::closeConn() {
+	return(convToBool(ld_closeconn(ldconn)));
+}
+
+bool dictConn::auth(char *user, char *pw) {
+	return(convToBool(ld_auth(ldconn, user, pw)));
+}
+
+char *dictConn::getServerInfo() {
+	return(ld_serverinfo(ldconn));
+}
+
+struct ld_dbs **dictConn::getDbs() {
+	return(ld_getdbs(ldconn));
+}
+
+struct ld_dbs **dictConn::getStrats() {
+	return(ld_getstrats(ldconn));
+}
+
+bool dictConn::setDb(char *db) {
+	return(convToBool(ld_setdb(ldconn, db)));
+}
+
+bool dictConn::setStrat(char *strat) {
+	return(convToBool(ld_setstrat(ldconn, strat)));
+}
+
+struct ld_defanswer **dictConn::define(char *word) {
+	return(ld_define(ldconn, word));
+}
+
+struct ld_matchanswer **dictConn::match(char *word) {
+	return(ld_match(ldconn, word));
+}
+
+char *dictConn::getSrvReply() {
+	return(ld_getsrvreply(ldconn));
+}
+
+int dictConn::getError() {
+	return(ld_geterrno(ldconn));
+}
+
+char *dictConn::strError(int errnum) {
+	return(ld_strerror(errnum));
+}
+
+bool dictConn::convToBool(ld_bool val) {
+	if(val == LD_True) return true;
+	return false;
+}
+
+ld_bool dictConn::convToLDBool(bool val) {
+	if(val == true) return LD_True;
+	return LD_False;
+}

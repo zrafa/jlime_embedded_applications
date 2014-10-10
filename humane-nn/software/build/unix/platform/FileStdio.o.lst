@@ -1,0 +1,812 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.globl	fsFile
+  14              		.section	.bss,"aw",@nobits
+  15              		.align	2
+  18              	fsFile:
+  19 0000 00000000 		.space	4
+  20              		.data
+  21              		.align	2
+  24              	fileStateVersion:
+  25 0000 01000000 		.word	1
+  26              		.local	readCount
+  27              		.comm	readCount,4,4
+  28 0004 00000000 		.text
+  28      00000000 
+  28      00000000 
+  29              		.align	2
+  30              		.globl	FileInit
+  31              	$LFB0 = .
+  32              		.file 1 "platform/FileStdio.c"
+   0:platform/FileStdio.c **** /** Filesystem abstraction level for testing on "real" OS targets **/
+   1:platform/FileStdio.c **** 
+   2:platform/FileStdio.c **** #include <stdio.h>
+   3:platform/FileStdio.c **** #include "Platform.h"
+   4:platform/FileStdio.c **** #include "Errors.h"
+   5:platform/FileStdio.c **** #include <assert.h>
+   6:platform/FileStdio.c **** 
+   7:platform/FileStdio.c **** #define _FDEV_EOF -1
+   8:platform/FileStdio.c **** 
+   9:platform/FileStdio.c **** FILE *fsFile=0x0;
+  10:platform/FileStdio.c **** static int fileStateVersion=1;
+  11:platform/FileStdio.c **** static int readCount=0;
+  12:platform/FileStdio.c **** 
+  13:platform/FileStdio.c **** void FileInit(const char *opt) {}
+  33              		.loc 1 14 0
+  34              		.set	nomips16
+  35              		.ent	FileInit
+  37              	FileInit:
+  38              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+  39              		.mask	0x40000000,-4
+  40              		.fmask	0x00000000,0
+  41              		.set	noreorder
+  42              		.set	nomacro
+  43              		
+  44 0000 F8FFBD27 		addiu	$sp,$sp,-8
+  45              	$LCFI0:
+  46 0004 0400BEAF 		sw	$fp,4($sp)
+  47              	$LCFI1:
+  48 0008 21F0A003 		move	$fp,$sp
+  49              	$LCFI2:
+  50 000c 0800C4AF 		sw	$4,8($fp)
+  51              		.loc 1 14 0
+  52 0010 21E8C003 		move	$sp,$fp
+  53 0014 0400BE8F 		lw	$fp,4($sp)
+  54 0018 0800BD27 		addiu	$sp,$sp,8
+  55 001c 0800E003 		j	$31
+  56 0020 00000000 		nop
+  57              	
+  58              		.set	macro
+  59              		.set	reorder
+  60              		.end	FileInit
+  61              	$LFE0:
+  63              		.rdata
+  64              		.align	2
+  65              	$LC0:
+  66 0000 726200   		.ascii	"rb\000"
+  67 0003 00       		.align	2
+  68              	$LC1:
+  69 0004 706C6174 		.ascii	"platform/FileStdio.c\000"
+  69      666F726D 
+  69      2F46696C 
+  69      65537464 
+  69      696F2E63 
+  70 0019 000000   		.align	2
+  71              	$LC2:
+  72 001c 4661696C 		.ascii	"Failed to open file\000"
+  72      65642074 
+  72      6F206F70 
+  72      656E2066 
+  72      696C6500 
+  73              		.text
+  74              		.align	2
+  75              		.globl	FileOpenRO
+  76              	$LFB1 = .
+  14:platform/FileStdio.c **** 
+  15:platform/FileStdio.c **** /** Returns File Exception on failure **/
+  16:platform/FileStdio.c **** void FileOpenRO(const char *fname) {
+  77              		.loc 1 17 0
+  78              		.set	nomips16
+  79              		.ent	FileOpenRO
+  81              	FileOpenRO:
+  82              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+  83              		.mask	0xc0000000,-4
+  84              		.fmask	0x00000000,0
+  85              		.set	noreorder
+  86              		.set	nomacro
+  87              		
+  88 0024 E0FFBD27 		addiu	$sp,$sp,-32
+  89              	$LCFI3:
+  90 0028 1C00BFAF 		sw	$31,28($sp)
+  91              	$LCFI4:
+  92 002c 1800BEAF 		sw	$fp,24($sp)
+  93              	$LCFI5:
+  94 0030 21F0A003 		move	$fp,$sp
+  95              	$LCFI6:
+  96 0034 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  97 0038 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  98 003c 1000BCAF 		.cprestore	16
+  99 0040 2000C4AF 		sw	$4,32($fp)
+  17:platform/FileStdio.c ****   ++fileStateVersion;
+ 100              		.loc 1 18 0
+ 101 0044 0000023C 		lui	$2,%hi(fileStateVersion)
+ 102 0048 0000428C 		lw	$2,%lo(fileStateVersion)($2)
+ 103 004c 00000000 		nop
+ 104 0050 01004324 		addiu	$3,$2,1
+ 105 0054 0000023C 		lui	$2,%hi(fileStateVersion)
+ 106 0058 000043AC 		sw	$3,%lo(fileStateVersion)($2)
+  18:platform/FileStdio.c ****   if (fsFile != 0x0) // can't open until closed
+ 107              		.loc 1 19 0
+ 108 005c 0000023C 		lui	$2,%hi(fsFile)
+ 109 0060 0000428C 		lw	$2,%lo(fsFile)($2)
+ 110 0064 00000000 		nop
+ 111 0068 0B004010 		beq	$2,$0,$L4
+ 112 006c 00000000 		nop
+ 113              	
+  19:platform/FileStdio.c ****     fclose(fsFile);
+ 114              		.loc 1 20 0
+ 115 0070 0000023C 		lui	$2,%hi(fsFile)
+ 116 0074 0000428C 		lw	$2,%lo(fsFile)($2)
+ 117 0078 00000000 		nop
+ 118 007c 21204000 		move	$4,$2
+ 119 0080 0000828F 		lw	$2,%call16(fclose)($28)
+ 120 0084 00000000 		nop
+ 121 0088 21C84000 		move	$25,$2
+ 122 008c 09F82003 		jalr	$25
+ 123 0090 00000000 		nop
+ 124              	
+ 125 0094 1000DC8F 		lw	$28,16($fp)
+ 126              	$L4:
+  20:platform/FileStdio.c ****   fsFile = fopen(fname, "rb");
+ 127              		.loc 1 21 0
+ 128 0098 0000023C 		lui	$2,%hi($LC0)
+ 129 009c 00004224 		addiu	$2,$2,%lo($LC0)
+ 130 00a0 2000C48F 		lw	$4,32($fp)
+ 131 00a4 21284000 		move	$5,$2
+ 132 00a8 0000828F 		lw	$2,%call16(fopen)($28)
+ 133 00ac 00000000 		nop
+ 134 00b0 21C84000 		move	$25,$2
+ 135 00b4 09F82003 		jalr	$25
+ 136 00b8 00000000 		nop
+ 137              	
+ 138 00bc 1000DC8F 		lw	$28,16($fp)
+ 139 00c0 21184000 		move	$3,$2
+ 140 00c4 0000023C 		lui	$2,%hi(fsFile)
+ 141 00c8 000043AC 		sw	$3,%lo(fsFile)($2)
+  21:platform/FileStdio.c ****   if (!fsFile)
+ 142              		.loc 1 22 0
+ 143 00cc 0000023C 		lui	$2,%hi(fsFile)
+ 144 00d0 0000428C 		lw	$2,%lo(fsFile)($2)
+ 145 00d4 00000000 		nop
+ 146 00d8 10004014 		bne	$2,$0,$L6
+ 147 00dc 00000000 		nop
+ 148              	
+  22:platform/FileStdio.c ****     ERRORreturn("Failed to open file");
+ 149              		.loc 1 23 0
+ 150 00e0 0000828F 		lw	$2,%got(errorFile)($28)
+ 151 00e4 0000033C 		lui	$3,%hi($LC1)
+ 152 00e8 04006324 		addiu	$3,$3,%lo($LC1)
+ 153 00ec 000043AC 		sw	$3,0($2)
+ 154 00f0 0000828F 		lw	$2,%got(errorLine)($28)
+ 155 00f4 17000324 		li	$3,23			# 0x17
+ 156 00f8 000043AC 		sw	$3,0($2)
+ 157 00fc 0000828F 		lw	$2,%got(errorFunc)($28)
+ 158 0100 0000033C 		lui	$3,%hi(__func__.1733)
+ 159 0104 9C006324 		addiu	$3,$3,%lo(__func__.1733)
+ 160 0108 000043AC 		sw	$3,0($2)
+ 161 010c 0000828F 		lw	$2,%got(errorMsg)($28)
+ 162 0110 0000033C 		lui	$3,%hi($LC2)
+ 163 0114 1C006324 		addiu	$3,$3,%lo($LC2)
+ 164 0118 000043AC 		sw	$3,0($2)
+ 165              	$L6:
+  23:platform/FileStdio.c **** }
+ 166              		.loc 1 24 0
+ 167 011c 21E8C003 		move	$sp,$fp
+ 168 0120 1C00BF8F 		lw	$31,28($sp)
+ 169 0124 1800BE8F 		lw	$fp,24($sp)
+ 170 0128 2000BD27 		addiu	$sp,$sp,32
+ 171 012c 0800E003 		j	$31
+ 172 0130 00000000 		nop
+ 173              	
+ 174              		.set	macro
+ 175              		.set	reorder
+ 176              		.end	FileOpenRO
+ 177              	$LFE1:
+ 179              		.rdata
+ 180              		.align	2
+ 181              	$LC3:
+ 182 0030 66734669 		.ascii	"fsFile\000"
+ 182      6C6500
+ 183              		.text
+ 184              		.align	2
+ 185              		.globl	FileClose
+ 186              	$LFB2 = .
+  24:platform/FileStdio.c **** 
+  25:platform/FileStdio.c **** void FileClose() {
+ 187              		.loc 1 26 0
+ 188              		.set	nomips16
+ 189              		.ent	FileClose
+ 191              	FileClose:
+ 192              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 193              		.mask	0xc0000000,-4
+ 194              		.fmask	0x00000000,0
+ 195              		.set	noreorder
+ 196              		.set	nomacro
+ 197              		
+ 198 0134 E0FFBD27 		addiu	$sp,$sp,-32
+ 199              	$LCFI7:
+ 200 0138 1C00BFAF 		sw	$31,28($sp)
+ 201              	$LCFI8:
+ 202 013c 1800BEAF 		sw	$fp,24($sp)
+ 203              	$LCFI9:
+ 204 0140 21F0A003 		move	$fp,$sp
+ 205              	$LCFI10:
+ 206 0144 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 207 0148 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 208 014c 1000BCAF 		.cprestore	16
+  26:platform/FileStdio.c ****   ++fileStateVersion;
+ 209              		.loc 1 27 0
+ 210 0150 0000023C 		lui	$2,%hi(fileStateVersion)
+ 211 0154 0000428C 		lw	$2,%lo(fileStateVersion)($2)
+ 212 0158 00000000 		nop
+ 213 015c 01004324 		addiu	$3,$2,1
+ 214 0160 0000023C 		lui	$2,%hi(fileStateVersion)
+ 215 0164 000043AC 		sw	$3,%lo(fileStateVersion)($2)
+  27:platform/FileStdio.c ****   assert(fsFile);
+ 216              		.loc 1 28 0
+ 217 0168 0000023C 		lui	$2,%hi(fsFile)
+ 218 016c 0000428C 		lw	$2,%lo(fsFile)($2)
+ 219 0170 00000000 		nop
+ 220 0174 0D004014 		bne	$2,$0,$L8
+ 221 0178 00000000 		nop
+ 222              	
+ 223 017c 0000023C 		lui	$2,%hi($LC3)
+ 224 0180 30004424 		addiu	$4,$2,%lo($LC3)
+ 225 0184 0000023C 		lui	$2,%hi($LC1)
+ 226 0188 04004524 		addiu	$5,$2,%lo($LC1)
+ 227 018c 1C000624 		li	$6,28			# 0x1c
+ 228 0190 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1747)
+ 229 0194 90004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1747)
+ 230 0198 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 231 019c 00000000 		nop
+ 232 01a0 21C84000 		move	$25,$2
+ 233 01a4 09F82003 		jalr	$25
+ 234 01a8 00000000 		nop
+ 235              	
+ 236              	$L8:
+  28:platform/FileStdio.c ****   fclose(fsFile);
+ 237              		.loc 1 29 0
+ 238 01ac 0000023C 		lui	$2,%hi(fsFile)
+ 239 01b0 0000428C 		lw	$2,%lo(fsFile)($2)
+ 240 01b4 00000000 		nop
+ 241 01b8 21204000 		move	$4,$2
+ 242 01bc 0000828F 		lw	$2,%call16(fclose)($28)
+ 243 01c0 00000000 		nop
+ 244 01c4 21C84000 		move	$25,$2
+ 245 01c8 09F82003 		jalr	$25
+ 246 01cc 00000000 		nop
+ 247              	
+ 248 01d0 1000DC8F 		lw	$28,16($fp)
+  29:platform/FileStdio.c **** }
+ 249              		.loc 1 30 0
+ 250 01d4 21E8C003 		move	$sp,$fp
+ 251 01d8 1C00BF8F 		lw	$31,28($sp)
+ 252 01dc 1800BE8F 		lw	$fp,24($sp)
+ 253 01e0 2000BD27 		addiu	$sp,$sp,32
+ 254 01e4 0800E003 		j	$31
+ 255 01e8 00000000 		nop
+ 256              	
+ 257              		.set	macro
+ 258              		.set	reorder
+ 259              		.end	FileClose
+ 260              	$LFE2:
+ 262              		.rdata
+ 263 0037 00       		.align	2
+ 264              	$LC4:
+ 265 0038 46696C65 		.ascii	"FileRead Short Read\000"
+ 265      52656164 
+ 265      2053686F 
+ 265      72742052 
+ 265      65616400 
+ 266              		.text
+ 267              		.align	2
+ 268              		.globl	FileRead
+ 269              	$LFB3 = .
+  30:platform/FileStdio.c **** 
+  31:platform/FileStdio.c **** /** Returns exception on error, number of bytes read on success (or partial
+  32:platform/FileStdio.c ****  * success) **/
+  33:platform/FileStdio.c **** int FileRead(char *buf, uint32_t len) {
+ 270              		.loc 1 34 0
+ 271              		.set	nomips16
+ 272              		.ent	FileRead
+ 274              	FileRead:
+ 275              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 276              		.mask	0xc0000000,-4
+ 277              		.fmask	0x00000000,0
+ 278              		.set	noreorder
+ 279              		.set	nomacro
+ 280              		
+ 281 01ec D8FFBD27 		addiu	$sp,$sp,-40
+ 282              	$LCFI11:
+ 283 01f0 2400BFAF 		sw	$31,36($sp)
+ 284              	$LCFI12:
+ 285 01f4 2000BEAF 		sw	$fp,32($sp)
+ 286              	$LCFI13:
+ 287 01f8 21F0A003 		move	$fp,$sp
+ 288              	$LCFI14:
+ 289 01fc 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 290 0200 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 291 0204 1000BCAF 		.cprestore	16
+ 292 0208 2800C4AF 		sw	$4,40($fp)
+ 293 020c 2C00C5AF 		sw	$5,44($fp)
+  34:platform/FileStdio.c ****   ++fileStateVersion;
+ 294              		.loc 1 35 0
+ 295 0210 0000023C 		lui	$2,%hi(fileStateVersion)
+ 296 0214 0000428C 		lw	$2,%lo(fileStateVersion)($2)
+ 297 0218 00000000 		nop
+ 298 021c 01004324 		addiu	$3,$2,1
+ 299 0220 0000023C 		lui	$2,%hi(fileStateVersion)
+ 300 0224 000043AC 		sw	$3,%lo(fileStateVersion)($2)
+  35:platform/FileStdio.c ****   ++readCount;
+ 301              		.loc 1 36 0
+ 302 0228 0000023C 		lui	$2,%hi(readCount)
+ 303 022c 0400428C 		lw	$2,%lo(readCount)($2)
+ 304 0230 00000000 		nop
+ 305 0234 01004324 		addiu	$3,$2,1
+ 306 0238 0000023C 		lui	$2,%hi(readCount)
+ 307 023c 040043AC 		sw	$3,%lo(readCount)($2)
+  36:platform/FileStdio.c ****   assert(fsFile);
+ 308              		.loc 1 37 0
+ 309 0240 0000023C 		lui	$2,%hi(fsFile)
+ 310 0244 0000428C 		lw	$2,%lo(fsFile)($2)
+ 311 0248 00000000 		nop
+ 312 024c 0D004014 		bne	$2,$0,$L11
+ 313 0250 00000000 		nop
+ 314              	
+ 315 0254 0000023C 		lui	$2,%hi($LC3)
+ 316 0258 30004424 		addiu	$4,$2,%lo($LC3)
+ 317 025c 0000023C 		lui	$2,%hi($LC1)
+ 318 0260 04004524 		addiu	$5,$2,%lo($LC1)
+ 319 0264 25000624 		li	$6,37			# 0x25
+ 320 0268 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1758)
+ 321 026c 78004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1758)
+ 322 0270 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 323 0274 00000000 		nop
+ 324 0278 21C84000 		move	$25,$2
+ 325 027c 09F82003 		jalr	$25
+ 326 0280 00000000 		nop
+ 327              	
+ 328              	$L11:
+  37:platform/FileStdio.c ****   size_t sz = fread(buf, 1, len, fsFile);
+ 329              		.loc 1 38 0
+ 330 0284 0000023C 		lui	$2,%hi(fsFile)
+ 331 0288 0000428C 		lw	$2,%lo(fsFile)($2)
+ 332 028c 2800C48F 		lw	$4,40($fp)
+ 333 0290 01000524 		li	$5,1			# 0x1
+ 334 0294 2C00C68F 		lw	$6,44($fp)
+ 335 0298 21384000 		move	$7,$2
+ 336 029c 0000828F 		lw	$2,%call16(fread)($28)
+ 337 02a0 00000000 		nop
+ 338 02a4 21C84000 		move	$25,$2
+ 339 02a8 09F82003 		jalr	$25
+ 340 02ac 00000000 		nop
+ 341              	
+ 342 02b0 1000DC8F 		lw	$28,16($fp)
+ 343 02b4 1800C2AF 		sw	$2,24($fp)
+  38:platform/FileStdio.c ****   if ((sz < len) && !feof(fsFile))
+ 344              		.loc 1 39 0
+ 345 02b8 1800C38F 		lw	$3,24($fp)
+ 346 02bc 2C00C28F 		lw	$2,44($fp)
+ 347 02c0 00000000 		nop
+ 348 02c4 2B106200 		sltu	$2,$3,$2
+ 349 02c8 1F004010 		beq	$2,$0,$L12
+ 350 02cc 00000000 		nop
+ 351              	
+ 352 02d0 0000023C 		lui	$2,%hi(fsFile)
+ 353 02d4 0000428C 		lw	$2,%lo(fsFile)($2)
+ 354 02d8 00000000 		nop
+ 355 02dc 21204000 		move	$4,$2
+ 356 02e0 0000828F 		lw	$2,%call16(feof)($28)
+ 357 02e4 00000000 		nop
+ 358 02e8 21C84000 		move	$25,$2
+ 359 02ec 09F82003 		jalr	$25
+ 360 02f0 00000000 		nop
+ 361              	
+ 362 02f4 1000DC8F 		lw	$28,16($fp)
+ 363 02f8 13004014 		bne	$2,$0,$L12
+ 364 02fc 00000000 		nop
+ 365              	
+  39:platform/FileStdio.c ****     ERRORreturn2("FileRead Short Read", 0);
+ 366              		.loc 1 40 0
+ 367 0300 0000828F 		lw	$2,%got(errorFile)($28)
+ 368 0304 0000033C 		lui	$3,%hi($LC1)
+ 369 0308 04006324 		addiu	$3,$3,%lo($LC1)
+ 370 030c 000043AC 		sw	$3,0($2)
+ 371 0310 0000828F 		lw	$2,%got(errorLine)($28)
+ 372 0314 28000324 		li	$3,40			# 0x28
+ 373 0318 000043AC 		sw	$3,0($2)
+ 374 031c 0000828F 		lw	$2,%got(errorFunc)($28)
+ 375 0320 0000033C 		lui	$3,%hi(__func__.1760)
+ 376 0324 84006324 		addiu	$3,$3,%lo(__func__.1760)
+ 377 0328 000043AC 		sw	$3,0($2)
+ 378 032c 0000828F 		lw	$2,%got(errorMsg)($28)
+ 379 0330 0000033C 		lui	$3,%hi($LC4)
+ 380 0334 38006324 		addiu	$3,$3,%lo($LC4)
+ 381 0338 000043AC 		sw	$3,0($2)
+ 382 033c 21100000 		move	$2,$0
+ 383 0340 02000010 		b	$L13
+ 384 0344 00000000 		nop
+ 385              	
+ 386              	$L12:
+  40:platform/FileStdio.c ****   return sz;
+ 387              		.loc 1 41 0
+ 388 0348 1800C28F 		lw	$2,24($fp)
+ 389              	$L13:
+  41:platform/FileStdio.c **** }
+ 390              		.loc 1 42 0
+ 391 034c 21E8C003 		move	$sp,$fp
+ 392 0350 2400BF8F 		lw	$31,36($sp)
+ 393 0354 2000BE8F 		lw	$fp,32($sp)
+ 394 0358 2800BD27 		addiu	$sp,$sp,40
+ 395 035c 0800E003 		j	$31
+ 396 0360 00000000 		nop
+ 397              	
+ 398              		.set	macro
+ 399              		.set	reorder
+ 400              		.end	FileRead
+ 401              	$LFE3:
+ 403              		.rdata
+ 404              		.align	2
+ 405              	$LC5:
+ 406 004c 46696C65 		.ascii	"FileSeek Failure\000"
+ 406      5365656B 
+ 406      20466169 
+ 406      6C757265 
+ 406      00
+ 407              		.text
+ 408              		.align	2
+ 409              		.globl	FileSeek
+ 410              	$LFB4 = .
+  42:platform/FileStdio.c **** 
+  43:platform/FileStdio.c **** void FileSeek(uint32_t pos) {
+ 411              		.loc 1 44 0
+ 412              		.set	nomips16
+ 413              		.ent	FileSeek
+ 415              	FileSeek:
+ 416              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 417              		.mask	0xc0000000,-4
+ 418              		.fmask	0x00000000,0
+ 419              		.set	noreorder
+ 420              		.set	nomacro
+ 421              		
+ 422 0364 E0FFBD27 		addiu	$sp,$sp,-32
+ 423              	$LCFI15:
+ 424 0368 1C00BFAF 		sw	$31,28($sp)
+ 425              	$LCFI16:
+ 426 036c 1800BEAF 		sw	$fp,24($sp)
+ 427              	$LCFI17:
+ 428 0370 21F0A003 		move	$fp,$sp
+ 429              	$LCFI18:
+ 430 0374 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 431 0378 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 432 037c 1000BCAF 		.cprestore	16
+ 433 0380 2000C4AF 		sw	$4,32($fp)
+  44:platform/FileStdio.c ****   ++fileStateVersion;
+ 434              		.loc 1 45 0
+ 435 0384 0000023C 		lui	$2,%hi(fileStateVersion)
+ 436 0388 0000428C 		lw	$2,%lo(fileStateVersion)($2)
+ 437 038c 00000000 		nop
+ 438 0390 01004324 		addiu	$3,$2,1
+ 439 0394 0000023C 		lui	$2,%hi(fileStateVersion)
+ 440 0398 000043AC 		sw	$3,%lo(fileStateVersion)($2)
+  45:platform/FileStdio.c ****   ++readCount;
+ 441              		.loc 1 46 0
+ 442 039c 0000023C 		lui	$2,%hi(readCount)
+ 443 03a0 0400428C 		lw	$2,%lo(readCount)($2)
+ 444 03a4 00000000 		nop
+ 445 03a8 01004324 		addiu	$3,$2,1
+ 446 03ac 0000023C 		lui	$2,%hi(readCount)
+ 447 03b0 040043AC 		sw	$3,%lo(readCount)($2)
+  46:platform/FileStdio.c ****   assert(fsFile);
+ 448              		.loc 1 47 0
+ 449 03b4 0000023C 		lui	$2,%hi(fsFile)
+ 450 03b8 0000428C 		lw	$2,%lo(fsFile)($2)
+ 451 03bc 00000000 		nop
+ 452 03c0 0D004014 		bne	$2,$0,$L16
+ 453 03c4 00000000 		nop
+ 454              	
+ 455 03c8 0000023C 		lui	$2,%hi($LC3)
+ 456 03cc 30004424 		addiu	$4,$2,%lo($LC3)
+ 457 03d0 0000023C 		lui	$2,%hi($LC1)
+ 458 03d4 04004524 		addiu	$5,$2,%lo($LC1)
+ 459 03d8 2F000624 		li	$6,47			# 0x2f
+ 460 03dc 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1780)
+ 461 03e0 60004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1780)
+ 462 03e4 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 463 03e8 00000000 		nop
+ 464 03ec 21C84000 		move	$25,$2
+ 465 03f0 09F82003 		jalr	$25
+ 466 03f4 00000000 		nop
+ 467              	
+ 468              	$L16:
+  47:platform/FileStdio.c ****   if (fseek(fsFile, pos, SEEK_SET))
+ 469              		.loc 1 48 0
+ 470 03f8 0000023C 		lui	$2,%hi(fsFile)
+ 471 03fc 0000438C 		lw	$3,%lo(fsFile)($2)
+ 472 0400 2000C28F 		lw	$2,32($fp)
+ 473 0404 21206000 		move	$4,$3
+ 474 0408 21284000 		move	$5,$2
+ 475 040c 21300000 		move	$6,$0
+ 476 0410 0000828F 		lw	$2,%call16(fseek)($28)
+ 477 0414 00000000 		nop
+ 478 0418 21C84000 		move	$25,$2
+ 479 041c 09F82003 		jalr	$25
+ 480 0420 00000000 		nop
+ 481              	
+ 482 0424 1000DC8F 		lw	$28,16($fp)
+ 483 0428 10004010 		beq	$2,$0,$L18
+ 484 042c 00000000 		nop
+ 485              	
+  48:platform/FileStdio.c ****     ERRORreturn("FileSeek Failure");
+ 486              		.loc 1 49 0
+ 487 0430 0000828F 		lw	$2,%got(errorFile)($28)
+ 488 0434 0000033C 		lui	$3,%hi($LC1)
+ 489 0438 04006324 		addiu	$3,$3,%lo($LC1)
+ 490 043c 000043AC 		sw	$3,0($2)
+ 491 0440 0000828F 		lw	$2,%got(errorLine)($28)
+ 492 0444 31000324 		li	$3,49			# 0x31
+ 493 0448 000043AC 		sw	$3,0($2)
+ 494 044c 0000828F 		lw	$2,%got(errorFunc)($28)
+ 495 0450 0000033C 		lui	$3,%hi(__func__.1781)
+ 496 0454 6C006324 		addiu	$3,$3,%lo(__func__.1781)
+ 497 0458 000043AC 		sw	$3,0($2)
+ 498 045c 0000828F 		lw	$2,%got(errorMsg)($28)
+ 499 0460 0000033C 		lui	$3,%hi($LC5)
+ 500 0464 4C006324 		addiu	$3,$3,%lo($LC5)
+ 501 0468 000043AC 		sw	$3,0($2)
+ 502              	$L18:
+  49:platform/FileStdio.c **** }
+ 503              		.loc 1 50 0
+ 504 046c 21E8C003 		move	$sp,$fp
+ 505 0470 1C00BF8F 		lw	$31,28($sp)
+ 506 0474 1800BE8F 		lw	$fp,24($sp)
+ 507 0478 2000BD27 		addiu	$sp,$sp,32
+ 508 047c 0800E003 		j	$31
+ 509 0480 00000000 		nop
+ 510              	
+ 511              		.set	macro
+ 512              		.set	reorder
+ 513              		.end	FileSeek
+ 514              	$LFE4:
+ 516              		.align	2
+ 517              		.globl	FileGetC
+ 518              	$LFB5 = .
+  50:platform/FileStdio.c **** 
+  51:platform/FileStdio.c **** int FileGetC(FILE *f) {
+ 519              		.loc 1 52 0
+ 520              		.set	nomips16
+ 521              		.ent	FileGetC
+ 523              	FileGetC:
+ 524              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 525              		.mask	0xc0000000,-4
+ 526              		.fmask	0x00000000,0
+ 527              		.set	noreorder
+ 528              		.set	nomacro
+ 529              		
+ 530 0484 D8FFBD27 		addiu	$sp,$sp,-40
+ 531              	$LCFI19:
+ 532 0488 2400BFAF 		sw	$31,36($sp)
+ 533              	$LCFI20:
+ 534 048c 2000BEAF 		sw	$fp,32($sp)
+ 535              	$LCFI21:
+ 536 0490 21F0A003 		move	$fp,$sp
+ 537              	$LCFI22:
+ 538 0494 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 539 0498 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 540 049c 1000BCAF 		.cprestore	16
+ 541 04a0 2800C4AF 		sw	$4,40($fp)
+  52:platform/FileStdio.c ****   char c;
+  53:platform/FileStdio.c ****   int r = FileRead(&c, 1);
+ 542              		.loc 1 54 0
+ 543 04a4 1C00C227 		addiu	$2,$fp,28
+ 544 04a8 21204000 		move	$4,$2
+ 545 04ac 01000524 		li	$5,1			# 0x1
+ 546              		.option	pic0
+ 547 04b0 0000000C 		jal	FileRead
+ 548 04b4 00000000 		nop
+ 549              	
+ 550              		.option	pic2
+ 551 04b8 1000DC8F 		lw	$28,16($fp)
+ 552 04bc 1800C2AF 		sw	$2,24($fp)
+  54:platform/FileStdio.c ****   if ((r != 1) || IsError) // FIXME: should return _FDEV_ERR?
+ 553              		.loc 1 55 0
+ 554 04c0 1800C38F 		lw	$3,24($fp)
+ 555 04c4 01000224 		li	$2,1			# 0x1
+ 556 04c8 07006214 		bne	$3,$2,$L20
+ 557 04cc 00000000 		nop
+ 558              	
+ 559 04d0 0000828F 		lw	$2,%got(errorMsg)($28)
+ 560 04d4 00000000 		nop
+ 561 04d8 0000428C 		lw	$2,0($2)
+ 562 04dc 00000000 		nop
+ 563 04e0 04004010 		beq	$2,$0,$L21
+ 564 04e4 00000000 		nop
+ 565              	
+ 566              	$L20:
+  55:platform/FileStdio.c ****     return _FDEV_EOF;
+ 567              		.loc 1 56 0
+ 568 04e8 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 569 04ec 02000010 		b	$L22
+ 570 04f0 00000000 		nop
+ 571              	
+ 572              	$L21:
+  56:platform/FileStdio.c ****   return c;
+ 573              		.loc 1 57 0
+ 574 04f4 1C00C283 		lb	$2,28($fp)
+ 575              	$L22:
+  57:platform/FileStdio.c **** }
+ 576              		.loc 1 58 0
+ 577 04f8 21E8C003 		move	$sp,$fp
+ 578 04fc 2400BF8F 		lw	$31,36($sp)
+ 579 0500 2000BE8F 		lw	$fp,32($sp)
+ 580 0504 2800BD27 		addiu	$sp,$sp,40
+ 581 0508 0800E003 		j	$31
+ 582 050c 00000000 		nop
+ 583              	
+ 584              		.set	macro
+ 585              		.set	reorder
+ 586              		.end	FileGetC
+ 587              	$LFE5:
+ 589              		.align	2
+ 590              		.globl	FileGetHandle
+ 591              	$LFB6 = .
+  58:platform/FileStdio.c **** 
+  59:platform/FileStdio.c **** FILE *FileGetHandle() {return fsFile;}
+ 592              		.loc 1 60 0
+ 593              		.set	nomips16
+ 594              		.ent	FileGetHandle
+ 596              	FileGetHandle:
+ 597              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+ 598              		.mask	0x40000000,-4
+ 599              		.fmask	0x00000000,0
+ 600              		.set	noreorder
+ 601              		.set	nomacro
+ 602              		
+ 603 0510 F8FFBD27 		addiu	$sp,$sp,-8
+ 604              	$LCFI23:
+ 605 0514 0400BEAF 		sw	$fp,4($sp)
+ 606              	$LCFI24:
+ 607 0518 21F0A003 		move	$fp,$sp
+ 608              	$LCFI25:
+ 609              		.loc 1 60 0
+ 610 051c 0000023C 		lui	$2,%hi(fsFile)
+ 611 0520 0000428C 		lw	$2,%lo(fsFile)($2)
+ 612 0524 21E8C003 		move	$sp,$fp
+ 613 0528 0400BE8F 		lw	$fp,4($sp)
+ 614 052c 0800BD27 		addiu	$sp,$sp,8
+ 615 0530 0800E003 		j	$31
+ 616 0534 00000000 		nop
+ 617              	
+ 618              		.set	macro
+ 619              		.set	reorder
+ 620              		.end	FileGetHandle
+ 621              	$LFE6:
+ 623              		.align	2
+ 624              		.globl	FileStateVersion
+ 625              	$LFB7 = .
+  60:platform/FileStdio.c **** 
+  61:platform/FileStdio.c **** int FileStateVersion() { return fileStateVersion; }
+ 626              		.loc 1 62 0
+ 627              		.set	nomips16
+ 628              		.ent	FileStateVersion
+ 630              	FileStateVersion:
+ 631              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+ 632              		.mask	0x40000000,-4
+ 633              		.fmask	0x00000000,0
+ 634              		.set	noreorder
+ 635              		.set	nomacro
+ 636              		
+ 637 0538 F8FFBD27 		addiu	$sp,$sp,-8
+ 638              	$LCFI26:
+ 639 053c 0400BEAF 		sw	$fp,4($sp)
+ 640              	$LCFI27:
+ 641 0540 21F0A003 		move	$fp,$sp
+ 642              	$LCFI28:
+ 643              		.loc 1 62 0
+ 644 0544 0000023C 		lui	$2,%hi(fileStateVersion)
+ 645 0548 0000428C 		lw	$2,%lo(fileStateVersion)($2)
+ 646 054c 21E8C003 		move	$sp,$fp
+ 647 0550 0400BE8F 		lw	$fp,4($sp)
+ 648 0554 0800BD27 		addiu	$sp,$sp,8
+ 649 0558 0800E003 		j	$31
+ 650 055c 00000000 		nop
+ 651              	
+ 652              		.set	macro
+ 653              		.set	reorder
+ 654              		.end	FileStateVersion
+ 655              	$LFE7:
+ 657              		.align	2
+ 658              		.globl	FileSectorReadCount
+ 659              	$LFB8 = .
+  62:platform/FileStdio.c **** 
+  63:platform/FileStdio.c **** uint32_t FileSectorReadCount() {
+ 660              		.loc 1 64 0
+ 661              		.set	nomips16
+ 662              		.ent	FileSectorReadCount
+ 664              	FileSectorReadCount:
+ 665              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+ 666              		.mask	0x40000000,-4
+ 667              		.fmask	0x00000000,0
+ 668              		.set	noreorder
+ 669              		.set	nomacro
+ 670              		
+ 671 0560 F8FFBD27 		addiu	$sp,$sp,-8
+ 672              	$LCFI29:
+ 673 0564 0400BEAF 		sw	$fp,4($sp)
+ 674              	$LCFI30:
+ 675 0568 21F0A003 		move	$fp,$sp
+ 676              	$LCFI31:
+  64:platform/FileStdio.c ****   return readCount;
+ 677              		.loc 1 65 0
+ 678 056c 0000023C 		lui	$2,%hi(readCount)
+ 679 0570 0400428C 		lw	$2,%lo(readCount)($2)
+  65:platform/FileStdio.c **** }
+ 680              		.loc 1 66 0
+ 681 0574 21E8C003 		move	$sp,$fp
+ 682 0578 0400BE8F 		lw	$fp,4($sp)
+ 683 057c 0800BD27 		addiu	$sp,$sp,8
+ 684 0580 0800E003 		j	$31
+ 685 0584 00000000 		nop
+ 686              	
+ 687              		.set	macro
+ 688              		.set	reorder
+ 689              		.end	FileSectorReadCount
+ 690              	$LFE8:
+ 692              		.rdata
+ 693 005d 000000   		.align	2
+ 696              	__PRETTY_FUNCTION__.1780:
+ 697 0060 46696C65 		.ascii	"FileSeek\000"
+ 697      5365656B 
+ 697      00
+ 698 0069 000000   		.align	2
+ 701              	__func__.1781:
+ 702 006c 46696C65 		.ascii	"FileSeek\000"
+ 702      5365656B 
+ 702      00
+ 703 0075 000000   		.align	2
+ 706              	__PRETTY_FUNCTION__.1758:
+ 707 0078 46696C65 		.ascii	"FileRead\000"
+ 707      52656164 
+ 707      00
+ 708 0081 000000   		.align	2
+ 711              	__func__.1760:
+ 712 0084 46696C65 		.ascii	"FileRead\000"
+ 712      52656164 
+ 712      00
+ 713 008d 000000   		.align	2
+ 716              	__PRETTY_FUNCTION__.1747:
+ 717 0090 46696C65 		.ascii	"FileClose\000"
+ 717      436C6F73 
+ 717      6500
+ 718 009a 0000     		.align	2
+ 721              	__func__.1733:
+ 722 009c 46696C65 		.ascii	"FileOpenRO\000"
+ 722      4F70656E 
+ 722      524F00
+ 943              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 platform/FileStdio.c
+     /tmp/ccOVKQXG.s:18     .bss:0000000000000000 fsFile
+     /tmp/ccOVKQXG.s:25     .data:0000000000000000 fileStateVersion
+     /tmp/ccOVKQXG.s:27     .bss:0000000000000004 readCount
+     /tmp/ccOVKQXG.s:37     .text:0000000000000000 FileInit
+     /tmp/ccOVKQXG.s:81     .text:0000000000000024 FileOpenRO
+     /tmp/ccOVKQXG.s:721    .rodata:000000000000009c __func__.1733
+     /tmp/ccOVKQXG.s:191    .text:0000000000000134 FileClose
+     /tmp/ccOVKQXG.s:716    .rodata:0000000000000090 __PRETTY_FUNCTION__.1747
+     /tmp/ccOVKQXG.s:274    .text:00000000000001ec FileRead
+     /tmp/ccOVKQXG.s:706    .rodata:0000000000000078 __PRETTY_FUNCTION__.1758
+     /tmp/ccOVKQXG.s:711    .rodata:0000000000000084 __func__.1760
+     /tmp/ccOVKQXG.s:415    .text:0000000000000364 FileSeek
+     /tmp/ccOVKQXG.s:696    .rodata:0000000000000060 __PRETTY_FUNCTION__.1780
+     /tmp/ccOVKQXG.s:701    .rodata:000000000000006c __func__.1781
+     /tmp/ccOVKQXG.s:523    .text:0000000000000484 FileGetC
+     /tmp/ccOVKQXG.s:596    .text:0000000000000510 FileGetHandle
+     /tmp/ccOVKQXG.s:630    .text:0000000000000538 FileStateVersion
+     /tmp/ccOVKQXG.s:664    .text:0000000000000560 FileSectorReadCount
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+fclose
+fopen
+errorFile
+errorLine
+errorFunc
+errorMsg
+__assert_fail
+fread
+feof
+fseek

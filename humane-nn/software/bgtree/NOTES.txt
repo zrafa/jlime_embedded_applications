@@ -1,0 +1,17 @@
+WIKIPEDIA USAGE:
+
+# Pre-process all wikipedia text - ~45 min
+zcat text.txt.gz |sed 's/\t$//' | ~/tmp/bgPrep.py "is" text.bgb >text.bgprep
+cat text.bgprep | ~/tmp/bgTree create text.bgt 8853102
+
+# Pre-process article CamelCase names to article ID's - ~5 min
+cat page.txt | cut -f3,10 | ~/tmp/bgPrep.py "sKi" page.bgb >page.bgprep
+cat page.bgprep |~/tmp/bgTree create page.bgt 8853102
+
+# To find a text index from page title:
+bgTreeCmd search page-100k.bgt "SAnarchism" page-100k.bgb "sx"
+
+# Use resulting text index into text file
+bgTreeCmd search page-100k.bgt "SAnarchism" page-100k.bgb "s"
+
+----

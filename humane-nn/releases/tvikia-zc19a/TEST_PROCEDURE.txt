@@ -1,0 +1,95 @@
+TVIKIA ZC19A TEST AND SETUP PROCEDURE
+
+Off Circuit Resistant Measures:
+
+-V+ to GND: 500< x <1k ohm
+ POWER.3 to POWER.4
+
+-POWER.1 to MICSP.5: x < 1 ohm
+
+-Audio Jack Tip to GND: x > 500
+
+-PICSP.1 to J6.4 330 < x < 1k (MOSI)
+
+-PICSP.3 to J6.6 330 < x < 1k (SCLK)
+
+-PICSP.4 to J6.5 330 < x < 1k (MISO)
+
+-VICSP.5 to J6.2 x < 100 (VRESET/DIO9)
+
+-MICSP.1 to J6.5 x < 50 (MISO)
+
+-MICSP.3 to J6.6 x < 50 (SCLK)
+
+-MICSP.4 to J6.4 x < 50 (MOSI)
+
+-IC1 (3.3V reg) pin 3 to GND x > 500
+
+-IC1 (3.3V reg) pin 3 to IC1 pin 2 x > 500
+
+-J5.6 to Audio Jack ~= 47k
+
+-Audio Jack to Audio Ground >500 ohms
+
+-Check for shorts among all USB pins with connector inserted
+
+Off Circuit Diode Checks (polarization matters!):
+
+-VICSP4 to Video Jack Tip 330<x<1M
+-Video Jack Tip to VICSP4 1M<x
+-GND to +5V (reverse polarity) = 47k
+-Check L1 LED polarity to GND
+-Check L2 LED polarity to GND
+
+POWER ON
+
+-Check Top L2 LED ON!
+-POWER.3 to POWER.4 (GND) = 5V
+-POWER.1 to POWER.4 (GND) = 5V (MRESET)
+
+OSCILLISCOPE: 
+-Q20 Crystal to Gnd: 90 mV p-to-p, 63 ns wavelength (16 MHz)
+
+AVRISP:
+sudo avrdude -vvv -B 8 -F -c avrispmkII -p m168 -P usb
+Check for "device signature".
+
+-Optional: BlinkApp
+BlinkApp Program with time test - should blink PORTD every 16 seconds (if F_CLK=16MHz)
+test with Peizo Buzzer from positive J5.7 to GND J6.7 (optional 100 ohm resistor)
+cd tviki/software/; scons ARCH=avr F_CPU=16000000
+cd build/atmega168p-16/apps
+sudo avrdude -vvv -B 8 -F -c avrispmkII -p m168 -P usb -Uflash:w:BlinkApp.hex:i
+
+WARNING: Don't run BlinkApp on multiple MCU's at the same time, they will drive
+the bus in opposition!  
+
+-Optional: Burn Nop (no operation) program to flash to clear BlinkApp:
+sudo avrdude -vvv -B 8 -F -c avrispmkII -p m168 -P usb -Uflash:w:Nop.hex:i
+
+-Burn Fuses to set oscillator, program chips.
+
+For each ICSP (VICSP, MICSP, PICSP) header, connect ICSP programmer and run the following to burn the fuses for the external oscillator:
+sudo avrdude -vvv -B 8 -F -c avrispmkII -p m168 -P usb -U lfuse:w:0xd6:m -U hfuse:w:0xdf:m -U efuse:w:0xf9:m
+
+NOTE: You'll get the message "efuse changed! Was f9, and is now 1.
+Change back?".  Just say no.  This is due to "don't care" bits in the
+fuse which don't get set.
+
+-OPTIONAL: BlinkApp should now blink PORTD every 1 second
+
+-Video MCU - Connect to VICSP header
+cd tviki/software/3rdParty/tellymate-114/
+make
+sudo avrdude -vvv -B 8 -F -c avrispmkII -p m168 -P usb -Uflash:w:main.hex:i
+Check for video out signal and blinking cursor (NOTE: WHITE connector is video out, not RED).
+
+-Main MCU - Connect to MICSP header
+cd tviki/software/build/tests
+sudo avrdude -vvv -B 8 -F -c avrispmkII -p m168 -P usb -Uflash:w:test_helloworld.hex:i
+
+The hello world test program should start printing a line every second, and
+keyboard and button input should be displayed.  Test buttons and keyboard.
+
+----
+

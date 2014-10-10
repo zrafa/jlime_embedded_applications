@@ -1,0 +1,283 @@
+head	1.7;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.7
+date	2002.07.04.01.49.56;	author sdyoung;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2002.07.04.00.45.10;	author sdyoung;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2002.03.15.18.38.50;	author sdyoung;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2001.11.13.00.01.37;	author sdyoung;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2001.11.09.06.29.04;	author sdyoung;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2001.10.18.02.35.15;	author sdyoung;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2001.03.03.10.06.47;	author sdyoung;	state Exp;
+branches;
+next	;
+
+
+desc
+@libdict utility functions.
+@
+
+
+1.7
+log
+@The Great Function Renaming - internal functions now start
+with _ld_, external functions start with ld_.
+@
+text
+@/* ldutil.c
+ * sdyoung@@well.com
+ *
+ * Various utility functions that are used throughout libdict can
+ * be found here. 
+ *
+ *   Copyright (c) 2001, 2002 Steven Young
+ *
+ *   Permission is hereby granted, free of charge, to any person obtaining
+ *   a copy of this software and associated documentation files (the
+ *   "Software"), to deal in the Software without restriction, including
+ *   without limitation the rights to use, copy, modify, merge, publish,
+ *   distribute, sublicense, and/or sell copies of the Software, and to
+ *   permit persons to whom the Software is furnished to do so, subject to
+ *   the following conditions:
+ *
+ *   The above copyright notice and this permission notice shall be
+ *   included in all copies or substantial portions of the Software.
+ *
+ *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ *   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ *   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ *   IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ *   CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ *   TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ *   SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * $Header: /home/sdyoung/cstuff/libdict-1.0-pre/src/ldutil.c,v 1.6 2002/07/04 00:45:10 sdyoung Exp sdyoung $
+ * $Log: ldutil.c,v $
+ * Revision 1.6  2002/07/04 00:45:10  sdyoung
+ * Added ld_qstrcmp to support caching functions.
+ *
+ * Revision 1.5  2002/03/15 18:38:50  sdyoung
+ * Added license to the header.
+ *
+ * Revision 1.4  2001/11/13 00:01:37  sdyoung
+ * Added ld_unquote function.
+ *
+ * Revision 1.3  2001/11/09 06:29:04  sdyoung
+ * Added comments.
+ *
+ * Revision 1.2  2001/10/18 02:35:15  sdyoung
+ * Added support for dmalloc.
+ *
+ * Revision 1.1  2001/03/03 10:06:47  sdyoung
+ * Initial revision
+ *
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+#include "libdict.h"
+#include "ldutil.h"
+
+/* All this is pretty self-explanitory.  If MDEBUG is defined, we're 
+ * using dmalloc, in which case all these functions are macros for
+ * the "real" function (ld_xmalloc becomes malloc, etc) so dmalloc
+ * can give meaningful results. */
+#ifndef LD_MDEBUG
+void *_ld_xmalloc(size_t sz) {
+	void *p;
+
+	if(!(p = malloc(sz))) {
+		fprintf(stderr, "libdict panic: out of memory?");
+		/* we will surely core now */
+		return(NULL);
+	}
+
+	return(p);
+}
+
+char *_ld_xstrdup(char *s) {
+	char *p;
+
+	if(!(p = strdup(s))) {
+		fprintf(stderr, "libdict panic: unable to strdup %p\n", s);
+		return(NULL);
+	}
+
+	return(p);
+}
+
+void _ld_xfree(void *p) {
+	if(p) free(p);
+}
+
+void *_ld_xrealloc(void *p, size_t sz) {
+	if(!(p = realloc(p, sz))) {
+		fprintf(stderr, "libdict panic: unable to realloc\n");
+		return(NULL);
+	}
+	
+	return(p);
+}
+#endif /* !MDEBUG */
+
+/* unquote a string */
+char *_ld_unquote(char *str) {
+	static char buf[BUFSIZ];
+	char *cpstart;
+	int sz;
+
+	if(str[0] == '\"') 
+		cpstart = str + 1;
+	else
+		cpstart = str;
+	
+	if(str[strlen(str)-1] == '\"') 
+		sz = (strlen(str) - 2);
+	else
+		sz = (strlen(str));
+
+	memcpy(buf, cpstart,  sz);
+
+	buf[sz] = '\0';
+
+	return(buf);
+}
+
+/* quick strcasecmp */
+int _ld_qstrcmp(char *s1, char *s2) {
+	while(*s1 && *s2) {
+		if(tolower(*s2) != tolower(*s1))
+			return(1);
+		s1++; s2++;
+	}
+
+	return(0);
+}
+@
+
+
+1.6
+log
+@Added ld_qstrcmp to support caching functions.
+@
+text
+@d28 1
+a28 1
+ * $Header: /home/sdyoung/cstuff/libdict-1.0-pre/src/ldutil.c,v 1.5 2002/03/15 18:38:50 sdyoung Exp sdyoung $
+d30 3
+d61 2
+a62 2
+#ifndef MDEBUG
+void *ld_xmalloc(size_t sz) {
+d74 1
+a74 1
+char *ld_xstrdup(char *s) {
+d85 1
+a85 1
+void ld_xfree(void *p) {
+d89 1
+a89 1
+void *ld_xrealloc(void *p, size_t sz) {
+d100 1
+a100 1
+char *ld_unquote(char *str) {
+d123 1
+a123 1
+int ld_qstrcmp(char *s1, char *s2) {
+@
+
+
+1.5
+log
+@Added license to the header.
+@
+text
+@d28 1
+a28 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.9/src/ldutil.c,v 1.4 2001/11/13 00:01:37 sdyoung Exp sdyoung $
+d30 3
+d49 1
+d117 11
+@
+
+
+1.4
+log
+@Added ld_unquote function.
+@
+text
+@d7 22
+a28 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/ldutil.c,v 1.3 2001/11/09 06:29:04 sdyoung Exp sdyoung $
+d30 3
+@
+
+
+1.3
+log
+@Added comments.
+@
+text
+@d7 1
+a7 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/ldutil.c,v 1.2 2001/10/18 02:35:15 sdyoung Exp sdyoung $
+d9 3
+d67 23
+@
+
+
+1.2
+log
+@Added support for dmalloc.
+@
+text
+@d7 1
+a7 1
+ * $Header: /home/sdyoung/cstuff/libdict-0.3-pre/src/ldutil.c,v 1.1 2001/03/03 10:06:47 sdyoung Exp sdyoung $
+d9 3
+d23 4
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d7 5
+a11 2
+ * $Header$
+ * $Log$
+d20 1
+d56 1
+@

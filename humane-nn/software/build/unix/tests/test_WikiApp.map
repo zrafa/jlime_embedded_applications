@@ -1,0 +1,1120 @@
+Archive member included because of file (symbol)
+
+build/unix/apps/libWikiApp.a(WikiApp.o)
+                              build/unix/tests/test_WikiApp.o (WikiAppInit)
+build/unix/apps/libWikiApp.a(WikiUtil.o)
+                              build/unix/apps/libWikiApp.a(WikiApp.o) (CalcUpperCRC)
+build/unix/ui/libUi.a(MorseBox.o)
+                              build/unix/apps/libWikiApp.a(WikiApp.o) (MorseBoxSetBuffer)
+build/unix/ui/libUi.a(ListView.o)
+                              build/unix/apps/libWikiApp.a(WikiUtil.o) (ListGenCreate)
+build/unix/ui/libUi.a(ListCmdr.o)
+                              build/unix/apps/libWikiApp.a(WikiUtil.o) (ListCmdrInit)
+build/unix/platform/libPlatform.a(PosixPlatform.o)
+                              build/unix/tests/test_WikiApp.o (StackPrintInfo)
+build/unix/platform/libPlatform.a(Platform.o)
+                              build/unix/apps/libWikiApp.a(WikiApp.o) (InputUnescape)
+build/unix/platform/libPlatform.a(vt52.o)
+                              build/unix/ui/libUi.a(MorseBox.o) (vposition)
+build/unix/platform/libPlatform.a(FileStdio.o)
+                              build/unix/platform/libPlatform.a(PosixPlatform.o) (FileInit)
+build/unix/bgtree/libbgTree.a(crc32.o)
+                              build/unix/tests/test_WikiApp.o (CalcCRC)
+build/unix/bgtree/libbgTree.a(bgApi.o)
+                              build/unix/tests/test_WikiApp.o (CursorNext)
+build/unix/bgtree/libbgTree.a(bgUtil2.o)
+                              build/unix/apps/libWikiApp.a(WikiUtil.o) (SchemaGetOffset)
+build/unix/bgtree/libbgTree.a(bgCore.o)
+                              build/unix/bgtree/libbgTree.a(bgApi.o) (SetUserData)
+build/unix/libLoadBlock.a(LoadBlock.o)
+                              build/unix/tests/test_WikiApp.o (LoadBlock)
+build/unix/libErrors.a(Errors.o)
+                              build/unix/apps/libWikiApp.a(WikiUtil.o) (errorFile)
+build/unix/uCmorse/libinmorse.a(inmorse.o)
+                              build/unix/ui/libUi.a(MorseBox.o) (codetree)
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+                              /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o (__libc_csu_fini)
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+                              build/unix/platform/libPlatform.a(PosixPlatform.o) (atexit)
+
+Allocating common symbols
+Common symbol       size              file
+
+errorMsg            0x4               build/unix/libErrors.a(Errors.o)
+orig_tios           0x34              build/unix/platform/libPlatform.a(PosixPlatform.o)
+tios                0x34              build/unix/platform/libPlatform.a(PosixPlatform.o)
+errorFunc           0x4               build/unix/libErrors.a(Errors.o)
+startTime           0x8               build/unix/platform/libPlatform.a(PosixPlatform.o)
+bgUserData          0x4               build/unix/bgtree/libbgTree.a(bgCore.o)
+tocLastCur          0x18              build/unix/apps/libWikiApp.a(WikiUtil.o)
+errorLine           0x4               build/unix/libErrors.a(Errors.o)
+errorFile           0x4               build/unix/libErrors.a(Errors.o)
+
+Discarded input sections
+
+ .note.ABI-tag  0x0000000000000000       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .data          0x0000000000000000       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .bss           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .text          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .data          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .bss           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .data          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .data          0x0000000000000000        0x0 build/unix/tests/test_WikiApp.o
+ .bss           0x0000000000000000        0x0 build/unix/tests/test_WikiApp.o
+ .reginfo       0x0000000000000000       0x18 build/unix/tests/test_WikiApp.o
+ .pdr           0x0000000000000000       0xc0 build/unix/tests/test_WikiApp.o
+ .data          0x0000000000000000        0x0 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .pdr           0x0000000000000000      0x140 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .data          0x0000000000000000        0x0 build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .bss           0x0000000000000000        0x0 build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .pdr           0x0000000000000000      0x280 build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .data          0x0000000000000000        0x0 build/unix/ui/libUi.a(MorseBox.o)
+ .bss           0x0000000000000000        0x0 build/unix/ui/libUi.a(MorseBox.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/ui/libUi.a(MorseBox.o)
+ .pdr           0x0000000000000000      0x100 build/unix/ui/libUi.a(MorseBox.o)
+ .data          0x0000000000000000        0x0 build/unix/ui/libUi.a(ListView.o)
+ .bss           0x0000000000000000        0x0 build/unix/ui/libUi.a(ListView.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/ui/libUi.a(ListView.o)
+ .pdr           0x0000000000000000      0x2c0 build/unix/ui/libUi.a(ListView.o)
+ .data          0x0000000000000000        0x0 build/unix/ui/libUi.a(ListCmdr.o)
+ .bss           0x0000000000000000        0x0 build/unix/ui/libUi.a(ListCmdr.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/ui/libUi.a(ListCmdr.o)
+ .pdr           0x0000000000000000       0xa0 build/unix/ui/libUi.a(ListCmdr.o)
+ .data          0x0000000000000000        0x0 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .bss           0x0000000000000000        0x0 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .pdr           0x0000000000000000      0x1e0 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .data          0x0000000000000000        0x0 build/unix/platform/libPlatform.a(Platform.o)
+ .bss           0x0000000000000000        0x0 build/unix/platform/libPlatform.a(Platform.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/platform/libPlatform.a(Platform.o)
+ .pdr           0x0000000000000000       0xa0 build/unix/platform/libPlatform.a(Platform.o)
+ .data          0x0000000000000000        0x0 build/unix/platform/libPlatform.a(vt52.o)
+ .bss           0x0000000000000000        0x0 build/unix/platform/libPlatform.a(vt52.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/platform/libPlatform.a(vt52.o)
+ .pdr           0x0000000000000000       0x40 build/unix/platform/libPlatform.a(vt52.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/platform/libPlatform.a(FileStdio.o)
+ .pdr           0x0000000000000000      0x120 build/unix/platform/libPlatform.a(FileStdio.o)
+ .data          0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(crc32.o)
+ .bss           0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(crc32.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/bgtree/libbgTree.a(crc32.o)
+ .pdr           0x0000000000000000       0x40 build/unix/bgtree/libbgTree.a(crc32.o)
+ .data          0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .bss           0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .pdr           0x0000000000000000      0x2a0 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .data          0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .bss           0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .pdr           0x0000000000000000      0x160 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .data          0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .bss           0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .pdr           0x0000000000000000      0x340 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .data          0x0000000000000000        0x0 build/unix/libLoadBlock.a(LoadBlock.o)
+ .bss           0x0000000000000000        0x0 build/unix/libLoadBlock.a(LoadBlock.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/libLoadBlock.a(LoadBlock.o)
+ .pdr           0x0000000000000000       0x60 build/unix/libLoadBlock.a(LoadBlock.o)
+ .data          0x0000000000000000        0x0 build/unix/libErrors.a(Errors.o)
+ .bss           0x0000000000000000        0x0 build/unix/libErrors.a(Errors.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/libErrors.a(Errors.o)
+ .pdr           0x0000000000000000       0x40 build/unix/libErrors.a(Errors.o)
+ .bss           0x0000000000000000        0x0 build/unix/uCmorse/libinmorse.a(inmorse.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/uCmorse/libinmorse.a(inmorse.o)
+ .pdr           0x0000000000000000       0x40 build/unix/uCmorse/libinmorse.a(inmorse.o)
+ .data          0x0000000000000000        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .bss           0x0000000000000000        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .reginfo       0x0000000000000000       0x18 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .pdr           0x0000000000000000       0x40 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .data          0x0000000000000000        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .bss           0x0000000000000000        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .reginfo       0x0000000000000000       0x18 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .pdr           0x0000000000000000       0x20 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .data          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .bss           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .text          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+ .data          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+ .bss           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+LOAD build/unix/tests/test_WikiApp.o
+LOAD build/unix/apps/libWikiApp.a
+LOAD build/unix/ui/libUi.a
+LOAD build/unix/platform/libPlatform.a
+LOAD build/unix/bgtree/libbgTree.a
+LOAD build/unix/libLoadBlock.a
+LOAD build/unix/libErrors.a
+LOAD build/unix/uCmorse/libuCmorse.a
+LOAD build/unix/uCmorse/libinmorse.a
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/libgcc.a
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/libgcc_s.so
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/libc.so
+START GROUP
+LOAD /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/lib/libc.so.6
+LOAD /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a
+LOAD /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/lib/ld.so.1
+END GROUP
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/libgcc.a
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/libgcc_s.so
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+                0x0000000000400000                PROVIDE (__executable_start, 0x400000)
+                0x00000000004000f4                . = (0x400000 + SIZEOF_HEADERS)
+
+.interp         0x00000000004000f4        0xd
+ *(.interp)
+ .interp        0x00000000004000f4        0xd /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.reginfo
+ *(.reginfo)
+
+.note.gnu.build-id
+ *(.note.gnu.build-id)
+
+.dynamic        0x0000000000400104       0xd8
+ *(.dynamic)
+ .dynamic       0x0000000000400104       0xd8 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000400104                _DYNAMIC
+
+.hash           0x00000000004001dc      0x460
+ *(.hash)
+ .hash          0x00000000004001dc      0x460 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.gnu.hash
+ *(.gnu.hash)
+
+.dynsym         0x000000000040063c      0x930
+ *(.dynsym)
+ .dynsym        0x000000000040063c      0x930 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.dynstr         0x0000000000400f6c      0x6a8
+ *(.dynstr)
+ .dynstr        0x0000000000400f6c      0x6a8 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.gnu.version    0x0000000000401614      0x126
+ *(.gnu.version)
+ .gnu.version   0x0000000000401614      0x126 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.gnu.version_d  0x000000000040173c        0x0 load address 0x000000000040173a
+ *(.gnu.version_d)
+ .gnu.version_d
+                0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.gnu.version_r  0x000000000040173c       0x30
+ *(.gnu.version_r)
+ .gnu.version_r
+                0x000000000040173c       0x30 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.rel.dyn        0x000000000040176c        0x0
+ *(.rel.init)
+ *(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
+ *(.rel.fini)
+ *(.rel.rodata .rel.rodata.* .rel.gnu.linkonce.r.*)
+ *(.rel.data.rel.ro* .rel.gnu.linkonce.d.rel.ro.*)
+ *(.rel.data .rel.data.* .rel.gnu.linkonce.d.*)
+ *(.rel.tdata .rel.tdata.* .rel.gnu.linkonce.td.*)
+ *(.rel.tbss .rel.tbss.* .rel.gnu.linkonce.tb.*)
+ *(.rel.ctors)
+ *(.rel.dtors)
+ *(.rel.got)
+ *(.rel.dyn)
+ .rel.dyn       0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ *(.rel.sdata .rel.sdata.* .rel.gnu.linkonce.s.*)
+ *(.rel.sbss .rel.sbss.* .rel.gnu.linkonce.sb.*)
+ *(.rel.sdata2 .rel.sdata2.* .rel.gnu.linkonce.s2.*)
+ *(.rel.sbss2 .rel.sbss2.* .rel.gnu.linkonce.sb2.*)
+ *(.rel.bss .rel.bss.* .rel.gnu.linkonce.b.*)
+ .rel.bss       0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x000000000040176c                PROVIDE (__rel_iplt_start, .)
+ *(.rel.iplt)
+                0x000000000040176c                PROVIDE (__rel_iplt_end, .)
+                0x000000000040176c                PROVIDE (__rela_iplt_start, .)
+                0x000000000040176c                PROVIDE (__rela_iplt_end, .)
+
+.rela.dyn       0x000000000040176c        0x0
+ *(.rela.init)
+ *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+ *(.rela.fini)
+ *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+ *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+ *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
+ *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
+ *(.rela.ctors)
+ *(.rela.dtors)
+ *(.rela.got)
+ *(.rela.sdata .rela.sdata.* .rela.gnu.linkonce.s.*)
+ *(.rela.sbss .rela.sbss.* .rela.gnu.linkonce.sb.*)
+ *(.rela.sdata2 .rela.sdata2.* .rela.gnu.linkonce.s2.*)
+ *(.rela.sbss2 .rela.sbss2.* .rela.gnu.linkonce.sb2.*)
+ *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+                0x000000000040176c                PROVIDE (__rel_iplt_start, .)
+                0x000000000040176c                PROVIDE (__rel_iplt_end, .)
+                0x000000000040176c                PROVIDE (__rela_iplt_start, .)
+ *(.rela.iplt)
+                0x000000000040176c                PROVIDE (__rela_iplt_end, .)
+
+.rel.plt        0x000000000040176c        0x0
+ *(.rel.plt)
+ .rel.plt       0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.rela.plt
+ *(.rela.plt)
+
+.init           0x000000000040176c       0x78
+ *(.init)
+ .init          0x000000000040176c       0x2c /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+                0x000000000040176c                _init
+ .init          0x0000000000401798       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .init          0x00000000004017b8       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .init          0x00000000004017d8        0xc /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.plt            0x00000000004017e4        0x0
+ *(.plt)
+ .plt           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.iplt
+ *(.iplt)
+
+.text           0x00000000004017f0     0xcfe0
+                0x00000000004017f0                _ftext = .
+ *(.text.unlikely .text.*_unlikely)
+ *(.text .stub .text.* .gnu.linkonce.t.*)
+ .text          0x00000000004017f0       0x60 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x00000000004017f0                __start
+ .text          0x0000000000401850       0xc0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .text          0x0000000000401910     0x1ba0 build/unix/tests/test_WikiApp.o
+                0x0000000000401910                PrintHexBlock
+                0x0000000000401a38                SeekAndRead
+                0x0000000000401be8                TestLargeSeek
+                0x0000000000402274                TestNodesValid
+                0x00000000004029cc                recur
+                0x0000000000402b24                main
+ .text          0x00000000004034b0      0xdd0 build/unix/apps/libWikiApp.a(WikiApp.o)
+                0x0000000000403540                WikiAppInit
+                0x0000000000403644                WikiAppSetTitle
+                0x0000000000403764                WikiAppSetText
+                0x0000000000403914                WikiAppDraw
+                0x0000000000403b94                TitleSearchPushEvent
+                0x0000000000403d20                TocPushEvent
+                0x0000000000403f64                WTextViewerPushEvent
+                0x0000000000404154                WikiAppPushEvent
+ .text          0x0000000000404280     0x1980 build/unix/apps/libWikiApp.a(WikiUtil.o)
+                0x00000000004045e0                CalcUpperCRC
+                0x0000000000404748                TocNext
+                0x0000000000404948                TocRestart
+                0x00000000004049cc                TocInit
+                0x0000000000404b98                TocDestroy
+                0x0000000000404c20                SearchNext
+                0x0000000000404dec                SearchRestart
+                0x0000000000404f0c                PreNext
+                0x0000000000405124                PreRestart
+                0x0000000000405244                SearchViewInit
+                0x0000000000405454                SectionNext
+                0x0000000000405870                SectionRestart
+                0x00000000004058c0                SectionViewInit
+                0x0000000000405b9c                SectionViewDestroy
+ .text          0x0000000000405c00      0xc60 build/unix/ui/libUi.a(MorseBox.o)
+                0x0000000000405c00                MorseBoxInit
+                0x0000000000405ca4                MorseBoxSetPrompt
+                0x0000000000405d5c                MorseBoxSetBuffer
+                0x0000000000405e4c                MorseBoxGetBuffer
+                0x0000000000405e74                MorseBoxReset
+                0x0000000000405ed8                MorseBoxPushEvent
+                0x0000000000406278                IsPrintable
+                0x0000000000406308                MorseBoxDraw
+ .text          0x0000000000406860     0x1450 build/unix/ui/libUi.a(ListView.o)
+                0x0000000000406860                ListGenCreate
+                0x00000000004068fc                ListGenNext
+                0x0000000000406aa8                ListGenRestart
+                0x0000000000406b54                ListGenGet
+                0x0000000000406c90                ListGenExists
+                0x0000000000406d68                ListGenModified
+                0x0000000000406db8                ListViewCreate
+                0x0000000000406ec8                DrawFocusChar
+                0x0000000000406fec                ListViewDrawFocus
+                0x00000000004070d0                ListViewDraw
+                0x0000000000407388                ListViewSetFocus
+                0x0000000000407538                ListViewGetFocus
+                0x0000000000407568                ListViewFocusNext
+                0x00000000004075b4                ListViewFocusPrev
+                0x0000000000407600                ListViewForceRedraw
+                0x0000000000407630                PrefixCompare
+                0x000000000040776c                PrefixFilterNext
+                0x00000000004078d0                PrefixFilterRestart
+                0x0000000000407924                PrefixFilterCreate
+                0x0000000000407a64                ConcatGenNext
+                0x0000000000407b1c                ConcatGenRestart
+                0x0000000000407b88                ConcatGenCreate
+ .text          0x0000000000407cb0      0x810 build/unix/ui/libUi.a(ListCmdr.o)
+                0x0000000000407cb0                ListCmdrInit
+                0x0000000000407f0c                ListCmdrPushEvent
+                0x0000000000408288                ListCmdrGetValue
+                0x00000000004082dc                ListCmdrDraw
+                0x0000000000408460                ListCmdrForceRedraw
+ .text          0x00000000004084c0      0xb40 build/unix/platform/libPlatform.a(PosixPlatform.o)
+                0x00000000004084c0                sounder
+                0x00000000004084e8                StdioDestroy
+                0x000000000040857c                StdioInit
+                0x00000000004088b4                StackCheck
+                0x00000000004088d4                StackPrintInfo
+                0x00000000004088f8                PlatformInit
+                0x0000000000408ad0                OutC
+                0x0000000000408b3c                GetTimeOfDayMilli
+                0x0000000000408c04                TimerInit
+                0x0000000000408c58                TimerMillisec
+                0x0000000000408cb4                TimerCount
+                0x0000000000408d04                TimerCountPerMillisec
+                0x0000000000408d28                DelayMs
+                0x0000000000408d9c                InputIsReady
+                0x0000000000408f3c                InputCheck
+ .text          0x0000000000409000      0x560 build/unix/platform/libPlatform.a(Platform.o)
+                0x0000000000409000                InputUnescape
+                0x0000000000409190                OutS
+                0x0000000000409224                OutXByte
+                0x0000000000409330                OutX
+                0x00000000004093c8                OutI
+ .text          0x0000000000409560      0x330 build/unix/platform/libPlatform.a(vt52.o)
+                0x0000000000409560                vposition
+                0x00000000004097b4                vclearlines
+ .text          0x0000000000409890      0x590 build/unix/platform/libPlatform.a(FileStdio.o)
+                0x0000000000409890                FileInit
+                0x00000000004098b4                FileOpenRO
+                0x00000000004099c4                FileClose
+                0x0000000000409a7c                FileRead
+                0x0000000000409bf4                FileSeek
+                0x0000000000409d14                FileGetC
+                0x0000000000409da0                FileGetHandle
+                0x0000000000409dc8                FileStateVersion
+                0x0000000000409df0                FileSectorReadCount
+ .text          0x0000000000409e20      0x170 build/unix/bgtree/libbgTree.a(crc32.o)
+                0x0000000000409e20                CalcCRCBase
+                0x0000000000409f2c                CalcCRC
+ .text          0x0000000000409f90     0x1790 build/unix/bgtree/libbgTree.a(bgApi.o)
+                0x000000000040a020                CursorKeyNext
+                0x000000000040a1ec                CursorConsecutiveKeysNext
+                0x000000000040a3ec                CursorUnionNext
+                0x000000000040a478                CursorIntersectionNext
+                0x000000000040a5fc                CursorUniqueNext
+                0x000000000040a624                CursorNext
+                0x000000000040a66c                CursorInit
+                0x000000000040a744                SelectKey
+                0x000000000040a894                SelectConsecutiveKeys
+                0x000000000040a9e4                SelectAll
+                0x000000000040ab28                Union
+                0x000000000040acc8                Intersection
+                0x000000000040ae90                CursorDup
+                0x000000000040b088                CursorDestroy
+                0x000000000040b1e4                CursorPeek
+                0x000000000040b25c                CalcTreeSize
+                0x000000000040b2d0                TreeCreate
+                0x000000000040b3f0                TreeInit
+                0x000000000040b434                TreeAppend
+ .text          0x000000000040b720     0x13b0 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+                0x000000000040b720                UnpackStringFromFile
+                0x000000000040b89c                UnpackIntFromFile
+                0x000000000040b960                UnpackUIntFromFile
+                0x000000000040ba24                SchemaGetOffset
+                0x000000000040be34                SchemaGetUInt
+                0x000000000040bf40                SchemaGetInt
+                0x000000000040c00c                SchemaGetString
+                0x000000000040c25c                SchemaGetStringLen
+                0x000000000040c3b0                UnpackAndPrintStringFromFile
+                0x000000000040c4d0                PrintVisitor
+                0x000000000040c864                TestSanityVisitor
+ .text          0x000000000040cad0     0x14c0 build/unix/bgtree/libbgTree.a(bgCore.o)
+                0x000000000040cad0                SetUserData
+                0x000000000040cb0c                GetUserData
+                0x000000000040cb40                FindIndexOfChild
+                0x000000000040cc04                FindInternalNode
+                0x000000000040ce34                FindInternal
+                0x000000000040cec4                NodeInit
+                0x000000000040cfa4                GetLastNodeOfDepth
+                0x000000000040d040                NodeSummaryCreate
+                0x000000000040d148                NodeSummaryLoad
+                0x000000000040d1e4                NodeItemLoad
+                0x000000000040d244                NodeKeyLoad
+                0x000000000040d2a4                NodeParent
+                0x000000000040d2e8                NodeLen
+                0x000000000040d32c                NodeDepth
+                0x000000000040d37c                NodeLoad
+                0x000000000040d3e8                NodeSave
+                0x000000000040d454                GetLastNonFullDescendant
+                0x000000000040d518                CreateDescendingNodes
+                0x000000000040d690                AppendNewLeafNode
+                0x000000000040d834                NodeVisitDFS
+                0x000000000040d978                CalcTreeSize2
+                0x000000000040da88                CalcMinimumDepth
+                0x000000000040dba4                NodeNextLeaf
+                0x000000000040dd4c                RowPtrInit
+                0x000000000040ddb8                RowPtrNext
+                0x000000000040df04                NodeFindFirstChild
+ .text          0x000000000040df90      0x290 build/unix/libLoadBlock.a(LoadBlock.o)
+                0x000000000040df90                LoadBlock
+                0x000000000040e174                AllocBlock
+                0x000000000040e1c4                SaveBlock
+ .text          0x000000000040e220      0x2a0 build/unix/libErrors.a(Errors.o)
+                0x000000000040e220                ERRORprint2
+                0x000000000040e480                ERRORprint3
+ .text          0x000000000040e4c0      0x1e0 build/unix/uCmorse/libinmorse.a(inmorse.o)
+                0x000000000040e4c0                InMorseCodeTree
+                0x000000000040e4f8                InMorseNext
+ .text          0x000000000040e6a0       0xb0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+                0x000000000040e6a0                __libc_csu_fini
+                0x000000000040e6a8                __libc_csu_init
+ .text          0x000000000040e750       0x30 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+                0x000000000040e750                atexit
+ .text          0x000000000040e780       0x50 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ *(.gnu.warning)
+ *(.mips16.fn.*)
+ *(.mips16.call.*)
+
+.MIPS.stubs     0x000000000040e7d0      0x230
+ .MIPS.stubs    0x000000000040e7d0      0x230 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x000000000040e7d0                fileno@@GLIBC_2.0
+                0x000000000040e7e0                sigemptyset@@GLIBC_2.0
+                0x000000000040e7f0                strncpy@@GLIBC_2.0
+                0x000000000040e800                putchar@@GLIBC_2.0
+                0x000000000040e810                toupper@@GLIBC_2.0
+                0x000000000040e820                memset@@GLIBC_2.0
+                0x000000000040e830                __libc_start_main@@GLIBC_2.0
+                0x000000000040e840                tcgetattr@@GLIBC_2.0
+                0x000000000040e850                __assert_fail@@GLIBC_2.0
+                0x000000000040e860                read@@GLIBC_2.0
+                0x000000000040e870                usleep@@GLIBC_2.0
+                0x000000000040e880                gettimeofday@@GLIBC_2.0
+                0x000000000040e890                free@@GLIBC_2.0
+                0x000000000040e8a0                sigaction@@GLIBC_2.0
+                0x000000000040e8b0                fflush@@GLIBC_2.0
+                0x000000000040e8c0                fseek@@GLIBC_2.0
+                0x000000000040e8d0                fclose@@GLIBC_2.2
+                0x000000000040e8e0                memcpy@@GLIBC_2.0
+                0x000000000040e8f0                strlen@@GLIBC_2.0
+                0x000000000040e900                feof@@GLIBC_2.0
+                0x000000000040e910                printf@@GLIBC_2.0
+                0x000000000040e920                select@@GLIBC_2.0
+                0x000000000040e930                fwrite@@GLIBC_2.0
+                0x000000000040e940                fprintf@@GLIBC_2.0
+                0x000000000040e950                malloc@@GLIBC_2.0
+                0x000000000040e960                __cxa_atexit@@GLIBC_2.2
+                0x000000000040e970                fputc@@GLIBC_2.0
+                0x000000000040e980                fopen@@GLIBC_2.2
+                0x000000000040e990                puts@@GLIBC_2.0
+                0x000000000040e9a0                tcsetattr@@GLIBC_2.0
+                0x000000000040e9b0                strncmp@@GLIBC_2.0
+                0x000000000040e9c0                _IO_putc@@GLIBC_2.0
+                0x000000000040e9d0                fread@@GLIBC_2.0
+                0x000000000040e9e0                snprintf@@GLIBC_2.0
+
+.fini           0x000000000040ea00       0x44
+ *(.fini)
+ .fini          0x000000000040ea00       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+                0x000000000040ea00                _fini
+ .fini          0x000000000040ea18       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .fini          0x000000000040ea38        0xc /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+                0x000000000040ea44                PROVIDE (__etext, .)
+                0x000000000040ea44                PROVIDE (_etext, .)
+                0x000000000040ea44                PROVIDE (etext, .)
+
+.rodata         0x000000000040ea50      0xcb0
+ *(.rodata .rodata.* .gnu.linkonce.r.*)
+ .rodata.cst4   0x000000000040ea50        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x000000000040ea50                _IO_stdin_used
+ *fill*         0x000000000040ea54        0xc 00
+ .rodata        0x000000000040ea60      0x300 build/unix/tests/test_WikiApp.o
+ .rodata        0x000000000040ed60       0xb0 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .rodata        0x000000000040ee10       0xe0 build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .rodata        0x000000000040eef0       0x50 build/unix/ui/libUi.a(MorseBox.o)
+ .rodata        0x000000000040ef40       0x90 build/unix/ui/libUi.a(ListView.o)
+ .rodata        0x000000000040efd0      0x130 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .rodata        0x000000000040f100       0x50 build/unix/platform/libPlatform.a(Platform.o)
+ .rodata        0x000000000040f150       0x10 build/unix/platform/libPlatform.a(vt52.o)
+ .rodata        0x000000000040f160       0xb0 build/unix/platform/libPlatform.a(FileStdio.o)
+ .rodata        0x000000000040f210       0x40 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .rodata        0x000000000040f250      0x330 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .rodata        0x000000000040f580       0x80 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .rodata        0x000000000040f600       0x80 build/unix/libLoadBlock.a(LoadBlock.o)
+ .rodata        0x000000000040f680       0x50 build/unix/libErrors.a(Errors.o)
+ .rodata        0x000000000040f6d0       0x30 build/unix/uCmorse/libinmorse.a(inmorse.o)
+
+.rodata1
+ *(.rodata1)
+
+.sdata2
+ *(.sdata2 .sdata2.* .gnu.linkonce.s2.*)
+
+.sbss2
+ *(.sbss2 .sbss2.* .gnu.linkonce.sb2.*)
+
+.eh_frame_hdr
+ *(.eh_frame_hdr)
+
+.eh_frame       0x000000000040f700        0x4
+ *(.eh_frame)
+ .eh_frame      0x000000000040f700        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+                0x000000000040f704                . = (ALIGN (0x10000) - ((0x10000 - .) & 0xffff))
+                0x000000000041f704                . = (0x10000 DATA_SEGMENT_ALIGN 0x1000)
+
+.eh_frame
+ *(.eh_frame)
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+
+.tdata
+ *(.tdata .tdata.* .gnu.linkonce.td.*)
+
+.tbss
+ *(.tbss .tbss.* .gnu.linkonce.tb.*)
+ *(.tcommon)
+
+.preinit_array  0x000000000041f704        0x0
+                0x000000000041f704                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array)
+                0x000000000041f704                PROVIDE (__preinit_array_end, .)
+
+.init_array     0x000000000041f704        0x0
+                0x000000000041f704                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array)
+                0x000000000041f704                PROVIDE (__init_array_end, .)
+
+.fini_array     0x000000000041f704        0x0
+                0x000000000041f704                PROVIDE (__fini_array_start, .)
+ *(.fini_array)
+ *(SORT(.fini_array.*))
+                0x000000000041f704                PROVIDE (__fini_array_end, .)
+
+.ctors          0x000000000041f704        0x8
+ *crtbegin.o(.ctors)
+ .ctors         0x000000000041f704        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+ .ctors         0x000000000041f708        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+
+.dtors          0x000000000041f70c        0x8
+ *crtbegin.o(.dtors)
+ .dtors         0x000000000041f70c        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+ .dtors         0x000000000041f710        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+                0x000000000041f710                __DTOR_END__
+
+.jcr            0x000000000041f714        0x4
+ *(.jcr)
+ .jcr           0x000000000041f714        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .jcr           0x000000000041f714        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+
+.data.rel.ro
+ *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*)
+ *(.data.rel.ro* .gnu.linkonce.d.rel.ro.*)
+                0x000000000041f718                . = (. DATA_SEGMENT_RELRO_END 0x0)
+
+.data           0x000000000041f720       0x50
+                0x000000000041f720                _fdata = .
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data          0x000000000041f720       0x10 build/unix/platform/libPlatform.a(FileStdio.o)
+ .data          0x000000000041f730       0x40 build/unix/uCmorse/libinmorse.a(inmorse.o)
+                0x000000000041f730                codetree
+
+.rld_map        0x000000000041f770        0x4
+ .rld_map       0x000000000041f770        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x000000000041f770                __RLD_MAP
+
+.data1
+ *(.data1)
+
+.got.plt        0x000000000041f774        0x0
+ *(.got.plt)
+ .got.plt       0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x000000000041f774                . = .
+                0x0000000000427770                _gp = (ALIGN (0x10) + 0x7ff0)
+
+.got            0x000000000041f780      0x25c
+ *(.got)
+ .got           0x000000000041f780      0x25c /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x000000000041f780                _GLOBAL_OFFSET_TABLE_
+
+.sdata          0x000000000041f9dc        0x4
+ *(.sdata .sdata.* .gnu.linkonce.s.*)
+ .sdata         0x000000000041f9dc        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+                0x000000000041f9dc                __dso_handle
+
+.lit8
+ *(.lit8)
+
+.lit4
+ *(.lit4)
+                0x000000000041f9e0                _edata = .
+                0x000000000041f9e0                PROVIDE (edata, .)
+                0x000000000041f9e0                __bss_start = .
+                0x000000000041f9e0                _fbss = .
+
+.sbss           0x000000000041f9e0       0x1c
+ *(.dynsbss)
+ *(.sbss .sbss.* .gnu.linkonce.sb.*)
+ *(.scommon)
+ .scommon       0x000000000041f9e0        0x8 build/unix/platform/libPlatform.a(PosixPlatform.o)
+                0x000000000041f9e0                startTime
+ .scommon       0x000000000041f9e8        0x4 build/unix/bgtree/libbgTree.a(bgCore.o)
+                0x000000000041f9e8                bgUserData
+ .scommon       0x000000000041f9ec       0x10 build/unix/libErrors.a(Errors.o)
+                0x000000000041f9ec                errorMsg
+                0x000000000041f9f0                errorFunc
+                0x000000000041f9f4                errorLine
+                0x000000000041f9f8                errorFile
+
+.bss            0x000000000041fa00       0xb0
+ *(.dynbss)
+ .dynbss        0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x000000000041fa00       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .bss           0x000000000041fa10       0x10 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .bss           0x000000000041fa20       0x10 build/unix/platform/libPlatform.a(FileStdio.o)
+                0x000000000041fa20                fsFile
+ *(COMMON)
+ COMMON         0x000000000041fa30       0x18 build/unix/apps/libWikiApp.a(WikiUtil.o)
+                0x000000000041fa30                tocLastCur
+ COMMON         0x000000000041fa48       0x68 build/unix/platform/libPlatform.a(PosixPlatform.o)
+                0x000000000041fa48                orig_tios
+                0x000000000041fa7c                tios
+                0x000000000041fab0                . = ALIGN ((. != 0x0)?0x4:0x1)
+                0x000000000041fab0                . = ALIGN (0x4)
+                0x000000000041fab0                . = ALIGN (0x4)
+                0x000000000041fab0                _end = .
+                0x000000000041fab0                PROVIDE (end, .)
+                0x000000000041fab0                . = DATA_SEGMENT_END (.)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.pdr            0x0000000000000000        0x0
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.comment        0x0000000000000000       0x11
+ *(.comment)
+ .comment       0x0000000000000000       0x11 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                                         0x12 (size before relaxing)
+ .comment       0x0000000000000000       0x12 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .comment       0x0000000000000000       0x12 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .comment       0x0000000000000000       0x12 build/unix/tests/test_WikiApp.o
+ .comment       0x0000000000000000       0x12 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .comment       0x0000000000000000       0x12 build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .comment       0x0000000000000000       0x12 build/unix/ui/libUi.a(MorseBox.o)
+ .comment       0x0000000000000000       0x12 build/unix/ui/libUi.a(ListView.o)
+ .comment       0x0000000000000000       0x12 build/unix/ui/libUi.a(ListCmdr.o)
+ .comment       0x0000000000000000       0x12 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .comment       0x0000000000000000       0x12 build/unix/platform/libPlatform.a(Platform.o)
+ .comment       0x0000000000000000       0x12 build/unix/platform/libPlatform.a(vt52.o)
+ .comment       0x0000000000000000       0x12 build/unix/platform/libPlatform.a(FileStdio.o)
+ .comment       0x0000000000000000       0x12 build/unix/bgtree/libbgTree.a(crc32.o)
+ .comment       0x0000000000000000       0x12 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .comment       0x0000000000000000       0x12 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .comment       0x0000000000000000       0x12 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .comment       0x0000000000000000       0x12 build/unix/libLoadBlock.a(LoadBlock.o)
+ .comment       0x0000000000000000       0x12 build/unix/libErrors.a(Errors.o)
+ .comment       0x0000000000000000       0x12 build/unix/uCmorse/libinmorse.a(inmorse.o)
+ .comment       0x0000000000000000       0x12 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .comment       0x0000000000000000       0x12 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .comment       0x0000000000000000       0x12 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .comment       0x0000000000000000       0x12 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x0000000000000000      0x220
+ *(.debug_aranges)
+ .debug_aranges
+                0x0000000000000000       0x20 build/unix/tests/test_WikiApp.o
+ .debug_aranges
+                0x0000000000000020       0x20 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .debug_aranges
+                0x0000000000000040       0x20 build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .debug_aranges
+                0x0000000000000060       0x20 build/unix/ui/libUi.a(MorseBox.o)
+ .debug_aranges
+                0x0000000000000080       0x20 build/unix/ui/libUi.a(ListView.o)
+ .debug_aranges
+                0x00000000000000a0       0x20 build/unix/ui/libUi.a(ListCmdr.o)
+ .debug_aranges
+                0x00000000000000c0       0x20 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_aranges
+                0x00000000000000e0       0x20 build/unix/platform/libPlatform.a(Platform.o)
+ .debug_aranges
+                0x0000000000000100       0x20 build/unix/platform/libPlatform.a(vt52.o)
+ .debug_aranges
+                0x0000000000000120       0x20 build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_aranges
+                0x0000000000000140       0x20 build/unix/bgtree/libbgTree.a(crc32.o)
+ .debug_aranges
+                0x0000000000000160       0x20 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_aranges
+                0x0000000000000180       0x20 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_aranges
+                0x00000000000001a0       0x20 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_aranges
+                0x00000000000001c0       0x20 build/unix/libLoadBlock.a(LoadBlock.o)
+ .debug_aranges
+                0x00000000000001e0       0x20 build/unix/libErrors.a(Errors.o)
+ .debug_aranges
+                0x0000000000000200       0x20 build/unix/uCmorse/libinmorse.a(inmorse.o)
+
+.debug_pubnames
+                0x0000000000000000      0xcd2
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x0000000000000000       0x6c build/unix/tests/test_WikiApp.o
+ .debug_pubnames
+                0x000000000000006c       0xb1 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .debug_pubnames
+                0x000000000000011d      0x105 build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .debug_pubnames
+                0x0000000000000222       0xae build/unix/ui/libUi.a(MorseBox.o)
+ .debug_pubnames
+                0x00000000000002d0      0x1c7 build/unix/ui/libUi.a(ListView.o)
+ .debug_pubnames
+                0x0000000000000497       0x77 build/unix/ui/libUi.a(ListCmdr.o)
+ .debug_pubnames
+                0x000000000000050e      0x129 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_pubnames
+                0x0000000000000637       0x4c build/unix/platform/libPlatform.a(Platform.o)
+ .debug_pubnames
+                0x0000000000000683       0x30 build/unix/platform/libPlatform.a(vt52.o)
+ .debug_pubnames
+                0x00000000000006b3       0xad build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_pubnames
+                0x0000000000000760       0x2e build/unix/bgtree/libbgTree.a(crc32.o)
+ .debug_pubnames
+                0x000000000000078e      0x160 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_pubnames
+                0x00000000000008ee      0x102 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_pubnames
+                0x00000000000009f0      0x1f9 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_pubnames
+                0x0000000000000be9       0x3d build/unix/libLoadBlock.a(LoadBlock.o)
+ .debug_pubnames
+                0x0000000000000c26       0x69 build/unix/libErrors.a(Errors.o)
+ .debug_pubnames
+                0x0000000000000c8f       0x43 build/unix/uCmorse/libinmorse.a(inmorse.o)
+
+.debug_info     0x0000000000000000     0x7fb1
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x0000000000000000      0xe78 build/unix/tests/test_WikiApp.o
+ .debug_info    0x0000000000000e78      0xbaf build/unix/apps/libWikiApp.a(WikiApp.o)
+ .debug_info    0x0000000000001a27     0x111f build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .debug_info    0x0000000000002b46      0x5a7 build/unix/ui/libUi.a(MorseBox.o)
+ .debug_info    0x00000000000030ed      0xbbe build/unix/ui/libUi.a(ListView.o)
+ .debug_info    0x0000000000003cab      0x6d1 build/unix/ui/libUi.a(ListCmdr.o)
+ .debug_info    0x000000000000437c      0xa90 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_info    0x0000000000004e0c      0x1d7 build/unix/platform/libPlatform.a(Platform.o)
+ .debug_info    0x0000000000004fe3      0x38d build/unix/platform/libPlatform.a(vt52.o)
+ .debug_info    0x0000000000005370      0x579 build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_info    0x00000000000058e9       0xe8 build/unix/bgtree/libbgTree.a(crc32.o)
+ .debug_info    0x00000000000059d1      0x8d0 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_info    0x00000000000062a1      0x9f3 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_info    0x0000000000006c94      0xb2c build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_info    0x00000000000077c0      0x30a build/unix/libLoadBlock.a(LoadBlock.o)
+ .debug_info    0x0000000000007aca      0x3a6 build/unix/libErrors.a(Errors.o)
+ .debug_info    0x0000000000007e70      0x141 build/unix/uCmorse/libinmorse.a(inmorse.o)
+
+.debug_abbrev   0x0000000000000000     0x167d
+ *(.debug_abbrev)
+ .debug_abbrev  0x0000000000000000      0x1e0 build/unix/tests/test_WikiApp.o
+ .debug_abbrev  0x00000000000001e0      0x1cd build/unix/apps/libWikiApp.a(WikiApp.o)
+ .debug_abbrev  0x00000000000003ad      0x1c7 build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .debug_abbrev  0x0000000000000574      0x160 build/unix/ui/libUi.a(MorseBox.o)
+ .debug_abbrev  0x00000000000006d4      0x16b build/unix/ui/libUi.a(ListView.o)
+ .debug_abbrev  0x000000000000083f      0x157 build/unix/ui/libUi.a(ListCmdr.o)
+ .debug_abbrev  0x0000000000000996      0x1e1 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_abbrev  0x0000000000000b77       0xf0 build/unix/platform/libPlatform.a(Platform.o)
+ .debug_abbrev  0x0000000000000c67       0xfc build/unix/platform/libPlatform.a(vt52.o)
+ .debug_abbrev  0x0000000000000d63      0x166 build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_abbrev  0x0000000000000ec9       0x97 build/unix/bgtree/libbgTree.a(crc32.o)
+ .debug_abbrev  0x0000000000000f60      0x195 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_abbrev  0x00000000000010f5      0x142 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_abbrev  0x0000000000001237      0x1b3 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_abbrev  0x00000000000013ea      0x100 build/unix/libLoadBlock.a(LoadBlock.o)
+ .debug_abbrev  0x00000000000014ea       0xe9 build/unix/libErrors.a(Errors.o)
+ .debug_abbrev  0x00000000000015d3       0xaa build/unix/uCmorse/libinmorse.a(inmorse.o)
+
+.debug_line     0x0000000000000000     0x256d
+ *(.debug_line)
+ .debug_line    0x0000000000000000      0x387 build/unix/tests/test_WikiApp.o
+ .debug_line    0x0000000000000387      0x321 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .debug_line    0x00000000000006a8      0x3cf build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .debug_line    0x0000000000000a77      0x279 build/unix/ui/libUi.a(MorseBox.o)
+ .debug_line    0x0000000000000cf0      0x2ff build/unix/ui/libUi.a(ListView.o)
+ .debug_line    0x0000000000000fef      0x22c build/unix/ui/libUi.a(ListCmdr.o)
+ .debug_line    0x000000000000121b      0x324 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_line    0x000000000000153f      0x116 build/unix/platform/libPlatform.a(Platform.o)
+ .debug_line    0x0000000000001655      0x1c9 build/unix/platform/libPlatform.a(vt52.o)
+ .debug_line    0x000000000000181e      0x20e build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_line    0x0000000000001a2c       0x5a build/unix/bgtree/libbgTree.a(crc32.o)
+ .debug_line    0x0000000000001a86      0x27d build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_line    0x0000000000001d03      0x2e5 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_line    0x0000000000001fe8      0x266 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_line    0x000000000000224e      0x115 build/unix/libLoadBlock.a(LoadBlock.o)
+ .debug_line    0x0000000000002363      0x1ab build/unix/libErrors.a(Errors.o)
+ .debug_line    0x000000000000250e       0x5f build/unix/uCmorse/libinmorse.a(inmorse.o)
+
+.debug_frame    0x0000000000000000     0x161c
+ *(.debug_frame)
+ .debug_frame   0x0000000000000000      0x110 build/unix/tests/test_WikiApp.o
+ .debug_frame   0x0000000000000110      0x148 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .debug_frame   0x0000000000000258      0x28c build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .debug_frame   0x00000000000004e4       0xfc build/unix/ui/libUi.a(MorseBox.o)
+ .debug_frame   0x00000000000005e0      0x2c4 build/unix/ui/libUi.a(ListView.o)
+ .debug_frame   0x00000000000008a4       0xb0 build/unix/ui/libUi.a(ListCmdr.o)
+ .debug_frame   0x0000000000000954      0x1ec build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_frame   0x0000000000000b40       0xb0 build/unix/platform/libPlatform.a(Platform.o)
+ .debug_frame   0x0000000000000bf0       0x50 build/unix/platform/libPlatform.a(vt52.o)
+ .debug_frame   0x0000000000000c40      0x120 build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_frame   0x0000000000000d60       0x4c build/unix/bgtree/libbgTree.a(crc32.o)
+ .debug_frame   0x0000000000000dac      0x2ac build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_frame   0x0000000000001058      0x174 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_frame   0x00000000000011cc      0x344 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_frame   0x0000000000001510       0x70 build/unix/libLoadBlock.a(LoadBlock.o)
+ .debug_frame   0x0000000000001580       0x50 build/unix/libErrors.a(Errors.o)
+ .debug_frame   0x00000000000015d0       0x4c build/unix/uCmorse/libinmorse.a(inmorse.o)
+
+.debug_str      0x0000000000000000     0x1427
+ *(.debug_str)
+ .debug_str     0x0000000000000000      0x620 build/unix/tests/test_WikiApp.o
+                                        0x696 (size before relaxing)
+ .debug_str     0x0000000000000620       0xd1 build/unix/apps/libWikiApp.a(WikiApp.o)
+                                        0x641 (size before relaxing)
+ .debug_str     0x00000000000006f1      0x150 build/unix/apps/libWikiApp.a(WikiUtil.o)
+                                        0x6d6 (size before relaxing)
+ .debug_str     0x0000000000000841       0xb0 build/unix/ui/libUi.a(MorseBox.o)
+                                        0x347 (size before relaxing)
+ .debug_str     0x00000000000008f1      0x196 build/unix/ui/libUi.a(ListView.o)
+                                        0x507 (size before relaxing)
+ .debug_str     0x0000000000000a87       0x70 build/unix/ui/libUi.a(ListCmdr.o)
+                                        0x3ea (size before relaxing)
+ .debug_str     0x0000000000000af7      0x312 build/unix/platform/libPlatform.a(PosixPlatform.o)
+                                        0x5de (size before relaxing)
+ .debug_str     0x0000000000000e09       0x4b build/unix/platform/libPlatform.a(Platform.o)
+                                        0x13a (size before relaxing)
+ .debug_str     0x0000000000000e54       0x2d build/unix/platform/libPlatform.a(vt52.o)
+                                        0x288 (size before relaxing)
+ .debug_str     0x0000000000000e81       0x8e build/unix/platform/libPlatform.a(FileStdio.o)
+                                        0x348 (size before relaxing)
+ .debug_str     0x0000000000000f0f       0x23 build/unix/bgtree/libbgTree.a(crc32.o)
+                                         0x8b (size before relaxing)
+ .debug_str     0x0000000000000f32      0x137 build/unix/bgtree/libbgTree.a(bgApi.o)
+                                        0x31d (size before relaxing)
+ .debug_str     0x0000000000001069       0xf0 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+                                        0x41a (size before relaxing)
+ .debug_str     0x0000000000001159      0x245 build/unix/bgtree/libbgTree.a(bgCore.o)
+                                        0x3d3 (size before relaxing)
+ .debug_str     0x000000000000139e       0x2b build/unix/libLoadBlock.a(LoadBlock.o)
+                                        0x1d7 (size before relaxing)
+ .debug_str     0x00000000000013c9       0x26 build/unix/libErrors.a(Errors.o)
+                                        0x2ab (size before relaxing)
+ .debug_str     0x00000000000013ef       0x38 build/unix/uCmorse/libinmorse.a(inmorse.o)
+                                        0x126 (size before relaxing)
+
+.debug_loc      0x0000000000000000     0x1cbd
+ *(.debug_loc)
+ .debug_loc     0x0000000000000000      0x108 build/unix/tests/test_WikiApp.o
+ .debug_loc     0x0000000000000108      0x1b0 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .debug_loc     0x00000000000002b8      0x36e build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .debug_loc     0x0000000000000626      0x158 build/unix/ui/libUi.a(MorseBox.o)
+ .debug_loc     0x000000000000077e      0x3ba build/unix/ui/libUi.a(ListView.o)
+ .debug_loc     0x0000000000000b38       0xd9 build/unix/ui/libUi.a(ListCmdr.o)
+ .debug_loc     0x0000000000000c11      0x289 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_loc     0x0000000000000e9a       0xd7 build/unix/platform/libPlatform.a(Platform.o)
+ .debug_loc     0x0000000000000f71       0x56 build/unix/platform/libPlatform.a(vt52.o)
+ .debug_loc     0x0000000000000fc7      0x183 build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_loc     0x000000000000114a       0x56 build/unix/bgtree/libbgTree.a(crc32.o)
+ .debug_loc     0x00000000000011a0      0x39f build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_loc     0x000000000000153f      0x1dd build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_loc     0x000000000000171c      0x474 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_loc     0x0000000000001b90       0x81 build/unix/libLoadBlock.a(LoadBlock.o)
+ .debug_loc     0x0000000000001c11       0x56 build/unix/libErrors.a(Errors.o)
+ .debug_loc     0x0000000000001c67       0x56 build/unix/uCmorse/libinmorse.a(inmorse.o)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges   0x0000000000000000       0x18
+ *(.debug_ranges)
+ .debug_ranges  0x0000000000000000       0x18 build/unix/bgtree/libbgTree.a(bgCore.o)
+
+.gnu.attributes
+                0x0000000000000000       0x10
+ *(.gnu.attributes)
+ .gnu.attributes
+                0x0000000000000000       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .gnu.attributes
+                0x0000000000000010       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .gnu.attributes
+                0x0000000000000020       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .gnu.attributes
+                0x0000000000000030       0x10 build/unix/tests/test_WikiApp.o
+ .gnu.attributes
+                0x0000000000000040       0x10 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .gnu.attributes
+                0x0000000000000050       0x10 build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .gnu.attributes
+                0x0000000000000060       0x10 build/unix/ui/libUi.a(MorseBox.o)
+ .gnu.attributes
+                0x0000000000000070       0x10 build/unix/ui/libUi.a(ListView.o)
+ .gnu.attributes
+                0x0000000000000080       0x10 build/unix/ui/libUi.a(ListCmdr.o)
+ .gnu.attributes
+                0x0000000000000090       0x10 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .gnu.attributes
+                0x00000000000000a0       0x10 build/unix/platform/libPlatform.a(Platform.o)
+ .gnu.attributes
+                0x00000000000000b0       0x10 build/unix/platform/libPlatform.a(vt52.o)
+ .gnu.attributes
+                0x00000000000000c0       0x10 build/unix/platform/libPlatform.a(FileStdio.o)
+ .gnu.attributes
+                0x00000000000000d0       0x10 build/unix/bgtree/libbgTree.a(crc32.o)
+ .gnu.attributes
+                0x00000000000000e0       0x10 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .gnu.attributes
+                0x00000000000000f0       0x10 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .gnu.attributes
+                0x0000000000000100       0x10 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .gnu.attributes
+                0x0000000000000110       0x10 build/unix/libLoadBlock.a(LoadBlock.o)
+ .gnu.attributes
+                0x0000000000000120       0x10 build/unix/libErrors.a(Errors.o)
+ .gnu.attributes
+                0x0000000000000130       0x10 build/unix/uCmorse/libinmorse.a(inmorse.o)
+ .gnu.attributes
+                0x0000000000000140       0x10 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .gnu.attributes
+                0x0000000000000150       0x10 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .gnu.attributes
+                0x0000000000000160       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .gnu.attributes
+                0x0000000000000170       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.gptab.sdata
+ *(.gptab.data)
+ *(.gptab.sdata)
+
+.gptab.sbss
+ *(.gptab.bss)
+ *(.gptab.sbss)
+
+.mdebug.abi32   0x0000000000000180        0x0
+ *(.mdebug.abi32)
+ .mdebug.abi32  0x0000000000000180        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .mdebug.abi32  0x0000000000000180        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .mdebug.abi32  0x0000000000000180        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/tests/test_WikiApp.o
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/apps/libWikiApp.a(WikiApp.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/apps/libWikiApp.a(WikiUtil.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/ui/libUi.a(MorseBox.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/ui/libUi.a(ListView.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/ui/libUi.a(ListCmdr.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/platform/libPlatform.a(Platform.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/platform/libPlatform.a(vt52.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/platform/libPlatform.a(FileStdio.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/bgtree/libbgTree.a(crc32.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/libLoadBlock.a(LoadBlock.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/libErrors.a(Errors.o)
+ .mdebug.abi32  0x0000000000000180        0x0 build/unix/uCmorse/libinmorse.a(inmorse.o)
+ .mdebug.abi32  0x0000000000000180        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .mdebug.abi32  0x0000000000000180        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .mdebug.abi32  0x0000000000000180        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .mdebug.abi32  0x0000000000000180        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.mdebug.abiN32
+ *(.mdebug.abiN32)
+
+.mdebug.abi64
+ *(.mdebug.abi64)
+
+.mdebug.abiO64
+ *(.mdebug.abiO64)
+
+.mdebug.eabi32
+ *(.mdebug.eabi32)
+
+.mdebug.eabi64
+ *(.mdebug.eabi64)
+
+.gcc_compiled_long32
+ *(.gcc_compiled_long32)
+
+.gcc_compiled_long64
+ *(.gcc_compiled_long64)
+
+/DISCARD/
+ *(.note.GNU-stack)
+ *(.gnu_debuglink)
+ *(.gnu.lto_*)
+OUTPUT(build/unix/tests/test_WikiApp elf32-tradlittlemips)

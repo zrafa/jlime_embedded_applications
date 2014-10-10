@@ -1,0 +1,358 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.rdata
+  14              		.align	2
+  15              	$LC0:
+  16 0000 1B5B00   		.ascii	"\033[\000"
+  17 0003 00       		.align	2
+  18              	$LC1:
+  19 0004 3B00     		.ascii	";\000"
+  20              		.text
+  21              		.align	2
+  22              		.globl	vposition
+  23              	$LFB0 = .
+  24              		.file 1 "platform/vt52.c"
+   0:platform/vt52.c **** #include "vt52.h"
+   1:platform/vt52.c **** 
+   2:platform/vt52.c **** #ifdef USE_VT52
+   3:platform/vt52.c **** void vposition(FILE *f, int row, int col) {
+   4:platform/vt52.c ****   fprintf(f, VESC "Y");
+   5:platform/vt52.c ****   char r = 32 + row;
+   6:platform/vt52.c ****   char c = 32 + col;
+   7:platform/vt52.c ****   fwrite(&r, 1, 1, f);
+   8:platform/vt52.c ****   fwrite(&c, 1, 1, f);
+   9:platform/vt52.c **** }
+  10:platform/vt52.c **** #else
+  11:platform/vt52.c **** void vposition(FILE *f, int row, int col) {
+  25              		.loc 1 12 0
+  26              		.set	nomips16
+  27              		.ent	vposition
+  29              	vposition:
+  30              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+  31              		.mask	0xc0000000,-4
+  32              		.fmask	0x00000000,0
+  33              		.set	noreorder
+  34              		.set	nomacro
+  35              		
+  36 0000 D8FFBD27 		addiu	$sp,$sp,-40
+  37              	$LCFI0:
+  38 0004 2400BFAF 		sw	$31,36($sp)
+  39              	$LCFI1:
+  40 0008 2000BEAF 		sw	$fp,32($sp)
+  41              	$LCFI2:
+  42 000c 21F0A003 		move	$fp,$sp
+  43              	$LCFI3:
+  44 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  45 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  46 0018 1000BCAF 		.cprestore	16
+  47 001c 2800C4AF 		sw	$4,40($fp)
+  48 0020 2C00C5AF 		sw	$5,44($fp)
+  49 0024 3000C6AF 		sw	$6,48($fp)
+  12:platform/vt52.c ****   fprintf(f, VESC);
+  50              		.loc 1 13 0
+  51 0028 0000023C 		lui	$2,%hi($LC0)
+  52 002c 00004224 		addiu	$2,$2,%lo($LC0)
+  53 0030 21204000 		move	$4,$2
+  54 0034 01000524 		li	$5,1			# 0x1
+  55 0038 02000624 		li	$6,2			# 0x2
+  56 003c 2800C78F 		lw	$7,40($fp)
+  57 0040 0000828F 		lw	$2,%call16(fwrite)($28)
+  58 0044 00000000 		nop
+  59 0048 21C84000 		move	$25,$2
+  60 004c 09F82003 		jalr	$25
+  61 0050 00000000 		nop
+  62              	
+  63 0054 1000DC8F 		lw	$28,16($fp)
+  13:platform/vt52.c ****   row += 1;
+  64              		.loc 1 14 0
+  65 0058 2C00C28F 		lw	$2,44($fp)
+  66 005c 00000000 		nop
+  67 0060 01004224 		addiu	$2,$2,1
+  68 0064 2C00C2AF 		sw	$2,44($fp)
+  14:platform/vt52.c ****   col += 1;
+  69              		.loc 1 15 0
+  70 0068 3000C28F 		lw	$2,48($fp)
+  71 006c 00000000 		nop
+  72 0070 01004224 		addiu	$2,$2,1
+  73 0074 3000C2AF 		sw	$2,48($fp)
+  15:platform/vt52.c ****   char c;
+  16:platform/vt52.c ****   c = '0' + row/10;
+  74              		.loc 1 17 0
+  75 0078 2C00C38F 		lw	$3,44($fp)
+  76 007c 0A000224 		li	$2,10			# 0xa
+  77 0080 02004014 		bne	$2,$0,1f
+  78 0084 1A006200 		div	$0,$3,$2
+  79 0088 0D000700 		break	7
+  80              	1:
+  81 008c 10180000 		mfhi	$3
+  82 0090 12100000 		mflo	$2
+  83 0094 FF004230 		andi	$2,$2,0x00ff
+  84 0098 30004224 		addiu	$2,$2,48
+  85 009c FF004230 		andi	$2,$2,0x00ff
+  86 00a0 00160200 		sll	$2,$2,24
+  87 00a4 03160200 		sra	$2,$2,24
+  88 00a8 1800C2A3 		sb	$2,24($fp)
+  17:platform/vt52.c ****   fwrite(&c, 1, 1, f);
+  89              		.loc 1 18 0
+  90 00ac 1800C227 		addiu	$2,$fp,24
+  91 00b0 21204000 		move	$4,$2
+  92 00b4 01000524 		li	$5,1			# 0x1
+  93 00b8 01000624 		li	$6,1			# 0x1
+  94 00bc 2800C78F 		lw	$7,40($fp)
+  95 00c0 0000828F 		lw	$2,%call16(fwrite)($28)
+  96 00c4 00000000 		nop
+  97 00c8 21C84000 		move	$25,$2
+  98 00cc 09F82003 		jalr	$25
+  99 00d0 00000000 		nop
+ 100              	
+ 101 00d4 1000DC8F 		lw	$28,16($fp)
+  18:platform/vt52.c ****   c = '0' + (row % 10);
+ 102              		.loc 1 19 0
+ 103 00d8 2C00C38F 		lw	$3,44($fp)
+ 104 00dc 0A000224 		li	$2,10			# 0xa
+ 105 00e0 02004014 		bne	$2,$0,1f
+ 106 00e4 1A006200 		div	$0,$3,$2
+ 107 00e8 0D000700 		break	7
+ 108              	1:
+ 109 00ec 10100000 		mfhi	$2
+ 110 00f0 FF004230 		andi	$2,$2,0x00ff
+ 111 00f4 30004224 		addiu	$2,$2,48
+ 112 00f8 FF004230 		andi	$2,$2,0x00ff
+ 113 00fc 00160200 		sll	$2,$2,24
+ 114 0100 03160200 		sra	$2,$2,24
+ 115 0104 1800C2A3 		sb	$2,24($fp)
+  19:platform/vt52.c ****   fwrite(&c, 1, 1, f);
+ 116              		.loc 1 20 0
+ 117 0108 1800C227 		addiu	$2,$fp,24
+ 118 010c 21204000 		move	$4,$2
+ 119 0110 01000524 		li	$5,1			# 0x1
+ 120 0114 01000624 		li	$6,1			# 0x1
+ 121 0118 2800C78F 		lw	$7,40($fp)
+ 122 011c 0000828F 		lw	$2,%call16(fwrite)($28)
+ 123 0120 00000000 		nop
+ 124 0124 21C84000 		move	$25,$2
+ 125 0128 09F82003 		jalr	$25
+ 126 012c 00000000 		nop
+ 127              	
+ 128 0130 1000DC8F 		lw	$28,16($fp)
+  20:platform/vt52.c ****   fwrite(";", 1, 1, f);
+ 129              		.loc 1 21 0
+ 130 0134 0000023C 		lui	$2,%hi($LC1)
+ 131 0138 04004424 		addiu	$4,$2,%lo($LC1)
+ 132 013c 01000524 		li	$5,1			# 0x1
+ 133 0140 01000624 		li	$6,1			# 0x1
+ 134 0144 2800C78F 		lw	$7,40($fp)
+ 135 0148 0000828F 		lw	$2,%call16(fwrite)($28)
+ 136 014c 00000000 		nop
+ 137 0150 21C84000 		move	$25,$2
+ 138 0154 09F82003 		jalr	$25
+ 139 0158 00000000 		nop
+ 140              	
+ 141 015c 1000DC8F 		lw	$28,16($fp)
+  21:platform/vt52.c ****   c = '0' + col/10;
+ 142              		.loc 1 22 0
+ 143 0160 3000C38F 		lw	$3,48($fp)
+ 144 0164 0A000224 		li	$2,10			# 0xa
+ 145 0168 02004014 		bne	$2,$0,1f
+ 146 016c 1A006200 		div	$0,$3,$2
+ 147 0170 0D000700 		break	7
+ 148              	1:
+ 149 0174 10180000 		mfhi	$3
+ 150 0178 12100000 		mflo	$2
+ 151 017c FF004230 		andi	$2,$2,0x00ff
+ 152 0180 30004224 		addiu	$2,$2,48
+ 153 0184 FF004230 		andi	$2,$2,0x00ff
+ 154 0188 00160200 		sll	$2,$2,24
+ 155 018c 03160200 		sra	$2,$2,24
+ 156 0190 1800C2A3 		sb	$2,24($fp)
+  22:platform/vt52.c ****   fwrite(&c, 1, 1, f);
+ 157              		.loc 1 23 0
+ 158 0194 1800C227 		addiu	$2,$fp,24
+ 159 0198 21204000 		move	$4,$2
+ 160 019c 01000524 		li	$5,1			# 0x1
+ 161 01a0 01000624 		li	$6,1			# 0x1
+ 162 01a4 2800C78F 		lw	$7,40($fp)
+ 163 01a8 0000828F 		lw	$2,%call16(fwrite)($28)
+ 164 01ac 00000000 		nop
+ 165 01b0 21C84000 		move	$25,$2
+ 166 01b4 09F82003 		jalr	$25
+ 167 01b8 00000000 		nop
+ 168              	
+ 169 01bc 1000DC8F 		lw	$28,16($fp)
+  23:platform/vt52.c ****   c = '0' + (col % 10);
+ 170              		.loc 1 24 0
+ 171 01c0 3000C38F 		lw	$3,48($fp)
+ 172 01c4 0A000224 		li	$2,10			# 0xa
+ 173 01c8 02004014 		bne	$2,$0,1f
+ 174 01cc 1A006200 		div	$0,$3,$2
+ 175 01d0 0D000700 		break	7
+ 176              	1:
+ 177 01d4 10100000 		mfhi	$2
+ 178 01d8 FF004230 		andi	$2,$2,0x00ff
+ 179 01dc 30004224 		addiu	$2,$2,48
+ 180 01e0 FF004230 		andi	$2,$2,0x00ff
+ 181 01e4 00160200 		sll	$2,$2,24
+ 182 01e8 03160200 		sra	$2,$2,24
+ 183 01ec 1800C2A3 		sb	$2,24($fp)
+  24:platform/vt52.c ****   fwrite(&c, 1, 1, f);
+ 184              		.loc 1 25 0
+ 185 01f0 1800C227 		addiu	$2,$fp,24
+ 186 01f4 21204000 		move	$4,$2
+ 187 01f8 01000524 		li	$5,1			# 0x1
+ 188 01fc 01000624 		li	$6,1			# 0x1
+ 189 0200 2800C78F 		lw	$7,40($fp)
+ 190 0204 0000828F 		lw	$2,%call16(fwrite)($28)
+ 191 0208 00000000 		nop
+ 192 020c 21C84000 		move	$25,$2
+ 193 0210 09F82003 		jalr	$25
+ 194 0214 00000000 		nop
+ 195              	
+ 196 0218 1000DC8F 		lw	$28,16($fp)
+  25:platform/vt52.c ****   fprintf(f, "f");
+ 197              		.loc 1 26 0
+ 198 021c 66000424 		li	$4,102			# 0x66
+ 199 0220 2800C58F 		lw	$5,40($fp)
+ 200 0224 0000828F 		lw	$2,%call16(fputc)($28)
+ 201 0228 00000000 		nop
+ 202 022c 21C84000 		move	$25,$2
+ 203 0230 09F82003 		jalr	$25
+ 204 0234 00000000 		nop
+ 205              	
+ 206 0238 1000DC8F 		lw	$28,16($fp)
+  26:platform/vt52.c **** }
+ 207              		.loc 1 27 0
+ 208 023c 21E8C003 		move	$sp,$fp
+ 209 0240 2400BF8F 		lw	$31,36($sp)
+ 210 0244 2000BE8F 		lw	$fp,32($sp)
+ 211 0248 2800BD27 		addiu	$sp,$sp,40
+ 212 024c 0800E003 		j	$31
+ 213 0250 00000000 		nop
+ 214              	
+ 215              		.set	macro
+ 216              		.set	reorder
+ 217              		.end	vposition
+ 218              	$LFE0:
+ 220              		.rdata
+ 221 0006 0000     		.align	2
+ 222              	$LC2:
+ 223 0008 1B5B324B 		.ascii	"\033[2K\015\012\000"
+ 223      0D0A00
+ 224 000f 00       		.text
+ 225              		.align	2
+ 226              		.globl	vclearlines
+ 227              	$LFB1 = .
+  27:platform/vt52.c **** #endif
+  28:platform/vt52.c **** 
+  29:platform/vt52.c **** void vclearlines(FILE *f, int startRow, int endRow) {
+ 228              		.loc 1 30 0
+ 229              		.set	nomips16
+ 230              		.ent	vclearlines
+ 232              	vclearlines:
+ 233              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 234              		.mask	0xc0000000,-4
+ 235              		.fmask	0x00000000,0
+ 236              		.set	noreorder
+ 237              		.set	nomacro
+ 238              		
+ 239 0254 D8FFBD27 		addiu	$sp,$sp,-40
+ 240              	$LCFI4:
+ 241 0258 2400BFAF 		sw	$31,36($sp)
+ 242              	$LCFI5:
+ 243 025c 2000BEAF 		sw	$fp,32($sp)
+ 244              	$LCFI6:
+ 245 0260 21F0A003 		move	$fp,$sp
+ 246              	$LCFI7:
+ 247 0264 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 248 0268 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 249 026c 1000BCAF 		.cprestore	16
+ 250 0270 2800C4AF 		sw	$4,40($fp)
+ 251 0274 2C00C5AF 		sw	$5,44($fp)
+ 252 0278 3000C6AF 		sw	$6,48($fp)
+  30:platform/vt52.c ****   vposition(f, startRow, 0);
+ 253              		.loc 1 31 0
+ 254 027c 2800C48F 		lw	$4,40($fp)
+ 255 0280 2C00C58F 		lw	$5,44($fp)
+ 256 0284 21300000 		move	$6,$0
+ 257              		.option	pic0
+ 258 0288 0000000C 		jal	vposition
+ 259 028c 00000000 		nop
+ 260              	
+ 261              		.option	pic2
+ 262 0290 1000DC8F 		lw	$28,16($fp)
+ 263              	$LBB2 = .
+  31:platform/vt52.c ****   for (int i=startRow; i <= endRow; ++i)
+ 264              		.loc 1 32 0
+ 265 0294 2C00C28F 		lw	$2,44($fp)
+ 266 0298 00000000 		nop
+ 267 029c 1800C2AF 		sw	$2,24($fp)
+ 268 02a0 11000010 		b	$L4
+ 269 02a4 00000000 		nop
+ 270              	
+ 271              	$L5:
+  32:platform/vt52.c ****     fprintf(f, VERASE_LINE_CUR"\n");
+ 272              		.loc 1 33 0
+ 273 02a8 0000023C 		lui	$2,%hi($LC2)
+ 274 02ac 08004224 		addiu	$2,$2,%lo($LC2)
+ 275 02b0 21204000 		move	$4,$2
+ 276 02b4 01000524 		li	$5,1			# 0x1
+ 277 02b8 06000624 		li	$6,6			# 0x6
+ 278 02bc 2800C78F 		lw	$7,40($fp)
+ 279 02c0 0000828F 		lw	$2,%call16(fwrite)($28)
+ 280 02c4 00000000 		nop
+ 281 02c8 21C84000 		move	$25,$2
+ 282 02cc 09F82003 		jalr	$25
+ 283 02d0 00000000 		nop
+ 284              	
+ 285 02d4 1000DC8F 		lw	$28,16($fp)
+  32:platform/vt52.c ****     fprintf(f, VERASE_LINE_CUR"\n");
+ 286              		.loc 1 32 0
+ 287 02d8 1800C28F 		lw	$2,24($fp)
+ 288 02dc 00000000 		nop
+ 289 02e0 01004224 		addiu	$2,$2,1
+ 290 02e4 1800C2AF 		sw	$2,24($fp)
+ 291              	$L4:
+ 292 02e8 1800C38F 		lw	$3,24($fp)
+ 293 02ec 3000C28F 		lw	$2,48($fp)
+ 294 02f0 00000000 		nop
+ 295 02f4 2A104300 		slt	$2,$2,$3
+ 296 02f8 EBFF4010 		beq	$2,$0,$L5
+ 297 02fc 00000000 		nop
+ 298              	
+ 299              	$LBE2 = .
+  33:platform/vt52.c ****   vposition(f, startRow, 0);
+ 300              		.loc 1 34 0
+ 301 0300 2800C48F 		lw	$4,40($fp)
+ 302 0304 2C00C58F 		lw	$5,44($fp)
+ 303 0308 21300000 		move	$6,$0
+ 304              		.option	pic0
+ 305 030c 0000000C 		jal	vposition
+ 306 0310 00000000 		nop
+ 307              	
+ 308              		.option	pic2
+ 309 0314 1000DC8F 		lw	$28,16($fp)
+  34:platform/vt52.c **** }
+ 310              		.loc 1 35 0
+ 311 0318 21E8C003 		move	$sp,$fp
+ 312 031c 2400BF8F 		lw	$31,36($sp)
+ 313 0320 2000BE8F 		lw	$fp,32($sp)
+ 314 0324 2800BD27 		addiu	$sp,$sp,40
+ 315 0328 0800E003 		j	$31
+ 316 032c 00000000 		nop
+ 317              	
+ 318              		.set	macro
+ 319              		.set	reorder
+ 320              		.end	vclearlines
+ 321              	$LFE1:
+ 387              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 platform/vt52.c
+     /tmp/ccLSuU9D.s:29     .text:0000000000000000 vposition
+     /tmp/ccLSuU9D.s:232    .text:0000000000000254 vclearlines
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+fwrite
+fputc

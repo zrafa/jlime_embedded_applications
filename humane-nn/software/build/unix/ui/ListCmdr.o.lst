@@ -1,0 +1,845 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.align	2
+  14              		.globl	ListCmdrInit
+  15              	$LFB1 = .
+  16              		.file 1 "ui/ListCmdr.c"
+   0:ui/ListCmdr.c **** #include "ListCmdr.h"
+   1:ui/ListCmdr.c **** 
+   2:ui/ListCmdr.c **** void ListCmdrInit(ListCmdr *cmdr, ListGen gen, unsigned char topRow, unsigned char nRows, unsigned 
+  17              		.loc 1 3 0
+  18              		.set	nomips16
+  19              		.ent	ListCmdrInit
+  21              	ListCmdrInit:
+  22              		.frame	$fp,176,$31		# vars= 104, regs= 3/0, args= 48, gp= 8
+  23              		.mask	0xc0010000,-4
+  24              		.fmask	0x00000000,0
+  25              		.set	noreorder
+  26              		.set	nomacro
+  27              		
+  28 0000 50FFBD27 		addiu	$sp,$sp,-176
+  29              	$LCFI0:
+  30 0004 AC00BFAF 		sw	$31,172($sp)
+  31              	$LCFI1:
+  32 0008 A800BEAF 		sw	$fp,168($sp)
+  33              	$LCFI2:
+  34 000c A400B0AF 		sw	$16,164($sp)
+  35              	$LCFI3:
+  36 0010 21F0A003 		move	$fp,$sp
+  37              	$LCFI4:
+  38 0014 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  39 0018 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  40 001c 3000BCAF 		.cprestore	48
+  41 0020 B000C4AF 		sw	$4,176($fp)
+  42 0024 B400C5AF 		sw	$5,180($fp)
+  43 0028 B800C6AF 		sw	$6,184($fp)
+  44 002c BC00C7AF 		sw	$7,188($fp)
+  45 0030 CC00C58F 		lw	$5,204($fp)
+  46 0034 D000C48F 		lw	$4,208($fp)
+  47 0038 D400C38F 		lw	$3,212($fp)
+  48 003c D800C28F 		lw	$2,216($fp)
+  49 0040 5800C5A3 		sb	$5,88($fp)
+  50 0044 5C00C4A3 		sb	$4,92($fp)
+  51 0048 6000C3A3 		sb	$3,96($fp)
+  52 004c 6400C2A3 		sb	$2,100($fp)
+   3:ui/ListCmdr.c ****   cmdr->topRow = topRow;
+  53              		.loc 1 4 0
+  54 0050 B000C28F 		lw	$2,176($fp)
+  55 0054 5800C393 		lbu	$3,88($fp)
+  56 0058 00000000 		nop
+  57 005c 000043A0 		sb	$3,0($2)
+   4:ui/ListCmdr.c ****   cmdr->nRows = nRows;
+  58              		.loc 1 5 0
+  59 0060 B000C28F 		lw	$2,176($fp)
+  60 0064 5C00C393 		lbu	$3,92($fp)
+  61 0068 00000000 		nop
+  62 006c 010043A0 		sb	$3,1($2)
+   5:ui/ListCmdr.c ****   cmdr->finished = 0;
+  63              		.loc 1 6 0
+  64 0070 B000C28F 		lw	$2,176($fp)
+  65 0074 00000000 		nop
+  66 0078 8C0040AC 		sw	$0,140($2)
+   6:ui/ListCmdr.c ****   cmdr->escState = 0;
+  67              		.loc 1 7 0
+  68 007c B000C28F 		lw	$2,176($fp)
+  69 0080 00000000 		nop
+  70 0084 900040AC 		sw	$0,144($2)
+   7:ui/ListCmdr.c ****   cmdr->flags = flags;
+  71              		.loc 1 8 0
+  72 0088 B000C28F 		lw	$2,176($fp)
+  73 008c 6000C393 		lbu	$3,96($fp)
+  74 0090 00000000 		nop
+  75 0094 940043A0 		sb	$3,148($2)
+   8:ui/ListCmdr.c ****   MorseBoxInit(&cmdr->mbox, topRow);
+  76              		.loc 1 9 0
+  77 0098 B000C28F 		lw	$2,176($fp)
+  78 009c 00000000 		nop
+  79 00a0 04004324 		addiu	$3,$2,4
+  80 00a4 5800C293 		lbu	$2,88($fp)
+  81 00a8 21206000 		move	$4,$3
+  82 00ac 21284000 		move	$5,$2
+  83 00b0 0000828F 		lw	$2,%call16(MorseBoxInit)($28)
+  84 00b4 00000000 		nop
+  85 00b8 21C84000 		move	$25,$2
+  86 00bc 09F82003 		jalr	$25
+  87 00c0 00000000 		nop
+  88              	
+  89 00c4 3000DC8F 		lw	$28,48($fp)
+   9:ui/ListCmdr.c ****   int rOffset = 0;
+  90              		.loc 1 10 0
+  91 00c8 3800C0AF 		sw	$0,56($fp)
+  10:ui/ListCmdr.c ****   if (!(flags & LC_ListOnlyMode)) {
+  92              		.loc 1 11 0
+  93 00cc 6000C293 		lbu	$2,96($fp)
+  94 00d0 00000000 		nop
+  95 00d4 01004230 		andi	$2,$2,0x1
+  96 00d8 03004014 		bne	$2,$0,$L2
+  97 00dc 00000000 		nop
+  98              	
+  11:ui/ListCmdr.c ****     rOffset = 4;
+  99              		.loc 1 12 0
+ 100 00e0 04000224 		li	$2,4			# 0x4
+ 101 00e4 3800C2AF 		sw	$2,56($fp)
+ 102              	$L2:
+  12:ui/ListCmdr.c ****   }
+  13:ui/ListCmdr.c ****   cmdr->view = ListViewCreate(
+ 103              		.loc 1 14 0
+ 104 00e8 B000C28F 		lw	$2,176($fp)
+ 105 00ec 00000000 		nop
+ 106 00f0 3C004324 		addiu	$3,$2,60
+ 107 00f4 B000C28F 		lw	$2,176($fp)
+ 108 00f8 00000000 		nop
+ 109 00fc 04004224 		addiu	$2,$2,4
+ 110 0100 3C00C427 		addiu	$4,$fp,60
+ 111 0104 B800C98F 		lw	$9,184($fp)
+ 112 0108 BC00C88F 		lw	$8,188($fp)
+ 113 010c C000C78F 		lw	$7,192($fp)
+ 114 0110 C400C68F 		lw	$6,196($fp)
+ 115 0114 C800C58F 		lw	$5,200($fp)
+ 116 0118 1000A9AF 		sw	$9,16($sp)
+ 117 011c 1400A8AF 		sw	$8,20($sp)
+ 118 0120 1800A7AF 		sw	$7,24($sp)
+ 119 0124 1C00A6AF 		sw	$6,28($sp)
+ 120 0128 2000A5AF 		sw	$5,32($sp)
+ 121 012c B400C78F 		lw	$7,180($fp)
+ 122 0130 21286000 		move	$5,$3
+ 123 0134 21304000 		move	$6,$2
+ 124 0138 0000828F 		lw	$2,%call16(PrefixFilterCreate)($28)
+ 125 013c 00000000 		nop
+ 126 0140 21C84000 		move	$25,$2
+ 127 0144 09F82003 		jalr	$25
+ 128 0148 00000000 		nop
+ 129              	
+ 130 014c 3000DC8F 		lw	$28,48($fp)
+ 131 0150 3800C28F 		lw	$2,56($fp)
+ 132 0154 00000000 		nop
+ 133 0158 FF004330 		andi	$3,$2,0x00ff
+ 134 015c 5800C293 		lbu	$2,88($fp)
+ 135 0160 00000000 		nop
+ 136 0164 21106200 		addu	$2,$3,$2
+ 137 0168 FF004230 		andi	$2,$2,0x00ff
+ 138 016c 21304000 		move	$6,$2
+ 139 0170 3800C28F 		lw	$2,56($fp)
+ 140 0174 00000000 		nop
+ 141 0178 FF004230 		andi	$2,$2,0x00ff
+ 142 017c 5C00C393 		lbu	$3,92($fp)
+ 143 0180 00000000 		nop
+ 144 0184 23106200 		subu	$2,$3,$2
+ 145 0188 FF004230 		andi	$2,$2,0x00ff
+ 146 018c 21284000 		move	$5,$2
+  14:ui/ListCmdr.c ****       PrefixFilterCreate(&cmdr->filter, cmdr->mbox.buffer, gen), 
+  15:ui/ListCmdr.c ****       topRow + rOffset, nRows - rOffset, (flags & LC_ListOnlyMode) ? 0 : -1, scrollJump);
+ 147              		.loc 1 16 0
+ 148 0190 6000C293 		lbu	$2,96($fp)
+ 149 0194 00000000 		nop
+ 150 0198 01004230 		andi	$2,$2,0x1
+  14:ui/ListCmdr.c ****       PrefixFilterCreate(&cmdr->filter, cmdr->mbox.buffer, gen), 
+ 151              		.loc 1 14 0
+ 152 019c FF004230 		andi	$2,$2,0x00ff
+ 153 01a0 04004010 		beq	$2,$0,$L3
+ 154 01a4 00000000 		nop
+ 155              	
+ 156 01a8 21100000 		move	$2,$0
+ 157 01ac 02000010 		b	$L4
+ 158 01b0 00000000 		nop
+ 159              	
+ 160              	$L3:
+ 161 01b4 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 162              	$L4:
+ 163 01b8 6400C493 		lbu	$4,100($fp)
+ 164 01bc B000D08F 		lw	$16,176($fp)
+ 165 01c0 6800C327 		addiu	$3,$fp,104
+ 166 01c4 1C00A6AF 		sw	$6,28($sp)
+ 167 01c8 2000A5AF 		sw	$5,32($sp)
+ 168 01cc 2400A2AF 		sw	$2,36($sp)
+ 169 01d0 2800A4AF 		sw	$4,40($sp)
+ 170 01d4 4800C58F 		lw	$5,72($fp)
+ 171 01d8 4C00C48F 		lw	$4,76($fp)
+ 172 01dc 5000C28F 		lw	$2,80($fp)
+ 173 01e0 1000A5AF 		sw	$5,16($sp)
+ 174 01e4 1400A4AF 		sw	$4,20($sp)
+ 175 01e8 1800A2AF 		sw	$2,24($sp)
+ 176 01ec 3C00C58F 		lw	$5,60($fp)
+ 177 01f0 4000C68F 		lw	$6,64($fp)
+ 178 01f4 4400C78F 		lw	$7,68($fp)
+ 179 01f8 21206000 		move	$4,$3
+ 180 01fc 0000828F 		lw	$2,%call16(ListViewCreate)($28)
+ 181 0200 00000000 		nop
+ 182 0204 21C84000 		move	$25,$2
+ 183 0208 09F82003 		jalr	$25
+ 184 020c 00000000 		nop
+ 185              	
+ 186 0210 3000DC8F 		lw	$28,48($fp)
+ 187 0214 58000426 		addiu	$4,$16,88
+ 188 0218 6800C327 		addiu	$3,$fp,104
+ 189 021c 34000224 		li	$2,52			# 0x34
+ 190 0220 21286000 		move	$5,$3
+ 191 0224 21304000 		move	$6,$2
+ 192 0228 0000828F 		lw	$2,%call16(memcpy)($28)
+ 193 022c 00000000 		nop
+ 194 0230 21C84000 		move	$25,$2
+ 195 0234 09F82003 		jalr	$25
+ 196 0238 00000000 		nop
+ 197              	
+ 198 023c 3000DC8F 		lw	$28,48($fp)
+  16:ui/ListCmdr.c **** }
+ 199              		.loc 1 17 0
+ 200 0240 21E8C003 		move	$sp,$fp
+ 201 0244 AC00BF8F 		lw	$31,172($sp)
+ 202 0248 A800BE8F 		lw	$fp,168($sp)
+ 203 024c A400B08F 		lw	$16,164($sp)
+ 204 0250 B000BD27 		addiu	$sp,$sp,176
+ 205 0254 0800E003 		j	$31
+ 206 0258 00000000 		nop
+ 207              	
+ 208              		.set	macro
+ 209              		.set	reorder
+ 210              		.end	ListCmdrInit
+ 211              	$LFE1:
+ 213              		.align	2
+ 214              		.globl	ListCmdrPushEvent
+ 215              	$LFB2 = .
+  17:ui/ListCmdr.c **** 
+  18:ui/ListCmdr.c **** void ListCmdrPushEvent(ListCmdr *cmdr, int r) {
+ 216              		.loc 1 19 0
+ 217              		.set	nomips16
+ 218              		.ent	ListCmdrPushEvent
+ 220              	ListCmdrPushEvent:
+ 221              		.frame	$fp,48,$31		# vars= 8, regs= 3/0, args= 16, gp= 8
+ 222              		.mask	0xc0010000,-4
+ 223              		.fmask	0x00000000,0
+ 224              		.set	noreorder
+ 225              		.set	nomacro
+ 226              		
+ 227 025c D0FFBD27 		addiu	$sp,$sp,-48
+ 228              	$LCFI5:
+ 229 0260 2C00BFAF 		sw	$31,44($sp)
+ 230              	$LCFI6:
+ 231 0264 2800BEAF 		sw	$fp,40($sp)
+ 232              	$LCFI7:
+ 233 0268 2400B0AF 		sw	$16,36($sp)
+ 234              	$LCFI8:
+ 235 026c 21F0A003 		move	$fp,$sp
+ 236              	$LCFI9:
+ 237 0270 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 238 0274 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 239 0278 1000BCAF 		.cprestore	16
+ 240 027c 3000C4AF 		sw	$4,48($fp)
+ 241 0280 3400C5AF 		sw	$5,52($fp)
+  19:ui/ListCmdr.c ****   if (ListViewGetFocus(&cmdr->view) != -1) {
+ 242              		.loc 1 20 0
+ 243 0284 3000C28F 		lw	$2,48($fp)
+ 244 0288 00000000 		nop
+ 245 028c 58004224 		addiu	$2,$2,88
+ 246 0290 21204000 		move	$4,$2
+ 247 0294 0000828F 		lw	$2,%call16(ListViewGetFocus)($28)
+ 248 0298 00000000 		nop
+ 249 029c 21C84000 		move	$25,$2
+ 250 02a0 09F82003 		jalr	$25
+ 251 02a4 00000000 		nop
+ 252              	
+ 253 02a8 1000DC8F 		lw	$28,16($fp)
+ 254 02ac 21184000 		move	$3,$2
+ 255 02b0 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 256 02b4 5C006210 		beq	$3,$2,$L7
+ 257 02b8 00000000 		nop
+ 258              	
+  20:ui/ListCmdr.c ****     if ((r == '\n') || (r == '\r') || (r == RIGHT_ARROW)) {
+ 259              		.loc 1 21 0
+ 260 02bc 3400C38F 		lw	$3,52($fp)
+ 261 02c0 0A000224 		li	$2,10			# 0xa
+ 262 02c4 09006210 		beq	$3,$2,$L8
+ 263 02c8 00000000 		nop
+ 264              	
+ 265 02cc 3400C38F 		lw	$3,52($fp)
+ 266 02d0 0D000224 		li	$2,13			# 0xd
+ 267 02d4 05006210 		beq	$3,$2,$L8
+ 268 02d8 00000000 		nop
+ 269              	
+ 270 02dc 3400C38F 		lw	$3,52($fp)
+ 271 02e0 00430224 		li	$2,17152			# 0x4300
+ 272 02e4 21006214 		bne	$3,$2,$L9
+ 273 02e8 00000000 		nop
+ 274              	
+ 275              	$L8:
+  21:ui/ListCmdr.c ****       ListGenGet(&cmdr->view.gen, ListViewGetFocus(&cmdr->view), cmdr->mbox.buffer, MORSEBOX_MAX);
+ 276              		.loc 1 22 0
+ 277 02ec 3000C28F 		lw	$2,48($fp)
+ 278 02f0 00000000 		nop
+ 279 02f4 58005024 		addiu	$16,$2,88
+ 280 02f8 3000C28F 		lw	$2,48($fp)
+ 281 02fc 00000000 		nop
+ 282 0300 58004224 		addiu	$2,$2,88
+ 283 0304 21204000 		move	$4,$2
+ 284 0308 0000828F 		lw	$2,%call16(ListViewGetFocus)($28)
+ 285 030c 00000000 		nop
+ 286 0310 21C84000 		move	$25,$2
+ 287 0314 09F82003 		jalr	$25
+ 288 0318 00000000 		nop
+ 289              	
+ 290 031c 1000DC8F 		lw	$28,16($fp)
+ 291 0320 21184000 		move	$3,$2
+ 292 0324 3000C28F 		lw	$2,48($fp)
+ 293 0328 00000000 		nop
+ 294 032c 04004224 		addiu	$2,$2,4
+ 295 0330 21200002 		move	$4,$16
+ 296 0334 21286000 		move	$5,$3
+ 297 0338 21304000 		move	$6,$2
+ 298 033c 28000724 		li	$7,40			# 0x28
+ 299 0340 0000828F 		lw	$2,%call16(ListGenGet)($28)
+ 300 0344 00000000 		nop
+ 301 0348 21C84000 		move	$25,$2
+ 302 034c 09F82003 		jalr	$25
+ 303 0350 00000000 		nop
+ 304              	
+ 305 0354 1000DC8F 		lw	$28,16($fp)
+  22:ui/ListCmdr.c ****       cmdr->finished = 1;
+ 306              		.loc 1 23 0
+ 307 0358 3000C28F 		lw	$2,48($fp)
+ 308 035c 01000324 		li	$3,1			# 0x1
+ 309 0360 8C0043AC 		sw	$3,140($2)
+  21:ui/ListCmdr.c ****       ListGenGet(&cmdr->view.gen, ListViewGetFocus(&cmdr->view), cmdr->mbox.buffer, MORSEBOX_MAX);
+ 310              		.loc 1 21 0
+ 311 0364 30000010 		b	$L7
+ 312 0368 00000000 		nop
+ 313              	
+ 314              	$L9:
+  23:ui/ListCmdr.c ****     } else if (r == UP_ARROW) {
+ 315              		.loc 1 24 0
+ 316 036c 3400C38F 		lw	$3,52($fp)
+ 317 0370 00410224 		li	$2,16640			# 0x4100
+ 318 0374 0D006214 		bne	$3,$2,$L10
+ 319 0378 00000000 		nop
+ 320              	
+  24:ui/ListCmdr.c ****       ListViewFocusPrev(&cmdr->view);
+ 321              		.loc 1 25 0
+ 322 037c 3000C28F 		lw	$2,48($fp)
+ 323 0380 00000000 		nop
+ 324 0384 58004224 		addiu	$2,$2,88
+ 325 0388 21204000 		move	$4,$2
+ 326 038c 0000828F 		lw	$2,%call16(ListViewFocusPrev)($28)
+ 327 0390 00000000 		nop
+ 328 0394 21C84000 		move	$25,$2
+ 329 0398 09F82003 		jalr	$25
+ 330 039c 00000000 		nop
+ 331              	
+ 332 03a0 1000DC8F 		lw	$28,16($fp)
+ 333 03a4 20000010 		b	$L7
+ 334 03a8 00000000 		nop
+ 335              	
+ 336              	$L10:
+  25:ui/ListCmdr.c ****     } else if (r == LEFT_ARROW) {
+ 337              		.loc 1 26 0
+ 338 03ac 3400C38F 		lw	$3,52($fp)
+ 339 03b0 00440224 		li	$2,17408			# 0x4400
+ 340 03b4 06006214 		bne	$3,$2,$L11
+ 341 03b8 00000000 		nop
+ 342              	
+  26:ui/ListCmdr.c ****       cmdr->finished = 2; // User abort from ListCmdr
+ 343              		.loc 1 27 0
+ 344 03bc 3000C28F 		lw	$2,48($fp)
+ 345 03c0 02000324 		li	$3,2			# 0x2
+ 346 03c4 8C0043AC 		sw	$3,140($2)
+ 347 03c8 17000010 		b	$L7
+ 348 03cc 00000000 		nop
+ 349              	
+ 350              	$L11:
+  27:ui/ListCmdr.c ****     } else if ((r != DOWN_ARROW) && !(cmdr->flags & LC_ListOnlyMode)) { // any other input resets p
+ 351              		.loc 1 28 0
+ 352 03d0 3400C38F 		lw	$3,52($fp)
+ 353 03d4 00420224 		li	$2,16896			# 0x4200
+ 354 03d8 13006210 		beq	$3,$2,$L7
+ 355 03dc 00000000 		nop
+ 356              	
+ 357 03e0 3000C28F 		lw	$2,48($fp)
+ 358 03e4 00000000 		nop
+ 359 03e8 94004290 		lbu	$2,148($2)
+ 360 03ec 00000000 		nop
+ 361 03f0 01004230 		andi	$2,$2,0x1
+ 362 03f4 0C004014 		bne	$2,$0,$L7
+ 363 03f8 00000000 		nop
+ 364              	
+  28:ui/ListCmdr.c ****       ListViewSetFocus(&cmdr->view, -1);
+ 365              		.loc 1 29 0
+ 366 03fc 3000C28F 		lw	$2,48($fp)
+ 367 0400 00000000 		nop
+ 368 0404 58004224 		addiu	$2,$2,88
+ 369 0408 21204000 		move	$4,$2
+ 370 040c FFFF0524 		li	$5,-1			# 0xffffffffffffffff
+ 371 0410 0000828F 		lw	$2,%call16(ListViewSetFocus)($28)
+ 372 0414 00000000 		nop
+ 373 0418 21C84000 		move	$25,$2
+ 374 041c 09F82003 		jalr	$25
+ 375 0420 00000000 		nop
+ 376              	
+ 377 0424 1000DC8F 		lw	$28,16($fp)
+ 378              	$L7:
+  29:ui/ListCmdr.c ****     }
+  30:ui/ListCmdr.c ****   } 
+  31:ui/ListCmdr.c ****   if (ListViewGetFocus(&cmdr->view) == -1) {
+ 379              		.loc 1 32 0
+ 380 0428 3000C28F 		lw	$2,48($fp)
+ 381 042c 00000000 		nop
+ 382 0430 58004224 		addiu	$2,$2,88
+ 383 0434 21204000 		move	$4,$2
+ 384 0438 0000828F 		lw	$2,%call16(ListViewGetFocus)($28)
+ 385 043c 00000000 		nop
+ 386 0440 21C84000 		move	$25,$2
+ 387 0444 09F82003 		jalr	$25
+ 388 0448 00000000 		nop
+ 389              	
+ 390 044c 1000DC8F 		lw	$28,16($fp)
+ 391 0450 21184000 		move	$3,$2
+ 392 0454 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 393 0458 22006214 		bne	$3,$2,$L12
+ 394 045c 00000000 		nop
+ 395              	
+  32:ui/ListCmdr.c ****     if (!(cmdr->flags & LC_ListOnlyMode)) {
+ 396              		.loc 1 33 0
+ 397 0460 3000C28F 		lw	$2,48($fp)
+ 398 0464 00000000 		nop
+ 399 0468 94004290 		lbu	$2,148($2)
+ 400 046c 00000000 		nop
+ 401 0470 01004230 		andi	$2,$2,0x1
+ 402 0474 1B004014 		bne	$2,$0,$L12
+ 403 0478 00000000 		nop
+ 404              	
+ 405              	$LBB2 = .
+  33:ui/ListCmdr.c ****       int consumed = MorseBoxPushEvent(&cmdr->mbox, r);
+ 406              		.loc 1 34 0
+ 407 047c 3000C28F 		lw	$2,48($fp)
+ 408 0480 00000000 		nop
+ 409 0484 04004224 		addiu	$2,$2,4
+ 410 0488 21204000 		move	$4,$2
+ 411 048c 3400C58F 		lw	$5,52($fp)
+ 412 0490 0000828F 		lw	$2,%call16(MorseBoxPushEvent)($28)
+ 413 0494 00000000 		nop
+ 414 0498 21C84000 		move	$25,$2
+ 415 049c 09F82003 		jalr	$25
+ 416 04a0 00000000 		nop
+ 417              	
+ 418 04a4 1000DC8F 		lw	$28,16($fp)
+ 419 04a8 1800C2AF 		sw	$2,24($fp)
+  34:ui/ListCmdr.c ****       if (consumed)
+ 420              		.loc 1 35 0
+ 421 04ac 1800C28F 		lw	$2,24($fp)
+ 422 04b0 00000000 		nop
+ 423 04b4 0B004010 		beq	$2,$0,$L12
+ 424 04b8 00000000 		nop
+ 425              	
+  35:ui/ListCmdr.c ****         ListGenModified(&cmdr->view.gen);
+ 426              		.loc 1 36 0
+ 427 04bc 3000C28F 		lw	$2,48($fp)
+ 428 04c0 00000000 		nop
+ 429 04c4 58004224 		addiu	$2,$2,88
+ 430 04c8 21204000 		move	$4,$2
+ 431 04cc 0000828F 		lw	$2,%call16(ListGenModified)($28)
+ 432 04d0 00000000 		nop
+ 433 04d4 21C84000 		move	$25,$2
+ 434 04d8 09F82003 		jalr	$25
+ 435 04dc 00000000 		nop
+ 436              	
+ 437 04e0 1000DC8F 		lw	$28,16($fp)
+ 438              	$L12:
+ 439              	$LBE2 = .
+  36:ui/ListCmdr.c ****     }
+  37:ui/ListCmdr.c ****   }
+  38:ui/ListCmdr.c ****   if (r == DOWN_ARROW) { // down arrow 
+ 440              		.loc 1 39 0
+ 441 04e4 3400C38F 		lw	$3,52($fp)
+ 442 04e8 00420224 		li	$2,16896			# 0x4200
+ 443 04ec 0B006214 		bne	$3,$2,$L13
+ 444 04f0 00000000 		nop
+ 445              	
+  39:ui/ListCmdr.c ****     ListViewFocusNext(&cmdr->view);
+ 446              		.loc 1 40 0
+ 447 04f4 3000C28F 		lw	$2,48($fp)
+ 448 04f8 00000000 		nop
+ 449 04fc 58004224 		addiu	$2,$2,88
+ 450 0500 21204000 		move	$4,$2
+ 451 0504 0000828F 		lw	$2,%call16(ListViewFocusNext)($28)
+ 452 0508 00000000 		nop
+ 453 050c 21C84000 		move	$25,$2
+ 454 0510 09F82003 		jalr	$25
+ 455 0514 00000000 		nop
+ 456              	
+ 457 0518 1000DC8F 		lw	$28,16($fp)
+ 458              	$L13:
+  40:ui/ListCmdr.c ****   }
+  41:ui/ListCmdr.c ****   if (ListViewGetFocus(&cmdr->view) == -1) {
+ 459              		.loc 1 42 0
+ 460 051c 3000C28F 		lw	$2,48($fp)
+ 461 0520 00000000 		nop
+ 462 0524 58004224 		addiu	$2,$2,88
+ 463 0528 21204000 		move	$4,$2
+ 464 052c 0000828F 		lw	$2,%call16(ListViewGetFocus)($28)
+ 465 0530 00000000 		nop
+ 466 0534 21C84000 		move	$25,$2
+ 467 0538 09F82003 		jalr	$25
+ 468 053c 00000000 		nop
+ 469              	
+ 470 0540 1000DC8F 		lw	$28,16($fp)
+ 471 0544 21184000 		move	$3,$2
+ 472 0548 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 473 054c 0F006214 		bne	$3,$2,$L14
+ 474 0550 00000000 		nop
+ 475              	
+  42:ui/ListCmdr.c ****     MorseBoxSetPrompt(&cmdr->mbox, '>', '$');
+ 476              		.loc 1 43 0
+ 477 0554 3000C28F 		lw	$2,48($fp)
+ 478 0558 00000000 		nop
+ 479 055c 04004224 		addiu	$2,$2,4
+ 480 0560 21204000 		move	$4,$2
+ 481 0564 3E000524 		li	$5,62			# 0x3e
+ 482 0568 24000624 		li	$6,36			# 0x24
+ 483 056c 0000828F 		lw	$2,%call16(MorseBoxSetPrompt)($28)
+ 484 0570 00000000 		nop
+ 485 0574 21C84000 		move	$25,$2
+ 486 0578 09F82003 		jalr	$25
+ 487 057c 00000000 		nop
+ 488              	
+ 489 0580 1000DC8F 		lw	$28,16($fp)
+ 490 0584 0D000010 		b	$L16
+ 491 0588 00000000 		nop
+ 492              	
+ 493              	$L14:
+  43:ui/ListCmdr.c ****   } else {
+  44:ui/ListCmdr.c ****     MorseBoxSetPrompt(&cmdr->mbox, ' ', '$');
+ 494              		.loc 1 45 0
+ 495 058c 3000C28F 		lw	$2,48($fp)
+ 496 0590 00000000 		nop
+ 497 0594 04004224 		addiu	$2,$2,4
+ 498 0598 21204000 		move	$4,$2
+ 499 059c 20000524 		li	$5,32			# 0x20
+ 500 05a0 24000624 		li	$6,36			# 0x24
+ 501 05a4 0000828F 		lw	$2,%call16(MorseBoxSetPrompt)($28)
+ 502 05a8 00000000 		nop
+ 503 05ac 21C84000 		move	$25,$2
+ 504 05b0 09F82003 		jalr	$25
+ 505 05b4 00000000 		nop
+ 506              	
+ 507 05b8 1000DC8F 		lw	$28,16($fp)
+ 508              	$L16:
+  45:ui/ListCmdr.c ****   }
+  46:ui/ListCmdr.c **** }
+ 509              		.loc 1 47 0
+ 510 05bc 21E8C003 		move	$sp,$fp
+ 511 05c0 2C00BF8F 		lw	$31,44($sp)
+ 512 05c4 2800BE8F 		lw	$fp,40($sp)
+ 513 05c8 2400B08F 		lw	$16,36($sp)
+ 514 05cc 3000BD27 		addiu	$sp,$sp,48
+ 515 05d0 0800E003 		j	$31
+ 516 05d4 00000000 		nop
+ 517              	
+ 518              		.set	macro
+ 519              		.set	reorder
+ 520              		.end	ListCmdrPushEvent
+ 521              	$LFE2:
+ 523              		.align	2
+ 524              		.globl	ListCmdrGetValue
+ 525              	$LFB3 = .
+  47:ui/ListCmdr.c **** 
+  48:ui/ListCmdr.c **** char *ListCmdrGetValue(ListCmdr *cmdr) {
+ 526              		.loc 1 49 0
+ 527              		.set	nomips16
+ 528              		.ent	ListCmdrGetValue
+ 530              	ListCmdrGetValue:
+ 531              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+ 532              		.mask	0x40000000,-4
+ 533              		.fmask	0x00000000,0
+ 534              		.set	noreorder
+ 535              		.set	nomacro
+ 536              		
+ 537 05d8 F8FFBD27 		addiu	$sp,$sp,-8
+ 538              	$LCFI10:
+ 539 05dc 0400BEAF 		sw	$fp,4($sp)
+ 540              	$LCFI11:
+ 541 05e0 21F0A003 		move	$fp,$sp
+ 542              	$LCFI12:
+ 543 05e4 0800C4AF 		sw	$4,8($fp)
+  49:ui/ListCmdr.c ****   if (cmdr->finished == 1)
+ 544              		.loc 1 50 0
+ 545 05e8 0800C28F 		lw	$2,8($fp)
+ 546 05ec 00000000 		nop
+ 547 05f0 8C00438C 		lw	$3,140($2)
+ 548 05f4 01000224 		li	$2,1			# 0x1
+ 549 05f8 06006214 		bne	$3,$2,$L18
+ 550 05fc 00000000 		nop
+ 551              	
+  50:ui/ListCmdr.c ****     return cmdr->mbox.buffer;
+ 552              		.loc 1 51 0
+ 553 0600 0800C28F 		lw	$2,8($fp)
+ 554 0604 00000000 		nop
+ 555 0608 04004224 		addiu	$2,$2,4
+ 556 060c 02000010 		b	$L19
+ 557 0610 00000000 		nop
+ 558              	
+ 559              	$L18:
+  51:ui/ListCmdr.c ****   else
+  52:ui/ListCmdr.c ****     return 0x0;
+ 560              		.loc 1 53 0
+ 561 0614 21100000 		move	$2,$0
+ 562              	$L19:
+  53:ui/ListCmdr.c **** }
+ 563              		.loc 1 54 0
+ 564 0618 21E8C003 		move	$sp,$fp
+ 565 061c 0400BE8F 		lw	$fp,4($sp)
+ 566 0620 0800BD27 		addiu	$sp,$sp,8
+ 567 0624 0800E003 		j	$31
+ 568 0628 00000000 		nop
+ 569              	
+ 570              		.set	macro
+ 571              		.set	reorder
+ 572              		.end	ListCmdrGetValue
+ 573              	$LFE3:
+ 575              		.align	2
+ 576              		.globl	ListCmdrDraw
+ 577              	$LFB4 = .
+  54:ui/ListCmdr.c **** 
+  55:ui/ListCmdr.c **** int ListCmdrDraw(ListCmdr *cmdr) {
+ 578              		.loc 1 56 0
+ 579              		.set	nomips16
+ 580              		.ent	ListCmdrDraw
+ 582              	ListCmdrDraw:
+ 583              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 584              		.mask	0xc0000000,-4
+ 585              		.fmask	0x00000000,0
+ 586              		.set	noreorder
+ 587              		.set	nomacro
+ 588              		
+ 589 062c D8FFBD27 		addiu	$sp,$sp,-40
+ 590              	$LCFI13:
+ 591 0630 2400BFAF 		sw	$31,36($sp)
+ 592              	$LCFI14:
+ 593 0634 2000BEAF 		sw	$fp,32($sp)
+ 594              	$LCFI15:
+ 595 0638 21F0A003 		move	$fp,$sp
+ 596              	$LCFI16:
+ 597 063c 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 598 0640 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 599 0644 1000BCAF 		.cprestore	16
+ 600 0648 2800C4AF 		sw	$4,40($fp)
+  56:ui/ListCmdr.c ****   vposition(stdout, cmdr->topRow, 0);
+ 601              		.loc 1 57 0
+ 602 064c 0000828F 		lw	$2,%got(stdout)($28)
+ 603 0650 00000000 		nop
+ 604 0654 0000438C 		lw	$3,0($2)
+ 605 0658 2800C28F 		lw	$2,40($fp)
+ 606 065c 00000000 		nop
+ 607 0660 00004290 		lbu	$2,0($2)
+ 608 0664 21206000 		move	$4,$3
+ 609 0668 21284000 		move	$5,$2
+ 610 066c 21300000 		move	$6,$0
+ 611 0670 0000828F 		lw	$2,%call16(vposition)($28)
+ 612 0674 00000000 		nop
+ 613 0678 21C84000 		move	$25,$2
+ 614 067c 09F82003 		jalr	$25
+ 615 0680 00000000 		nop
+ 616              	
+ 617 0684 1000DC8F 		lw	$28,16($fp)
+  57:ui/ListCmdr.c ****   if (!(cmdr->flags & LC_ListOnlyMode)) {
+ 618              		.loc 1 58 0
+ 619 0688 2800C28F 		lw	$2,40($fp)
+ 620 068c 00000000 		nop
+ 621 0690 94004290 		lbu	$2,148($2)
+ 622 0694 00000000 		nop
+ 623 0698 01004230 		andi	$2,$2,0x1
+ 624 069c 1D004014 		bne	$2,$0,$L22
+ 625 06a0 00000000 		nop
+ 626              	
+  58:ui/ListCmdr.c ****     MorseBoxDraw(&cmdr->mbox);
+ 627              		.loc 1 59 0
+ 628 06a4 2800C28F 		lw	$2,40($fp)
+ 629 06a8 00000000 		nop
+ 630 06ac 04004224 		addiu	$2,$2,4
+ 631 06b0 21204000 		move	$4,$2
+ 632 06b4 0000828F 		lw	$2,%call16(MorseBoxDraw)($28)
+ 633 06b8 00000000 		nop
+ 634 06bc 21C84000 		move	$25,$2
+ 635 06c0 09F82003 		jalr	$25
+ 636 06c4 00000000 		nop
+ 637              	
+ 638 06c8 1000DC8F 		lw	$28,16($fp)
+ 639 06cc 00000000 		nop
+  59:ui/ListCmdr.c ****     vposition(stdout, cmdr->topRow + 3, 0);
+ 640              		.loc 1 60 0
+ 641 06d0 0000828F 		lw	$2,%got(stdout)($28)
+ 642 06d4 00000000 		nop
+ 643 06d8 0000438C 		lw	$3,0($2)
+ 644 06dc 2800C28F 		lw	$2,40($fp)
+ 645 06e0 00000000 		nop
+ 646 06e4 00004290 		lbu	$2,0($2)
+ 647 06e8 00000000 		nop
+ 648 06ec 03004224 		addiu	$2,$2,3
+ 649 06f0 21206000 		move	$4,$3
+ 650 06f4 21284000 		move	$5,$2
+ 651 06f8 21300000 		move	$6,$0
+ 652 06fc 0000828F 		lw	$2,%call16(vposition)($28)
+ 653 0700 00000000 		nop
+ 654 0704 21C84000 		move	$25,$2
+ 655 0708 09F82003 		jalr	$25
+ 656 070c 00000000 		nop
+ 657              	
+ 658 0710 1000DC8F 		lw	$28,16($fp)
+ 659              	$L22:
+  60:ui/ListCmdr.c ****   }
+  61:ui/ListCmdr.c ****   int res = ListViewDraw(&cmdr->view);
+ 660              		.loc 1 62 0
+ 661 0714 2800C28F 		lw	$2,40($fp)
+ 662 0718 00000000 		nop
+ 663 071c 58004224 		addiu	$2,$2,88
+ 664 0720 21204000 		move	$4,$2
+ 665 0724 0000828F 		lw	$2,%call16(ListViewDraw)($28)
+ 666 0728 00000000 		nop
+ 667 072c 21C84000 		move	$25,$2
+ 668 0730 09F82003 		jalr	$25
+ 669 0734 00000000 		nop
+ 670              	
+ 671 0738 1000DC8F 		lw	$28,16($fp)
+ 672 073c 1800C2AF 		sw	$2,24($fp)
+  62:ui/ListCmdr.c ****   
+  63:ui/ListCmdr.c ****   // move blinking cursor back to prompt
+  64:ui/ListCmdr.c ****   vposition(stdout, cmdr->topRow + 2, cmdr->mbox.bufferPos + 3);
+ 673              		.loc 1 65 0
+ 674 0740 0000828F 		lw	$2,%got(stdout)($28)
+ 675 0744 00000000 		nop
+ 676 0748 0000448C 		lw	$4,0($2)
+ 677 074c 2800C28F 		lw	$2,40($fp)
+ 678 0750 00000000 		nop
+ 679 0754 00004290 		lbu	$2,0($2)
+ 680 0758 00000000 		nop
+ 681 075c 02004324 		addiu	$3,$2,2
+ 682 0760 2800C28F 		lw	$2,40($fp)
+ 683 0764 00000000 		nop
+ 684 0768 2C00428C 		lw	$2,44($2)
+ 685 076c 00000000 		nop
+ 686 0770 03004224 		addiu	$2,$2,3
+ 687 0774 21286000 		move	$5,$3
+ 688 0778 21304000 		move	$6,$2
+ 689 077c 0000828F 		lw	$2,%call16(vposition)($28)
+ 690 0780 00000000 		nop
+ 691 0784 21C84000 		move	$25,$2
+ 692 0788 09F82003 		jalr	$25
+ 693 078c 00000000 		nop
+ 694              	
+ 695 0790 1000DC8F 		lw	$28,16($fp)
+  65:ui/ListCmdr.c ****   return res;
+ 696              		.loc 1 66 0
+ 697 0794 1800C28F 		lw	$2,24($fp)
+  66:ui/ListCmdr.c **** }
+ 698              		.loc 1 67 0
+ 699 0798 21E8C003 		move	$sp,$fp
+ 700 079c 2400BF8F 		lw	$31,36($sp)
+ 701 07a0 2000BE8F 		lw	$fp,32($sp)
+ 702 07a4 2800BD27 		addiu	$sp,$sp,40
+ 703 07a8 0800E003 		j	$31
+ 704 07ac 00000000 		nop
+ 705              	
+ 706              		.set	macro
+ 707              		.set	reorder
+ 708              		.end	ListCmdrDraw
+ 709              	$LFE4:
+ 711              		.align	2
+ 712              		.globl	ListCmdrForceRedraw
+ 713              	$LFB5 = .
+  67:ui/ListCmdr.c **** 
+  68:ui/ListCmdr.c **** void ListCmdrForceRedraw(ListCmdr *cmdr) {
+ 714              		.loc 1 69 0
+ 715              		.set	nomips16
+ 716              		.ent	ListCmdrForceRedraw
+ 718              	ListCmdrForceRedraw:
+ 719              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 720              		.mask	0xc0000000,-4
+ 721              		.fmask	0x00000000,0
+ 722              		.set	noreorder
+ 723              		.set	nomacro
+ 724              		
+ 725 07b0 E0FFBD27 		addiu	$sp,$sp,-32
+ 726              	$LCFI17:
+ 727 07b4 1C00BFAF 		sw	$31,28($sp)
+ 728              	$LCFI18:
+ 729 07b8 1800BEAF 		sw	$fp,24($sp)
+ 730              	$LCFI19:
+ 731 07bc 21F0A003 		move	$fp,$sp
+ 732              	$LCFI20:
+ 733 07c0 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 734 07c4 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 735 07c8 1000BCAF 		.cprestore	16
+ 736 07cc 2000C4AF 		sw	$4,32($fp)
+  69:ui/ListCmdr.c ****   ListViewForceRedraw(&cmdr->view);
+ 737              		.loc 1 70 0
+ 738 07d0 2000C28F 		lw	$2,32($fp)
+ 739 07d4 00000000 		nop
+ 740 07d8 58004224 		addiu	$2,$2,88
+ 741 07dc 21204000 		move	$4,$2
+ 742 07e0 0000828F 		lw	$2,%call16(ListViewForceRedraw)($28)
+ 743 07e4 00000000 		nop
+ 744 07e8 21C84000 		move	$25,$2
+ 745 07ec 09F82003 		jalr	$25
+ 746 07f0 00000000 		nop
+ 747              	
+ 748 07f4 1000DC8F 		lw	$28,16($fp)
+  70:ui/ListCmdr.c **** }
+ 749              		.loc 1 71 0
+ 750 07f8 21E8C003 		move	$sp,$fp
+ 751 07fc 1C00BF8F 		lw	$31,28($sp)
+ 752 0800 1800BE8F 		lw	$fp,24($sp)
+ 753 0804 2000BD27 		addiu	$sp,$sp,32
+ 754 0808 0800E003 		j	$31
+ 755 080c 00000000 		nop
+ 756              	
+ 757              		.set	macro
+ 758              		.set	reorder
+ 759              		.end	ListCmdrForceRedraw
+ 760              	$LFE5:
+ 901              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ui/ListCmdr.c
+     /tmp/ccgkWBPo.s:21     .text:0000000000000000 ListCmdrInit
+     /tmp/ccgkWBPo.s:220    .text:000000000000025c ListCmdrPushEvent
+     /tmp/ccgkWBPo.s:530    .text:00000000000005d8 ListCmdrGetValue
+     /tmp/ccgkWBPo.s:582    .text:000000000000062c ListCmdrDraw
+     /tmp/ccgkWBPo.s:718    .text:00000000000007b0 ListCmdrForceRedraw
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+MorseBoxInit
+PrefixFilterCreate
+ListViewCreate
+memcpy
+ListViewGetFocus
+ListGenGet
+ListViewFocusPrev
+ListViewSetFocus
+MorseBoxPushEvent
+ListGenModified
+ListViewFocusNext
+MorseBoxSetPrompt
+stdout
+vposition
+MorseBoxDraw
+ListViewDraw
+ListViewForceRedraw

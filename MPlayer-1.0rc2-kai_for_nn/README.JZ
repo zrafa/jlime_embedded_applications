@@ -1,0 +1,13 @@
+1 if you use MPlayer on jz4740, type the following command
+# tar jcf MPlayer-1.0rc2-20090218.tar.bz2
+# cd MPlayerr-1.0rc2
+# ./build.jz4740
+# cp mplayer <your target board filesystem>
+
+2 if you use MPlayer on jz4750, type the following command
+# tar jcf MPlayer-1.0rc2-20090218.tar.bz2
+# cd MPlayerr-1.0rc2
+# ./build.jz4750
+# cp final_mplayer <your target board filesystem>
+
+3 when you patch the patch file, you get three tcsm bin files on jz4750, cp them to /usr/share/mplayer/tcsm/ on your target board filesystem.

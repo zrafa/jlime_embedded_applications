@@ -1,0 +1,266 @@
+#include "bgCore.h"
+#include "bgApi.h"
+#include <stdio.h>
+#include <string.h>
+#include <assert.h>
+#include <stdlib.h>
+#include "crc32.h"
+#include "bgUtil.h"
+#include "bgUtil2.h"
+#include "Errors.h"
+ErrorsGlobals
+
+char *mem=0x0;
+uint32_t memLast=0;
+uint32_t memSize=0;
+
+/** Return the length of a file - simple convenience **/
+long FileLen(FILE *f) {
+  long pos1 = ftell(f);
+  int res = fseek(f, 0, SEEK_END);
+  assert(res == 0);
+  long pos2 = ftell(f);
+  res = fseek(f, pos1, SEEK_SET); // return to original position
+  assert((res == 0) && "Could not rewind file");
+  return pos2;
+}
+
+void LoadBlock(BlockAddrT addr, Node *ptr, void *userData) {
+  memcpy(ptr, &mem[addr], sizeof(Node));
+}
+
+void UnloadBlock(BlockAddrT addr, Node *ptr, void *userData) {
+  // nop
+}
+
+/** User supplied function to allocate a new block **/
+BlockAddrT AllocBlock(void *userData) {
+  //fprintf(stderr, "AllocBlock() memLast = %i, memSize=%i\n", memLast, memSize);
+  assert(mem[memSize] == 123); // overflow detector
+  BlockAddrT p = memLast;
+  assert(memLast + BlockSize <= memSize);
+  memLast += BlockSize;
+  return p;
+}
+
+void SaveBlock(BlockAddrT addr, Node *buffer, void *userData) {
+  if ((char *) buffer == &mem[addr]) 
+    return;
+  memcpy(&mem[addr], buffer, BlockSize);
+}
+
+
+void PrintUsage(FILE *f, char *progname) {
+  fprintf(f, "USAGE:\n");
+  fprintf(f, "%s create <outbfile> <n>\n", progname);
+  fprintf(f, "   Read two columns of tab delim key/value ints on stdin, write to stdout\n");
+  fprintf(f, "%s search <inbfile> <key> [<inblobfile> <schema>]\n", progname);
+  fprintf(f, "   Search inbfile for key\n");
+  fprintf(f, "Columns are assumed to be in HEX \nunless they are prefixed with an 'S' for string.\n");
+  fprintf(f, "Key columns which are 'S'trings will be hashed with CRC-32.\n");
+  fprintf(f, "Item columns which are 'S'trings will be written to <outdatafile>\n");
+}
+int LoadBGT(char *fname) {
+    FILE *f = fopen(fname, "rb");
+    if (!f) {
+      fprintf(stderr, "ERROR: Failed to open file for reading %s\n", fname);
+      return -13;
+    }
+    long sz = FileLen(f);
+
+    /* Create memory buffer */
+    mem = (char *) malloc(sz + 1);
+    mem[sz] = 123; // Magic Marker to detect overflow
+    memSize = sz;
+    memLast = sz;
+
+    int res = fread(mem, 1, memLast, f);
+    if (res != memLast) {
+      fprintf(stderr, "ERROR: reading input bfile failed %s\n", fname);
+      return -14;
+    }
+    fclose(f);
+    assert(mem[sz] == 123); // overflow check
+    return 0;
+}
+
+int main(int argc, char **argv) {
+  if (argc < 3) {
+    PrintUsage(stderr, argv[0]);
+    return -1;
+  }
+
+  if (!strcmp(argv[1], "create")) {
+    if (argc < 4) {
+      fprintf(stderr, "ERROR: incorrect create usage\n");
+      return -2;
+    }
+    char *outbfile = argv[2];
+    int n = atoi(argv[3]);
+
+    /* Calculate btree size */
+    int depth = CalcMinimumDepth(n);
+    int sz = CalcTreeSize2(n, depth);
+    fprintf(stderr, "n = %i, depth = %i, size = %i\n", n, depth, sz);
+
+    /* Create memory buffer */
+    mem = (char *) malloc(sz + 1);
+    mem[sz] = 123; // Magic Marker to detect overflow
+    memSize = sz;
+
+    /* Init top node */
+    BlockAddrT top = AllocBlock(0x0);
+    Node topNode; 
+    NodeInit(&topNode);
+    topNode.depth = depth - 1; // total depth vs depth(rank?) of this node
+    NodeSave(&topNode, top);
+    BgTree tree;
+    tree.topNode = top;
+
+    /* Read in data */
+    KeyT highestKey = 0;
+    for (int i=0; i<n; i++) {
+      KeyT key;
+      BlockAddrT item;
+
+      int res = fscanf(stdin, "%x\t%x", &key, &item);
+      assert(res == 2);
+
+      if (key < highestKey) {
+        fprintf(stderr, "ERROR: Key out of order on line %i.  Input must be sorted!\n", i+1);
+        return -3;
+      }
+      highestKey = key;
+      //printf("GOT %i %i\n", key, item);
+      TreeAppend(tree, key, item);
+    }
+
+    /* Set keys for non-leaf nodes */
+    //NodeVisitDFS(&SetKeysVisitor, top);
+
+    /* Write memory to file */
+    assert(mem[sz] == 123);
+    fprintf(stderr, "MEM: %i of %i allocated was used\n", memLast, memSize);
+    FILE *f = fopen(outbfile, "wb");
+    if (!f) {
+      fprintf(stderr, "ERROR: Failed to open file %s for writing\n", outbfile);
+      return -9;
+    }
+    int res = fwrite(mem, 1, memLast, f);
+    if (res != memLast) {
+      fprintf(stderr, "ERROR: Could not write all data to file %s\n", outbfile);
+      return -4;
+    }
+    fclose(f);
+  } // end of "create" command
+
+  if (!strcmp(argv[1], "search")) {
+    if (argc < 4) {
+      fprintf(stderr, "ERROR: search usage incorrect, not enough arguments\n");
+      return -11;
+    }
+    FILE *blobfile = 0x0;
+    if (argc > 4) {
+      blobfile = fopen(argv[4],"rb");
+      if (!blobfile) {
+        fprintf(stderr, "ERROR: failed to open Blob File %s\n", argv[4]);
+        return -19;
+      }
+    }
+    char *schema=0x0;
+    if (argc > 5) {
+      schema = argv[5];
+    }
+
+    char *inbfile = argv[2];
+    KeyT key;
+    int res;
+    if (argv[3][0] == 'S') {
+      key = CalcCRC(&argv[3][1], strlen(&argv[3][1]));
+      //fprintf(stderr, "CRC32=%x for %s len=%i\n", key, &argv[3][1], (int) strlen(&argv[3][1]));
+      printf("%x", key);
+	if (mem)
+    		free(mem);
+	exit(0);
+    } else { // assume hex
+      res = sscanf(argv[3], "%x", &key);
+      if (res != 1) {
+        fprintf(stderr, "ERROR: Unable to parse query key argument %s\n", argv[3]);
+        return -12;
+      }
+    }
+
+    if (LoadBGT(inbfile) != 0) 
+      return -99;
+
+    /* Perform Search */
+    BAT outParent;
+    int outIndex;
+    BAT found_temp;
+    BAT found = FindInternal(0, key, &outParent, &outIndex);
+    while (found != BAInvalid) {
+	
+//    if (found == BAInvalid) {
+  //    printf("%x NOT FOUND!\n", key);
+ //   } else {
+      //printf("%x\t%08x", key, found);
+      if (schema && blobfile) {
+        for (char *p = &schema[0]; *p; ++p) {
+          if ((*p == 's') || (*p == 'K')) {
+            char buf[2000000];
+            fseek(blobfile, found, SEEK_SET);
+            int sz = UnpackStringFromFile(blobfile, buf, 2000000);
+            if (sz < 0) {
+              fprintf(stderr, "ERROR: Failed to read String from blob file\n");
+              return -20;
+            }
+            found += sz;
+            buf[sz] = 0x0; // not null terminated by default
+            printf("\t%s", buf);
+
+          } else if (*p == 'i') {
+            int32_t v;
+            fseek(blobfile, found, SEEK_SET);
+            v = UnpackIntFromFile(blobfile);
+            ERRORassert();
+            found += 4;
+            printf("\t%i", v);
+          } else if ((*p == 'I') || (*p == 'x') || (*p == 'X')) {
+            uint32_t v;
+            fseek(blobfile, found, SEEK_SET);
+            v = UnpackUIntFromFile(blobfile);
+            ERRORassert();
+            if (*p == 'I')
+              printf("\t%u", v);
+            else
+              printf("\t%x", v);
+            found += 4;
+          } else {
+            fprintf(stderr, "ERROR: Unsupported schema character '%c'\n", *p);
+            return -23;
+          }
+
+        }
+      }
+      printf("\n");
+//	found_temp = NodeNextLeaf(NodeParent(found), found);
+	//found_temp = FindInternal(0, key, &outParent, &outIndex);
+	key++;
+	found_temp = FindInternal(0, key, &outParent, &outIndex);
+	found = found_temp;
+	
+    }
+    if (blobfile)
+      fclose(blobfile);
+  } else if (!strcmp(argv[1],"printtree")) {
+    if (LoadBGT(argv[2]) != 0) {
+      printf("Error Loading BGT\n");
+      return -99;
+    }
+    BgTree dummy;
+    TreeInit(&dummy,0x0);
+    NodeVisitDFS(dummy, &PrintVisitor, 0);
+  }
+  if (mem)
+    free(mem);
+}

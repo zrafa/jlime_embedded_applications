@@ -1,0 +1,705 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.align	2
+  14              		.globl	InitBlockCache
+  15              	$LFB0 = .
+  16              		.file 1 "bgtree/bgUtil.c"
+   0:bgtree/bgUtil.c **** /** Utility Functions for bgTree which DO NOT RELY
+   1:bgtree/bgUtil.c ****  * UPON STANDARD LIBRARIES **/
+   2:bgtree/bgUtil.c **** #include "bgUtil.h"
+   3:bgtree/bgUtil.c **** #include <assert.h>
+   4:bgtree/bgUtil.c **** #include <string.h>
+   5:bgtree/bgUtil.c **** 
+   6:bgtree/bgUtil.c **** void InitBlockCache(BlockCache *cache) {
+  17              		.loc 1 7 0
+  18              		.set	nomips16
+  19              		.ent	InitBlockCache
+  21              	InitBlockCache:
+  22              		.frame	$fp,24,$31		# vars= 8, regs= 1/0, args= 0, gp= 8
+  23              		.mask	0x40000000,-4
+  24              		.fmask	0x00000000,0
+  25              		.set	noreorder
+  26              		.set	nomacro
+  27              		
+  28 0000 E8FFBD27 		addiu	$sp,$sp,-24
+  29              	$LCFI0:
+  30 0004 1400BEAF 		sw	$fp,20($sp)
+  31              	$LCFI1:
+  32 0008 21F0A003 		move	$fp,$sp
+  33              	$LCFI2:
+  34 000c 1800C4AF 		sw	$4,24($fp)
+  35              	$LBB2 = .
+   7:bgtree/bgUtil.c ****   for (int i=0; i<2; ++i) {
+  36              		.loc 1 8 0
+  37 0010 0800C0AF 		sw	$0,8($fp)
+  38 0014 11000010 		b	$L2
+  39 0018 00000000 		nop
+  40              	
+  41              	$L3:
+   8:bgtree/bgUtil.c ****     cache->addr[i] = BAInvalid;
+  42              		.loc 1 9 0
+  43 001c 0800C28F 		lw	$2,8($fp)
+  44 0020 1800C38F 		lw	$3,24($fp)
+  45 0024 80100200 		sll	$2,$2,2
+  46 0028 21106200 		addu	$2,$3,$2
+  47 002c FFFF0324 		li	$3,-1			# 0xffffffffffffffff
+  48 0030 000043AC 		sw	$3,0($2)
+   9:bgtree/bgUtil.c ****     cache->locks[i] = 0;
+  49              		.loc 1 10 0
+  50 0034 0800C28F 		lw	$2,8($fp)
+  51 0038 1800C38F 		lw	$3,24($fp)
+  52 003c 42004224 		addiu	$2,$2,66
+  53 0040 80100200 		sll	$2,$2,2
+  54 0044 21106200 		addu	$2,$3,$2
+  55 0048 000040AC 		sw	$0,0($2)
+   8:bgtree/bgUtil.c ****     cache->addr[i] = BAInvalid;
+  56              		.loc 1 8 0
+  57 004c 0800C28F 		lw	$2,8($fp)
+  58 0050 00000000 		nop
+  59 0054 01004224 		addiu	$2,$2,1
+  60 0058 0800C2AF 		sw	$2,8($fp)
+  61              	$L2:
+  62 005c 0800C28F 		lw	$2,8($fp)
+  63 0060 00000000 		nop
+  64 0064 02004228 		slt	$2,$2,2
+  65 0068 ECFF4014 		bne	$2,$0,$L3
+  66 006c 00000000 		nop
+  67              	
+  68              	$LBE2 = .
+  10:bgtree/bgUtil.c ****   }
+  11:bgtree/bgUtil.c **** }
+  69              		.loc 1 12 0
+  70 0070 21E8C003 		move	$sp,$fp
+  71 0074 1400BE8F 		lw	$fp,20($sp)
+  72 0078 1800BD27 		addiu	$sp,$sp,24
+  73 007c 0800E003 		j	$31
+  74 0080 00000000 		nop
+  75              	
+  76              		.set	macro
+  77              		.set	reorder
+  78              		.end	InitBlockCache
+  79              	$LFE0:
+  81              		.align	2
+  82              		.globl	LockBlockInCache
+  83              	$LFB1 = .
+  12:bgtree/bgUtil.c **** 
+  13:bgtree/bgUtil.c **** Node *LockBlockInCache(BlockCache *cache, BlockAddrT addr) {
+  84              		.loc 1 14 0
+  85              		.set	nomips16
+  86              		.ent	LockBlockInCache
+  88              	LockBlockInCache:
+  89              		.frame	$fp,24,$31		# vars= 8, regs= 1/0, args= 0, gp= 8
+  90              		.mask	0x40000000,-4
+  91              		.fmask	0x00000000,0
+  92              		.set	noreorder
+  93              		.set	nomacro
+  94              		
+  95 0084 E8FFBD27 		addiu	$sp,$sp,-24
+  96              	$LCFI3:
+  97 0088 1400BEAF 		sw	$fp,20($sp)
+  98              	$LCFI4:
+  99 008c 21F0A003 		move	$fp,$sp
+ 100              	$LCFI5:
+ 101 0090 1800C4AF 		sw	$4,24($fp)
+ 102 0094 1C00C5AF 		sw	$5,28($fp)
+ 103              	$LBB3 = .
+  14:bgtree/bgUtil.c ****   for (int i=0; i<2; ++i) {
+ 104              		.loc 1 15 0
+ 105 0098 0800C0AF 		sw	$0,8($fp)
+ 106 009c 24000010 		b	$L6
+ 107 00a0 00000000 		nop
+ 108              	
+ 109              	$L9:
+  15:bgtree/bgUtil.c ****     if (cache->addr[i] == addr) {
+ 110              		.loc 1 16 0
+ 111 00a4 0800C28F 		lw	$2,8($fp)
+ 112 00a8 1800C38F 		lw	$3,24($fp)
+ 113 00ac 80100200 		sll	$2,$2,2
+ 114 00b0 21106200 		addu	$2,$3,$2
+ 115 00b4 0000438C 		lw	$3,0($2)
+ 116 00b8 1C00C28F 		lw	$2,28($fp)
+ 117 00bc 00000000 		nop
+ 118 00c0 17006214 		bne	$3,$2,$L7
+ 119 00c4 00000000 		nop
+ 120              	
+  16:bgtree/bgUtil.c ****       ++cache->locks[i];
+ 121              		.loc 1 17 0
+ 122 00c8 0800C28F 		lw	$2,8($fp)
+ 123 00cc 1800C48F 		lw	$4,24($fp)
+ 124 00d0 42004324 		addiu	$3,$2,66
+ 125 00d4 80180300 		sll	$3,$3,2
+ 126 00d8 21188300 		addu	$3,$4,$3
+ 127 00dc 0000638C 		lw	$3,0($3)
+ 128 00e0 00000000 		nop
+ 129 00e4 01006324 		addiu	$3,$3,1
+ 130 00e8 1800C48F 		lw	$4,24($fp)
+ 131 00ec 42004224 		addiu	$2,$2,66
+ 132 00f0 80100200 		sll	$2,$2,2
+ 133 00f4 21108200 		addu	$2,$4,$2
+ 134 00f8 000043AC 		sw	$3,0($2)
+  17:bgtree/bgUtil.c ****       return &cache->block[i];
+ 135              		.loc 1 18 0
+ 136 00fc 1800C28F 		lw	$2,24($fp)
+ 137 0100 00000000 		nop
+ 138 0104 08004324 		addiu	$3,$2,8
+ 139 0108 0800C28F 		lw	$2,8($fp)
+ 140 010c 00000000 		nop
+ 141 0110 C0110200 		sll	$2,$2,7
+ 142 0114 21106200 		addu	$2,$3,$2
+ 143 0118 0B000010 		b	$L8
+ 144 011c 00000000 		nop
+ 145              	
+ 146              	$L7:
+  15:bgtree/bgUtil.c ****     if (cache->addr[i] == addr) {
+ 147              		.loc 1 15 0
+ 148 0120 0800C28F 		lw	$2,8($fp)
+ 149 0124 00000000 		nop
+ 150 0128 01004224 		addiu	$2,$2,1
+ 151 012c 0800C2AF 		sw	$2,8($fp)
+ 152              	$L6:
+ 153 0130 0800C28F 		lw	$2,8($fp)
+ 154 0134 00000000 		nop
+ 155 0138 02004228 		slt	$2,$2,2
+ 156 013c D9FF4014 		bne	$2,$0,$L9
+ 157 0140 00000000 		nop
+ 158              	
+ 159              	$LBE3 = .
+  18:bgtree/bgUtil.c ****     }
+  19:bgtree/bgUtil.c ****   }
+  20:bgtree/bgUtil.c ****   return 0x0; // not in cache
+ 160              		.loc 1 21 0
+ 161 0144 21100000 		move	$2,$0
+ 162              	$L8:
+  21:bgtree/bgUtil.c **** }
+ 163              		.loc 1 22 0
+ 164 0148 21E8C003 		move	$sp,$fp
+ 165 014c 1400BE8F 		lw	$fp,20($sp)
+ 166 0150 1800BD27 		addiu	$sp,$sp,24
+ 167 0154 0800E003 		j	$31
+ 168 0158 00000000 		nop
+ 169              	
+ 170              		.set	macro
+ 171              		.set	reorder
+ 172              		.end	LockBlockInCache
+ 173              	$LFE1:
+ 175              		.rdata
+ 176              		.align	2
+ 177              	$LC0:
+ 178 0000 63616368 		.ascii	"cache->addr[i] != addr\000"
+ 178      652D3E61 
+ 178      6464725B 
+ 178      695D2021 
+ 178      3D206164 
+ 179 0017 00       		.align	2
+ 180              	$LC1:
+ 181 0018 62677472 		.ascii	"bgtree/bgUtil.c\000"
+ 181      65652F62 
+ 181      67557469 
+ 181      6C2E6300 
+ 182              		.text
+ 183              		.align	2
+ 184              		.globl	AllocBlockFromCache
+ 185              	$LFB2 = .
+  22:bgtree/bgUtil.c **** 
+  23:bgtree/bgUtil.c **** Node *AllocBlockFromCache(BlockCache *cache, BlockAddrT addr) {
+ 186              		.loc 1 24 0
+ 187              		.set	nomips16
+ 188              		.ent	AllocBlockFromCache
+ 190              	AllocBlockFromCache:
+ 191              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 192              		.mask	0xc0000000,-4
+ 193              		.fmask	0x00000000,0
+ 194              		.set	noreorder
+ 195              		.set	nomacro
+ 196              		
+ 197 015c D8FFBD27 		addiu	$sp,$sp,-40
+ 198              	$LCFI6:
+ 199 0160 2400BFAF 		sw	$31,36($sp)
+ 200              	$LCFI7:
+ 201 0164 2000BEAF 		sw	$fp,32($sp)
+ 202              	$LCFI8:
+ 203 0168 21F0A003 		move	$fp,$sp
+ 204              	$LCFI9:
+ 205 016c 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 206 0170 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 207 0174 1000BCAF 		.cprestore	16
+ 208 0178 2800C4AF 		sw	$4,40($fp)
+ 209 017c 2C00C5AF 		sw	$5,44($fp)
+ 210              	$LBB4 = .
+  24:bgtree/bgUtil.c ****   // find space
+  25:bgtree/bgUtil.c ****   for (int i=0; i<2; ++i) {
+ 211              		.loc 1 26 0
+ 212 0180 1800C0AF 		sw	$0,24($fp)
+ 213 0184 40000010 		b	$L12
+ 214 0188 00000000 		nop
+ 215              	
+ 216              	$L16:
+  26:bgtree/bgUtil.c ****     assert(cache->addr[i] != addr); // should not already exist in cache
+ 217              		.loc 1 27 0
+ 218 018c 1800C28F 		lw	$2,24($fp)
+ 219 0190 2800C38F 		lw	$3,40($fp)
+ 220 0194 80100200 		sll	$2,$2,2
+ 221 0198 21106200 		addu	$2,$3,$2
+ 222 019c 0000438C 		lw	$3,0($2)
+ 223 01a0 2C00C28F 		lw	$2,44($fp)
+ 224 01a4 00000000 		nop
+ 225 01a8 0D006214 		bne	$3,$2,$L13
+ 226 01ac 00000000 		nop
+ 227              	
+ 228 01b0 0000023C 		lui	$2,%hi($LC0)
+ 229 01b4 00004424 		addiu	$4,$2,%lo($LC0)
+ 230 01b8 0000023C 		lui	$2,%hi($LC1)
+ 231 01bc 18004524 		addiu	$5,$2,%lo($LC1)
+ 232 01c0 1B000624 		li	$6,27			# 0x1b
+ 233 01c4 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1958)
+ 234 01c8 A0004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1958)
+ 235 01cc 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 236 01d0 00000000 		nop
+ 237 01d4 21C84000 		move	$25,$2
+ 238 01d8 09F82003 		jalr	$25
+ 239 01dc 00000000 		nop
+ 240              	
+ 241              	$L13:
+  27:bgtree/bgUtil.c ****     if (!cache->locks[i]) {
+ 242              		.loc 1 28 0
+ 243 01e0 1800C28F 		lw	$2,24($fp)
+ 244 01e4 2800C38F 		lw	$3,40($fp)
+ 245 01e8 42004224 		addiu	$2,$2,66
+ 246 01ec 80100200 		sll	$2,$2,2
+ 247 01f0 21106200 		addu	$2,$3,$2
+ 248 01f4 0000428C 		lw	$2,0($2)
+ 249 01f8 00000000 		nop
+ 250 01fc 1E004014 		bne	$2,$0,$L14
+ 251 0200 00000000 		nop
+ 252              	
+  28:bgtree/bgUtil.c ****       cache->addr[i] = addr;
+ 253              		.loc 1 29 0
+ 254 0204 1800C28F 		lw	$2,24($fp)
+ 255 0208 2800C38F 		lw	$3,40($fp)
+ 256 020c 80100200 		sll	$2,$2,2
+ 257 0210 21106200 		addu	$2,$3,$2
+ 258 0214 2C00C38F 		lw	$3,44($fp)
+ 259 0218 00000000 		nop
+ 260 021c 000043AC 		sw	$3,0($2)
+  29:bgtree/bgUtil.c ****       cache->locks[i]++;
+ 261              		.loc 1 30 0
+ 262 0220 1800C28F 		lw	$2,24($fp)
+ 263 0224 2800C48F 		lw	$4,40($fp)
+ 264 0228 42004324 		addiu	$3,$2,66
+ 265 022c 80180300 		sll	$3,$3,2
+ 266 0230 21188300 		addu	$3,$4,$3
+ 267 0234 0000638C 		lw	$3,0($3)
+ 268 0238 00000000 		nop
+ 269 023c 01006324 		addiu	$3,$3,1
+ 270 0240 2800C48F 		lw	$4,40($fp)
+ 271 0244 42004224 		addiu	$2,$2,66
+ 272 0248 80100200 		sll	$2,$2,2
+ 273 024c 21108200 		addu	$2,$4,$2
+ 274 0250 000043AC 		sw	$3,0($2)
+  30:bgtree/bgUtil.c ****       return &cache->block[i];
+ 275              		.loc 1 31 0
+ 276 0254 2800C28F 		lw	$2,40($fp)
+ 277 0258 00000000 		nop
+ 278 025c 08004324 		addiu	$3,$2,8
+ 279 0260 1800C28F 		lw	$2,24($fp)
+ 280 0264 00000000 		nop
+ 281 0268 C0110200 		sll	$2,$2,7
+ 282 026c 21106200 		addu	$2,$3,$2
+ 283 0270 0B000010 		b	$L15
+ 284 0274 00000000 		nop
+ 285              	
+ 286              	$L14:
+  26:bgtree/bgUtil.c ****   for (int i=0; i<2; ++i) {
+ 287              		.loc 1 26 0
+ 288 0278 1800C28F 		lw	$2,24($fp)
+ 289 027c 00000000 		nop
+ 290 0280 01004224 		addiu	$2,$2,1
+ 291 0284 1800C2AF 		sw	$2,24($fp)
+ 292              	$L12:
+ 293 0288 1800C28F 		lw	$2,24($fp)
+ 294 028c 00000000 		nop
+ 295 0290 02004228 		slt	$2,$2,2
+ 296 0294 BDFF4014 		bne	$2,$0,$L16
+ 297 0298 00000000 		nop
+ 298              	
+ 299              	$LBE4 = .
+  31:bgtree/bgUtil.c ****     }
+  32:bgtree/bgUtil.c ****   }
+  33:bgtree/bgUtil.c ****   return 0x0; // no unlocked space!
+ 300              		.loc 1 34 0
+ 301 029c 21100000 		move	$2,$0
+ 302              	$L15:
+  34:bgtree/bgUtil.c **** }
+ 303              		.loc 1 35 0
+ 304 02a0 21E8C003 		move	$sp,$fp
+ 305 02a4 2400BF8F 		lw	$31,36($sp)
+ 306 02a8 2000BE8F 		lw	$fp,32($sp)
+ 307 02ac 2800BD27 		addiu	$sp,$sp,40
+ 308 02b0 0800E003 		j	$31
+ 309 02b4 00000000 		nop
+ 310              	
+ 311              		.set	macro
+ 312              		.set	reorder
+ 313              		.end	AllocBlockFromCache
+ 314              	$LFE2:
+ 316              		.rdata
+ 317              		.align	2
+ 318              	$LC2:
+ 319 0028 63616368 		.ascii	"cache->locks[i] != 0\000"
+ 319      652D3E6C 
+ 319      6F636B73 
+ 319      5B695D20 
+ 319      213D2030 
+ 320 003d 000000   		.align	2
+ 321              	$LC3:
+ 322 0040 30202626 		.ascii	"0 && \"UnlockBlockInCache: Attempt to unlock block which"
+ 322      2022556E 
+ 322      6C6F636B 
+ 322      426C6F63 
+ 322      6B496E43 
+ 323 0077 20776173 		.ascii	" was not allocated!\"\000"
+ 323      206E6F74 
+ 323      20616C6C 
+ 323      6F636174 
+ 323      65642122 
+ 324              		.text
+ 325              		.align	2
+ 326              		.globl	UnlockBlockInCache
+ 327              	$LFB3 = .
+  35:bgtree/bgUtil.c **** 
+  36:bgtree/bgUtil.c **** void UnlockBlockInCache(BlockCache *cache, BlockAddrT addr) {
+ 328              		.loc 1 37 0
+ 329              		.set	nomips16
+ 330              		.ent	UnlockBlockInCache
+ 332              	UnlockBlockInCache:
+ 333              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 334              		.mask	0xc0000000,-4
+ 335              		.fmask	0x00000000,0
+ 336              		.set	noreorder
+ 337              		.set	nomacro
+ 338              		
+ 339 02b8 D8FFBD27 		addiu	$sp,$sp,-40
+ 340              	$LCFI10:
+ 341 02bc 2400BFAF 		sw	$31,36($sp)
+ 342              	$LCFI11:
+ 343 02c0 2000BEAF 		sw	$fp,32($sp)
+ 344              	$LCFI12:
+ 345 02c4 21F0A003 		move	$fp,$sp
+ 346              	$LCFI13:
+ 347 02c8 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 348 02cc 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 349 02d0 1000BCAF 		.cprestore	16
+ 350 02d4 2800C4AF 		sw	$4,40($fp)
+ 351 02d8 2C00C5AF 		sw	$5,44($fp)
+ 352              	$LBB5 = .
+  37:bgtree/bgUtil.c ****   for (int i=0; i<2; ++i) {
+ 353              		.loc 1 38 0
+ 354 02dc 1800C0AF 		sw	$0,24($fp)
+ 355 02e0 36000010 		b	$L19
+ 356 02e4 00000000 		nop
+ 357              	
+ 358              	$L22:
+  38:bgtree/bgUtil.c ****     if (cache->addr[i] == addr) {
+ 359              		.loc 1 39 0
+ 360 02e8 1800C28F 		lw	$2,24($fp)
+ 361 02ec 2800C38F 		lw	$3,40($fp)
+ 362 02f0 80100200 		sll	$2,$2,2
+ 363 02f4 21106200 		addu	$2,$3,$2
+ 364 02f8 0000438C 		lw	$3,0($2)
+ 365 02fc 2C00C28F 		lw	$2,44($fp)
+ 366 0300 00000000 		nop
+ 367 0304 29006214 		bne	$3,$2,$L20
+ 368 0308 00000000 		nop
+ 369              	
+  39:bgtree/bgUtil.c ****       assert(cache->locks[i] != 0);
+ 370              		.loc 1 40 0
+ 371 030c 1800C28F 		lw	$2,24($fp)
+ 372 0310 2800C38F 		lw	$3,40($fp)
+ 373 0314 42004224 		addiu	$2,$2,66
+ 374 0318 80100200 		sll	$2,$2,2
+ 375 031c 21106200 		addu	$2,$3,$2
+ 376 0320 0000428C 		lw	$2,0($2)
+ 377 0324 00000000 		nop
+ 378 0328 0D004014 		bne	$2,$0,$L21
+ 379 032c 00000000 		nop
+ 380              	
+ 381 0330 0000023C 		lui	$2,%hi($LC2)
+ 382 0334 28004424 		addiu	$4,$2,%lo($LC2)
+ 383 0338 0000023C 		lui	$2,%hi($LC1)
+ 384 033c 18004524 		addiu	$5,$2,%lo($LC1)
+ 385 0340 28000624 		li	$6,40			# 0x28
+ 386 0344 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1983)
+ 387 0348 8C004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1983)
+ 388 034c 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 389 0350 00000000 		nop
+ 390 0354 21C84000 		move	$25,$2
+ 391 0358 09F82003 		jalr	$25
+ 392 035c 00000000 		nop
+ 393              	
+ 394              	$L21:
+  40:bgtree/bgUtil.c ****       --cache->locks[i];
+ 395              		.loc 1 41 0
+ 396 0360 1800C28F 		lw	$2,24($fp)
+ 397 0364 2800C48F 		lw	$4,40($fp)
+ 398 0368 42004324 		addiu	$3,$2,66
+ 399 036c 80180300 		sll	$3,$3,2
+ 400 0370 21188300 		addu	$3,$4,$3
+ 401 0374 0000638C 		lw	$3,0($3)
+ 402 0378 00000000 		nop
+ 403 037c FFFF6324 		addiu	$3,$3,-1
+ 404 0380 2800C48F 		lw	$4,40($fp)
+ 405 0384 42004224 		addiu	$2,$2,66
+ 406 0388 80100200 		sll	$2,$2,2
+ 407 038c 21108200 		addu	$2,$4,$2
+ 408 0390 000043AC 		sw	$3,0($2)
+ 409              	$LBE5 = .
+  41:bgtree/bgUtil.c ****       return;
+  42:bgtree/bgUtil.c ****     }
+  43:bgtree/bgUtil.c ****   }
+  44:bgtree/bgUtil.c ****   assert(0 && "UnlockBlockInCache: Attempt to unlock block which was not allocated!");
+  45:bgtree/bgUtil.c **** }
+ 410              		.loc 1 46 0
+ 411 0394 21E8C003 		move	$sp,$fp
+ 412 0398 2400BF8F 		lw	$31,36($sp)
+ 413 039c 2000BE8F 		lw	$fp,32($sp)
+ 414 03a0 2800BD27 		addiu	$sp,$sp,40
+ 415 03a4 0800E003 		j	$31
+ 416 03a8 00000000 		nop
+ 417              	
+ 418              	$L20:
+ 419              	$LBB6 = .
+  38:bgtree/bgUtil.c ****   for (int i=0; i<2; ++i) {
+ 420              		.loc 1 38 0
+ 421 03ac 1800C28F 		lw	$2,24($fp)
+ 422 03b0 00000000 		nop
+ 423 03b4 01004224 		addiu	$2,$2,1
+ 424 03b8 1800C2AF 		sw	$2,24($fp)
+ 425              	$L19:
+ 426 03bc 1800C28F 		lw	$2,24($fp)
+ 427 03c0 00000000 		nop
+ 428 03c4 02004228 		slt	$2,$2,2
+ 429 03c8 C7FF4014 		bne	$2,$0,$L22
+ 430 03cc 00000000 		nop
+ 431              	
+ 432              	$LBE6 = .
+  45:bgtree/bgUtil.c ****   assert(0 && "UnlockBlockInCache: Attempt to unlock block which was not allocated!");
+ 433              		.loc 1 45 0
+ 434 03d0 0000023C 		lui	$2,%hi($LC3)
+ 435 03d4 40004424 		addiu	$4,$2,%lo($LC3)
+ 436 03d8 0000023C 		lui	$2,%hi($LC1)
+ 437 03dc 18004524 		addiu	$5,$2,%lo($LC1)
+ 438 03e0 2D000624 		li	$6,45			# 0x2d
+ 439 03e4 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1983)
+ 440 03e8 8C004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1983)
+ 441 03ec 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 442 03f0 00000000 		nop
+ 443 03f4 21C84000 		move	$25,$2
+ 444 03f8 09F82003 		jalr	$25
+ 445 03fc 00000000 		nop
+ 446              	
+ 447              		.set	macro
+ 448              		.set	reorder
+ 449              		.end	UnlockBlockInCache
+ 450              	$LFE3:
+ 452              		.align	2
+ 453              		.globl	UnpackBlobInt
+ 454              	$LFB4 = .
+  46:bgtree/bgUtil.c **** 
+  47:bgtree/bgUtil.c **** /** Serialization Routines **/
+  48:bgtree/bgUtil.c **** 
+  49:bgtree/bgUtil.c **** int32_t UnpackBlobInt(char *blob) {
+ 455              		.loc 1 50 0
+ 456              		.set	nomips16
+ 457              		.ent	UnpackBlobInt
+ 459              	UnpackBlobInt:
+ 460              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+ 461              		.mask	0x40000000,-4
+ 462              		.fmask	0x00000000,0
+ 463              		.set	noreorder
+ 464              		.set	nomacro
+ 465              		
+ 466 0400 F8FFBD27 		addiu	$sp,$sp,-8
+ 467              	$LCFI14:
+ 468 0404 0400BEAF 		sw	$fp,4($sp)
+ 469              	$LCFI15:
+ 470 0408 21F0A003 		move	$fp,$sp
+ 471              	$LCFI16:
+ 472 040c 0800C4AF 		sw	$4,8($fp)
+  50:bgtree/bgUtil.c ****   return *((int32_t*)blob);
+ 473              		.loc 1 51 0
+ 474 0410 0800C28F 		lw	$2,8($fp)
+ 475 0414 00000000 		nop
+ 476 0418 0000428C 		lw	$2,0($2)
+  51:bgtree/bgUtil.c **** }
+ 477              		.loc 1 52 0
+ 478 041c 21E8C003 		move	$sp,$fp
+ 479 0420 0400BE8F 		lw	$fp,4($sp)
+ 480 0424 0800BD27 		addiu	$sp,$sp,8
+ 481 0428 0800E003 		j	$31
+ 482 042c 00000000 		nop
+ 483              	
+ 484              		.set	macro
+ 485              		.set	reorder
+ 486              		.end	UnpackBlobInt
+ 487              	$LFE4:
+ 489              		.align	2
+ 490              		.globl	UnpackBlobUInt
+ 491              	$LFB5 = .
+  52:bgtree/bgUtil.c **** 
+  53:bgtree/bgUtil.c **** uint32_t UnpackBlobUInt(char *blob) {
+ 492              		.loc 1 54 0
+ 493              		.set	nomips16
+ 494              		.ent	UnpackBlobUInt
+ 496              	UnpackBlobUInt:
+ 497              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+ 498              		.mask	0x40000000,-4
+ 499              		.fmask	0x00000000,0
+ 500              		.set	noreorder
+ 501              		.set	nomacro
+ 502              		
+ 503 0430 F8FFBD27 		addiu	$sp,$sp,-8
+ 504              	$LCFI17:
+ 505 0434 0400BEAF 		sw	$fp,4($sp)
+ 506              	$LCFI18:
+ 507 0438 21F0A003 		move	$fp,$sp
+ 508              	$LCFI19:
+ 509 043c 0800C4AF 		sw	$4,8($fp)
+  54:bgtree/bgUtil.c ****   return *((uint32_t*)blob);
+ 510              		.loc 1 55 0
+ 511 0440 0800C28F 		lw	$2,8($fp)
+ 512 0444 00000000 		nop
+ 513 0448 0000428C 		lw	$2,0($2)
+  55:bgtree/bgUtil.c **** }
+ 514              		.loc 1 56 0
+ 515 044c 21E8C003 		move	$sp,$fp
+ 516 0450 0400BE8F 		lw	$fp,4($sp)
+ 517 0454 0800BD27 		addiu	$sp,$sp,8
+ 518 0458 0800E003 		j	$31
+ 519 045c 00000000 		nop
+ 520              	
+ 521              		.set	macro
+ 522              		.set	reorder
+ 523              		.end	UnpackBlobUInt
+ 524              	$LFE5:
+ 526              		.align	2
+ 527              		.globl	UnpackString
+ 528              	$LFB6 = .
+  56:bgtree/bgUtil.c **** 
+  57:bgtree/bgUtil.c **** int UnpackString(char *blob, char *buf, int buflen) {
+ 529              		.loc 1 58 0
+ 530              		.set	nomips16
+ 531              		.ent	UnpackString
+ 533              	UnpackString:
+ 534              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 535              		.mask	0xc0000000,-4
+ 536              		.fmask	0x00000000,0
+ 537              		.set	noreorder
+ 538              		.set	nomacro
+ 539              		
+ 540 0460 D8FFBD27 		addiu	$sp,$sp,-40
+ 541              	$LCFI20:
+ 542 0464 2400BFAF 		sw	$31,36($sp)
+ 543              	$LCFI21:
+ 544 0468 2000BEAF 		sw	$fp,32($sp)
+ 545              	$LCFI22:
+ 546 046c 21F0A003 		move	$fp,$sp
+ 547              	$LCFI23:
+ 548 0470 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 549 0474 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 550 0478 1000BCAF 		.cprestore	16
+ 551 047c 2800C4AF 		sw	$4,40($fp)
+ 552 0480 2C00C5AF 		sw	$5,44($fp)
+ 553 0484 3000C6AF 		sw	$6,48($fp)
+  58:bgtree/bgUtil.c ****   uint32_t sz = UnpackBlobUInt(blob);
+ 554              		.loc 1 59 0
+ 555 0488 2800C48F 		lw	$4,40($fp)
+ 556              		.option	pic0
+ 557 048c 0000000C 		jal	UnpackBlobUInt
+ 558 0490 00000000 		nop
+ 559              	
+ 560              		.option	pic2
+ 561 0494 1000DC8F 		lw	$28,16($fp)
+ 562 0498 1C00C2AF 		sw	$2,28($fp)
+  59:bgtree/bgUtil.c ****   blob += 4;
+ 563              		.loc 1 60 0
+ 564 049c 2800C28F 		lw	$2,40($fp)
+ 565 04a0 00000000 		nop
+ 566 04a4 04004224 		addiu	$2,$2,4
+ 567 04a8 2800C2AF 		sw	$2,40($fp)
+  60:bgtree/bgUtil.c ****   uint32_t sz2 = (buflen > sz) ? sz : buflen;
+ 568              		.loc 1 61 0
+ 569 04ac 3000C28F 		lw	$2,48($fp)
+ 570 04b0 1C00C38F 		lw	$3,28($fp)
+ 571 04b4 00000000 		nop
+ 572 04b8 2B206200 		sltu	$4,$3,$2
+ 573 04bc 02008010 		beq	$4,$0,$L29
+ 574 04c0 00000000 		nop
+ 575              	
+ 576 04c4 21106000 		move	$2,$3
+ 577              	$L29:
+ 578 04c8 1800C2AF 		sw	$2,24($fp)
+  61:bgtree/bgUtil.c ****   memcpy(buf, blob, sz2);
+ 579              		.loc 1 62 0
+ 580 04cc 2C00C48F 		lw	$4,44($fp)
+ 581 04d0 2800C58F 		lw	$5,40($fp)
+ 582 04d4 1800C68F 		lw	$6,24($fp)
+ 583 04d8 0000828F 		lw	$2,%call16(memcpy)($28)
+ 584 04dc 00000000 		nop
+ 585 04e0 21C84000 		move	$25,$2
+ 586 04e4 09F82003 		jalr	$25
+ 587 04e8 00000000 		nop
+ 588              	
+ 589 04ec 1000DC8F 		lw	$28,16($fp)
+  62:bgtree/bgUtil.c ****   return sz + 4;
+ 590              		.loc 1 63 0
+ 591 04f0 1C00C28F 		lw	$2,28($fp)
+ 592 04f4 00000000 		nop
+ 593 04f8 04004224 		addiu	$2,$2,4
+  63:bgtree/bgUtil.c **** }
+ 594              		.loc 1 64 0
+ 595 04fc 21E8C003 		move	$sp,$fp
+ 596 0500 2400BF8F 		lw	$31,36($sp)
+ 597 0504 2000BE8F 		lw	$fp,32($sp)
+ 598 0508 2800BD27 		addiu	$sp,$sp,40
+ 599 050c 0800E003 		j	$31
+ 600 0510 00000000 		nop
+ 601              	
+ 602              		.set	macro
+ 603              		.set	reorder
+ 604              		.end	UnpackString
+ 605              	$LFE6:
+ 607              		.rdata
+ 608              		.align	2
+ 611              	__PRETTY_FUNCTION__.1983:
+ 612 008c 556E6C6F 		.ascii	"UnlockBlockInCache\000"
+ 612      636B426C 
+ 612      6F636B49 
+ 612      6E436163 
+ 612      686500
+ 613 009f 00       		.align	2
+ 616              	__PRETTY_FUNCTION__.1958:
+ 617 00a0 416C6C6F 		.ascii	"AllocBlockFromCache\000"
+ 617      63426C6F 
+ 617      636B4672 
+ 617      6F6D4361 
+ 617      63686500 
+ 790              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 bgtree/bgUtil.c
+     /tmp/ccUyd9tS.s:21     .text:0000000000000000 InitBlockCache
+     /tmp/ccUyd9tS.s:88     .text:0000000000000084 LockBlockInCache
+     /tmp/ccUyd9tS.s:190    .text:000000000000015c AllocBlockFromCache
+     /tmp/ccUyd9tS.s:616    .rodata:00000000000000a0 __PRETTY_FUNCTION__.1958
+     /tmp/ccUyd9tS.s:332    .text:00000000000002b8 UnlockBlockInCache
+     /tmp/ccUyd9tS.s:611    .rodata:000000000000008c __PRETTY_FUNCTION__.1983
+     /tmp/ccUyd9tS.s:459    .text:0000000000000400 UnpackBlobInt
+     /tmp/ccUyd9tS.s:496    .text:0000000000000430 UnpackBlobUInt
+     /tmp/ccUyd9tS.s:533    .text:0000000000000460 UnpackString
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+__assert_fail
+memcpy

@@ -1,0 +1,190 @@
+
+
+                         Block Rage - README
+			 ===================
+
+Description
+-----------
+  Block Rage is a "falling-blocks" arcade game, inspired by a DOS
+  classic. It features a two-player hotseat mode. In the future
+  it should also feature nice graphics and sound.
+
+Notes on version 0.2.3
+----------------------
+  This release presents some visible improvements, notably the new
+  tile graphics. There are also several fixes, mainly, the sound
+  mixer will now hopefully work on big-endian machines.
+  (greetings to Pegassos users ;-)
+  
+  The graphics and sound are still heavily under construction,
+  and there is no music. Windows users might experience some bugs.
+
+What does it run on?
+--------------------
+  Block Rage is know to compile and run on x86 Linux, Solaris/SPARC
+  and x86 Win32.
+
+Run-time Requirements
+---------------------
+
+  UNIX, GNU/Linux -- libSDL 1.2.x (just the core library)
+  Win32 -- nothing special
+
+Build-time Requirements
+-----------------------
+
+  UNIX, GNU/Linux -- libSDL 1.2.x with headers, gcc, make
+  Win32 -- Cygwin environment with gcc, make, and libSDL 1.2.x,
+           which must be compiled and installed from source.
+	   
+  For instructions on building the game se the file INSTALL.
+
+GLOBAL KEYS
+===========
+  Alt-Enter	... Toggle fullscreen mode
+
+  Alt-Backslash	... Toggle doublesize mode
+
+  PrintScreen	... Capture a screenshot to $HOME/blockrage-scr.pcx
+  
+  Alt-X		... Exit the program immediately
+
+IN-GAME KEYS
+============
+  P		... Pause the game
+  
+  Default key bindings for player 1:
+  ----------------------------------
+  Left Arrow	... move block left
+  Right Arrow	... move block right
+  Up Arrow	... rotate block up
+  Down Arrow    ... rotate block down
+  Right Shift   ... drop block
+  
+  Default key bindings for player 2:
+  ----------------------------------
+  A		... move block left
+  D		... move block right
+  W		... rotate block up
+  S		... rotate block down
+  Q		... drop block
+
+PLAYING THE GAME
+================
+
+  (Assuming you didn't change the default key settings.)
+  Use left/right arrows to move the falling piece left/right,
+  up/down arrows to cycle it's tiles and right shift to make it fall faster.
+
+  Get three same pieces in a row (horizontal/vertical/diagonal) and boom!
+  they dissappear and your score increases.
+  You can earn even more points by inflicting chain reactions.
+  A chain reaction happens when some pieces explode, the ones on top of them
+  fall, and, forming a new line, explode again.
+
+2-PLAYER HOTSEAT MODE
+---------------------
+  Default key settings for the other player are A,D (left,right)
+  W,S (cycle), Q (drop).
+
+  If you inflict a chain reaction in hotseat mode, your opponent
+  will get an unpleasant surprise in the form of a row of tiles
+  inserted to the bottom of his playing board.
+
+MAKING A SCREENSHOT
+===================
+
+  During gameplay, you can make a screenshot by presing the PrintScreen key.
+  Your screen will be saved in your $HOME directory in a file called
+  "blockrage-scr.pcx". (This will not work in the menu).
+
+COMMAND LINE OPTIONS
+--------------------
+
+You needn't really use them. Everything listed here can be set using
+the ingame menu.
+
+  +p <1|2>
+  sets the number of players
+  
+  +d <4|5|6>
+  sets the difficulty Easy/Medium/Hard
+  
+  +l <1..10>
+  sets the starting level
+  
+  +b <0,1,...>
+  chooses a block set (piece graphics)
+  
+  +k1 <left> <right> <sh_up> <sh_down> <drop>
+  +k2 <left> <right> <sh_up> <sh_down> <drop>
+  sets player 1/2 controls
+  you must enter five decimal numbers corresponding to SDLK_* keycodes
+  e.g. +k1 276 275 303 273 274
+  
+  +data <dataset>
+  chooses a dataset. the format is identical to the format of blockrage.cfg.
+  example: +data br320
+
+THE RC FILES
+------------
+  Typically you don't need to know anything about the game's RC and config
+  files. They are designed so it just magically works... But if you are
+  interested: the RC and config files can be of great use if you want to
+  install on a multiuser system (you can customize default settings for
+  the users, create a shared topten table, etc).
+
+  When you start Block Rage, it tries to find in order:
+  
+    1. <EXECDIR>/blockrage.rc
+      here <EXECDIR> is the directory where the blockrage[.exe] executable
+      is situated.
+      
+    2. $HOME/.blockrage/blockrage.rc
+    3. /etc/games/blockrage/blockrage.rc
+  
+  Whichever is found first is processed. That is typically (1) if the game is
+  run from the source directory, or (3) if the game is run from the UNIX FHS
+  filesystem. Also any user can override the system-wide settings by creating
+  the file (2).
+  
+  The .rc file contains 5 lines:
+    <sys-config-file>		pathname of the system-wide config file
+    <user-config-file>		pathname of the user's config file
+    <data-dir>/			directory where the data files reside,
+                                trailed with slash
+    <topten-file>		pathname of the file where topscores are stored
+    <dataset>			name of the dataset to use (a data/ subdir)
+    
+  In the source package's src/ directory the file blockrage.rc enables the game
+  to be run directly from the src/ directory. The file blockrage-fhs.rc is the
+  RC file for running from the live filesystem. 'make install' copies this file
+  to /etc/games/blockrage/blockrage.rc. (3)
+    
+  After processing the .rc file, the config files are processed.
+
+THE CONFIG FILES
+----------------
+
+  First the game tries to read the <user-config-file>. If it doesn't exist
+  (meaning this user is running the game for the first time), if falls back to
+  <sys-config-file>. If that cannot be found either, defaults are assumed.
+  
+  The config file contains the key bindings, starting level, tileset, etc.
+
+AUTHOR
+------
+  Block Rage has been written in 1999-2005 by Jiri Svoboda
+  <jirik.svoboda@seznam.cz>. (Please do not list this e-mail
+  address on your webpage, or list it in other packages,
+  before contacting me first)
+
+NOTES
+-----
+  This README describes version 0.2.3 of Block Rage.
+
+SEE ALSO
+--------
+  The Block Rage homepage at <http://blockrage.sourceforge.net>.
+  The manpage 'man blockrage', or blockrage.6 in the Block Rage
+  src/ directory.

@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+stamp=`date +%Y%m%d`
+dir="nightsky-$stamp"
+svn export .@HEAD /tmp/$dir
+tar czf /tmp/$dir.tar.gz -C /tmp $dir
+rm -Rf /tmp/$dir
+

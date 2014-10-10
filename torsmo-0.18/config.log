@@ -1,0 +1,80 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:572: checking for a BSD compatible install
+configure:625: checking whether build environment is sane
+configure:682: checking whether make sets ${MAKE}
+configure:728: checking for working aclocal-1.4
+configure:741: checking for working autoconf
+configure:754: checking for working automake-1.4
+configure:767: checking for working autoheader
+configure:780: checking for working makeinfo
+configure:971: checking for gcc
+configure:1084: checking whether the C compiler (gcc  ) works
+configure:1100: gcc -o conftest    conftest.c  1>&5
+configure:1126: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:1131: checking whether we are using GNU C
+configure:1140: gcc -E conftest.c
+configure:1159: checking whether gcc accepts -g
+configure:1193: checking how to run the C preprocessor
+configure:1214: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1277: checking for X
+configure:1344: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1420: gcc -o conftest -g -O2   conftest.c -lXt  1>&5
+configure:1516: checking for XOpenDisplay in -lX11
+configure:1535: gcc -o conftest -g -O2   conftest.c -lX11 -L  1>&5
+gcc: argument to '-L' is missing
+configure: failed program was:
+#line 1524 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char XOpenDisplay();
+
+int main() {
+XOpenDisplay()
+; return 0; }
+configure:1556: checking for XdbeQueryExtension in -lXext
+configure:1575: gcc -o conftest -g -O2   conftest.c -lXext -L   1>&5
+gcc: argument to '-L' is missing
+configure: failed program was:
+#line 1564 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char XdbeQueryExtension();
+
+int main() {
+XdbeQueryExtension()
+; return 0; }
+configure:1757: checking for signal.h
+configure:1767: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1757: checking for unistd.h
+configure:1767: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1757: checking for X11/Xlib.h
+configure:1767: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1757: checking for sys/utsname.h
+configure:1767: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1757: checking for sys/stat.h
+configure:1767: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1757: checking for linux/soundcard.h
+configure:1767: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1757: checking for dirent.h
+configure:1767: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1797: checking for sys/statfs.h
+configure:1807: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1797: checking for sys/param.h
+configure:1807: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1797: checking for sys/mount.h
+configure:1807: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1837: checking for X11/extensions/Xdbe.h
+configure:1847: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1878: checking for help2man
+configure:1924: checking for sysinfo
+configure:1934: gcc -c -g -O2  conftest.c 1>&5
+configure:2008: checking for getloadavg
+configure:2017: gcc -c -g -O2  conftest.c 1>&5
+configure:2036: checking for popen
+configure:2064: gcc -o conftest -g -O2   conftest.c  1>&5

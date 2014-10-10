@@ -1,0 +1,397 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.rdata
+  14              		.align	2
+  15              	$LC0:
+  16 0000 6300     		.ascii	"c\000"
+  17 0002 0000     		.align	2
+  18              	$LC1:
+  19 0004 4C6F6164 		.ascii	"LoadBlock.c\000"
+  19      426C6F63 
+  19      6B2E6300 
+  20              		.align	2
+  21              	$LC2:
+  22 0010 44454255 		.ascii	"DEBUG: Short Read, %i of %i at %08x!\012\000"
+  22      473A2053 
+  22      686F7274 
+  22      20526561 
+  22      642C2025 
+  23 0036 0000     		.align	2
+  24              	$LC3:
+  25 0038 53686F72 		.ascii	"Short Read\000"
+  25      74205265 
+  25      616400
+  26              		.text
+  27              		.align	2
+  28              		.globl	LoadBlock
+  29              	$LFB0 = .
+  30              		.file 1 "LoadBlock.c"
+   0:LoadBlock.c   **** #include "Platform.h"
+   1:LoadBlock.c   **** #include "bgtree/bgDefines.h"
+   2:LoadBlock.c   **** #include <string.h> //memcpy
+   3:LoadBlock.c   **** 
+   4:LoadBlock.c   **** /* ** LoadBlock, AllocBlock, etc are used by the bgtree
+   5:LoadBlock.c   ****  * implementation to load blocks from our storage media. 
+   6:LoadBlock.c   ****  * As written here they are platform independent thanks to
+   7:LoadBlock.c   ****  * the FileStdio abstraction library, but this could be
+   8:LoadBlock.c   ****  * changed in the future for improved performance. ** */
+   9:LoadBlock.c   **** 
+  10:LoadBlock.c   **** /** BGTree - User-supplied function loads block as addr, returning result in buffer.
+  11:LoadBlock.c   ****  * buffer is a pre-allocated array of size blkSize **/
+  12:LoadBlock.c   **** void LoadBlock(BlockAddrT addr, Node *ptr, void *userData) {
+  31              		.loc 1 13 0
+  32              		.set	nomips16
+  33              		.ent	LoadBlock
+  35              	LoadBlock:
+  36              		.frame	$fp,48,$31		# vars= 8, regs= 3/0, args= 16, gp= 8
+  37              		.mask	0xc0010000,-4
+  38              		.fmask	0x00000000,0
+  39              		.set	noreorder
+  40              		.set	nomacro
+  41              		
+  42 0000 D0FFBD27 		addiu	$sp,$sp,-48
+  43              	$LCFI0:
+  44 0004 2C00BFAF 		sw	$31,44($sp)
+  45              	$LCFI1:
+  46 0008 2800BEAF 		sw	$fp,40($sp)
+  47              	$LCFI2:
+  48 000c 2400B0AF 		sw	$16,36($sp)
+  49              	$LCFI3:
+  50 0010 21F0A003 		move	$fp,$sp
+  51              	$LCFI4:
+  52 0014 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  53 0018 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  54 001c 1000BCAF 		.cprestore	16
+  55 0020 3000C4AF 		sw	$4,48($fp)
+  56 0024 3400C5AF 		sw	$5,52($fp)
+  57 0028 3800C6AF 		sw	$6,56($fp)
+  13:LoadBlock.c   **** #ifdef USE_BGTREE_CACHE
+  14:LoadBlock.c   ****   static Node cacheBlock;
+  15:LoadBlock.c   ****   static BAT cacheAddr = BAInvalid;
+  16:LoadBlock.c   ****   static void *cacheUserData=0x0;
+  17:LoadBlock.c   **** #endif
+  18:LoadBlock.c   ****   //OutP("LoadBlock(");OutX(addr);OutP(")\n");
+  19:LoadBlock.c   **** 	/* rafa */
+  20:LoadBlock.c   ****   // ERRORassert(); // DEBUG - remove me
+  21:LoadBlock.c   **** 	/* rafa */
+  22:LoadBlock.c   ****   //BlockContext *bgtreeContext = (BlockContext*) userData;
+  23:LoadBlock.c   **** #ifdef USE_BGTREE_CACHE
+  24:LoadBlock.c   ****   if ((addr == cacheAddr) && (userData == cacheUserData)) { // cache hit?
+  25:LoadBlock.c   ****     memcpy(ptr, &cacheBlock, BlockSize);
+  26:LoadBlock.c   ****     return;
+  27:LoadBlock.c   ****   }
+  28:LoadBlock.c   **** #endif
+  29:LoadBlock.c   ****   DbContext *c = (DbContext *) userData;
+  58              		.loc 1 30 0
+  59 002c 3800C28F 		lw	$2,56($fp)
+  60 0030 00000000 		nop
+  61 0034 1C00C2AF 		sw	$2,28($fp)
+  30:LoadBlock.c   ****   assert(c);
+  62              		.loc 1 31 0
+  63 0038 1C00C28F 		lw	$2,28($fp)
+  64 003c 00000000 		nop
+  65 0040 0D004014 		bne	$2,$0,$L2
+  66 0044 00000000 		nop
+  67              	
+  68 0048 0000023C 		lui	$2,%hi($LC0)
+  69 004c 00004424 		addiu	$4,$2,%lo($LC0)
+  70 0050 0000023C 		lui	$2,%hi($LC1)
+  71 0054 04004524 		addiu	$5,$2,%lo($LC1)
+  72 0058 1F000624 		li	$6,31			# 0x1f
+  73 005c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1954)
+  74 0060 60004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1954)
+  75 0064 0000828F 		lw	$2,%call16(__assert_fail)($28)
+  76 0068 00000000 		nop
+  77 006c 21C84000 		move	$25,$2
+  78 0070 09F82003 		jalr	$25
+  79 0074 00000000 		nop
+  80              	
+  81              	$L2:
+  31:LoadBlock.c   ****   // Get block from disk
+  32:LoadBlock.c   ****   if (c->fileStateVersion != FileStateVersion()) { // has anyone changed the currently open file?
+  82              		.loc 1 33 0
+  83 0078 1C00C28F 		lw	$2,28($fp)
+  84 007c 00000000 		nop
+  85 0080 0000508C 		lw	$16,0($2)
+  86 0084 0000828F 		lw	$2,%call16(FileStateVersion)($28)
+  87 0088 00000000 		nop
+  88 008c 21C84000 		move	$25,$2
+  89 0090 09F82003 		jalr	$25
+  90 0094 00000000 		nop
+  91              	
+  92 0098 1000DC8F 		lw	$28,16($fp)
+  93 009c 0C000212 		beq	$16,$2,$L3
+  94 00a0 00000000 		nop
+  95              	
+  33:LoadBlock.c   ****     FileOpenRO(c->tableFname);
+  96              		.loc 1 34 0
+  97 00a4 1C00C28F 		lw	$2,28($fp)
+  98 00a8 00000000 		nop
+  99 00ac 0400428C 		lw	$2,4($2)
+ 100 00b0 00000000 		nop
+ 101 00b4 21204000 		move	$4,$2
+ 102 00b8 0000828F 		lw	$2,%call16(FileOpenRO)($28)
+ 103 00bc 00000000 		nop
+ 104 00c0 21C84000 		move	$25,$2
+ 105 00c4 09F82003 		jalr	$25
+ 106 00c8 00000000 		nop
+ 107              	
+ 108 00cc 1000DC8F 		lw	$28,16($fp)
+ 109              	$L3:
+  34:LoadBlock.c   ****   }
+  35:LoadBlock.c   **** 	/* rafa */
+  36:LoadBlock.c   ****   //ERRORassert();
+  37:LoadBlock.c   **** 	/* rafa */
+  38:LoadBlock.c   ****   FileSeek(addr);
+ 110              		.loc 1 39 0
+ 111 00d0 3000C48F 		lw	$4,48($fp)
+ 112 00d4 0000828F 		lw	$2,%call16(FileSeek)($28)
+ 113 00d8 00000000 		nop
+ 114 00dc 21C84000 		move	$25,$2
+ 115 00e0 09F82003 		jalr	$25
+ 116 00e4 00000000 		nop
+ 117              	
+ 118 00e8 1000DC8F 		lw	$28,16($fp)
+  39:LoadBlock.c   **** 	/* rafa */
+  40:LoadBlock.c   ****   //ERRORassert();
+  41:LoadBlock.c   **** 	/* rafa */
+  42:LoadBlock.c   ****   int rd = FileRead((char *) ptr, BlockSize);
+ 119              		.loc 1 43 0
+ 120 00ec 3400C28F 		lw	$2,52($fp)
+ 121 00f0 00000000 		nop
+ 122 00f4 21204000 		move	$4,$2
+ 123 00f8 80000524 		li	$5,128			# 0x80
+ 124 00fc 0000828F 		lw	$2,%call16(FileRead)($28)
+ 125 0100 00000000 		nop
+ 126 0104 21C84000 		move	$25,$2
+ 127 0108 09F82003 		jalr	$25
+ 128 010c 00000000 		nop
+ 129              	
+ 130 0110 1000DC8F 		lw	$28,16($fp)
+ 131 0114 1800C2AF 		sw	$2,24($fp)
+  43:LoadBlock.c   ****   if (rd != BlockSize) {
+ 132              		.loc 1 44 0
+ 133 0118 1800C38F 		lw	$3,24($fp)
+ 134 011c 80000224 		li	$2,128			# 0x80
+ 135 0120 1F006210 		beq	$3,$2,$L4
+ 136 0124 00000000 		nop
+ 137              	
+  44:LoadBlock.c   ****     printf_P(PSTR("DEBUG: Short Read, %i of %i at %08x!\n"), rd, BlockSize, addr);
+ 138              		.loc 1 45 0
+ 139 0128 0000023C 		lui	$2,%hi($LC2)
+ 140 012c 10004224 		addiu	$2,$2,%lo($LC2)
+ 141 0130 21204000 		move	$4,$2
+ 142 0134 1800C58F 		lw	$5,24($fp)
+ 143 0138 80000624 		li	$6,128			# 0x80
+ 144 013c 3000C78F 		lw	$7,48($fp)
+ 145 0140 0000828F 		lw	$2,%call16(printf)($28)
+ 146 0144 00000000 		nop
+ 147 0148 21C84000 		move	$25,$2
+ 148 014c 09F82003 		jalr	$25
+ 149 0150 00000000 		nop
+ 150              	
+ 151 0154 1000DC8F 		lw	$28,16($fp)
+ 152 0158 00000000 		nop
+  45:LoadBlock.c   ****     ERRORreturn("Short Read");
+ 153              		.loc 1 46 0
+ 154 015c 0000828F 		lw	$2,%got(errorFile)($28)
+ 155 0160 0000033C 		lui	$3,%hi($LC1)
+ 156 0164 04006324 		addiu	$3,$3,%lo($LC1)
+ 157 0168 000043AC 		sw	$3,0($2)
+ 158 016c 0000828F 		lw	$2,%got(errorLine)($28)
+ 159 0170 2E000324 		li	$3,46			# 0x2e
+ 160 0174 000043AC 		sw	$3,0($2)
+ 161 0178 0000828F 		lw	$2,%got(errorFunc)($28)
+ 162 017c 0000033C 		lui	$3,%hi(__func__.1956)
+ 163 0180 6C006324 		addiu	$3,$3,%lo(__func__.1956)
+ 164 0184 000043AC 		sw	$3,0($2)
+ 165 0188 0000828F 		lw	$2,%got(errorMsg)($28)
+ 166 018c 0000033C 		lui	$3,%hi($LC3)
+ 167 0190 38006324 		addiu	$3,$3,%lo($LC3)
+ 168 0194 000043AC 		sw	$3,0($2)
+ 169 0198 0B000010 		b	$L6
+ 170 019c 00000000 		nop
+ 171              	
+ 172              	$L4:
+  46:LoadBlock.c   ****   }
+  47:LoadBlock.c   **** 	/* rafa */
+  48:LoadBlock.c   ****   //ERRORassert();
+  49:LoadBlock.c   **** 	/* rafa */
+  50:LoadBlock.c   **** #ifdef USE_BGTREE_CACHE
+  51:LoadBlock.c   ****   cacheAddr = addr;
+  52:LoadBlock.c   ****   cacheUserData = userData;
+  53:LoadBlock.c   ****   memcpy(&cacheBlock, ptr, BlockSize);
+  54:LoadBlock.c   **** #endif
+  55:LoadBlock.c   ****   c->fileStateVersion = FileStateVersion();
+ 173              		.loc 1 56 0
+ 174 01a0 0000828F 		lw	$2,%call16(FileStateVersion)($28)
+ 175 01a4 00000000 		nop
+ 176 01a8 21C84000 		move	$25,$2
+ 177 01ac 09F82003 		jalr	$25
+ 178 01b0 00000000 		nop
+ 179              	
+ 180 01b4 1000DC8F 		lw	$28,16($fp)
+ 181 01b8 21184000 		move	$3,$2
+ 182 01bc 1C00C28F 		lw	$2,28($fp)
+ 183 01c0 00000000 		nop
+ 184 01c4 000043AC 		sw	$3,0($2)
+ 185              	$L6:
+  56:LoadBlock.c   **** }
+ 186              		.loc 1 57 0
+ 187 01c8 21E8C003 		move	$sp,$fp
+ 188 01cc 2C00BF8F 		lw	$31,44($sp)
+ 189 01d0 2800BE8F 		lw	$fp,40($sp)
+ 190 01d4 2400B08F 		lw	$16,36($sp)
+ 191 01d8 3000BD27 		addiu	$sp,$sp,48
+ 192 01dc 0800E003 		j	$31
+ 193 01e0 00000000 		nop
+ 194              	
+ 195              		.set	macro
+ 196              		.set	reorder
+ 197              		.end	LoadBlock
+ 198              	$LFE0:
+ 200              		.rdata
+ 201 0043 00       		.align	2
+ 202              	$LC4:
+ 203 0044 3000     		.ascii	"0\000"
+ 204              		.text
+ 205              		.align	2
+ 206              		.globl	AllocBlock
+ 207              	$LFB1 = .
+  57:LoadBlock.c   **** 
+  58:LoadBlock.c   **** /** User supplied function to allocate a new block **/
+  59:LoadBlock.c   **** BlockAddrT AllocBlock(void *userData) { assert(0); } // read only
+ 208              		.loc 1 60 0
+ 209              		.set	nomips16
+ 210              		.ent	AllocBlock
+ 212              	AllocBlock:
+ 213              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 214              		.mask	0xc0000000,-4
+ 215              		.fmask	0x00000000,0
+ 216              		.set	noreorder
+ 217              		.set	nomacro
+ 218              		
+ 219 01e4 E0FFBD27 		addiu	$sp,$sp,-32
+ 220              	$LCFI5:
+ 221 01e8 1C00BFAF 		sw	$31,28($sp)
+ 222              	$LCFI6:
+ 223 01ec 1800BEAF 		sw	$fp,24($sp)
+ 224              	$LCFI7:
+ 225 01f0 21F0A003 		move	$fp,$sp
+ 226              	$LCFI8:
+ 227 01f4 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 228 01f8 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 229 01fc 1000BCAF 		.cprestore	16
+ 230 0200 2000C4AF 		sw	$4,32($fp)
+ 231              		.loc 1 60 0
+ 232 0204 0000023C 		lui	$2,%hi($LC4)
+ 233 0208 44004424 		addiu	$4,$2,%lo($LC4)
+ 234 020c 0000023C 		lui	$2,%hi($LC1)
+ 235 0210 04004524 		addiu	$5,$2,%lo($LC1)
+ 236 0214 3C000624 		li	$6,60			# 0x3c
+ 237 0218 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1973)
+ 238 021c 54004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1973)
+ 239 0220 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 240 0224 00000000 		nop
+ 241 0228 21C84000 		move	$25,$2
+ 242 022c 09F82003 		jalr	$25
+ 243 0230 00000000 		nop
+ 244              	
+ 245              		.set	macro
+ 246              		.set	reorder
+ 247              		.end	AllocBlock
+ 248              	$LFE1:
+ 250              		.align	2
+ 251              		.globl	SaveBlock
+ 252              	$LFB2 = .
+  60:LoadBlock.c   **** 
+  61:LoadBlock.c   **** void SaveBlock(BlockAddrT addr, Node *buffer, void *userData) { assert(0); } // read only
+ 253              		.loc 1 62 0
+ 254              		.set	nomips16
+ 255              		.ent	SaveBlock
+ 257              	SaveBlock:
+ 258              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 259              		.mask	0xc0000000,-4
+ 260              		.fmask	0x00000000,0
+ 261              		.set	noreorder
+ 262              		.set	nomacro
+ 263              		
+ 264 0234 E0FFBD27 		addiu	$sp,$sp,-32
+ 265              	$LCFI9:
+ 266 0238 1C00BFAF 		sw	$31,28($sp)
+ 267              	$LCFI10:
+ 268 023c 1800BEAF 		sw	$fp,24($sp)
+ 269              	$LCFI11:
+ 270 0240 21F0A003 		move	$fp,$sp
+ 271              	$LCFI12:
+ 272 0244 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 273 0248 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 274 024c 1000BCAF 		.cprestore	16
+ 275 0250 2000C4AF 		sw	$4,32($fp)
+ 276 0254 2400C5AF 		sw	$5,36($fp)
+ 277 0258 2800C6AF 		sw	$6,40($fp)
+ 278              		.loc 1 62 0
+ 279 025c 0000023C 		lui	$2,%hi($LC4)
+ 280 0260 44004424 		addiu	$4,$2,%lo($LC4)
+ 281 0264 0000023C 		lui	$2,%hi($LC1)
+ 282 0268 04004524 		addiu	$5,$2,%lo($LC1)
+ 283 026c 3E000624 		li	$6,62			# 0x3e
+ 284 0270 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1979)
+ 285 0274 48004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1979)
+ 286 0278 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 287 027c 00000000 		nop
+ 288 0280 21C84000 		move	$25,$2
+ 289 0284 09F82003 		jalr	$25
+ 290 0288 00000000 		nop
+ 291              	
+ 292              		.set	macro
+ 293              		.set	reorder
+ 294              		.end	SaveBlock
+ 295              	$LFE2:
+ 297              		.rdata
+ 298 0046 0000     		.align	2
+ 301              	__PRETTY_FUNCTION__.1979:
+ 302 0048 53617665 		.ascii	"SaveBlock\000"
+ 302      426C6F63 
+ 302      6B00
+ 303 0052 0000     		.align	2
+ 306              	__PRETTY_FUNCTION__.1973:
+ 307 0054 416C6C6F 		.ascii	"AllocBlock\000"
+ 307      63426C6F 
+ 307      636B00
+ 308 005f 00       		.align	2
+ 311              	__PRETTY_FUNCTION__.1954:
+ 312 0060 4C6F6164 		.ascii	"LoadBlock\000"
+ 312      426C6F63 
+ 312      6B00
+ 313 006a 0000     		.align	2
+ 316              	__func__.1956:
+ 317 006c 4C6F6164 		.ascii	"LoadBlock\000"
+ 317      426C6F63 
+ 317      6B00
+ 409              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 LoadBlock.c
+     /tmp/ccRUClhh.s:35     .text:0000000000000000 LoadBlock
+     /tmp/ccRUClhh.s:311    .rodata:0000000000000060 __PRETTY_FUNCTION__.1954
+     /tmp/ccRUClhh.s:316    .rodata:000000000000006c __func__.1956
+     /tmp/ccRUClhh.s:212    .text:00000000000001e4 AllocBlock
+     /tmp/ccRUClhh.s:306    .rodata:0000000000000054 __PRETTY_FUNCTION__.1973
+     /tmp/ccRUClhh.s:257    .text:0000000000000234 SaveBlock
+     /tmp/ccRUClhh.s:301    .rodata:0000000000000048 __PRETTY_FUNCTION__.1979
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+__assert_fail
+FileStateVersion
+FileOpenRO
+FileSeek
+FileRead
+printf
+errorFile
+errorLine
+errorFunc
+errorMsg

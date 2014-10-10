@@ -1,0 +1,696 @@
+Archive member included because of file (symbol)
+
+build/unix/platform/libPlatform.a(PosixPlatform.o)
+                              build/unix/tests/test_vt52.o (PlatformInit)
+build/unix/platform/libPlatform.a(vt52.o)
+                              build/unix/tests/test_vt52.o (vposition)
+build/unix/platform/libPlatform.a(FileStdio.o)
+                              build/unix/platform/libPlatform.a(PosixPlatform.o) (FileInit)
+build/unix/libErrors.a(Errors.o)
+                              build/unix/platform/libPlatform.a(PosixPlatform.o) (errorFile)
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+                              /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o (__libc_csu_fini)
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+                              build/unix/platform/libPlatform.a(PosixPlatform.o) (atexit)
+
+Allocating common symbols
+Common symbol       size              file
+
+errorMsg            0x4               build/unix/libErrors.a(Errors.o)
+orig_tios           0x34              build/unix/platform/libPlatform.a(PosixPlatform.o)
+tios                0x34              build/unix/platform/libPlatform.a(PosixPlatform.o)
+errorFunc           0x4               build/unix/libErrors.a(Errors.o)
+startTime           0x8               build/unix/platform/libPlatform.a(PosixPlatform.o)
+errorLine           0x4               build/unix/libErrors.a(Errors.o)
+errorFile           0x4               build/unix/libErrors.a(Errors.o)
+
+Discarded input sections
+
+ .note.ABI-tag  0x0000000000000000       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .data          0x0000000000000000       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .bss           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .text          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .data          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .bss           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .data          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .data          0x0000000000000000        0x0 build/unix/tests/test_vt52.o
+ .bss           0x0000000000000000        0x0 build/unix/tests/test_vt52.o
+ .reginfo       0x0000000000000000       0x18 build/unix/tests/test_vt52.o
+ .pdr           0x0000000000000000       0x20 build/unix/tests/test_vt52.o
+ .data          0x0000000000000000        0x0 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .bss           0x0000000000000000        0x0 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .pdr           0x0000000000000000      0x1e0 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .data          0x0000000000000000        0x0 build/unix/platform/libPlatform.a(vt52.o)
+ .bss           0x0000000000000000        0x0 build/unix/platform/libPlatform.a(vt52.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/platform/libPlatform.a(vt52.o)
+ .pdr           0x0000000000000000       0x40 build/unix/platform/libPlatform.a(vt52.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/platform/libPlatform.a(FileStdio.o)
+ .pdr           0x0000000000000000      0x120 build/unix/platform/libPlatform.a(FileStdio.o)
+ .data          0x0000000000000000        0x0 build/unix/libErrors.a(Errors.o)
+ .bss           0x0000000000000000        0x0 build/unix/libErrors.a(Errors.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/libErrors.a(Errors.o)
+ .pdr           0x0000000000000000       0x40 build/unix/libErrors.a(Errors.o)
+ .data          0x0000000000000000        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .bss           0x0000000000000000        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .reginfo       0x0000000000000000       0x18 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .pdr           0x0000000000000000       0x40 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .data          0x0000000000000000        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .bss           0x0000000000000000        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .reginfo       0x0000000000000000       0x18 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .pdr           0x0000000000000000       0x20 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .data          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .bss           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .text          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+ .data          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+ .bss           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+LOAD build/unix/tests/test_vt52.o
+LOAD build/unix/ui/libUi.a
+LOAD build/unix/platform/libPlatform.a
+LOAD build/unix/bgtree/libbgTree.a
+LOAD build/unix/libLoadBlock.a
+LOAD build/unix/libErrors.a
+LOAD build/unix/uCmorse/libuCmorse.a
+LOAD build/unix/uCmorse/libinmorse.a
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/libgcc.a
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/libgcc_s.so
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/libc.so
+START GROUP
+LOAD /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/lib/libc.so.6
+LOAD /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a
+LOAD /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/lib/ld.so.1
+END GROUP
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/libgcc.a
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/libgcc_s.so
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+                0x0000000000400000                PROVIDE (__executable_start, 0x400000)
+                0x00000000004000f4                . = (0x400000 + SIZEOF_HEADERS)
+
+.interp         0x00000000004000f4        0xd
+ *(.interp)
+ .interp        0x00000000004000f4        0xd /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.reginfo
+ *(.reginfo)
+
+.note.gnu.build-id
+ *(.note.gnu.build-id)
+
+.dynamic        0x0000000000400104       0xd8
+ *(.dynamic)
+ .dynamic       0x0000000000400104       0xd8 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000400104                _DYNAMIC
+
+.hash           0x00000000004001dc      0x160
+ *(.hash)
+ .hash          0x00000000004001dc      0x160 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.gnu.hash
+ *(.gnu.hash)
+
+.dynsym         0x000000000040033c      0x310
+ *(.dynsym)
+ .dynsym        0x000000000040033c      0x310 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.dynstr         0x000000000040064c      0x1cb
+ *(.dynstr)
+ .dynstr        0x000000000040064c      0x1cb /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.gnu.version    0x0000000000400818       0x62
+ *(.gnu.version)
+ .gnu.version   0x0000000000400818       0x62 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.gnu.version_d  0x000000000040087c        0x0 load address 0x000000000040087a
+ *(.gnu.version_d)
+ .gnu.version_d
+                0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.gnu.version_r  0x000000000040087c       0x30
+ *(.gnu.version_r)
+ .gnu.version_r
+                0x000000000040087c       0x30 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.rel.dyn        0x00000000004008ac        0x0
+ *(.rel.init)
+ *(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
+ *(.rel.fini)
+ *(.rel.rodata .rel.rodata.* .rel.gnu.linkonce.r.*)
+ *(.rel.data.rel.ro* .rel.gnu.linkonce.d.rel.ro.*)
+ *(.rel.data .rel.data.* .rel.gnu.linkonce.d.*)
+ *(.rel.tdata .rel.tdata.* .rel.gnu.linkonce.td.*)
+ *(.rel.tbss .rel.tbss.* .rel.gnu.linkonce.tb.*)
+ *(.rel.ctors)
+ *(.rel.dtors)
+ *(.rel.got)
+ *(.rel.dyn)
+ .rel.dyn       0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ *(.rel.sdata .rel.sdata.* .rel.gnu.linkonce.s.*)
+ *(.rel.sbss .rel.sbss.* .rel.gnu.linkonce.sb.*)
+ *(.rel.sdata2 .rel.sdata2.* .rel.gnu.linkonce.s2.*)
+ *(.rel.sbss2 .rel.sbss2.* .rel.gnu.linkonce.sb2.*)
+ *(.rel.bss .rel.bss.* .rel.gnu.linkonce.b.*)
+ .rel.bss       0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x00000000004008ac                PROVIDE (__rel_iplt_start, .)
+ *(.rel.iplt)
+                0x00000000004008ac                PROVIDE (__rel_iplt_end, .)
+                0x00000000004008ac                PROVIDE (__rela_iplt_start, .)
+                0x00000000004008ac                PROVIDE (__rela_iplt_end, .)
+
+.rela.dyn       0x00000000004008ac        0x0
+ *(.rela.init)
+ *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+ *(.rela.fini)
+ *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+ *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+ *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
+ *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
+ *(.rela.ctors)
+ *(.rela.dtors)
+ *(.rela.got)
+ *(.rela.sdata .rela.sdata.* .rela.gnu.linkonce.s.*)
+ *(.rela.sbss .rela.sbss.* .rela.gnu.linkonce.sb.*)
+ *(.rela.sdata2 .rela.sdata2.* .rela.gnu.linkonce.s2.*)
+ *(.rela.sbss2 .rela.sbss2.* .rela.gnu.linkonce.sb2.*)
+ *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+                0x00000000004008ac                PROVIDE (__rel_iplt_start, .)
+                0x00000000004008ac                PROVIDE (__rel_iplt_end, .)
+                0x00000000004008ac                PROVIDE (__rela_iplt_start, .)
+ *(.rela.iplt)
+                0x00000000004008ac                PROVIDE (__rela_iplt_end, .)
+
+.rel.plt        0x00000000004008ac        0x0
+ *(.rel.plt)
+ .rel.plt       0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.rela.plt
+ *(.rela.plt)
+
+.init           0x00000000004008ac       0x78
+ *(.init)
+ .init          0x00000000004008ac       0x2c /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+                0x00000000004008ac                _init
+ .init          0x00000000004008d8       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .init          0x00000000004008f8       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .init          0x0000000000400918        0xc /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.plt            0x0000000000400924        0x0
+ *(.plt)
+ .plt           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.iplt
+ *(.iplt)
+
+.text           0x0000000000400930     0x1de0
+                0x0000000000400930                _ftext = .
+ *(.text.unlikely .text.*_unlikely)
+ *(.text .stub .text.* .gnu.linkonce.t.*)
+ .text          0x0000000000400930       0x60 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000400930                __start
+ .text          0x0000000000400990       0xc0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .text          0x0000000000400a50      0x4f0 build/unix/tests/test_vt52.o
+                0x0000000000400a50                main
+ .text          0x0000000000400f40      0xb40 build/unix/platform/libPlatform.a(PosixPlatform.o)
+                0x0000000000400f40                sounder
+                0x0000000000400f68                StdioDestroy
+                0x0000000000400ffc                StdioInit
+                0x0000000000401334                StackCheck
+                0x0000000000401354                StackPrintInfo
+                0x0000000000401378                PlatformInit
+                0x0000000000401550                OutC
+                0x00000000004015bc                GetTimeOfDayMilli
+                0x0000000000401684                TimerInit
+                0x00000000004016d8                TimerMillisec
+                0x0000000000401734                TimerCount
+                0x0000000000401784                TimerCountPerMillisec
+                0x00000000004017a8                DelayMs
+                0x000000000040181c                InputIsReady
+                0x00000000004019bc                InputCheck
+ .text          0x0000000000401a80      0x330 build/unix/platform/libPlatform.a(vt52.o)
+                0x0000000000401a80                vposition
+                0x0000000000401cd4                vclearlines
+ .text          0x0000000000401db0      0x590 build/unix/platform/libPlatform.a(FileStdio.o)
+                0x0000000000401db0                FileInit
+                0x0000000000401dd4                FileOpenRO
+                0x0000000000401ee4                FileClose
+                0x0000000000401f9c                FileRead
+                0x0000000000402114                FileSeek
+                0x0000000000402234                FileGetC
+                0x00000000004022c0                FileGetHandle
+                0x00000000004022e8                FileStateVersion
+                0x0000000000402310                FileSectorReadCount
+ .text          0x0000000000402340      0x2a0 build/unix/libErrors.a(Errors.o)
+                0x0000000000402340                ERRORprint2
+                0x00000000004025a0                ERRORprint3
+ .text          0x00000000004025e0       0xb0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+                0x00000000004025e0                __libc_csu_fini
+                0x00000000004025e8                __libc_csu_init
+ .text          0x0000000000402690       0x30 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+                0x0000000000402690                atexit
+ .text          0x00000000004026c0       0x50 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ *(.gnu.warning)
+ *(.mips16.fn.*)
+ *(.mips16.call.*)
+
+.MIPS.stubs     0x0000000000402710      0x180
+ .MIPS.stubs    0x0000000000402710      0x180 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000402710                fileno@@GLIBC_2.0
+                0x0000000000402720                sigemptyset@@GLIBC_2.0
+                0x0000000000402730                __libc_start_main@@GLIBC_2.0
+                0x0000000000402740                tcgetattr@@GLIBC_2.0
+                0x0000000000402750                __assert_fail@@GLIBC_2.0
+                0x0000000000402760                read@@GLIBC_2.0
+                0x0000000000402770                usleep@@GLIBC_2.0
+                0x0000000000402780                gettimeofday@@GLIBC_2.0
+                0x0000000000402790                sigaction@@GLIBC_2.0
+                0x00000000004027a0                fseek@@GLIBC_2.0
+                0x00000000004027b0                fclose@@GLIBC_2.2
+                0x00000000004027c0                memcpy@@GLIBC_2.0
+                0x00000000004027d0                feof@@GLIBC_2.0
+                0x00000000004027e0                printf@@GLIBC_2.0
+                0x00000000004027f0                select@@GLIBC_2.0
+                0x0000000000402800                fwrite@@GLIBC_2.0
+                0x0000000000402810                fprintf@@GLIBC_2.0
+                0x0000000000402820                __cxa_atexit@@GLIBC_2.2
+                0x0000000000402830                fputc@@GLIBC_2.0
+                0x0000000000402840                fopen@@GLIBC_2.2
+                0x0000000000402850                puts@@GLIBC_2.0
+                0x0000000000402860                tcsetattr@@GLIBC_2.0
+                0x0000000000402870                fread@@GLIBC_2.0
+
+.fini           0x0000000000402890       0x44
+ *(.fini)
+ .fini          0x0000000000402890       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+                0x0000000000402890                _fini
+ .fini          0x00000000004028a8       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .fini          0x00000000004028c8        0xc /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+                0x00000000004028d4                PROVIDE (__etext, .)
+                0x00000000004028d4                PROVIDE (_etext, .)
+                0x00000000004028d4                PROVIDE (etext, .)
+
+.rodata         0x00000000004028e0      0x2f0
+ *(.rodata .rodata.* .gnu.linkonce.r.*)
+ .rodata.cst4   0x00000000004028e0        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x00000000004028e0                _IO_stdin_used
+ *fill*         0x00000000004028e4        0xc 00
+ .rodata        0x00000000004028f0       0xa0 build/unix/tests/test_vt52.o
+ .rodata        0x0000000000402990      0x130 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .rodata        0x0000000000402ac0       0x10 build/unix/platform/libPlatform.a(vt52.o)
+ .rodata        0x0000000000402ad0       0xb0 build/unix/platform/libPlatform.a(FileStdio.o)
+ .rodata        0x0000000000402b80       0x50 build/unix/libErrors.a(Errors.o)
+
+.rodata1
+ *(.rodata1)
+
+.sdata2
+ *(.sdata2 .sdata2.* .gnu.linkonce.s2.*)
+
+.sbss2
+ *(.sbss2 .sbss2.* .gnu.linkonce.sb2.*)
+
+.eh_frame_hdr
+ *(.eh_frame_hdr)
+
+.eh_frame       0x0000000000402bd0        0x4
+ *(.eh_frame)
+ .eh_frame      0x0000000000402bd0        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+                0x0000000000402bd4                . = (ALIGN (0x10000) - ((0x10000 - .) & 0xffff))
+                0x0000000000412bd4                . = (0x10000 DATA_SEGMENT_ALIGN 0x1000)
+
+.eh_frame
+ *(.eh_frame)
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+
+.tdata
+ *(.tdata .tdata.* .gnu.linkonce.td.*)
+
+.tbss
+ *(.tbss .tbss.* .gnu.linkonce.tb.*)
+ *(.tcommon)
+
+.preinit_array  0x0000000000412bd4        0x0
+                0x0000000000412bd4                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array)
+                0x0000000000412bd4                PROVIDE (__preinit_array_end, .)
+
+.init_array     0x0000000000412bd4        0x0
+                0x0000000000412bd4                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array)
+                0x0000000000412bd4                PROVIDE (__init_array_end, .)
+
+.fini_array     0x0000000000412bd4        0x0
+                0x0000000000412bd4                PROVIDE (__fini_array_start, .)
+ *(.fini_array)
+ *(SORT(.fini_array.*))
+                0x0000000000412bd4                PROVIDE (__fini_array_end, .)
+
+.ctors          0x0000000000412bd4        0x8
+ *crtbegin.o(.ctors)
+ .ctors         0x0000000000412bd4        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+ .ctors         0x0000000000412bd8        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+
+.dtors          0x0000000000412bdc        0x8
+ *crtbegin.o(.dtors)
+ .dtors         0x0000000000412bdc        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+ .dtors         0x0000000000412be0        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+                0x0000000000412be0                __DTOR_END__
+
+.jcr            0x0000000000412be4        0x4
+ *(.jcr)
+ .jcr           0x0000000000412be4        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .jcr           0x0000000000412be4        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+
+.data.rel.ro
+ *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*)
+ *(.data.rel.ro* .gnu.linkonce.d.rel.ro.*)
+                0x0000000000412be8                . = (. DATA_SEGMENT_RELRO_END 0x0)
+
+.data           0x0000000000412bf0       0x10
+                0x0000000000412bf0                _fdata = .
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data          0x0000000000412bf0       0x10 build/unix/platform/libPlatform.a(FileStdio.o)
+
+.rld_map        0x0000000000412c00        0x4
+ .rld_map       0x0000000000412c00        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000412c00                __RLD_MAP
+
+.data1
+ *(.data1)
+
+.got.plt        0x0000000000412c04        0x0
+ *(.got.plt)
+ .got.plt       0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000412c04                . = .
+                0x000000000041ac00                _gp = (ALIGN (0x10) + 0x7ff0)
+
+.got            0x0000000000412c10       0xd4
+ *(.got)
+ .got           0x0000000000412c10       0xd4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000412c10                _GLOBAL_OFFSET_TABLE_
+
+.sdata          0x0000000000412ce4        0x4
+ *(.sdata .sdata.* .gnu.linkonce.s.*)
+ .sdata         0x0000000000412ce4        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+                0x0000000000412ce4                __dso_handle
+
+.lit8
+ *(.lit8)
+
+.lit4
+ *(.lit4)
+                0x0000000000412ce8                _edata = .
+                0x0000000000412ce8                PROVIDE (edata, .)
+                0x0000000000412ce8                __bss_start = .
+                0x0000000000412ce8                _fbss = .
+
+.sbss           0x0000000000412ce8       0x18
+ *(.dynsbss)
+ *(.sbss .sbss.* .gnu.linkonce.sb.*)
+ *(.scommon)
+ .scommon       0x0000000000412ce8        0x8 build/unix/platform/libPlatform.a(PosixPlatform.o)
+                0x0000000000412ce8                startTime
+ .scommon       0x0000000000412cf0       0x10 build/unix/libErrors.a(Errors.o)
+                0x0000000000412cf0                errorMsg
+                0x0000000000412cf4                errorFunc
+                0x0000000000412cf8                errorLine
+                0x0000000000412cfc                errorFile
+
+.bss            0x0000000000412d00       0x88
+ *(.dynbss)
+ .dynbss        0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x0000000000412d00       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .bss           0x0000000000412d10       0x10 build/unix/platform/libPlatform.a(FileStdio.o)
+                0x0000000000412d10                fsFile
+ *(COMMON)
+ COMMON         0x0000000000412d20       0x68 build/unix/platform/libPlatform.a(PosixPlatform.o)
+                0x0000000000412d20                orig_tios
+                0x0000000000412d54                tios
+                0x0000000000412d88                . = ALIGN ((. != 0x0)?0x4:0x1)
+                0x0000000000412d88                . = ALIGN (0x4)
+                0x0000000000412d88                . = ALIGN (0x4)
+                0x0000000000412d88                _end = .
+                0x0000000000412d88                PROVIDE (end, .)
+                0x0000000000412d88                . = DATA_SEGMENT_END (.)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.pdr            0x0000000000000000        0x0
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.comment        0x0000000000000000       0x11
+ *(.comment)
+ .comment       0x0000000000000000       0x11 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                                         0x12 (size before relaxing)
+ .comment       0x0000000000000000       0x12 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .comment       0x0000000000000000       0x12 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .comment       0x0000000000000000       0x12 build/unix/tests/test_vt52.o
+ .comment       0x0000000000000000       0x12 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .comment       0x0000000000000000       0x12 build/unix/platform/libPlatform.a(vt52.o)
+ .comment       0x0000000000000000       0x12 build/unix/platform/libPlatform.a(FileStdio.o)
+ .comment       0x0000000000000000       0x12 build/unix/libErrors.a(Errors.o)
+ .comment       0x0000000000000000       0x12 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .comment       0x0000000000000000       0x12 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .comment       0x0000000000000000       0x12 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .comment       0x0000000000000000       0x12 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x0000000000000000       0xa0
+ *(.debug_aranges)
+ .debug_aranges
+                0x0000000000000000       0x20 build/unix/tests/test_vt52.o
+ .debug_aranges
+                0x0000000000000020       0x20 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_aranges
+                0x0000000000000040       0x20 build/unix/platform/libPlatform.a(vt52.o)
+ .debug_aranges
+                0x0000000000000060       0x20 build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_aranges
+                0x0000000000000080       0x20 build/unix/libErrors.a(Errors.o)
+
+.debug_pubnames
+                0x0000000000000000      0x28a
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x0000000000000000       0x1b build/unix/tests/test_vt52.o
+ .debug_pubnames
+                0x000000000000001b      0x129 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_pubnames
+                0x0000000000000144       0x30 build/unix/platform/libPlatform.a(vt52.o)
+ .debug_pubnames
+                0x0000000000000174       0xad build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_pubnames
+                0x0000000000000221       0x69 build/unix/libErrors.a(Errors.o)
+
+.debug_info     0x0000000000000000     0x1a93
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x0000000000000000      0x357 build/unix/tests/test_vt52.o
+ .debug_info    0x0000000000000357      0xa90 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_info    0x0000000000000de7      0x38d build/unix/platform/libPlatform.a(vt52.o)
+ .debug_info    0x0000000000001174      0x579 build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_info    0x00000000000016ed      0x3a6 build/unix/libErrors.a(Errors.o)
+
+.debug_abbrev   0x0000000000000000      0x622
+ *(.debug_abbrev)
+ .debug_abbrev  0x0000000000000000       0xf6 build/unix/tests/test_vt52.o
+ .debug_abbrev  0x00000000000000f6      0x1e1 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_abbrev  0x00000000000002d7       0xfc build/unix/platform/libPlatform.a(vt52.o)
+ .debug_abbrev  0x00000000000003d3      0x166 build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_abbrev  0x0000000000000539       0xe9 build/unix/libErrors.a(Errors.o)
+
+.debug_line     0x0000000000000000      0xa93
+ *(.debug_line)
+ .debug_line    0x0000000000000000      0x1ed build/unix/tests/test_vt52.o
+ .debug_line    0x00000000000001ed      0x324 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_line    0x0000000000000511      0x1c9 build/unix/platform/libPlatform.a(vt52.o)
+ .debug_line    0x00000000000006da      0x20e build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_line    0x00000000000008e8      0x1ab build/unix/libErrors.a(Errors.o)
+
+.debug_frame    0x0000000000000000      0x3dc
+ *(.debug_frame)
+ .debug_frame   0x0000000000000000       0x30 build/unix/tests/test_vt52.o
+ .debug_frame   0x0000000000000030      0x1ec build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_frame   0x000000000000021c       0x50 build/unix/platform/libPlatform.a(vt52.o)
+ .debug_frame   0x000000000000026c      0x120 build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_frame   0x000000000000038c       0x50 build/unix/libErrors.a(Errors.o)
+
+.debug_str      0x0000000000000000      0x6a6
+ *(.debug_str)
+ .debug_str     0x0000000000000000      0x22d build/unix/tests/test_vt52.o
+                                        0x275 (size before relaxing)
+ .debug_str     0x000000000000022d      0x36f build/unix/platform/libPlatform.a(PosixPlatform.o)
+                                        0x5de (size before relaxing)
+ .debug_str     0x000000000000059c       0x36 build/unix/platform/libPlatform.a(vt52.o)
+                                        0x288 (size before relaxing)
+ .debug_str     0x00000000000005d2       0xa9 build/unix/platform/libPlatform.a(FileStdio.o)
+                                        0x348 (size before relaxing)
+ .debug_str     0x000000000000067b       0x2b build/unix/libErrors.a(Errors.o)
+                                        0x2ab (size before relaxing)
+
+.debug_loc      0x0000000000000000      0x4e3
+ *(.debug_loc)
+ .debug_loc     0x0000000000000000       0x2b build/unix/tests/test_vt52.o
+ .debug_loc     0x000000000000002b      0x289 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .debug_loc     0x00000000000002b4       0x56 build/unix/platform/libPlatform.a(vt52.o)
+ .debug_loc     0x000000000000030a      0x183 build/unix/platform/libPlatform.a(FileStdio.o)
+ .debug_loc     0x000000000000048d       0x56 build/unix/libErrors.a(Errors.o)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges
+ *(.debug_ranges)
+
+.gnu.attributes
+                0x0000000000000000       0x10
+ *(.gnu.attributes)
+ .gnu.attributes
+                0x0000000000000000       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .gnu.attributes
+                0x0000000000000010       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .gnu.attributes
+                0x0000000000000020       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .gnu.attributes
+                0x0000000000000030       0x10 build/unix/tests/test_vt52.o
+ .gnu.attributes
+                0x0000000000000040       0x10 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .gnu.attributes
+                0x0000000000000050       0x10 build/unix/platform/libPlatform.a(vt52.o)
+ .gnu.attributes
+                0x0000000000000060       0x10 build/unix/platform/libPlatform.a(FileStdio.o)
+ .gnu.attributes
+                0x0000000000000070       0x10 build/unix/libErrors.a(Errors.o)
+ .gnu.attributes
+                0x0000000000000080       0x10 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .gnu.attributes
+                0x0000000000000090       0x10 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .gnu.attributes
+                0x00000000000000a0       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .gnu.attributes
+                0x00000000000000b0       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.gptab.sdata
+ *(.gptab.data)
+ *(.gptab.sdata)
+
+.gptab.sbss
+ *(.gptab.bss)
+ *(.gptab.sbss)
+
+.mdebug.abi32   0x00000000000000c0        0x0
+ *(.mdebug.abi32)
+ .mdebug.abi32  0x00000000000000c0        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .mdebug.abi32  0x00000000000000c0        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .mdebug.abi32  0x00000000000000c0        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .mdebug.abi32  0x00000000000000c0        0x0 build/unix/tests/test_vt52.o
+ .mdebug.abi32  0x00000000000000c0        0x0 build/unix/platform/libPlatform.a(PosixPlatform.o)
+ .mdebug.abi32  0x00000000000000c0        0x0 build/unix/platform/libPlatform.a(vt52.o)
+ .mdebug.abi32  0x00000000000000c0        0x0 build/unix/platform/libPlatform.a(FileStdio.o)
+ .mdebug.abi32  0x00000000000000c0        0x0 build/unix/libErrors.a(Errors.o)
+ .mdebug.abi32  0x00000000000000c0        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .mdebug.abi32  0x00000000000000c0        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(atexit.oS)
+ .mdebug.abi32  0x00000000000000c0        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .mdebug.abi32  0x00000000000000c0        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.mdebug.abiN32
+ *(.mdebug.abiN32)
+
+.mdebug.abi64
+ *(.mdebug.abi64)
+
+.mdebug.abiO64
+ *(.mdebug.abiO64)
+
+.mdebug.eabi32
+ *(.mdebug.eabi32)
+
+.mdebug.eabi64
+ *(.mdebug.eabi64)
+
+.gcc_compiled_long32
+ *(.gcc_compiled_long32)
+
+.gcc_compiled_long64
+ *(.gcc_compiled_long64)
+
+/DISCARD/
+ *(.note.GNU-stack)
+ *(.gnu_debuglink)
+ *(.gnu.lto_*)
+OUTPUT(build/unix/tests/test_vt52 elf32-tradlittlemips)

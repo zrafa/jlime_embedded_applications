@@ -1,0 +1,158 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.align	2
+  14              		.globl	main
+  15              	$LFB0 = .
+  16              		.file 1 "tests/test_MorseBox.c"
+   0:tests/test_MorseBox.c **** #include "MorseBox.h"
+   1:tests/test_MorseBox.c **** #include "vt52.h"
+   2:tests/test_MorseBox.c **** 
+   3:tests/test_MorseBox.c **** int main(int argc, char **argv) {
+  17              		.loc 1 4 0
+  18              		.set	nomips16
+  19              		.ent	main
+  21              	main:
+  22              		.frame	$fp,96,$31		# vars= 64, regs= 2/0, args= 16, gp= 8
+  23              		.mask	0xc0000000,-4
+  24              		.fmask	0x00000000,0
+  25              		.set	noreorder
+  26              		.set	nomacro
+  27              		
+  28 0000 A0FFBD27 		addiu	$sp,$sp,-96
+  29              	$LCFI0:
+  30 0004 5C00BFAF 		sw	$31,92($sp)
+  31              	$LCFI1:
+  32 0008 5800BEAF 		sw	$fp,88($sp)
+  33              	$LCFI2:
+  34 000c 21F0A003 		move	$fp,$sp
+  35              	$LCFI3:
+  36 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  37 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  38 0018 1000BCAF 		.cprestore	16
+  39 001c 6000C4AF 		sw	$4,96($fp)
+  40 0020 6400C5AF 		sw	$5,100($fp)
+   4:tests/test_MorseBox.c ****   unsigned char escState=0;
+  41              		.loc 1 5 0
+  42 0024 1C00C0A3 		sb	$0,28($fp)
+   5:tests/test_MorseBox.c ****   PlatformInit();
+  43              		.loc 1 6 0
+  44 0028 0000828F 		lw	$2,%call16(PlatformInit)($28)
+  45 002c 00000000 		nop
+  46 0030 21C84000 		move	$25,$2
+  47 0034 09F82003 		jalr	$25
+  48 0038 00000000 		nop
+  49              	
+  50 003c 1000DC8F 		lw	$28,16($fp)
+   6:tests/test_MorseBox.c ****   MorseBox mb;
+   7:tests/test_MorseBox.c ****   MorseBoxInit(&mb,0);
+  51              		.loc 1 8 0
+  52 0040 2000C227 		addiu	$2,$fp,32
+  53 0044 21204000 		move	$4,$2
+  54 0048 21280000 		move	$5,$0
+  55 004c 0000828F 		lw	$2,%call16(MorseBoxInit)($28)
+  56 0050 00000000 		nop
+  57 0054 21C84000 		move	$25,$2
+  58 0058 09F82003 		jalr	$25
+  59 005c 00000000 		nop
+  60              	
+  61 0060 1000DC8F 		lw	$28,16($fp)
+  62 0064 02000010 		b	$L3
+  63 0068 00000000 		nop
+  64              	
+  65              	$L5:
+   8:tests/test_MorseBox.c ****   while (1) {
+   9:tests/test_MorseBox.c ****     MorseBoxDraw(&mb);
+  10:tests/test_MorseBox.c ****     int r = fgetc(stdin);
+  11:tests/test_MorseBox.c ****     r = InputUnescape(r, &escState);
+  12:tests/test_MorseBox.c ****     if (r != -1)
+  13:tests/test_MorseBox.c ****       MorseBoxPushEvent(&mb, r);
+  14:tests/test_MorseBox.c ****   }
+  66              		.loc 1 15 0
+  67 006c 00000000 		nop
+  68              	$L3:
+  69              	$LBB2 = .
+  10:tests/test_MorseBox.c ****     MorseBoxDraw(&mb);
+  70              		.loc 1 10 0
+  71 0070 2000C227 		addiu	$2,$fp,32
+  72 0074 21204000 		move	$4,$2
+  73 0078 0000828F 		lw	$2,%call16(MorseBoxDraw)($28)
+  74 007c 00000000 		nop
+  75 0080 21C84000 		move	$25,$2
+  76 0084 09F82003 		jalr	$25
+  77 0088 00000000 		nop
+  78              	
+  79 008c 1000DC8F 		lw	$28,16($fp)
+  80 0090 00000000 		nop
+  11:tests/test_MorseBox.c ****     int r = fgetc(stdin);
+  81              		.loc 1 11 0
+  82 0094 0000828F 		lw	$2,%got(stdin)($28)
+  83 0098 00000000 		nop
+  84 009c 0000428C 		lw	$2,0($2)
+  85 00a0 00000000 		nop
+  86 00a4 21204000 		move	$4,$2
+  87 00a8 0000828F 		lw	$2,%call16(fgetc)($28)
+  88 00ac 00000000 		nop
+  89 00b0 21C84000 		move	$25,$2
+  90 00b4 09F82003 		jalr	$25
+  91 00b8 00000000 		nop
+  92              	
+  93 00bc 1000DC8F 		lw	$28,16($fp)
+  94 00c0 1800C2AF 		sw	$2,24($fp)
+  12:tests/test_MorseBox.c ****     r = InputUnescape(r, &escState);
+  95              		.loc 1 12 0
+  96 00c4 1C00C227 		addiu	$2,$fp,28
+  97 00c8 1800C48F 		lw	$4,24($fp)
+  98 00cc 21284000 		move	$5,$2
+  99 00d0 0000828F 		lw	$2,%call16(InputUnescape)($28)
+ 100 00d4 00000000 		nop
+ 101 00d8 21C84000 		move	$25,$2
+ 102 00dc 09F82003 		jalr	$25
+ 103 00e0 00000000 		nop
+ 104              	
+ 105 00e4 1000DC8F 		lw	$28,16($fp)
+ 106 00e8 1800C2AF 		sw	$2,24($fp)
+  13:tests/test_MorseBox.c ****     if (r != -1)
+ 107              		.loc 1 13 0
+ 108 00ec 1800C38F 		lw	$3,24($fp)
+ 109 00f0 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 110 00f4 DDFF6210 		beq	$3,$2,$L5
+ 111 00f8 00000000 		nop
+ 112              	
+  14:tests/test_MorseBox.c ****       MorseBoxPushEvent(&mb, r);
+ 113              		.loc 1 14 0
+ 114 00fc 2000C227 		addiu	$2,$fp,32
+ 115 0100 21204000 		move	$4,$2
+ 116 0104 1800C58F 		lw	$5,24($fp)
+ 117 0108 0000828F 		lw	$2,%call16(MorseBoxPushEvent)($28)
+ 118 010c 00000000 		nop
+ 119 0110 21C84000 		move	$25,$2
+ 120 0114 09F82003 		jalr	$25
+ 121 0118 00000000 		nop
+ 122              	
+ 123 011c 1000DC8F 		lw	$28,16($fp)
+ 124              	$LBE2 = .
+ 125              		.loc 1 15 0
+ 126 0120 D3FF0010 		b	$L3
+ 127 0124 00000000 		nop
+ 128              	
+ 129              		.set	macro
+ 130              		.set	reorder
+ 131              		.end	main
+ 132              	$LFE0:
+ 174              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 tests/test_MorseBox.c
+     /tmp/cc0fZyFh.s:21     .text:0000000000000000 main
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+PlatformInit
+MorseBoxInit
+MorseBoxDraw
+stdin
+fgetc
+InputUnescape
+MorseBoxPushEvent

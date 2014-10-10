@@ -1,0 +1,6 @@
+#!/bin/sh -e
+#
+USER=unclouded
+find web-site/ -type f | xargs chmod a+r
+find web-site/ -type d | xargs chmod a+rx
+rsync -avP -e ssh web-site/ $USER,nightsky@web.sourceforge.net:htdocs/

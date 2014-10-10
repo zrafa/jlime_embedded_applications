@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+Import("env","ARCH", 'ObjCopyHexCmd', 'HiLibs', 'USE_FAT_IMAGE', 'USE_KEYBOARD')
+
+SRC=["MorseBox.c", "ListView.c", "ListCmdr.c"]
+env.Library(target="Ui", source=SRC)

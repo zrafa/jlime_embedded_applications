@@ -1,0 +1,138 @@
+#!/bin/sh
+#
+# Block Rage - the arcade game
+# Copyright (C) 1999-2005 Jiri Svoboda
+#
+# This file is part of Block Rage.
+#
+# Block Rage is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.#
+#
+# Block Rage is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Block Rage; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+# Jiri Svoboda
+# jirik.svoboda@seznam.cz
+#
+
+#
+# This shell script creates target directory branch if necessary,
+# then copies files and directories (recursively) and sets
+# file and directory permissions as specified.
+#
+#  inst [perm-options] -t <target-dir> <source>...
+#  inst [perm-options] -T <target-file> <source-file>
+#
+# perm-options:
+#   -dp <directory-permissions>
+#   -fp <file-permissions>
+#
+
+SELF="$0"
+DIRPERM=755
+FILEPERM=644
+TARGDIR=
+TARGFILE=
+
+while test ."$1" != . ; do
+  if test ."$1" = ."-dp" ; then
+    shift 1
+    DIRPERM="$1"
+  elif test ."$1" = ."-fp" ; then
+    shift 1
+    FILEPERM="$1"
+  elif test ."$1" = ."-t" ; then
+    shift 1
+    TARGDIR="$1"
+    TARFILE=
+  elif test ."$1" = ."-T" ; then
+    shift 1
+    TARGFILE="$1"
+    TARGDIR=
+  else
+    break
+  fi
+  shift 1
+done
+
+# determine destination path
+
+if test ."$TARGFILE" != . ; then
+  # remove name of the file
+  TPATH=`echo "$TARGFILE" | sed 's:/[^/]*$:/:'`
+else
+  # make sure there is a trailing slash
+  TPATH=`echo "$TARGDIR" | sed 's:/$::'`/
+fi
+
+# create the target directory branch, step-by-step
+ORIGDIR=`pwd`
+
+# handle absolute path
+TPC0=`echo "$TPATH" | cut -c 1`
+if test ."$TPC0" = ."/" ; then
+  cd /
+  TPATH=`echo "$TPATH" | cut -c 2-`
+fi
+
+while test ."$TPATH" != . ; do
+  PATHCOMP=`echo "$TPATH" | sed 's:\(.[^/]*\).*:\1:'`
+  if test ! -d "$PATHCOMP" ; then
+    CWD=`pwd`
+    if test ."$CWD" = ."/" ; then
+      echo installing /"$PATHCOMP"
+    else
+      echo installing "$CWD"/"$PATHCOMP"
+    fi
+    mkdir "$PATHCOMP"
+    chmod "$DIRPERM" "$PATHCOMP"
+  fi
+  cd "$PATHCOMP"
+  TPATH=`echo "$TPATH" | sed 's:^[^/]*//*::'`
+done
+
+# switch back to original directory
+cd "$ORIGDIR"
+
+if test ."$TARGFILE" != . ; then
+  # odstran nadbytecna lomitka
+  TARGFILE=`echo "$TARGFILE"| sed 's://*:/:g'`
+  echo installing "$TARGFILE"
+  cp "$1" "$TARGFILE"
+  chmod "$FILEPERM" "$TARGFILE"
+else
+  # install all source files/directories
+
+  while test ."$1" != . ; do
+    BASENAME=`echo "$1"| sed 's:^.*/::'`
+    TARGNAME="$TARGDIR"/"$BASENAME"
+    
+    # odstran nadbytecna lomitka
+    TARGNAME=`echo "$TARGNAME"| sed 's://*:/:g'`
+
+    if test -d "$1" ; then
+      # directory
+      echo installing "$TARGNAME"
+      if test ! -d "$TARGNAME" ; then
+        mkdir "$TARGNAME"
+	chmod "$DIRPERM" "$TARGNAME"
+      fi
+      "$SELF" -dp "$DIRPERM" -fp "$FILEPERM" -t "$TARGNAME" "$1"/*
+    else
+      # regular file
+      echo installing "$TARGNAME"
+      cp "$1" "$TARGNAME"
+      chmod "$FILEPERM" "$TARGNAME"
+    fi
+    
+    shift 1
+  done
+fi

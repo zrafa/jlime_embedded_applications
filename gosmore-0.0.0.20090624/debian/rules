@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/class/makefile.mk
+include /usr/share/cdbs/1/rules/debhelper.mk
+DESTDIR := $(CURDIR)/debian/gosmore
+DEB_MAKE_INSTALL_TARGET := DESTDIR=$(DESTDIR) prefix=/usr install
+
+CFLAGS := -DRES_DIR='\"/usr/share/gosmore/\"'
+
+SVNREPO := http://svn.openstreetmap.org/applications/rendering/gosmore
+SVNREV := 16088
+DATE := $(shell date +%Y%m%d)
+
+get-orig-source:
+	dh_testdir
+	test -d ../tarballs/. || mkdir -p ../tarballs
+	@echo Downloading gosmore from ${SVNREPO}
+	svn -r $(SVNREV) --ignore-externals export ${SVNREPO} ../tarballs/gosmore-0.0.0.${DATE}
+	@echo Removing debian dir
+	rm -rf ../tarballs/gosmore-0.0.0.${DATE}/debian
+	@echo Building snapshot tarball
+	tar czf ../tarballs/gosmore_0.0.0.${DATE}.orig.tar.gz -C ../tarballs gosmore-0.0.0.${DATE}
+	@echo Cleaning up
+	rm -rf ../tarballs/gosmore-0.0.0.${DATE}
+	@echo .
+	@echo To update debian/changelog type
+	@echo dch -v 0.0.0.${DATE}-1
+	@echo .

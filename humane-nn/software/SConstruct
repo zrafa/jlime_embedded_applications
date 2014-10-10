@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+import os
+
+ARCH = ARGUMENTS.get('ARCH','unix')
+F_CPU   = ARGUMENTS.get('F_CPU','20000000')
+AVR_CPU = ARGUMENTS.get('AVR_CPU', "atmega328p")
+if ARCH == 'avr':
+  MHZ = ("%f" % (float(F_CPU)/1000000.)).rstrip("0").rstrip(".")
+  BuildDir = "#/build/"+AVR_CPU+"-"+MHZ
+  F_CPU = F_CPU + "ULL"
+  Export('F_CPU', 'AVR_CPU')
+else:
+  BuildDir = "#/build/"+ARCH
+Export('ARCH','BuildDir')
+SConscript('SConscript', variant_dir=BuildDir, duplicate=0)

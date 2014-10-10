@@ -1,0 +1,678 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.rdata
+  14              		.align	2
+  15              	$LC0:
+  16 0000 282A7374 		.ascii	"(*state < 3) && (*state >= 0)\000"
+  16      61746520 
+  16      3C203329 
+  16      20262620 
+  16      282A7374 
+  17 001e 0000     		.align	2
+  18              	$LC1:
+  19 0020 706C6174 		.ascii	"platform/Platform.c\000"
+  19      666F726D 
+  19      2F506C61 
+  19      74666F72 
+  19      6D2E6300 
+  20              		.text
+  21              		.align	2
+  22              		.globl	InputUnescape
+  23              	$LFB0 = .
+  24              		.file 1 "platform/Platform.c"
+   0:platform/Platform.c **** #include "Platform.h"
+   1:platform/Platform.c **** 
+   2:platform/Platform.c **** int InputUnescape(int in, unsigned char *state) {
+  25              		.loc 1 3 0
+  26              		.set	nomips16
+  27              		.ent	InputUnescape
+  29              	InputUnescape:
+  30              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+  31              		.mask	0xc0000000,-4
+  32              		.fmask	0x00000000,0
+  33              		.set	noreorder
+  34              		.set	nomacro
+  35              		
+  36 0000 D8FFBD27 		addiu	$sp,$sp,-40
+  37              	$LCFI0:
+  38 0004 2400BFAF 		sw	$31,36($sp)
+  39              	$LCFI1:
+  40 0008 2000BEAF 		sw	$fp,32($sp)
+  41              	$LCFI2:
+  42 000c 21F0A003 		move	$fp,$sp
+  43              	$LCFI3:
+  44 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  45 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  46 0018 1000BCAF 		.cprestore	16
+  47 001c 2800C4AF 		sw	$4,40($fp)
+  48 0020 2C00C5AF 		sw	$5,44($fp)
+   3:platform/Platform.c ****   assert((*state < 3) && (*state >= 0));
+  49              		.loc 1 4 0
+  50 0024 2C00C28F 		lw	$2,44($fp)
+  51 0028 00000000 		nop
+  52 002c 00004290 		lbu	$2,0($2)
+  53 0030 00000000 		nop
+  54 0034 0300422C 		sltu	$2,$2,3
+  55 0038 0D004014 		bne	$2,$0,$L2
+  56 003c 00000000 		nop
+  57              	
+  58 0040 0000023C 		lui	$2,%hi($LC0)
+  59 0044 00004424 		addiu	$4,$2,%lo($LC0)
+  60 0048 0000023C 		lui	$2,%hi($LC1)
+  61 004c 20004524 		addiu	$5,$2,%lo($LC1)
+  62 0050 04000624 		li	$6,4			# 0x4
+  63 0054 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1714)
+  64 0058 34004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1714)
+  65 005c 0000828F 		lw	$2,%call16(__assert_fail)($28)
+  66 0060 00000000 		nop
+  67 0064 21C84000 		move	$25,$2
+  68 0068 09F82003 		jalr	$25
+  69 006c 00000000 		nop
+  70              	
+  71              	$L2:
+   4:platform/Platform.c ****   if (in == -1) return -1;
+  72              		.loc 1 5 0
+  73 0070 2800C38F 		lw	$3,40($fp)
+  74 0074 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+  75 0078 04006214 		bne	$3,$2,$L3
+  76 007c 00000000 		nop
+  77              	
+  78 0080 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+  79 0084 3C000010 		b	$L4
+  80 0088 00000000 		nop
+  81              	
+  82              	$L3:
+   5:platform/Platform.c ****   int ret=in;
+  83              		.loc 1 6 0
+  84 008c 2800C28F 		lw	$2,40($fp)
+  85 0090 00000000 		nop
+  86 0094 1800C2AF 		sw	$2,24($fp)
+   6:platform/Platform.c ****   if (*state == 0) {
+  87              		.loc 1 7 0
+  88 0098 2C00C28F 		lw	$2,44($fp)
+  89 009c 00000000 		nop
+  90 00a0 00004290 		lbu	$2,0($2)
+  91 00a4 00000000 		nop
+  92 00a8 0C004014 		bne	$2,$0,$L5
+  93 00ac 00000000 		nop
+  94              	
+   7:platform/Platform.c ****     if (in == 27) {
+  95              		.loc 1 8 0
+  96 00b0 2800C38F 		lw	$3,40($fp)
+  97 00b4 1B000224 		li	$2,27			# 0x1b
+  98 00b8 2D006214 		bne	$3,$2,$L12
+  99 00bc 00000000 		nop
+ 100              	
+   8:platform/Platform.c ****       *state = 1;
+ 101              		.loc 1 9 0
+ 102 00c0 2C00C28F 		lw	$2,44($fp)
+ 103 00c4 01000324 		li	$3,1			# 0x1
+ 104 00c8 000043A0 		sb	$3,0($2)
+   9:platform/Platform.c ****       ret = -1;
+ 105              		.loc 1 10 0
+ 106 00cc FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 107 00d0 1800C2AF 		sw	$2,24($fp)
+ 108 00d4 27000010 		b	$L7
+ 109 00d8 00000000 		nop
+ 110              	
+ 111              	$L5:
+  10:platform/Platform.c ****     }
+  11:platform/Platform.c ****   } else if (*state == 1) {
+ 112              		.loc 1 12 0
+ 113 00dc 2C00C28F 		lw	$2,44($fp)
+ 114 00e0 00000000 		nop
+ 115 00e4 00004390 		lbu	$3,0($2)
+ 116 00e8 01000224 		li	$2,1			# 0x1
+ 117 00ec 11006214 		bne	$3,$2,$L8
+ 118 00f0 00000000 		nop
+ 119              	
+  12:platform/Platform.c ****     if (in == '[') {
+ 120              		.loc 1 13 0
+ 121 00f4 2800C38F 		lw	$3,40($fp)
+ 122 00f8 5B000224 		li	$2,91			# 0x5b
+ 123 00fc 08006214 		bne	$3,$2,$L9
+ 124 0100 00000000 		nop
+ 125              	
+  13:platform/Platform.c ****       *state = 2;
+ 126              		.loc 1 14 0
+ 127 0104 2C00C28F 		lw	$2,44($fp)
+ 128 0108 02000324 		li	$3,2			# 0x2
+ 129 010c 000043A0 		sb	$3,0($2)
+  14:platform/Platform.c ****       ret = -1;
+ 130              		.loc 1 15 0
+ 131 0110 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 132 0114 1800C2AF 		sw	$2,24($fp)
+  15:platform/Platform.c ****     } else {
+  16:platform/Platform.c ****       *state = 0; // fluke?
+ 133              		.loc 1 17 0
+ 134 0118 16000010 		b	$L7
+ 135 011c 00000000 		nop
+ 136              	
+ 137              	$L9:
+ 138 0120 2C00C28F 		lw	$2,44($fp)
+ 139 0124 00000000 		nop
+ 140 0128 000040A0 		sb	$0,0($2)
+ 141 012c 11000010 		b	$L7
+ 142 0130 00000000 		nop
+ 143              	
+ 144              	$L8:
+  17:platform/Platform.c ****     }
+  18:platform/Platform.c ****   } else if (*state == 2) {
+ 145              		.loc 1 19 0
+ 146 0134 2C00C28F 		lw	$2,44($fp)
+ 147 0138 00000000 		nop
+ 148 013c 00004390 		lbu	$3,0($2)
+ 149 0140 02000224 		li	$2,2			# 0x2
+ 150 0144 0B006214 		bne	$3,$2,$L7
+ 151 0148 00000000 		nop
+ 152              	
+  19:platform/Platform.c ****     ret = in << 8; // escape code
+ 153              		.loc 1 20 0
+ 154 014c 2800C28F 		lw	$2,40($fp)
+ 155 0150 00000000 		nop
+ 156 0154 00120200 		sll	$2,$2,8
+ 157 0158 1800C2AF 		sw	$2,24($fp)
+  20:platform/Platform.c ****     *state = 0;
+ 158              		.loc 1 21 0
+ 159 015c 2C00C28F 		lw	$2,44($fp)
+ 160 0160 00000000 		nop
+ 161 0164 000040A0 		sb	$0,0($2)
+ 162 0168 02000010 		b	$L7
+ 163 016c 00000000 		nop
+ 164              	
+ 165              	$L12:
+  10:platform/Platform.c ****       ret = -1;
+ 166              		.loc 1 10 0
+ 167 0170 00000000 		nop
+ 168              	$L7:
+  21:platform/Platform.c ****   }
+  22:platform/Platform.c ****   return ret;
+ 169              		.loc 1 23 0
+ 170 0174 1800C28F 		lw	$2,24($fp)
+ 171              	$L4:
+  23:platform/Platform.c **** }
+ 172              		.loc 1 24 0
+ 173 0178 21E8C003 		move	$sp,$fp
+ 174 017c 2400BF8F 		lw	$31,36($sp)
+ 175 0180 2000BE8F 		lw	$fp,32($sp)
+ 176 0184 2800BD27 		addiu	$sp,$sp,40
+ 177 0188 0800E003 		j	$31
+ 178 018c 00000000 		nop
+ 179              	
+ 180              		.set	macro
+ 181              		.set	reorder
+ 182              		.end	InputUnescape
+ 183              	$LFE0:
+ 185              		.align	2
+ 186              		.globl	OutS
+ 187              	$LFB1 = .
+  24:platform/Platform.c **** 
+  25:platform/Platform.c **** void OutS(const char *s) {
+ 188              		.loc 1 26 0
+ 189              		.set	nomips16
+ 190              		.ent	OutS
+ 192              	OutS:
+ 193              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 194              		.mask	0xc0000000,-4
+ 195              		.fmask	0x00000000,0
+ 196              		.set	noreorder
+ 197              		.set	nomacro
+ 198              		
+ 199 0190 E0FFBD27 		addiu	$sp,$sp,-32
+ 200              	$LCFI4:
+ 201 0194 1C00BFAF 		sw	$31,28($sp)
+ 202              	$LCFI5:
+ 203 0198 1800BEAF 		sw	$fp,24($sp)
+ 204              	$LCFI6:
+ 205 019c 21F0A003 		move	$fp,$sp
+ 206              	$LCFI7:
+ 207 01a0 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 208 01a4 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 209 01a8 1000BCAF 		.cprestore	16
+ 210 01ac 2000C4AF 		sw	$4,32($fp)
+  26:platform/Platform.c ****   for (; *s != 0x0; s++)
+ 211              		.loc 1 27 0
+ 212 01b0 10000010 		b	$L14
+ 213 01b4 00000000 		nop
+ 214              	
+ 215              	$L15:
+  27:platform/Platform.c ****     OutC(*s);
+ 216              		.loc 1 28 0
+ 217 01b8 2000C28F 		lw	$2,32($fp)
+ 218 01bc 00000000 		nop
+ 219 01c0 00004280 		lb	$2,0($2)
+ 220 01c4 00000000 		nop
+ 221 01c8 21204000 		move	$4,$2
+ 222 01cc 0000828F 		lw	$2,%call16(OutC)($28)
+ 223 01d0 00000000 		nop
+ 224 01d4 21C84000 		move	$25,$2
+ 225 01d8 09F82003 		jalr	$25
+ 226 01dc 00000000 		nop
+ 227              	
+ 228 01e0 1000DC8F 		lw	$28,16($fp)
+  27:platform/Platform.c ****     OutC(*s);
+ 229              		.loc 1 27 0
+ 230 01e4 2000C28F 		lw	$2,32($fp)
+ 231 01e8 00000000 		nop
+ 232 01ec 01004224 		addiu	$2,$2,1
+ 233 01f0 2000C2AF 		sw	$2,32($fp)
+ 234              	$L14:
+ 235 01f4 2000C28F 		lw	$2,32($fp)
+ 236 01f8 00000000 		nop
+ 237 01fc 00004280 		lb	$2,0($2)
+ 238 0200 00000000 		nop
+ 239 0204 ECFF4014 		bne	$2,$0,$L15
+ 240 0208 00000000 		nop
+ 241              	
+  28:platform/Platform.c **** }
+ 242              		.loc 1 29 0
+ 243 020c 21E8C003 		move	$sp,$fp
+ 244 0210 1C00BF8F 		lw	$31,28($sp)
+ 245 0214 1800BE8F 		lw	$fp,24($sp)
+ 246 0218 2000BD27 		addiu	$sp,$sp,32
+ 247 021c 0800E003 		j	$31
+ 248 0220 00000000 		nop
+ 249              	
+ 250              		.set	macro
+ 251              		.set	reorder
+ 252              		.end	OutS
+ 253              	$LFE1:
+ 255              		.align	2
+ 256              		.globl	OutXByte
+ 257              	$LFB2 = .
+  29:platform/Platform.c **** 
+  30:platform/Platform.c **** void OutXByte(unsigned char byte) {
+ 258              		.loc 1 31 0
+ 259              		.set	nomips16
+ 260              		.ent	OutXByte
+ 262              	OutXByte:
+ 263              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 264              		.mask	0xc0000000,-4
+ 265              		.fmask	0x00000000,0
+ 266              		.set	noreorder
+ 267              		.set	nomacro
+ 268              		
+ 269 0224 D8FFBD27 		addiu	$sp,$sp,-40
+ 270              	$LCFI8:
+ 271 0228 2400BFAF 		sw	$31,36($sp)
+ 272              	$LCFI9:
+ 273 022c 2000BEAF 		sw	$fp,32($sp)
+ 274              	$LCFI10:
+ 275 0230 21F0A003 		move	$fp,$sp
+ 276              	$LCFI11:
+ 277 0234 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 278 0238 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 279 023c 1000BCAF 		.cprestore	16
+ 280 0240 21108000 		move	$2,$4
+ 281 0244 2800C2A3 		sb	$2,40($fp)
+  31:platform/Platform.c ****   unsigned char nibble;
+  32:platform/Platform.c ****   nibble=(byte>>4);
+ 282              		.loc 1 33 0
+ 283 0248 2800C293 		lbu	$2,40($fp)
+ 284 024c 00000000 		nop
+ 285 0250 02110200 		srl	$2,$2,4
+ 286 0254 1800C2A3 		sb	$2,24($fp)
+  33:platform/Platform.c ****   OutC(nibble + (nibble < 10 ? '0' : '7'));
+ 287              		.loc 1 34 0
+ 288 0258 1800C293 		lbu	$2,24($fp)
+ 289 025c 00000000 		nop
+ 290 0260 0A00422C 		sltu	$2,$2,10
+ 291 0264 04004010 		beq	$2,$0,$L18
+ 292 0268 00000000 		nop
+ 293              	
+ 294 026c 30000224 		li	$2,48			# 0x30
+ 295 0270 02000010 		b	$L19
+ 296 0274 00000000 		nop
+ 297              	
+ 298              	$L18:
+ 299 0278 37000224 		li	$2,55			# 0x37
+ 300              	$L19:
+ 301 027c 1800C393 		lbu	$3,24($fp)
+ 302 0280 00000000 		nop
+ 303 0284 21104300 		addu	$2,$2,$3
+ 304 0288 FF004230 		andi	$2,$2,0x00ff
+ 305 028c 00160200 		sll	$2,$2,24
+ 306 0290 03160200 		sra	$2,$2,24
+ 307 0294 21204000 		move	$4,$2
+ 308 0298 0000828F 		lw	$2,%call16(OutC)($28)
+ 309 029c 00000000 		nop
+ 310 02a0 21C84000 		move	$25,$2
+ 311 02a4 09F82003 		jalr	$25
+ 312 02a8 00000000 		nop
+ 313              	
+ 314 02ac 1000DC8F 		lw	$28,16($fp)
+  34:platform/Platform.c ****   nibble=(byte&0xf);
+ 315              		.loc 1 35 0
+ 316 02b0 2800C293 		lbu	$2,40($fp)
+ 317 02b4 00000000 		nop
+ 318 02b8 0F004230 		andi	$2,$2,0xf
+ 319 02bc 1800C2A3 		sb	$2,24($fp)
+  35:platform/Platform.c ****   OutC(nibble + (nibble < 10 ? '0' : '7'));
+ 320              		.loc 1 36 0
+ 321 02c0 1800C293 		lbu	$2,24($fp)
+ 322 02c4 00000000 		nop
+ 323 02c8 0A00422C 		sltu	$2,$2,10
+ 324 02cc 04004010 		beq	$2,$0,$L20
+ 325 02d0 00000000 		nop
+ 326              	
+ 327 02d4 30000224 		li	$2,48			# 0x30
+ 328 02d8 02000010 		b	$L21
+ 329 02dc 00000000 		nop
+ 330              	
+ 331              	$L20:
+ 332 02e0 37000224 		li	$2,55			# 0x37
+ 333              	$L21:
+ 334 02e4 1800C393 		lbu	$3,24($fp)
+ 335 02e8 00000000 		nop
+ 336 02ec 21104300 		addu	$2,$2,$3
+ 337 02f0 FF004230 		andi	$2,$2,0x00ff
+ 338 02f4 00160200 		sll	$2,$2,24
+ 339 02f8 03160200 		sra	$2,$2,24
+ 340 02fc 21204000 		move	$4,$2
+ 341 0300 0000828F 		lw	$2,%call16(OutC)($28)
+ 342 0304 00000000 		nop
+ 343 0308 21C84000 		move	$25,$2
+ 344 030c 09F82003 		jalr	$25
+ 345 0310 00000000 		nop
+ 346              	
+ 347 0314 1000DC8F 		lw	$28,16($fp)
+  36:platform/Platform.c **** }
+ 348              		.loc 1 37 0
+ 349 0318 21E8C003 		move	$sp,$fp
+ 350 031c 2400BF8F 		lw	$31,36($sp)
+ 351 0320 2000BE8F 		lw	$fp,32($sp)
+ 352 0324 2800BD27 		addiu	$sp,$sp,40
+ 353 0328 0800E003 		j	$31
+ 354 032c 00000000 		nop
+ 355              	
+ 356              		.set	macro
+ 357              		.set	reorder
+ 358              		.end	OutXByte
+ 359              	$LFE2:
+ 361              		.align	2
+ 362              		.globl	OutX
+ 363              	$LFB3 = .
+  37:platform/Platform.c **** 
+  38:platform/Platform.c **** void OutX(uint32_t v) {
+ 364              		.loc 1 39 0
+ 365              		.set	nomips16
+ 366              		.ent	OutX
+ 368              	OutX:
+ 369              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 370              		.mask	0xc0000000,-4
+ 371              		.fmask	0x00000000,0
+ 372              		.set	noreorder
+ 373              		.set	nomacro
+ 374              		
+ 375 0330 E0FFBD27 		addiu	$sp,$sp,-32
+ 376              	$LCFI12:
+ 377 0334 1C00BFAF 		sw	$31,28($sp)
+ 378              	$LCFI13:
+ 379 0338 1800BEAF 		sw	$fp,24($sp)
+ 380              	$LCFI14:
+ 381 033c 21F0A003 		move	$fp,$sp
+ 382              	$LCFI15:
+ 383 0340 2000C4AF 		sw	$4,32($fp)
+  39:platform/Platform.c ****   OutXByte((v >> 24) & 0xff);
+ 384              		.loc 1 40 0
+ 385 0344 2000C28F 		lw	$2,32($fp)
+ 386 0348 00000000 		nop
+ 387 034c 02160200 		srl	$2,$2,24
+ 388 0350 FF004230 		andi	$2,$2,0x00ff
+ 389 0354 21204000 		move	$4,$2
+ 390              		.option	pic0
+ 391 0358 0000000C 		jal	OutXByte
+ 392 035c 00000000 		nop
+ 393              	
+ 394              		.option	pic2
+  40:platform/Platform.c ****   OutXByte((v >> 16) & 0xff);
+ 395              		.loc 1 41 0
+ 396 0360 2000C28F 		lw	$2,32($fp)
+ 397 0364 00000000 		nop
+ 398 0368 02140200 		srl	$2,$2,16
+ 399 036c FF004230 		andi	$2,$2,0x00ff
+ 400 0370 21204000 		move	$4,$2
+ 401              		.option	pic0
+ 402 0374 0000000C 		jal	OutXByte
+ 403 0378 00000000 		nop
+ 404              	
+ 405              		.option	pic2
+  41:platform/Platform.c ****   OutXByte((v >> 8) & 0xff);
+ 406              		.loc 1 42 0
+ 407 037c 2000C28F 		lw	$2,32($fp)
+ 408 0380 00000000 		nop
+ 409 0384 02120200 		srl	$2,$2,8
+ 410 0388 FF004230 		andi	$2,$2,0x00ff
+ 411 038c 21204000 		move	$4,$2
+ 412              		.option	pic0
+ 413 0390 0000000C 		jal	OutXByte
+ 414 0394 00000000 		nop
+ 415              	
+ 416              		.option	pic2
+  42:platform/Platform.c ****   OutXByte(v & 0xff);
+ 417              		.loc 1 43 0
+ 418 0398 2000C28F 		lw	$2,32($fp)
+ 419 039c 00000000 		nop
+ 420 03a0 FF004230 		andi	$2,$2,0x00ff
+ 421 03a4 21204000 		move	$4,$2
+ 422              		.option	pic0
+ 423 03a8 0000000C 		jal	OutXByte
+ 424 03ac 00000000 		nop
+ 425              	
+ 426              		.option	pic2
+  43:platform/Platform.c **** }
+ 427              		.loc 1 44 0
+ 428 03b0 21E8C003 		move	$sp,$fp
+ 429 03b4 1C00BF8F 		lw	$31,28($sp)
+ 430 03b8 1800BE8F 		lw	$fp,24($sp)
+ 431 03bc 2000BD27 		addiu	$sp,$sp,32
+ 432 03c0 0800E003 		j	$31
+ 433 03c4 00000000 		nop
+ 434              	
+ 435              		.set	macro
+ 436              		.set	reorder
+ 437              		.end	OutX
+ 438              	$LFE3:
+ 440              		.align	2
+ 441              		.globl	OutI
+ 442              	$LFB4 = .
+  44:platform/Platform.c **** 
+  45:platform/Platform.c **** void OutI(uint32_t val) {
+ 443              		.loc 1 46 0
+ 444              		.set	nomips16
+ 445              		.ent	OutI
+ 447              	OutI:
+ 448              		.frame	$fp,48,$31		# vars= 16, regs= 2/0, args= 16, gp= 8
+ 449              		.mask	0xc0000000,-4
+ 450              		.fmask	0x00000000,0
+ 451              		.set	noreorder
+ 452              		.set	nomacro
+ 453              		
+ 454 03c8 D0FFBD27 		addiu	$sp,$sp,-48
+ 455              	$LCFI16:
+ 456 03cc 2C00BFAF 		sw	$31,44($sp)
+ 457              	$LCFI17:
+ 458 03d0 2800BEAF 		sw	$fp,40($sp)
+ 459              	$LCFI18:
+ 460 03d4 21F0A003 		move	$fp,$sp
+ 461              	$LCFI19:
+ 462 03d8 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 463 03dc 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 464 03e0 1000BCAF 		.cprestore	16
+ 465 03e4 3000C4AF 		sw	$4,48($fp)
+  46:platform/Platform.c ****   unsigned char c;
+  47:platform/Platform.c ****   long v2,p,vlen;
+  48:platform/Platform.c ****   if (val < 0) {
+  49:platform/Platform.c ****     OutC('-');
+  50:platform/Platform.c ****     val = -val;
+  51:platform/Platform.c ****   } else if (val == 0) {
+ 466              		.loc 1 52 0
+ 467 03e8 3000C28F 		lw	$2,48($fp)
+ 468 03ec 00000000 		nop
+ 469 03f0 0A004014 		bne	$2,$0,$L26
+ 470 03f4 00000000 		nop
+ 471              	
+  52:platform/Platform.c ****     OutC('0');
+ 472              		.loc 1 53 0
+ 473 03f8 30000424 		li	$4,48			# 0x30
+ 474 03fc 0000828F 		lw	$2,%call16(OutC)($28)
+ 475 0400 00000000 		nop
+ 476 0404 21C84000 		move	$25,$2
+ 477 0408 09F82003 		jalr	$25
+ 478 040c 00000000 		nop
+ 479              	
+ 480 0410 1000DC8F 		lw	$28,16($fp)
+  53:platform/Platform.c ****     return;
+ 481              		.loc 1 54 0
+ 482 0414 4C000010 		b	$L31
+ 483 0418 00000000 		nop
+ 484              	
+ 485              	$L26:
+  54:platform/Platform.c ****   }
+  55:platform/Platform.c ****   /* Determine number of digits */
+  56:platform/Platform.c ****   v2 = val;
+ 486              		.loc 1 57 0
+ 487 041c 3000C28F 		lw	$2,48($fp)
+ 488 0420 00000000 		nop
+ 489 0424 2000C2AF 		sw	$2,32($fp)
+  57:platform/Platform.c ****   p = 1;
+ 490              		.loc 1 58 0
+ 491 0428 01000224 		li	$2,1			# 0x1
+ 492 042c 1C00C2AF 		sw	$2,28($fp)
+  58:platform/Platform.c ****   for (vlen=0; v2 != 0; v2 = v2 / 10)
+ 493              		.loc 1 59 0
+ 494 0430 1800C0AF 		sw	$0,24($fp)
+ 495 0434 0F000010 		b	$L28
+ 496 0438 00000000 		nop
+ 497              	
+ 498              	$L29:
+  59:platform/Platform.c ****     p *= 10;
+ 499              		.loc 1 60 0
+ 500 043c 1C00C28F 		lw	$2,28($fp)
+ 501 0440 00000000 		nop
+ 502 0444 40100200 		sll	$2,$2,1
+ 503 0448 80180200 		sll	$3,$2,2
+ 504 044c 21104300 		addu	$2,$2,$3
+ 505 0450 1C00C2AF 		sw	$2,28($fp)
+  59:platform/Platform.c ****     p *= 10;
+ 506              		.loc 1 59 0
+ 507 0454 2000C38F 		lw	$3,32($fp)
+ 508 0458 0A000224 		li	$2,10			# 0xa
+ 509 045c 02004014 		bne	$2,$0,1f
+ 510 0460 1A006200 		div	$0,$3,$2
+ 511 0464 0D000700 		break	7
+ 512              	1:
+ 513 0468 10180000 		mfhi	$3
+ 514 046c 12100000 		mflo	$2
+ 515 0470 2000C2AF 		sw	$2,32($fp)
+ 516              	$L28:
+ 517 0474 2000C28F 		lw	$2,32($fp)
+ 518 0478 00000000 		nop
+ 519 047c EFFF4014 		bne	$2,$0,$L29
+ 520 0480 00000000 		nop
+ 521              	
+ 522              	$L30:
+  60:platform/Platform.c **** 
+  61:platform/Platform.c ****   do {
+  62:platform/Platform.c ****     p = p/10;
+ 523              		.loc 1 63 0
+ 524 0484 1C00C38F 		lw	$3,28($fp)
+ 525 0488 0A000224 		li	$2,10			# 0xa
+ 526 048c 02004014 		bne	$2,$0,1f
+ 527 0490 1A006200 		div	$0,$3,$2
+ 528 0494 0D000700 		break	7
+ 529              	1:
+ 530 0498 10180000 		mfhi	$3
+ 531 049c 12100000 		mflo	$2
+ 532 04a0 1C00C2AF 		sw	$2,28($fp)
+  63:platform/Platform.c ****     c = (val / p) % 10;
+ 533              		.loc 1 64 0
+ 534 04a4 1C00C28F 		lw	$2,28($fp)
+ 535 04a8 3000C38F 		lw	$3,48($fp)
+ 536 04ac 00000000 		nop
+ 537 04b0 02004014 		bne	$2,$0,1f
+ 538 04b4 1B006200 		divu	$0,$3,$2
+ 539 04b8 0D000700 		break	7
+ 540              	1:
+ 541 04bc 10180000 		mfhi	$3
+ 542 04c0 12100000 		mflo	$2
+ 543 04c4 21184000 		move	$3,$2
+ 544 04c8 0A000224 		li	$2,10			# 0xa
+ 545 04cc 02004014 		bne	$2,$0,1f
+ 546 04d0 1B006200 		divu	$0,$3,$2
+ 547 04d4 0D000700 		break	7
+ 548              	1:
+ 549 04d8 10100000 		mfhi	$2
+ 550 04dc 2400C2A3 		sb	$2,36($fp)
+  64:platform/Platform.c ****     OutC(c + '0');
+ 551              		.loc 1 65 0
+ 552 04e0 2400C293 		lbu	$2,36($fp)
+ 553 04e4 00000000 		nop
+ 554 04e8 30004224 		addiu	$2,$2,48
+ 555 04ec FF004230 		andi	$2,$2,0x00ff
+ 556 04f0 00160200 		sll	$2,$2,24
+ 557 04f4 03160200 		sra	$2,$2,24
+ 558 04f8 21204000 		move	$4,$2
+ 559 04fc 0000828F 		lw	$2,%call16(OutC)($28)
+ 560 0500 00000000 		nop
+ 561 0504 21C84000 		move	$25,$2
+ 562 0508 09F82003 		jalr	$25
+ 563 050c 00000000 		nop
+ 564              	
+ 565 0510 1000DC8F 		lw	$28,16($fp)
+  65:platform/Platform.c ****     val = val - c*p;
+ 566              		.loc 1 66 0
+ 567 0514 2400C393 		lbu	$3,36($fp)
+ 568 0518 1C00C28F 		lw	$2,28($fp)
+ 569 051c 00000000 		nop
+ 570 0520 18006200 		mult	$3,$2
+ 571 0524 12100000 		mflo	$2
+ 572 0528 3000C38F 		lw	$3,48($fp)
+ 573 052c 00000000 		nop
+ 574 0530 23106200 		subu	$2,$3,$2
+ 575 0534 3000C2AF 		sw	$2,48($fp)
+  66:platform/Platform.c ****   } while (p != 1);
+ 576              		.loc 1 67 0
+ 577 0538 1C00C38F 		lw	$3,28($fp)
+ 578 053c 01000224 		li	$2,1			# 0x1
+ 579 0540 D0FF6214 		bne	$3,$2,$L30
+ 580 0544 00000000 		nop
+ 581              	
+ 582              	$L31:
+  67:platform/Platform.c **** }
+ 583              		.loc 1 68 0
+ 584 0548 21E8C003 		move	$sp,$fp
+ 585 054c 2C00BF8F 		lw	$31,44($sp)
+ 586 0550 2800BE8F 		lw	$fp,40($sp)
+ 587 0554 3000BD27 		addiu	$sp,$sp,48
+ 588 0558 0800E003 		j	$31
+ 589 055c 00000000 		nop
+ 590              	
+ 591              		.set	macro
+ 592              		.set	reorder
+ 593              		.end	OutI
+ 594              	$LFE4:
+ 596              		.rdata
+ 597              		.align	2
+ 600              	__PRETTY_FUNCTION__.1714:
+ 601 0034 496E7075 		.ascii	"InputUnescape\000"
+ 601      74556E65 
+ 601      73636170 
+ 601      6500
+ 738              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 platform/Platform.c
+     /tmp/ccOdukkB.s:29     .text:0000000000000000 InputUnescape
+     /tmp/ccOdukkB.s:600    .rodata:0000000000000034 __PRETTY_FUNCTION__.1714
+     /tmp/ccOdukkB.s:192    .text:0000000000000190 OutS
+     /tmp/ccOdukkB.s:262    .text:0000000000000224 OutXByte
+     /tmp/ccOdukkB.s:368    .text:0000000000000330 OutX
+     /tmp/ccOdukkB.s:447    .text:00000000000003c8 OutI
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+__assert_fail
+OutC

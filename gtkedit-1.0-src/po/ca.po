@@ -1,0 +1,247 @@
+# Gtkedit catalan translation.
+# Copyright (C) 2005-2006 Daniel Guerrero Miralles
+# This file is distributed under the same license as the gtkedit package.
+# Daniel Guerrero Miralles <danlist@terra.es>, 2005-2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gtkedit 0.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-03-01 09:24+0100\n"
+"PO-Revision-Date: 2006-03-01 09:24+0100\n"
+"Last-Translator: Daniel Guerrero Miralles <danlist@terra.es>\n"
+"Language-Team: Daniel Guerrero Miralles <danlist@terra.es>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Catalan\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Keywords: _,N_\n"
+
+#: gtkedit.c:346
+#: gtkedit.c:355
+#: gtkedit.c:1297
+msgid "_OK"
+msgstr "_Val"
+
+#: gtkedit.c:352
+msgid "_No"
+msgstr "_No"
+
+#: gtkedit.c:352
+msgid "_Yes"
+msgstr "_Si"
+
+#: gtkedit.c:354
+msgid "Unsaved changes will be lost. Continue ?"
+msgstr "Els canvis no desats es perdran. Continuar?"
+
+#: gtkedit.c:355
+#: gtkedit.c:1305
+msgid "_Cancel"
+msgstr "_Cancel·la"
+
+#: gtkedit.c:376
+msgid "Untitled"
+msgstr "Sense títol"
+
+#: gtkedit.c:378
+msgid " [not saved]"
+msgstr " [no desat]"
+
+#: gtkedit.c:461
+#, c-format
+msgid ""
+"gtkedit %s\n"
+"\n"
+"A minimalistic text editor based on GTK+\n"
+"Copyright (c) %s Daniel Guerrero Miralles\n"
+"\n"
+"This program is released under the MIT license.\n"
+"Read the accompanying LICENSE.txt file for details."
+msgstr ""
+"gtkedit %s\n"
+"\n"
+"Un editor de text minimalista basar en GTK+\n"
+"Copyright (c) %s Daniel Guerrero Miralles\n"
+"\n"
+"Aquest programa es distribueix sota la llicencia MIT.\n"
+"Llegeix l'arxiu LICENSE.txt que l'acompanya per més detalls."
+
+#: gtkedit.c:725
+msgid "Overwrite this file ?"
+msgstr "Substituir aquest arxiu?"
+
+#: gtkedit.c:745
+msgid "Open file"
+msgstr "Obre arxiu"
+
+#: gtkedit.c:750
+msgid "Save file"
+msgstr "Desa arxiu"
+
+#: gtkedit.c:919
+msgid "The file is not local or the name is invalid"
+msgstr "L'arxiu no és local o el nom és invàlid"
+
+#: gtkedit.c:1041
+msgid "No more ocurrences found"
+msgstr "No s'han trobat més instàncies"
+
+#: gtkedit.c:1099
+msgid "Replace all occurrences from the current position ?"
+msgstr "Substituir totes les instàncies des de la posició actual?"
+
+#: gtkedit.c:1124
+msgid "Find text"
+msgstr "Cerca text"
+
+#: gtkedit.c:1151
+msgid "Replace text"
+msgstr "Substitueix text"
+
+#: gtkedit.c:1175
+msgid "Find :"
+msgstr "Cercar :"
+
+#: gtkedit.c:1184
+msgid "Replace with: "
+msgstr "Substitueix amb:"
+
+#: gtkedit.c:1193
+msgid "Case sensitive"
+msgstr "Sensible a caixa"
+
+#: gtkedit.c:1197
+msgid "Find backwards"
+msgstr "Cerca enrere"
+
+#: gtkedit.c:1204
+msgid "_Find"
+msgstr "_Cerca"
+
+#: gtkedit.c:1209
+msgid "_Replace"
+msgstr "_Substitueix"
+
+#: gtkedit.c:1214
+msgid "Replace _All"
+msgstr "Substitueix _tot"
+
+#: gtkedit.c:1219
+msgid "_Close"
+msgstr "_Tanca"
+
+#: gtkedit.c:1285
+msgid "Go to line"
+msgstr "Vés a la línia"
+
+#: gtkedit.c:1330
+msgid "Cannot set the new font"
+msgstr "No es pot posar la nova font"
+
+#: gtkedit.c:1340
+msgid "Select font"
+msgstr "Selecciona font"
+
+#: gtkedit.c:1373
+msgid "/_File"
+msgstr "/_Fitxer"
+
+#: gtkedit.c:1374
+msgid "/File/_New"
+msgstr "/Fitxer/_Nou"
+
+#: gtkedit.c:1375
+msgid "/File/_Open..."
+msgstr "/Fitxer/_Obre..."
+
+#: gtkedit.c:1376
+msgid "/File/_Save"
+msgstr "/Fitxer/_Desa"
+
+#: gtkedit.c:1377
+msgid "/File/Save _As..."
+msgstr "/Fitxer/_Anomena i desa..."
+
+#: gtkedit.c:1379
+msgid "/File/_Quit"
+msgstr "/Fitxer/_Tanca"
+
+#: gtkedit.c:1381
+msgid "/_Edit"
+msgstr "/_Edita"
+
+#: gtkedit.c:1382
+msgid "/Edit/_Undo"
+msgstr "/Edita/_Desfés"
+
+#: gtkedit.c:1384
+msgid "/Edit/Cu_t"
+msgstr "/Edita/_Retalla"
+
+#: gtkedit.c:1385
+msgid "/Edit/_Copy"
+msgstr "/Edita/C_opia"
+
+#: gtkedit.c:1386
+msgid "/Edit/_Paste"
+msgstr "/Edita/_Enganxa"
+
+#: gtkedit.c:1387
+msgid "/Edit/_Select All"
+msgstr "/Edita/Selecciona-ho _tot"
+
+#: gtkedit.c:1389
+msgid "/Edit/_Find..."
+msgstr "/Edita/_Cerca..."
+
+#: gtkedit.c:1390
+msgid "/Edit/Find _Again"
+msgstr "/Edita/Cerca _següent"
+
+#: gtkedit.c:1391
+msgid "/Edit/_Replace..."
+msgstr "/Edita/S_ubstitueix..."
+
+#: gtkedit.c:1393
+msgid "/Edit/_Go to line..."
+msgstr "/Edita/_Vés a la línia..."
+
+#: gtkedit.c:1395
+msgid "/F_ormat"
+msgstr "/F_ormat"
+
+#: gtkedit.c:1396
+msgid "/Format/_Wrap long lines"
+msgstr "/Format/_Plega línies llargues"
+
+#: gtkedit.c:1398
+msgid "/Format/_Change Font..."
+msgstr "/Format/_Canvia la font"
+
+#: gtkedit.c:1400
+msgid "/_Help"
+msgstr "/_Ajuda"
+
+#: gtkedit.c:1401
+msgid "/Help/_About..."
+msgstr "/_Ajuda/_Quant a..."
+
+#: gtkedit.c:1405
+msgid "/Select _All"
+msgstr "/Selecciona-ho _tot"
+
+#: gtkedit.c:1407
+msgid "/Cu_t"
+msgstr "/_Retalla"
+
+#: gtkedit.c:1408
+msgid "/_Copy"
+msgstr "/_Copia"
+
+#: gtkedit.c:1409
+msgid "/_Paste"
+msgstr "/_Enganxa"
+

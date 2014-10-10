@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+
+Import("env","ARCH", 'ObjCopyHexCmd', 'HiLibs')
+elfObjs = []
+
+env.Program('FsTest', 'FsTest.cpp', LIBS=HiLibs)
+
+env.Program('test_MorseBox.c', LIBS=HiLibs)
+elfObjs.append( env.Program('test_vt52.c', LIBS=HiLibs) )
+elfObjs.append( env.Program('test_ListCmdr.c', LIBS=HiLibs) )
+elfObjs.append( env.Program('test_WikiApp.c', LIBS=["WikiApp"] + HiLibs) )
+elfObjs.append( env.Program('test_Input.c', LIBS=HiLibs) )
+
+if ARCH == 'avr':
+  elfObjs.append( env.Program('test_helloworld.c', LIBS=HiLibs) )
+  
+if ARCH == 'avr':
+  for elfObj in elfObjs:
+    env.AddPostAction(elfObj, ObjCopyHexCmd + elfObj[0].abspath + " " + elfObj[0].abspath.replace(".o","") + ".hex")
+

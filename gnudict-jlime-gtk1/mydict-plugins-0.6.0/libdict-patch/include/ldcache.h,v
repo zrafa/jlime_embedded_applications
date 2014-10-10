@@ -1,0 +1,178 @@
+head	1.3;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.3
+date	2002.07.04.04.44.54;	author sdyoung;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2002.07.04.01.50.50;	author sdyoung;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2002.07.04.00.45.37;	author sdyoung;	state Exp;
+branches;
+next	;
+
+
+desc
+@Cache header file.
+@
+
+
+1.3
+log
+@Minor changes - more comments.
+@
+text
+@/* ldcache.h
+ * sdyoung@@well.com
+ *
+ * This is the header file for the word define/match cache, which is used
+ * to avoid repeated costly network lookups for common or frequent words.
+ * Negative caching is supported. 
+ *
+ *   Copyright (c) 2001, 2002 Steven Young
+ *
+ *   Permission is hereby granted, free of charge, to any person obtaining
+ *   a copy of this software and associated documentation files (the
+ *   "Software"), to deal in the Software without restriction, including
+ *   without limitation the rights to use, copy, modify, merge, publish,
+ *   distribute, sublicense, and/or sell copies of the Software, and to
+ *   permit persons to whom the Software is furnished to do so, subject to
+ *   the following conditions:
+ *
+ *   The above copyright notice and this permission notice shall be
+ *   included in all copies or substantial portions of the Software.
+ *
+ *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ *   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ *   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ *   IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ *   CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ *   TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ *   SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ * $History$
+ * $Log: ldcache.h,v $
+ * Revision 1.2  2002/07/04 01:50:50  sdyoung
+ * The Great Function Renaming - internal functions now start
+ * with _ld_, external functions start with ld_.
+ *
+ * Revision 1.1  2002/07/04 00:45:37  sdyoung
+ * Initial revision
+ * 
+ */
+#ifndef _LD_CACHE_H
+#define _LD_CACHE_H
+
+/* defaults */
+#define DEFAULT_MCACHE 5000		/* match cache size */
+#define DEFAULT_DCACHE 100		/* define cache size */
+
+/* structures */
+/* ld_cacheent is the structure of which buckets are comprised - a simple
+ * linked list. */
+struct ld_cacheent {
+	union {
+		struct ld_matchanswer **manswer;
+		struct ld_defanswer **danswer;
+	} answers;
+	char *word;
+	/* serial is used for aging purposes by the garbage collector. */
+	unsigned int serial;
+	struct ld_cacheent *next;
+};
+
+/* this is the high-level "cache object".  Every piece of information
+ * needed to make a cache work is stored in this structure.  Two 
+ * of these objects are created for each connection; the DEFINE
+ * cache and the MATCH cache. */
+struct ld_cacheinfo {
+	struct ld_cacheent **cachebuckets;
+	/* quickptr and oquickptr are a simple speed hack; when
+	 * isdefinecached/ismatchcached find a hit, they set
+	 * quickptr to the ld_cacheent structure of the hit
+	 * word, and oquickptr to the previous entry in the bucket
+	 * linked list.  oquickptr is used for moving the hit
+	 * entry to the front of the queue. */
+	struct ld_cacheent *quickptr, *oquickptr;
+	int curgcbucket;
+	unsigned int curserial;
+	unsigned int objcount;
+	unsigned int cachesize;
+	unsigned int buckets;
+#ifdef LD_DEBUGCACHE
+	struct {
+		unsigned int gcs;
+		unsigned int adds;
+		unsigned int removes;
+		unsigned int hits;
+		unsigned int misses;
+	} stats;
+#endif
+};
+
+/* prototypes */
+struct ld_cacheinfo *_ld_newcache(int cachesize);
+struct ld_defanswer **_ld_getdefinecache(struct ld_conn *conn, char *word);
+struct ld_matchanswer **_ld_getmatchcache(struct ld_conn *conn, char *word);
+ld_bool _ld_isxcached(struct ld_cacheinfo *cacheptr, char *word);
+void _ld_adddefinecache(struct ld_conn *conn, char *word, struct ld_defanswer **ans);
+void _ld_addmatchcache(struct ld_conn *conn, char *word, struct ld_matchanswer **ans);
+void _ld_resetcache(struct ld_conn *conn);
+void _ld_freecache(struct ld_cacheinfo *cacheptr, ld_bool isdefine);
+
+/* macros */
+#define _ld_isdefinecached(x, y)		_ld_isxcached(x->ld_dconncache, y)
+#define _ld_ismatchcached(x, y)			_ld_isxcached(x->ld_mconncache, y)
+#endif /* !_LDCACHE_H */
+@
+
+
+1.2
+log
+@The Great Function Renaming - internal functions now start
+with _ld_, external functions start with ld_.
+@
+text
+@d31 4
+d47 2
+d55 1
+d60 4
+d66 6
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d30 4
+a33 1
+ * $Log$ 
+d56 1
+a56 1
+	int ld_curgcbucket;
+d73 8
+a80 8
+struct ld_cacheinfo *ld_newcache(int cachesize);
+struct ld_defanswer **getdefinecache(struct ld_conn *conn, char *word);
+struct ld_matchanswer **getmatchcache(struct ld_conn *conn, char *word);
+ld_bool isxcached(struct ld_cacheinfo *cache, char *word);
+void setcachesize(struct ld_conn *conn, unsigned int elements);
+void adddefinecache(struct ld_conn *conn, char *word, struct ld_defanswer **ans);
+void addmatchcache(struct ld_conn *conn, char *word, struct ld_matchanswer **ans);
+void resetcache(struct ld_conn *conn);
+d83 2
+a84 2
+#define isdefinecached(x, y)		isxcached(x->ld_dconncache, y)
+#define ismatchcached(x, y)			isxcached(x->ld_mconncache, y)
+@

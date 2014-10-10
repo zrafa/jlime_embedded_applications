@@ -1,0 +1,49 @@
+== Build ===
+I use default Fedora Core 2 
+use automake-1.4
+
+
+== QUICK INSTALL ==
+rpm -ivh mydict-0.6.x.-1.i383.rpm
+rpm -ivh mydict-plugins-0.6.x.-1.i386rpm
+
+for babylon : install babylob.dic.tar.gz under /usr/local/share/mydict/babylon
+for ndict   : install mydict-dict-0.2.0 and mydict-fonts as below
+
+== TEST ===
+testplug
+
+== DEVELOP ===
+
+mydict_plugin.h is the interface used in mydict-client 
+
+ndict/ connect to local db
+babylon/ connect to babylon's dictionaries
+
+===== 
+
+./configure --bindir=/usr/local/share/mydict/plugins
+gmake 
+gmake install
+
+===== OTHERS ===
+
+demo/ for the demos how to use it. , build by yourself
+test/ testing plugins, build by yourself
+
+dict/ connect to DICT server , build by yourself
+you also need start dictd in localhost
+
+FAQ:
+Question : where to specify DICT server host.
+Answer : update the dict/rfc2229.cpp file for server name
+=====
+You may also install dictionary/fonts if you use ndict plugin
+
+All the system plugins and data are under /usr/local/share/mydict/
+/usr/local/share/mydict/plugins/ for different plugins - from mydict-plugins 
+/usr/local/share/mydict/xfonts/ for phonetic (yinbiao) and default chinese fonts - from mydict-fonts
+/usr/local/share/mydict/dicts/ for local dictionary - from mydict-dicts
+/usr/local/share/mydict/babylon/ for local dictionary - from http://futureware.at/equick.htm
+
+Contact Larry Cai <caiyu@yahoo.com>

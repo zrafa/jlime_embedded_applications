@@ -1,0 +1,706 @@
+Archive member included because of file (symbol)
+
+build/unix/bgtree/libbgTree.a(bgCore.o)
+                              build/unix/bgtree/bgTest.o (FindInternal)
+build/unix/bgtree/libbgTree.a(bgApi.o)
+                              build/unix/bgtree/bgTest.o (CursorNext)
+build/unix/bgtree/libbgTree.a(bgUtil2.o)
+                              build/unix/bgtree/bgTest.o (PrintVisitor)
+build/unix/libErrors.a(Errors.o)
+                              build/unix/bgtree/libbgTree.a(bgUtil2.o) (ERRORprint2)
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+                              /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o (__libc_csu_fini)
+
+Allocating common symbols
+Common symbol       size              file
+
+errorMsg            0x4               build/unix/bgtree/bgTest.o
+errorFunc           0x4               build/unix/bgtree/bgTest.o
+bgUserData          0x4               build/unix/bgtree/libbgTree.a(bgCore.o)
+errorLine           0x4               build/unix/bgtree/bgTest.o
+mem                 0x80000           build/unix/bgtree/bgTest.o
+errorFile           0x4               build/unix/bgtree/bgTest.o
+
+Discarded input sections
+
+ .note.ABI-tag  0x0000000000000000       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .data          0x0000000000000000       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .bss           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .text          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .data          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .bss           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .data          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .sdata         0x0000000000000000        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .data          0x0000000000000000        0x0 build/unix/bgtree/bgTest.o
+ .reginfo       0x0000000000000000       0x18 build/unix/bgtree/bgTest.o
+ .pdr           0x0000000000000000      0x120 build/unix/bgtree/bgTest.o
+ .data          0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .bss           0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .pdr           0x0000000000000000      0x340 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .data          0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .bss           0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .pdr           0x0000000000000000      0x2a0 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .data          0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .bss           0x0000000000000000        0x0 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .pdr           0x0000000000000000      0x160 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .data          0x0000000000000000        0x0 build/unix/libErrors.a(Errors.o)
+ .bss           0x0000000000000000        0x0 build/unix/libErrors.a(Errors.o)
+ .reginfo       0x0000000000000000       0x18 build/unix/libErrors.a(Errors.o)
+ .pdr           0x0000000000000000       0x40 build/unix/libErrors.a(Errors.o)
+ .data          0x0000000000000000        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .bss           0x0000000000000000        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .reginfo       0x0000000000000000       0x18 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .pdr           0x0000000000000000       0x40 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .data          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .bss           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .text          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+ .data          0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+ .bss           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+ .reginfo       0x0000000000000000       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+LOAD build/unix/bgtree/bgTest.o
+LOAD build/unix/bgtree/libbgTree.a
+LOAD build/unix/libErrors.a
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/libgcc.a
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/libgcc_s.so
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/libc.so
+START GROUP
+LOAD /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/lib/libc.so.6
+LOAD /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a
+LOAD /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/lib/ld.so.1
+END GROUP
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/libgcc.a
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/libgcc_s.so
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+LOAD /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+                0x0000000000400000                PROVIDE (__executable_start, 0x400000)
+                0x00000000004000f4                . = (0x400000 + SIZEOF_HEADERS)
+
+.interp         0x00000000004000f4        0xd
+ *(.interp)
+ .interp        0x00000000004000f4        0xd /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.reginfo
+ *(.reginfo)
+
+.note.gnu.build-id
+ *(.note.gnu.build-id)
+
+.dynamic        0x0000000000400104       0xd8
+ *(.dynamic)
+ .dynamic       0x0000000000400104       0xd8 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000400104                _DYNAMIC
+
+.hash           0x00000000004001dc      0x19c
+ *(.hash)
+ .hash          0x00000000004001dc      0x19c /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.gnu.hash
+ *(.gnu.hash)
+
+.dynsym         0x0000000000400378      0x400
+ *(.dynsym)
+ .dynsym        0x0000000000400378      0x400 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.dynstr         0x0000000000400778      0x2c7
+ *(.dynstr)
+ .dynstr        0x0000000000400778      0x2c7 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.gnu.version    0x0000000000400a40       0x80
+ *(.gnu.version)
+ .gnu.version   0x0000000000400a40       0x80 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.gnu.version_d  0x0000000000400ac0        0x0
+ *(.gnu.version_d)
+ .gnu.version_d
+                0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.gnu.version_r  0x0000000000400ac0       0x20
+ *(.gnu.version_r)
+ .gnu.version_r
+                0x0000000000400ac0       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.rel.dyn        0x0000000000400ae0        0x0
+ *(.rel.init)
+ *(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
+ *(.rel.fini)
+ *(.rel.rodata .rel.rodata.* .rel.gnu.linkonce.r.*)
+ *(.rel.data.rel.ro* .rel.gnu.linkonce.d.rel.ro.*)
+ *(.rel.data .rel.data.* .rel.gnu.linkonce.d.*)
+ *(.rel.tdata .rel.tdata.* .rel.gnu.linkonce.td.*)
+ *(.rel.tbss .rel.tbss.* .rel.gnu.linkonce.tb.*)
+ *(.rel.ctors)
+ *(.rel.dtors)
+ *(.rel.got)
+ *(.rel.dyn)
+ .rel.dyn       0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ *(.rel.sdata .rel.sdata.* .rel.gnu.linkonce.s.*)
+ *(.rel.sbss .rel.sbss.* .rel.gnu.linkonce.sb.*)
+ *(.rel.sdata2 .rel.sdata2.* .rel.gnu.linkonce.s2.*)
+ *(.rel.sbss2 .rel.sbss2.* .rel.gnu.linkonce.sb2.*)
+ *(.rel.bss .rel.bss.* .rel.gnu.linkonce.b.*)
+ .rel.bss       0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000400ae0                PROVIDE (__rel_iplt_start, .)
+ *(.rel.iplt)
+                0x0000000000400ae0                PROVIDE (__rel_iplt_end, .)
+                0x0000000000400ae0                PROVIDE (__rela_iplt_start, .)
+                0x0000000000400ae0                PROVIDE (__rela_iplt_end, .)
+
+.rela.dyn       0x0000000000400ae0        0x0
+ *(.rela.init)
+ *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+ *(.rela.fini)
+ *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+ *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+ *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
+ *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
+ *(.rela.ctors)
+ *(.rela.dtors)
+ *(.rela.got)
+ *(.rela.sdata .rela.sdata.* .rela.gnu.linkonce.s.*)
+ *(.rela.sbss .rela.sbss.* .rela.gnu.linkonce.sb.*)
+ *(.rela.sdata2 .rela.sdata2.* .rela.gnu.linkonce.s2.*)
+ *(.rela.sbss2 .rela.sbss2.* .rela.gnu.linkonce.sb2.*)
+ *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+                0x0000000000400ae0                PROVIDE (__rel_iplt_start, .)
+                0x0000000000400ae0                PROVIDE (__rel_iplt_end, .)
+                0x0000000000400ae0                PROVIDE (__rela_iplt_start, .)
+ *(.rela.iplt)
+                0x0000000000400ae0                PROVIDE (__rela_iplt_end, .)
+
+.rel.plt        0x0000000000400ae0        0x0
+ *(.rel.plt)
+ .rel.plt       0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.rela.plt
+ *(.rela.plt)
+
+.init           0x0000000000400ae0       0x78
+ *(.init)
+ .init          0x0000000000400ae0       0x2c /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+                0x0000000000400ae0                _init
+ .init          0x0000000000400b0c       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .init          0x0000000000400b2c       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .init          0x0000000000400b4c        0xc /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.plt            0x0000000000400b58        0x0
+ *(.plt)
+ .plt           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+
+.iplt
+ *(.iplt)
+
+.text           0x0000000000400b60     0x5a90
+                0x0000000000400b60                _ftext = .
+ *(.text.unlikely .text.*_unlikely)
+ *(.text .stub .text.* .gnu.linkonce.t.*)
+ .text          0x0000000000400b60       0x60 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000400b60                __start
+ .text          0x0000000000400bc0       0xc0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .text          0x0000000000400c80     0x15d0 build/unix/bgtree/bgTest.o
+                0x0000000000400c80                LoadBlock
+                0x0000000000400d34                UnloadBlock
+                0x0000000000400df0                AllocBlock
+                0x0000000000400e9c                SaveBlock
+                0x0000000000400f3c                Test1
+                0x0000000000400f5c                Test2
+                0x0000000000401330                Test3
+                0x0000000000401bd4                Test4
+                0x00000000004021f4                main
+ .text          0x0000000000402250     0x14c0 build/unix/bgtree/libbgTree.a(bgCore.o)
+                0x0000000000402250                SetUserData
+                0x000000000040228c                GetUserData
+                0x00000000004022c0                FindIndexOfChild
+                0x0000000000402384                FindInternalNode
+                0x00000000004025b4                FindInternal
+                0x0000000000402644                NodeInit
+                0x0000000000402724                GetLastNodeOfDepth
+                0x00000000004027c0                NodeSummaryCreate
+                0x00000000004028c8                NodeSummaryLoad
+                0x0000000000402964                NodeItemLoad
+                0x00000000004029c4                NodeKeyLoad
+                0x0000000000402a24                NodeParent
+                0x0000000000402a68                NodeLen
+                0x0000000000402aac                NodeDepth
+                0x0000000000402afc                NodeLoad
+                0x0000000000402b68                NodeSave
+                0x0000000000402bd4                GetLastNonFullDescendant
+                0x0000000000402c98                CreateDescendingNodes
+                0x0000000000402e10                AppendNewLeafNode
+                0x0000000000402fb4                NodeVisitDFS
+                0x00000000004030f8                CalcTreeSize2
+                0x0000000000403208                CalcMinimumDepth
+                0x0000000000403324                NodeNextLeaf
+                0x00000000004034cc                RowPtrInit
+                0x0000000000403538                RowPtrNext
+                0x0000000000403684                NodeFindFirstChild
+ .text          0x0000000000403710     0x1790 build/unix/bgtree/libbgTree.a(bgApi.o)
+                0x00000000004037a0                CursorKeyNext
+                0x000000000040396c                CursorConsecutiveKeysNext
+                0x0000000000403b6c                CursorUnionNext
+                0x0000000000403bf8                CursorIntersectionNext
+                0x0000000000403d7c                CursorUniqueNext
+                0x0000000000403da4                CursorNext
+                0x0000000000403dec                CursorInit
+                0x0000000000403ec4                SelectKey
+                0x0000000000404014                SelectConsecutiveKeys
+                0x0000000000404164                SelectAll
+                0x00000000004042a8                Union
+                0x0000000000404448                Intersection
+                0x0000000000404610                CursorDup
+                0x0000000000404808                CursorDestroy
+                0x0000000000404964                CursorPeek
+                0x00000000004049dc                CalcTreeSize
+                0x0000000000404a50                TreeCreate
+                0x0000000000404b70                TreeInit
+                0x0000000000404bb4                TreeAppend
+ .text          0x0000000000404ea0     0x13b0 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+                0x0000000000404ea0                UnpackStringFromFile
+                0x000000000040501c                UnpackIntFromFile
+                0x00000000004050e0                UnpackUIntFromFile
+                0x00000000004051a4                SchemaGetOffset
+                0x00000000004055b4                SchemaGetUInt
+                0x00000000004056c0                SchemaGetInt
+                0x000000000040578c                SchemaGetString
+                0x00000000004059dc                SchemaGetStringLen
+                0x0000000000405b30                UnpackAndPrintStringFromFile
+                0x0000000000405c50                PrintVisitor
+                0x0000000000405fe4                TestSanityVisitor
+ .text          0x0000000000406250      0x2a0 build/unix/libErrors.a(Errors.o)
+                0x0000000000406250                ERRORprint2
+                0x00000000004064b0                ERRORprint3
+ .text          0x00000000004064f0       0xb0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+                0x00000000004064f0                __libc_csu_fini
+                0x00000000004064f8                __libc_csu_init
+ .text          0x00000000004065a0       0x50 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ *(.gnu.warning)
+ *(.mips16.fn.*)
+ *(.mips16.call.*)
+
+.MIPS.stubs     0x00000000004065f0       0xe0
+ .MIPS.stubs    0x00000000004065f0       0xe0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x00000000004065f0                putchar@@GLIBC_2.0
+                0x0000000000406600                __libc_start_main@@GLIBC_2.0
+                0x0000000000406610                __assert_fail@@GLIBC_2.0
+                0x0000000000406620                free@@GLIBC_2.0
+                0x0000000000406630                memcpy@@GLIBC_2.0
+                0x0000000000406640                strlen@@GLIBC_2.0
+                0x0000000000406650                printf@@GLIBC_2.0
+                0x0000000000406660                fwrite@@GLIBC_2.0
+                0x0000000000406670                fprintf@@GLIBC_2.0
+                0x0000000000406680                malloc@@GLIBC_2.0
+                0x0000000000406690                fputc@@GLIBC_2.0
+                0x00000000004066a0                puts@@GLIBC_2.0
+                0x00000000004066b0                fread@@GLIBC_2.0
+
+.fini           0x00000000004066d0       0x44
+ *(.fini)
+ .fini          0x00000000004066d0       0x18 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+                0x00000000004066d0                _fini
+ .fini          0x00000000004066e8       0x20 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .fini          0x0000000000406708        0xc /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+                0x0000000000406714                PROVIDE (__etext, .)
+                0x0000000000406714                PROVIDE (_etext, .)
+                0x0000000000406714                PROVIDE (etext, .)
+
+.rodata         0x0000000000406720      0x630
+ *(.rodata .rodata.* .gnu.linkonce.r.*)
+ .rodata.cst4   0x0000000000406720        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000406720                _IO_stdin_used
+ *fill*         0x0000000000406724        0xc 00
+ .rodata        0x0000000000406730      0x1e0 build/unix/bgtree/bgTest.o
+ .rodata        0x0000000000406910       0x80 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .rodata        0x0000000000406990       0x40 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .rodata        0x00000000004069d0      0x330 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .rodata        0x0000000000406d00       0x50 build/unix/libErrors.a(Errors.o)
+
+.rodata1
+ *(.rodata1)
+
+.sdata2
+ *(.sdata2 .sdata2.* .gnu.linkonce.s2.*)
+
+.sbss2
+ *(.sbss2 .sbss2.* .gnu.linkonce.sb2.*)
+
+.eh_frame_hdr
+ *(.eh_frame_hdr)
+
+.eh_frame       0x0000000000406d50        0x4
+ *(.eh_frame)
+ .eh_frame      0x0000000000406d50        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+                0x0000000000406d54                . = (ALIGN (0x10000) - ((0x10000 - .) & 0xffff))
+                0x0000000000416d54                . = (0x10000 DATA_SEGMENT_ALIGN 0x1000)
+
+.eh_frame
+ *(.eh_frame)
+
+.gcc_except_table
+ *(.gcc_except_table .gcc_except_table.*)
+
+.tdata
+ *(.tdata .tdata.* .gnu.linkonce.td.*)
+
+.tbss
+ *(.tbss .tbss.* .gnu.linkonce.tb.*)
+ *(.tcommon)
+
+.preinit_array  0x0000000000416d54        0x0
+                0x0000000000416d54                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array)
+                0x0000000000416d54                PROVIDE (__preinit_array_end, .)
+
+.init_array     0x0000000000416d54        0x0
+                0x0000000000416d54                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array)
+                0x0000000000416d54                PROVIDE (__init_array_end, .)
+
+.fini_array     0x0000000000416d54        0x0
+                0x0000000000416d54                PROVIDE (__fini_array_start, .)
+ *(.fini_array)
+ *(SORT(.fini_array.*))
+                0x0000000000416d54                PROVIDE (__fini_array_end, .)
+
+.ctors          0x0000000000416d54        0x8
+ *crtbegin.o(.ctors)
+ .ctors         0x0000000000416d54        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+ .ctors         0x0000000000416d58        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+
+.dtors          0x0000000000416d5c        0x8
+ *crtbegin.o(.dtors)
+ .dtors         0x0000000000416d5c        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+ .dtors         0x0000000000416d60        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+                0x0000000000416d60                __DTOR_END__
+
+.jcr            0x0000000000416d64        0x4
+ *(.jcr)
+ .jcr           0x0000000000416d64        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .jcr           0x0000000000416d64        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+
+.data.rel.ro
+ *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*)
+ *(.data.rel.ro* .gnu.linkonce.d.rel.ro.*)
+                0x0000000000416d68                . = (. DATA_SEGMENT_RELRO_END 0x0)
+
+.data           0x0000000000416d68        0x0
+                0x0000000000416d68                _fdata = .
+ *(.data .data.* .gnu.linkonce.d.*)
+
+.rld_map        0x0000000000416d68        0x4
+ .rld_map       0x0000000000416d68        0x4 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000416d68                __RLD_MAP
+
+.data1
+ *(.data1)
+
+.got.plt        0x0000000000416d6c        0x0
+ *(.got.plt)
+ .got.plt       0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000416d6c                . = .
+                0x000000000041ed60                _gp = (ALIGN (0x10) + 0x7ff0)
+
+.got            0x0000000000416d70      0x10c
+ *(.got)
+ .got           0x0000000000416d70      0x10c /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                0x0000000000416d70                _GLOBAL_OFFSET_TABLE_
+
+.sdata
+ *(.sdata .sdata.* .gnu.linkonce.s.*)
+
+.lit8
+ *(.lit8)
+
+.lit4
+ *(.lit4)
+                0x0000000000416e7c                _edata = .
+                0x0000000000416e7c                PROVIDE (edata, .)
+                0x0000000000416e7c                __bss_start = .
+                0x0000000000416e7c                _fbss = .
+
+.sbss           0x0000000000416e7c       0x14
+ *(.dynsbss)
+ *(.sbss .sbss.* .gnu.linkonce.sb.*)
+ *(.scommon)
+ .scommon       0x0000000000416e7c       0x10 build/unix/bgtree/bgTest.o
+                0x0000000000416e7c                errorMsg
+                0x0000000000416e80                errorFunc
+                0x0000000000416e84                errorLine
+                0x0000000000416e88                errorFile
+ .scommon       0x0000000000416e8c        0x4 build/unix/bgtree/libbgTree.a(bgCore.o)
+                0x0000000000416e8c                bgUserData
+ .scommon       0x0000000000416e90        0x0 build/unix/libErrors.a(Errors.o)
+
+.bss            0x0000000000416e90    0x80020
+ *(.dynbss)
+ .dynbss        0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x0000000000416e90       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .bss           0x0000000000416ea0       0x10 build/unix/bgtree/bgTest.o
+                0x0000000000416ea0                memLast
+ *(COMMON)
+ COMMON         0x0000000000416eb0    0x80000 build/unix/bgtree/bgTest.o
+                0x0000000000416eb0                mem
+                0x0000000000496eb0                . = ALIGN ((. != 0x0)?0x4:0x1)
+                0x0000000000496eb0                . = ALIGN (0x4)
+                0x0000000000496eb0                . = ALIGN (0x4)
+                0x0000000000496eb0                _end = .
+                0x0000000000496eb0                PROVIDE (end, .)
+                0x0000000000496eb0                . = DATA_SEGMENT_END (.)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.pdr            0x0000000000000000        0x0
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .pdr           0x0000000000000000        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.comment        0x0000000000000000       0x11
+ *(.comment)
+ .comment       0x0000000000000000       0x11 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+                                         0x12 (size before relaxing)
+ .comment       0x0000000000000000       0x12 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .comment       0x0000000000000000       0x12 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .comment       0x0000000000000000       0x12 build/unix/bgtree/bgTest.o
+ .comment       0x0000000000000000       0x12 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .comment       0x0000000000000000       0x12 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .comment       0x0000000000000000       0x12 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .comment       0x0000000000000000       0x12 build/unix/libErrors.a(Errors.o)
+ .comment       0x0000000000000000       0x12 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .comment       0x0000000000000000       0x12 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .comment       0x0000000000000000       0x12 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x0000000000000000       0xa0
+ *(.debug_aranges)
+ .debug_aranges
+                0x0000000000000000       0x20 build/unix/bgtree/bgTest.o
+ .debug_aranges
+                0x0000000000000020       0x20 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_aranges
+                0x0000000000000040       0x20 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_aranges
+                0x0000000000000060       0x20 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_aranges
+                0x0000000000000080       0x20 build/unix/libErrors.a(Errors.o)
+
+.debug_pubnames
+                0x0000000000000000      0x58d
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x0000000000000000       0xc9 build/unix/bgtree/bgTest.o
+ .debug_pubnames
+                0x00000000000000c9      0x1f9 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_pubnames
+                0x00000000000002c2      0x160 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_pubnames
+                0x0000000000000422      0x102 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_pubnames
+                0x0000000000000524       0x69 build/unix/libErrors.a(Errors.o)
+
+.debug_info     0x0000000000000000     0x2a18
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x0000000000000000      0x883 build/unix/bgtree/bgTest.o
+ .debug_info    0x0000000000000883      0xb2c build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_info    0x00000000000013af      0x8d0 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_info    0x0000000000001c7f      0x9f3 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_info    0x0000000000002672      0x3a6 build/unix/libErrors.a(Errors.o)
+
+.debug_abbrev   0x0000000000000000      0x738
+ *(.debug_abbrev)
+ .debug_abbrev  0x0000000000000000      0x1c5 build/unix/bgtree/bgTest.o
+ .debug_abbrev  0x00000000000001c5      0x1b3 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_abbrev  0x0000000000000378      0x195 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_abbrev  0x000000000000050d      0x142 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_abbrev  0x000000000000064f       0xe9 build/unix/libErrors.a(Errors.o)
+
+.debug_line     0x0000000000000000      0xb9e
+ *(.debug_line)
+ .debug_line    0x0000000000000000      0x22b build/unix/bgtree/bgTest.o
+ .debug_line    0x000000000000022b      0x266 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_line    0x0000000000000491      0x27d build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_line    0x000000000000070e      0x2e5 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_line    0x00000000000009f3      0x1ab build/unix/libErrors.a(Errors.o)
+
+.debug_frame    0x0000000000000000      0x8e0
+ *(.debug_frame)
+ .debug_frame   0x0000000000000000      0x12c build/unix/bgtree/bgTest.o
+ .debug_frame   0x000000000000012c      0x344 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_frame   0x0000000000000470      0x2ac build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_frame   0x000000000000071c      0x174 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_frame   0x0000000000000890       0x50 build/unix/libErrors.a(Errors.o)
+
+.debug_str      0x0000000000000000      0x8ba
+ *(.debug_str)
+ .debug_str     0x0000000000000000      0x255 build/unix/bgtree/bgTest.o
+                                        0x298 (size before relaxing)
+ .debug_str     0x0000000000000255      0x248 build/unix/bgtree/libbgTree.a(bgCore.o)
+                                        0x3d3 (size before relaxing)
+ .debug_str     0x000000000000049d      0x152 build/unix/bgtree/libbgTree.a(bgApi.o)
+                                        0x31d (size before relaxing)
+ .debug_str     0x00000000000005ef      0x2a0 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+                                        0x41a (size before relaxing)
+ .debug_str     0x000000000000088f       0x2b build/unix/libErrors.a(Errors.o)
+                                        0x2ab (size before relaxing)
+
+.debug_loc      0x0000000000000000      0xbd1
+ *(.debug_loc)
+ .debug_loc     0x0000000000000000      0x18b build/unix/bgtree/bgTest.o
+ .debug_loc     0x000000000000018b      0x474 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .debug_loc     0x00000000000005ff      0x39f build/unix/bgtree/libbgTree.a(bgApi.o)
+ .debug_loc     0x000000000000099e      0x1dd build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .debug_loc     0x0000000000000b7b       0x56 build/unix/libErrors.a(Errors.o)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges   0x0000000000000000       0x18
+ *(.debug_ranges)
+ .debug_ranges  0x0000000000000000       0x18 build/unix/bgtree/libbgTree.a(bgCore.o)
+
+.gnu.attributes
+                0x0000000000000000       0x10
+ *(.gnu.attributes)
+ .gnu.attributes
+                0x0000000000000000       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .gnu.attributes
+                0x0000000000000010       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .gnu.attributes
+                0x0000000000000020       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .gnu.attributes
+                0x0000000000000030       0x10 build/unix/bgtree/bgTest.o
+ .gnu.attributes
+                0x0000000000000040       0x10 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .gnu.attributes
+                0x0000000000000050       0x10 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .gnu.attributes
+                0x0000000000000060       0x10 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .gnu.attributes
+                0x0000000000000070       0x10 build/unix/libErrors.a(Errors.o)
+ .gnu.attributes
+                0x0000000000000080       0x10 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .gnu.attributes
+                0x0000000000000090       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .gnu.attributes
+                0x00000000000000a0       0x10 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.gptab.sdata
+ *(.gptab.data)
+ *(.gptab.sdata)
+
+.gptab.sbss
+ *(.gptab.bss)
+ *(.gptab.sbss)
+
+.mdebug.abi32   0x00000000000000b0        0x0
+ *(.mdebug.abi32)
+ .mdebug.abi32  0x00000000000000b0        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crt1.o
+ .mdebug.abi32  0x00000000000000b0        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crti.o
+ .mdebug.abi32  0x00000000000000b0        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtbegin.o
+ .mdebug.abi32  0x00000000000000b0        0x0 build/unix/bgtree/bgTest.o
+ .mdebug.abi32  0x00000000000000b0        0x0 build/unix/bgtree/libbgTree.a(bgCore.o)
+ .mdebug.abi32  0x00000000000000b0        0x0 build/unix/bgtree/libbgTree.a(bgApi.o)
+ .mdebug.abi32  0x00000000000000b0        0x0 build/unix/bgtree/libbgTree.a(bgUtil2.o)
+ .mdebug.abi32  0x00000000000000b0        0x0 build/unix/libErrors.a(Errors.o)
+ .mdebug.abi32  0x00000000000000b0        0x0 /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/lib/libc_nonshared.a(elf-init.oS)
+ .mdebug.abi32  0x00000000000000b0        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/crtend.o
+ .mdebug.abi32  0x00000000000000b0        0x0 /usr/local/jlime/mipsel-toolchain/usr/bin/../lib/gcc/mipsel-linux/4.4.2/../../../../mipsel-linux/lib/crtn.o
+
+.mdebug.abiN32
+ *(.mdebug.abiN32)
+
+.mdebug.abi64
+ *(.mdebug.abi64)
+
+.mdebug.abiO64
+ *(.mdebug.abiO64)
+
+.mdebug.eabi32
+ *(.mdebug.eabi32)
+
+.mdebug.eabi64
+ *(.mdebug.eabi64)
+
+.gcc_compiled_long32
+ *(.gcc_compiled_long32)
+
+.gcc_compiled_long64
+ *(.gcc_compiled_long64)
+
+/DISCARD/
+ *(.note.GNU-stack)
+ *(.gnu_debuglink)
+ *(.gnu.lto_*)
+OUTPUT(build/unix/bgtree/bgTest elf32-tradlittlemips)

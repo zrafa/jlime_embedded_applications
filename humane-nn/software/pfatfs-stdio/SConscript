@@ -1,0 +1,7 @@
+Import('env', 'ARCH', 'ObjCopyHexCmd')
+
+env.Append(CCFLAGS = '-D_USE_LSEEK')
+
+if ARCH != 'avr':
+  env.Library(target='pfatfs-stdio', source=['diskio.c', 'pff.c'])
+  env.Program('test_pffsio.c',LIBS=['pfatfs-stdio'],LIBPATH=['.'])

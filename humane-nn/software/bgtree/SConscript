@@ -1,0 +1,13 @@
+Import("env", "ARCH", "HiLibs", "ObjCopyHexCmd")
+
+BGT_SRC = Split("bgCore.c bgUtil.c crc32.c ar.c bgApi.c bgUtil2.c")
+env.Library(target="bgTree", source=BGT_SRC)
+
+if ARCH != "avr":
+  env.Program(target="bgTreeCmd", source=["bgTree.c"], LIBS=["bgTree","Errors"], LIBPATH=[".",".."])
+  env.Program(target="artest", source=["artest.c", "ar.c"])
+  env.Program(target="bgTest", source=["bgTest.c"], LIBS=["bgTree", "Errors"], LIBPATH=[".",".."])
+
+#else:
+  #elfObj = env.Program(target="bgTest", source="bgTest.c", LIBS=["bgTree"])
+  #env.AddPostAction(elfObj, ObjCopyHexCmd + elfObj[0].abspath + " " + elfObj[0].abspath.replace(".o","") + ".hex")

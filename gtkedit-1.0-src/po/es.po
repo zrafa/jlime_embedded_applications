@@ -1,0 +1,247 @@
+# Spanish translation of gtkedit1.
+# Copyright (C) 2006 Daniel Guerrero Miralles
+# This file is distributed under the same license as the gtkedit1 package.
+# Daniel Guerrero Miralles <danlist@terra.es>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gtkedit 0.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-03-01 09:24+0100\n"
+"PO-Revision-Date: 2006-03-01 09:25+0100\n"
+"Last-Translator: Daniel Guerrero Miralles <danlist@terra.es>\n"
+"Language-Team: Daniel Guerrero Miralles <danlist@terra.es>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: iso-8859-15\n"
+"X-Poedit-Keywords: _,N_\n"
+
+#: gtkedit.c:346
+#: gtkedit.c:355
+#: gtkedit.c:1297
+msgid "_OK"
+msgstr "_Aceptar"
+
+#: gtkedit.c:352
+msgid "_No"
+msgstr "_No"
+
+#: gtkedit.c:352
+msgid "_Yes"
+msgstr "_Sí"
+
+#: gtkedit.c:354
+msgid "Unsaved changes will be lost. Continue ?"
+msgstr "Los cambios no guardados se perderán. ¿ Continuar ?"
+
+#: gtkedit.c:355
+#: gtkedit.c:1305
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: gtkedit.c:376
+msgid "Untitled"
+msgstr "Sin título"
+
+#: gtkedit.c:378
+msgid " [not saved]"
+msgstr " [Sin guardar]"
+
+#: gtkedit.c:461
+#, c-format
+msgid ""
+"gtkedit %s\n"
+"\n"
+"A minimalistic text editor based on GTK+\n"
+"Copyright (c) %s Daniel Guerrero Miralles\n"
+"\n"
+"This program is released under the MIT license.\n"
+"Read the accompanying LICENSE.txt file for details."
+msgstr ""
+"gtkedit %s\n"
+"\n"
+"Un editor minimalista basado en GTK+\n"
+"Copyright (c) %s Daniel Guerrero Miralles\n"
+"\n"
+"Este programa se distribuye bajo la licencia MIT.\n"
+"Lea el archivo LICENSE.txt que lo acompaña para más detalles."
+
+#: gtkedit.c:725
+msgid "Overwrite this file ?"
+msgstr "¿ Remplazar este archivo ?"
+
+#: gtkedit.c:745
+msgid "Open file"
+msgstr "Abrir archivo"
+
+#: gtkedit.c:750
+msgid "Save file"
+msgstr "Guardar archivo"
+
+#: gtkedit.c:919
+msgid "The file is not local or the name is invalid"
+msgstr "El fichero no es local o el nombre es inválido"
+
+#: gtkedit.c:1041
+msgid "No more ocurrences found"
+msgstr "No se encontraron más ocurrencias"
+
+#: gtkedit.c:1099
+msgid "Replace all occurrences from the current position ?"
+msgstr "¿ Remplazar todas las ocurrencias a partir de la posición actual ?"
+
+#: gtkedit.c:1124
+msgid "Find text"
+msgstr "Buscar texto:"
+
+#: gtkedit.c:1151
+msgid "Replace text"
+msgstr "Remplazar texto"
+
+#: gtkedit.c:1175
+msgid "Find :"
+msgstr "Buscar :"
+
+#: gtkedit.c:1184
+msgid "Replace with: "
+msgstr "Remplazar con:"
+
+#: gtkedit.c:1193
+msgid "Case sensitive"
+msgstr "Distinguir mayúsculas y minúsculas"
+
+#: gtkedit.c:1197
+msgid "Find backwards"
+msgstr "Buscar hacia atrás"
+
+#: gtkedit.c:1204
+msgid "_Find"
+msgstr "_Buscar"
+
+#: gtkedit.c:1209
+msgid "_Replace"
+msgstr "_Remplazar"
+
+#: gtkedit.c:1214
+msgid "Replace _All"
+msgstr "Reemplazar _todos"
+
+#: gtkedit.c:1219
+msgid "_Close"
+msgstr "_Cerrar"
+
+#: gtkedit.c:1285
+msgid "Go to line"
+msgstr "Ir a la línea"
+
+#: gtkedit.c:1330
+msgid "Cannot set the new font"
+msgstr "No se puede usar la nueva fuente"
+
+#: gtkedit.c:1340
+msgid "Select font"
+msgstr "Seleccionar tipografía"
+
+#: gtkedit.c:1373
+msgid "/_File"
+msgstr "/_Archivo"
+
+#: gtkedit.c:1374
+msgid "/File/_New"
+msgstr "/Archivo/_Nuevo"
+
+#: gtkedit.c:1375
+msgid "/File/_Open..."
+msgstr "/Archivo/_Abrir..."
+
+#: gtkedit.c:1376
+msgid "/File/_Save"
+msgstr "/Archivo/_Guardar"
+
+#: gtkedit.c:1377
+msgid "/File/Save _As..."
+msgstr "/Archivo/Guardar _como..."
+
+#: gtkedit.c:1379
+msgid "/File/_Quit"
+msgstr "/Archivo/_Salir"
+
+#: gtkedit.c:1381
+msgid "/_Edit"
+msgstr "/_Editar"
+
+#: gtkedit.c:1382
+msgid "/Edit/_Undo"
+msgstr "/Editar/_Deshacer"
+
+#: gtkedit.c:1384
+msgid "/Edit/Cu_t"
+msgstr "/Editar/Cor_tar"
+
+#: gtkedit.c:1385
+msgid "/Edit/_Copy"
+msgstr "/Editar/_Copiar"
+
+#: gtkedit.c:1386
+msgid "/Edit/_Paste"
+msgstr "/Editar/_Pegar"
+
+#: gtkedit.c:1387
+msgid "/Edit/_Select All"
+msgstr "/Editar/_Seleccionar todo"
+
+#: gtkedit.c:1389
+msgid "/Edit/_Find..."
+msgstr "/Editar/_Buscar..."
+
+#: gtkedit.c:1390
+msgid "/Edit/Find _Again"
+msgstr "/Editar/Buscar _siguiente"
+
+#: gtkedit.c:1391
+msgid "/Edit/_Replace..."
+msgstr "/Editar/_Remplazar..."
+
+#: gtkedit.c:1393
+msgid "/Edit/_Go to line..."
+msgstr "/Editar/Ir a línea..."
+
+#: gtkedit.c:1395
+msgid "/F_ormat"
+msgstr "/_Formato"
+
+#: gtkedit.c:1396
+msgid "/Format/_Wrap long lines"
+msgstr "/Formato/_Plegar líneas largas"
+
+#: gtkedit.c:1398
+msgid "/Format/_Change Font..."
+msgstr "/Formato/_Cambiar fuente..."
+
+#: gtkedit.c:1400
+msgid "/_Help"
+msgstr "/A_yuda"
+
+#: gtkedit.c:1401
+msgid "/Help/_About..."
+msgstr "/Ayuda/_Acerca..."
+
+#: gtkedit.c:1405
+msgid "/Select _All"
+msgstr "/_Seleccionar todo"
+
+#: gtkedit.c:1407
+msgid "/Cu_t"
+msgstr "/Cor_tar"
+
+#: gtkedit.c:1408
+msgid "/_Copy"
+msgstr "/_Copia"
+
+#: gtkedit.c:1409
+msgid "/_Paste"
+msgstr "/_Pegar"
+

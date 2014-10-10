@@ -1,0 +1,107 @@
+gosmore (0.0.0.20090624-1) unstable; urgency=low
+
+  * New upstream snapshot fetched from svn, revision 16088. (Closes: #533372)
+  * debian/rules get-orig-source:
+    - Remove debian/ dir.
+    - Ignore externals in svn export command.
+  * Removed 10-findresources.dpatch, applied upstream.
+  * Mentioned ConvertUTF.c, elemstyles.xml and icons.* in debian/copyright.
+  * Added a note to the long description that gosmore needs additional
+    data files. (Closes: #491842)
+  * Dropped dependency on libgps-dev, gosmore tries to parse NMEA sentences
+    on its own. (Closes: #524042)
+  * Removed dpatch build-dependency and debian/patches since there are
+    no patches currently.
+  * Bumped policy to 3.8.2, without changes.
+  * Added DM-Upload-Allowed to debian/control.
+  * Removed build-dependency on flite-dev, feature has been removed.
+  * Bumped debhelper compatibility level to 7. 
+
+ -- Andreas Putzo <andreas@putzo.net>  Wed, 24 Jun 2009 20:32:38 +0000
+
+gosmore (0.0.0.20080704-1) unstable; urgency=low
+
+  [ Andreas Putzo ]
+  * New upstream snapshot fetched from svn, revision 8034.
+    (Closes: #487711, #479985)
+  * Backported patch 10-findresources to search for files.
+    not only in the current directory.
+  * Adapt CFLAGS in debian/rules.
+  * Added gosmore.install file.
+  * Bumped Standards-Version to 3.8.0. 
+  * Added myself to Uploaders.
+  * Added missing build dependency on libxml2-dev.
+
+  [ Petter Reinholdtsen ]
+  * Add josm as suggests.
+  * Add get-orig-source target to the rules file.
+
+ -- Andreas Putzo <andreas@putzo.net>  Sat, 05 Jul 2008 13:36:39 +0000
+
+gosmore (0.0.0.20070901-3) unstable; urgency=low
+
+  [ Francesco Paolo Lovergine ]
+  * Debhelper compatibility level bumped to 5.
+  * Policy bumped to 3.7.3 without changes.
+  * Added Vcs-* fields into debian/control.
+  * Added Homepage field in debian/control.
+
+  [ Petter Reinholdtsen ]
+  * Add Francesco Paolo Lovergine as uploader.
+  * Acknowledge NMU (Closes: #454519, #456843)
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat, 29 Mar 2008 13:10:26 +0100
+
+gosmore (0.0.0.20070901-2.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * debian/patches:
+    - Removing 10_bad_gpsd_header.dpatch as the package FTBFS whith the
+      applied patch, which was a workaround for a bug in libgps-dev.
+      (Closes: #454519, #456843)
+  * debian/control:
+    - Changing the libgps-dev build dependency to require a version
+      >= 2.34.dfsg-5 as the package will FTBFS with lower versions.
+
+ -- Bernd Zeimetz <bzed@debian.org>  Tue, 18 Dec 2007 23:54:29 +0100
+
+gosmore (0.0.0.20070901-2) unstable; urgency=low
+
+  * Change build-depend on gpsd to libgps-dev (>= 2.34.dfsg-3) | gpsd
+    (<< 2.34.dfsg-1) to work with the new gpsd package while still
+    allowing backports. (Closes: #447168)
+  * Building with new gpsd will avoid duplicate dependency. (Closes:
+    #440383)
+  * New patch 10_bad_gpsd_header.dpatch to make sure the defines
+    required by gps.h is set during compilation.  Add dpatch as
+    build-depend to get the patch applied.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Thu,  1 Nov 2007 11:26:55 +0100
+
+gosmore (0.0.0.20070901-1) unstable; urgency=low
+
+  * New upstream version.
+    - Fix buffer overflow in route finding code. (Closes: #439732)
+  * Change priority from important to optional.  The important
+    priority was the result of a cut-n-paste error. (Closes: #439607)
+
+ -- Petter Reinholdtsen <pere@debian.org>  Sat,  1 Sep 2007 13:01:38 +0200
+
+gosmore (0.0.0.20070819-1) unstable; urgency=low
+
+  * Initial Release. (Closes: #436039)
+  * Added menu entry based on the one in qgis.  Change menu section
+    from Apps/Science to Applications/Science/Geoscience, to match
+    new menu proposal.
+  * Make the Debian GIS group the maintainer, and myself an uploader.
+  * Depend directly on gpsd to prepare for libgpsd to be split out from
+    the gpsd package.
+  * Need to build-depend on libgtk2.0-dev.
+  * Build-depend on flite-dev to get speech synthesis.
+  * Build-depend on gpsd to support showing current GPS position.
+  * Define ROUTE_TEST during build to enable route finding.
+  * Make sure the copyright file make it clear that the source is
+    public domain.
+
+ -- Petter Reinholdtsen <pere@debian.org>  Thu, 09 Aug 2007 00:15:23 +0200
+

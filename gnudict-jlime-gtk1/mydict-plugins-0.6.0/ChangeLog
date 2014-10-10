@@ -1,0 +1,58 @@
+Author : Larry <caiyu@yahoo.com>
+
+Version 0.5.2 2003.02.27 - Larry
+* ingore case for plugndict
+* remove .ini for chinese display (not used for other dictionary)
+
+Version 0.5.1 2002.10.15 - Larry
+* keep same version with mydict
+* update .ini for chinese display
+
+version 0.4.2 2002.10.06 - Larry
+* fix a bug for ndict on looking up chinese . 
+  Thanks konghui for reporting this bug
+* modify start-up for babylon
+* and keep same version with mydict
+
+version 0.4.0 2002.09.13 - Larry
+* fix a bug for babylon
+* and keep same version with mydict
+
+version 0.3.3 2002.09.09 - Larry
+* ndict , dict support config file 
+
+version 0.3.2 2002.08.27 - Larry
+* add babylon.ini for babylon 
+  database=/usr/local/share/mydict
+  dictionary=engtochs.dic
+  dictionary=engtoswe.dic
+* testplug is rewritten for test plugins  
+
+version 0.3.1 2002.08.23 - Larry
+* only keep ndict and babylon plugins in rpm
+
+
+
+2002.08.22 - Larry
+* add babylon plugins
+* client is used for pluginpath in the interface
+
+2002.08.20 - Larry
+* improvement for dict 
+
+2002.08.16 - Larry
+* fix bug & improvement for dict 
+
+2002.08.12 - Larry
+ + add README and update dictionary
+ 
+2002.08.07 - Larry
+ + dict is ready for testing 
+ 
+2002.08.02 - Larry
+ + update the plugin interface version 1
+ + demo/ndict/test works
+ 
+2002.08.01 - Larry
+ + create the plugin interface version 1
+ + only the demo and ndict is ok to use

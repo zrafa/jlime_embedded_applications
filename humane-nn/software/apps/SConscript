@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+
+Import("env","ARCH", 'ObjCopyHexCmd', 'HiLibs')
+elfObjs = []
+
+# I used this code to make a single monster command line to experiment
+# with --combine -fwhole-program flags
+if 0:
+  import glob
+  SRC = ["WikiMain.c", "WikiApp.c","WikiUtil.c", "../LoadBlock.c" ]
+  SRC += ["../bgtree/bgApi.c", "../bgtree/bgCore.c", "../bgtree/bgUtil.c", "../bgtree/bgUtil2.c"]
+  SRC += ["../3rdParty/pfatfs/avr/pff.c","../3rdParty/pfatfs/avr/mmc.c"]
+  SRC += ["../platform/FilePFat.c", "../platform/Keyboard.c", "../platform/Platform.c", "../platform/ps2.c", "../platform/TvikiaPlatform.c", "../platform/TvikiaSDCard.c", "../platform/vt52.c"]
+  SRC += glob.glob("../ui/*.c")
+  SRC += ["../uCmorse/inmorse.c", "../uCmorse/uCmorse.c"]
+  SRC += ["../Errors.c"]
+  import string
+  print "avr-gcc -o WikiAppAll --combine -fwhole-program " + env["CFLAGS"] + env["CCFLAGS"] +" "+string.join(SRC, " ") + (env["LINKFLAGS"]) + " " + string.join(["-l"+x for x in HiLibs]) + " " + string.join(["-I"+x.replace("#", "..") for x in env["CPPPATH"]]) + " " + string.join(["-L"+x.replace("#", "..") for x in env["LIBPATH"]])
+
+env.Library(target="WikiApp", source=["WikiApp.c", "WikiUtil.c"])
+elfObjs.append( env.Program('WikiMain.c', LIBS=['WikiApp'] + HiLibs) )
+elfObjs.append( env.Program('ViewFile.c', LIBS=HiLibs) )
+elfObjs.append( env.Program('Benchmarks.c', LIBS=HiLibs) )
+if ARCH == 'avr':
+  elfObjs.append( env.Program('BlinkApp.c', LIBS=HiLibs) )
+  elfObjs.append( env.Program('Nop.c', LIBS=HiLibs) )
+  elfObjs.append( env.Program('PinTest.c', LIBS=HiLibs) )
+
+if ARCH == 'avr':
+  for elfObj in elfObjs:
+    env.AddPostAction(elfObj, ObjCopyHexCmd + elfObj[0].abspath + " " + elfObj[0].abspath.replace(".o","") + ".hex")
+

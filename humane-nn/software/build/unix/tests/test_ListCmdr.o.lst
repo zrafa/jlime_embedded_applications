@@ -1,0 +1,2166 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.globl	strings
+  14              		.rdata
+  15              		.align	2
+  16              	$LC0:
+  17 0000 6170706C 		.ascii	"apple\000"
+  17      6500
+  18 0006 0000     		.align	2
+  19              	$LC1:
+  20 0008 62616E61 		.ascii	"banana\000"
+  20      6E6100
+  21 000f 00       		.align	2
+  22              	$LC2:
+  23 0010 63726570 		.ascii	"crepe\000"
+  23      6500
+  24 0016 0000     		.align	2
+  25              	$LC3:
+  26 0018 63726F69 		.ascii	"croissant\000"
+  26      7373616E 
+  26      7400
+  27 0022 0000     		.align	2
+  28              	$LC4:
+  29 0024 64657373 		.ascii	"dessert\000"
+  29      65727400 
+  30              		.align	2
+  31              	$LC5:
+  32 002c 65646962 		.ascii	"edible\000"
+  32      6C6500
+  33 0033 00       		.align	2
+  34              	$LC6:
+  35 0034 66726F6D 		.ascii	"fromage\000"
+  35      61676500 
+  36              		.section	.data.rel.local,"aw",@progbits
+  37              		.align	2
+  40              	strings:
+  41 0000 00000000 		.word	$LC0
+  42 0004 08000000 		.word	$LC1
+  43 0008 10000000 		.word	$LC2
+  44 000c 18000000 		.word	$LC3
+  45 0010 24000000 		.word	$LC4
+  46 0014 2C000000 		.word	$LC5
+  47 0018 34000000 		.word	$LC6
+  48 001c 00000000 		.word	0
+  49              		.globl	stringsIndex
+  50              		.section	.bss,"aw",@nobits
+  51              		.align	2
+  54              	stringsIndex:
+  55 0000 00000000 		.space	4
+  56 0004 00000000 		.text
+  56      00000000 
+  56      00000000 
+  57              		.align	2
+  58              		.globl	StringsNextFunc
+  59              	$LFB1 = .
+  60              		.file 1 "tests/test_ListCmdr.c"
+   0:tests/test_ListCmdr.c **** #include "ListView.h"
+   1:tests/test_ListCmdr.c **** #include "ListCmdr.h"
+   2:tests/test_ListCmdr.c **** #include "vt52.h"
+   3:tests/test_ListCmdr.c **** #include <string.h>
+   4:tests/test_ListCmdr.c **** #ifndef AVR
+   5:tests/test_ListCmdr.c **** #  include <unistd.h>
+   6:tests/test_ListCmdr.c **** #else
+   7:tests/test_ListCmdr.c **** #  define usleep(x)
+   8:tests/test_ListCmdr.c **** #endif
+   9:tests/test_ListCmdr.c **** 
+  10:tests/test_ListCmdr.c **** char *strings[]={"apple","banana","crepe","croissant","dessert","edible","fromage",0x0};
+  11:tests/test_ListCmdr.c **** int stringsIndex=0;
+  12:tests/test_ListCmdr.c **** 
+  13:tests/test_ListCmdr.c **** char StringsNextFunc(ListGen *gen, char *outBuf, unsigned char outBufLen) {
+  61              		.loc 1 14 0
+  62              		.set	nomips16
+  63              		.ent	StringsNextFunc
+  65              	StringsNextFunc:
+  66              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+  67              		.mask	0xc0000000,-4
+  68              		.fmask	0x00000000,0
+  69              		.set	noreorder
+  70              		.set	nomacro
+  71              		
+  72 0000 E0FFBD27 		addiu	$sp,$sp,-32
+  73              	$LCFI0:
+  74 0004 1C00BFAF 		sw	$31,28($sp)
+  75              	$LCFI1:
+  76 0008 1800BEAF 		sw	$fp,24($sp)
+  77              	$LCFI2:
+  78 000c 21F0A003 		move	$fp,$sp
+  79              	$LCFI3:
+  80 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  81 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  82 0018 1000BCAF 		.cprestore	16
+  83 001c 2000C4AF 		sw	$4,32($fp)
+  84 0020 2400C5AF 		sw	$5,36($fp)
+  85 0024 2110C000 		move	$2,$6
+  86 0028 2800C2A3 		sb	$2,40($fp)
+  14:tests/test_ListCmdr.c ****   if (strings[stringsIndex] == 0x0)
+  87              		.loc 1 15 0
+  88 002c 0000023C 		lui	$2,%hi(stringsIndex)
+  89 0030 0000438C 		lw	$3,%lo(stringsIndex)($2)
+  90 0034 0000023C 		lui	$2,%hi(strings)
+  91 0038 80180300 		sll	$3,$3,2
+  92 003c 00004224 		addiu	$2,$2,%lo(strings)
+  93 0040 21106200 		addu	$2,$3,$2
+  94 0044 0000428C 		lw	$2,0($2)
+  95 0048 00000000 		nop
+  96 004c 04004014 		bne	$2,$0,$L2
+  97 0050 00000000 		nop
+  98              	
+  15:tests/test_ListCmdr.c ****     return 0;
+  99              		.loc 1 16 0
+ 100 0054 21100000 		move	$2,$0
+ 101 0058 1F000010 		b	$L3
+ 102 005c 00000000 		nop
+ 103              	
+ 104              	$L2:
+  16:tests/test_ListCmdr.c ****   if (outBuf)
+ 105              		.loc 1 17 0
+ 106 0060 2400C28F 		lw	$2,36($fp)
+ 107 0064 00000000 		nop
+ 108 0068 14004010 		beq	$2,$0,$L4
+ 109 006c 00000000 		nop
+ 110              	
+  17:tests/test_ListCmdr.c ****     strncpy(outBuf, strings[stringsIndex], outBufLen);
+ 111              		.loc 1 18 0
+ 112 0070 0000023C 		lui	$2,%hi(stringsIndex)
+ 113 0074 0000438C 		lw	$3,%lo(stringsIndex)($2)
+ 114 0078 0000023C 		lui	$2,%hi(strings)
+ 115 007c 80180300 		sll	$3,$3,2
+ 116 0080 00004224 		addiu	$2,$2,%lo(strings)
+ 117 0084 21106200 		addu	$2,$3,$2
+ 118 0088 0000428C 		lw	$2,0($2)
+ 119 008c 00000000 		nop
+ 120 0090 21184000 		move	$3,$2
+ 121 0094 2800C293 		lbu	$2,40($fp)
+ 122 0098 2400C48F 		lw	$4,36($fp)
+ 123 009c 21286000 		move	$5,$3
+ 124 00a0 21304000 		move	$6,$2
+ 125 00a4 0000828F 		lw	$2,%call16(strncpy)($28)
+ 126 00a8 00000000 		nop
+ 127 00ac 21C84000 		move	$25,$2
+ 128 00b0 09F82003 		jalr	$25
+ 129 00b4 00000000 		nop
+ 130              	
+ 131 00b8 1000DC8F 		lw	$28,16($fp)
+ 132              	$L4:
+  18:tests/test_ListCmdr.c ****   ++stringsIndex;
+ 133              		.loc 1 19 0
+ 134 00bc 0000023C 		lui	$2,%hi(stringsIndex)
+ 135 00c0 0000428C 		lw	$2,%lo(stringsIndex)($2)
+ 136 00c4 00000000 		nop
+ 137 00c8 01004324 		addiu	$3,$2,1
+ 138 00cc 0000023C 		lui	$2,%hi(stringsIndex)
+ 139 00d0 000043AC 		sw	$3,%lo(stringsIndex)($2)
+  19:tests/test_ListCmdr.c ****   return 1;
+ 140              		.loc 1 20 0
+ 141 00d4 01000224 		li	$2,1			# 0x1
+ 142              	$L3:
+  20:tests/test_ListCmdr.c **** }
+ 143              		.loc 1 21 0
+ 144 00d8 21E8C003 		move	$sp,$fp
+ 145 00dc 1C00BF8F 		lw	$31,28($sp)
+ 146 00e0 1800BE8F 		lw	$fp,24($sp)
+ 147 00e4 2000BD27 		addiu	$sp,$sp,32
+ 148 00e8 0800E003 		j	$31
+ 149 00ec 00000000 		nop
+ 150              	
+ 151              		.set	macro
+ 152              		.set	reorder
+ 153              		.end	StringsNextFunc
+ 154              	$LFE1:
+ 156              		.align	2
+ 157              		.globl	StringsRestartFunc
+ 158              	$LFB2 = .
+  21:tests/test_ListCmdr.c **** 
+  22:tests/test_ListCmdr.c **** void StringsRestartFunc(ListGen *gen) {
+ 159              		.loc 1 23 0
+ 160              		.set	nomips16
+ 161              		.ent	StringsRestartFunc
+ 163              	StringsRestartFunc:
+ 164              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+ 165              		.mask	0x40000000,-4
+ 166              		.fmask	0x00000000,0
+ 167              		.set	noreorder
+ 168              		.set	nomacro
+ 169              		
+ 170 00f0 F8FFBD27 		addiu	$sp,$sp,-8
+ 171              	$LCFI4:
+ 172 00f4 0400BEAF 		sw	$fp,4($sp)
+ 173              	$LCFI5:
+ 174 00f8 21F0A003 		move	$fp,$sp
+ 175              	$LCFI6:
+ 176 00fc 0800C4AF 		sw	$4,8($fp)
+  23:tests/test_ListCmdr.c ****   stringsIndex = 0;
+ 177              		.loc 1 24 0
+ 178 0100 0000023C 		lui	$2,%hi(stringsIndex)
+ 179 0104 000040AC 		sw	$0,%lo(stringsIndex)($2)
+  24:tests/test_ListCmdr.c **** }
+ 180              		.loc 1 25 0
+ 181 0108 21E8C003 		move	$sp,$fp
+ 182 010c 0400BE8F 		lw	$fp,4($sp)
+ 183 0110 0800BD27 		addiu	$sp,$sp,8
+ 184 0114 0800E003 		j	$31
+ 185 0118 00000000 		nop
+ 186              	
+ 187              		.set	macro
+ 188              		.set	reorder
+ 189              		.end	StringsRestartFunc
+ 190              	$LFE2:
+ 192              		.rdata
+ 193              		.align	2
+ 194              	$LC7:
+ 195 003c 6E6F7465 		.ascii	"notend\000"
+ 195      6E6400
+ 196 0043 00       		.align	2
+ 197              	$LC8:
+ 198 0044 74657374 		.ascii	"tests/test_ListCmdr.c\000"
+ 198      732F7465 
+ 198      73745F4C 
+ 198      69737443 
+ 198      6D64722E 
+ 199 005a 0000     		.align	2
+ 200              	$LC9:
+ 201 005c 21737472 		.ascii	"!strcmp(buf, \"apple\")\000"
+ 201      636D7028 
+ 201      6275662C 
+ 201      20226170 
+ 201      706C6522 
+ 202 0072 0000     		.align	2
+ 203              	$LC10:
+ 204 0074 21737472 		.ascii	"!strcmp(buf, \"banana\")\000"
+ 204      636D7028 
+ 204      6275662C 
+ 204      20226261 
+ 204      6E616E61 
+ 205 008b 00       		.align	2
+ 206              	$LC11:
+ 207 008c 21737472 		.ascii	"!strcmp(buf, strings[i])\000"
+ 207      636D7028 
+ 207      6275662C 
+ 207      20737472 
+ 207      696E6773 
+ 208 00a5 000000   		.align	2
+ 209              	$LC12:
+ 210 00a8 216E6F74 		.ascii	"!notend\000"
+ 210      656E6400 
+ 211              		.text
+ 212              		.align	2
+ 213              		.globl	Test1
+ 214              	$LFB3 = .
+  25:tests/test_ListCmdr.c **** 
+  26:tests/test_ListCmdr.c **** void Test1() {
+ 215              		.loc 1 27 0
+ 216              		.set	nomips16
+ 217              		.ent	Test1
+ 219              	Test1:
+ 220              		.frame	$fp,112,$31		# vars= 80, regs= 2/0, args= 16, gp= 8
+ 221              		.mask	0xc0000000,-4
+ 222              		.fmask	0x00000000,0
+ 223              		.set	noreorder
+ 224              		.set	nomacro
+ 225              		
+ 226 011c 90FFBD27 		addiu	$sp,$sp,-112
+ 227              	$LCFI7:
+ 228 0120 6C00BFAF 		sw	$31,108($sp)
+ 229              	$LCFI8:
+ 230 0124 6800BEAF 		sw	$fp,104($sp)
+ 231              	$LCFI9:
+ 232 0128 21F0A003 		move	$fp,$sp
+ 233              	$LCFI10:
+ 234 012c 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 235 0130 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 236 0134 1000BCAF 		.cprestore	16
+  27:tests/test_ListCmdr.c ****   ListGen gen = ListGenCreate(StringsNextFunc, StringsRestartFunc, 0x0);
+ 237              		.loc 1 28 0
+ 238 0138 2400C227 		addiu	$2,$fp,36
+ 239 013c 21204000 		move	$4,$2
+ 240 0140 0000023C 		lui	$2,%hi(StringsNextFunc)
+ 241 0144 00004524 		addiu	$5,$2,%lo(StringsNextFunc)
+ 242 0148 0000023C 		lui	$2,%hi(StringsRestartFunc)
+ 243 014c 00004624 		addiu	$6,$2,%lo(StringsRestartFunc)
+ 244 0150 21380000 		move	$7,$0
+ 245 0154 0000828F 		lw	$2,%call16(ListGenCreate)($28)
+ 246 0158 00000000 		nop
+ 247 015c 21C84000 		move	$25,$2
+ 248 0160 09F82003 		jalr	$25
+ 249 0164 00000000 		nop
+ 250              	
+ 251 0168 1000DC8F 		lw	$28,16($fp)
+  28:tests/test_ListCmdr.c ****   char buf[LISTGEN_STRING_MAX];
+  29:tests/test_ListCmdr.c ****   int notend = ListGenNext(&gen, buf, LISTGEN_STRING_MAX);
+ 252              		.loc 1 30 0
+ 253 016c 2400C327 		addiu	$3,$fp,36
+ 254 0170 3C00C227 		addiu	$2,$fp,60
+ 255 0174 21206000 		move	$4,$3
+ 256 0178 21284000 		move	$5,$2
+ 257 017c 25000624 		li	$6,37			# 0x25
+ 258 0180 0000828F 		lw	$2,%call16(ListGenNext)($28)
+ 259 0184 00000000 		nop
+ 260 0188 21C84000 		move	$25,$2
+ 261 018c 09F82003 		jalr	$25
+ 262 0190 00000000 		nop
+ 263              	
+ 264 0194 1000DC8F 		lw	$28,16($fp)
+ 265 0198 2000C2AF 		sw	$2,32($fp)
+  30:tests/test_ListCmdr.c ****   assert(notend);
+ 266              		.loc 1 31 0
+ 267 019c 2000C28F 		lw	$2,32($fp)
+ 268 01a0 00000000 		nop
+ 269 01a4 0D004014 		bne	$2,$0,$L9
+ 270 01a8 00000000 		nop
+ 271              	
+ 272 01ac 0000023C 		lui	$2,%hi($LC7)
+ 273 01b0 3C004424 		addiu	$4,$2,%lo($LC7)
+ 274 01b4 0000023C 		lui	$2,%hi($LC8)
+ 275 01b8 44004524 		addiu	$5,$2,%lo($LC8)
+ 276 01bc 1F000624 		li	$6,31			# 0x1f
+ 277 01c0 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2797)
+ 278 01c4 34024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2797)
+ 279 01c8 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 280 01cc 00000000 		nop
+ 281 01d0 21C84000 		move	$25,$2
+ 282 01d4 09F82003 		jalr	$25
+ 283 01d8 00000000 		nop
+ 284              	
+ 285              	$L9:
+  31:tests/test_ListCmdr.c ****   assert(!strcmp(buf, "apple"));
+ 286              		.loc 1 32 0
+ 287 01dc 3C00C227 		addiu	$2,$fp,60
+ 288 01e0 21204000 		move	$4,$2
+ 289 01e4 0000023C 		lui	$2,%hi($LC0)
+ 290 01e8 00004524 		addiu	$5,$2,%lo($LC0)
+ 291 01ec 0000828F 		lw	$2,%call16(strcmp)($28)
+ 292 01f0 00000000 		nop
+ 293 01f4 21C84000 		move	$25,$2
+ 294 01f8 09F82003 		jalr	$25
+ 295 01fc 00000000 		nop
+ 296              	
+ 297 0200 1000DC8F 		lw	$28,16($fp)
+ 298 0204 0D004010 		beq	$2,$0,$L10
+ 299 0208 00000000 		nop
+ 300              	
+ 301 020c 0000023C 		lui	$2,%hi($LC9)
+ 302 0210 5C004424 		addiu	$4,$2,%lo($LC9)
+ 303 0214 0000023C 		lui	$2,%hi($LC8)
+ 304 0218 44004524 		addiu	$5,$2,%lo($LC8)
+ 305 021c 20000624 		li	$6,32			# 0x20
+ 306 0220 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2797)
+ 307 0224 34024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2797)
+ 308 0228 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 309 022c 00000000 		nop
+ 310 0230 21C84000 		move	$25,$2
+ 311 0234 09F82003 		jalr	$25
+ 312 0238 00000000 		nop
+ 313              	
+ 314              	$L10:
+  32:tests/test_ListCmdr.c ****   notend = ListGenNext(&gen, buf, LISTGEN_STRING_MAX);
+ 315              		.loc 1 33 0
+ 316 023c 2400C327 		addiu	$3,$fp,36
+ 317 0240 3C00C227 		addiu	$2,$fp,60
+ 318 0244 21206000 		move	$4,$3
+ 319 0248 21284000 		move	$5,$2
+ 320 024c 25000624 		li	$6,37			# 0x25
+ 321 0250 0000828F 		lw	$2,%call16(ListGenNext)($28)
+ 322 0254 00000000 		nop
+ 323 0258 21C84000 		move	$25,$2
+ 324 025c 09F82003 		jalr	$25
+ 325 0260 00000000 		nop
+ 326              	
+ 327 0264 1000DC8F 		lw	$28,16($fp)
+ 328 0268 2000C2AF 		sw	$2,32($fp)
+  33:tests/test_ListCmdr.c ****   assert(notend);
+ 329              		.loc 1 34 0
+ 330 026c 2000C28F 		lw	$2,32($fp)
+ 331 0270 00000000 		nop
+ 332 0274 0D004014 		bne	$2,$0,$L11
+ 333 0278 00000000 		nop
+ 334              	
+ 335 027c 0000023C 		lui	$2,%hi($LC7)
+ 336 0280 3C004424 		addiu	$4,$2,%lo($LC7)
+ 337 0284 0000023C 		lui	$2,%hi($LC8)
+ 338 0288 44004524 		addiu	$5,$2,%lo($LC8)
+ 339 028c 22000624 		li	$6,34			# 0x22
+ 340 0290 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2797)
+ 341 0294 34024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2797)
+ 342 0298 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 343 029c 00000000 		nop
+ 344 02a0 21C84000 		move	$25,$2
+ 345 02a4 09F82003 		jalr	$25
+ 346 02a8 00000000 		nop
+ 347              	
+ 348              	$L11:
+  34:tests/test_ListCmdr.c ****   assert(!strcmp(buf, "banana"));
+ 349              		.loc 1 35 0
+ 350 02ac 3C00C227 		addiu	$2,$fp,60
+ 351 02b0 21204000 		move	$4,$2
+ 352 02b4 0000023C 		lui	$2,%hi($LC1)
+ 353 02b8 08004524 		addiu	$5,$2,%lo($LC1)
+ 354 02bc 0000828F 		lw	$2,%call16(strcmp)($28)
+ 355 02c0 00000000 		nop
+ 356 02c4 21C84000 		move	$25,$2
+ 357 02c8 09F82003 		jalr	$25
+ 358 02cc 00000000 		nop
+ 359              	
+ 360 02d0 1000DC8F 		lw	$28,16($fp)
+ 361 02d4 0D004010 		beq	$2,$0,$L12
+ 362 02d8 00000000 		nop
+ 363              	
+ 364 02dc 0000023C 		lui	$2,%hi($LC10)
+ 365 02e0 74004424 		addiu	$4,$2,%lo($LC10)
+ 366 02e4 0000023C 		lui	$2,%hi($LC8)
+ 367 02e8 44004524 		addiu	$5,$2,%lo($LC8)
+ 368 02ec 23000624 		li	$6,35			# 0x23
+ 369 02f0 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2797)
+ 370 02f4 34024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2797)
+ 371 02f8 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 372 02fc 00000000 		nop
+ 373 0300 21C84000 		move	$25,$2
+ 374 0304 09F82003 		jalr	$25
+ 375 0308 00000000 		nop
+ 376              	
+ 377              	$L12:
+  35:tests/test_ListCmdr.c **** 
+  36:tests/test_ListCmdr.c ****   ListGenRestart(&gen);
+ 378              		.loc 1 37 0
+ 379 030c 2400C227 		addiu	$2,$fp,36
+ 380 0310 21204000 		move	$4,$2
+ 381 0314 0000828F 		lw	$2,%call16(ListGenRestart)($28)
+ 382 0318 00000000 		nop
+ 383 031c 21C84000 		move	$25,$2
+ 384 0320 09F82003 		jalr	$25
+ 385 0324 00000000 		nop
+ 386              	
+ 387 0328 1000DC8F 		lw	$28,16($fp)
+ 388              	$LBB2 = .
+  37:tests/test_ListCmdr.c ****   for (int i=0; i<7; ++i) {
+ 389              		.loc 1 38 0
+ 390 032c 1C00C0AF 		sw	$0,28($fp)
+ 391 0330 3E000010 		b	$L13
+ 392 0334 00000000 		nop
+ 393              	
+ 394              	$L16:
+  38:tests/test_ListCmdr.c ****     notend = ListGenNext(&gen, buf, LISTGEN_STRING_MAX);
+ 395              		.loc 1 39 0
+ 396 0338 2400C327 		addiu	$3,$fp,36
+ 397 033c 3C00C227 		addiu	$2,$fp,60
+ 398 0340 21206000 		move	$4,$3
+ 399 0344 21284000 		move	$5,$2
+ 400 0348 25000624 		li	$6,37			# 0x25
+ 401 034c 0000828F 		lw	$2,%call16(ListGenNext)($28)
+ 402 0350 00000000 		nop
+ 403 0354 21C84000 		move	$25,$2
+ 404 0358 09F82003 		jalr	$25
+ 405 035c 00000000 		nop
+ 406              	
+ 407 0360 1000DC8F 		lw	$28,16($fp)
+ 408 0364 2000C2AF 		sw	$2,32($fp)
+  39:tests/test_ListCmdr.c ****     assert(notend);
+ 409              		.loc 1 40 0
+ 410 0368 2000C28F 		lw	$2,32($fp)
+ 411 036c 00000000 		nop
+ 412 0370 0D004014 		bne	$2,$0,$L14
+ 413 0374 00000000 		nop
+ 414              	
+ 415 0378 0000023C 		lui	$2,%hi($LC7)
+ 416 037c 3C004424 		addiu	$4,$2,%lo($LC7)
+ 417 0380 0000023C 		lui	$2,%hi($LC8)
+ 418 0384 44004524 		addiu	$5,$2,%lo($LC8)
+ 419 0388 28000624 		li	$6,40			# 0x28
+ 420 038c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2797)
+ 421 0390 34024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2797)
+ 422 0394 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 423 0398 00000000 		nop
+ 424 039c 21C84000 		move	$25,$2
+ 425 03a0 09F82003 		jalr	$25
+ 426 03a4 00000000 		nop
+ 427              	
+ 428              	$L14:
+  40:tests/test_ListCmdr.c ****     assert(!strcmp(buf, strings[i]));
+ 429              		.loc 1 41 0
+ 430 03a8 1C00C38F 		lw	$3,28($fp)
+ 431 03ac 0000023C 		lui	$2,%hi(strings)
+ 432 03b0 80180300 		sll	$3,$3,2
+ 433 03b4 00004224 		addiu	$2,$2,%lo(strings)
+ 434 03b8 21106200 		addu	$2,$3,$2
+ 435 03bc 0000428C 		lw	$2,0($2)
+ 436 03c0 3C00C327 		addiu	$3,$fp,60
+ 437 03c4 21206000 		move	$4,$3
+ 438 03c8 21284000 		move	$5,$2
+ 439 03cc 0000828F 		lw	$2,%call16(strcmp)($28)
+ 440 03d0 00000000 		nop
+ 441 03d4 21C84000 		move	$25,$2
+ 442 03d8 09F82003 		jalr	$25
+ 443 03dc 00000000 		nop
+ 444              	
+ 445 03e0 1000DC8F 		lw	$28,16($fp)
+ 446 03e4 0D004010 		beq	$2,$0,$L15
+ 447 03e8 00000000 		nop
+ 448              	
+ 449 03ec 0000023C 		lui	$2,%hi($LC11)
+ 450 03f0 8C004424 		addiu	$4,$2,%lo($LC11)
+ 451 03f4 0000023C 		lui	$2,%hi($LC8)
+ 452 03f8 44004524 		addiu	$5,$2,%lo($LC8)
+ 453 03fc 29000624 		li	$6,41			# 0x29
+ 454 0400 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2797)
+ 455 0404 34024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2797)
+ 456 0408 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 457 040c 00000000 		nop
+ 458 0410 21C84000 		move	$25,$2
+ 459 0414 09F82003 		jalr	$25
+ 460 0418 00000000 		nop
+ 461              	
+ 462              	$L15:
+  38:tests/test_ListCmdr.c ****     notend = ListGenNext(&gen, buf, LISTGEN_STRING_MAX);
+ 463              		.loc 1 38 0
+ 464 041c 1C00C28F 		lw	$2,28($fp)
+ 465 0420 00000000 		nop
+ 466 0424 01004224 		addiu	$2,$2,1
+ 467 0428 1C00C2AF 		sw	$2,28($fp)
+ 468              	$L13:
+ 469 042c 1C00C28F 		lw	$2,28($fp)
+ 470 0430 00000000 		nop
+ 471 0434 07004228 		slt	$2,$2,7
+ 472 0438 BFFF4014 		bne	$2,$0,$L16
+ 473 043c 00000000 		nop
+ 474              	
+ 475              	$LBE2 = .
+  41:tests/test_ListCmdr.c ****   }
+  42:tests/test_ListCmdr.c ****   notend = ListGenNext(&gen, buf, LISTGEN_STRING_MAX);
+ 476              		.loc 1 43 0
+ 477 0440 2400C327 		addiu	$3,$fp,36
+ 478 0444 3C00C227 		addiu	$2,$fp,60
+ 479 0448 21206000 		move	$4,$3
+ 480 044c 21284000 		move	$5,$2
+ 481 0450 25000624 		li	$6,37			# 0x25
+ 482 0454 0000828F 		lw	$2,%call16(ListGenNext)($28)
+ 483 0458 00000000 		nop
+ 484 045c 21C84000 		move	$25,$2
+ 485 0460 09F82003 		jalr	$25
+ 486 0464 00000000 		nop
+ 487              	
+ 488 0468 1000DC8F 		lw	$28,16($fp)
+ 489 046c 2000C2AF 		sw	$2,32($fp)
+  43:tests/test_ListCmdr.c ****   assert(!notend);
+ 490              		.loc 1 44 0
+ 491 0470 2000C28F 		lw	$2,32($fp)
+ 492 0474 00000000 		nop
+ 493 0478 0D004010 		beq	$2,$0,$L17
+ 494 047c 00000000 		nop
+ 495              	
+ 496 0480 0000023C 		lui	$2,%hi($LC12)
+ 497 0484 A8004424 		addiu	$4,$2,%lo($LC12)
+ 498 0488 0000023C 		lui	$2,%hi($LC8)
+ 499 048c 44004524 		addiu	$5,$2,%lo($LC8)
+ 500 0490 2C000624 		li	$6,44			# 0x2c
+ 501 0494 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2797)
+ 502 0498 34024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2797)
+ 503 049c 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 504 04a0 00000000 		nop
+ 505 04a4 21C84000 		move	$25,$2
+ 506 04a8 09F82003 		jalr	$25
+ 507 04ac 00000000 		nop
+ 508              	
+ 509              	$L17:
+ 510              	$LBB3 = .
+  44:tests/test_ListCmdr.c **** 
+  45:tests/test_ListCmdr.c ****   for (int i=6; i>=0; --i) {
+ 511              		.loc 1 46 0
+ 512 04b0 06000224 		li	$2,6			# 0x6
+ 513 04b4 1800C2AF 		sw	$2,24($fp)
+ 514 04b8 3F000010 		b	$L18
+ 515 04bc 00000000 		nop
+ 516              	
+ 517              	$L21:
+  46:tests/test_ListCmdr.c ****     notend = ListGenGet(&gen, i, buf, LISTGEN_STRING_MAX);
+ 518              		.loc 1 47 0
+ 519 04c0 2400C327 		addiu	$3,$fp,36
+ 520 04c4 3C00C227 		addiu	$2,$fp,60
+ 521 04c8 21206000 		move	$4,$3
+ 522 04cc 1800C58F 		lw	$5,24($fp)
+ 523 04d0 21304000 		move	$6,$2
+ 524 04d4 25000724 		li	$7,37			# 0x25
+ 525 04d8 0000828F 		lw	$2,%call16(ListGenGet)($28)
+ 526 04dc 00000000 		nop
+ 527 04e0 21C84000 		move	$25,$2
+ 528 04e4 09F82003 		jalr	$25
+ 529 04e8 00000000 		nop
+ 530              	
+ 531 04ec 1000DC8F 		lw	$28,16($fp)
+ 532 04f0 2000C2AF 		sw	$2,32($fp)
+  47:tests/test_ListCmdr.c ****     assert(notend);
+ 533              		.loc 1 48 0
+ 534 04f4 2000C28F 		lw	$2,32($fp)
+ 535 04f8 00000000 		nop
+ 536 04fc 0D004014 		bne	$2,$0,$L19
+ 537 0500 00000000 		nop
+ 538              	
+ 539 0504 0000023C 		lui	$2,%hi($LC7)
+ 540 0508 3C004424 		addiu	$4,$2,%lo($LC7)
+ 541 050c 0000023C 		lui	$2,%hi($LC8)
+ 542 0510 44004524 		addiu	$5,$2,%lo($LC8)
+ 543 0514 30000624 		li	$6,48			# 0x30
+ 544 0518 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2797)
+ 545 051c 34024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2797)
+ 546 0520 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 547 0524 00000000 		nop
+ 548 0528 21C84000 		move	$25,$2
+ 549 052c 09F82003 		jalr	$25
+ 550 0530 00000000 		nop
+ 551              	
+ 552              	$L19:
+  48:tests/test_ListCmdr.c ****     assert(!strcmp(buf, strings[i]));
+ 553              		.loc 1 49 0
+ 554 0534 1800C38F 		lw	$3,24($fp)
+ 555 0538 0000023C 		lui	$2,%hi(strings)
+ 556 053c 80180300 		sll	$3,$3,2
+ 557 0540 00004224 		addiu	$2,$2,%lo(strings)
+ 558 0544 21106200 		addu	$2,$3,$2
+ 559 0548 0000428C 		lw	$2,0($2)
+ 560 054c 3C00C327 		addiu	$3,$fp,60
+ 561 0550 21206000 		move	$4,$3
+ 562 0554 21284000 		move	$5,$2
+ 563 0558 0000828F 		lw	$2,%call16(strcmp)($28)
+ 564 055c 00000000 		nop
+ 565 0560 21C84000 		move	$25,$2
+ 566 0564 09F82003 		jalr	$25
+ 567 0568 00000000 		nop
+ 568              	
+ 569 056c 1000DC8F 		lw	$28,16($fp)
+ 570 0570 0D004010 		beq	$2,$0,$L20
+ 571 0574 00000000 		nop
+ 572              	
+ 573 0578 0000023C 		lui	$2,%hi($LC11)
+ 574 057c 8C004424 		addiu	$4,$2,%lo($LC11)
+ 575 0580 0000023C 		lui	$2,%hi($LC8)
+ 576 0584 44004524 		addiu	$5,$2,%lo($LC8)
+ 577 0588 31000624 		li	$6,49			# 0x31
+ 578 058c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2797)
+ 579 0590 34024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2797)
+ 580 0594 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 581 0598 00000000 		nop
+ 582 059c 21C84000 		move	$25,$2
+ 583 05a0 09F82003 		jalr	$25
+ 584 05a4 00000000 		nop
+ 585              	
+ 586              	$L20:
+  46:tests/test_ListCmdr.c ****     notend = ListGenGet(&gen, i, buf, LISTGEN_STRING_MAX);
+ 587              		.loc 1 46 0
+ 588 05a8 1800C28F 		lw	$2,24($fp)
+ 589 05ac 00000000 		nop
+ 590 05b0 FFFF4224 		addiu	$2,$2,-1
+ 591 05b4 1800C2AF 		sw	$2,24($fp)
+ 592              	$L18:
+ 593 05b8 1800C28F 		lw	$2,24($fp)
+ 594 05bc 00000000 		nop
+ 595 05c0 BFFF4104 		bgez	$2,$L21
+ 596 05c4 00000000 		nop
+ 597              	
+ 598              	$LBE3 = .
+  49:tests/test_ListCmdr.c ****   }
+  50:tests/test_ListCmdr.c **** }
+ 599              		.loc 1 51 0
+ 600 05c8 21E8C003 		move	$sp,$fp
+ 601 05cc 6C00BF8F 		lw	$31,108($sp)
+ 602 05d0 6800BE8F 		lw	$fp,104($sp)
+ 603 05d4 7000BD27 		addiu	$sp,$sp,112
+ 604 05d8 0800E003 		j	$31
+ 605 05dc 00000000 		nop
+ 606              	
+ 607              		.set	macro
+ 608              		.set	reorder
+ 609              		.end	Test1
+ 610              	$LFE3:
+ 612              		.rdata
+ 613              		.align	2
+ 614              	$LC13:
+ 615 00b0 1B5B324A 		.ascii	"\033[2J\033[H\000"
+ 615      1B5B4800 
+ 616              		.align	2
+ 617              	$LC14:
+ 618 00b8 4C697374 		.ascii	"ListViewGetFocus(&view) == 3\000"
+ 618      56696577 
+ 618      47657446 
+ 618      6F637573 
+ 618      28267669 
+ 619 00d5 000000   		.align	2
+ 620              	$LC15:
+ 621 00d8 4C697374 		.ascii	"ListViewGetFocus(&view) == 4\000"
+ 621      56696577 
+ 621      47657446 
+ 621      6F637573 
+ 621      28267669 
+ 622 00f5 000000   		.align	2
+ 623              	$LC16:
+ 624 00f8 76696577 		.ascii	"view.offset == 1\000"
+ 624      2E6F6666 
+ 624      73657420 
+ 624      3D3D2031 
+ 624      00
+ 625 0109 000000   		.align	2
+ 626              	$LC17:
+ 627 010c 4C697374 		.ascii	"ListViewGetFocus(&view) == 2\000"
+ 627      56696577 
+ 627      47657446 
+ 627      6F637573 
+ 627      28267669 
+ 628 0129 000000   		.align	2
+ 629              	$LC18:
+ 630 012c 76696577 		.ascii	"view.offset == 0\000"
+ 630      2E6F6666 
+ 630      73657420 
+ 630      3D3D2030 
+ 630      00
+ 631              		.text
+ 632              		.align	2
+ 633              		.globl	Test2
+ 634              	$LFB4 = .
+  51:tests/test_ListCmdr.c **** 
+  52:tests/test_ListCmdr.c **** void Test2() {
+ 635              		.loc 1 53 0
+ 636              		.set	nomips16
+ 637              		.ent	Test2
+ 639              	Test2:
+ 640              		.frame	$fp,144,$31		# vars= 80, regs= 2/0, args= 48, gp= 8
+ 641              		.mask	0xc0000000,-4
+ 642              		.fmask	0x00000000,0
+ 643              		.set	noreorder
+ 644              		.set	nomacro
+ 645              		
+ 646 05e0 70FFBD27 		addiu	$sp,$sp,-144
+ 647              	$LCFI11:
+ 648 05e4 8C00BFAF 		sw	$31,140($sp)
+ 649              	$LCFI12:
+ 650 05e8 8800BEAF 		sw	$fp,136($sp)
+ 651              	$LCFI13:
+ 652 05ec 21F0A003 		move	$fp,$sp
+ 653              	$LCFI14:
+ 654 05f0 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 655 05f4 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 656 05f8 3000BCAF 		.cprestore	48
+  53:tests/test_ListCmdr.c ****   ListView view = ListViewCreate(ListGenCreate(StringsNextFunc, StringsRestartFunc, 0x0), 3, 4, -1,
+ 657              		.loc 1 54 0
+ 658 05fc 3800C227 		addiu	$2,$fp,56
+ 659 0600 21204000 		move	$4,$2
+ 660 0604 0000023C 		lui	$2,%hi(StringsNextFunc)
+ 661 0608 00004524 		addiu	$5,$2,%lo(StringsNextFunc)
+ 662 060c 0000023C 		lui	$2,%hi(StringsRestartFunc)
+ 663 0610 00004624 		addiu	$6,$2,%lo(StringsRestartFunc)
+ 664 0614 21380000 		move	$7,$0
+ 665 0618 0000828F 		lw	$2,%call16(ListGenCreate)($28)
+ 666 061c 00000000 		nop
+ 667 0620 21C84000 		move	$25,$2
+ 668 0624 09F82003 		jalr	$25
+ 669 0628 00000000 		nop
+ 670              	
+ 671 062c 3000DC8F 		lw	$28,48($fp)
+ 672 0630 5000C227 		addiu	$2,$fp,80
+ 673 0634 03000324 		li	$3,3			# 0x3
+ 674 0638 1C00A3AF 		sw	$3,28($sp)
+ 675 063c 04000324 		li	$3,4			# 0x4
+ 676 0640 2000A3AF 		sw	$3,32($sp)
+ 677 0644 FFFF0324 		li	$3,-1			# 0xffffffffffffffff
+ 678 0648 2400A3AF 		sw	$3,36($sp)
+ 679 064c 01000324 		li	$3,1			# 0x1
+ 680 0650 2800A3AF 		sw	$3,40($sp)
+ 681 0654 4400C58F 		lw	$5,68($fp)
+ 682 0658 4800C48F 		lw	$4,72($fp)
+ 683 065c 4C00C38F 		lw	$3,76($fp)
+ 684 0660 1000A5AF 		sw	$5,16($sp)
+ 685 0664 1400A4AF 		sw	$4,20($sp)
+ 686 0668 1800A3AF 		sw	$3,24($sp)
+ 687 066c 3800C58F 		lw	$5,56($fp)
+ 688 0670 3C00C68F 		lw	$6,60($fp)
+ 689 0674 4000C78F 		lw	$7,64($fp)
+ 690 0678 21204000 		move	$4,$2
+ 691 067c 0000828F 		lw	$2,%call16(ListViewCreate)($28)
+ 692 0680 00000000 		nop
+ 693 0684 21C84000 		move	$25,$2
+ 694 0688 09F82003 		jalr	$25
+ 695 068c 00000000 		nop
+ 696              	
+ 697 0690 3000DC8F 		lw	$28,48($fp)
+  54:tests/test_ListCmdr.c ****   printf(VERASE_SCR);
+ 698              		.loc 1 55 0
+ 699 0694 0000023C 		lui	$2,%hi($LC13)
+ 700 0698 B0004224 		addiu	$2,$2,%lo($LC13)
+ 701 069c 21204000 		move	$4,$2
+ 702 06a0 0000828F 		lw	$2,%call16(printf)($28)
+ 703 06a4 00000000 		nop
+ 704 06a8 21C84000 		move	$25,$2
+ 705 06ac 09F82003 		jalr	$25
+ 706 06b0 00000000 		nop
+ 707              	
+ 708 06b4 3000DC8F 		lw	$28,48($fp)
+ 709 06b8 00000000 		nop
+  55:tests/test_ListCmdr.c ****   vposition(stdout, 0,0);
+ 710              		.loc 1 56 0
+ 711 06bc 0000828F 		lw	$2,%got(stdout)($28)
+ 712 06c0 00000000 		nop
+ 713 06c4 0000428C 		lw	$2,0($2)
+ 714 06c8 00000000 		nop
+ 715 06cc 21204000 		move	$4,$2
+ 716 06d0 21280000 		move	$5,$0
+ 717 06d4 21300000 		move	$6,$0
+ 718 06d8 0000828F 		lw	$2,%call16(vposition)($28)
+ 719 06dc 00000000 		nop
+ 720 06e0 21C84000 		move	$25,$2
+ 721 06e4 09F82003 		jalr	$25
+ 722 06e8 00000000 		nop
+ 723              	
+ 724 06ec 3000DC8F 		lw	$28,48($fp)
+ 725              	$L24:
+  56:tests/test_ListCmdr.c ****   while (!ListViewDraw(&view));
+ 726              		.loc 1 57 0
+ 727 06f0 5000C227 		addiu	$2,$fp,80
+ 728 06f4 21204000 		move	$4,$2
+ 729 06f8 0000828F 		lw	$2,%call16(ListViewDraw)($28)
+ 730 06fc 00000000 		nop
+ 731 0700 21C84000 		move	$25,$2
+ 732 0704 09F82003 		jalr	$25
+ 733 0708 00000000 		nop
+ 734              	
+ 735 070c 3000DC8F 		lw	$28,48($fp)
+ 736 0710 F7FF4010 		beq	$2,$0,$L24
+ 737 0714 00000000 		nop
+ 738              	
+  57:tests/test_ListCmdr.c **** 
+  58:tests/test_ListCmdr.c ****   usleep(200);
+ 739              		.loc 1 59 0
+ 740 0718 C8000424 		li	$4,200			# 0xc8
+ 741 071c 0000828F 		lw	$2,%call16(usleep)($28)
+ 742 0720 00000000 		nop
+ 743 0724 21C84000 		move	$25,$2
+ 744 0728 09F82003 		jalr	$25
+ 745 072c 00000000 		nop
+ 746              	
+ 747 0730 3000DC8F 		lw	$28,48($fp)
+  59:tests/test_ListCmdr.c ****   ListViewSetFocus(&view, 3);
+ 748              		.loc 1 60 0
+ 749 0734 5000C227 		addiu	$2,$fp,80
+ 750 0738 21204000 		move	$4,$2
+ 751 073c 03000524 		li	$5,3			# 0x3
+ 752 0740 0000828F 		lw	$2,%call16(ListViewSetFocus)($28)
+ 753 0744 00000000 		nop
+ 754 0748 21C84000 		move	$25,$2
+ 755 074c 09F82003 		jalr	$25
+ 756 0750 00000000 		nop
+ 757              	
+ 758 0754 3000DC8F 		lw	$28,48($fp)
+  60:tests/test_ListCmdr.c ****   assert(ListViewGetFocus(&view) == 3);
+ 759              		.loc 1 61 0
+ 760 0758 5000C227 		addiu	$2,$fp,80
+ 761 075c 21204000 		move	$4,$2
+ 762 0760 0000828F 		lw	$2,%call16(ListViewGetFocus)($28)
+ 763 0764 00000000 		nop
+ 764 0768 21C84000 		move	$25,$2
+ 765 076c 09F82003 		jalr	$25
+ 766 0770 00000000 		nop
+ 767              	
+ 768 0774 3000DC8F 		lw	$28,48($fp)
+ 769 0778 21184000 		move	$3,$2
+ 770 077c 03000224 		li	$2,3			# 0x3
+ 771 0780 0D006210 		beq	$3,$2,$L25
+ 772 0784 00000000 		nop
+ 773              	
+ 774 0788 0000023C 		lui	$2,%hi($LC14)
+ 775 078c B8004424 		addiu	$4,$2,%lo($LC14)
+ 776 0790 0000023C 		lui	$2,%hi($LC8)
+ 777 0794 44004524 		addiu	$5,$2,%lo($LC8)
+ 778 0798 3D000624 		li	$6,61			# 0x3d
+ 779 079c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2843)
+ 780 07a0 2C024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2843)
+ 781 07a4 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 782 07a8 00000000 		nop
+ 783 07ac 21C84000 		move	$25,$2
+ 784 07b0 09F82003 		jalr	$25
+ 785 07b4 00000000 		nop
+ 786              	
+ 787              	$L25:
+  61:tests/test_ListCmdr.c ****   printf(VERASE_SCR);
+ 788              		.loc 1 62 0
+ 789 07b8 0000023C 		lui	$2,%hi($LC13)
+ 790 07bc B0004224 		addiu	$2,$2,%lo($LC13)
+ 791 07c0 21204000 		move	$4,$2
+ 792 07c4 0000828F 		lw	$2,%call16(printf)($28)
+ 793 07c8 00000000 		nop
+ 794 07cc 21C84000 		move	$25,$2
+ 795 07d0 09F82003 		jalr	$25
+ 796 07d4 00000000 		nop
+ 797              	
+ 798 07d8 3000DC8F 		lw	$28,48($fp)
+ 799 07dc 00000000 		nop
+  62:tests/test_ListCmdr.c ****   vposition(stdout, 0,0);
+ 800              		.loc 1 63 0
+ 801 07e0 0000828F 		lw	$2,%got(stdout)($28)
+ 802 07e4 00000000 		nop
+ 803 07e8 0000428C 		lw	$2,0($2)
+ 804 07ec 00000000 		nop
+ 805 07f0 21204000 		move	$4,$2
+ 806 07f4 21280000 		move	$5,$0
+ 807 07f8 21300000 		move	$6,$0
+ 808 07fc 0000828F 		lw	$2,%call16(vposition)($28)
+ 809 0800 00000000 		nop
+ 810 0804 21C84000 		move	$25,$2
+ 811 0808 09F82003 		jalr	$25
+ 812 080c 00000000 		nop
+ 813              	
+ 814 0810 3000DC8F 		lw	$28,48($fp)
+ 815              	$L26:
+  63:tests/test_ListCmdr.c ****   while (!ListViewDraw(&view));
+ 816              		.loc 1 64 0
+ 817 0814 5000C227 		addiu	$2,$fp,80
+ 818 0818 21204000 		move	$4,$2
+ 819 081c 0000828F 		lw	$2,%call16(ListViewDraw)($28)
+ 820 0820 00000000 		nop
+ 821 0824 21C84000 		move	$25,$2
+ 822 0828 09F82003 		jalr	$25
+ 823 082c 00000000 		nop
+ 824              	
+ 825 0830 3000DC8F 		lw	$28,48($fp)
+ 826 0834 F7FF4010 		beq	$2,$0,$L26
+ 827 0838 00000000 		nop
+ 828              	
+  64:tests/test_ListCmdr.c **** 
+  65:tests/test_ListCmdr.c ****   usleep(200);
+ 829              		.loc 1 66 0
+ 830 083c C8000424 		li	$4,200			# 0xc8
+ 831 0840 0000828F 		lw	$2,%call16(usleep)($28)
+ 832 0844 00000000 		nop
+ 833 0848 21C84000 		move	$25,$2
+ 834 084c 09F82003 		jalr	$25
+ 835 0850 00000000 		nop
+ 836              	
+ 837 0854 3000DC8F 		lw	$28,48($fp)
+  66:tests/test_ListCmdr.c ****   ListViewFocusNext(&view);
+ 838              		.loc 1 67 0
+ 839 0858 5000C227 		addiu	$2,$fp,80
+ 840 085c 21204000 		move	$4,$2
+ 841 0860 0000828F 		lw	$2,%call16(ListViewFocusNext)($28)
+ 842 0864 00000000 		nop
+ 843 0868 21C84000 		move	$25,$2
+ 844 086c 09F82003 		jalr	$25
+ 845 0870 00000000 		nop
+ 846              	
+ 847 0874 3000DC8F 		lw	$28,48($fp)
+  67:tests/test_ListCmdr.c ****   assert(ListViewGetFocus(&view) == 4);
+ 848              		.loc 1 68 0
+ 849 0878 5000C227 		addiu	$2,$fp,80
+ 850 087c 21204000 		move	$4,$2
+ 851 0880 0000828F 		lw	$2,%call16(ListViewGetFocus)($28)
+ 852 0884 00000000 		nop
+ 853 0888 21C84000 		move	$25,$2
+ 854 088c 09F82003 		jalr	$25
+ 855 0890 00000000 		nop
+ 856              	
+ 857 0894 3000DC8F 		lw	$28,48($fp)
+ 858 0898 21184000 		move	$3,$2
+ 859 089c 04000224 		li	$2,4			# 0x4
+ 860 08a0 0D006210 		beq	$3,$2,$L27
+ 861 08a4 00000000 		nop
+ 862              	
+ 863 08a8 0000023C 		lui	$2,%hi($LC15)
+ 864 08ac D8004424 		addiu	$4,$2,%lo($LC15)
+ 865 08b0 0000023C 		lui	$2,%hi($LC8)
+ 866 08b4 44004524 		addiu	$5,$2,%lo($LC8)
+ 867 08b8 44000624 		li	$6,68			# 0x44
+ 868 08bc 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2843)
+ 869 08c0 2C024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2843)
+ 870 08c4 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 871 08c8 00000000 		nop
+ 872 08cc 21C84000 		move	$25,$2
+ 873 08d0 09F82003 		jalr	$25
+ 874 08d4 00000000 		nop
+ 875              	
+ 876              	$L27:
+  68:tests/test_ListCmdr.c ****   assert(view.offset == 1);
+ 877              		.loc 1 69 0
+ 878 08d8 6800C38F 		lw	$3,104($fp)
+ 879 08dc 01000224 		li	$2,1			# 0x1
+ 880 08e0 0D006210 		beq	$3,$2,$L28
+ 881 08e4 00000000 		nop
+ 882              	
+ 883 08e8 0000023C 		lui	$2,%hi($LC16)
+ 884 08ec F8004424 		addiu	$4,$2,%lo($LC16)
+ 885 08f0 0000023C 		lui	$2,%hi($LC8)
+ 886 08f4 44004524 		addiu	$5,$2,%lo($LC8)
+ 887 08f8 45000624 		li	$6,69			# 0x45
+ 888 08fc 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2843)
+ 889 0900 2C024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2843)
+ 890 0904 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 891 0908 00000000 		nop
+ 892 090c 21C84000 		move	$25,$2
+ 893 0910 09F82003 		jalr	$25
+ 894 0914 00000000 		nop
+ 895              	
+ 896              	$L28:
+  69:tests/test_ListCmdr.c ****   printf(VERASE_SCR);
+ 897              		.loc 1 70 0
+ 898 0918 0000023C 		lui	$2,%hi($LC13)
+ 899 091c B0004224 		addiu	$2,$2,%lo($LC13)
+ 900 0920 21204000 		move	$4,$2
+ 901 0924 0000828F 		lw	$2,%call16(printf)($28)
+ 902 0928 00000000 		nop
+ 903 092c 21C84000 		move	$25,$2
+ 904 0930 09F82003 		jalr	$25
+ 905 0934 00000000 		nop
+ 906              	
+ 907 0938 3000DC8F 		lw	$28,48($fp)
+ 908 093c 00000000 		nop
+  70:tests/test_ListCmdr.c ****   vposition(stdout, 0,0);
+ 909              		.loc 1 71 0
+ 910 0940 0000828F 		lw	$2,%got(stdout)($28)
+ 911 0944 00000000 		nop
+ 912 0948 0000428C 		lw	$2,0($2)
+ 913 094c 00000000 		nop
+ 914 0950 21204000 		move	$4,$2
+ 915 0954 21280000 		move	$5,$0
+ 916 0958 21300000 		move	$6,$0
+ 917 095c 0000828F 		lw	$2,%call16(vposition)($28)
+ 918 0960 00000000 		nop
+ 919 0964 21C84000 		move	$25,$2
+ 920 0968 09F82003 		jalr	$25
+ 921 096c 00000000 		nop
+ 922              	
+ 923 0970 3000DC8F 		lw	$28,48($fp)
+ 924              	$L29:
+  71:tests/test_ListCmdr.c ****   while (!ListViewDraw(&view));
+ 925              		.loc 1 72 0
+ 926 0974 5000C227 		addiu	$2,$fp,80
+ 927 0978 21204000 		move	$4,$2
+ 928 097c 0000828F 		lw	$2,%call16(ListViewDraw)($28)
+ 929 0980 00000000 		nop
+ 930 0984 21C84000 		move	$25,$2
+ 931 0988 09F82003 		jalr	$25
+ 932 098c 00000000 		nop
+ 933              	
+ 934 0990 3000DC8F 		lw	$28,48($fp)
+ 935 0994 F7FF4010 		beq	$2,$0,$L29
+ 936 0998 00000000 		nop
+ 937              	
+  72:tests/test_ListCmdr.c **** 
+  73:tests/test_ListCmdr.c ****   usleep(200);
+ 938              		.loc 1 74 0
+ 939 099c C8000424 		li	$4,200			# 0xc8
+ 940 09a0 0000828F 		lw	$2,%call16(usleep)($28)
+ 941 09a4 00000000 		nop
+ 942 09a8 21C84000 		move	$25,$2
+ 943 09ac 09F82003 		jalr	$25
+ 944 09b0 00000000 		nop
+ 945              	
+ 946 09b4 3000DC8F 		lw	$28,48($fp)
+  74:tests/test_ListCmdr.c ****   ListViewFocusPrev(&view);
+ 947              		.loc 1 75 0
+ 948 09b8 5000C227 		addiu	$2,$fp,80
+ 949 09bc 21204000 		move	$4,$2
+ 950 09c0 0000828F 		lw	$2,%call16(ListViewFocusPrev)($28)
+ 951 09c4 00000000 		nop
+ 952 09c8 21C84000 		move	$25,$2
+ 953 09cc 09F82003 		jalr	$25
+ 954 09d0 00000000 		nop
+ 955              	
+ 956 09d4 3000DC8F 		lw	$28,48($fp)
+  75:tests/test_ListCmdr.c ****   ListViewFocusPrev(&view);
+ 957              		.loc 1 76 0
+ 958 09d8 5000C227 		addiu	$2,$fp,80
+ 959 09dc 21204000 		move	$4,$2
+ 960 09e0 0000828F 		lw	$2,%call16(ListViewFocusPrev)($28)
+ 961 09e4 00000000 		nop
+ 962 09e8 21C84000 		move	$25,$2
+ 963 09ec 09F82003 		jalr	$25
+ 964 09f0 00000000 		nop
+ 965              	
+ 966 09f4 3000DC8F 		lw	$28,48($fp)
+  76:tests/test_ListCmdr.c ****   assert(ListViewGetFocus(&view) == 2);
+ 967              		.loc 1 77 0
+ 968 09f8 5000C227 		addiu	$2,$fp,80
+ 969 09fc 21204000 		move	$4,$2
+ 970 0a00 0000828F 		lw	$2,%call16(ListViewGetFocus)($28)
+ 971 0a04 00000000 		nop
+ 972 0a08 21C84000 		move	$25,$2
+ 973 0a0c 09F82003 		jalr	$25
+ 974 0a10 00000000 		nop
+ 975              	
+ 976 0a14 3000DC8F 		lw	$28,48($fp)
+ 977 0a18 21184000 		move	$3,$2
+ 978 0a1c 02000224 		li	$2,2			# 0x2
+ 979 0a20 0D006210 		beq	$3,$2,$L30
+ 980 0a24 00000000 		nop
+ 981              	
+ 982 0a28 0000023C 		lui	$2,%hi($LC17)
+ 983 0a2c 0C014424 		addiu	$4,$2,%lo($LC17)
+ 984 0a30 0000023C 		lui	$2,%hi($LC8)
+ 985 0a34 44004524 		addiu	$5,$2,%lo($LC8)
+ 986 0a38 4D000624 		li	$6,77			# 0x4d
+ 987 0a3c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2843)
+ 988 0a40 2C024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2843)
+ 989 0a44 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 990 0a48 00000000 		nop
+ 991 0a4c 21C84000 		move	$25,$2
+ 992 0a50 09F82003 		jalr	$25
+ 993 0a54 00000000 		nop
+ 994              	
+ 995              	$L30:
+  77:tests/test_ListCmdr.c ****   printf(VERASE_SCR);
+ 996              		.loc 1 78 0
+ 997 0a58 0000023C 		lui	$2,%hi($LC13)
+ 998 0a5c B0004224 		addiu	$2,$2,%lo($LC13)
+ 999 0a60 21204000 		move	$4,$2
+ 1000 0a64 0000828F 		lw	$2,%call16(printf)($28)
+ 1001 0a68 00000000 		nop
+ 1002 0a6c 21C84000 		move	$25,$2
+ 1003 0a70 09F82003 		jalr	$25
+ 1004 0a74 00000000 		nop
+ 1005              	
+ 1006 0a78 3000DC8F 		lw	$28,48($fp)
+ 1007 0a7c 00000000 		nop
+  78:tests/test_ListCmdr.c ****   vposition(stdout, 0,0);
+ 1008              		.loc 1 79 0
+ 1009 0a80 0000828F 		lw	$2,%got(stdout)($28)
+ 1010 0a84 00000000 		nop
+ 1011 0a88 0000428C 		lw	$2,0($2)
+ 1012 0a8c 00000000 		nop
+ 1013 0a90 21204000 		move	$4,$2
+ 1014 0a94 21280000 		move	$5,$0
+ 1015 0a98 21300000 		move	$6,$0
+ 1016 0a9c 0000828F 		lw	$2,%call16(vposition)($28)
+ 1017 0aa0 00000000 		nop
+ 1018 0aa4 21C84000 		move	$25,$2
+ 1019 0aa8 09F82003 		jalr	$25
+ 1020 0aac 00000000 		nop
+ 1021              	
+ 1022 0ab0 3000DC8F 		lw	$28,48($fp)
+ 1023              	$L31:
+  79:tests/test_ListCmdr.c ****   while (!ListViewDraw(&view));
+ 1024              		.loc 1 80 0
+ 1025 0ab4 5000C227 		addiu	$2,$fp,80
+ 1026 0ab8 21204000 		move	$4,$2
+ 1027 0abc 0000828F 		lw	$2,%call16(ListViewDraw)($28)
+ 1028 0ac0 00000000 		nop
+ 1029 0ac4 21C84000 		move	$25,$2
+ 1030 0ac8 09F82003 		jalr	$25
+ 1031 0acc 00000000 		nop
+ 1032              	
+ 1033 0ad0 3000DC8F 		lw	$28,48($fp)
+ 1034 0ad4 F7FF4010 		beq	$2,$0,$L31
+ 1035 0ad8 00000000 		nop
+ 1036              	
+  80:tests/test_ListCmdr.c **** 
+  81:tests/test_ListCmdr.c ****   ListViewSetFocus(&view, 10);
+ 1037              		.loc 1 82 0
+ 1038 0adc 5000C227 		addiu	$2,$fp,80
+ 1039 0ae0 21204000 		move	$4,$2
+ 1040 0ae4 0A000524 		li	$5,10			# 0xa
+ 1041 0ae8 0000828F 		lw	$2,%call16(ListViewSetFocus)($28)
+ 1042 0aec 00000000 		nop
+ 1043 0af0 21C84000 		move	$25,$2
+ 1044 0af4 09F82003 		jalr	$25
+ 1045 0af8 00000000 		nop
+ 1046              	
+ 1047 0afc 3000DC8F 		lw	$28,48($fp)
+  82:tests/test_ListCmdr.c ****   assert(ListViewGetFocus(&view) == 2);
+ 1048              		.loc 1 83 0
+ 1049 0b00 5000C227 		addiu	$2,$fp,80
+ 1050 0b04 21204000 		move	$4,$2
+ 1051 0b08 0000828F 		lw	$2,%call16(ListViewGetFocus)($28)
+ 1052 0b0c 00000000 		nop
+ 1053 0b10 21C84000 		move	$25,$2
+ 1054 0b14 09F82003 		jalr	$25
+ 1055 0b18 00000000 		nop
+ 1056              	
+ 1057 0b1c 3000DC8F 		lw	$28,48($fp)
+ 1058 0b20 21184000 		move	$3,$2
+ 1059 0b24 02000224 		li	$2,2			# 0x2
+ 1060 0b28 0D006210 		beq	$3,$2,$L32
+ 1061 0b2c 00000000 		nop
+ 1062              	
+ 1063 0b30 0000023C 		lui	$2,%hi($LC17)
+ 1064 0b34 0C014424 		addiu	$4,$2,%lo($LC17)
+ 1065 0b38 0000023C 		lui	$2,%hi($LC8)
+ 1066 0b3c 44004524 		addiu	$5,$2,%lo($LC8)
+ 1067 0b40 53000624 		li	$6,83			# 0x53
+ 1068 0b44 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2843)
+ 1069 0b48 2C024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2843)
+ 1070 0b4c 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1071 0b50 00000000 		nop
+ 1072 0b54 21C84000 		move	$25,$2
+ 1073 0b58 09F82003 		jalr	$25
+ 1074 0b5c 00000000 		nop
+ 1075              	
+ 1076              	$L32:
+  83:tests/test_ListCmdr.c ****   
+  84:tests/test_ListCmdr.c ****   usleep(200);
+ 1077              		.loc 1 85 0
+ 1078 0b60 C8000424 		li	$4,200			# 0xc8
+ 1079 0b64 0000828F 		lw	$2,%call16(usleep)($28)
+ 1080 0b68 00000000 		nop
+ 1081 0b6c 21C84000 		move	$25,$2
+ 1082 0b70 09F82003 		jalr	$25
+ 1083 0b74 00000000 		nop
+ 1084              	
+ 1085 0b78 3000DC8F 		lw	$28,48($fp)
+  85:tests/test_ListCmdr.c ****   ListViewSetFocus(&view, 0);
+ 1086              		.loc 1 86 0
+ 1087 0b7c 5000C227 		addiu	$2,$fp,80
+ 1088 0b80 21204000 		move	$4,$2
+ 1089 0b84 21280000 		move	$5,$0
+ 1090 0b88 0000828F 		lw	$2,%call16(ListViewSetFocus)($28)
+ 1091 0b8c 00000000 		nop
+ 1092 0b90 21C84000 		move	$25,$2
+ 1093 0b94 09F82003 		jalr	$25
+ 1094 0b98 00000000 		nop
+ 1095              	
+ 1096 0b9c 3000DC8F 		lw	$28,48($fp)
+  86:tests/test_ListCmdr.c ****   assert(view.offset == 0);
+ 1097              		.loc 1 87 0
+ 1098 0ba0 6800C28F 		lw	$2,104($fp)
+ 1099 0ba4 00000000 		nop
+ 1100 0ba8 0D004010 		beq	$2,$0,$L33
+ 1101 0bac 00000000 		nop
+ 1102              	
+ 1103 0bb0 0000023C 		lui	$2,%hi($LC18)
+ 1104 0bb4 2C014424 		addiu	$4,$2,%lo($LC18)
+ 1105 0bb8 0000023C 		lui	$2,%hi($LC8)
+ 1106 0bbc 44004524 		addiu	$5,$2,%lo($LC8)
+ 1107 0bc0 57000624 		li	$6,87			# 0x57
+ 1108 0bc4 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2843)
+ 1109 0bc8 2C024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2843)
+ 1110 0bcc 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1111 0bd0 00000000 		nop
+ 1112 0bd4 21C84000 		move	$25,$2
+ 1113 0bd8 09F82003 		jalr	$25
+ 1114 0bdc 00000000 		nop
+ 1115              	
+ 1116              	$L33:
+  87:tests/test_ListCmdr.c ****   printf(VERASE_SCR);
+ 1117              		.loc 1 88 0
+ 1118 0be0 0000023C 		lui	$2,%hi($LC13)
+ 1119 0be4 B0004224 		addiu	$2,$2,%lo($LC13)
+ 1120 0be8 21204000 		move	$4,$2
+ 1121 0bec 0000828F 		lw	$2,%call16(printf)($28)
+ 1122 0bf0 00000000 		nop
+ 1123 0bf4 21C84000 		move	$25,$2
+ 1124 0bf8 09F82003 		jalr	$25
+ 1125 0bfc 00000000 		nop
+ 1126              	
+ 1127 0c00 3000DC8F 		lw	$28,48($fp)
+ 1128 0c04 00000000 		nop
+  88:tests/test_ListCmdr.c ****   vposition(stdout, 0,0);
+ 1129              		.loc 1 89 0
+ 1130 0c08 0000828F 		lw	$2,%got(stdout)($28)
+ 1131 0c0c 00000000 		nop
+ 1132 0c10 0000428C 		lw	$2,0($2)
+ 1133 0c14 00000000 		nop
+ 1134 0c18 21204000 		move	$4,$2
+ 1135 0c1c 21280000 		move	$5,$0
+ 1136 0c20 21300000 		move	$6,$0
+ 1137 0c24 0000828F 		lw	$2,%call16(vposition)($28)
+ 1138 0c28 00000000 		nop
+ 1139 0c2c 21C84000 		move	$25,$2
+ 1140 0c30 09F82003 		jalr	$25
+ 1141 0c34 00000000 		nop
+ 1142              	
+ 1143 0c38 3000DC8F 		lw	$28,48($fp)
+ 1144              	$L34:
+  89:tests/test_ListCmdr.c ****   while (!ListViewDraw(&view));
+ 1145              		.loc 1 90 0
+ 1146 0c3c 5000C227 		addiu	$2,$fp,80
+ 1147 0c40 21204000 		move	$4,$2
+ 1148 0c44 0000828F 		lw	$2,%call16(ListViewDraw)($28)
+ 1149 0c48 00000000 		nop
+ 1150 0c4c 21C84000 		move	$25,$2
+ 1151 0c50 09F82003 		jalr	$25
+ 1152 0c54 00000000 		nop
+ 1153              	
+ 1154 0c58 3000DC8F 		lw	$28,48($fp)
+ 1155 0c5c F7FF4010 		beq	$2,$0,$L34
+ 1156 0c60 00000000 		nop
+ 1157              	
+  90:tests/test_ListCmdr.c **** }
+ 1158              		.loc 1 91 0
+ 1159 0c64 21E8C003 		move	$sp,$fp
+ 1160 0c68 8C00BF8F 		lw	$31,140($sp)
+ 1161 0c6c 8800BE8F 		lw	$fp,136($sp)
+ 1162 0c70 9000BD27 		addiu	$sp,$sp,144
+ 1163 0c74 0800E003 		j	$31
+ 1164 0c78 00000000 		nop
+ 1165              	
+ 1166              		.set	macro
+ 1167              		.set	reorder
+ 1168              		.end	Test2
+ 1169              	$LFE4:
+ 1171              		.rdata
+ 1172 013d 000000   		.align	2
+ 1173              	$LC19:
+ 1174 0140 61705000 		.ascii	"apP\000"
+ 1175              		.align	2
+ 1176              	$LC20:
+ 1177 0144 6150706C 		.ascii	"aPple\000"
+ 1177      6500
+ 1178 014a 0000     		.align	2
+ 1179              	$LC21:
+ 1180 014c 21507265 		.ascii	"!PrefixCompare(\"apP\",\"aPple\")\000"
+ 1180      66697843 
+ 1180      6F6D7061 
+ 1180      72652822 
+ 1180      61705022 
+ 1181 016a 0000     		.align	2
+ 1182              	$LC22:
+ 1183 016c 4C697374 		.ascii	"ListGenGet(&gen, 4, 0x0, 0)\000"
+ 1183      47656E47 
+ 1183      65742826 
+ 1183      67656E2C 
+ 1183      20342C20 
+ 1184              		.align	2
+ 1185              	$LC23:
+ 1186 0188 214C6973 		.ascii	"!ListGenGet(&gen, 4, 0x0, 0)\000"
+ 1186      7447656E 
+ 1186      47657428 
+ 1186      2667656E 
+ 1186      2C20342C 
+ 1187 01a5 000000   		.align	2
+ 1188              	$LC24:
+ 1189 01a8 4C697374 		.ascii	"ListGenNext(&gen, buf, 37)\000"
+ 1189      47656E4E 
+ 1189      65787428 
+ 1189      2667656E 
+ 1189      2C206275 
+ 1190 01c3 00       		.align	2
+ 1191              	$LC25:
+ 1192 01c4 214C6973 		.ascii	"!ListGenNext(&gen, buf, 37)\000"
+ 1192      7447656E 
+ 1192      4E657874 
+ 1192      28266765 
+ 1192      6E2C2062 
+ 1193              		.text
+ 1194              		.align	2
+ 1195              		.globl	Test3
+ 1196              	$LFB5 = .
+  91:tests/test_ListCmdr.c **** 
+  92:tests/test_ListCmdr.c **** void Test3() {
+ 1197              		.loc 1 93 0
+ 1198              		.set	nomips16
+ 1199              		.ent	Test3
+ 1201              	Test3:
+ 1202              		.frame	$fp,216,$31		# vars= 160, regs= 2/0, args= 40, gp= 8
+ 1203              		.mask	0xc0000000,-4
+ 1204              		.fmask	0x00000000,0
+ 1205              		.set	noreorder
+ 1206              		.set	nomacro
+ 1207              		
+ 1208 0c7c 28FFBD27 		addiu	$sp,$sp,-216
+ 1209              	$LCFI15:
+ 1210 0c80 D400BFAF 		sw	$31,212($sp)
+ 1211              	$LCFI16:
+ 1212 0c84 D000BEAF 		sw	$fp,208($sp)
+ 1213              	$LCFI17:
+ 1214 0c88 21F0A003 		move	$fp,$sp
+ 1215              	$LCFI18:
+ 1216 0c8c 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 1217 0c90 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 1218 0c94 2800BCAF 		.cprestore	40
+  93:tests/test_ListCmdr.c ****   char prefix[LISTGEN_STRING_MAX];
+  94:tests/test_ListCmdr.c ****   prefix[0] = 0x0;
+ 1219              		.loc 1 95 0
+ 1220 0c98 4800C0A3 		sb	$0,72($fp)
+  95:tests/test_ListCmdr.c ****   StringsRestartFunc(0x0);
+ 1221              		.loc 1 96 0
+ 1222 0c9c 21200000 		move	$4,$0
+ 1223              		.option	pic0
+ 1224 0ca0 0000000C 		jal	StringsRestartFunc
+ 1225 0ca4 00000000 		nop
+ 1226              	
+ 1227              		.option	pic2
+ 1228 0ca8 2800DC8F 		lw	$28,40($fp)
+  96:tests/test_ListCmdr.c ****   assert(!PrefixCompare("apP","aPple"));
+ 1229              		.loc 1 97 0
+ 1230 0cac 0000023C 		lui	$2,%hi($LC19)
+ 1231 0cb0 40014424 		addiu	$4,$2,%lo($LC19)
+ 1232 0cb4 0000023C 		lui	$2,%hi($LC20)
+ 1233 0cb8 44014524 		addiu	$5,$2,%lo($LC20)
+ 1234 0cbc 0000828F 		lw	$2,%call16(PrefixCompare)($28)
+ 1235 0cc0 00000000 		nop
+ 1236 0cc4 21C84000 		move	$25,$2
+ 1237 0cc8 09F82003 		jalr	$25
+ 1238 0ccc 00000000 		nop
+ 1239              	
+ 1240 0cd0 2800DC8F 		lw	$28,40($fp)
+ 1241 0cd4 0D004010 		beq	$2,$0,$L37
+ 1242 0cd8 00000000 		nop
+ 1243              	
+ 1244 0cdc 0000023C 		lui	$2,%hi($LC21)
+ 1245 0ce0 4C014424 		addiu	$4,$2,%lo($LC21)
+ 1246 0ce4 0000023C 		lui	$2,%hi($LC8)
+ 1247 0ce8 44004524 		addiu	$5,$2,%lo($LC8)
+ 1248 0cec 61000624 		li	$6,97			# 0x61
+ 1249 0cf0 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2893)
+ 1250 0cf4 24024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2893)
+ 1251 0cf8 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1252 0cfc 00000000 		nop
+ 1253 0d00 21C84000 		move	$25,$2
+ 1254 0d04 09F82003 		jalr	$25
+ 1255 0d08 00000000 		nop
+ 1256              	
+ 1257              	$L37:
+  97:tests/test_ListCmdr.c ****   PrefixFilter pf;
+  98:tests/test_ListCmdr.c ****   ListGen gen = PrefixFilterCreate(&pf, prefix, ListGenCreate(StringsNextFunc, StringsRestartFunc, 
+ 1258              		.loc 1 99 0
+ 1259 0d0c 3000C227 		addiu	$2,$fp,48
+ 1260 0d10 21204000 		move	$4,$2
+ 1261 0d14 0000023C 		lui	$2,%hi(StringsNextFunc)
+ 1262 0d18 00004524 		addiu	$5,$2,%lo(StringsNextFunc)
+ 1263 0d1c 0000023C 		lui	$2,%hi(StringsRestartFunc)
+ 1264 0d20 00004624 		addiu	$6,$2,%lo(StringsRestartFunc)
+ 1265 0d24 21380000 		move	$7,$0
+ 1266 0d28 0000828F 		lw	$2,%call16(ListGenCreate)($28)
+ 1267 0d2c 00000000 		nop
+ 1268 0d30 21C84000 		move	$25,$2
+ 1269 0d34 09F82003 		jalr	$25
+ 1270 0d38 00000000 		nop
+ 1271              	
+ 1272 0d3c 2800DC8F 		lw	$28,40($fp)
+ 1273 0d40 8C00C427 		addiu	$4,$fp,140
+ 1274 0d44 7000C327 		addiu	$3,$fp,112
+ 1275 0d48 4800C227 		addiu	$2,$fp,72
+ 1276 0d4c 3400C98F 		lw	$9,52($fp)
+ 1277 0d50 3800C88F 		lw	$8,56($fp)
+ 1278 0d54 3C00C78F 		lw	$7,60($fp)
+ 1279 0d58 4000C68F 		lw	$6,64($fp)
+ 1280 0d5c 4400C58F 		lw	$5,68($fp)
+ 1281 0d60 1000A9AF 		sw	$9,16($sp)
+ 1282 0d64 1400A8AF 		sw	$8,20($sp)
+ 1283 0d68 1800A7AF 		sw	$7,24($sp)
+ 1284 0d6c 1C00A6AF 		sw	$6,28($sp)
+ 1285 0d70 2000A5AF 		sw	$5,32($sp)
+ 1286 0d74 3000C78F 		lw	$7,48($fp)
+ 1287 0d78 21286000 		move	$5,$3
+ 1288 0d7c 21304000 		move	$6,$2
+ 1289 0d80 0000828F 		lw	$2,%call16(PrefixFilterCreate)($28)
+ 1290 0d84 00000000 		nop
+ 1291 0d88 21C84000 		move	$25,$2
+ 1292 0d8c 09F82003 		jalr	$25
+ 1293 0d90 00000000 		nop
+ 1294              	
+ 1295 0d94 2800DC8F 		lw	$28,40($fp)
+  99:tests/test_ListCmdr.c ****   assert(ListGenGet(&gen, 4, 0x0, 0));
+ 1296              		.loc 1 100 0
+ 1297 0d98 8C00C227 		addiu	$2,$fp,140
+ 1298 0d9c 21204000 		move	$4,$2
+ 1299 0da0 04000524 		li	$5,4			# 0x4
+ 1300 0da4 21300000 		move	$6,$0
+ 1301 0da8 21380000 		move	$7,$0
+ 1302 0dac 0000828F 		lw	$2,%call16(ListGenGet)($28)
+ 1303 0db0 00000000 		nop
+ 1304 0db4 21C84000 		move	$25,$2
+ 1305 0db8 09F82003 		jalr	$25
+ 1306 0dbc 00000000 		nop
+ 1307              	
+ 1308 0dc0 2800DC8F 		lw	$28,40($fp)
+ 1309 0dc4 0D004014 		bne	$2,$0,$L38
+ 1310 0dc8 00000000 		nop
+ 1311              	
+ 1312 0dcc 0000023C 		lui	$2,%hi($LC22)
+ 1313 0dd0 6C014424 		addiu	$4,$2,%lo($LC22)
+ 1314 0dd4 0000023C 		lui	$2,%hi($LC8)
+ 1315 0dd8 44004524 		addiu	$5,$2,%lo($LC8)
+ 1316 0ddc 64000624 		li	$6,100			# 0x64
+ 1317 0de0 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2893)
+ 1318 0de4 24024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2893)
+ 1319 0de8 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1320 0dec 00000000 		nop
+ 1321 0df0 21C84000 		move	$25,$2
+ 1322 0df4 09F82003 		jalr	$25
+ 1323 0df8 00000000 		nop
+ 1324              	
+ 1325              	$L38:
+ 100:tests/test_ListCmdr.c ****   prefix[0] = 'b';
+ 1326              		.loc 1 101 0
+ 1327 0dfc 62000224 		li	$2,98			# 0x62
+ 1328 0e00 4800C2A3 		sb	$2,72($fp)
+ 101:tests/test_ListCmdr.c ****   prefix[1] = 0x0;
+ 1329              		.loc 1 102 0
+ 1330 0e04 4900C0A3 		sb	$0,73($fp)
+ 102:tests/test_ListCmdr.c ****   assert(!ListGenGet(&gen, 4, 0x0, 0));
+ 1331              		.loc 1 103 0
+ 1332 0e08 8C00C227 		addiu	$2,$fp,140
+ 1333 0e0c 21204000 		move	$4,$2
+ 1334 0e10 04000524 		li	$5,4			# 0x4
+ 1335 0e14 21300000 		move	$6,$0
+ 1336 0e18 21380000 		move	$7,$0
+ 1337 0e1c 0000828F 		lw	$2,%call16(ListGenGet)($28)
+ 1338 0e20 00000000 		nop
+ 1339 0e24 21C84000 		move	$25,$2
+ 1340 0e28 09F82003 		jalr	$25
+ 1341 0e2c 00000000 		nop
+ 1342              	
+ 1343 0e30 2800DC8F 		lw	$28,40($fp)
+ 1344 0e34 0D004010 		beq	$2,$0,$L39
+ 1345 0e38 00000000 		nop
+ 1346              	
+ 1347 0e3c 0000023C 		lui	$2,%hi($LC23)
+ 1348 0e40 88014424 		addiu	$4,$2,%lo($LC23)
+ 1349 0e44 0000023C 		lui	$2,%hi($LC8)
+ 1350 0e48 44004524 		addiu	$5,$2,%lo($LC8)
+ 1351 0e4c 67000624 		li	$6,103			# 0x67
+ 1352 0e50 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2893)
+ 1353 0e54 24024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2893)
+ 1354 0e58 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1355 0e5c 00000000 		nop
+ 1356 0e60 21C84000 		move	$25,$2
+ 1357 0e64 09F82003 		jalr	$25
+ 1358 0e68 00000000 		nop
+ 1359              	
+ 1360              	$L39:
+ 103:tests/test_ListCmdr.c ****   char buf[LISTGEN_STRING_MAX];
+ 104:tests/test_ListCmdr.c ****   ListGenRestart(&gen);
+ 1361              		.loc 1 105 0
+ 1362 0e6c 8C00C227 		addiu	$2,$fp,140
+ 1363 0e70 21204000 		move	$4,$2
+ 1364 0e74 0000828F 		lw	$2,%call16(ListGenRestart)($28)
+ 1365 0e78 00000000 		nop
+ 1366 0e7c 21C84000 		move	$25,$2
+ 1367 0e80 09F82003 		jalr	$25
+ 1368 0e84 00000000 		nop
+ 1369              	
+ 1370 0e88 2800DC8F 		lw	$28,40($fp)
+ 105:tests/test_ListCmdr.c ****   assert(ListGenNext(&gen, buf, LISTGEN_STRING_MAX));
+ 1371              		.loc 1 106 0
+ 1372 0e8c 8C00C327 		addiu	$3,$fp,140
+ 1373 0e90 A400C227 		addiu	$2,$fp,164
+ 1374 0e94 21206000 		move	$4,$3
+ 1375 0e98 21284000 		move	$5,$2
+ 1376 0e9c 25000624 		li	$6,37			# 0x25
+ 1377 0ea0 0000828F 		lw	$2,%call16(ListGenNext)($28)
+ 1378 0ea4 00000000 		nop
+ 1379 0ea8 21C84000 		move	$25,$2
+ 1380 0eac 09F82003 		jalr	$25
+ 1381 0eb0 00000000 		nop
+ 1382              	
+ 1383 0eb4 2800DC8F 		lw	$28,40($fp)
+ 1384 0eb8 0D004014 		bne	$2,$0,$L40
+ 1385 0ebc 00000000 		nop
+ 1386              	
+ 1387 0ec0 0000023C 		lui	$2,%hi($LC24)
+ 1388 0ec4 A8014424 		addiu	$4,$2,%lo($LC24)
+ 1389 0ec8 0000023C 		lui	$2,%hi($LC8)
+ 1390 0ecc 44004524 		addiu	$5,$2,%lo($LC8)
+ 1391 0ed0 6A000624 		li	$6,106			# 0x6a
+ 1392 0ed4 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2893)
+ 1393 0ed8 24024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2893)
+ 1394 0edc 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1395 0ee0 00000000 		nop
+ 1396 0ee4 21C84000 		move	$25,$2
+ 1397 0ee8 09F82003 		jalr	$25
+ 1398 0eec 00000000 		nop
+ 1399              	
+ 1400              	$L40:
+ 106:tests/test_ListCmdr.c ****   assert(!strcmp(buf, "banana"));
+ 1401              		.loc 1 107 0
+ 1402 0ef0 A400C227 		addiu	$2,$fp,164
+ 1403 0ef4 21204000 		move	$4,$2
+ 1404 0ef8 0000023C 		lui	$2,%hi($LC1)
+ 1405 0efc 08004524 		addiu	$5,$2,%lo($LC1)
+ 1406 0f00 0000828F 		lw	$2,%call16(strcmp)($28)
+ 1407 0f04 00000000 		nop
+ 1408 0f08 21C84000 		move	$25,$2
+ 1409 0f0c 09F82003 		jalr	$25
+ 1410 0f10 00000000 		nop
+ 1411              	
+ 1412 0f14 2800DC8F 		lw	$28,40($fp)
+ 1413 0f18 0D004010 		beq	$2,$0,$L41
+ 1414 0f1c 00000000 		nop
+ 1415              	
+ 1416 0f20 0000023C 		lui	$2,%hi($LC10)
+ 1417 0f24 74004424 		addiu	$4,$2,%lo($LC10)
+ 1418 0f28 0000023C 		lui	$2,%hi($LC8)
+ 1419 0f2c 44004524 		addiu	$5,$2,%lo($LC8)
+ 1420 0f30 6B000624 		li	$6,107			# 0x6b
+ 1421 0f34 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2893)
+ 1422 0f38 24024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2893)
+ 1423 0f3c 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1424 0f40 00000000 		nop
+ 1425 0f44 21C84000 		move	$25,$2
+ 1426 0f48 09F82003 		jalr	$25
+ 1427 0f4c 00000000 		nop
+ 1428              	
+ 1429              	$L41:
+ 107:tests/test_ListCmdr.c ****   assert(!ListGenNext(&gen, buf, LISTGEN_STRING_MAX));
+ 1430              		.loc 1 108 0
+ 1431 0f50 8C00C327 		addiu	$3,$fp,140
+ 1432 0f54 A400C227 		addiu	$2,$fp,164
+ 1433 0f58 21206000 		move	$4,$3
+ 1434 0f5c 21284000 		move	$5,$2
+ 1435 0f60 25000624 		li	$6,37			# 0x25
+ 1436 0f64 0000828F 		lw	$2,%call16(ListGenNext)($28)
+ 1437 0f68 00000000 		nop
+ 1438 0f6c 21C84000 		move	$25,$2
+ 1439 0f70 09F82003 		jalr	$25
+ 1440 0f74 00000000 		nop
+ 1441              	
+ 1442 0f78 2800DC8F 		lw	$28,40($fp)
+ 1443 0f7c 0D004010 		beq	$2,$0,$L43
+ 1444 0f80 00000000 		nop
+ 1445              	
+ 1446 0f84 0000023C 		lui	$2,%hi($LC25)
+ 1447 0f88 C4014424 		addiu	$4,$2,%lo($LC25)
+ 1448 0f8c 0000023C 		lui	$2,%hi($LC8)
+ 1449 0f90 44004524 		addiu	$5,$2,%lo($LC8)
+ 1450 0f94 6C000624 		li	$6,108			# 0x6c
+ 1451 0f98 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2893)
+ 1452 0f9c 24024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2893)
+ 1453 0fa0 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1454 0fa4 00000000 		nop
+ 1455 0fa8 21C84000 		move	$25,$2
+ 1456 0fac 09F82003 		jalr	$25
+ 1457 0fb0 00000000 		nop
+ 1458              	
+ 1459              	$L43:
+ 108:tests/test_ListCmdr.c **** }
+ 1460              		.loc 1 109 0
+ 1461 0fb4 21E8C003 		move	$sp,$fp
+ 1462 0fb8 D400BF8F 		lw	$31,212($sp)
+ 1463 0fbc D000BE8F 		lw	$fp,208($sp)
+ 1464 0fc0 D800BD27 		addiu	$sp,$sp,216
+ 1465 0fc4 0800E003 		j	$31
+ 1466 0fc8 00000000 		nop
+ 1467              	
+ 1468              		.set	macro
+ 1469              		.set	reorder
+ 1470              		.end	Test3
+ 1471              	$LFE5:
+ 1473              		.rdata
+ 1474              		.align	2
+ 1475              	$LC26:
+ 1476 01e0 4C697374 		.ascii	"ListCmdrGetValue(&cmdr) == 0x0\000"
+ 1476      436D6472 
+ 1476      47657456 
+ 1476      616C7565 
+ 1476      2826636D 
+ 1477 01ff 00       		.align	2
+ 1478              	$LC27:
+ 1479 0200 1B5B324B 		.ascii	"\033[2K\015%i -> \000"
+ 1479      0D256920 
+ 1479      2D3E2000 
+ 1480              		.align	2
+ 1481              	$LC28:
+ 1482 020c 256900   		.ascii	"%i\000"
+ 1483 020f 00       		.align	2
+ 1484              	$LC29:
+ 1485 0210 56414C55 		.ascii	"VALUE = %s\012\000"
+ 1485      45203D20 
+ 1485      25730A00 
+ 1486              		.text
+ 1487              		.align	2
+ 1488              		.globl	Test4
+ 1489              	$LFB6 = .
+ 109:tests/test_ListCmdr.c **** 
+ 110:tests/test_ListCmdr.c **** void Test4() {
+ 1490              		.loc 1 111 0
+ 1491              		.set	nomips16
+ 1492              		.ent	Test4
+ 1494              	Test4:
+ 1495              		.frame	$fp,256,$31		# vars= 184, regs= 3/0, args= 48, gp= 8
+ 1496              		.mask	0xc0010000,-4
+ 1497              		.fmask	0x00000000,0
+ 1498              		.set	noreorder
+ 1499              		.set	nomacro
+ 1500              		
+ 1501 0fcc 00FFBD27 		addiu	$sp,$sp,-256
+ 1502              	$LCFI19:
+ 1503 0fd0 FC00BFAF 		sw	$31,252($sp)
+ 1504              	$LCFI20:
+ 1505 0fd4 F800BEAF 		sw	$fp,248($sp)
+ 1506              	$LCFI21:
+ 1507 0fd8 F400B0AF 		sw	$16,244($sp)
+ 1508              	$LCFI22:
+ 1509 0fdc 21F0A003 		move	$fp,$sp
+ 1510              	$LCFI23:
+ 1511 0fe0 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 1512 0fe4 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 1513 0fe8 3000BCAF 		.cprestore	48
+ 111:tests/test_ListCmdr.c ****   PlatformInit();
+ 1514              		.loc 1 112 0
+ 1515 0fec 0000828F 		lw	$2,%call16(PlatformInit)($28)
+ 1516 0ff0 00000000 		nop
+ 1517 0ff4 21C84000 		move	$25,$2
+ 1518 0ff8 09F82003 		jalr	$25
+ 1519 0ffc 00000000 		nop
+ 1520              	
+ 1521 1000 3000DC8F 		lw	$28,48($fp)
+ 112:tests/test_ListCmdr.c ****   printf(VERASE_SCR);
+ 1522              		.loc 1 113 0
+ 1523 1004 0000023C 		lui	$2,%hi($LC13)
+ 1524 1008 B0004224 		addiu	$2,$2,%lo($LC13)
+ 1525 100c 21204000 		move	$4,$2
+ 1526 1010 0000828F 		lw	$2,%call16(printf)($28)
+ 1527 1014 00000000 		nop
+ 1528 1018 21C84000 		move	$25,$2
+ 1529 101c 09F82003 		jalr	$25
+ 1530 1020 00000000 		nop
+ 1531              	
+ 1532 1024 3000DC8F 		lw	$28,48($fp)
+ 113:tests/test_ListCmdr.c **** 
+ 114:tests/test_ListCmdr.c ****   ListGen gen = ListGenCreate(StringsNextFunc, StringsRestartFunc, 0x0);
+ 1533              		.loc 1 115 0
+ 1534 1028 3C00C227 		addiu	$2,$fp,60
+ 1535 102c 21204000 		move	$4,$2
+ 1536 1030 0000023C 		lui	$2,%hi(StringsNextFunc)
+ 1537 1034 00004524 		addiu	$5,$2,%lo(StringsNextFunc)
+ 1538 1038 0000023C 		lui	$2,%hi(StringsRestartFunc)
+ 1539 103c 00004624 		addiu	$6,$2,%lo(StringsRestartFunc)
+ 1540 1040 21380000 		move	$7,$0
+ 1541 1044 0000828F 		lw	$2,%call16(ListGenCreate)($28)
+ 1542 1048 00000000 		nop
+ 1543 104c 21C84000 		move	$25,$2
+ 1544 1050 09F82003 		jalr	$25
+ 1545 1054 00000000 		nop
+ 1546              	
+ 1547 1058 3000DC8F 		lw	$28,48($fp)
+ 115:tests/test_ListCmdr.c ****   ListCmdr cmdr;
+ 116:tests/test_ListCmdr.c ****   ListCmdrInit(&cmdr, gen, 1, 7, 0, 1);
+ 1548              		.loc 1 117 0
+ 1549 105c 5400C227 		addiu	$2,$fp,84
+ 1550 1060 01000324 		li	$3,1			# 0x1
+ 1551 1064 1C00A3AF 		sw	$3,28($sp)
+ 1552 1068 07000324 		li	$3,7			# 0x7
+ 1553 106c 2000A3AF 		sw	$3,32($sp)
+ 1554 1070 2400A0AF 		sw	$0,36($sp)
+ 1555 1074 01000324 		li	$3,1			# 0x1
+ 1556 1078 2800A3AF 		sw	$3,40($sp)
+ 1557 107c 4800C58F 		lw	$5,72($fp)
+ 1558 1080 4C00C48F 		lw	$4,76($fp)
+ 1559 1084 5000C38F 		lw	$3,80($fp)
+ 1560 1088 1000A5AF 		sw	$5,16($sp)
+ 1561 108c 1400A4AF 		sw	$4,20($sp)
+ 1562 1090 1800A3AF 		sw	$3,24($sp)
+ 1563 1094 3C00C58F 		lw	$5,60($fp)
+ 1564 1098 4000C68F 		lw	$6,64($fp)
+ 1565 109c 4400C78F 		lw	$7,68($fp)
+ 1566 10a0 21204000 		move	$4,$2
+ 1567 10a4 0000828F 		lw	$2,%call16(ListCmdrInit)($28)
+ 1568 10a8 00000000 		nop
+ 1569 10ac 21C84000 		move	$25,$2
+ 1570 10b0 09F82003 		jalr	$25
+ 1571 10b4 00000000 		nop
+ 1572              	
+ 1573 10b8 3000DC8F 		lw	$28,48($fp)
+ 117:tests/test_ListCmdr.c ****   assert(ListCmdrGetValue(&cmdr) == 0x0);
+ 1574              		.loc 1 118 0
+ 1575 10bc 5400C227 		addiu	$2,$fp,84
+ 1576 10c0 21204000 		move	$4,$2
+ 1577 10c4 0000828F 		lw	$2,%call16(ListCmdrGetValue)($28)
+ 1578 10c8 00000000 		nop
+ 1579 10cc 21C84000 		move	$25,$2
+ 1580 10d0 09F82003 		jalr	$25
+ 1581 10d4 00000000 		nop
+ 1582              	
+ 1583 10d8 3000DC8F 		lw	$28,48($fp)
+ 1584 10dc 0D004010 		beq	$2,$0,$L45
+ 1585 10e0 00000000 		nop
+ 1586              	
+ 1587 10e4 0000023C 		lui	$2,%hi($LC26)
+ 1588 10e8 E0014424 		addiu	$4,$2,%lo($LC26)
+ 1589 10ec 0000023C 		lui	$2,%hi($LC8)
+ 1590 10f0 44004524 		addiu	$5,$2,%lo($LC8)
+ 1591 10f4 76000624 		li	$6,118			# 0x76
+ 1592 10f8 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2920)
+ 1593 10fc 1C024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2920)
+ 1594 1100 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1595 1104 00000000 		nop
+ 1596 1108 21C84000 		move	$25,$2
+ 1597 110c 09F82003 		jalr	$25
+ 1598 1110 00000000 		nop
+ 1599              	
+ 1600              	$L45:
+ 118:tests/test_ListCmdr.c ****   while (!ListCmdrDraw(&cmdr));
+ 1601              		.loc 1 119 0
+ 1602 1114 5400C227 		addiu	$2,$fp,84
+ 1603 1118 21204000 		move	$4,$2
+ 1604 111c 0000828F 		lw	$2,%call16(ListCmdrDraw)($28)
+ 1605 1120 00000000 		nop
+ 1606 1124 21C84000 		move	$25,$2
+ 1607 1128 09F82003 		jalr	$25
+ 1608 112c 00000000 		nop
+ 1609              	
+ 1610 1130 3000DC8F 		lw	$28,48($fp)
+ 1611 1134 F7FF4010 		beq	$2,$0,$L45
+ 1612 1138 00000000 		nop
+ 1613              	
+ 119:tests/test_ListCmdr.c **** 
+ 120:tests/test_ListCmdr.c ****   usleep(500);
+ 1614              		.loc 1 121 0
+ 1615 113c F4010424 		li	$4,500			# 0x1f4
+ 1616 1140 0000828F 		lw	$2,%call16(usleep)($28)
+ 1617 1144 00000000 		nop
+ 1618 1148 21C84000 		move	$25,$2
+ 1619 114c 09F82003 		jalr	$25
+ 1620 1150 00000000 		nop
+ 1621              	
+ 1622 1154 3000DC8F 		lw	$28,48($fp)
+ 121:tests/test_ListCmdr.c ****   ListCmdrPushEvent(&cmdr, 'a');
+ 1623              		.loc 1 122 0
+ 1624 1158 5400C227 		addiu	$2,$fp,84
+ 1625 115c 21204000 		move	$4,$2
+ 1626 1160 61000524 		li	$5,97			# 0x61
+ 1627 1164 0000828F 		lw	$2,%call16(ListCmdrPushEvent)($28)
+ 1628 1168 00000000 		nop
+ 1629 116c 21C84000 		move	$25,$2
+ 1630 1170 09F82003 		jalr	$25
+ 1631 1174 00000000 		nop
+ 1632              	
+ 1633 1178 3000DC8F 		lw	$28,48($fp)
+ 1634              	$L46:
+ 122:tests/test_ListCmdr.c ****   while (!ListCmdrDraw(&cmdr));
+ 1635              		.loc 1 123 0
+ 1636 117c 5400C227 		addiu	$2,$fp,84
+ 1637 1180 21204000 		move	$4,$2
+ 1638 1184 0000828F 		lw	$2,%call16(ListCmdrDraw)($28)
+ 1639 1188 00000000 		nop
+ 1640 118c 21C84000 		move	$25,$2
+ 1641 1190 09F82003 		jalr	$25
+ 1642 1194 00000000 		nop
+ 1643              	
+ 1644 1198 3000DC8F 		lw	$28,48($fp)
+ 1645 119c F7FF4010 		beq	$2,$0,$L46
+ 1646 11a0 00000000 		nop
+ 1647              	
+ 123:tests/test_ListCmdr.c **** 
+ 124:tests/test_ListCmdr.c ****   usleep(500);
+ 1648              		.loc 1 125 0
+ 1649 11a4 F4010424 		li	$4,500			# 0x1f4
+ 1650 11a8 0000828F 		lw	$2,%call16(usleep)($28)
+ 1651 11ac 00000000 		nop
+ 1652 11b0 21C84000 		move	$25,$2
+ 1653 11b4 09F82003 		jalr	$25
+ 1654 11b8 00000000 		nop
+ 1655              	
+ 1656 11bc 3000DC8F 		lw	$28,48($fp)
+ 125:tests/test_ListCmdr.c ****   ListCmdrPushEvent(&cmdr, '\b');
+ 1657              		.loc 1 126 0
+ 1658 11c0 5400C227 		addiu	$2,$fp,84
+ 1659 11c4 21204000 		move	$4,$2
+ 1660 11c8 08000524 		li	$5,8			# 0x8
+ 1661 11cc 0000828F 		lw	$2,%call16(ListCmdrPushEvent)($28)
+ 1662 11d0 00000000 		nop
+ 1663 11d4 21C84000 		move	$25,$2
+ 1664 11d8 09F82003 		jalr	$25
+ 1665 11dc 00000000 		nop
+ 1666              	
+ 1667 11e0 3000DC8F 		lw	$28,48($fp)
+ 1668              	$L47:
+ 126:tests/test_ListCmdr.c ****   while (!ListCmdrDraw(&cmdr));
+ 1669              		.loc 1 127 0
+ 1670 11e4 5400C227 		addiu	$2,$fp,84
+ 1671 11e8 21204000 		move	$4,$2
+ 1672 11ec 0000828F 		lw	$2,%call16(ListCmdrDraw)($28)
+ 1673 11f0 00000000 		nop
+ 1674 11f4 21C84000 		move	$25,$2
+ 1675 11f8 09F82003 		jalr	$25
+ 1676 11fc 00000000 		nop
+ 1677              	
+ 1678 1200 3000DC8F 		lw	$28,48($fp)
+ 1679 1204 F7FF4010 		beq	$2,$0,$L47
+ 1680 1208 00000000 		nop
+ 1681              	
+ 127:tests/test_ListCmdr.c **** 
+ 128:tests/test_ListCmdr.c ****   unsigned char escState = 0;
+ 1682              		.loc 1 129 0
+ 1683 120c EC00C0A3 		sb	$0,236($fp)
+ 129:tests/test_ListCmdr.c ****   while (!ListCmdrGetValue(&cmdr)) {
+ 1684              		.loc 1 130 0
+ 1685 1210 4F000010 		b	$L48
+ 1686 1214 00000000 		nop
+ 1687              	
+ 1688              	$L50:
+ 1689              	$LBB4 = .
+ 130:tests/test_ListCmdr.c ****     int r = fgetc(stdin);
+ 1690              		.loc 1 131 0
+ 1691 1218 0000828F 		lw	$2,%got(stdin)($28)
+ 1692 121c 00000000 		nop
+ 1693 1220 0000428C 		lw	$2,0($2)
+ 1694 1224 00000000 		nop
+ 1695 1228 21204000 		move	$4,$2
+ 1696 122c 0000828F 		lw	$2,%call16(fgetc)($28)
+ 1697 1230 00000000 		nop
+ 1698 1234 21C84000 		move	$25,$2
+ 1699 1238 09F82003 		jalr	$25
+ 1700 123c 00000000 		nop
+ 1701              	
+ 1702 1240 3000DC8F 		lw	$28,48($fp)
+ 1703 1244 3800C2AF 		sw	$2,56($fp)
+ 131:tests/test_ListCmdr.c ****     vposition(stdout, 15, 0);
+ 1704              		.loc 1 132 0
+ 1705 1248 0000828F 		lw	$2,%got(stdout)($28)
+ 1706 124c 00000000 		nop
+ 1707 1250 0000428C 		lw	$2,0($2)
+ 1708 1254 00000000 		nop
+ 1709 1258 21204000 		move	$4,$2
+ 1710 125c 0F000524 		li	$5,15			# 0xf
+ 1711 1260 21300000 		move	$6,$0
+ 1712 1264 0000828F 		lw	$2,%call16(vposition)($28)
+ 1713 1268 00000000 		nop
+ 1714 126c 21C84000 		move	$25,$2
+ 1715 1270 09F82003 		jalr	$25
+ 1716 1274 00000000 		nop
+ 1717              	
+ 1718 1278 3000DC8F 		lw	$28,48($fp)
+ 132:tests/test_ListCmdr.c ****     printf(VERASE_LINE_CUR "%i -> ",r);
+ 1719              		.loc 1 133 0
+ 1720 127c 0000023C 		lui	$2,%hi($LC27)
+ 1721 1280 00024224 		addiu	$2,$2,%lo($LC27)
+ 1722 1284 21204000 		move	$4,$2
+ 1723 1288 3800C58F 		lw	$5,56($fp)
+ 1724 128c 0000828F 		lw	$2,%call16(printf)($28)
+ 1725 1290 00000000 		nop
+ 1726 1294 21C84000 		move	$25,$2
+ 1727 1298 09F82003 		jalr	$25
+ 1728 129c 00000000 		nop
+ 1729              	
+ 1730 12a0 3000DC8F 		lw	$28,48($fp)
+ 133:tests/test_ListCmdr.c ****     r = InputUnescape(r, &escState);
+ 1731              		.loc 1 134 0
+ 1732 12a4 EC00C227 		addiu	$2,$fp,236
+ 1733 12a8 3800C48F 		lw	$4,56($fp)
+ 1734 12ac 21284000 		move	$5,$2
+ 1735 12b0 0000828F 		lw	$2,%call16(InputUnescape)($28)
+ 1736 12b4 00000000 		nop
+ 1737 12b8 21C84000 		move	$25,$2
+ 1738 12bc 09F82003 		jalr	$25
+ 1739 12c0 00000000 		nop
+ 1740              	
+ 1741 12c4 3000DC8F 		lw	$28,48($fp)
+ 1742 12c8 3800C2AF 		sw	$2,56($fp)
+ 134:tests/test_ListCmdr.c ****     printf("%i",r);
+ 1743              		.loc 1 135 0
+ 1744 12cc 0000023C 		lui	$2,%hi($LC28)
+ 1745 12d0 0C024224 		addiu	$2,$2,%lo($LC28)
+ 1746 12d4 21204000 		move	$4,$2
+ 1747 12d8 3800C58F 		lw	$5,56($fp)
+ 1748 12dc 0000828F 		lw	$2,%call16(printf)($28)
+ 1749 12e0 00000000 		nop
+ 1750 12e4 21C84000 		move	$25,$2
+ 1751 12e8 09F82003 		jalr	$25
+ 1752 12ec 00000000 		nop
+ 1753              	
+ 1754 12f0 3000DC8F 		lw	$28,48($fp)
+ 135:tests/test_ListCmdr.c ****     if (r != -1)
+ 1755              		.loc 1 136 0
+ 1756 12f4 3800C38F 		lw	$3,56($fp)
+ 1757 12f8 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 1758 12fc 0A006210 		beq	$3,$2,$L49
+ 1759 1300 00000000 		nop
+ 1760              	
+ 136:tests/test_ListCmdr.c ****       ListCmdrPushEvent(&cmdr, r);
+ 1761              		.loc 1 137 0
+ 1762 1304 5400C227 		addiu	$2,$fp,84
+ 1763 1308 21204000 		move	$4,$2
+ 1764 130c 3800C58F 		lw	$5,56($fp)
+ 1765 1310 0000828F 		lw	$2,%call16(ListCmdrPushEvent)($28)
+ 1766 1314 00000000 		nop
+ 1767 1318 21C84000 		move	$25,$2
+ 1768 131c 09F82003 		jalr	$25
+ 1769 1320 00000000 		nop
+ 1770              	
+ 1771 1324 3000DC8F 		lw	$28,48($fp)
+ 1772              	$L49:
+ 137:tests/test_ListCmdr.c ****     while (!ListCmdrDraw(&cmdr));
+ 1773              		.loc 1 138 0
+ 1774 1328 5400C227 		addiu	$2,$fp,84
+ 1775 132c 21204000 		move	$4,$2
+ 1776 1330 0000828F 		lw	$2,%call16(ListCmdrDraw)($28)
+ 1777 1334 00000000 		nop
+ 1778 1338 21C84000 		move	$25,$2
+ 1779 133c 09F82003 		jalr	$25
+ 1780 1340 00000000 		nop
+ 1781              	
+ 1782 1344 3000DC8F 		lw	$28,48($fp)
+ 1783 1348 F7FF4010 		beq	$2,$0,$L49
+ 1784 134c 00000000 		nop
+ 1785              	
+ 1786              	$L48:
+ 1787              	$LBE4 = .
+ 130:tests/test_ListCmdr.c ****   while (!ListCmdrGetValue(&cmdr)) {
+ 1788              		.loc 1 130 0
+ 1789 1350 5400C227 		addiu	$2,$fp,84
+ 1790 1354 21204000 		move	$4,$2
+ 1791 1358 0000828F 		lw	$2,%call16(ListCmdrGetValue)($28)
+ 1792 135c 00000000 		nop
+ 1793 1360 21C84000 		move	$25,$2
+ 1794 1364 09F82003 		jalr	$25
+ 1795 1368 00000000 		nop
+ 1796              	
+ 1797 136c 3000DC8F 		lw	$28,48($fp)
+ 1798 1370 A9FF4010 		beq	$2,$0,$L50
+ 1799 1374 00000000 		nop
+ 1800              	
+ 138:tests/test_ListCmdr.c ****   }
+ 139:tests/test_ListCmdr.c ****   printf("VALUE = %s\n", ListCmdrGetValue(&cmdr));
+ 1801              		.loc 1 140 0
+ 1802 1378 0000023C 		lui	$2,%hi($LC29)
+ 1803 137c 10025024 		addiu	$16,$2,%lo($LC29)
+ 1804 1380 5400C227 		addiu	$2,$fp,84
+ 1805 1384 21204000 		move	$4,$2
+ 1806 1388 0000828F 		lw	$2,%call16(ListCmdrGetValue)($28)
+ 1807 138c 00000000 		nop
+ 1808 1390 21C84000 		move	$25,$2
+ 1809 1394 09F82003 		jalr	$25
+ 1810 1398 00000000 		nop
+ 1811              	
+ 1812 139c 3000DC8F 		lw	$28,48($fp)
+ 1813 13a0 21200002 		move	$4,$16
+ 1814 13a4 21284000 		move	$5,$2
+ 1815 13a8 0000828F 		lw	$2,%call16(printf)($28)
+ 1816 13ac 00000000 		nop
+ 1817 13b0 21C84000 		move	$25,$2
+ 1818 13b4 09F82003 		jalr	$25
+ 1819 13b8 00000000 		nop
+ 1820              	
+ 1821 13bc 3000DC8F 		lw	$28,48($fp)
+ 140:tests/test_ListCmdr.c **** }
+ 1822              		.loc 1 141 0
+ 1823 13c0 21E8C003 		move	$sp,$fp
+ 1824 13c4 FC00BF8F 		lw	$31,252($sp)
+ 1825 13c8 F800BE8F 		lw	$fp,248($sp)
+ 1826 13cc F400B08F 		lw	$16,244($sp)
+ 1827 13d0 0001BD27 		addiu	$sp,$sp,256
+ 1828 13d4 0800E003 		j	$31
+ 1829 13d8 00000000 		nop
+ 1830              	
+ 1831              		.set	macro
+ 1832              		.set	reorder
+ 1833              		.end	Test4
+ 1834              	$LFE6:
+ 1836              		.align	2
+ 1837              		.globl	main
+ 1838              	$LFB7 = .
+ 141:tests/test_ListCmdr.c **** 
+ 142:tests/test_ListCmdr.c **** int main(int argc, char **argv) {
+ 1839              		.loc 1 143 0
+ 1840              		.set	nomips16
+ 1841              		.ent	main
+ 1843              	main:
+ 1844              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 1845              		.mask	0xc0000000,-4
+ 1846              		.fmask	0x00000000,0
+ 1847              		.set	noreorder
+ 1848              		.set	nomacro
+ 1849              		
+ 1850 13dc E0FFBD27 		addiu	$sp,$sp,-32
+ 1851              	$LCFI24:
+ 1852 13e0 1C00BFAF 		sw	$31,28($sp)
+ 1853              	$LCFI25:
+ 1854 13e4 1800BEAF 		sw	$fp,24($sp)
+ 1855              	$LCFI26:
+ 1856 13e8 21F0A003 		move	$fp,$sp
+ 1857              	$LCFI27:
+ 1858 13ec 2000C4AF 		sw	$4,32($fp)
+ 1859 13f0 2400C5AF 		sw	$5,36($fp)
+ 143:tests/test_ListCmdr.c ****   Test1();
+ 1860              		.loc 1 144 0
+ 1861              		.option	pic0
+ 1862 13f4 0000000C 		jal	Test1
+ 1863 13f8 00000000 		nop
+ 1864              	
+ 1865              		.option	pic2
+ 144:tests/test_ListCmdr.c ****   Test2();
+ 1866              		.loc 1 145 0
+ 1867              		.option	pic0
+ 1868 13fc 0000000C 		jal	Test2
+ 1869 1400 00000000 		nop
+ 1870              	
+ 1871              		.option	pic2
+ 145:tests/test_ListCmdr.c ****   Test3();
+ 1872              		.loc 1 146 0
+ 1873              		.option	pic0
+ 1874 1404 0000000C 		jal	Test3
+ 1875 1408 00000000 		nop
+ 1876              	
+ 1877              		.option	pic2
+ 146:tests/test_ListCmdr.c ****   Test4();
+ 1878              		.loc 1 147 0
+ 1879              		.option	pic0
+ 1880 140c 0000000C 		jal	Test4
+ 1881 1410 00000000 		nop
+ 1882              	
+ 1883              		.option	pic2
+ 147:tests/test_ListCmdr.c ****   return 0;
+ 1884              		.loc 1 148 0
+ 1885 1414 21100000 		move	$2,$0
+ 148:tests/test_ListCmdr.c **** }
+ 1886              		.loc 1 149 0
+ 1887 1418 21E8C003 		move	$sp,$fp
+ 1888 141c 1C00BF8F 		lw	$31,28($sp)
+ 1889 1420 1800BE8F 		lw	$fp,24($sp)
+ 1890 1424 2000BD27 		addiu	$sp,$sp,32
+ 1891 1428 0800E003 		j	$31
+ 1892 142c 00000000 		nop
+ 1893              	
+ 1894              		.set	macro
+ 1895              		.set	reorder
+ 1896              		.end	main
+ 1897              	$LFE7:
+ 1899              		.rdata
+ 1900              		.align	2
+ 1903              	__PRETTY_FUNCTION__.2920:
+ 1904 021c 54657374 		.ascii	"Test4\000"
+ 1904      3400
+ 1905 0222 0000     		.align	2
+ 1908              	__PRETTY_FUNCTION__.2893:
+ 1909 0224 54657374 		.ascii	"Test3\000"
+ 1909      3300
+ 1910 022a 0000     		.align	2
+ 1913              	__PRETTY_FUNCTION__.2843:
+ 1914 022c 54657374 		.ascii	"Test2\000"
+ 1914      3200
+ 1915 0232 0000     		.align	2
+ 1918              	__PRETTY_FUNCTION__.2797:
+ 1919 0234 54657374 		.ascii	"Test1\000"
+ 1919      3100
+ 2104              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 tests/test_ListCmdr.c
+     /tmp/cc1MWj4j.s:41     .data.rel.local:0000000000000000 strings
+     /tmp/cc1MWj4j.s:54     .bss:0000000000000000 stringsIndex
+     /tmp/cc1MWj4j.s:65     .text:0000000000000000 StringsNextFunc
+     /tmp/cc1MWj4j.s:163    .text:00000000000000f0 StringsRestartFunc
+     /tmp/cc1MWj4j.s:219    .text:000000000000011c Test1
+     /tmp/cc1MWj4j.s:1918   .rodata:0000000000000234 __PRETTY_FUNCTION__.2797
+     /tmp/cc1MWj4j.s:639    .text:00000000000005e0 Test2
+     /tmp/cc1MWj4j.s:1913   .rodata:000000000000022c __PRETTY_FUNCTION__.2843
+     /tmp/cc1MWj4j.s:1201   .text:0000000000000c7c Test3
+     /tmp/cc1MWj4j.s:1908   .rodata:0000000000000224 __PRETTY_FUNCTION__.2893
+     /tmp/cc1MWj4j.s:1494   .text:0000000000000fcc Test4
+     /tmp/cc1MWj4j.s:1903   .rodata:000000000000021c __PRETTY_FUNCTION__.2920
+     /tmp/cc1MWj4j.s:1843   .text:00000000000013dc main
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+strncpy
+ListGenCreate
+ListGenNext
+__assert_fail
+strcmp
+ListGenRestart
+ListGenGet
+ListViewCreate
+printf
+stdout
+vposition
+ListViewDraw
+usleep
+ListViewSetFocus
+ListViewGetFocus
+ListViewFocusNext
+ListViewFocusPrev
+PrefixCompare
+PrefixFilterCreate
+PlatformInit
+ListCmdrInit
+ListCmdrGetValue
+ListCmdrDraw
+ListCmdrPushEvent
+stdin
+fgetc
+InputUnescape

@@ -1,0 +1,2296 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.rdata
+  14              		.align	2
+  15              	$LC0:
+  16 0000 62677472 		.ascii	"bgtree/bgUtil2.c\000"
+  16      65652F62 
+  16      67557469 
+  16      6C322E63 
+  16      00
+  17 0011 000000   		.align	2
+  18              	$LC1:
+  19 0014 556E6162 		.ascii	"Unable to read size int from file\000"
+  19      6C652074 
+  19      6F207265 
+  19      61642073 
+  19      697A6520 
+  20 0036 0000     		.align	2
+  21              	$LC2:
+  22 0038 556E6162 		.ascii	"Unable to read string from filen\000"
+  22      6C652074 
+  22      6F207265 
+  22      61642073 
+  22      7472696E 
+  23              		.text
+  24              		.align	2
+  25              		.globl	UnpackStringFromFile
+  26              	$LFB0 = .
+  27              		.file 1 "bgtree/bgUtil2.c"
+   0:bgtree/bgUtil2.c **** /** Utility Functions for bgTree which MAY RELY
+   1:bgtree/bgUtil2.c ****  * UPON STANDARD LIBRARIES **/
+   2:bgtree/bgUtil2.c **** 
+   3:bgtree/bgUtil2.c **** #include <stdio.h>
+   4:bgtree/bgUtil2.c **** #include <string.h>
+   5:bgtree/bgUtil2.c **** #include "Errors.h"
+   6:bgtree/bgUtil2.c **** #include "bgCore.h"
+   7:bgtree/bgUtil2.c **** #include "bgUtil2.h"
+   8:bgtree/bgUtil2.c **** 
+   9:bgtree/bgUtil2.c **** #ifndef AVR
+  10:bgtree/bgUtil2.c **** #  define fprintf_P fprintf
+  11:bgtree/bgUtil2.c **** #  define printf_P printf
+  12:bgtree/bgUtil2.c **** #  define PSTR(x) (x)
+  13:bgtree/bgUtil2.c **** #else
+  14:bgtree/bgUtil2.c **** #  include <avr/pgmspace.h>
+  15:bgtree/bgUtil2.c **** #endif
+  16:bgtree/bgUtil2.c **** 
+  17:bgtree/bgUtil2.c **** int UnpackStringFromFile(FILE *f, char *buf, int buflen) {
+  28              		.loc 1 18 0
+  29              		.set	nomips16
+  30              		.ent	UnpackStringFromFile
+  32              	UnpackStringFromFile:
+  33              		.frame	$fp,48,$31		# vars= 16, regs= 2/0, args= 16, gp= 8
+  34              		.mask	0xc0000000,-4
+  35              		.fmask	0x00000000,0
+  36              		.set	noreorder
+  37              		.set	nomacro
+  38              		
+  39 0000 D0FFBD27 		addiu	$sp,$sp,-48
+  40              	$LCFI0:
+  41 0004 2C00BFAF 		sw	$31,44($sp)
+  42              	$LCFI1:
+  43 0008 2800BEAF 		sw	$fp,40($sp)
+  44              	$LCFI2:
+  45 000c 21F0A003 		move	$fp,$sp
+  46              	$LCFI3:
+  47 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  48 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  49 0018 1000BCAF 		.cprestore	16
+  50 001c 3000C4AF 		sw	$4,48($fp)
+  51 0020 3400C5AF 		sw	$5,52($fp)
+  52 0024 3800C6AF 		sw	$6,56($fp)
+  18:bgtree/bgUtil2.c ****   /** Read size **/
+  19:bgtree/bgUtil2.c ****   uint32_t sz;
+  20:bgtree/bgUtil2.c ****   int r;
+  21:bgtree/bgUtil2.c ****   r = fread(&sz, 4, 1, f);
+  53              		.loc 1 22 0
+  54 0028 2000C227 		addiu	$2,$fp,32
+  55 002c 21204000 		move	$4,$2
+  56 0030 04000524 		li	$5,4			# 0x4
+  57 0034 01000624 		li	$6,1			# 0x1
+  58 0038 3000C78F 		lw	$7,48($fp)
+  59 003c 0000828F 		lw	$2,%call16(fread)($28)
+  60 0040 00000000 		nop
+  61 0044 21C84000 		move	$25,$2
+  62 0048 09F82003 		jalr	$25
+  63 004c 00000000 		nop
+  64              	
+  65 0050 1000DC8F 		lw	$28,16($fp)
+  66 0054 1C00C2AF 		sw	$2,28($fp)
+  22:bgtree/bgUtil2.c ****   if (r != 1) {
+  67              		.loc 1 23 0
+  68 0058 1C00C38F 		lw	$3,28($fp)
+  69 005c 01000224 		li	$2,1			# 0x1
+  70 0060 13006210 		beq	$3,$2,$L2
+  71 0064 00000000 		nop
+  72              	
+  23:bgtree/bgUtil2.c ****     ERRORreturn2("Unable to read size int from file", -1);
+  73              		.loc 1 24 0
+  74 0068 0000828F 		lw	$2,%got(errorFile)($28)
+  75 006c 0000033C 		lui	$3,%hi($LC0)
+  76 0070 00006324 		addiu	$3,$3,%lo($LC0)
+  77 0074 000043AC 		sw	$3,0($2)
+  78 0078 0000828F 		lw	$2,%got(errorLine)($28)
+  79 007c 18000324 		li	$3,24			# 0x18
+  80 0080 000043AC 		sw	$3,0($2)
+  81 0084 0000828F 		lw	$2,%got(errorFunc)($28)
+  82 0088 0000033C 		lui	$3,%hi(__func__.2031)
+  83 008c 18036324 		addiu	$3,$3,%lo(__func__.2031)
+  84 0090 000043AC 		sw	$3,0($2)
+  85 0094 0000828F 		lw	$2,%got(errorMsg)($28)
+  86 0098 0000033C 		lui	$3,%hi($LC1)
+  87 009c 14006324 		addiu	$3,$3,%lo($LC1)
+  88 00a0 000043AC 		sw	$3,0($2)
+  89 00a4 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+  90 00a8 2E000010 		b	$L3
+  91 00ac 00000000 		nop
+  92              	
+  93              	$L2:
+  24:bgtree/bgUtil2.c ****   }
+  25:bgtree/bgUtil2.c ****   uint32_t sz2 = (buflen > sz) ? sz : buflen;
+  94              		.loc 1 26 0
+  95 00b0 3800C28F 		lw	$2,56($fp)
+  96 00b4 2000C38F 		lw	$3,32($fp)
+  97 00b8 00000000 		nop
+  98 00bc 2B206200 		sltu	$4,$3,$2
+  99 00c0 02008010 		beq	$4,$0,$L4
+ 100 00c4 00000000 		nop
+ 101              	
+ 102 00c8 21106000 		move	$2,$3
+ 103              	$L4:
+ 104 00cc 1800C2AF 		sw	$2,24($fp)
+  26:bgtree/bgUtil2.c **** 
+  27:bgtree/bgUtil2.c ****   /** Read string **/
+  28:bgtree/bgUtil2.c ****   r = fread(buf, 1, sz2, f);
+ 105              		.loc 1 29 0
+ 106 00d0 3400C48F 		lw	$4,52($fp)
+ 107 00d4 01000524 		li	$5,1			# 0x1
+ 108 00d8 1800C68F 		lw	$6,24($fp)
+ 109 00dc 3000C78F 		lw	$7,48($fp)
+ 110 00e0 0000828F 		lw	$2,%call16(fread)($28)
+ 111 00e4 00000000 		nop
+ 112 00e8 21C84000 		move	$25,$2
+ 113 00ec 09F82003 		jalr	$25
+ 114 00f0 00000000 		nop
+ 115              	
+ 116 00f4 1000DC8F 		lw	$28,16($fp)
+ 117 00f8 1C00C2AF 		sw	$2,28($fp)
+  29:bgtree/bgUtil2.c ****   if (r != sz2) {
+ 118              		.loc 1 30 0
+ 119 00fc 1C00C38F 		lw	$3,28($fp)
+ 120 0100 1800C28F 		lw	$2,24($fp)
+ 121 0104 00000000 		nop
+ 122 0108 13006210 		beq	$3,$2,$L5
+ 123 010c 00000000 		nop
+ 124              	
+  30:bgtree/bgUtil2.c ****     ERRORreturn2("Unable to read string from filen",-2);
+ 125              		.loc 1 31 0
+ 126 0110 0000828F 		lw	$2,%got(errorFile)($28)
+ 127 0114 0000033C 		lui	$3,%hi($LC0)
+ 128 0118 00006324 		addiu	$3,$3,%lo($LC0)
+ 129 011c 000043AC 		sw	$3,0($2)
+ 130 0120 0000828F 		lw	$2,%got(errorLine)($28)
+ 131 0124 1F000324 		li	$3,31			# 0x1f
+ 132 0128 000043AC 		sw	$3,0($2)
+ 133 012c 0000828F 		lw	$2,%got(errorFunc)($28)
+ 134 0130 0000033C 		lui	$3,%hi(__func__.2031)
+ 135 0134 18036324 		addiu	$3,$3,%lo(__func__.2031)
+ 136 0138 000043AC 		sw	$3,0($2)
+ 137 013c 0000828F 		lw	$2,%got(errorMsg)($28)
+ 138 0140 0000033C 		lui	$3,%hi($LC2)
+ 139 0144 38006324 		addiu	$3,$3,%lo($LC2)
+ 140 0148 000043AC 		sw	$3,0($2)
+ 141 014c FEFF0224 		li	$2,-2			# 0xfffffffffffffffe
+ 142 0150 04000010 		b	$L3
+ 143 0154 00000000 		nop
+ 144              	
+ 145              	$L5:
+  31:bgtree/bgUtil2.c ****     return -4;
+  32:bgtree/bgUtil2.c ****   }
+  33:bgtree/bgUtil2.c ****   return sz + 4;
+ 146              		.loc 1 34 0
+ 147 0158 2000C28F 		lw	$2,32($fp)
+ 148 015c 00000000 		nop
+ 149 0160 04004224 		addiu	$2,$2,4
+ 150              	$L3:
+  34:bgtree/bgUtil2.c **** }
+ 151              		.loc 1 35 0
+ 152 0164 21E8C003 		move	$sp,$fp
+ 153 0168 2C00BF8F 		lw	$31,44($sp)
+ 154 016c 2800BE8F 		lw	$fp,40($sp)
+ 155 0170 3000BD27 		addiu	$sp,$sp,48
+ 156 0174 0800E003 		j	$31
+ 157 0178 00000000 		nop
+ 158              	
+ 159              		.set	macro
+ 160              		.set	reorder
+ 161              		.end	UnpackStringFromFile
+ 162              	$LFE0:
+ 164              		.align	2
+ 165              		.globl	UnpackIntFromFile
+ 166              	$LFB1 = .
+  35:bgtree/bgUtil2.c **** 
+  36:bgtree/bgUtil2.c **** int32_t UnpackIntFromFile(FILE *f) {
+ 167              		.loc 1 37 0
+ 168              		.set	nomips16
+ 169              		.ent	UnpackIntFromFile
+ 171              	UnpackIntFromFile:
+ 172              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 173              		.mask	0xc0000000,-4
+ 174              		.fmask	0x00000000,0
+ 175              		.set	noreorder
+ 176              		.set	nomacro
+ 177              		
+ 178 017c D8FFBD27 		addiu	$sp,$sp,-40
+ 179              	$LCFI4:
+ 180 0180 2400BFAF 		sw	$31,36($sp)
+ 181              	$LCFI5:
+ 182 0184 2000BEAF 		sw	$fp,32($sp)
+ 183              	$LCFI6:
+ 184 0188 21F0A003 		move	$fp,$sp
+ 185              	$LCFI7:
+ 186 018c 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 187 0190 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 188 0194 1000BCAF 		.cprestore	16
+ 189 0198 2800C4AF 		sw	$4,40($fp)
+  37:bgtree/bgUtil2.c ****   int r;
+  38:bgtree/bgUtil2.c ****   int32_t v;
+  39:bgtree/bgUtil2.c ****   r = fread(&v, 4, 1, f);
+ 190              		.loc 1 40 0
+ 191 019c 1C00C227 		addiu	$2,$fp,28
+ 192 01a0 21204000 		move	$4,$2
+ 193 01a4 04000524 		li	$5,4			# 0x4
+ 194 01a8 01000624 		li	$6,1			# 0x1
+ 195 01ac 2800C78F 		lw	$7,40($fp)
+ 196 01b0 0000828F 		lw	$2,%call16(fread)($28)
+ 197 01b4 00000000 		nop
+ 198 01b8 21C84000 		move	$25,$2
+ 199 01bc 09F82003 		jalr	$25
+ 200 01c0 00000000 		nop
+ 201              	
+ 202 01c4 1000DC8F 		lw	$28,16($fp)
+ 203 01c8 1800C2AF 		sw	$2,24($fp)
+  40:bgtree/bgUtil2.c ****   if (r != 1)
+ 204              		.loc 1 41 0
+ 205 01cc 1800C38F 		lw	$3,24($fp)
+ 206 01d0 01000224 		li	$2,1			# 0x1
+ 207 01d4 13006210 		beq	$3,$2,$L8
+ 208 01d8 00000000 		nop
+ 209              	
+  41:bgtree/bgUtil2.c ****     ERRORreturn2("Unable to read size int from file", -999);
+ 210              		.loc 1 42 0
+ 211 01dc 0000828F 		lw	$2,%got(errorFile)($28)
+ 212 01e0 0000033C 		lui	$3,%hi($LC0)
+ 213 01e4 00006324 		addiu	$3,$3,%lo($LC0)
+ 214 01e8 000043AC 		sw	$3,0($2)
+ 215 01ec 0000828F 		lw	$2,%got(errorLine)($28)
+ 216 01f0 2A000324 		li	$3,42			# 0x2a
+ 217 01f4 000043AC 		sw	$3,0($2)
+ 218 01f8 0000828F 		lw	$2,%got(errorFunc)($28)
+ 219 01fc 0000033C 		lui	$3,%hi(__func__.2050)
+ 220 0200 04036324 		addiu	$3,$3,%lo(__func__.2050)
+ 221 0204 000043AC 		sw	$3,0($2)
+ 222 0208 0000828F 		lw	$2,%got(errorMsg)($28)
+ 223 020c 0000033C 		lui	$3,%hi($LC1)
+ 224 0210 14006324 		addiu	$3,$3,%lo($LC1)
+ 225 0214 000043AC 		sw	$3,0($2)
+ 226 0218 19FC0224 		li	$2,-999			# 0xfffffffffffffc19
+ 227 021c 02000010 		b	$L9
+ 228 0220 00000000 		nop
+ 229              	
+ 230              	$L8:
+  42:bgtree/bgUtil2.c ****   return v;
+ 231              		.loc 1 43 0
+ 232 0224 1C00C28F 		lw	$2,28($fp)
+ 233              	$L9:
+  43:bgtree/bgUtil2.c **** }
+ 234              		.loc 1 44 0
+ 235 0228 21E8C003 		move	$sp,$fp
+ 236 022c 2400BF8F 		lw	$31,36($sp)
+ 237 0230 2000BE8F 		lw	$fp,32($sp)
+ 238 0234 2800BD27 		addiu	$sp,$sp,40
+ 239 0238 0800E003 		j	$31
+ 240 023c 00000000 		nop
+ 241              	
+ 242              		.set	macro
+ 243              		.set	reorder
+ 244              		.end	UnpackIntFromFile
+ 245              	$LFE1:
+ 247              		.align	2
+ 248              		.globl	UnpackUIntFromFile
+ 249              	$LFB2 = .
+  44:bgtree/bgUtil2.c **** 
+  45:bgtree/bgUtil2.c **** uint32_t UnpackUIntFromFile(FILE *f) {
+ 250              		.loc 1 46 0
+ 251              		.set	nomips16
+ 252              		.ent	UnpackUIntFromFile
+ 254              	UnpackUIntFromFile:
+ 255              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 256              		.mask	0xc0000000,-4
+ 257              		.fmask	0x00000000,0
+ 258              		.set	noreorder
+ 259              		.set	nomacro
+ 260              		
+ 261 0240 D8FFBD27 		addiu	$sp,$sp,-40
+ 262              	$LCFI8:
+ 263 0244 2400BFAF 		sw	$31,36($sp)
+ 264              	$LCFI9:
+ 265 0248 2000BEAF 		sw	$fp,32($sp)
+ 266              	$LCFI10:
+ 267 024c 21F0A003 		move	$fp,$sp
+ 268              	$LCFI11:
+ 269 0250 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 270 0254 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 271 0258 1000BCAF 		.cprestore	16
+ 272 025c 2800C4AF 		sw	$4,40($fp)
+  46:bgtree/bgUtil2.c ****   int r;
+  47:bgtree/bgUtil2.c ****   uint32_t v;
+  48:bgtree/bgUtil2.c ****   r = fread(&v, 4, 1, f);
+ 273              		.loc 1 49 0
+ 274 0260 1C00C227 		addiu	$2,$fp,28
+ 275 0264 21204000 		move	$4,$2
+ 276 0268 04000524 		li	$5,4			# 0x4
+ 277 026c 01000624 		li	$6,1			# 0x1
+ 278 0270 2800C78F 		lw	$7,40($fp)
+ 279 0274 0000828F 		lw	$2,%call16(fread)($28)
+ 280 0278 00000000 		nop
+ 281 027c 21C84000 		move	$25,$2
+ 282 0280 09F82003 		jalr	$25
+ 283 0284 00000000 		nop
+ 284              	
+ 285 0288 1000DC8F 		lw	$28,16($fp)
+ 286 028c 1800C2AF 		sw	$2,24($fp)
+  49:bgtree/bgUtil2.c ****   if (r != 1)
+ 287              		.loc 1 50 0
+ 288 0290 1800C38F 		lw	$3,24($fp)
+ 289 0294 01000224 		li	$2,1			# 0x1
+ 290 0298 13006210 		beq	$3,$2,$L12
+ 291 029c 00000000 		nop
+ 292              	
+  50:bgtree/bgUtil2.c ****     ERRORreturn2("Unable to read size int from file", -999);
+ 293              		.loc 1 51 0
+ 294 02a0 0000828F 		lw	$2,%got(errorFile)($28)
+ 295 02a4 0000033C 		lui	$3,%hi($LC0)
+ 296 02a8 00006324 		addiu	$3,$3,%lo($LC0)
+ 297 02ac 000043AC 		sw	$3,0($2)
+ 298 02b0 0000828F 		lw	$2,%got(errorLine)($28)
+ 299 02b4 33000324 		li	$3,51			# 0x33
+ 300 02b8 000043AC 		sw	$3,0($2)
+ 301 02bc 0000828F 		lw	$2,%got(errorFunc)($28)
+ 302 02c0 0000033C 		lui	$3,%hi(__func__.2060)
+ 303 02c4 F0026324 		addiu	$3,$3,%lo(__func__.2060)
+ 304 02c8 000043AC 		sw	$3,0($2)
+ 305 02cc 0000828F 		lw	$2,%got(errorMsg)($28)
+ 306 02d0 0000033C 		lui	$3,%hi($LC1)
+ 307 02d4 14006324 		addiu	$3,$3,%lo($LC1)
+ 308 02d8 000043AC 		sw	$3,0($2)
+ 309 02dc 19FC0224 		li	$2,-999			# 0xfffffffffffffc19
+ 310 02e0 02000010 		b	$L13
+ 311 02e4 00000000 		nop
+ 312              	
+ 313              	$L12:
+  51:bgtree/bgUtil2.c ****   return v;
+ 314              		.loc 1 52 0
+ 315 02e8 1C00C28F 		lw	$2,28($fp)
+ 316              	$L13:
+  52:bgtree/bgUtil2.c **** }
+ 317              		.loc 1 53 0
+ 318 02ec 21E8C003 		move	$sp,$fp
+ 319 02f0 2400BF8F 		lw	$31,36($sp)
+ 320 02f4 2000BE8F 		lw	$fp,32($sp)
+ 321 02f8 2800BD27 		addiu	$sp,$sp,40
+ 322 02fc 0800E003 		j	$31
+ 323 0300 00000000 		nop
+ 324              	
+ 325              		.set	macro
+ 326              		.set	reorder
+ 327              		.end	UnpackUIntFromFile
+ 328              	$LFE2:
+ 330              		.rdata
+ 331 0059 000000   		.align	2
+ 332              	$LC3:
+ 333 005c 73636865 		.ascii	"schema[i]\000"
+ 333      6D615B69 
+ 333      5D00
+ 334 0066 0000     		.align	2
+ 335              	$LC4:
+ 336 0068 556E6162 		.ascii	"Unable to read int from file\000"
+ 336      6C652074 
+ 336      6F207265 
+ 336      61642069 
+ 336      6E742066 
+ 337 0085 000000   		.align	2
+ 338              	$LC5:
+ 339 0088 556E6162 		.ascii	"Unable to read string from file\000"
+ 339      6C652074 
+ 339      6F207265 
+ 339      61642073 
+ 339      7472696E 
+ 340              		.align	2
+ 341              	$LC6:
+ 342 00a8 2122496E 		.ascii	"!\"Invalid Schema\"\000"
+ 342      76616C69 
+ 342      64205363 
+ 342      68656D61 
+ 342      2200
+ 343              		.text
+ 344              		.align	2
+ 345              		.globl	SchemaGetOffset
+ 346              	$LFB3 = .
+  53:bgtree/bgUtil2.c **** 
+  54:bgtree/bgUtil2.c **** uint32_t SchemaGetOffset(FILE *blob, char *schema, int field) {
+ 347              		.loc 1 55 0
+ 348              		.set	nomips16
+ 349              		.ent	SchemaGetOffset
+ 351              	SchemaGetOffset:
+ 352              		.frame	$fp,64,$31		# vars= 32, regs= 2/0, args= 16, gp= 8
+ 353              		.mask	0xc0000000,-4
+ 354              		.fmask	0x00000000,0
+ 355              		.set	noreorder
+ 356              		.set	nomacro
+ 357              		
+ 358 0304 C0FFBD27 		addiu	$sp,$sp,-64
+ 359              	$LCFI12:
+ 360 0308 3C00BFAF 		sw	$31,60($sp)
+ 361              	$LCFI13:
+ 362 030c 3800BEAF 		sw	$fp,56($sp)
+ 363              	$LCFI14:
+ 364 0310 21F0A003 		move	$fp,$sp
+ 365              	$LCFI15:
+ 366 0314 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 367 0318 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 368 031c 1000BCAF 		.cprestore	16
+ 369 0320 4000C4AF 		sw	$4,64($fp)
+ 370 0324 4400C5AF 		sw	$5,68($fp)
+ 371 0328 4800C6AF 		sw	$6,72($fp)
+  55:bgtree/bgUtil2.c ****   uint32_t offset = 0;
+ 372              		.loc 1 56 0
+ 373 032c 2C00C0AF 		sw	$0,44($fp)
+ 374              	$LBB2 = .
+  56:bgtree/bgUtil2.c ****   uint32_t buf;
+  57:bgtree/bgUtil2.c ****   for (int i=0; i<field; ++i) {
+ 375              		.loc 1 58 0
+ 376 0330 2800C0AF 		sw	$0,40($fp)
+ 377 0334 EA000010 		b	$L16
+ 378 0338 00000000 		nop
+ 379              	
+ 380              	$L30:
+  58:bgtree/bgUtil2.c ****     assert(schema[i]);
+ 381              		.loc 1 59 0
+ 382 033c 2800C28F 		lw	$2,40($fp)
+ 383 0340 4400C38F 		lw	$3,68($fp)
+ 384 0344 00000000 		nop
+ 385 0348 21106200 		addu	$2,$3,$2
+ 386 034c 00004280 		lb	$2,0($2)
+ 387 0350 00000000 		nop
+ 388 0354 0D004014 		bne	$2,$0,$L17
+ 389 0358 00000000 		nop
+ 390              	
+ 391 035c 0000023C 		lui	$2,%hi($LC3)
+ 392 0360 5C004424 		addiu	$4,$2,%lo($LC3)
+ 393 0364 0000023C 		lui	$2,%hi($LC0)
+ 394 0368 00004524 		addiu	$5,$2,%lo($LC0)
+ 395 036c 3B000624 		li	$6,59			# 0x3b
+ 396 0370 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2073)
+ 397 0374 D0024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2073)
+ 398 0378 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 399 037c 00000000 		nop
+ 400 0380 21C84000 		move	$25,$2
+ 401 0384 09F82003 		jalr	$25
+ 402 0388 00000000 		nop
+ 403              	
+ 404              	$L17:
+  59:bgtree/bgUtil2.c ****     if (schema[i] == 'I' || schema[i] == 'i' 
+ 405              		.loc 1 60 0
+ 406 038c 2800C28F 		lw	$2,40($fp)
+ 407 0390 4400C38F 		lw	$3,68($fp)
+ 408 0394 00000000 		nop
+ 409 0398 21106200 		addu	$2,$3,$2
+ 410 039c 00004380 		lb	$3,0($2)
+ 411 03a0 49000224 		li	$2,73			# 0x49
+ 412 03a4 19006210 		beq	$3,$2,$L18
+ 413 03a8 00000000 		nop
+ 414              	
+ 415 03ac 2800C28F 		lw	$2,40($fp)
+ 416 03b0 4400C38F 		lw	$3,68($fp)
+ 417 03b4 00000000 		nop
+ 418 03b8 21106200 		addu	$2,$3,$2
+ 419 03bc 00004380 		lb	$3,0($2)
+ 420 03c0 69000224 		li	$2,105			# 0x69
+ 421 03c4 11006210 		beq	$3,$2,$L18
+ 422 03c8 00000000 		nop
+ 423              	
+  60:bgtree/bgUtil2.c ****         || schema[i] == 'x' || schema[i] == 'X') 
+ 424              		.loc 1 61 0
+ 425 03cc 2800C28F 		lw	$2,40($fp)
+ 426 03d0 4400C38F 		lw	$3,68($fp)
+ 427 03d4 00000000 		nop
+ 428 03d8 21106200 		addu	$2,$3,$2
+ 429 03dc 00004380 		lb	$3,0($2)
+  60:bgtree/bgUtil2.c ****         || schema[i] == 'x' || schema[i] == 'X') 
+ 430              		.loc 1 60 0
+ 431 03e0 78000224 		li	$2,120			# 0x78
+ 432 03e4 09006210 		beq	$3,$2,$L18
+ 433 03e8 00000000 		nop
+ 434              	
+ 435              		.loc 1 61 0
+ 436 03ec 2800C28F 		lw	$2,40($fp)
+ 437 03f0 4400C38F 		lw	$3,68($fp)
+ 438 03f4 00000000 		nop
+ 439 03f8 21106200 		addu	$2,$3,$2
+ 440 03fc 00004380 		lb	$3,0($2)
+  60:bgtree/bgUtil2.c ****         || schema[i] == 'x' || schema[i] == 'X') 
+ 441              		.loc 1 60 0
+ 442 0400 58000224 		li	$2,88			# 0x58
+ 443 0404 39006214 		bne	$3,$2,$L19
+ 444 0408 00000000 		nop
+ 445              	
+ 446              	$L18:
+ 447              	$LBB3 = .
+  61:bgtree/bgUtil2.c ****     {
+  62:bgtree/bgUtil2.c ****       offset += 4;
+ 448              		.loc 1 63 0
+ 449 040c 2C00C28F 		lw	$2,44($fp)
+ 450 0410 00000000 		nop
+ 451 0414 04004224 		addiu	$2,$2,4
+ 452 0418 2C00C2AF 		sw	$2,44($fp)
+  63:bgtree/bgUtil2.c ****       int r = fread(&buf, 4, 1, blob);
+ 453              		.loc 1 64 0
+ 454 041c 3000C227 		addiu	$2,$fp,48
+ 455 0420 21204000 		move	$4,$2
+ 456 0424 04000524 		li	$5,4			# 0x4
+ 457 0428 01000624 		li	$6,1			# 0x1
+ 458 042c 4000C78F 		lw	$7,64($fp)
+ 459 0430 0000828F 		lw	$2,%call16(fread)($28)
+ 460 0434 00000000 		nop
+ 461 0438 21C84000 		move	$25,$2
+ 462 043c 09F82003 		jalr	$25
+ 463 0440 00000000 		nop
+ 464              	
+ 465 0444 1000DC8F 		lw	$28,16($fp)
+ 466 0448 2400C2AF 		sw	$2,36($fp)
+  64:bgtree/bgUtil2.c ****       if (r != 1) {
+ 467              		.loc 1 65 0
+ 468 044c 2400C38F 		lw	$3,36($fp)
+ 469 0450 01000224 		li	$2,1			# 0x1
+ 470 0454 9D006210 		beq	$3,$2,$L32
+ 471 0458 00000000 		nop
+ 472              	
+  65:bgtree/bgUtil2.c ****         if (IsError) {
+ 473              		.loc 1 66 0
+ 474 045c 0000828F 		lw	$2,%got(errorMsg)($28)
+ 475 0460 00000000 		nop
+ 476 0464 0000428C 		lw	$2,0($2)
+ 477 0468 00000000 		nop
+ 478 046c 0D004010 		beq	$2,$0,$L21
+ 479 0470 00000000 		nop
+ 480              	
+  66:bgtree/bgUtil2.c ****           ERRORprint();
+ 481              		.loc 1 67 0
+ 482 0474 0000023C 		lui	$2,%hi(__func__.2075)
+ 483 0478 E0024424 		addiu	$4,$2,%lo(__func__.2075)
+ 484 047c 0000023C 		lui	$2,%hi($LC0)
+ 485 0480 00004524 		addiu	$5,$2,%lo($LC0)
+ 486 0484 43000624 		li	$6,67			# 0x43
+ 487 0488 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 488 048c 00000000 		nop
+ 489 0490 21C84000 		move	$25,$2
+ 490 0494 09F82003 		jalr	$25
+ 491 0498 00000000 		nop
+ 492              	
+ 493 049c 1000DC8F 		lw	$28,16($fp)
+ 494 04a0 00000000 		nop
+ 495              	$L21:
+  67:bgtree/bgUtil2.c ****         }
+  68:bgtree/bgUtil2.c ****         ERRORreturn2("Unable to read int from file", 0);
+ 496              		.loc 1 69 0
+ 497 04a4 0000828F 		lw	$2,%got(errorFile)($28)
+ 498 04a8 0000033C 		lui	$3,%hi($LC0)
+ 499 04ac 00006324 		addiu	$3,$3,%lo($LC0)
+ 500 04b0 000043AC 		sw	$3,0($2)
+ 501 04b4 0000828F 		lw	$2,%got(errorLine)($28)
+ 502 04b8 45000324 		li	$3,69			# 0x45
+ 503 04bc 000043AC 		sw	$3,0($2)
+ 504 04c0 0000828F 		lw	$2,%got(errorFunc)($28)
+ 505 04c4 0000033C 		lui	$3,%hi(__func__.2075)
+ 506 04c8 E0026324 		addiu	$3,$3,%lo(__func__.2075)
+ 507 04cc 000043AC 		sw	$3,0($2)
+ 508 04d0 0000828F 		lw	$2,%got(errorMsg)($28)
+ 509 04d4 0000033C 		lui	$3,%hi($LC4)
+ 510 04d8 68006324 		addiu	$3,$3,%lo($LC4)
+ 511 04dc 000043AC 		sw	$3,0($2)
+ 512 04e0 21100000 		move	$2,$0
+ 513 04e4 85000010 		b	$L22
+ 514 04e8 00000000 		nop
+ 515              	
+ 516              	$L19:
+ 517              	$LBE3 = .
+  69:bgtree/bgUtil2.c ****       }
+  70:bgtree/bgUtil2.c ****     } else if (schema[i] == 's' || schema[i] == 'K') {
+ 518              		.loc 1 71 0
+ 519 04ec 2800C28F 		lw	$2,40($fp)
+ 520 04f0 4400C38F 		lw	$3,68($fp)
+ 521 04f4 00000000 		nop
+ 522 04f8 21106200 		addu	$2,$3,$2
+ 523 04fc 00004380 		lb	$3,0($2)
+ 524 0500 73000224 		li	$2,115			# 0x73
+ 525 0504 09006210 		beq	$3,$2,$L24
+ 526 0508 00000000 		nop
+ 527              	
+ 528 050c 2800C28F 		lw	$2,40($fp)
+ 529 0510 4400C38F 		lw	$3,68($fp)
+ 530 0514 00000000 		nop
+ 531 0518 21106200 		addu	$2,$3,$2
+ 532 051c 00004380 		lb	$3,0($2)
+ 533 0520 4B000224 		li	$2,75			# 0x4b
+ 534 0524 5D006214 		bne	$3,$2,$L25
+ 535 0528 00000000 		nop
+ 536              	
+ 537              	$L24:
+ 538              	$LBB4 = .
+  71:bgtree/bgUtil2.c ****       offset += 4;
+ 539              		.loc 1 72 0
+ 540 052c 2C00C28F 		lw	$2,44($fp)
+ 541 0530 00000000 		nop
+ 542 0534 04004224 		addiu	$2,$2,4
+ 543 0538 2C00C2AF 		sw	$2,44($fp)
+  72:bgtree/bgUtil2.c ****       int r = fread(&buf, 4, 1, blob);
+ 544              		.loc 1 73 0
+ 545 053c 3000C227 		addiu	$2,$fp,48
+ 546 0540 21204000 		move	$4,$2
+ 547 0544 04000524 		li	$5,4			# 0x4
+ 548 0548 01000624 		li	$6,1			# 0x1
+ 549 054c 4000C78F 		lw	$7,64($fp)
+ 550 0550 0000828F 		lw	$2,%call16(fread)($28)
+ 551 0554 00000000 		nop
+ 552 0558 21C84000 		move	$25,$2
+ 553 055c 09F82003 		jalr	$25
+ 554 0560 00000000 		nop
+ 555              	
+ 556 0564 1000DC8F 		lw	$28,16($fp)
+ 557 0568 2000C2AF 		sw	$2,32($fp)
+  73:bgtree/bgUtil2.c ****       if (r != 1) 
+ 558              		.loc 1 74 0
+ 559 056c 2000C38F 		lw	$3,32($fp)
+ 560 0570 01000224 		li	$2,1			# 0x1
+ 561 0574 13006210 		beq	$3,$2,$L26
+ 562 0578 00000000 		nop
+ 563              	
+  74:bgtree/bgUtil2.c ****         ERRORreturn2("Unable to read int from file", 0);
+ 564              		.loc 1 75 0
+ 565 057c 0000828F 		lw	$2,%got(errorFile)($28)
+ 566 0580 0000033C 		lui	$3,%hi($LC0)
+ 567 0584 00006324 		addiu	$3,$3,%lo($LC0)
+ 568 0588 000043AC 		sw	$3,0($2)
+ 569 058c 0000828F 		lw	$2,%got(errorLine)($28)
+ 570 0590 4B000324 		li	$3,75			# 0x4b
+ 571 0594 000043AC 		sw	$3,0($2)
+ 572 0598 0000828F 		lw	$2,%got(errorFunc)($28)
+ 573 059c 0000033C 		lui	$3,%hi(__func__.2075)
+ 574 05a0 E0026324 		addiu	$3,$3,%lo(__func__.2075)
+ 575 05a4 000043AC 		sw	$3,0($2)
+ 576 05a8 0000828F 		lw	$2,%got(errorMsg)($28)
+ 577 05ac 0000033C 		lui	$3,%hi($LC4)
+ 578 05b0 68006324 		addiu	$3,$3,%lo($LC4)
+ 579 05b4 000043AC 		sw	$3,0($2)
+ 580 05b8 21100000 		move	$2,$0
+ 581 05bc 4F000010 		b	$L22
+ 582 05c0 00000000 		nop
+ 583              	
+ 584              	$L26:
+  75:bgtree/bgUtil2.c ****       offset += buf;
+ 585              		.loc 1 76 0
+ 586 05c4 3000C28F 		lw	$2,48($fp)
+ 587 05c8 2C00C38F 		lw	$3,44($fp)
+ 588 05cc 00000000 		nop
+ 589 05d0 21106200 		addu	$2,$3,$2
+ 590 05d4 2C00C2AF 		sw	$2,44($fp)
+ 591              	$LBB5 = .
+  76:bgtree/bgUtil2.c ****       for (int j=0; j<buf; ++j) {
+ 592              		.loc 1 77 0
+ 593 05d8 1C00C0AF 		sw	$0,28($fp)
+ 594 05dc 27000010 		b	$L27
+ 595 05e0 00000000 		nop
+ 596              	
+ 597              	$L29:
+ 598              	$LBB6 = .
+  77:bgtree/bgUtil2.c ****         char c;
+  78:bgtree/bgUtil2.c ****         int r = fread(&c, 1, 1, blob);
+ 599              		.loc 1 79 0
+ 600 05e4 3400C227 		addiu	$2,$fp,52
+ 601 05e8 21204000 		move	$4,$2
+ 602 05ec 01000524 		li	$5,1			# 0x1
+ 603 05f0 01000624 		li	$6,1			# 0x1
+ 604 05f4 4000C78F 		lw	$7,64($fp)
+ 605 05f8 0000828F 		lw	$2,%call16(fread)($28)
+ 606 05fc 00000000 		nop
+ 607 0600 21C84000 		move	$25,$2
+ 608 0604 09F82003 		jalr	$25
+ 609 0608 00000000 		nop
+ 610              	
+ 611 060c 1000DC8F 		lw	$28,16($fp)
+ 612 0610 1800C2AF 		sw	$2,24($fp)
+  79:bgtree/bgUtil2.c ****         if (r != 1) 
+ 613              		.loc 1 80 0
+ 614 0614 1800C38F 		lw	$3,24($fp)
+ 615 0618 01000224 		li	$2,1			# 0x1
+ 616 061c 13006210 		beq	$3,$2,$L28
+ 617 0620 00000000 		nop
+ 618              	
+  80:bgtree/bgUtil2.c ****           ERRORreturn2("Unable to read string from file", 0);
+ 619              		.loc 1 81 0
+ 620 0624 0000828F 		lw	$2,%got(errorFile)($28)
+ 621 0628 0000033C 		lui	$3,%hi($LC0)
+ 622 062c 00006324 		addiu	$3,$3,%lo($LC0)
+ 623 0630 000043AC 		sw	$3,0($2)
+ 624 0634 0000828F 		lw	$2,%got(errorLine)($28)
+ 625 0638 51000324 		li	$3,81			# 0x51
+ 626 063c 000043AC 		sw	$3,0($2)
+ 627 0640 0000828F 		lw	$2,%got(errorFunc)($28)
+ 628 0644 0000033C 		lui	$3,%hi(__func__.2075)
+ 629 0648 E0026324 		addiu	$3,$3,%lo(__func__.2075)
+ 630 064c 000043AC 		sw	$3,0($2)
+ 631 0650 0000828F 		lw	$2,%got(errorMsg)($28)
+ 632 0654 0000033C 		lui	$3,%hi($LC5)
+ 633 0658 88006324 		addiu	$3,$3,%lo($LC5)
+ 634 065c 000043AC 		sw	$3,0($2)
+ 635 0660 21100000 		move	$2,$0
+ 636 0664 25000010 		b	$L22
+ 637 0668 00000000 		nop
+ 638              	
+ 639              	$L28:
+ 640              	$LBE6 = .
+  77:bgtree/bgUtil2.c ****         char c;
+ 641              		.loc 1 77 0
+ 642 066c 1C00C28F 		lw	$2,28($fp)
+ 643 0670 00000000 		nop
+ 644 0674 01004224 		addiu	$2,$2,1
+ 645 0678 1C00C2AF 		sw	$2,28($fp)
+ 646              	$L27:
+ 647 067c 1C00C38F 		lw	$3,28($fp)
+ 648 0680 3000C28F 		lw	$2,48($fp)
+ 649 0684 00000000 		nop
+ 650 0688 2B106200 		sltu	$2,$3,$2
+ 651 068c D5FF4014 		bne	$2,$0,$L29
+ 652 0690 00000000 		nop
+ 653              	
+ 654              	$LBE5 = .
+ 655              	$LBE4 = .
+  71:bgtree/bgUtil2.c ****     } else if (schema[i] == 's' || schema[i] == 'K') {
+ 656              		.loc 1 71 0
+ 657 0694 0E000010 		b	$L23
+ 658 0698 00000000 		nop
+ 659              	
+ 660              	$L25:
+  81:bgtree/bgUtil2.c ****       }
+  82:bgtree/bgUtil2.c ****     } else {
+  83:bgtree/bgUtil2.c ****       assert(!"Invalid Schema");
+ 661              		.loc 1 84 0
+ 662 069c 0000023C 		lui	$2,%hi($LC6)
+ 663 06a0 A8004424 		addiu	$4,$2,%lo($LC6)
+ 664 06a4 0000023C 		lui	$2,%hi($LC0)
+ 665 06a8 00004524 		addiu	$5,$2,%lo($LC0)
+ 666 06ac 54000624 		li	$6,84			# 0x54
+ 667 06b0 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2073)
+ 668 06b4 D0024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2073)
+ 669 06b8 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 670 06bc 00000000 		nop
+ 671 06c0 21C84000 		move	$25,$2
+ 672 06c4 09F82003 		jalr	$25
+ 673 06c8 00000000 		nop
+ 674              	
+ 675              	$L32:
+  60:bgtree/bgUtil2.c ****     if (schema[i] == 'I' || schema[i] == 'i' 
+ 676              		.loc 1 60 0
+ 677 06cc 00000000 		nop
+ 678              	$L23:
+  58:bgtree/bgUtil2.c ****   for (int i=0; i<field; ++i) {
+ 679              		.loc 1 58 0
+ 680 06d0 2800C28F 		lw	$2,40($fp)
+ 681 06d4 00000000 		nop
+ 682 06d8 01004224 		addiu	$2,$2,1
+ 683 06dc 2800C2AF 		sw	$2,40($fp)
+ 684              	$L16:
+ 685 06e0 2800C38F 		lw	$3,40($fp)
+ 686 06e4 4800C28F 		lw	$2,72($fp)
+ 687 06e8 00000000 		nop
+ 688 06ec 2A106200 		slt	$2,$3,$2
+ 689 06f0 12FF4014 		bne	$2,$0,$L30
+ 690 06f4 00000000 		nop
+ 691              	
+ 692              	$LBE2 = .
+  84:bgtree/bgUtil2.c ****     }
+  85:bgtree/bgUtil2.c ****   }
+  86:bgtree/bgUtil2.c ****   return offset;
+ 693              		.loc 1 87 0
+ 694 06f8 2C00C28F 		lw	$2,44($fp)
+ 695              	$L22:
+  87:bgtree/bgUtil2.c **** }
+ 696              		.loc 1 88 0
+ 697 06fc 21E8C003 		move	$sp,$fp
+ 698 0700 3C00BF8F 		lw	$31,60($sp)
+ 699 0704 3800BE8F 		lw	$fp,56($sp)
+ 700 0708 4000BD27 		addiu	$sp,$sp,64
+ 701 070c 0800E003 		j	$31
+ 702 0710 00000000 		nop
+ 703              	
+ 704              		.set	macro
+ 705              		.set	reorder
+ 706              		.end	SchemaGetOffset
+ 707              	$LFE3:
+ 709              		.rdata
+ 710 00ba 0000     		.align	2
+ 711              	$LC7:
+ 712 00bc 52455155 		.ascii	"REQUIRE FAILURE %s\012\000"
+ 712      49524520 
+ 712      4641494C 
+ 712      55524520 
+ 712      25730A00 
+ 713              		.align	2
+ 714              	$LC8:
+ 715 00d0 554E4B00 		.ascii	"UNK\000"
+ 716              		.text
+ 717              		.align	2
+ 718              		.globl	SchemaGetUInt
+ 719              	$LFB4 = .
+  88:bgtree/bgUtil2.c **** 
+  89:bgtree/bgUtil2.c **** uint32_t SchemaGetUInt(FILE *blob, char *schema, int field) {
+ 720              		.loc 1 90 0
+ 721              		.set	nomips16
+ 722              		.ent	SchemaGetUInt
+ 724              	SchemaGetUInt:
+ 725              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 726              		.mask	0xc0000000,-4
+ 727              		.fmask	0x00000000,0
+ 728              		.set	noreorder
+ 729              		.set	nomacro
+ 730              		
+ 731 0714 E0FFBD27 		addiu	$sp,$sp,-32
+ 732              	$LCFI16:
+ 733 0718 1C00BFAF 		sw	$31,28($sp)
+ 734              	$LCFI17:
+ 735 071c 1800BEAF 		sw	$fp,24($sp)
+ 736              	$LCFI18:
+ 737 0720 21F0A003 		move	$fp,$sp
+ 738              	$LCFI19:
+ 739 0724 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 740 0728 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 741 072c 1000BCAF 		.cprestore	16
+ 742 0730 2000C4AF 		sw	$4,32($fp)
+ 743 0734 2400C5AF 		sw	$5,36($fp)
+ 744 0738 2800C6AF 		sw	$6,40($fp)
+  90:bgtree/bgUtil2.c ****   require(schema[field] == 'I' || schema[field] == 'x' || schema[field] == 'X');
+ 745              		.loc 1 91 0
+ 746 073c 2800C28F 		lw	$2,40($fp)
+ 747 0740 2400C38F 		lw	$3,36($fp)
+ 748 0744 00000000 		nop
+ 749 0748 21106200 		addu	$2,$3,$2
+ 750 074c 00004380 		lb	$3,0($2)
+ 751 0750 49000224 		li	$2,73			# 0x49
+ 752 0754 22006210 		beq	$3,$2,$L34
+ 753 0758 00000000 		nop
+ 754              	
+ 755 075c 2800C28F 		lw	$2,40($fp)
+ 756 0760 2400C38F 		lw	$3,36($fp)
+ 757 0764 00000000 		nop
+ 758 0768 21106200 		addu	$2,$3,$2
+ 759 076c 00004380 		lb	$3,0($2)
+ 760 0770 78000224 		li	$2,120			# 0x78
+ 761 0774 1A006210 		beq	$3,$2,$L34
+ 762 0778 00000000 		nop
+ 763              	
+ 764 077c 2800C28F 		lw	$2,40($fp)
+ 765 0780 2400C38F 		lw	$3,36($fp)
+ 766 0784 00000000 		nop
+ 767 0788 21106200 		addu	$2,$3,$2
+ 768 078c 00004380 		lb	$3,0($2)
+ 769 0790 58000224 		li	$2,88			# 0x58
+ 770 0794 12006210 		beq	$3,$2,$L34
+ 771 0798 00000000 		nop
+ 772              	
+ 773 079c 0000828F 		lw	$2,%got(stderr)($28)
+ 774 07a0 00000000 		nop
+ 775 07a4 0000428C 		lw	$2,0($2)
+ 776 07a8 00000000 		nop
+ 777 07ac 21184000 		move	$3,$2
+ 778 07b0 0000023C 		lui	$2,%hi($LC7)
+ 779 07b4 BC004224 		addiu	$2,$2,%lo($LC7)
+ 780 07b8 21206000 		move	$4,$3
+ 781 07bc 21284000 		move	$5,$2
+ 782 07c0 0000023C 		lui	$2,%hi($LC8)
+ 783 07c4 D0004624 		addiu	$6,$2,%lo($LC8)
+ 784 07c8 0000828F 		lw	$2,%call16(fprintf)($28)
+ 785 07cc 00000000 		nop
+ 786 07d0 21C84000 		move	$25,$2
+ 787 07d4 09F82003 		jalr	$25
+ 788 07d8 00000000 		nop
+ 789              	
+ 790 07dc 1000DC8F 		lw	$28,16($fp)
+ 791              	$L34:
+  91:bgtree/bgUtil2.c ****   SchemaGetOffset(blob, schema, field);
+ 792              		.loc 1 92 0
+ 793 07e0 2000C48F 		lw	$4,32($fp)
+ 794 07e4 2400C58F 		lw	$5,36($fp)
+ 795 07e8 2800C68F 		lw	$6,40($fp)
+ 796              		.option	pic0
+ 797 07ec 0000000C 		jal	SchemaGetOffset
+ 798 07f0 00000000 		nop
+ 799              	
+ 800              		.option	pic2
+ 801 07f4 1000DC8F 		lw	$28,16($fp)
+  92:bgtree/bgUtil2.c ****   return UnpackUIntFromFile(blob);
+ 802              		.loc 1 93 0
+ 803 07f8 2000C48F 		lw	$4,32($fp)
+ 804              		.option	pic0
+ 805 07fc 0000000C 		jal	UnpackUIntFromFile
+ 806 0800 00000000 		nop
+ 807              	
+ 808              		.option	pic2
+ 809 0804 1000DC8F 		lw	$28,16($fp)
+  93:bgtree/bgUtil2.c **** }
+ 810              		.loc 1 94 0
+ 811 0808 21E8C003 		move	$sp,$fp
+ 812 080c 1C00BF8F 		lw	$31,28($sp)
+ 813 0810 1800BE8F 		lw	$fp,24($sp)
+ 814 0814 2000BD27 		addiu	$sp,$sp,32
+ 815 0818 0800E003 		j	$31
+ 816 081c 00000000 		nop
+ 817              	
+ 818              		.set	macro
+ 819              		.set	reorder
+ 820              		.end	SchemaGetUInt
+ 821              	$LFE4:
+ 823              		.align	2
+ 824              		.globl	SchemaGetInt
+ 825              	$LFB5 = .
+  94:bgtree/bgUtil2.c **** 
+  95:bgtree/bgUtil2.c **** int32_t SchemaGetInt(FILE *blob, char *schema, int field) {
+ 826              		.loc 1 96 0
+ 827              		.set	nomips16
+ 828              		.ent	SchemaGetInt
+ 830              	SchemaGetInt:
+ 831              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 832              		.mask	0xc0000000,-4
+ 833              		.fmask	0x00000000,0
+ 834              		.set	noreorder
+ 835              		.set	nomacro
+ 836              		
+ 837 0820 E0FFBD27 		addiu	$sp,$sp,-32
+ 838              	$LCFI20:
+ 839 0824 1C00BFAF 		sw	$31,28($sp)
+ 840              	$LCFI21:
+ 841 0828 1800BEAF 		sw	$fp,24($sp)
+ 842              	$LCFI22:
+ 843 082c 21F0A003 		move	$fp,$sp
+ 844              	$LCFI23:
+ 845 0830 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 846 0834 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 847 0838 1000BCAF 		.cprestore	16
+ 848 083c 2000C4AF 		sw	$4,32($fp)
+ 849 0840 2400C5AF 		sw	$5,36($fp)
+ 850 0844 2800C6AF 		sw	$6,40($fp)
+  96:bgtree/bgUtil2.c ****   require(schema[field] == 'i');
+ 851              		.loc 1 97 0
+ 852 0848 2800C28F 		lw	$2,40($fp)
+ 853 084c 2400C38F 		lw	$3,36($fp)
+ 854 0850 00000000 		nop
+ 855 0854 21106200 		addu	$2,$3,$2
+ 856 0858 00004380 		lb	$3,0($2)
+ 857 085c 69000224 		li	$2,105			# 0x69
+ 858 0860 12006210 		beq	$3,$2,$L37
+ 859 0864 00000000 		nop
+ 860              	
+ 861 0868 0000828F 		lw	$2,%got(stderr)($28)
+ 862 086c 00000000 		nop
+ 863 0870 0000428C 		lw	$2,0($2)
+ 864 0874 00000000 		nop
+ 865 0878 21184000 		move	$3,$2
+ 866 087c 0000023C 		lui	$2,%hi($LC7)
+ 867 0880 BC004224 		addiu	$2,$2,%lo($LC7)
+ 868 0884 21206000 		move	$4,$3
+ 869 0888 21284000 		move	$5,$2
+ 870 088c 0000023C 		lui	$2,%hi($LC8)
+ 871 0890 D0004624 		addiu	$6,$2,%lo($LC8)
+ 872 0894 0000828F 		lw	$2,%call16(fprintf)($28)
+ 873 0898 00000000 		nop
+ 874 089c 21C84000 		move	$25,$2
+ 875 08a0 09F82003 		jalr	$25
+ 876 08a4 00000000 		nop
+ 877              	
+ 878 08a8 1000DC8F 		lw	$28,16($fp)
+ 879              	$L37:
+  97:bgtree/bgUtil2.c ****   SchemaGetOffset(blob, schema, field);
+ 880              		.loc 1 98 0
+ 881 08ac 2000C48F 		lw	$4,32($fp)
+ 882 08b0 2400C58F 		lw	$5,36($fp)
+ 883 08b4 2800C68F 		lw	$6,40($fp)
+ 884              		.option	pic0
+ 885 08b8 0000000C 		jal	SchemaGetOffset
+ 886 08bc 00000000 		nop
+ 887              	
+ 888              		.option	pic2
+ 889 08c0 1000DC8F 		lw	$28,16($fp)
+  98:bgtree/bgUtil2.c ****   return UnpackIntFromFile(blob);
+ 890              		.loc 1 99 0
+ 891 08c4 2000C48F 		lw	$4,32($fp)
+ 892              		.option	pic0
+ 893 08c8 0000000C 		jal	UnpackIntFromFile
+ 894 08cc 00000000 		nop
+ 895              	
+ 896              		.option	pic2
+ 897 08d0 1000DC8F 		lw	$28,16($fp)
+  99:bgtree/bgUtil2.c **** }
+ 898              		.loc 1 100 0
+ 899 08d4 21E8C003 		move	$sp,$fp
+ 900 08d8 1C00BF8F 		lw	$31,28($sp)
+ 901 08dc 1800BE8F 		lw	$fp,24($sp)
+ 902 08e0 2000BD27 		addiu	$sp,$sp,32
+ 903 08e4 0800E003 		j	$31
+ 904 08e8 00000000 		nop
+ 905              	
+ 906              		.set	macro
+ 907              		.set	reorder
+ 908              		.end	SchemaGetInt
+ 909              	$LFE5:
+ 911              		.rdata
+ 912              		.align	2
+ 913              	$LC9:
+ 914 00d4 73636865 		.ascii	"schema[field] == 's' || schema[field] == 'K'\000"
+ 914      6D615B66 
+ 914      69656C64 
+ 914      5D203D3D 
+ 914      20277327 
+ 915 0101 000000   		.align	2
+ 916              	$LC10:
+ 917 0104 556E6162 		.ascii	"Unable to read string size from file\000"
+ 917      6C652074 
+ 917      6F207265 
+ 917      61642073 
+ 917      7472696E 
+ 918 0129 000000   		.align	2
+ 919              	$LC11:
+ 920 012c 556E6162 		.ascii	"Unable to read full string from file\000"
+ 920      6C652074 
+ 920      6F207265 
+ 920      61642066 
+ 920      756C6C20 
+ 921              		.text
+ 922              		.align	2
+ 923              		.globl	SchemaGetString
+ 924              	$LFB6 = .
+ 100:bgtree/bgUtil2.c **** 
+ 101:bgtree/bgUtil2.c **** uint32_t SchemaGetString(FILE *blob, char *schema, int field, char *outBuf, int bufLen) {
+ 925              		.loc 1 102 0
+ 926              		.set	nomips16
+ 927              		.ent	SchemaGetString
+ 929              	SchemaGetString:
+ 930              		.frame	$fp,48,$31		# vars= 16, regs= 2/0, args= 16, gp= 8
+ 931              		.mask	0xc0000000,-4
+ 932              		.fmask	0x00000000,0
+ 933              		.set	noreorder
+ 934              		.set	nomacro
+ 935              		
+ 936 08ec D0FFBD27 		addiu	$sp,$sp,-48
+ 937              	$LCFI24:
+ 938 08f0 2C00BFAF 		sw	$31,44($sp)
+ 939              	$LCFI25:
+ 940 08f4 2800BEAF 		sw	$fp,40($sp)
+ 941              	$LCFI26:
+ 942 08f8 21F0A003 		move	$fp,$sp
+ 943              	$LCFI27:
+ 944 08fc 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 945 0900 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 946 0904 1000BCAF 		.cprestore	16
+ 947 0908 3000C4AF 		sw	$4,48($fp)
+ 948 090c 3400C5AF 		sw	$5,52($fp)
+ 949 0910 3800C6AF 		sw	$6,56($fp)
+ 950 0914 3C00C7AF 		sw	$7,60($fp)
+ 102:bgtree/bgUtil2.c ****   assert(schema[field] == 's' || schema[field] == 'K');
+ 951              		.loc 1 103 0
+ 952 0918 3800C28F 		lw	$2,56($fp)
+ 953 091c 3400C38F 		lw	$3,52($fp)
+ 954 0920 00000000 		nop
+ 955 0924 21106200 		addu	$2,$3,$2
+ 956 0928 00004380 		lb	$3,0($2)
+ 957 092c 73000224 		li	$2,115			# 0x73
+ 958 0930 15006210 		beq	$3,$2,$L40
+ 959 0934 00000000 		nop
+ 960              	
+ 961 0938 3800C28F 		lw	$2,56($fp)
+ 962 093c 3400C38F 		lw	$3,52($fp)
+ 963 0940 00000000 		nop
+ 964 0944 21106200 		addu	$2,$3,$2
+ 965 0948 00004380 		lb	$3,0($2)
+ 966 094c 4B000224 		li	$2,75			# 0x4b
+ 967 0950 0D006210 		beq	$3,$2,$L40
+ 968 0954 00000000 		nop
+ 969              	
+ 970 0958 0000023C 		lui	$2,%hi($LC9)
+ 971 095c D4004424 		addiu	$4,$2,%lo($LC9)
+ 972 0960 0000023C 		lui	$2,%hi($LC0)
+ 973 0964 00004524 		addiu	$5,$2,%lo($LC0)
+ 974 0968 67000624 		li	$6,103			# 0x67
+ 975 096c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2182)
+ 976 0970 B0024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2182)
+ 977 0974 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 978 0978 00000000 		nop
+ 979 097c 21C84000 		move	$25,$2
+ 980 0980 09F82003 		jalr	$25
+ 981 0984 00000000 		nop
+ 982              	
+ 983              	$L40:
+ 103:bgtree/bgUtil2.c ****   SchemaGetOffset(blob, schema, field);
+ 984              		.loc 1 104 0
+ 985 0988 3000C48F 		lw	$4,48($fp)
+ 986 098c 3400C58F 		lw	$5,52($fp)
+ 987 0990 3800C68F 		lw	$6,56($fp)
+ 988              		.option	pic0
+ 989 0994 0000000C 		jal	SchemaGetOffset
+ 990 0998 00000000 		nop
+ 991              	
+ 992              		.option	pic2
+ 993 099c 1000DC8F 		lw	$28,16($fp)
+ 994 09a0 00000000 		nop
+ 104:bgtree/bgUtil2.c ****   if (IsError) return 0;
+ 995              		.loc 1 105 0
+ 996 09a4 0000828F 		lw	$2,%got(errorMsg)($28)
+ 997 09a8 00000000 		nop
+ 998 09ac 0000428C 		lw	$2,0($2)
+ 999 09b0 00000000 		nop
+ 1000 09b4 04004010 		beq	$2,$0,$L41
+ 1001 09b8 00000000 		nop
+ 1002              	
+ 1003 09bc 21100000 		move	$2,$0
+ 1004 09c0 58000010 		b	$L42
+ 1005 09c4 00000000 		nop
+ 1006              	
+ 1007              	$L41:
+ 105:bgtree/bgUtil2.c ****   uint32_t sz;
+ 106:bgtree/bgUtil2.c ****   int r = fread(&sz, 4, 1, blob);
+ 1008              		.loc 1 107 0
+ 1009 09c8 2000C227 		addiu	$2,$fp,32
+ 1010 09cc 21204000 		move	$4,$2
+ 1011 09d0 04000524 		li	$5,4			# 0x4
+ 1012 09d4 01000624 		li	$6,1			# 0x1
+ 1013 09d8 3000C78F 		lw	$7,48($fp)
+ 1014 09dc 0000828F 		lw	$2,%call16(fread)($28)
+ 1015 09e0 00000000 		nop
+ 1016 09e4 21C84000 		move	$25,$2
+ 1017 09e8 09F82003 		jalr	$25
+ 1018 09ec 00000000 		nop
+ 1019              	
+ 1020 09f0 1000DC8F 		lw	$28,16($fp)
+ 1021 09f4 1C00C2AF 		sw	$2,28($fp)
+ 107:bgtree/bgUtil2.c ****   if (r != 1) 
+ 1022              		.loc 1 108 0
+ 1023 09f8 1C00C38F 		lw	$3,28($fp)
+ 1024 09fc 01000224 		li	$2,1			# 0x1
+ 1025 0a00 13006210 		beq	$3,$2,$L43
+ 1026 0a04 00000000 		nop
+ 1027              	
+ 108:bgtree/bgUtil2.c ****     ERRORreturn2("Unable to read string size from file", 0);
+ 1028              		.loc 1 109 0
+ 1029 0a08 0000828F 		lw	$2,%got(errorFile)($28)
+ 1030 0a0c 0000033C 		lui	$3,%hi($LC0)
+ 1031 0a10 00006324 		addiu	$3,$3,%lo($LC0)
+ 1032 0a14 000043AC 		sw	$3,0($2)
+ 1033 0a18 0000828F 		lw	$2,%got(errorLine)($28)
+ 1034 0a1c 6D000324 		li	$3,109			# 0x6d
+ 1035 0a20 000043AC 		sw	$3,0($2)
+ 1036 0a24 0000828F 		lw	$2,%got(errorFunc)($28)
+ 1037 0a28 0000033C 		lui	$3,%hi(__func__.2185)
+ 1038 0a2c C0026324 		addiu	$3,$3,%lo(__func__.2185)
+ 1039 0a30 000043AC 		sw	$3,0($2)
+ 1040 0a34 0000828F 		lw	$2,%got(errorMsg)($28)
+ 1041 0a38 0000033C 		lui	$3,%hi($LC10)
+ 1042 0a3c 04016324 		addiu	$3,$3,%lo($LC10)
+ 1043 0a40 000043AC 		sw	$3,0($2)
+ 1044 0a44 21100000 		move	$2,$0
+ 1045 0a48 36000010 		b	$L42
+ 1046 0a4c 00000000 		nop
+ 1047              	
+ 1048              	$L43:
+ 109:bgtree/bgUtil2.c ****   uint32_t sz2 = bufLen - 1;
+ 1049              		.loc 1 110 0
+ 1050 0a50 4000C28F 		lw	$2,64($fp)
+ 1051 0a54 00000000 		nop
+ 1052 0a58 FFFF4224 		addiu	$2,$2,-1
+ 1053 0a5c 1800C2AF 		sw	$2,24($fp)
+ 110:bgtree/bgUtil2.c ****   if (sz2 < sz) sz = sz2;
+ 1054              		.loc 1 111 0
+ 1055 0a60 2000C28F 		lw	$2,32($fp)
+ 1056 0a64 1800C38F 		lw	$3,24($fp)
+ 1057 0a68 00000000 		nop
+ 1058 0a6c 2B106200 		sltu	$2,$3,$2
+ 1059 0a70 04004010 		beq	$2,$0,$L44
+ 1060 0a74 00000000 		nop
+ 1061              	
+ 1062 0a78 1800C28F 		lw	$2,24($fp)
+ 1063 0a7c 00000000 		nop
+ 1064 0a80 2000C2AF 		sw	$2,32($fp)
+ 1065              	$L44:
+ 111:bgtree/bgUtil2.c ****   r = fread(outBuf, sz, 1, blob);
+ 1066              		.loc 1 112 0
+ 1067 0a84 2000C28F 		lw	$2,32($fp)
+ 1068 0a88 3C00C48F 		lw	$4,60($fp)
+ 1069 0a8c 21284000 		move	$5,$2
+ 1070 0a90 01000624 		li	$6,1			# 0x1
+ 1071 0a94 3000C78F 		lw	$7,48($fp)
+ 1072 0a98 0000828F 		lw	$2,%call16(fread)($28)
+ 1073 0a9c 00000000 		nop
+ 1074 0aa0 21C84000 		move	$25,$2
+ 1075 0aa4 09F82003 		jalr	$25
+ 1076 0aa8 00000000 		nop
+ 1077              	
+ 1078 0aac 1000DC8F 		lw	$28,16($fp)
+ 1079 0ab0 1C00C2AF 		sw	$2,28($fp)
+ 112:bgtree/bgUtil2.c ****   if (r != 1)
+ 1080              		.loc 1 113 0
+ 1081 0ab4 1C00C38F 		lw	$3,28($fp)
+ 1082 0ab8 01000224 		li	$2,1			# 0x1
+ 1083 0abc 13006210 		beq	$3,$2,$L45
+ 1084 0ac0 00000000 		nop
+ 1085              	
+ 113:bgtree/bgUtil2.c ****     ERRORreturn2("Unable to read full string from file", 0);
+ 1086              		.loc 1 114 0
+ 1087 0ac4 0000828F 		lw	$2,%got(errorFile)($28)
+ 1088 0ac8 0000033C 		lui	$3,%hi($LC0)
+ 1089 0acc 00006324 		addiu	$3,$3,%lo($LC0)
+ 1090 0ad0 000043AC 		sw	$3,0($2)
+ 1091 0ad4 0000828F 		lw	$2,%got(errorLine)($28)
+ 1092 0ad8 72000324 		li	$3,114			# 0x72
+ 1093 0adc 000043AC 		sw	$3,0($2)
+ 1094 0ae0 0000828F 		lw	$2,%got(errorFunc)($28)
+ 1095 0ae4 0000033C 		lui	$3,%hi(__func__.2185)
+ 1096 0ae8 C0026324 		addiu	$3,$3,%lo(__func__.2185)
+ 1097 0aec 000043AC 		sw	$3,0($2)
+ 1098 0af0 0000828F 		lw	$2,%got(errorMsg)($28)
+ 1099 0af4 0000033C 		lui	$3,%hi($LC11)
+ 1100 0af8 2C016324 		addiu	$3,$3,%lo($LC11)
+ 1101 0afc 000043AC 		sw	$3,0($2)
+ 1102 0b00 21100000 		move	$2,$0
+ 1103 0b04 07000010 		b	$L42
+ 1104 0b08 00000000 		nop
+ 1105              	
+ 1106              	$L45:
+ 114:bgtree/bgUtil2.c ****   outBuf[sz] = 0x0;
+ 1107              		.loc 1 115 0
+ 1108 0b0c 2000C28F 		lw	$2,32($fp)
+ 1109 0b10 3C00C38F 		lw	$3,60($fp)
+ 1110 0b14 00000000 		nop
+ 1111 0b18 21106200 		addu	$2,$3,$2
+ 1112 0b1c 000040A0 		sb	$0,0($2)
+ 115:bgtree/bgUtil2.c ****   return sz; 
+ 1113              		.loc 1 116 0
+ 1114 0b20 2000C28F 		lw	$2,32($fp)
+ 1115              	$L42:
+ 116:bgtree/bgUtil2.c **** }
+ 1116              		.loc 1 117 0
+ 1117 0b24 21E8C003 		move	$sp,$fp
+ 1118 0b28 2C00BF8F 		lw	$31,44($sp)
+ 1119 0b2c 2800BE8F 		lw	$fp,40($sp)
+ 1120 0b30 3000BD27 		addiu	$sp,$sp,48
+ 1121 0b34 0800E003 		j	$31
+ 1122 0b38 00000000 		nop
+ 1123              	
+ 1124              		.set	macro
+ 1125              		.set	reorder
+ 1126              		.end	SchemaGetString
+ 1127              	$LFE6:
+ 1129              		.align	2
+ 1130              		.globl	SchemaGetStringLen
+ 1131              	$LFB7 = .
+ 117:bgtree/bgUtil2.c **** 
+ 118:bgtree/bgUtil2.c **** uint32_t SchemaGetStringLen(FILE *blob, char *schema, int field) {
+ 1132              		.loc 1 119 0
+ 1133              		.set	nomips16
+ 1134              		.ent	SchemaGetStringLen
+ 1136              	SchemaGetStringLen:
+ 1137              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 1138              		.mask	0xc0000000,-4
+ 1139              		.fmask	0x00000000,0
+ 1140              		.set	noreorder
+ 1141              		.set	nomacro
+ 1142              		
+ 1143 0b3c D8FFBD27 		addiu	$sp,$sp,-40
+ 1144              	$LCFI28:
+ 1145 0b40 2400BFAF 		sw	$31,36($sp)
+ 1146              	$LCFI29:
+ 1147 0b44 2000BEAF 		sw	$fp,32($sp)
+ 1148              	$LCFI30:
+ 1149 0b48 21F0A003 		move	$fp,$sp
+ 1150              	$LCFI31:
+ 1151 0b4c 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 1152 0b50 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 1153 0b54 1000BCAF 		.cprestore	16
+ 1154 0b58 2800C4AF 		sw	$4,40($fp)
+ 1155 0b5c 2C00C5AF 		sw	$5,44($fp)
+ 1156 0b60 3000C6AF 		sw	$6,48($fp)
+ 119:bgtree/bgUtil2.c ****   assert(schema[field] == 's' || schema[field] == 'K');
+ 1157              		.loc 1 120 0
+ 1158 0b64 3000C28F 		lw	$2,48($fp)
+ 1159 0b68 2C00C38F 		lw	$3,44($fp)
+ 1160 0b6c 00000000 		nop
+ 1161 0b70 21106200 		addu	$2,$3,$2
+ 1162 0b74 00004380 		lb	$3,0($2)
+ 1163 0b78 73000224 		li	$2,115			# 0x73
+ 1164 0b7c 15006210 		beq	$3,$2,$L48
+ 1165 0b80 00000000 		nop
+ 1166              	
+ 1167 0b84 3000C28F 		lw	$2,48($fp)
+ 1168 0b88 2C00C38F 		lw	$3,44($fp)
+ 1169 0b8c 00000000 		nop
+ 1170 0b90 21106200 		addu	$2,$3,$2
+ 1171 0b94 00004380 		lb	$3,0($2)
+ 1172 0b98 4B000224 		li	$2,75			# 0x4b
+ 1173 0b9c 0D006210 		beq	$3,$2,$L48
+ 1174 0ba0 00000000 		nop
+ 1175              	
+ 1176 0ba4 0000023C 		lui	$2,%hi($LC9)
+ 1177 0ba8 D4004424 		addiu	$4,$2,%lo($LC9)
+ 1178 0bac 0000023C 		lui	$2,%hi($LC0)
+ 1179 0bb0 00004524 		addiu	$5,$2,%lo($LC0)
+ 1180 0bb4 78000624 		li	$6,120			# 0x78
+ 1181 0bb8 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2219)
+ 1182 0bbc 88024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2219)
+ 1183 0bc0 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1184 0bc4 00000000 		nop
+ 1185 0bc8 21C84000 		move	$25,$2
+ 1186 0bcc 09F82003 		jalr	$25
+ 1187 0bd0 00000000 		nop
+ 1188              	
+ 1189              	$L48:
+ 120:bgtree/bgUtil2.c ****   SchemaGetOffset(blob, schema, field);
+ 1190              		.loc 1 121 0
+ 1191 0bd4 2800C48F 		lw	$4,40($fp)
+ 1192 0bd8 2C00C58F 		lw	$5,44($fp)
+ 1193 0bdc 3000C68F 		lw	$6,48($fp)
+ 1194              		.option	pic0
+ 1195 0be0 0000000C 		jal	SchemaGetOffset
+ 1196 0be4 00000000 		nop
+ 1197              	
+ 1198              		.option	pic2
+ 1199 0be8 1000DC8F 		lw	$28,16($fp)
+ 121:bgtree/bgUtil2.c ****   uint32_t sz;
+ 122:bgtree/bgUtil2.c ****   int r = fread(&sz, 4, 1, blob);
+ 1200              		.loc 1 123 0
+ 1201 0bec 1C00C227 		addiu	$2,$fp,28
+ 1202 0bf0 21204000 		move	$4,$2
+ 1203 0bf4 04000524 		li	$5,4			# 0x4
+ 1204 0bf8 01000624 		li	$6,1			# 0x1
+ 1205 0bfc 2800C78F 		lw	$7,40($fp)
+ 1206 0c00 0000828F 		lw	$2,%call16(fread)($28)
+ 1207 0c04 00000000 		nop
+ 1208 0c08 21C84000 		move	$25,$2
+ 1209 0c0c 09F82003 		jalr	$25
+ 1210 0c10 00000000 		nop
+ 1211              	
+ 1212 0c14 1000DC8F 		lw	$28,16($fp)
+ 1213 0c18 1800C2AF 		sw	$2,24($fp)
+ 123:bgtree/bgUtil2.c ****   if (r != 1) 
+ 1214              		.loc 1 124 0
+ 1215 0c1c 1800C38F 		lw	$3,24($fp)
+ 1216 0c20 01000224 		li	$2,1			# 0x1
+ 1217 0c24 13006210 		beq	$3,$2,$L49
+ 1218 0c28 00000000 		nop
+ 1219              	
+ 124:bgtree/bgUtil2.c ****     ERRORreturn2("Unable to read string size from file", 0);
+ 1220              		.loc 1 125 0
+ 1221 0c2c 0000828F 		lw	$2,%got(errorFile)($28)
+ 1222 0c30 0000033C 		lui	$3,%hi($LC0)
+ 1223 0c34 00006324 		addiu	$3,$3,%lo($LC0)
+ 1224 0c38 000043AC 		sw	$3,0($2)
+ 1225 0c3c 0000828F 		lw	$2,%got(errorLine)($28)
+ 1226 0c40 7D000324 		li	$3,125			# 0x7d
+ 1227 0c44 000043AC 		sw	$3,0($2)
+ 1228 0c48 0000828F 		lw	$2,%got(errorFunc)($28)
+ 1229 0c4c 0000033C 		lui	$3,%hi(__func__.2222)
+ 1230 0c50 9C026324 		addiu	$3,$3,%lo(__func__.2222)
+ 1231 0c54 000043AC 		sw	$3,0($2)
+ 1232 0c58 0000828F 		lw	$2,%got(errorMsg)($28)
+ 1233 0c5c 0000033C 		lui	$3,%hi($LC10)
+ 1234 0c60 04016324 		addiu	$3,$3,%lo($LC10)
+ 1235 0c64 000043AC 		sw	$3,0($2)
+ 1236 0c68 21100000 		move	$2,$0
+ 1237 0c6c 02000010 		b	$L50
+ 1238 0c70 00000000 		nop
+ 1239              	
+ 1240              	$L49:
+ 125:bgtree/bgUtil2.c ****   return sz; 
+ 1241              		.loc 1 126 0
+ 1242 0c74 1C00C28F 		lw	$2,28($fp)
+ 1243              	$L50:
+ 126:bgtree/bgUtil2.c **** }
+ 1244              		.loc 1 127 0
+ 1245 0c78 21E8C003 		move	$sp,$fp
+ 1246 0c7c 2400BF8F 		lw	$31,36($sp)
+ 1247 0c80 2000BE8F 		lw	$fp,32($sp)
+ 1248 0c84 2800BD27 		addiu	$sp,$sp,40
+ 1249 0c88 0800E003 		j	$31
+ 1250 0c8c 00000000 		nop
+ 1251              	
+ 1252              		.set	macro
+ 1253              		.set	reorder
+ 1254              		.end	SchemaGetStringLen
+ 1255              	$LFE7:
+ 1257              		.rdata
+ 1258 0151 000000   		.align	2
+ 1259              	$LC12:
+ 1260 0154 6E203D3D 		.ascii	"n == 1\000"
+ 1260      203100
+ 1261              		.text
+ 1262              		.align	2
+ 1263              		.globl	UnpackAndPrintStringFromFile
+ 1264              	$LFB8 = .
+ 127:bgtree/bgUtil2.c **** 
+ 128:bgtree/bgUtil2.c **** int UnpackAndPrintStringFromFile(FILE *blob, FILE *output) {
+ 1265              		.loc 1 129 0
+ 1266              		.set	nomips16
+ 1267              		.ent	UnpackAndPrintStringFromFile
+ 1269              	UnpackAndPrintStringFromFile:
+ 1270              		.frame	$fp,48,$31		# vars= 16, regs= 2/0, args= 16, gp= 8
+ 1271              		.mask	0xc0000000,-4
+ 1272              		.fmask	0x00000000,0
+ 1273              		.set	noreorder
+ 1274              		.set	nomacro
+ 1275              		
+ 1276 0c90 D0FFBD27 		addiu	$sp,$sp,-48
+ 1277              	$LCFI32:
+ 1278 0c94 2C00BFAF 		sw	$31,44($sp)
+ 1279              	$LCFI33:
+ 1280 0c98 2800BEAF 		sw	$fp,40($sp)
+ 1281              	$LCFI34:
+ 1282 0c9c 21F0A003 		move	$fp,$sp
+ 1283              	$LCFI35:
+ 1284 0ca0 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 1285 0ca4 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 1286 0ca8 1000BCAF 		.cprestore	16
+ 1287 0cac 3000C4AF 		sw	$4,48($fp)
+ 1288 0cb0 3400C5AF 		sw	$5,52($fp)
+ 129:bgtree/bgUtil2.c ****   uint32_t textSize = UnpackUIntFromFile(blob);
+ 1289              		.loc 1 130 0
+ 1290 0cb4 3000C48F 		lw	$4,48($fp)
+ 1291              		.option	pic0
+ 1292 0cb8 0000000C 		jal	UnpackUIntFromFile
+ 1293 0cbc 00000000 		nop
+ 1294              	
+ 1295              		.option	pic2
+ 1296 0cc0 1000DC8F 		lw	$28,16($fp)
+ 1297 0cc4 2000C2AF 		sw	$2,32($fp)
+ 1298              	$LBB7 = .
+ 130:bgtree/bgUtil2.c ****   for (int i=0; i<textSize; ++i) {
+ 1299              		.loc 1 131 0
+ 1300 0cc8 1C00C0AF 		sw	$0,28($fp)
+ 1301 0ccc 2B000010 		b	$L53
+ 1302 0cd0 00000000 		nop
+ 1303              	
+ 1304              	$L55:
+ 1305              	$LBB8 = .
+ 131:bgtree/bgUtil2.c ****     char buf;
+ 132:bgtree/bgUtil2.c ****     int n = fread(&buf, 1, 1, blob); // kinda inefficient
+ 1306              		.loc 1 133 0
+ 1307 0cd4 2400C227 		addiu	$2,$fp,36
+ 1308 0cd8 21204000 		move	$4,$2
+ 1309 0cdc 01000524 		li	$5,1			# 0x1
+ 1310 0ce0 01000624 		li	$6,1			# 0x1
+ 1311 0ce4 3000C78F 		lw	$7,48($fp)
+ 1312 0ce8 0000828F 		lw	$2,%call16(fread)($28)
+ 1313 0cec 00000000 		nop
+ 1314 0cf0 21C84000 		move	$25,$2
+ 1315 0cf4 09F82003 		jalr	$25
+ 1316 0cf8 00000000 		nop
+ 1317              	
+ 1318 0cfc 1000DC8F 		lw	$28,16($fp)
+ 1319 0d00 1800C2AF 		sw	$2,24($fp)
+ 133:bgtree/bgUtil2.c ****     assert(n == 1);
+ 1320              		.loc 1 134 0
+ 1321 0d04 1800C38F 		lw	$3,24($fp)
+ 1322 0d08 01000224 		li	$2,1			# 0x1
+ 1323 0d0c 0D006210 		beq	$3,$2,$L54
+ 1324 0d10 00000000 		nop
+ 1325              	
+ 1326 0d14 0000023C 		lui	$2,%hi($LC12)
+ 1327 0d18 54014424 		addiu	$4,$2,%lo($LC12)
+ 1328 0d1c 0000023C 		lui	$2,%hi($LC0)
+ 1329 0d20 00004524 		addiu	$5,$2,%lo($LC0)
+ 1330 0d24 86000624 		li	$6,134			# 0x86
+ 1331 0d28 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2245)
+ 1332 0d2c 68024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2245)
+ 1333 0d30 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1334 0d34 00000000 		nop
+ 1335 0d38 21C84000 		move	$25,$2
+ 1336 0d3c 09F82003 		jalr	$25
+ 1337 0d40 00000000 		nop
+ 1338              	
+ 1339              	$L54:
+ 134:bgtree/bgUtil2.c ****     fputc(buf, output);
+ 1340              		.loc 1 135 0
+ 1341 0d44 2400C283 		lb	$2,36($fp)
+ 1342 0d48 00000000 		nop
+ 1343 0d4c 21204000 		move	$4,$2
+ 1344 0d50 3400C58F 		lw	$5,52($fp)
+ 1345 0d54 0000828F 		lw	$2,%call16(fputc)($28)
+ 1346 0d58 00000000 		nop
+ 1347 0d5c 21C84000 		move	$25,$2
+ 1348 0d60 09F82003 		jalr	$25
+ 1349 0d64 00000000 		nop
+ 1350              	
+ 1351 0d68 1000DC8F 		lw	$28,16($fp)
+ 1352              	$LBE8 = .
+ 131:bgtree/bgUtil2.c ****     char buf;
+ 1353              		.loc 1 131 0
+ 1354 0d6c 1C00C28F 		lw	$2,28($fp)
+ 1355 0d70 00000000 		nop
+ 1356 0d74 01004224 		addiu	$2,$2,1
+ 1357 0d78 1C00C2AF 		sw	$2,28($fp)
+ 1358              	$L53:
+ 1359 0d7c 1C00C38F 		lw	$3,28($fp)
+ 1360 0d80 2000C28F 		lw	$2,32($fp)
+ 1361 0d84 00000000 		nop
+ 1362 0d88 2B106200 		sltu	$2,$3,$2
+ 1363 0d8c D1FF4014 		bne	$2,$0,$L55
+ 1364 0d90 00000000 		nop
+ 1365              	
+ 1366              	$LBE7 = .
+ 135:bgtree/bgUtil2.c ****   }
+ 136:bgtree/bgUtil2.c ****   return textSize;
+ 1367              		.loc 1 137 0
+ 1368 0d94 2000C28F 		lw	$2,32($fp)
+ 137:bgtree/bgUtil2.c **** }
+ 1369              		.loc 1 138 0
+ 1370 0d98 21E8C003 		move	$sp,$fp
+ 1371 0d9c 2C00BF8F 		lw	$31,44($sp)
+ 1372 0da0 2800BE8F 		lw	$fp,40($sp)
+ 1373 0da4 3000BD27 		addiu	$sp,$sp,48
+ 1374 0da8 0800E003 		j	$31
+ 1375 0dac 00000000 		nop
+ 1376              	
+ 1377              		.set	macro
+ 1378              		.set	reorder
+ 1379              		.end	UnpackAndPrintStringFromFile
+ 1380              	$LFE8:
+ 1382              		.rdata
+ 1383 015b 00       		.align	2
+ 1384              	$LC13:
+ 1385 015c 4C562569 		.ascii	"LV%i\011\000"
+ 1385      0900
+ 1386 0162 0000     		.align	2
+ 1387              	$LC14:
+ 1388 0164 25303878 		.ascii	"%08x \000"
+ 1388      2000
+ 1389 016a 0000     		.align	2
+ 1390              	$LC15:
+ 1391 016c 28256920 		.ascii	"(%i - %i+)\000"
+ 1391      2D202569 
+ 1391      2B2900
+ 1392 0177 00       		.align	2
+ 1393              	$LC16:
+ 1394 0178 4C454E47 		.ascii	"LENGTH=0!\000"
+ 1394      54483D30 
+ 1394      2100
+ 1395 0182 0000     		.align	2
+ 1396              	$LC17:
+ 1397 0184 20706172 		.ascii	" parent=%x\000"
+ 1397      656E743D 
+ 1397      257800
+ 1398 018f 00       		.align	2
+ 1399              	$LC18:
+ 1400 0190 202000   		.ascii	"  \000"
+ 1401 0193 00       		.align	2
+ 1402              	$LC19:
+ 1403 0194 25693A25 		.ascii	"%i:%i \000"
+ 1403      692000
+ 1404 019b 00       		.align	2
+ 1405              	$LC20:
+ 1406 019c 25693A30 		.ascii	"%i:0x%x \000"
+ 1406      78257820 
+ 1406      00
+ 1407              		.text
+ 1408              		.align	2
+ 1409              		.globl	PrintVisitor
+ 1410              	$LFB9 = .
+ 138:bgtree/bgUtil2.c **** 
+ 139:bgtree/bgUtil2.c **** int PrintVisitor(BAT block, Node *n) {
+ 1411              		.loc 1 140 0
+ 1412              		.set	nomips16
+ 1413              		.ent	PrintVisitor
+ 1415              	PrintVisitor:
+ 1416              		.frame	$fp,64,$31		# vars= 24, regs= 4/0, args= 16, gp= 8
+ 1417              		.mask	0xc0030000,-4
+ 1418              		.fmask	0x00000000,0
+ 1419              		.set	noreorder
+ 1420              		.set	nomacro
+ 1421              		
+ 1422 0db0 C0FFBD27 		addiu	$sp,$sp,-64
+ 1423              	$LCFI36:
+ 1424 0db4 3C00BFAF 		sw	$31,60($sp)
+ 1425              	$LCFI37:
+ 1426 0db8 3800BEAF 		sw	$fp,56($sp)
+ 1427              	$LCFI38:
+ 1428 0dbc 3400B1AF 		sw	$17,52($sp)
+ 1429              	$LCFI39:
+ 1430 0dc0 3000B0AF 		sw	$16,48($sp)
+ 1431              	$LCFI40:
+ 1432 0dc4 21F0A003 		move	$fp,$sp
+ 1433              	$LCFI41:
+ 1434 0dc8 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 1435 0dcc 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 1436 0dd0 1000BCAF 		.cprestore	16
+ 1437 0dd4 4000C4AF 		sw	$4,64($fp)
+ 1438 0dd8 4400C5AF 		sw	$5,68($fp)
+ 140:bgtree/bgUtil2.c ****   int depth = n->depth;
+ 1439              		.loc 1 141 0
+ 1440 0ddc 4400C28F 		lw	$2,68($fp)
+ 1441 0de0 00000000 		nop
+ 1442 0de4 04004290 		lbu	$2,4($2)
+ 1443 0de8 00000000 		nop
+ 1444 0dec 2800C2AF 		sw	$2,40($fp)
+ 1445              	$LBB9 = .
+ 141:bgtree/bgUtil2.c ****   for (int i=0; i<depth; i++)
+ 1446              		.loc 1 142 0
+ 1447 0df0 2000C0AF 		sw	$0,32($fp)
+ 1448 0df4 0F000010 		b	$L58
+ 1449 0df8 00000000 		nop
+ 1450              	
+ 1451              	$L59:
+ 142:bgtree/bgUtil2.c ****     printf_P(PSTR("LV%i\t"), i);
+ 1452              		.loc 1 143 0
+ 1453 0dfc 0000023C 		lui	$2,%hi($LC13)
+ 1454 0e00 5C014224 		addiu	$2,$2,%lo($LC13)
+ 1455 0e04 21204000 		move	$4,$2
+ 1456 0e08 2000C58F 		lw	$5,32($fp)
+ 1457 0e0c 0000828F 		lw	$2,%call16(printf)($28)
+ 1458 0e10 00000000 		nop
+ 1459 0e14 21C84000 		move	$25,$2
+ 1460 0e18 09F82003 		jalr	$25
+ 1461 0e1c 00000000 		nop
+ 1462              	
+ 1463 0e20 1000DC8F 		lw	$28,16($fp)
+ 142:bgtree/bgUtil2.c ****     printf_P(PSTR("LV%i\t"), i);
+ 1464              		.loc 1 142 0
+ 1465 0e24 2000C28F 		lw	$2,32($fp)
+ 1466 0e28 00000000 		nop
+ 1467 0e2c 01004224 		addiu	$2,$2,1
+ 1468 0e30 2000C2AF 		sw	$2,32($fp)
+ 1469              	$L58:
+ 1470 0e34 2000C38F 		lw	$3,32($fp)
+ 1471 0e38 2800C28F 		lw	$2,40($fp)
+ 1472 0e3c 00000000 		nop
+ 1473 0e40 2A106200 		slt	$2,$3,$2
+ 1474 0e44 EDFF4014 		bne	$2,$0,$L59
+ 1475 0e48 00000000 		nop
+ 1476              	
+ 1477              	$LBE9 = .
+ 143:bgtree/bgUtil2.c ****   printf_P(PSTR("%08x "), block);
+ 1478              		.loc 1 144 0
+ 1479 0e4c 0000023C 		lui	$2,%hi($LC14)
+ 1480 0e50 64014224 		addiu	$2,$2,%lo($LC14)
+ 1481 0e54 21204000 		move	$4,$2
+ 1482 0e58 4000C58F 		lw	$5,64($fp)
+ 1483 0e5c 0000828F 		lw	$2,%call16(printf)($28)
+ 1484 0e60 00000000 		nop
+ 1485 0e64 21C84000 		move	$25,$2
+ 1486 0e68 09F82003 		jalr	$25
+ 1487 0e6c 00000000 		nop
+ 1488              	
+ 1489 0e70 1000DC8F 		lw	$28,16($fp)
+ 144:bgtree/bgUtil2.c ****   if (n->length > 0)
+ 1490              		.loc 1 145 0
+ 1491 0e74 4400C28F 		lw	$2,68($fp)
+ 1492 0e78 00000000 		nop
+ 1493 0e7c 05004290 		lbu	$2,5($2)
+ 1494 0e80 00000000 		nop
+ 1495 0e84 1E004010 		beq	$2,$0,$L60
+ 1496 0e88 00000000 		nop
+ 1497              	
+ 145:bgtree/bgUtil2.c ****     printf_P(PSTR("(%i - %i+)"), n->keys[0], n->keys[NodeLen(block)-1]);
+ 1498              		.loc 1 146 0
+ 1499 0e8c 0000023C 		lui	$2,%hi($LC15)
+ 1500 0e90 6C015124 		addiu	$17,$2,%lo($LC15)
+ 1501 0e94 4400C28F 		lw	$2,68($fp)
+ 1502 0e98 00000000 		nop
+ 1503 0e9c 0800508C 		lw	$16,8($2)
+ 1504 0ea0 4000C48F 		lw	$4,64($fp)
+ 1505 0ea4 0000828F 		lw	$2,%call16(NodeLen)($28)
+ 1506 0ea8 00000000 		nop
+ 1507 0eac 21C84000 		move	$25,$2
+ 1508 0eb0 09F82003 		jalr	$25
+ 1509 0eb4 00000000 		nop
+ 1510              	
+ 1511 0eb8 1000DC8F 		lw	$28,16($fp)
+ 1512 0ebc FFFF4224 		addiu	$2,$2,-1
+ 1513 0ec0 4400C38F 		lw	$3,68($fp)
+ 1514 0ec4 02004224 		addiu	$2,$2,2
+ 1515 0ec8 80100200 		sll	$2,$2,2
+ 1516 0ecc 21106200 		addu	$2,$3,$2
+ 1517 0ed0 0000428C 		lw	$2,0($2)
+ 1518 0ed4 21202002 		move	$4,$17
+ 1519 0ed8 21280002 		move	$5,$16
+ 1520 0edc 21304000 		move	$6,$2
+ 1521 0ee0 0000828F 		lw	$2,%call16(printf)($28)
+ 1522 0ee4 00000000 		nop
+ 1523 0ee8 21C84000 		move	$25,$2
+ 1524 0eec 09F82003 		jalr	$25
+ 1525 0ef0 00000000 		nop
+ 1526              	
+ 1527 0ef4 1000DC8F 		lw	$28,16($fp)
+ 1528 0ef8 0A000010 		b	$L61
+ 1529 0efc 00000000 		nop
+ 1530              	
+ 1531              	$L60:
+ 146:bgtree/bgUtil2.c ****   else
+ 147:bgtree/bgUtil2.c ****     printf_P(PSTR("LENGTH=0!"));
+ 1532              		.loc 1 148 0
+ 1533 0f00 0000023C 		lui	$2,%hi($LC16)
+ 1534 0f04 78014224 		addiu	$2,$2,%lo($LC16)
+ 1535 0f08 21204000 		move	$4,$2
+ 1536 0f0c 0000828F 		lw	$2,%call16(printf)($28)
+ 1537 0f10 00000000 		nop
+ 1538 0f14 21C84000 		move	$25,$2
+ 1539 0f18 09F82003 		jalr	$25
+ 1540 0f1c 00000000 		nop
+ 1541              	
+ 1542 0f20 1000DC8F 		lw	$28,16($fp)
+ 1543              	$L61:
+ 148:bgtree/bgUtil2.c ****   printf_P(PSTR(" parent=%x"), n->parentNode);
+ 1544              		.loc 1 149 0
+ 1545 0f24 0000023C 		lui	$2,%hi($LC17)
+ 1546 0f28 84014324 		addiu	$3,$2,%lo($LC17)
+ 1547 0f2c 4400C28F 		lw	$2,68($fp)
+ 1548 0f30 00000000 		nop
+ 1549 0f34 0000428C 		lw	$2,0($2)
+ 1550 0f38 21206000 		move	$4,$3
+ 1551 0f3c 21284000 		move	$5,$2
+ 1552 0f40 0000828F 		lw	$2,%call16(printf)($28)
+ 1553 0f44 00000000 		nop
+ 1554 0f48 21C84000 		move	$25,$2
+ 1555 0f4c 09F82003 		jalr	$25
+ 1556 0f50 00000000 		nop
+ 1557              	
+ 1558 0f54 1000DC8F 		lw	$28,16($fp)
+ 149:bgtree/bgUtil2.c ****   printf_P(PSTR("\n"));
+ 1559              		.loc 1 150 0
+ 1560 0f58 0A000424 		li	$4,10			# 0xa
+ 1561 0f5c 0000828F 		lw	$2,%call16(putchar)($28)
+ 1562 0f60 00000000 		nop
+ 1563 0f64 21C84000 		move	$25,$2
+ 1564 0f68 09F82003 		jalr	$25
+ 1565 0f6c 00000000 		nop
+ 1566              	
+ 1567 0f70 1000DC8F 		lw	$28,16($fp)
+ 150:bgtree/bgUtil2.c ****   int nlen = NodeLen(block);
+ 1568              		.loc 1 151 0
+ 1569 0f74 4000C48F 		lw	$4,64($fp)
+ 1570 0f78 0000828F 		lw	$2,%call16(NodeLen)($28)
+ 1571 0f7c 00000000 		nop
+ 1572 0f80 21C84000 		move	$25,$2
+ 1573 0f84 09F82003 		jalr	$25
+ 1574 0f88 00000000 		nop
+ 1575              	
+ 1576 0f8c 1000DC8F 		lw	$28,16($fp)
+ 1577 0f90 2400C2AF 		sw	$2,36($fp)
+ 151:bgtree/bgUtil2.c ****   printf_P(PSTR("  "));
+ 1578              		.loc 1 152 0
+ 1579 0f94 0000023C 		lui	$2,%hi($LC18)
+ 1580 0f98 90014224 		addiu	$2,$2,%lo($LC18)
+ 1581 0f9c 21204000 		move	$4,$2
+ 1582 0fa0 0000828F 		lw	$2,%call16(printf)($28)
+ 1583 0fa4 00000000 		nop
+ 1584 0fa8 21C84000 		move	$25,$2
+ 1585 0fac 09F82003 		jalr	$25
+ 1586 0fb0 00000000 		nop
+ 1587              	
+ 1588 0fb4 1000DC8F 		lw	$28,16($fp)
+ 152:bgtree/bgUtil2.c ****   if (depth == 0) { // leaf
+ 1589              		.loc 1 153 0
+ 1590 0fb8 2800C28F 		lw	$2,40($fp)
+ 1591 0fbc 00000000 		nop
+ 1592 0fc0 2D004014 		bne	$2,$0,$L62
+ 1593 0fc4 00000000 		nop
+ 1594              	
+ 1595              	$LBB10 = .
+ 153:bgtree/bgUtil2.c ****     for (int i=0; i<nlen; i++)
+ 1596              		.loc 1 154 0
+ 1597 0fc8 1C00C0AF 		sw	$0,28($fp)
+ 1598 0fcc 1B000010 		b	$L63
+ 1599 0fd0 00000000 		nop
+ 1600              	
+ 1601              	$L64:
+ 154:bgtree/bgUtil2.c ****       printf_P(PSTR("%i:%i "), n->keys[i], n->items[i]);
+ 1602              		.loc 1 155 0
+ 1603 0fd4 0000023C 		lui	$2,%hi($LC19)
+ 1604 0fd8 94014424 		addiu	$4,$2,%lo($LC19)
+ 1605 0fdc 1C00C28F 		lw	$2,28($fp)
+ 1606 0fe0 4400C38F 		lw	$3,68($fp)
+ 1607 0fe4 02004224 		addiu	$2,$2,2
+ 1608 0fe8 80100200 		sll	$2,$2,2
+ 1609 0fec 21106200 		addu	$2,$3,$2
+ 1610 0ff0 0000438C 		lw	$3,0($2)
+ 1611 0ff4 1C00C28F 		lw	$2,28($fp)
+ 1612 0ff8 4400C58F 		lw	$5,68($fp)
+ 1613 0ffc 10004224 		addiu	$2,$2,16
+ 1614 1000 80100200 		sll	$2,$2,2
+ 1615 1004 2110A200 		addu	$2,$5,$2
+ 1616 1008 0400428C 		lw	$2,4($2)
+ 1617 100c 21286000 		move	$5,$3
+ 1618 1010 21304000 		move	$6,$2
+ 1619 1014 0000828F 		lw	$2,%call16(printf)($28)
+ 1620 1018 00000000 		nop
+ 1621 101c 21C84000 		move	$25,$2
+ 1622 1020 09F82003 		jalr	$25
+ 1623 1024 00000000 		nop
+ 1624              	
+ 1625 1028 1000DC8F 		lw	$28,16($fp)
+ 154:bgtree/bgUtil2.c ****       printf_P(PSTR("%i:%i "), n->keys[i], n->items[i]);
+ 1626              		.loc 1 154 0
+ 1627 102c 1C00C28F 		lw	$2,28($fp)
+ 1628 1030 00000000 		nop
+ 1629 1034 01004224 		addiu	$2,$2,1
+ 1630 1038 1C00C2AF 		sw	$2,28($fp)
+ 1631              	$L63:
+ 1632 103c 1C00C38F 		lw	$3,28($fp)
+ 1633 1040 2400C28F 		lw	$2,36($fp)
+ 1634 1044 00000000 		nop
+ 1635 1048 2A106200 		slt	$2,$3,$2
+ 1636 104c E1FF4014 		bne	$2,$0,$L64
+ 1637 1050 00000000 		nop
+ 1638              	
+ 1639              	$LBE10 = .
+ 155:bgtree/bgUtil2.c ****     printf_P(PSTR("\n"));
+ 1640              		.loc 1 156 0
+ 1641 1054 0A000424 		li	$4,10			# 0xa
+ 1642 1058 0000828F 		lw	$2,%call16(putchar)($28)
+ 1643 105c 00000000 		nop
+ 1644 1060 21C84000 		move	$25,$2
+ 1645 1064 09F82003 		jalr	$25
+ 1646 1068 00000000 		nop
+ 1647              	
+ 1648 106c 1000DC8F 		lw	$28,16($fp)
+ 1649 1070 2B000010 		b	$L65
+ 1650 1074 00000000 		nop
+ 1651              	
+ 1652              	$L62:
+ 1653              	$LBB11 = .
+ 156:bgtree/bgUtil2.c ****   } else {
+ 157:bgtree/bgUtil2.c ****     for (int i=0; i<nlen; i++)
+ 1654              		.loc 1 158 0
+ 1655 1078 1800C0AF 		sw	$0,24($fp)
+ 1656 107c 1B000010 		b	$L66
+ 1657 1080 00000000 		nop
+ 1658              	
+ 1659              	$L67:
+ 158:bgtree/bgUtil2.c ****       printf_P(PSTR("%i:0x%x "), n->keys[i], n->items[i]);
+ 1660              		.loc 1 159 0
+ 1661 1084 0000023C 		lui	$2,%hi($LC20)
+ 1662 1088 9C014424 		addiu	$4,$2,%lo($LC20)
+ 1663 108c 1800C28F 		lw	$2,24($fp)
+ 1664 1090 4400C38F 		lw	$3,68($fp)
+ 1665 1094 02004224 		addiu	$2,$2,2
+ 1666 1098 80100200 		sll	$2,$2,2
+ 1667 109c 21106200 		addu	$2,$3,$2
+ 1668 10a0 0000438C 		lw	$3,0($2)
+ 1669 10a4 1800C28F 		lw	$2,24($fp)
+ 1670 10a8 4400C58F 		lw	$5,68($fp)
+ 1671 10ac 10004224 		addiu	$2,$2,16
+ 1672 10b0 80100200 		sll	$2,$2,2
+ 1673 10b4 2110A200 		addu	$2,$5,$2
+ 1674 10b8 0400428C 		lw	$2,4($2)
+ 1675 10bc 21286000 		move	$5,$3
+ 1676 10c0 21304000 		move	$6,$2
+ 1677 10c4 0000828F 		lw	$2,%call16(printf)($28)
+ 1678 10c8 00000000 		nop
+ 1679 10cc 21C84000 		move	$25,$2
+ 1680 10d0 09F82003 		jalr	$25
+ 1681 10d4 00000000 		nop
+ 1682              	
+ 1683 10d8 1000DC8F 		lw	$28,16($fp)
+ 158:bgtree/bgUtil2.c ****       printf_P(PSTR("%i:0x%x "), n->keys[i], n->items[i]);
+ 1684              		.loc 1 158 0
+ 1685 10dc 1800C28F 		lw	$2,24($fp)
+ 1686 10e0 00000000 		nop
+ 1687 10e4 01004224 		addiu	$2,$2,1
+ 1688 10e8 1800C2AF 		sw	$2,24($fp)
+ 1689              	$L66:
+ 1690 10ec 1800C38F 		lw	$3,24($fp)
+ 1691 10f0 2400C28F 		lw	$2,36($fp)
+ 1692 10f4 00000000 		nop
+ 1693 10f8 2A106200 		slt	$2,$3,$2
+ 1694 10fc E1FF4014 		bne	$2,$0,$L67
+ 1695 1100 00000000 		nop
+ 1696              	
+ 1697              	$LBE11 = .
+ 159:bgtree/bgUtil2.c ****     printf_P(PSTR("\n"));
+ 1698              		.loc 1 160 0
+ 1699 1104 0A000424 		li	$4,10			# 0xa
+ 1700 1108 0000828F 		lw	$2,%call16(putchar)($28)
+ 1701 110c 00000000 		nop
+ 1702 1110 21C84000 		move	$25,$2
+ 1703 1114 09F82003 		jalr	$25
+ 1704 1118 00000000 		nop
+ 1705              	
+ 1706 111c 1000DC8F 		lw	$28,16($fp)
+ 1707              	$L65:
+ 160:bgtree/bgUtil2.c ****   }
+ 161:bgtree/bgUtil2.c ****   return 0;
+ 1708              		.loc 1 162 0
+ 1709 1120 21100000 		move	$2,$0
+ 162:bgtree/bgUtil2.c **** }
+ 1710              		.loc 1 163 0
+ 1711 1124 21E8C003 		move	$sp,$fp
+ 1712 1128 3C00BF8F 		lw	$31,60($sp)
+ 1713 112c 3800BE8F 		lw	$fp,56($sp)
+ 1714 1130 3400B18F 		lw	$17,52($sp)
+ 1715 1134 3000B08F 		lw	$16,48($sp)
+ 1716 1138 4000BD27 		addiu	$sp,$sp,64
+ 1717 113c 0800E003 		j	$31
+ 1718 1140 00000000 		nop
+ 1719              	
+ 1720              		.set	macro
+ 1721              		.set	reorder
+ 1722              		.end	PrintVisitor
+ 1723              	$LFE9:
+ 1725              		.rdata
+ 1726 01a5 000000   		.align	2
+ 1727              	$LC21:
+ 1728 01a8 54657374 		.ascii	"TestSanityVisitor %08x\012\000"
+ 1728      53616E69 
+ 1728      74795669 
+ 1728      7369746F 
+ 1728      72202530 
+ 1729              		.align	2
+ 1730              	$LC22:
+ 1731 01c0 4E6F6465 		.ascii	"NodeLen(block) > 0\000"
+ 1731      4C656E28 
+ 1731      626C6F63 
+ 1731      6B29203E 
+ 1731      203000
+ 1732 01d3 00       		.align	2
+ 1733              	$LC23:
+ 1734 01d4 4E6F6465 		.ascii	"NodeParent(block) != block\000"
+ 1734      50617265 
+ 1734      6E742862 
+ 1734      6C6F636B 
+ 1734      2920213D 
+ 1735 01ef 00       		.align	2
+ 1736              	$LC24:
+ 1737 01f0 4E6F6465 		.ascii	"NodeDepth(NodeParent(block)) > NodeDepth(block)\000"
+ 1737      44657074 
+ 1737      68284E6F 
+ 1737      64655061 
+ 1737      72656E74 
+ 1738              		.align	2
+ 1739              	$LC25:
+ 1740 0220 284E6F64 		.ascii	"(NodeDepth(block)==0) == (NodeDepth(block) == 0)\000"
+ 1740      65446570 
+ 1740      74682862 
+ 1740      6C6F636B 
+ 1740      293D3D30 
+ 1741              		.text
+ 1742              		.align	2
+ 1743              		.globl	TestSanityVisitor
+ 1744              	$LFB10 = .
+ 163:bgtree/bgUtil2.c **** 
+ 164:bgtree/bgUtil2.c **** int TestSanityVisitor(BAT block, Node *n) {
+ 1745              		.loc 1 165 0
+ 1746              		.set	nomips16
+ 1747              		.ent	TestSanityVisitor
+ 1749              	TestSanityVisitor:
+ 1750              		.frame	$fp,40,$31		# vars= 0, regs= 3/0, args= 16, gp= 8
+ 1751              		.mask	0xc0010000,-4
+ 1752              		.fmask	0x00000000,0
+ 1753              		.set	noreorder
+ 1754              		.set	nomacro
+ 1755              		
+ 1756 1144 D8FFBD27 		addiu	$sp,$sp,-40
+ 1757              	$LCFI42:
+ 1758 1148 2400BFAF 		sw	$31,36($sp)
+ 1759              	$LCFI43:
+ 1760 114c 2000BEAF 		sw	$fp,32($sp)
+ 1761              	$LCFI44:
+ 1762 1150 1C00B0AF 		sw	$16,28($sp)
+ 1763              	$LCFI45:
+ 1764 1154 21F0A003 		move	$fp,$sp
+ 1765              	$LCFI46:
+ 1766 1158 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 1767 115c 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 1768 1160 1000BCAF 		.cprestore	16
+ 1769 1164 2800C4AF 		sw	$4,40($fp)
+ 1770 1168 2C00C5AF 		sw	$5,44($fp)
+ 165:bgtree/bgUtil2.c ****   printf_P(PSTR("TestSanityVisitor %08x\n"),block);
+ 1771              		.loc 1 166 0
+ 1772 116c 0000023C 		lui	$2,%hi($LC21)
+ 1773 1170 A8014224 		addiu	$2,$2,%lo($LC21)
+ 1774 1174 21204000 		move	$4,$2
+ 1775 1178 2800C58F 		lw	$5,40($fp)
+ 1776 117c 0000828F 		lw	$2,%call16(printf)($28)
+ 1777 1180 00000000 		nop
+ 1778 1184 21C84000 		move	$25,$2
+ 1779 1188 09F82003 		jalr	$25
+ 1780 118c 00000000 		nop
+ 1781              	
+ 1782 1190 1000DC8F 		lw	$28,16($fp)
+ 166:bgtree/bgUtil2.c ****   assert(NodeLen(block) > 0);
+ 1783              		.loc 1 167 0
+ 1784 1194 2800C48F 		lw	$4,40($fp)
+ 1785 1198 0000828F 		lw	$2,%call16(NodeLen)($28)
+ 1786 119c 00000000 		nop
+ 1787 11a0 21C84000 		move	$25,$2
+ 1788 11a4 09F82003 		jalr	$25
+ 1789 11a8 00000000 		nop
+ 1790              	
+ 1791 11ac 1000DC8F 		lw	$28,16($fp)
+ 1792 11b0 0D004014 		bne	$2,$0,$L70
+ 1793 11b4 00000000 		nop
+ 1794              	
+ 1795 11b8 0000023C 		lui	$2,%hi($LC22)
+ 1796 11bc C0014424 		addiu	$4,$2,%lo($LC22)
+ 1797 11c0 0000023C 		lui	$2,%hi($LC0)
+ 1798 11c4 00004524 		addiu	$5,$2,%lo($LC0)
+ 1799 11c8 A7000624 		li	$6,167			# 0xa7
+ 1800 11cc 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2310)
+ 1801 11d0 54024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2310)
+ 1802 11d4 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1803 11d8 00000000 		nop
+ 1804 11dc 21C84000 		move	$25,$2
+ 1805 11e0 09F82003 		jalr	$25
+ 1806 11e4 00000000 		nop
+ 1807              	
+ 1808              	$L70:
+ 167:bgtree/bgUtil2.c ****   assert(NodeParent(block) != block);
+ 1809              		.loc 1 168 0
+ 1810 11e8 2800C48F 		lw	$4,40($fp)
+ 1811 11ec 0000828F 		lw	$2,%call16(NodeParent)($28)
+ 1812 11f0 00000000 		nop
+ 1813 11f4 21C84000 		move	$25,$2
+ 1814 11f8 09F82003 		jalr	$25
+ 1815 11fc 00000000 		nop
+ 1816              	
+ 1817 1200 1000DC8F 		lw	$28,16($fp)
+ 1818 1204 21184000 		move	$3,$2
+ 1819 1208 2800C28F 		lw	$2,40($fp)
+ 1820 120c 00000000 		nop
+ 1821 1210 0D006214 		bne	$3,$2,$L71
+ 1822 1214 00000000 		nop
+ 1823              	
+ 1824 1218 0000023C 		lui	$2,%hi($LC23)
+ 1825 121c D4014424 		addiu	$4,$2,%lo($LC23)
+ 1826 1220 0000023C 		lui	$2,%hi($LC0)
+ 1827 1224 00004524 		addiu	$5,$2,%lo($LC0)
+ 1828 1228 A8000624 		li	$6,168			# 0xa8
+ 1829 122c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2310)
+ 1830 1230 54024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2310)
+ 1831 1234 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1832 1238 00000000 		nop
+ 1833 123c 21C84000 		move	$25,$2
+ 1834 1240 09F82003 		jalr	$25
+ 1835 1244 00000000 		nop
+ 1836              	
+ 1837              	$L71:
+ 168:bgtree/bgUtil2.c ****   if (NodeParent(block) != BAInvalid)
+ 1838              		.loc 1 169 0
+ 1839 1248 2800C48F 		lw	$4,40($fp)
+ 1840 124c 0000828F 		lw	$2,%call16(NodeParent)($28)
+ 1841 1250 00000000 		nop
+ 1842 1254 21C84000 		move	$25,$2
+ 1843 1258 09F82003 		jalr	$25
+ 1844 125c 00000000 		nop
+ 1845              	
+ 1846 1260 1000DC8F 		lw	$28,16($fp)
+ 1847 1264 21184000 		move	$3,$2
+ 1848 1268 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 1849 126c 26006210 		beq	$3,$2,$L72
+ 1850 1270 00000000 		nop
+ 1851              	
+ 169:bgtree/bgUtil2.c ****     assert(NodeDepth(NodeParent(block)) > NodeDepth(block));
+ 1852              		.loc 1 170 0
+ 1853 1274 2800C48F 		lw	$4,40($fp)
+ 1854 1278 0000828F 		lw	$2,%call16(NodeParent)($28)
+ 1855 127c 00000000 		nop
+ 1856 1280 21C84000 		move	$25,$2
+ 1857 1284 09F82003 		jalr	$25
+ 1858 1288 00000000 		nop
+ 1859              	
+ 1860 128c 1000DC8F 		lw	$28,16($fp)
+ 1861 1290 21204000 		move	$4,$2
+ 1862 1294 0000828F 		lw	$2,%call16(NodeDepth)($28)
+ 1863 1298 00000000 		nop
+ 1864 129c 21C84000 		move	$25,$2
+ 1865 12a0 09F82003 		jalr	$25
+ 1866 12a4 00000000 		nop
+ 1867              	
+ 1868 12a8 1000DC8F 		lw	$28,16($fp)
+ 1869 12ac 21804000 		move	$16,$2
+ 1870 12b0 2800C48F 		lw	$4,40($fp)
+ 1871 12b4 0000828F 		lw	$2,%call16(NodeDepth)($28)
+ 1872 12b8 00000000 		nop
+ 1873 12bc 21C84000 		move	$25,$2
+ 1874 12c0 09F82003 		jalr	$25
+ 1875 12c4 00000000 		nop
+ 1876              	
+ 1877 12c8 1000DC8F 		lw	$28,16($fp)
+ 1878 12cc 2A105000 		slt	$2,$2,$16
+ 1879 12d0 0D004014 		bne	$2,$0,$L72
+ 1880 12d4 00000000 		nop
+ 1881              	
+ 1882 12d8 0000023C 		lui	$2,%hi($LC24)
+ 1883 12dc F0014424 		addiu	$4,$2,%lo($LC24)
+ 1884 12e0 0000023C 		lui	$2,%hi($LC0)
+ 1885 12e4 00004524 		addiu	$5,$2,%lo($LC0)
+ 1886 12e8 AA000624 		li	$6,170			# 0xaa
+ 1887 12ec 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2310)
+ 1888 12f0 54024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2310)
+ 1889 12f4 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1890 12f8 00000000 		nop
+ 1891 12fc 21C84000 		move	$25,$2
+ 1892 1300 09F82003 		jalr	$25
+ 1893 1304 00000000 		nop
+ 1894              	
+ 1895              	$L72:
+ 170:bgtree/bgUtil2.c ****   assert((NodeDepth(block)==0) == (NodeDepth(block) == 0));
+ 1896              		.loc 1 171 0
+ 1897 1308 2800C48F 		lw	$4,40($fp)
+ 1898 130c 0000828F 		lw	$2,%call16(NodeDepth)($28)
+ 1899 1310 00000000 		nop
+ 1900 1314 21C84000 		move	$25,$2
+ 1901 1318 09F82003 		jalr	$25
+ 1902 131c 00000000 		nop
+ 1903              	
+ 1904 1320 1000DC8F 		lw	$28,16($fp)
+ 1905 1324 0100422C 		sltu	$2,$2,1
+ 1906 1328 FF005030 		andi	$16,$2,0x00ff
+ 1907 132c 2800C48F 		lw	$4,40($fp)
+ 1908 1330 0000828F 		lw	$2,%call16(NodeDepth)($28)
+ 1909 1334 00000000 		nop
+ 1910 1338 21C84000 		move	$25,$2
+ 1911 133c 09F82003 		jalr	$25
+ 1912 1340 00000000 		nop
+ 1913              	
+ 1914 1344 1000DC8F 		lw	$28,16($fp)
+ 1915 1348 0100422C 		sltu	$2,$2,1
+ 1916 134c FF004230 		andi	$2,$2,0x00ff
+ 1917 1350 26100202 		xor	$2,$16,$2
+ 1918 1354 FF004230 		andi	$2,$2,0x00ff
+ 1919 1358 0D004010 		beq	$2,$0,$L73
+ 1920 135c 00000000 		nop
+ 1921              	
+ 1922 1360 0000023C 		lui	$2,%hi($LC25)
+ 1923 1364 20024424 		addiu	$4,$2,%lo($LC25)
+ 1924 1368 0000023C 		lui	$2,%hi($LC0)
+ 1925 136c 00004524 		addiu	$5,$2,%lo($LC0)
+ 1926 1370 AB000624 		li	$6,171			# 0xab
+ 1927 1374 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2310)
+ 1928 1378 54024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2310)
+ 1929 137c 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1930 1380 00000000 		nop
+ 1931 1384 21C84000 		move	$25,$2
+ 1932 1388 09F82003 		jalr	$25
+ 1933 138c 00000000 		nop
+ 1934              	
+ 1935              	$L73:
+ 171:bgtree/bgUtil2.c ****   return 0;
+ 1936              		.loc 1 172 0
+ 1937 1390 21100000 		move	$2,$0
+ 172:bgtree/bgUtil2.c **** }
+ 1938              		.loc 1 173 0
+ 1939 1394 21E8C003 		move	$sp,$fp
+ 1940 1398 2400BF8F 		lw	$31,36($sp)
+ 1941 139c 2000BE8F 		lw	$fp,32($sp)
+ 1942 13a0 1C00B08F 		lw	$16,28($sp)
+ 1943 13a4 2800BD27 		addiu	$sp,$sp,40
+ 1944 13a8 0800E003 		j	$31
+ 1945 13ac 00000000 		nop
+ 1946              	
+ 1947              		.set	macro
+ 1948              		.set	reorder
+ 1949              		.end	TestSanityVisitor
+ 1950              	$LFE10:
+ 1952              		.rdata
+ 1953 0251 000000   		.align	2
+ 1956              	__PRETTY_FUNCTION__.2310:
+ 1957 0254 54657374 		.ascii	"TestSanityVisitor\000"
+ 1957      53616E69 
+ 1957      74795669 
+ 1957      7369746F 
+ 1957      7200
+ 1958 0266 0000     		.align	2
+ 1961              	__PRETTY_FUNCTION__.2245:
+ 1962 0268 556E7061 		.ascii	"UnpackAndPrintStringFromFile\000"
+ 1962      636B416E 
+ 1962      64507269 
+ 1962      6E745374 
+ 1962      72696E67 
+ 1963 0285 000000   		.align	2
+ 1966              	__PRETTY_FUNCTION__.2219:
+ 1967 0288 53636865 		.ascii	"SchemaGetStringLen\000"
+ 1967      6D614765 
+ 1967      74537472 
+ 1967      696E674C 
+ 1967      656E00
+ 1968 029b 00       		.align	2
+ 1971              	__func__.2222:
+ 1972 029c 53636865 		.ascii	"SchemaGetStringLen\000"
+ 1972      6D614765 
+ 1972      74537472 
+ 1972      696E674C 
+ 1972      656E00
+ 1973 02af 00       		.align	2
+ 1976              	__PRETTY_FUNCTION__.2182:
+ 1977 02b0 53636865 		.ascii	"SchemaGetString\000"
+ 1977      6D614765 
+ 1977      74537472 
+ 1977      696E6700 
+ 1978              		.align	2
+ 1981              	__func__.2185:
+ 1982 02c0 53636865 		.ascii	"SchemaGetString\000"
+ 1982      6D614765 
+ 1982      74537472 
+ 1982      696E6700 
+ 1983              		.align	2
+ 1986              	__PRETTY_FUNCTION__.2073:
+ 1987 02d0 53636865 		.ascii	"SchemaGetOffset\000"
+ 1987      6D614765 
+ 1987      744F6666 
+ 1987      73657400 
+ 1988              		.align	2
+ 1991              	__func__.2075:
+ 1992 02e0 53636865 		.ascii	"SchemaGetOffset\000"
+ 1992      6D614765 
+ 1992      744F6666 
+ 1992      73657400 
+ 1993              		.align	2
+ 1996              	__func__.2060:
+ 1997 02f0 556E7061 		.ascii	"UnpackUIntFromFile\000"
+ 1997      636B5549 
+ 1997      6E744672 
+ 1997      6F6D4669 
+ 1997      6C6500
+ 1998 0303 00       		.align	2
+ 2001              	__func__.2050:
+ 2002 0304 556E7061 		.ascii	"UnpackIntFromFile\000"
+ 2002      636B496E 
+ 2002      7446726F 
+ 2002      6D46696C 
+ 2002      6500
+ 2003 0316 0000     		.align	2
+ 2006              	__func__.2031:
+ 2007 0318 556E7061 		.ascii	"UnpackStringFromFile\000"
+ 2007      636B5374 
+ 2007      72696E67 
+ 2007      46726F6D 
+ 2007      46696C65 
+ 2297              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 bgtree/bgUtil2.c
+     /tmp/cco48vE4.s:32     .text:0000000000000000 UnpackStringFromFile
+     /tmp/cco48vE4.s:2006   .rodata:0000000000000318 __func__.2031
+     /tmp/cco48vE4.s:171    .text:000000000000017c UnpackIntFromFile
+     /tmp/cco48vE4.s:2001   .rodata:0000000000000304 __func__.2050
+     /tmp/cco48vE4.s:254    .text:0000000000000240 UnpackUIntFromFile
+     /tmp/cco48vE4.s:1996   .rodata:00000000000002f0 __func__.2060
+     /tmp/cco48vE4.s:351    .text:0000000000000304 SchemaGetOffset
+     /tmp/cco48vE4.s:1986   .rodata:00000000000002d0 __PRETTY_FUNCTION__.2073
+     /tmp/cco48vE4.s:1991   .rodata:00000000000002e0 __func__.2075
+     /tmp/cco48vE4.s:724    .text:0000000000000714 SchemaGetUInt
+     /tmp/cco48vE4.s:830    .text:0000000000000820 SchemaGetInt
+     /tmp/cco48vE4.s:929    .text:00000000000008ec SchemaGetString
+     /tmp/cco48vE4.s:1976   .rodata:00000000000002b0 __PRETTY_FUNCTION__.2182
+     /tmp/cco48vE4.s:1981   .rodata:00000000000002c0 __func__.2185
+     /tmp/cco48vE4.s:1136   .text:0000000000000b3c SchemaGetStringLen
+     /tmp/cco48vE4.s:1966   .rodata:0000000000000288 __PRETTY_FUNCTION__.2219
+     /tmp/cco48vE4.s:1971   .rodata:000000000000029c __func__.2222
+     /tmp/cco48vE4.s:1269   .text:0000000000000c90 UnpackAndPrintStringFromFile
+     /tmp/cco48vE4.s:1961   .rodata:0000000000000268 __PRETTY_FUNCTION__.2245
+     /tmp/cco48vE4.s:1415   .text:0000000000000db0 PrintVisitor
+     /tmp/cco48vE4.s:1749   .text:0000000000001144 TestSanityVisitor
+     /tmp/cco48vE4.s:1956   .rodata:0000000000000254 __PRETTY_FUNCTION__.2310
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+fread
+errorFile
+errorLine
+errorFunc
+errorMsg
+__assert_fail
+ERRORprint2
+stderr
+fprintf
+fputc
+printf
+NodeLen
+putchar
+NodeParent
+NodeDepth

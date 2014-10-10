@@ -1,0 +1,211 @@
+#!/bin/sh
+#
+# Block Rage - the arcade game
+# Copyright (C) 1999-2005 Jiri Svoboda
+#
+# This file is part of Block Rage.
+#
+# Block Rage is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.#
+#
+# Block Rage is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Block Rage; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+# Jiri Svoboda
+# jirik.svoboda@seznam.cz
+#
+
+# Static configuration
+
+prefix=/usr/local
+exec_prefix='${prefix}'
+progname=blockrage
+
+sysconfdir='${prefix}/etc'
+bindir='${exec_prefix}/bin'
+datadir='${prefix}/share'
+mandir='${prefix}/man'
+
+srcdir=.
+
+#SOUND_OPT=-DNOSOUND
+SOUND_OPT=
+
+MYCC=gcc
+MYCFLAGS='-s -O2 -Wall `sdl-config --cflags`'" $SOUND_OPT -DSYSCONFDIR=\\\"\${sysconfdir}/\${progname}\\\""
+
+if test -z "$CC" ; then
+  CC="$MYCC";
+fi
+
+if test -z "$CFLAGS"; then
+  CFLAGS="$MYCFLAGS"
+else
+  CFLAGS="$MYCFLAGS $CFLAGS"
+fi
+MAKE=make
+CTEMPFILE=configure.tmp
+MAKEFILE=Makefile
+MAKEFILE_IN=Makefile.in
+FHS_RC_FILE=blockrage-fhs.rc
+LIBS='`sdl-config --libs`'" -lm"
+
+
+# Parse options
+
+for cfg_option; do
+
+  case "$cfg_option" in
+  -*=*) cfg_optarg=`echo "$cfg_option" | sed 's/[-_a-zA-Z0-9]*=//'`;;
+  *) ac_optarg= ;;
+  esac
+
+  case "$cfg_option" in
+    --prefix=*) prefix="$cfg_optarg";;
+    --exec-prefix=*) exec_prefix="$cfg_optarg";;
+    
+    --build=*) build_alias="$cfg_optarg";;
+    --host=*) if test ."$build_alias" != ."$cfg_optarg" ; then
+        printf "configure: cross-compiling not supported\n" >&2
+	exit 1
+      fi;;
+    
+    --bindir=*) bindir="$cfg_optarg";;
+    --sbindir=*) ;;
+    --libexecdir=*) ;;
+    --datadir=*) datadir="$cfg_optarg";;
+    --sysconfdir=*) sysconfdir="$cfg_optarg";;
+    --sharedstatedir=*) ;;
+    --localstatedir=*) ;;
+    --libdir=*) ;;
+    --includedir=*) ;;
+    --oldincludedir=*) ;;
+    --infodir=*) ;;
+    --mandir=*) mandir="$cfg_optarg";;
+
+    --help) printf "options:\n"
+      printf "\t--prefix=PREFIX\t\t[/usr/local]\n"
+      printf "\t--exec-prefix=EPREFIX\t[PREFIX]\n"
+      printf "\n"
+      printf "\t--bindir=DIR\t\t[EPREFIX/bin]\n"
+      printf "\t--datadir=DIR\t\t[PREFIX/share]\n"
+      printf "\t--infodir=DIR\t\t[PREFIX/info] (ignored)\n"
+      printf "\t--localstatedir=DIR\t[PREFIX/var] (ignored)\n"
+      printf "\t--mandir=DIR\t\t[PREFIX/man]\n"
+      printf "\t--sysconfdir=DIR\t[PREFIX/etc]\n"
+      printf "\n"
+      printf "\t--build=BUILD\t\t(ignored)\n"
+      printf "\t--host=HOST\t\t[BUILD] (ignored)\n"
+      printf "\n"
+      printf "environment variables:\n"
+      printf "\tCC\n"
+      printf "\tCFLAGS\n"
+      printf "\tLDFLAGS\n"
+      exit;;
+    *) echo "configure: invalid parameter '$cfg_option'; use --help to show usage" >&2
+       exit 1;;
+  esac
+done
+
+# Determine executable suffix
+
+printf "Determine executable suffix... "
+printf "int main(void) { return 0; }\n" > x0temp.c
+"$CC" -o x1temp x0temp.c
+XSUF=`echo x1temp* | cut -c7-`
+rm x0temp.c x1temp*
+if test ".$XSUF" = . ; then
+  printf "none\n"
+else
+  printf "%b\n" "'$XSUF'"
+fi
+
+# Determine whether to use -lwinmm
+
+printf "Look for time function... "
+printf "#ifdef _WIN32\n#include <windows.h>\n#include <mmsystem.h>\n\
+int main(void) { (void)timeGetTime(); return 0; }\n\
+#else\n#include <sys/time.h>\nint main(void) {\n\
+struct timeval tv;\nstruct timezone tz;\n\
+gettimeofday(&tv,&tz); return 0;\n}\n#endif\n" > x0temp.c
+
+XCFLAGS=`eval echo "$CFLAGS"`
+XLIBS=`eval echo "$LIBS"`
+"$CC" $XCFLAGS -o x1temp x0temp.c $XLIBS 2>/dev/null
+if test "$?" -eq "0" ; then
+  printf "yes\n"
+  HAVE_TIMING=yes
+else
+  printf "no\n"
+  HAVE_TIMING=no
+fi
+
+if test $HAVE_TIMING = no ; then
+  printf "Look for time function with -lwinmm... "
+  "$CC" $XCFLAGS -o x1temp x0temp.c $XLIBS -lwinmm 2>/dev/null
+  if test "$?" -eq "0" ; then
+    printf "yes\n"
+    LIBS="$LIBS -lwinmm"
+    HAVE_TIMING=yes
+  else
+    printf "no\n"
+    printf "Error: Neither gettimeofday() nor timeGetTime() found\n">&2
+  fi
+fi
+
+rm x0temp.c
+rm -f "x1temp$XSUF"
+
+if test $HAVE_TIMING = no ; then
+  exit 1
+fi
+
+# Prepare makefile header
+
+printf "Caching configuration... "
+printf "%b " "# Generated automatically from $MAKEFILE_IN" > "$CTEMPFILE"
+printf "%b\n\n" "by configure" >> "$CTEMPFILE"
+printf "CC=%b\n" "$CC" >> "$CTEMPFILE"
+printf "MAKE=%b\n" "$MAKE" >> "$CTEMPFILE"
+# can't use printf because of backslashes in $CFLAGS
+echo "CFLAGS=$CFLAGS" >> "$CTEMPFILE"
+printf "LDFLAGS=%b\n" "$LDFLAGS" >> "$CTEMPFILE"
+printf "LIBS=%b\n" "$LIBS" >> "$CTEMPFILE"
+printf "XSUF=%b\n" "$XSUF" >> "$CTEMPFILE"
+printf "prefix=%b\n" "$prefix" >> "$CTEMPFILE"
+printf "exec_prefix=%b\n" "$exec_prefix" >> "$CTEMPFILE"
+printf "progname=%b\n" "$progname" >> "$CTEMPFILE"
+printf "sysconfdir=%b\n" "$sysconfdir" >> "$CTEMPFILE"
+printf "bindir=%b\n" "$bindir" >> "$CTEMPFILE"
+printf "datadir=%b\n" "$datadir" >> "$CTEMPFILE"
+printf "mandir=%b\n" "$mandir" >> "$CTEMPFILE"
+printf "done\n"
+
+# Write the FHS RC file
+printf "Writing %b ..." "$FHS_RC_FILE"
+eval "printf \"$sysconfdir/$progname/$progname.cfg\n\"" > "$FHS_RC_FILE"
+eval "printf \"~/.$progname/$progname.cfg\n\"" >> "$FHS_RC_FILE"
+eval "printf \"$datadir/$progname/\n\"" >> "$FHS_RC_FILE"
+eval "printf \"~/.$progname/topten\n\"" >> "$FHS_RC_FILE"
+printf "test\n" >> "$FHS_RC_FILE"
+printf "done\n"
+
+# Write the makefiles
+
+printf "Writing %b ..." "$MAKEFILE"
+cat "$CTEMPFILE" "$MAKEFILE_IN" > "$MAKEFILE"
+printf "done\n"
+
+printf "Writing %b ..." "src/$MAKEFILE"
+cat "$CTEMPFILE" "src/$MAKEFILE_IN" > "src/$MAKEFILE"
+printf "done\n"
+
+rm -f "$CTEMPFILE"

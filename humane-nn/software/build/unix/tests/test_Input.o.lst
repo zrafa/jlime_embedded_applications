@@ -1,0 +1,144 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.rdata
+  14              		.align	2
+  15              	$LC0:
+  16 0000 5B25783D 		.ascii	"[%x=_%c_->%i]\012\000"
+  16      5F25635F 
+  16      2D3E2569 
+  16      5D0A00
+  17 000f 00       		.text
+  18              		.align	2
+  19              		.globl	main
+  20              	$LFB0 = .
+  21              		.file 1 "tests/test_Input.c"
+   0:tests/test_Input.c **** #include "Platform.h"
+   1:tests/test_Input.c **** 
+   2:tests/test_Input.c **** int main(int argc, char **argv) {
+  22              		.loc 1 3 0
+  23              		.set	nomips16
+  24              		.ent	main
+  26              	main:
+  27              		.frame	$fp,48,$31		# vars= 16, regs= 2/0, args= 16, gp= 8
+  28              		.mask	0xc0000000,-4
+  29              		.fmask	0x00000000,0
+  30              		.set	noreorder
+  31              		.set	nomacro
+  32              		
+  33 0000 D0FFBD27 		addiu	$sp,$sp,-48
+  34              	$LCFI0:
+  35 0004 2C00BFAF 		sw	$31,44($sp)
+  36              	$LCFI1:
+  37 0008 2800BEAF 		sw	$fp,40($sp)
+  38              	$LCFI2:
+  39 000c 21F0A003 		move	$fp,$sp
+  40              	$LCFI3:
+  41 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  42 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  43 0018 1000BCAF 		.cprestore	16
+  44 001c 3000C4AF 		sw	$4,48($fp)
+  45 0020 3400C5AF 		sw	$5,52($fp)
+   3:tests/test_Input.c ****   PlatformInit();
+  46              		.loc 1 4 0
+  47 0024 0000828F 		lw	$2,%call16(PlatformInit)($28)
+  48 0028 00000000 		nop
+  49 002c 21C84000 		move	$25,$2
+  50 0030 09F82003 		jalr	$25
+  51 0034 00000000 		nop
+  52              	
+  53 0038 1000DC8F 		lw	$28,16($fp)
+   4:tests/test_Input.c ****   unsigned char escState = 0;
+  54              		.loc 1 5 0
+  55 003c 2000C0A3 		sb	$0,32($fp)
+  56 0040 02000010 		b	$L4
+  57 0044 00000000 		nop
+  58              	
+  59              	$L6:
+   5:tests/test_Input.c ****   while (1) {
+   6:tests/test_Input.c ****     int r = InputCheck();
+   7:tests/test_Input.c ****     int r2 = InputUnescape(r, &escState);
+   8:tests/test_Input.c ****     if ((r != -1) || (r2 != -1))
+   9:tests/test_Input.c ****       printf("[%x=_%c_->%i]\n", (unsigned int) r, (char) r, r2);
+  10:tests/test_Input.c ****   }
+  60              		.loc 1 11 0
+  61 0048 00000000 		nop
+  62              	$L4:
+  63              	$LBB2 = .
+   7:tests/test_Input.c ****     int r = InputCheck();
+  64              		.loc 1 7 0
+  65 004c 0000828F 		lw	$2,%call16(InputCheck)($28)
+  66 0050 00000000 		nop
+  67 0054 21C84000 		move	$25,$2
+  68 0058 09F82003 		jalr	$25
+  69 005c 00000000 		nop
+  70              	
+  71 0060 1000DC8F 		lw	$28,16($fp)
+  72 0064 1C00C2AF 		sw	$2,28($fp)
+   8:tests/test_Input.c ****     int r2 = InputUnescape(r, &escState);
+  73              		.loc 1 8 0
+  74 0068 2000C227 		addiu	$2,$fp,32
+  75 006c 1C00C48F 		lw	$4,28($fp)
+  76 0070 21284000 		move	$5,$2
+  77 0074 0000828F 		lw	$2,%call16(InputUnescape)($28)
+  78 0078 00000000 		nop
+  79 007c 21C84000 		move	$25,$2
+  80 0080 09F82003 		jalr	$25
+  81 0084 00000000 		nop
+  82              	
+  83 0088 1000DC8F 		lw	$28,16($fp)
+  84 008c 1800C2AF 		sw	$2,24($fp)
+   9:tests/test_Input.c ****     if ((r != -1) || (r2 != -1))
+  85              		.loc 1 9 0
+  86 0090 1C00C38F 		lw	$3,28($fp)
+  87 0094 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+  88 0098 05006214 		bne	$3,$2,$L2
+  89 009c 00000000 		nop
+  90              	
+  91 00a0 1800C38F 		lw	$3,24($fp)
+  92 00a4 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+  93 00a8 E7FF6210 		beq	$3,$2,$L6
+  94 00ac 00000000 		nop
+  95              	
+  96              	$L2:
+  10:tests/test_Input.c ****       printf("[%x=_%c_->%i]\n", (unsigned int) r, (char) r, r2);
+  97              		.loc 1 10 0
+  98 00b0 0000023C 		lui	$2,%hi($LC0)
+  99 00b4 00004424 		addiu	$4,$2,%lo($LC0)
+ 100 00b8 1C00C38F 		lw	$3,28($fp)
+ 101 00bc 1C00C28F 		lw	$2,28($fp)
+ 102 00c0 00000000 		nop
+ 103 00c4 00160200 		sll	$2,$2,24
+ 104 00c8 03160200 		sra	$2,$2,24
+ 105 00cc 21286000 		move	$5,$3
+ 106 00d0 21304000 		move	$6,$2
+ 107 00d4 1800C78F 		lw	$7,24($fp)
+ 108 00d8 0000828F 		lw	$2,%call16(printf)($28)
+ 109 00dc 00000000 		nop
+ 110 00e0 21C84000 		move	$25,$2
+ 111 00e4 09F82003 		jalr	$25
+ 112 00e8 00000000 		nop
+ 113              	
+ 114 00ec 1000DC8F 		lw	$28,16($fp)
+ 115              	$LBE2 = .
+ 116              		.loc 1 11 0
+ 117 00f0 D6FF0010 		b	$L4
+ 118 00f4 00000000 		nop
+ 119              	
+ 120              		.set	macro
+ 121              		.set	reorder
+ 122              		.end	main
+ 123              	$LFE0:
+ 165              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 tests/test_Input.c
+     /tmp/cclQBBff.s:26     .text:0000000000000000 main
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+PlatformInit
+InputCheck
+InputUnescape
+printf

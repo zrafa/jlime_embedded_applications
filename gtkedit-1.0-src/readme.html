@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<!--+====|====+====|====+====|====+====|====+====|====+====|====+====|====+==-->
+<html>
+<head>
+<meta name="generator" content=
+"HTML Tidy for Linux/x86 (vers 1st December 2004), see www.w3.org">
+<title>gtkedit - a Notepad clone</title>
+</head>
+<body>
+<table id="header" border="0" cellpadding="0" cellspacing="0" summary="header">
+<tr>
+<td class="header">Gtkedit - A notepad clone based on GTK+</td>
+</tr>
+</table>
+<hr>
+<h2>Introduction</h2>
+<h3>Why another editor? Don't we have enough already?</h3>
+<p>Well, yes indeed. There are quite a lot of different - and not
+so different - editors one can download from the Internet.
+Anyway...</p>
+<ol>
+<li>I wanted a simple project to try GUI programming in Unix.</li>
+<li>I have an old machine (Pentium 166 MHz, 32 MB RAM) with
+Slackware Linux 9.0. This machine runs Xfce 3.8, based on GTK+
+1.2.</li>
+<li>There's no decent GUI editor for this machine. All are too
+slow, too bloated or too ugly.</li>
+</ol>
+<p>OK, In fact I did found an editor that works fine. It's called
+gnotepad+, but it too takes too long to load (about 2 seconds) in
+this old machine. There's plenty of room for improvements here, I
+thought.</p>
+<p>And so gtkedit begun. I only wanted the most basic editing
+features: cut, copy, paste, basic undo/redo... nothing fancy. The
+obvious model to copy was, of course, Notepad.</p>
+<h2>What is it ?</h2>
+<p>Gtkedit is a simple editor, written using the GTK+ 1.2 toolkit.
+It aims to be (in that order) light, useful and simple (source
+code-wise).</p>
+<ul>
+<li>Binary weights about 30 KB.</li>
+<li>Takes less than half a second to start in the development
+machine.</li>
+<li>Has nearly all the features of Windows 2000' Notepad (only
+printing and help are missing).</li>
+<li>The C source code is a single file, about 1400 lines long. No
+need to use a configure script or even a makefile (although one is
+provided).</li>
+</ul>
+<p>Being a simple project, it also can serve as a real world GTK+
+tutorial.</p>
+<p>To sum it up all: gtkedit is the little unsexy app everybody needs to have 
+;-).</p>
+<h2>Using the editor</h2>
+<p>gtkedit is very simple to use. It understands the basic common
+shortcut keys, like &lt;Ctrl&gt;C for copy. You will find them
+listed next to each menu item.</p>
+<p>Very basic undo/redo capabilities are provided, because the
+editor can only undo the very last text insertion or removal.</p>
+<p>You can find and replace text, and there is a menu option that
+will allow you to quickly go to any particular line, which is handy
+if one is writting a program and wants locate an error line.</p>
+<p>One useful feature is the ability to open files by dragging them
+from your file manager into the editor window, replacing the 
+current open one.</p>
+<p>Finally, you can change the font used for text display, or
+toggle the wrapping of long lines by means of the "Format" menu. Gtkedit will
+remember those settings, along with the window size (they are saved to a file
+named <tt>./gtkeditrc</tt> in you home directory.)</p>
+<h2>Compiling and running</h2>
+<p>Gtkedit uses the GNU gettext library for translation. All major Linux distributions are based 
+on the GNU C library, that includes gettext. Other systems may not compile if the gettext library 
+is not installed.</p>
+<p>To compile the source, issue the following command from a
+terminal window:</p>
+<pre>
+   make
+</pre>
+Alternatively you can compile the program with the following command:
+<pre>
+   gcc $(gtk-config --cflags --libs) -O -o gtkedit gtkedit.c
+</pre>
+<p>I assumed you use GNU bash. If you use any other shell, use this
+instead:</p>
+<pre>
+   gcc `gtk-config --cflags --libs` -O -o gtkedit gtkedit.c
+</pre>
+<p>Beware of the back-quotes (`), as they are not the same as
+single quotes (') if you happen to be a Unix shell.</p>
+<p>Once the compilation finishes you can start the program with the
+command:</p>
+<pre>
+   ./gtkedit
+</pre>
+<p>This opens the editor with a blank unnamed file. You can add the
+name of a file to have it loaded, if you wish. Alternatively you
+can use the file manager to drag file over the editor window.</p>
+<p>If you like the editor and plan to use it frequently, it would be wise to 
+put it somewhere in your path, for example in <tt>/usr/bin</tt> or 
+<tt>/usr/local/bin</tt>, and create a shortcut in your desktop.</p>
+<p>If your primary language is not English you may want to install one or more of the translations
+modules, found in the <tt>po</tt> subdirectory. Each module name is the ISO code of the language
+it adds. For instance, <tt>ca.mo</tt> is the Catalan language module.<p>
+<p>For example, to install the Catalan language translation you should issue the following commands:</p> 
+<pre>
+	su
+	password: *****
+	cp po/ca.mo /usr/share/locale/ca/LC_MESSAGES/gtkedit.mo
+	exit
+</pre>
+<p>There are a couple of important things to note:<p>
+<ul>
+<li>You need administrator rights to install the translation modules.</li>
+<li><tt>/usr/share/locale/</tt> is the standard base path for translations. If it differs in 
+your system change if for the right one.</li>
+<li>The module name has to change to <tt>gtkedit.mo</tt>. Otherwise it will not be recognized.</li>
+</ul>
+<h2>Collaborate!</h2>
+<p>If you want to collaborate (that's the best part of this thing called Open 
+Source) you can by translating gtkedit to your native language. To do this you 
+should do the following:</p>
+<ol>
+<li>Download the latest source code from  
+<a href="http://sourceforge.net/projects/gtkedit1">Sourceforge</a>. Inside the 
+tarball you will find the <tt>gtkedit.pot</tt>. This POT (Portable Object 
+Template) is a text file with all the strings in the application.</li>
+<li>Translate the strings in the <tt>gtkedit.pot</tt> file and save it as 
+<tt><i>&lt;language-code&gt;</i>.po</tt>, where <i>language-code</i> is the ISO 
+2 letter code for your language. Since the .POT file is just plain text you can
+edit it with gtkedit itself, although I strongly recommend using an specialized
+editor like <a href="http://www.poedit.org">poedit</a>. Be sure to fill in the
+Copyright and license comments. For simplicity, I will only accept translations
+under the same license as gtkedit.</li>
+<li>Send the translated file to me, or better yet, publish it in the 
+<a href="http://sourceforge.net/forum/forum.php?forum_id=456762">Developers</a> 
+forum.</li>
+</ol>
+<p>Of course, other contributions will be welcomed too.</p>
+</body>
+</html>

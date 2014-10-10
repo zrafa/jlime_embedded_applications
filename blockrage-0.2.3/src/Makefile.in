@@ -1,0 +1,17 @@
+OBJS    = main.o gfxout.o gfxlib.o menus.o keyboard.o bg.o sound.o global.o timer.o
+
+$(progname)$(XSUF): $(OBJS)
+	gcc -s -o $(progname)$(XSUF) $(OBJS) $(LIBS)
+
+bg.o: bg.c bg.h global.h main.h
+gfxlib.o: gfxlib.c gfxlib.h global.h gfxout.h
+gfxout.o: gfxout.c gfxout.h global.h
+global.o: global.c global.h main.h
+keyboard.o: keyboard.c keyboard.h global.h main.h
+main.o: main.c main.h global.h gfxout.h gfxlib.h menus.h bg.h keyboard.h sound.h timer.h
+menus.o: menus.c menus.h global.h gfxout.h gfxlib.h keyboard.h bg.h main.h timer.h
+sound.o: sound.c sound.h global.h
+timer.o: timer.c timer.h
+
+clean:
+	rm -f *.o $(progname)$(XSUF)

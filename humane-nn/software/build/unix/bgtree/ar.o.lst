@@ -1,0 +1,246 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              	
+  14              		.comm	arRecords,192,4
+  15              		.align	2
+  16              		.globl	ArParseHeader
+  17              	$LFB0 = .
+  18              		.file 1 "bgtree/ar.c"
+   0:bgtree/ar.c   **** #include "ar.h"
+   1:bgtree/ar.c   **** 
+   2:bgtree/ar.c   **** #define ARMAXFILES 8
+   3:bgtree/ar.c   **** ArFileRecord arRecords[ARMAXFILES];
+   4:bgtree/ar.c   **** 
+   5:bgtree/ar.c   **** /** Parse a header.  Returns record size, or 0 if last record. **/
+   6:bgtree/ar.c   **** uint32_t ArParseHeader(ArFileRecord *record, const char *buf, uint32_t *position) {
+  19              		.loc 1 7 0
+  20              		.set	nomips16
+  21              		.ent	ArParseHeader
+  23              	ArParseHeader:
+  24              		.frame	$fp,32,$31		# vars= 16, regs= 1/0, args= 0, gp= 8
+  25              		.mask	0x40000000,-4
+  26              		.fmask	0x00000000,0
+  27              		.set	noreorder
+  28              		.set	nomacro
+  29              		
+  30 0000 E0FFBD27 		addiu	$sp,$sp,-32
+  31              	$LCFI0:
+  32 0004 1C00BEAF 		sw	$fp,28($sp)
+  33              	$LCFI1:
+  34 0008 21F0A003 		move	$fp,$sp
+  35              	$LCFI2:
+  36 000c 2000C4AF 		sw	$4,32($fp)
+  37 0010 2400C5AF 		sw	$5,36($fp)
+  38 0014 2800C6AF 		sw	$6,40($fp)
+   7:bgtree/ar.c   ****   if (buf[0] == '\n') // empty line indicates last record
+  39              		.loc 1 8 0
+  40 0018 2400C28F 		lw	$2,36($fp)
+  41 001c 00000000 		nop
+  42 0020 00004380 		lb	$3,0($2)
+  43 0024 0A000224 		li	$2,10			# 0xa
+  44 0028 04006214 		bne	$3,$2,$L2
+  45 002c 00000000 		nop
+  46              	
+   8:bgtree/ar.c   ****     return 0;
+  47              		.loc 1 9 0
+  48 0030 21100000 		move	$2,$0
+  49 0034 79000010 		b	$L3
+  50 0038 00000000 		nop
+  51              	
+  52              	$L2:
+  53              	$LBB2 = .
+   9:bgtree/ar.c   ****   for (int i=0; i<16; ++i)
+  54              		.loc 1 10 0
+  55 003c 0C00C0AF 		sw	$0,12($fp)
+  56 0040 0F000010 		b	$L4
+  57 0044 00000000 		nop
+  58              	
+  59              	$L5:
+  10:bgtree/ar.c   ****     record->fname[i] = buf[i];
+  60              		.loc 1 11 0
+  61 0048 0C00C28F 		lw	$2,12($fp)
+  62 004c 0C00C38F 		lw	$3,12($fp)
+  63 0050 2400C48F 		lw	$4,36($fp)
+  64 0054 00000000 		nop
+  65 0058 21188300 		addu	$3,$4,$3
+  66 005c 00006380 		lb	$3,0($3)
+  67 0060 2000C48F 		lw	$4,32($fp)
+  68 0064 00000000 		nop
+  69 0068 21108200 		addu	$2,$4,$2
+  70 006c 000043A0 		sb	$3,0($2)
+  10:bgtree/ar.c   ****     record->fname[i] = buf[i];
+  71              		.loc 1 10 0
+  72 0070 0C00C28F 		lw	$2,12($fp)
+  73 0074 00000000 		nop
+  74 0078 01004224 		addiu	$2,$2,1
+  75 007c 0C00C2AF 		sw	$2,12($fp)
+  76              	$L4:
+  77 0080 0C00C28F 		lw	$2,12($fp)
+  78 0084 00000000 		nop
+  79 0088 10004228 		slt	$2,$2,16
+  80 008c EEFF4014 		bne	$2,$0,$L5
+  81 0090 00000000 		nop
+  82              	
+  83              	$LBE2 = .
+  11:bgtree/ar.c   ****   //right-trim spaces
+  12:bgtree/ar.c   ****   char *bp;
+  13:bgtree/ar.c   ****   for (bp=record->fname+15; *bp==' ' || *bp=='/'; --bp);
+  84              		.loc 1 14 0
+  85 0094 2000C28F 		lw	$2,32($fp)
+  86 0098 00000000 		nop
+  87 009c 0F004224 		addiu	$2,$2,15
+  88 00a0 1400C2AF 		sw	$2,20($fp)
+  89 00a4 05000010 		b	$L6
+  90 00a8 00000000 		nop
+  91              	
+  92              	$L7:
+  93 00ac 1400C28F 		lw	$2,20($fp)
+  94 00b0 00000000 		nop
+  95 00b4 FFFF4224 		addiu	$2,$2,-1
+  96 00b8 1400C2AF 		sw	$2,20($fp)
+  97              	$L6:
+  98 00bc 1400C28F 		lw	$2,20($fp)
+  99 00c0 00000000 		nop
+ 100 00c4 00004380 		lb	$3,0($2)
+ 101 00c8 20000224 		li	$2,32			# 0x20
+ 102 00cc F7FF6210 		beq	$3,$2,$L7
+ 103 00d0 00000000 		nop
+ 104              	
+ 105 00d4 1400C28F 		lw	$2,20($fp)
+ 106 00d8 00000000 		nop
+ 107 00dc 00004380 		lb	$3,0($2)
+ 108 00e0 2F000224 		li	$2,47			# 0x2f
+ 109 00e4 F1FF6210 		beq	$3,$2,$L7
+ 110 00e8 00000000 		nop
+ 111              	
+  14:bgtree/ar.c   ****   *(bp+1) = '\000';
+ 112              		.loc 1 15 0
+ 113 00ec 1400C28F 		lw	$2,20($fp)
+ 114 00f0 00000000 		nop
+ 115 00f4 01004224 		addiu	$2,$2,1
+ 116 00f8 000040A0 		sb	$0,0($2)
+  15:bgtree/ar.c   ****   record->position = *position;
+ 117              		.loc 1 16 0
+ 118 00fc 2800C28F 		lw	$2,40($fp)
+ 119 0100 00000000 		nop
+ 120 0104 0000438C 		lw	$3,0($2)
+ 121 0108 2000C28F 		lw	$2,32($fp)
+ 122 010c 00000000 		nop
+ 123 0110 100043AC 		sw	$3,16($2)
+  16:bgtree/ar.c   ****   record->sz = 0;
+ 124              		.loc 1 17 0
+ 125 0114 2000C28F 		lw	$2,32($fp)
+ 126 0118 00000000 		nop
+ 127 011c 140040AC 		sw	$0,20($2)
+  17:bgtree/ar.c   ****   uint32_t mult=1;
+ 128              		.loc 1 18 0
+ 129 0120 01000224 		li	$2,1			# 0x1
+ 130 0124 1000C2AF 		sw	$2,16($fp)
+ 131              	$LBB3 = .
+  18:bgtree/ar.c   ****   for (int i=57; i>47; --i) {
+ 132              		.loc 1 19 0
+ 133 0128 39000224 		li	$2,57			# 0x39
+ 134 012c 0800C2AF 		sw	$2,8($fp)
+ 135 0130 26000010 		b	$L8
+ 136 0134 00000000 		nop
+ 137              	
+ 138              	$L10:
+  19:bgtree/ar.c   ****     if (*(buf+i) != ' ') {
+ 139              		.loc 1 20 0
+ 140 0138 0800C28F 		lw	$2,8($fp)
+ 141 013c 2400C38F 		lw	$3,36($fp)
+ 142 0140 00000000 		nop
+ 143 0144 21106200 		addu	$2,$3,$2
+ 144 0148 00004380 		lb	$3,0($2)
+ 145 014c 20000224 		li	$2,32			# 0x20
+ 146 0150 1A006210 		beq	$3,$2,$L9
+ 147 0154 00000000 		nop
+ 148              	
+  20:bgtree/ar.c   ****       record->sz += mult * (*(buf+i) - '0');
+ 149              		.loc 1 21 0
+ 150 0158 2000C28F 		lw	$2,32($fp)
+ 151 015c 00000000 		nop
+ 152 0160 1400428C 		lw	$2,20($2)
+ 153 0164 0800C38F 		lw	$3,8($fp)
+ 154 0168 2400C48F 		lw	$4,36($fp)
+ 155 016c 00000000 		nop
+ 156 0170 21188300 		addu	$3,$4,$3
+ 157 0174 00006380 		lb	$3,0($3)
+ 158 0178 00000000 		nop
+ 159 017c D0FF6324 		addiu	$3,$3,-48
+ 160 0180 21206000 		move	$4,$3
+ 161 0184 1000C38F 		lw	$3,16($fp)
+ 162 0188 00000000 		nop
+ 163 018c 18008300 		mult	$4,$3
+ 164 0190 12180000 		mflo	$3
+ 165 0194 21184300 		addu	$3,$2,$3
+ 166 0198 2000C28F 		lw	$2,32($fp)
+ 167 019c 00000000 		nop
+ 168 01a0 140043AC 		sw	$3,20($2)
+  21:bgtree/ar.c   ****       mult *= 10;
+ 169              		.loc 1 22 0
+ 170 01a4 1000C28F 		lw	$2,16($fp)
+ 171 01a8 00000000 		nop
+ 172 01ac 40100200 		sll	$2,$2,1
+ 173 01b0 80180200 		sll	$3,$2,2
+ 174 01b4 21104300 		addu	$2,$2,$3
+ 175 01b8 1000C2AF 		sw	$2,16($fp)
+ 176              	$L9:
+  19:bgtree/ar.c   ****     if (*(buf+i) != ' ') {
+ 177              		.loc 1 19 0
+ 178 01bc 0800C28F 		lw	$2,8($fp)
+ 179 01c0 00000000 		nop
+ 180 01c4 FFFF4224 		addiu	$2,$2,-1
+ 181 01c8 0800C2AF 		sw	$2,8($fp)
+ 182              	$L8:
+ 183 01cc 0800C28F 		lw	$2,8($fp)
+ 184 01d0 00000000 		nop
+ 185 01d4 30004228 		slt	$2,$2,48
+ 186 01d8 D7FF4010 		beq	$2,$0,$L10
+ 187 01dc 00000000 		nop
+ 188              	
+ 189              	$LBE3 = .
+  22:bgtree/ar.c   ****     }
+  23:bgtree/ar.c   ****   }
+  24:bgtree/ar.c   ****   *position += record->sz + 60;
+ 190              		.loc 1 25 0
+ 191 01e0 2800C28F 		lw	$2,40($fp)
+ 192 01e4 00000000 		nop
+ 193 01e8 0000438C 		lw	$3,0($2)
+ 194 01ec 2000C28F 		lw	$2,32($fp)
+ 195 01f0 00000000 		nop
+ 196 01f4 1400428C 		lw	$2,20($2)
+ 197 01f8 00000000 		nop
+ 198 01fc 21106200 		addu	$2,$3,$2
+ 199 0200 3C004324 		addiu	$3,$2,60
+ 200 0204 2800C28F 		lw	$2,40($fp)
+ 201 0208 00000000 		nop
+ 202 020c 000043AC 		sw	$3,0($2)
+  25:bgtree/ar.c   ****   return record->sz;
+ 203              		.loc 1 26 0
+ 204 0210 2000C28F 		lw	$2,32($fp)
+ 205 0214 00000000 		nop
+ 206 0218 1400428C 		lw	$2,20($2)
+ 207              	$L3:
+  26:bgtree/ar.c   **** }
+ 208              		.loc 1 27 0
+ 209 021c 21E8C003 		move	$sp,$fp
+ 210 0220 1C00BE8F 		lw	$fp,28($sp)
+ 211 0224 2000BD27 		addiu	$sp,$sp,32
+ 212 0228 0800E003 		j	$31
+ 213 022c 00000000 		nop
+ 214              	
+ 215              		.set	macro
+ 216              		.set	reorder
+ 217              		.end	ArParseHeader
+ 218              	$LFE0:
+ 257              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 bgtree/ar.c
+                            *COM*:00000000000000c0 arRecords
+     /tmp/ccofskhV.s:23     .text:0000000000000000 ArParseHeader
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,385 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.rdata
+  14              		.align	2
+  15              	$LC0:
+  16 0000 2D2D6368 		.ascii	"--chdir\000"
+  16      64697200 
+  17              		.align	2
+  18              	$LC1:
+  19 0008 4552524F 		.ascii	"ERROR: --chdir %s failed\012\000"
+  19      523A202D 
+  19      2D636864 
+  19      69722025 
+  19      73206661 
+  20 0022 0000     		.align	2
+  21              	$LC2:
+  22 0024 7365632E 		.ascii	"sec.bgb\000"
+  22      62676200 
+  23              		.align	2
+  24              	$LC3:
+  25 002c 7365632E 		.ascii	"sec.bgt\000"
+  25      62677400 
+  26              		.align	2
+  27              	$LC4:
+  28 0034 7072652E 		.ascii	"pre.bgt\000"
+  28      62677400 
+  29              		.align	2
+  30              	$LC5:
+  31 003c 1B5B324A 		.ascii	"\033[2J\033[H\000"
+  31      1B5B4800 
+  32 0044 00000000 		.text
+  32      00000000 
+  32      00000000 
+  33              		.align	2
+  34              		.globl	main
+  35              	$LFB3 = .
+  36              		.file 1 "apps/WikiMain.c"
+   0:apps/WikiMain.c **** #include "WikiApp.h"
+   1:apps/WikiMain.c **** #include "vt52.h"
+   2:apps/WikiMain.c **** #include <string.h>
+   3:apps/WikiMain.c **** #ifndef AVR
+   4:apps/WikiMain.c **** #  include <unistd.h>
+   5:apps/WikiMain.c **** #endif
+   6:apps/WikiMain.c **** 
+   7:apps/WikiMain.c **** int main(int argc, char **argv) {
+  37              		.loc 1 8 0
+  38              		.set	nomips16
+  39              		.ent	main
+  41              	main:
+  42              		.frame	$fp,648,$31		# vars= 616, regs= 2/0, args= 16, gp= 8
+  43              		.mask	0xc0000000,-4
+  44              		.fmask	0x00000000,0
+  45              		.set	noreorder
+  46              		.set	nomacro
+  47              		
+  48 0000 78FDBD27 		addiu	$sp,$sp,-648
+  49              	$LCFI0:
+  50 0004 8402BFAF 		sw	$31,644($sp)
+  51              	$LCFI1:
+  52 0008 8002BEAF 		sw	$fp,640($sp)
+  53              	$LCFI2:
+  54 000c 21F0A003 		move	$fp,$sp
+  55              	$LCFI3:
+  56 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  57 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  58 0018 1000BCAF 		.cprestore	16
+  59 001c 8802C4AF 		sw	$4,648($fp)
+  60 0020 8C02C5AF 		sw	$5,652($fp)
+   8:apps/WikiMain.c **** #ifndef AVR
+   9:apps/WikiMain.c ****   if ((argc > 2) && (!strcmp(argv[1], "--chdir"))) {
+  61              		.loc 1 10 0
+  62 0024 8802C28F 		lw	$2,648($fp)
+  63 0028 00000000 		nop
+  64 002c 03004228 		slt	$2,$2,3
+  65 0030 3C004014 		bne	$2,$0,$L2
+  66 0034 00000000 		nop
+  67              	
+  68 0038 8C02C28F 		lw	$2,652($fp)
+  69 003c 00000000 		nop
+  70 0040 04004224 		addiu	$2,$2,4
+  71 0044 0000428C 		lw	$2,0($2)
+  72 0048 00000000 		nop
+  73 004c 21204000 		move	$4,$2
+  74 0050 0000023C 		lui	$2,%hi($LC0)
+  75 0054 00004524 		addiu	$5,$2,%lo($LC0)
+  76 0058 0000828F 		lw	$2,%call16(strcmp)($28)
+  77 005c 00000000 		nop
+  78 0060 21C84000 		move	$25,$2
+  79 0064 09F82003 		jalr	$25
+  80 0068 00000000 		nop
+  81              	
+  82 006c 1000DC8F 		lw	$28,16($fp)
+  83 0070 2C004014 		bne	$2,$0,$L2
+  84 0074 00000000 		nop
+  85              	
+  86              	$LBB2 = .
+  10:apps/WikiMain.c ****     int res = chdir(argv[2]);
+  87              		.loc 1 11 0
+  88 0078 8C02C28F 		lw	$2,652($fp)
+  89 007c 00000000 		nop
+  90 0080 08004224 		addiu	$2,$2,8
+  91 0084 0000428C 		lw	$2,0($2)
+  92 0088 00000000 		nop
+  93 008c 21204000 		move	$4,$2
+  94 0090 0000828F 		lw	$2,%call16(chdir)($28)
+  95 0094 00000000 		nop
+  96 0098 21C84000 		move	$25,$2
+  97 009c 09F82003 		jalr	$25
+  98 00a0 00000000 		nop
+  99              	
+ 100 00a4 1000DC8F 		lw	$28,16($fp)
+ 101 00a8 1800C2AF 		sw	$2,24($fp)
+  11:apps/WikiMain.c ****     if (res) {
+ 102              		.loc 1 12 0
+ 103 00ac 1800C28F 		lw	$2,24($fp)
+ 104 00b0 00000000 		nop
+ 105 00b4 1B004010 		beq	$2,$0,$L2
+ 106 00b8 00000000 		nop
+ 107              	
+  12:apps/WikiMain.c ****       fprintf(stderr, "ERROR: --chdir %s failed\n", argv[2]);
+ 108              		.loc 1 13 0
+ 109 00bc 0000828F 		lw	$2,%got(stderr)($28)
+ 110 00c0 00000000 		nop
+ 111 00c4 0000428C 		lw	$2,0($2)
+ 112 00c8 00000000 		nop
+ 113 00cc 21204000 		move	$4,$2
+ 114 00d0 0000023C 		lui	$2,%hi($LC1)
+ 115 00d4 08004324 		addiu	$3,$2,%lo($LC1)
+ 116 00d8 8C02C28F 		lw	$2,652($fp)
+ 117 00dc 00000000 		nop
+ 118 00e0 08004224 		addiu	$2,$2,8
+ 119 00e4 0000428C 		lw	$2,0($2)
+ 120 00e8 21286000 		move	$5,$3
+ 121 00ec 21304000 		move	$6,$2
+ 122 00f0 0000828F 		lw	$2,%call16(fprintf)($28)
+ 123 00f4 00000000 		nop
+ 124 00f8 21C84000 		move	$25,$2
+ 125 00fc 09F82003 		jalr	$25
+ 126 0100 00000000 		nop
+ 127              	
+ 128 0104 1000DC8F 		lw	$28,16($fp)
+  13:apps/WikiMain.c ****       return -1;
+ 129              		.loc 1 14 0
+ 130 0108 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 131              	$LBE2 = .
+  14:apps/WikiMain.c ****     }
+  15:apps/WikiMain.c ****   }
+  16:apps/WikiMain.c **** #endif
+  17:apps/WikiMain.c ****   PlatformInit();
+  18:apps/WikiMain.c **** 
+  19:apps/WikiMain.c ****   WikiApp wapp;
+  20:apps/WikiMain.c ****   WikiAppInit(&wapp);
+  21:apps/WikiMain.c **** 
+  22:apps/WikiMain.c ****   // preload continuities in database file
+  23:apps/WikiMain.c ****   FileOpenRO("sec.bgb");
+  24:apps/WikiMain.c ****   FileSeek(1574387021);
+  25:apps/WikiMain.c ****   FileOpenRO("sec.bgt");
+  26:apps/WikiMain.c ****   FileSeek(37550590);
+  27:apps/WikiMain.c ****   FileOpenRO("pre.bgt");
+  28:apps/WikiMain.c ****   FileSeek(0xffffffff); // will get truncated to file end
+  29:apps/WikiMain.c **** 
+  30:apps/WikiMain.c ****   int changed = 1;
+  31:apps/WikiMain.c ****   int r = -1;
+  32:apps/WikiMain.c ****   int fullyDrawn = 1;
+  33:apps/WikiMain.c ****   printf(VERASE_SCR);
+  34:apps/WikiMain.c ****   while (1) {
+  35:apps/WikiMain.c ****     if ((r == -1) && (changed || !fullyDrawn)) {
+  36:apps/WikiMain.c ****       fullyDrawn = WikiAppDraw(&wapp);
+  37:apps/WikiMain.c ****       changed = 0;
+  38:apps/WikiMain.c ****     }
+  39:apps/WikiMain.c ****     r = InputCheck();
+  40:apps/WikiMain.c ****     changed |= WikiAppPushEvent(&wapp, r);
+  41:apps/WikiMain.c ****   }
+  42:apps/WikiMain.c ****   return 0;
+  43:apps/WikiMain.c **** }
+ 132              		.loc 1 44 0
+ 133 010c 21E8C003 		move	$sp,$fp
+ 134 0110 8402BF8F 		lw	$31,644($sp)
+ 135 0114 8002BE8F 		lw	$fp,640($sp)
+ 136 0118 8802BD27 		addiu	$sp,$sp,648
+ 137 011c 0800E003 		j	$31
+ 138 0120 00000000 		nop
+ 139              	
+ 140              	$L2:
+  18:apps/WikiMain.c ****   PlatformInit();
+ 141              		.loc 1 18 0
+ 142 0124 0000828F 		lw	$2,%call16(PlatformInit)($28)
+ 143 0128 00000000 		nop
+ 144 012c 21C84000 		move	$25,$2
+ 145 0130 09F82003 		jalr	$25
+ 146 0134 00000000 		nop
+ 147              	
+ 148 0138 1000DC8F 		lw	$28,16($fp)
+  21:apps/WikiMain.c ****   WikiAppInit(&wapp);
+ 149              		.loc 1 21 0
+ 150 013c 2800C227 		addiu	$2,$fp,40
+ 151 0140 21204000 		move	$4,$2
+ 152 0144 0000828F 		lw	$2,%call16(WikiAppInit)($28)
+ 153 0148 00000000 		nop
+ 154 014c 21C84000 		move	$25,$2
+ 155 0150 09F82003 		jalr	$25
+ 156 0154 00000000 		nop
+ 157              	
+ 158 0158 1000DC8F 		lw	$28,16($fp)
+  24:apps/WikiMain.c ****   FileOpenRO("sec.bgb");
+ 159              		.loc 1 24 0
+ 160 015c 0000023C 		lui	$2,%hi($LC2)
+ 161 0160 24004424 		addiu	$4,$2,%lo($LC2)
+ 162 0164 0000828F 		lw	$2,%call16(FileOpenRO)($28)
+ 163 0168 00000000 		nop
+ 164 016c 21C84000 		move	$25,$2
+ 165 0170 09F82003 		jalr	$25
+ 166 0174 00000000 		nop
+ 167              	
+ 168 0178 1000DC8F 		lw	$28,16($fp)
+  25:apps/WikiMain.c ****   FileSeek(1574387021);
+ 169              		.loc 1 25 0
+ 170 017c D75D023C 		li	$2,1574371328			# 0x5dd70000
+ 171 0180 4D3D4434 		ori	$4,$2,0x3d4d
+ 172 0184 0000828F 		lw	$2,%call16(FileSeek)($28)
+ 173 0188 00000000 		nop
+ 174 018c 21C84000 		move	$25,$2
+ 175 0190 09F82003 		jalr	$25
+ 176 0194 00000000 		nop
+ 177              	
+ 178 0198 1000DC8F 		lw	$28,16($fp)
+  26:apps/WikiMain.c ****   FileOpenRO("sec.bgt");
+ 179              		.loc 1 26 0
+ 180 019c 0000023C 		lui	$2,%hi($LC3)
+ 181 01a0 2C004424 		addiu	$4,$2,%lo($LC3)
+ 182 01a4 0000828F 		lw	$2,%call16(FileOpenRO)($28)
+ 183 01a8 00000000 		nop
+ 184 01ac 21C84000 		move	$25,$2
+ 185 01b0 09F82003 		jalr	$25
+ 186 01b4 00000000 		nop
+ 187              	
+ 188 01b8 1000DC8F 		lw	$28,16($fp)
+  27:apps/WikiMain.c ****   FileSeek(37550590);
+ 189              		.loc 1 27 0
+ 190 01bc 3C02023C 		li	$2,37486592			# 0x23c0000
+ 191 01c0 FEF94434 		ori	$4,$2,0xf9fe
+ 192 01c4 0000828F 		lw	$2,%call16(FileSeek)($28)
+ 193 01c8 00000000 		nop
+ 194 01cc 21C84000 		move	$25,$2
+ 195 01d0 09F82003 		jalr	$25
+ 196 01d4 00000000 		nop
+ 197              	
+ 198 01d8 1000DC8F 		lw	$28,16($fp)
+  28:apps/WikiMain.c ****   FileOpenRO("pre.bgt");
+ 199              		.loc 1 28 0
+ 200 01dc 0000023C 		lui	$2,%hi($LC4)
+ 201 01e0 34004424 		addiu	$4,$2,%lo($LC4)
+ 202 01e4 0000828F 		lw	$2,%call16(FileOpenRO)($28)
+ 203 01e8 00000000 		nop
+ 204 01ec 21C84000 		move	$25,$2
+ 205 01f0 09F82003 		jalr	$25
+ 206 01f4 00000000 		nop
+ 207              	
+ 208 01f8 1000DC8F 		lw	$28,16($fp)
+  29:apps/WikiMain.c ****   FileSeek(0xffffffff); // will get truncated to file end
+ 209              		.loc 1 29 0
+ 210 01fc FFFF0424 		li	$4,-1			# 0xffffffffffffffff
+ 211 0200 0000828F 		lw	$2,%call16(FileSeek)($28)
+ 212 0204 00000000 		nop
+ 213 0208 21C84000 		move	$25,$2
+ 214 020c 09F82003 		jalr	$25
+ 215 0210 00000000 		nop
+ 216              	
+ 217 0214 1000DC8F 		lw	$28,16($fp)
+  31:apps/WikiMain.c ****   int changed = 1;
+ 218              		.loc 1 31 0
+ 219 0218 01000224 		li	$2,1			# 0x1
+ 220 021c 2400C2AF 		sw	$2,36($fp)
+  32:apps/WikiMain.c ****   int r = -1;
+ 221              		.loc 1 32 0
+ 222 0220 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 223 0224 2000C2AF 		sw	$2,32($fp)
+  33:apps/WikiMain.c ****   int fullyDrawn = 1;
+ 224              		.loc 1 33 0
+ 225 0228 01000224 		li	$2,1			# 0x1
+ 226 022c 1C00C2AF 		sw	$2,28($fp)
+  34:apps/WikiMain.c ****   printf(VERASE_SCR);
+ 227              		.loc 1 34 0
+ 228 0230 0000023C 		lui	$2,%hi($LC5)
+ 229 0234 3C004224 		addiu	$2,$2,%lo($LC5)
+ 230 0238 21204000 		move	$4,$2
+ 231 023c 0000828F 		lw	$2,%call16(printf)($28)
+ 232 0240 00000000 		nop
+ 233 0244 21C84000 		move	$25,$2
+ 234 0248 09F82003 		jalr	$25
+ 235 024c 00000000 		nop
+ 236              	
+ 237 0250 1000DC8F 		lw	$28,16($fp)
+ 238              	$L5:
+  36:apps/WikiMain.c ****     if ((r == -1) && (changed || !fullyDrawn)) {
+ 239              		.loc 1 36 0
+ 240 0254 2000C38F 		lw	$3,32($fp)
+ 241 0258 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 242 025c 13006214 		bne	$3,$2,$L3
+ 243 0260 00000000 		nop
+ 244              	
+ 245 0264 2400C28F 		lw	$2,36($fp)
+ 246 0268 00000000 		nop
+ 247 026c 05004014 		bne	$2,$0,$L4
+ 248 0270 00000000 		nop
+ 249              	
+ 250 0274 1C00C28F 		lw	$2,28($fp)
+ 251 0278 00000000 		nop
+ 252 027c 0B004014 		bne	$2,$0,$L3
+ 253 0280 00000000 		nop
+ 254              	
+ 255              	$L4:
+  37:apps/WikiMain.c ****       fullyDrawn = WikiAppDraw(&wapp);
+ 256              		.loc 1 37 0
+ 257 0284 2800C227 		addiu	$2,$fp,40
+ 258 0288 21204000 		move	$4,$2
+ 259 028c 0000828F 		lw	$2,%call16(WikiAppDraw)($28)
+ 260 0290 00000000 		nop
+ 261 0294 21C84000 		move	$25,$2
+ 262 0298 09F82003 		jalr	$25
+ 263 029c 00000000 		nop
+ 264              	
+ 265 02a0 1000DC8F 		lw	$28,16($fp)
+ 266 02a4 1C00C2AF 		sw	$2,28($fp)
+  38:apps/WikiMain.c ****       changed = 0;
+ 267              		.loc 1 38 0
+ 268 02a8 2400C0AF 		sw	$0,36($fp)
+ 269              	$L3:
+  40:apps/WikiMain.c ****     r = InputCheck();
+ 270              		.loc 1 40 0
+ 271 02ac 0000828F 		lw	$2,%call16(InputCheck)($28)
+ 272 02b0 00000000 		nop
+ 273 02b4 21C84000 		move	$25,$2
+ 274 02b8 09F82003 		jalr	$25
+ 275 02bc 00000000 		nop
+ 276              	
+ 277 02c0 1000DC8F 		lw	$28,16($fp)
+ 278 02c4 2000C2AF 		sw	$2,32($fp)
+  41:apps/WikiMain.c ****     changed |= WikiAppPushEvent(&wapp, r);
+ 279              		.loc 1 41 0
+ 280 02c8 2800C227 		addiu	$2,$fp,40
+ 281 02cc 21204000 		move	$4,$2
+ 282 02d0 2000C58F 		lw	$5,32($fp)
+ 283 02d4 0000828F 		lw	$2,%call16(WikiAppPushEvent)($28)
+ 284 02d8 00000000 		nop
+ 285 02dc 21C84000 		move	$25,$2
+ 286 02e0 09F82003 		jalr	$25
+ 287 02e4 00000000 		nop
+ 288              	
+ 289 02e8 1000DC8F 		lw	$28,16($fp)
+ 290 02ec 2400C38F 		lw	$3,36($fp)
+ 291 02f0 00000000 		nop
+ 292 02f4 25106200 		or	$2,$3,$2
+ 293 02f8 2400C2AF 		sw	$2,36($fp)
+  42:apps/WikiMain.c ****   }
+ 294              		.loc 1 42 0
+ 295 02fc D5FF0010 		b	$L5
+ 296 0300 00000000 		nop
+ 297              	
+ 298              		.set	macro
+ 299              		.set	reorder
+ 300              		.end	main
+ 301              	$LFE3:
+ 343              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 apps/WikiMain.c
+     /tmp/ccmE2Sjm.s:41     .text:0000000000000000 main
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+strcmp
+chdir
+stderr
+fprintf
+PlatformInit
+WikiAppInit
+FileOpenRO
+FileSeek
+printf
+WikiAppDraw
+InputCheck
+WikiAppPushEvent

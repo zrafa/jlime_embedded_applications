@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+Import("env","ARCH", 'ObjCopyHexCmd', 'HiLibs', 'USE_FAT_IMAGE', 'USE_KEYBOARD')
+
+env.Append(CCFLAGS = '-D_USE_LSEEK -D_WRITE_FUNC')
+
+if ARCH != "avr":
+  SRC=["PosixPlatform.c", "Platform.c", "vt52.c"]
+  if USE_FAT_IMAGE:
+    SRC.append(["FilePFat.c", "../pfatfs-stdio/diskio.c", "../pfatfs-stdio/pff.c"])
+  else:
+    SRC.append("FileStdio.c")
+  env.Library(target="Platform", source=SRC)
+else:
+  SRC=["TvikiaPlatform.c", "Platform.c", "ps2.c", "Keyboard.c", "vt52.c",'FilePFat.c', "TvikiaSDCard.c", "../3rdParty/pfatfs/avr/mmc.c", "../3rdParty/pfatfs/avr/pff.c"]
+  env.Library(target="Platform", source=SRC)

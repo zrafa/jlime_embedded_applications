@@ -1,0 +1,2829 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.rdata
+  14              		.align	2
+  15              	$LC0:
+  16 0000 25782578 		.ascii	"%x%x\000"
+  16      00
+  17              		.text
+  18              		.align	2
+  19              		.globl	PrintHexBlock
+  20              	$LFB3 = .
+  21              		.file 1 "tests/test_WikiApp.c"
+   0:tests/test_WikiApp.c **** #include <string.h>
+   1:tests/test_WikiApp.c **** #include "WikiApp.h"
+   2:tests/test_WikiApp.c **** #include "vt52.h"
+   3:tests/test_WikiApp.c **** #include "crc32.h"
+   4:tests/test_WikiApp.c **** #include "bgUtil2.h"
+   5:tests/test_WikiApp.c **** 
+   6:tests/test_WikiApp.c **** void PrintHexBlock(unsigned char *buf, int buflen) {
+  22              		.loc 1 7 0
+  23              		.set	nomips16
+  24              		.ent	PrintHexBlock
+  26              	PrintHexBlock:
+  27              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+  28              		.mask	0xc0000000,-4
+  29              		.fmask	0x00000000,0
+  30              		.set	noreorder
+  31              		.set	nomacro
+  32              		
+  33 0000 D8FFBD27 		addiu	$sp,$sp,-40
+  34              	$LCFI0:
+  35 0004 2400BFAF 		sw	$31,36($sp)
+  36              	$LCFI1:
+  37 0008 2000BEAF 		sw	$fp,32($sp)
+  38              	$LCFI2:
+  39 000c 21F0A003 		move	$fp,$sp
+  40              	$LCFI3:
+  41 0010 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+  42 0014 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+  43 0018 1000BCAF 		.cprestore	16
+  44 001c 2800C4AF 		sw	$4,40($fp)
+  45 0020 2C00C5AF 		sw	$5,44($fp)
+  46              	$LBB2 = .
+   7:tests/test_WikiApp.c ****   for (int i=1; i<buflen; ++i) {
+  47              		.loc 1 8 0
+  48 0024 01000224 		li	$2,1			# 0x1
+  49 0028 1800C2AF 		sw	$2,24($fp)
+  50 002c 2B000010 		b	$L2
+  51 0030 00000000 		nop
+  52              	
+  53              	$L4:
+   8:tests/test_WikiApp.c ****     printf_P(PSTR("%x%x"), (unsigned int) (buf[i] >> 4) & 0xf, (unsigned int) buf[i] & 0xf);
+  54              		.loc 1 9 0
+  55 0034 0000023C 		lui	$2,%hi($LC0)
+  56 0038 00004424 		addiu	$4,$2,%lo($LC0)
+  57 003c 1800C28F 		lw	$2,24($fp)
+  58 0040 2800C38F 		lw	$3,40($fp)
+  59 0044 00000000 		nop
+  60 0048 21106200 		addu	$2,$3,$2
+  61 004c 00004290 		lbu	$2,0($2)
+  62 0050 00000000 		nop
+  63 0054 02110200 		srl	$2,$2,4
+  64 0058 FF004230 		andi	$2,$2,0x00ff
+  65 005c 21184000 		move	$3,$2
+  66 0060 1800C28F 		lw	$2,24($fp)
+  67 0064 2800C58F 		lw	$5,40($fp)
+  68 0068 00000000 		nop
+  69 006c 2110A200 		addu	$2,$5,$2
+  70 0070 00004290 		lbu	$2,0($2)
+  71 0074 00000000 		nop
+  72 0078 0F004230 		andi	$2,$2,0xf
+  73 007c 21286000 		move	$5,$3
+  74 0080 21304000 		move	$6,$2
+  75 0084 0000828F 		lw	$2,%call16(printf)($28)
+  76 0088 00000000 		nop
+  77 008c 21C84000 		move	$25,$2
+  78 0090 09F82003 		jalr	$25
+  79 0094 00000000 		nop
+  80              	
+  81 0098 1000DC8F 		lw	$28,16($fp)
+   9:tests/test_WikiApp.c ****     if (!(i % 16))
+  82              		.loc 1 10 0
+  83 009c 1800C28F 		lw	$2,24($fp)
+  84 00a0 00000000 		nop
+  85 00a4 0F004230 		andi	$2,$2,0xf
+  86 00a8 08004014 		bne	$2,$0,$L3
+  87 00ac 00000000 		nop
+  88              	
+  10:tests/test_WikiApp.c ****       OutC('\n');
+  89              		.loc 1 11 0
+  90 00b0 0A000424 		li	$4,10			# 0xa
+  91 00b4 0000828F 		lw	$2,%call16(OutC)($28)
+  92 00b8 00000000 		nop
+  93 00bc 21C84000 		move	$25,$2
+  94 00c0 09F82003 		jalr	$25
+  95 00c4 00000000 		nop
+  96              	
+  97 00c8 1000DC8F 		lw	$28,16($fp)
+  98              	$L3:
+   8:tests/test_WikiApp.c ****     printf_P(PSTR("%x%x"), (unsigned int) (buf[i] >> 4) & 0xf, (unsigned int) buf[i] & 0xf);
+  99              		.loc 1 8 0
+ 100 00cc 1800C28F 		lw	$2,24($fp)
+ 101 00d0 00000000 		nop
+ 102 00d4 01004224 		addiu	$2,$2,1
+ 103 00d8 1800C2AF 		sw	$2,24($fp)
+ 104              	$L2:
+ 105 00dc 1800C38F 		lw	$3,24($fp)
+ 106 00e0 2C00C28F 		lw	$2,44($fp)
+ 107 00e4 00000000 		nop
+ 108 00e8 2A106200 		slt	$2,$3,$2
+ 109 00ec D1FF4014 		bne	$2,$0,$L4
+ 110 00f0 00000000 		nop
+ 111              	
+ 112              	$LBE2 = .
+  11:tests/test_WikiApp.c ****   }
+  12:tests/test_WikiApp.c ****   OutC('\n');
+ 113              		.loc 1 13 0
+ 114 00f4 0A000424 		li	$4,10			# 0xa
+ 115 00f8 0000828F 		lw	$2,%call16(OutC)($28)
+ 116 00fc 00000000 		nop
+ 117 0100 21C84000 		move	$25,$2
+ 118 0104 09F82003 		jalr	$25
+ 119 0108 00000000 		nop
+ 120              	
+ 121 010c 1000DC8F 		lw	$28,16($fp)
+  13:tests/test_WikiApp.c **** }
+ 122              		.loc 1 14 0
+ 123 0110 21E8C003 		move	$sp,$fp
+ 124 0114 2400BF8F 		lw	$31,36($sp)
+ 125 0118 2000BE8F 		lw	$fp,32($sp)
+ 126 011c 2800BD27 		addiu	$sp,$sp,40
+ 127 0120 0800E003 		j	$31
+ 128 0124 00000000 		nop
+ 129              	
+ 130              		.set	macro
+ 131              		.set	reorder
+ 132              		.end	PrintHexBlock
+ 133              	$LFE3:
+ 135              		.rdata
+ 136 0005 000000   		.align	2
+ 137              	$LC1:
+ 138 0008 74657374 		.ascii	"tests/test_WikiApp.c\000"
+ 138      732F7465 
+ 138      73745F57 
+ 138      696B6941 
+ 138      70702E63 
+ 139 001d 000000   		.align	2
+ 140              	$LC2:
+ 141 0020 3000     		.ascii	"0\000"
+ 142 0022 0000     		.align	2
+ 143              	$LC3:
+ 144 0024 72657320 		.ascii	"res == sizeof(uint64_t)\000"
+ 144      3D3D2073 
+ 144      697A656F 
+ 144      66287569 
+ 144      6E743634 
+ 145              		.text
+ 146              		.align	2
+ 147              		.globl	SeekAndRead
+ 148              	$LFB4 = .
+  14:tests/test_WikiApp.c **** 
+  15:tests/test_WikiApp.c **** uint64_t SeekAndRead(uint32_t offset) {
+ 149              		.loc 1 16 0
+ 150              		.set	nomips16
+ 151              		.ent	SeekAndRead
+ 153              	SeekAndRead:
+ 154              		.frame	$fp,48,$31		# vars= 16, regs= 2/0, args= 16, gp= 8
+ 155              		.mask	0xc0000000,-4
+ 156              		.fmask	0x00000000,0
+ 157              		.set	noreorder
+ 158              		.set	nomacro
+ 159              		
+ 160 0128 D0FFBD27 		addiu	$sp,$sp,-48
+ 161              	$LCFI4:
+ 162 012c 2C00BFAF 		sw	$31,44($sp)
+ 163              	$LCFI5:
+ 164 0130 2800BEAF 		sw	$fp,40($sp)
+ 165              	$LCFI6:
+ 166 0134 21F0A003 		move	$fp,$sp
+ 167              	$LCFI7:
+ 168 0138 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 169 013c 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 170 0140 1000BCAF 		.cprestore	16
+ 171 0144 3000C4AF 		sw	$4,48($fp)
+  16:tests/test_WikiApp.c ****   FileSeek(offset);
+ 172              		.loc 1 17 0
+ 173 0148 3000C48F 		lw	$4,48($fp)
+ 174 014c 0000828F 		lw	$2,%call16(FileSeek)($28)
+ 175 0150 00000000 		nop
+ 176 0154 21C84000 		move	$25,$2
+ 177 0158 09F82003 		jalr	$25
+ 178 015c 00000000 		nop
+ 179              	
+ 180 0160 1000DC8F 		lw	$28,16($fp)
+ 181 0164 00000000 		nop
+  17:tests/test_WikiApp.c ****   ERRORassert();
+ 182              		.loc 1 18 0
+ 183 0168 0000828F 		lw	$2,%got(errorMsg)($28)
+ 184 016c 00000000 		nop
+ 185 0170 0000428C 		lw	$2,0($2)
+ 186 0174 00000000 		nop
+ 187 0178 18004010 		beq	$2,$0,$L7
+ 188 017c 00000000 		nop
+ 189              	
+ 190 0180 0000023C 		lui	$2,%hi(__func__.2405)
+ 191 0184 DC024424 		addiu	$4,$2,%lo(__func__.2405)
+ 192 0188 0000023C 		lui	$2,%hi($LC1)
+ 193 018c 08004524 		addiu	$5,$2,%lo($LC1)
+ 194 0190 12000624 		li	$6,18			# 0x12
+ 195 0194 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 196 0198 00000000 		nop
+ 197 019c 21C84000 		move	$25,$2
+ 198 01a0 09F82003 		jalr	$25
+ 199 01a4 00000000 		nop
+ 200              	
+ 201 01a8 1000DC8F 		lw	$28,16($fp)
+ 202 01ac 0000023C 		lui	$2,%hi($LC2)
+ 203 01b0 20004424 		addiu	$4,$2,%lo($LC2)
+ 204 01b4 0000023C 		lui	$2,%hi($LC1)
+ 205 01b8 08004524 		addiu	$5,$2,%lo($LC1)
+ 206 01bc 12000624 		li	$6,18			# 0x12
+ 207 01c0 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2406)
+ 208 01c4 E8024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2406)
+ 209 01c8 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 210 01cc 00000000 		nop
+ 211 01d0 21C84000 		move	$25,$2
+ 212 01d4 09F82003 		jalr	$25
+ 213 01d8 00000000 		nop
+ 214              	
+ 215              	$L7:
+  18:tests/test_WikiApp.c ****   uint64_t i;
+  19:tests/test_WikiApp.c ****   int res = FileRead((char *) &i, sizeof(uint64_t));
+ 216              		.loc 1 20 0
+ 217 01dc 2000C227 		addiu	$2,$fp,32
+ 218 01e0 21204000 		move	$4,$2
+ 219 01e4 08000524 		li	$5,8			# 0x8
+ 220 01e8 0000828F 		lw	$2,%call16(FileRead)($28)
+ 221 01ec 00000000 		nop
+ 222 01f0 21C84000 		move	$25,$2
+ 223 01f4 09F82003 		jalr	$25
+ 224 01f8 00000000 		nop
+ 225              	
+ 226 01fc 1000DC8F 		lw	$28,16($fp)
+ 227 0200 1800C2AF 		sw	$2,24($fp)
+  20:tests/test_WikiApp.c ****   ERRORassert();
+ 228              		.loc 1 21 0
+ 229 0204 0000828F 		lw	$2,%got(errorMsg)($28)
+ 230 0208 00000000 		nop
+ 231 020c 0000428C 		lw	$2,0($2)
+ 232 0210 00000000 		nop
+ 233 0214 18004010 		beq	$2,$0,$L8
+ 234 0218 00000000 		nop
+ 235              	
+ 236 021c 0000023C 		lui	$2,%hi(__func__.2405)
+ 237 0220 DC024424 		addiu	$4,$2,%lo(__func__.2405)
+ 238 0224 0000023C 		lui	$2,%hi($LC1)
+ 239 0228 08004524 		addiu	$5,$2,%lo($LC1)
+ 240 022c 15000624 		li	$6,21			# 0x15
+ 241 0230 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 242 0234 00000000 		nop
+ 243 0238 21C84000 		move	$25,$2
+ 244 023c 09F82003 		jalr	$25
+ 245 0240 00000000 		nop
+ 246              	
+ 247 0244 1000DC8F 		lw	$28,16($fp)
+ 248 0248 0000023C 		lui	$2,%hi($LC2)
+ 249 024c 20004424 		addiu	$4,$2,%lo($LC2)
+ 250 0250 0000023C 		lui	$2,%hi($LC1)
+ 251 0254 08004524 		addiu	$5,$2,%lo($LC1)
+ 252 0258 15000624 		li	$6,21			# 0x15
+ 253 025c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2406)
+ 254 0260 E8024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2406)
+ 255 0264 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 256 0268 00000000 		nop
+ 257 026c 21C84000 		move	$25,$2
+ 258 0270 09F82003 		jalr	$25
+ 259 0274 00000000 		nop
+ 260              	
+ 261              	$L8:
+  21:tests/test_WikiApp.c ****   assert(res == sizeof(uint64_t));
+ 262              		.loc 1 22 0
+ 263 0278 1800C38F 		lw	$3,24($fp)
+ 264 027c 08000224 		li	$2,8			# 0x8
+ 265 0280 0D006210 		beq	$3,$2,$L9
+ 266 0284 00000000 		nop
+ 267              	
+ 268 0288 0000023C 		lui	$2,%hi($LC3)
+ 269 028c 24004424 		addiu	$4,$2,%lo($LC3)
+ 270 0290 0000023C 		lui	$2,%hi($LC1)
+ 271 0294 08004524 		addiu	$5,$2,%lo($LC1)
+ 272 0298 16000624 		li	$6,22			# 0x16
+ 273 029c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2406)
+ 274 02a0 E8024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2406)
+ 275 02a4 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 276 02a8 00000000 		nop
+ 277 02ac 21C84000 		move	$25,$2
+ 278 02b0 09F82003 		jalr	$25
+ 279 02b4 00000000 		nop
+ 280              	
+ 281              	$L9:
+  22:tests/test_WikiApp.c ****   return i;
+ 282              		.loc 1 23 0
+ 283 02b8 2000C28F 		lw	$2,32($fp)
+ 284 02bc 2400C38F 		lw	$3,36($fp)
+  23:tests/test_WikiApp.c **** }
+ 285              		.loc 1 24 0
+ 286 02c0 21E8C003 		move	$sp,$fp
+ 287 02c4 2C00BF8F 		lw	$31,44($sp)
+ 288 02c8 2800BE8F 		lw	$fp,40($sp)
+ 289 02cc 3000BD27 		addiu	$sp,$sp,48
+ 290 02d0 0800E003 		j	$31
+ 291 02d4 00000000 		nop
+ 292              	
+ 293              		.set	macro
+ 294              		.set	reorder
+ 295              		.end	SeekAndRead
+ 296              	$LFE4:
+ 298              		.rdata
+ 299              		.align	2
+ 300              	$LC4:
+ 301 003c 54657374 		.ascii	"TestLargeSeek.\000"
+ 301      4C617267 
+ 301      65536565 
+ 301      6B2E00
+ 302 004b 00       		.align	2
+ 303              	$LC5:
+ 304 004c 7365632E 		.ascii	"sec.bgb\000"
+ 304      62676200 
+ 305              		.align	2
+ 306              	$LC6:
+ 307 0054 256C750A 		.ascii	"%lu\012\000"
+ 307      00
+ 308 0059 000000   		.align	2
+ 309              	$LC7:
+ 310 005c 20426164 		.ascii	" Bad match \000"
+ 310      206D6174 
+ 310      63682000 
+ 311              		.align	2
+ 312              	$LC8:
+ 313 0068 213D00   		.ascii	"!=\000"
+ 314 006b 00       		.align	2
+ 315              	$LC9:
+ 316 006c 0A00     		.ascii	"\012\000"
+ 317 006e 0000     		.align	2
+ 318              	$LC10:
+ 319 0070 206D6174 		.ascii	" match \000"
+ 319      63682000 
+ 320              		.align	2
+ 321              	$LC11:
+ 322 0078 3D3D00   		.ascii	"==\000"
+ 323 007b 00       		.align	2
+ 324              	$LC12:
+ 325 007c 20232052 		.ascii	" # Reads=\000"
+ 325      65616473 
+ 325      3D00
+ 326 0086 0000     		.align	2
+ 327              	$LC13:
+ 328 0088 75696E74 		.ascii	"uint32_t samples[] = {\000"
+ 328      33325F74 
+ 328      2073616D 
+ 328      706C6573 
+ 328      5B5D203D 
+ 329 009f 00       		.align	2
+ 330              	$LC14:
+ 331 00a0 30782530 		.ascii	"0x%08x, \000"
+ 331      38782C20 
+ 331      00
+ 332 00a9 000000   		.align	2
+ 333              	$LC15:
+ 334 00ac 7D3B0A00 		.ascii	"};\012\000"
+ 335              		.text
+ 336              		.align	2
+ 337              		.globl	TestLargeSeek
+ 338              	$LFB5 = .
+  24:tests/test_WikiApp.c **** 
+  25:tests/test_WikiApp.c **** void TestLargeSeek() {
+ 339              		.loc 1 26 0
+ 340              		.set	nomips16
+ 341              		.ent	TestLargeSeek
+ 343              	TestLargeSeek:
+ 344              		.frame	$fp,224,$31		# vars= 160, regs= 10/0, args= 16, gp= 8
+ 345              		.mask	0xc0ff0000,-4
+ 346              		.fmask	0x00000000,0
+ 347              		.set	noreorder
+ 348              		.set	nomacro
+ 349              		
+ 350 02d8 20FFBD27 		addiu	$sp,$sp,-224
+ 351              	$LCFI8:
+ 352 02dc DC00BFAF 		sw	$31,220($sp)
+ 353              	$LCFI9:
+ 354 02e0 D800BEAF 		sw	$fp,216($sp)
+ 355              	$LCFI10:
+ 356 02e4 D400B7AF 		sw	$23,212($sp)
+ 357              	$LCFI11:
+ 358 02e8 D000B6AF 		sw	$22,208($sp)
+ 359              	$LCFI12:
+ 360 02ec CC00B5AF 		sw	$21,204($sp)
+ 361              	$LCFI13:
+ 362 02f0 C800B4AF 		sw	$20,200($sp)
+ 363              	$LCFI14:
+ 364 02f4 C400B3AF 		sw	$19,196($sp)
+ 365              	$LCFI15:
+ 366 02f8 C000B2AF 		sw	$18,192($sp)
+ 367              	$LCFI16:
+ 368 02fc BC00B1AF 		sw	$17,188($sp)
+ 369              	$LCFI17:
+ 370 0300 B800B0AF 		sw	$16,184($sp)
+ 371              	$LCFI18:
+ 372 0304 21F0A003 		move	$fp,$sp
+ 373              	$LCFI19:
+ 374 0308 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 375 030c 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 376 0310 1000BCAF 		.cprestore	16
+ 377              		.loc 1 26 0
+ 378 0314 2110A003 		move	$2,$sp
+ 379 0318 9000C2AF 		sw	$2,144($fp)
+  26:tests/test_WikiApp.c ****   OutP("TestLargeSeek.");
+ 380              		.loc 1 27 0
+ 381 031c 0000023C 		lui	$2,%hi($LC4)
+ 382 0320 3C004424 		addiu	$4,$2,%lo($LC4)
+ 383 0324 0000828F 		lw	$2,%call16(OutS)($28)
+ 384 0328 00000000 		nop
+ 385 032c 21C84000 		move	$25,$2
+ 386 0330 09F82003 		jalr	$25
+ 387 0334 00000000 		nop
+ 388              	
+ 389 0338 1000DC8F 		lw	$28,16($fp)
+  27:tests/test_WikiApp.c **** 
+  28:tests/test_WikiApp.c ****   FileOpenRO("sec.bgb"); //800Mbyte+
+ 390              		.loc 1 29 0
+ 391 033c 0000023C 		lui	$2,%hi($LC5)
+ 392 0340 4C004424 		addiu	$4,$2,%lo($LC5)
+ 393 0344 0000828F 		lw	$2,%call16(FileOpenRO)($28)
+ 394 0348 00000000 		nop
+ 395 034c 21C84000 		move	$25,$2
+ 396 0350 09F82003 		jalr	$25
+ 397 0354 00000000 		nop
+ 398              	
+ 399 0358 1000DC8F 		lw	$28,16($fp)
+ 400 035c 00000000 		nop
+  29:tests/test_WikiApp.c ****   ERRORassert();
+ 401              		.loc 1 30 0
+ 402 0360 0000828F 		lw	$2,%got(errorMsg)($28)
+ 403 0364 00000000 		nop
+ 404 0368 0000428C 		lw	$2,0($2)
+ 405 036c 00000000 		nop
+ 406 0370 18004010 		beq	$2,$0,$L12
+ 407 0374 00000000 		nop
+ 408              	
+ 409 0378 0000023C 		lui	$2,%hi(__func__.2422)
+ 410 037c 60024424 		addiu	$4,$2,%lo(__func__.2422)
+ 411 0380 0000023C 		lui	$2,%hi($LC1)
+ 412 0384 08004524 		addiu	$5,$2,%lo($LC1)
+ 413 0388 1E000624 		li	$6,30			# 0x1e
+ 414 038c 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 415 0390 00000000 		nop
+ 416 0394 21C84000 		move	$25,$2
+ 417 0398 09F82003 		jalr	$25
+ 418 039c 00000000 		nop
+ 419              	
+ 420 03a0 1000DC8F 		lw	$28,16($fp)
+ 421 03a4 0000023C 		lui	$2,%hi($LC2)
+ 422 03a8 20004424 		addiu	$4,$2,%lo($LC2)
+ 423 03ac 0000023C 		lui	$2,%hi($LC1)
+ 424 03b0 08004524 		addiu	$5,$2,%lo($LC1)
+ 425 03b4 1E000624 		li	$6,30			# 0x1e
+ 426 03b8 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2423)
+ 427 03bc 70024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2423)
+ 428 03c0 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 429 03c4 00000000 		nop
+ 430 03c8 21C84000 		move	$25,$2
+ 431 03cc 09F82003 		jalr	$25
+ 432 03d0 00000000 		nop
+ 433              	
+ 434              	$L12:
+  30:tests/test_WikiApp.c **** 
+  31:tests/test_WikiApp.c ****   const int nsample=23;
+ 435              		.loc 1 32 0
+ 436 03d4 17000224 		li	$2,23			# 0x17
+ 437 03d8 2800C2AF 		sw	$2,40($fp)
+  32:tests/test_WikiApp.c ****   uint32_t samples[] = {0x63612072, 0x70206120, 0x61747365, 0x6e45202e, 0x6f697461, 0x34312f70, 0x4
+ 438              		.loc 1 33 0
+ 439 03dc 0000023C 		lui	$2,%hi(C.8.2440)
+ 440 03e0 3400C427 		addiu	$4,$fp,52
+ 441 03e4 80024324 		addiu	$3,$2,%lo(C.8.2440)
+ 442 03e8 5C000224 		li	$2,92			# 0x5c
+ 443 03ec 21286000 		move	$5,$3
+ 444 03f0 21304000 		move	$6,$2
+ 445 03f4 0000828F 		lw	$2,%call16(memcpy)($28)
+ 446 03f8 00000000 		nop
+ 447 03fc 21C84000 		move	$25,$2
+ 448 0400 09F82003 		jalr	$25
+ 449 0404 00000000 		nop
+ 450              	
+ 451 0408 1000DC8F 		lw	$28,16($fp)
+  33:tests/test_WikiApp.c ****   uint32_t samples2[nsample];
+ 452              		.loc 1 34 0
+ 453 040c 2800C28F 		lw	$2,40($fp)
+ 454 0410 00000000 		nop
+ 455 0414 FFFF4224 		addiu	$2,$2,-1
+ 456 0418 3000C2AF 		sw	$2,48($fp)
+ 457 041c 2800C28F 		lw	$2,40($fp)
+ 458 0420 00000000 		nop
+ 459 0424 21904000 		move	$18,$2
+ 460 0428 21980000 		move	$19,$0
+ 461 042c FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 462 0430 24104202 		and	$2,$18,$2
+ 463 0434 9800C2AF 		sw	$2,152($fp)
+ 464 0438 0F006232 		andi	$2,$19,0xf
+ 465 043c 9C00C2AF 		sw	$2,156($fp)
+ 466 0440 9800D28F 		lw	$18,152($fp)
+ 467 0444 9C00D38F 		lw	$19,156($fp)
+ 468 0448 C2161200 		srl	$2,$18,27
+ 469 044c 40B91300 		sll	$23,$19,5
+ 470 0450 25B85700 		or	$23,$2,$23
+ 471 0454 40B11200 		sll	$22,$18,5
+ 472 0458 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 473 045c 2410C202 		and	$2,$22,$2
+ 474 0460 A000C2AF 		sw	$2,160($fp)
+ 475 0464 0F00F932 		andi	$25,$23,0xf
+ 476 0468 A400D9AF 		sw	$25,164($fp)
+ 477 046c A000D68F 		lw	$22,160($fp)
+ 478 0470 A400D78F 		lw	$23,164($fp)
+ 479 0474 2800C28F 		lw	$2,40($fp)
+ 480 0478 00000000 		nop
+ 481 047c 21804000 		move	$16,$2
+ 482 0480 21880000 		move	$17,$0
+ 483 0484 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 484 0488 24100202 		and	$2,$16,$2
+ 485 048c A800C2AF 		sw	$2,168($fp)
+ 486 0490 0F002232 		andi	$2,$17,0xf
+ 487 0494 AC00C2AF 		sw	$2,172($fp)
+ 488 0498 A800D08F 		lw	$16,168($fp)
+ 489 049c AC00D18F 		lw	$17,172($fp)
+ 490 04a0 C2161000 		srl	$2,$16,27
+ 491 04a4 40A91100 		sll	$21,$17,5
+ 492 04a8 25A85500 		or	$21,$2,$21
+ 493 04ac 40A11000 		sll	$20,$16,5
+ 494 04b0 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 495 04b4 24108202 		and	$2,$20,$2
+ 496 04b8 B000C2AF 		sw	$2,176($fp)
+ 497 04bc 0F00B932 		andi	$25,$21,0xf
+ 498 04c0 B400D9AF 		sw	$25,180($fp)
+ 499 04c4 B000D48F 		lw	$20,176($fp)
+ 500 04c8 B400D58F 		lw	$21,180($fp)
+ 501 04cc 2800C28F 		lw	$2,40($fp)
+ 502 04d0 00000000 		nop
+ 503 04d4 80100200 		sll	$2,$2,2
+ 504 04d8 07004224 		addiu	$2,$2,7
+ 505 04dc 07004224 		addiu	$2,$2,7
+ 506 04e0 C2100200 		srl	$2,$2,3
+ 507 04e4 C0100200 		sll	$2,$2,3
+ 508 04e8 23E8A203 		subu	$sp,$sp,$2
+ 509 04ec 1000A227 		addiu	$2,$sp,16
+ 510 04f0 07004224 		addiu	$2,$2,7
+ 511 04f4 C2100200 		srl	$2,$2,3
+ 512 04f8 C0100200 		sll	$2,$2,3
+ 513 04fc 2C00C2AF 		sw	$2,44($fp)
+  34:tests/test_WikiApp.c **** 
+  35:tests/test_WikiApp.c ****   // warm continuity record 
+  36:tests/test_WikiApp.c ****   printf("%lu\n", 128LU << 22LU);
+ 514              		.loc 1 37 0
+ 515 0500 0000023C 		lui	$2,%hi($LC6)
+ 516 0504 54004224 		addiu	$2,$2,%lo($LC6)
+ 517 0508 21204000 		move	$4,$2
+ 518 050c 0020053C 		li	$5,536870912			# 0x20000000
+ 519 0510 0000828F 		lw	$2,%call16(printf)($28)
+ 520 0514 00000000 		nop
+ 521 0518 21C84000 		move	$25,$2
+ 522 051c 09F82003 		jalr	$25
+ 523 0520 00000000 		nop
+ 524              	
+ 525 0524 1000DC8F 		lw	$28,16($fp)
+  37:tests/test_WikiApp.c ****   SeekAndRead(128LU << 22);
+ 526              		.loc 1 38 0
+ 527 0528 0020043C 		li	$4,536870912			# 0x20000000
+ 528              		.option	pic0
+ 529 052c 0000000C 		jal	SeekAndRead
+ 530 0530 00000000 		nop
+ 531              	
+ 532              		.option	pic2
+ 533 0534 1000DC8F 		lw	$28,16($fp)
+  38:tests/test_WikiApp.c ****   uint32_t a=128;
+ 534              		.loc 1 39 0
+ 535 0538 80000224 		li	$2,128			# 0x80
+ 536 053c 2400C2AF 		sw	$2,36($fp)
+ 537              	$LBB3 = .
+  39:tests/test_WikiApp.c ****   for (int i=0; i<nsample; ++i) {
+ 538              		.loc 1 40 0
+ 539 0540 2000C0AF 		sw	$0,32($fp)
+ 540 0544 BF000010 		b	$L13
+ 541 0548 00000000 		nop
+ 542              	
+ 543              	$L16:
+ 544              	$LBB4 = .
+  40:tests/test_WikiApp.c ****     uint32_t readCount = FileSectorReadCount();
+ 545              		.loc 1 41 0
+ 546 054c 0000828F 		lw	$2,%call16(FileSectorReadCount)($28)
+ 547 0550 00000000 		nop
+ 548 0554 21C84000 		move	$25,$2
+ 549 0558 09F82003 		jalr	$25
+ 550 055c 00000000 		nop
+ 551              	
+ 552 0560 1000DC8F 		lw	$28,16($fp)
+ 553 0564 1C00C2AF 		sw	$2,28($fp)
+  41:tests/test_WikiApp.c ****     samples2[i] = SeekAndRead(a);
+ 554              		.loc 1 42 0
+ 555 0568 2000D08F 		lw	$16,32($fp)
+ 556 056c 2400C48F 		lw	$4,36($fp)
+ 557              		.option	pic0
+ 558 0570 0000000C 		jal	SeekAndRead
+ 559 0574 00000000 		nop
+ 560              	
+ 561              		.option	pic2
+ 562 0578 1000DC8F 		lw	$28,16($fp)
+ 563 057c 21184000 		move	$3,$2
+ 564 0580 2C00C48F 		lw	$4,44($fp)
+ 565 0584 80101000 		sll	$2,$16,2
+ 566 0588 21108200 		addu	$2,$4,$2
+ 567 058c 000043AC 		sw	$3,0($2)
+  42:tests/test_WikiApp.c ****     if (samples[i] != samples2[i]) {
+ 568              		.loc 1 43 0
+ 569 0590 2000C28F 		lw	$2,32($fp)
+ 570 0594 00000000 		nop
+ 571 0598 80100200 		sll	$2,$2,2
+ 572 059c 1800C327 		addiu	$3,$fp,24
+ 573 05a0 21106200 		addu	$2,$3,$2
+ 574 05a4 1C00438C 		lw	$3,28($2)
+ 575 05a8 2000C28F 		lw	$2,32($fp)
+ 576 05ac 2C00C48F 		lw	$4,44($fp)
+ 577 05b0 80100200 		sll	$2,$2,2
+ 578 05b4 21108200 		addu	$2,$4,$2
+ 579 05b8 0000428C 		lw	$2,0($2)
+ 580 05bc 00000000 		nop
+ 581 05c0 3D006210 		beq	$3,$2,$L14
+ 582 05c4 00000000 		nop
+ 583              	
+  43:tests/test_WikiApp.c ****       OutX(a);OutP(" Bad match "); OutX(samples[i]); OutP("!="); OutX(samples2[i]);OutP("\n");
+ 584              		.loc 1 44 0
+ 585 05c8 2400C48F 		lw	$4,36($fp)
+ 586 05cc 0000828F 		lw	$2,%call16(OutX)($28)
+ 587 05d0 00000000 		nop
+ 588 05d4 21C84000 		move	$25,$2
+ 589 05d8 09F82003 		jalr	$25
+ 590 05dc 00000000 		nop
+ 591              	
+ 592 05e0 1000DC8F 		lw	$28,16($fp)
+ 593 05e4 0000023C 		lui	$2,%hi($LC7)
+ 594 05e8 5C004424 		addiu	$4,$2,%lo($LC7)
+ 595 05ec 0000828F 		lw	$2,%call16(OutS)($28)
+ 596 05f0 00000000 		nop
+ 597 05f4 21C84000 		move	$25,$2
+ 598 05f8 09F82003 		jalr	$25
+ 599 05fc 00000000 		nop
+ 600              	
+ 601 0600 1000DC8F 		lw	$28,16($fp)
+ 602 0604 2000C28F 		lw	$2,32($fp)
+ 603 0608 00000000 		nop
+ 604 060c 80100200 		sll	$2,$2,2
+ 605 0610 1800C327 		addiu	$3,$fp,24
+ 606 0614 21106200 		addu	$2,$3,$2
+ 607 0618 1C00428C 		lw	$2,28($2)
+ 608 061c 00000000 		nop
+ 609 0620 21204000 		move	$4,$2
+ 610 0624 0000828F 		lw	$2,%call16(OutX)($28)
+ 611 0628 00000000 		nop
+ 612 062c 21C84000 		move	$25,$2
+ 613 0630 09F82003 		jalr	$25
+ 614 0634 00000000 		nop
+ 615              	
+ 616 0638 1000DC8F 		lw	$28,16($fp)
+ 617 063c 0000023C 		lui	$2,%hi($LC8)
+ 618 0640 68004424 		addiu	$4,$2,%lo($LC8)
+ 619 0644 0000828F 		lw	$2,%call16(OutS)($28)
+ 620 0648 00000000 		nop
+ 621 064c 21C84000 		move	$25,$2
+ 622 0650 09F82003 		jalr	$25
+ 623 0654 00000000 		nop
+ 624              	
+ 625 0658 1000DC8F 		lw	$28,16($fp)
+ 626 065c 2000C28F 		lw	$2,32($fp)
+ 627 0660 2C00C38F 		lw	$3,44($fp)
+ 628 0664 80100200 		sll	$2,$2,2
+ 629 0668 21106200 		addu	$2,$3,$2
+ 630 066c 0000428C 		lw	$2,0($2)
+ 631 0670 00000000 		nop
+ 632 0674 21204000 		move	$4,$2
+ 633 0678 0000828F 		lw	$2,%call16(OutX)($28)
+ 634 067c 00000000 		nop
+ 635 0680 21C84000 		move	$25,$2
+ 636 0684 09F82003 		jalr	$25
+ 637 0688 00000000 		nop
+ 638              	
+ 639 068c 1000DC8F 		lw	$28,16($fp)
+ 640 0690 0000023C 		lui	$2,%hi($LC9)
+ 641 0694 6C004424 		addiu	$4,$2,%lo($LC9)
+ 642 0698 0000828F 		lw	$2,%call16(OutS)($28)
+ 643 069c 00000000 		nop
+ 644 06a0 21C84000 		move	$25,$2
+ 645 06a4 09F82003 		jalr	$25
+ 646 06a8 00000000 		nop
+ 647              	
+ 648 06ac 1000DC8F 		lw	$28,16($fp)
+ 649 06b0 5C000010 		b	$L15
+ 650 06b4 00000000 		nop
+ 651              	
+ 652              	$L14:
+  44:tests/test_WikiApp.c ****     } else {
+  45:tests/test_WikiApp.c ****       OutX(a);OutP(" match "); OutX(samples[i]); OutP("=="); OutX(samples2[i]);
+ 653              		.loc 1 46 0
+ 654 06b8 2400C48F 		lw	$4,36($fp)
+ 655 06bc 0000828F 		lw	$2,%call16(OutX)($28)
+ 656 06c0 00000000 		nop
+ 657 06c4 21C84000 		move	$25,$2
+ 658 06c8 09F82003 		jalr	$25
+ 659 06cc 00000000 		nop
+ 660              	
+ 661 06d0 1000DC8F 		lw	$28,16($fp)
+ 662 06d4 0000023C 		lui	$2,%hi($LC10)
+ 663 06d8 70004424 		addiu	$4,$2,%lo($LC10)
+ 664 06dc 0000828F 		lw	$2,%call16(OutS)($28)
+ 665 06e0 00000000 		nop
+ 666 06e4 21C84000 		move	$25,$2
+ 667 06e8 09F82003 		jalr	$25
+ 668 06ec 00000000 		nop
+ 669              	
+ 670 06f0 1000DC8F 		lw	$28,16($fp)
+ 671 06f4 2000C28F 		lw	$2,32($fp)
+ 672 06f8 00000000 		nop
+ 673 06fc 80100200 		sll	$2,$2,2
+ 674 0700 1800C327 		addiu	$3,$fp,24
+ 675 0704 21106200 		addu	$2,$3,$2
+ 676 0708 1C00428C 		lw	$2,28($2)
+ 677 070c 00000000 		nop
+ 678 0710 21204000 		move	$4,$2
+ 679 0714 0000828F 		lw	$2,%call16(OutX)($28)
+ 680 0718 00000000 		nop
+ 681 071c 21C84000 		move	$25,$2
+ 682 0720 09F82003 		jalr	$25
+ 683 0724 00000000 		nop
+ 684              	
+ 685 0728 1000DC8F 		lw	$28,16($fp)
+ 686 072c 0000023C 		lui	$2,%hi($LC11)
+ 687 0730 78004424 		addiu	$4,$2,%lo($LC11)
+ 688 0734 0000828F 		lw	$2,%call16(OutS)($28)
+ 689 0738 00000000 		nop
+ 690 073c 21C84000 		move	$25,$2
+ 691 0740 09F82003 		jalr	$25
+ 692 0744 00000000 		nop
+ 693              	
+ 694 0748 1000DC8F 		lw	$28,16($fp)
+ 695 074c 2000C28F 		lw	$2,32($fp)
+ 696 0750 2C00C38F 		lw	$3,44($fp)
+ 697 0754 80100200 		sll	$2,$2,2
+ 698 0758 21106200 		addu	$2,$3,$2
+ 699 075c 0000428C 		lw	$2,0($2)
+ 700 0760 00000000 		nop
+ 701 0764 21204000 		move	$4,$2
+ 702 0768 0000828F 		lw	$2,%call16(OutX)($28)
+ 703 076c 00000000 		nop
+ 704 0770 21C84000 		move	$25,$2
+ 705 0774 09F82003 		jalr	$25
+ 706 0778 00000000 		nop
+ 707              	
+ 708 077c 1000DC8F 		lw	$28,16($fp)
+  46:tests/test_WikiApp.c ****       OutP(" # Reads=");OutI(FileSectorReadCount() - readCount); OutP("\n");
+ 709              		.loc 1 47 0
+ 710 0780 0000023C 		lui	$2,%hi($LC12)
+ 711 0784 7C004424 		addiu	$4,$2,%lo($LC12)
+ 712 0788 0000828F 		lw	$2,%call16(OutS)($28)
+ 713 078c 00000000 		nop
+ 714 0790 21C84000 		move	$25,$2
+ 715 0794 09F82003 		jalr	$25
+ 716 0798 00000000 		nop
+ 717              	
+ 718 079c 1000DC8F 		lw	$28,16($fp)
+ 719 07a0 00000000 		nop
+ 720 07a4 0000828F 		lw	$2,%call16(FileSectorReadCount)($28)
+ 721 07a8 00000000 		nop
+ 722 07ac 21C84000 		move	$25,$2
+ 723 07b0 09F82003 		jalr	$25
+ 724 07b4 00000000 		nop
+ 725              	
+ 726 07b8 1000DC8F 		lw	$28,16($fp)
+ 727 07bc 21184000 		move	$3,$2
+ 728 07c0 1C00C28F 		lw	$2,28($fp)
+ 729 07c4 00000000 		nop
+ 730 07c8 23106200 		subu	$2,$3,$2
+ 731 07cc 21204000 		move	$4,$2
+ 732 07d0 0000828F 		lw	$2,%call16(OutI)($28)
+ 733 07d4 00000000 		nop
+ 734 07d8 21C84000 		move	$25,$2
+ 735 07dc 09F82003 		jalr	$25
+ 736 07e0 00000000 		nop
+ 737              	
+ 738 07e4 1000DC8F 		lw	$28,16($fp)
+ 739 07e8 0000023C 		lui	$2,%hi($LC9)
+ 740 07ec 6C004424 		addiu	$4,$2,%lo($LC9)
+ 741 07f0 0000828F 		lw	$2,%call16(OutS)($28)
+ 742 07f4 00000000 		nop
+ 743 07f8 21C84000 		move	$25,$2
+ 744 07fc 09F82003 		jalr	$25
+ 745 0800 00000000 		nop
+ 746              	
+ 747 0804 1000DC8F 		lw	$28,16($fp)
+  47:tests/test_WikiApp.c ****       OutC('.');
+ 748              		.loc 1 48 0
+ 749 0808 2E000424 		li	$4,46			# 0x2e
+ 750 080c 0000828F 		lw	$2,%call16(OutC)($28)
+ 751 0810 00000000 		nop
+ 752 0814 21C84000 		move	$25,$2
+ 753 0818 09F82003 		jalr	$25
+ 754 081c 00000000 		nop
+ 755              	
+ 756 0820 1000DC8F 		lw	$28,16($fp)
+ 757              	$L15:
+  48:tests/test_WikiApp.c ****     }
+  49:tests/test_WikiApp.c ****     a = a << 1;
+ 758              		.loc 1 50 0
+ 759 0824 2400C28F 		lw	$2,36($fp)
+ 760 0828 00000000 		nop
+ 761 082c 40100200 		sll	$2,$2,1
+ 762 0830 2400C2AF 		sw	$2,36($fp)
+ 763              	$LBE4 = .
+  40:tests/test_WikiApp.c ****   for (int i=0; i<nsample; ++i) {
+ 764              		.loc 1 40 0
+ 765 0834 2000C28F 		lw	$2,32($fp)
+ 766 0838 00000000 		nop
+ 767 083c 01004224 		addiu	$2,$2,1
+ 768 0840 2000C2AF 		sw	$2,32($fp)
+ 769              	$L13:
+ 770 0844 2000C38F 		lw	$3,32($fp)
+ 771 0848 2800C28F 		lw	$2,40($fp)
+ 772 084c 00000000 		nop
+ 773 0850 2A106200 		slt	$2,$3,$2
+ 774 0854 3DFF4014 		bne	$2,$0,$L16
+ 775 0858 00000000 		nop
+ 776              	
+ 777              	$LBE3 = .
+  50:tests/test_WikiApp.c ****   }
+  51:tests/test_WikiApp.c ****   OutC('\n');
+ 778              		.loc 1 52 0
+ 779 085c 0A000424 		li	$4,10			# 0xa
+ 780 0860 0000828F 		lw	$2,%call16(OutC)($28)
+ 781 0864 00000000 		nop
+ 782 0868 21C84000 		move	$25,$2
+ 783 086c 09F82003 		jalr	$25
+ 784 0870 00000000 		nop
+ 785              	
+ 786 0874 1000DC8F 		lw	$28,16($fp)
+  52:tests/test_WikiApp.c ****  
+  53:tests/test_WikiApp.c **** #if 0 
+  54:tests/test_WikiApp.c ****   a=128 << nsample;
+  55:tests/test_WikiApp.c ****   for (int i=nsample-1; i>=0; --i) {
+  56:tests/test_WikiApp.c ****     a = a >> 1;
+  57:tests/test_WikiApp.c ****     samples2[i] = SeekAndRead(a);
+  58:tests/test_WikiApp.c ****     if (samples[i] != samples2[i]) {
+  59:tests/test_WikiApp.c ****       OutX(a);OutP(" rev bad match "); OutX(samples[i]); OutP("!="); OutX(samples2[i]);OutP("\n");
+  60:tests/test_WikiApp.c ****     } else {
+  61:tests/test_WikiApp.c ****       //OutX(a);OutP(" rev match "); OutX(samples[i]); OutP("=="); OutX(samples2[i]);OutP("\n");
+  62:tests/test_WikiApp.c ****     }
+  63:tests/test_WikiApp.c ****   }
+  64:tests/test_WikiApp.c **** #endif
+  65:tests/test_WikiApp.c **** 
+  66:tests/test_WikiApp.c ****   OutP("uint32_t samples[] = {");
+ 787              		.loc 1 67 0
+ 788 0878 0000023C 		lui	$2,%hi($LC13)
+ 789 087c 88004424 		addiu	$4,$2,%lo($LC13)
+ 790 0880 0000828F 		lw	$2,%call16(OutS)($28)
+ 791 0884 00000000 		nop
+ 792 0888 21C84000 		move	$25,$2
+ 793 088c 09F82003 		jalr	$25
+ 794 0890 00000000 		nop
+ 795              	
+ 796 0894 1000DC8F 		lw	$28,16($fp)
+ 797              	$LBB5 = .
+  67:tests/test_WikiApp.c ****   for (int i=0; i<nsample; ++i)
+ 798              		.loc 1 68 0
+ 799 0898 1800C0AF 		sw	$0,24($fp)
+ 800 089c 14000010 		b	$L17
+ 801 08a0 00000000 		nop
+ 802              	
+ 803              	$L18:
+  68:tests/test_WikiApp.c ****     printf_P(PSTR("0x%08x, "), (unsigned int) samples2[i]);
+ 804              		.loc 1 69 0
+ 805 08a4 0000023C 		lui	$2,%hi($LC14)
+ 806 08a8 A0004324 		addiu	$3,$2,%lo($LC14)
+ 807 08ac 1800C28F 		lw	$2,24($fp)
+ 808 08b0 2C00C48F 		lw	$4,44($fp)
+ 809 08b4 80100200 		sll	$2,$2,2
+ 810 08b8 21108200 		addu	$2,$4,$2
+ 811 08bc 0000428C 		lw	$2,0($2)
+ 812 08c0 21206000 		move	$4,$3
+ 813 08c4 21284000 		move	$5,$2
+ 814 08c8 0000828F 		lw	$2,%call16(printf)($28)
+ 815 08cc 00000000 		nop
+ 816 08d0 21C84000 		move	$25,$2
+ 817 08d4 09F82003 		jalr	$25
+ 818 08d8 00000000 		nop
+ 819              	
+ 820 08dc 1000DC8F 		lw	$28,16($fp)
+  68:tests/test_WikiApp.c ****     printf_P(PSTR("0x%08x, "), (unsigned int) samples2[i]);
+ 821              		.loc 1 68 0
+ 822 08e0 1800C28F 		lw	$2,24($fp)
+ 823 08e4 00000000 		nop
+ 824 08e8 01004224 		addiu	$2,$2,1
+ 825 08ec 1800C2AF 		sw	$2,24($fp)
+ 826              	$L17:
+ 827 08f0 1800C38F 		lw	$3,24($fp)
+ 828 08f4 2800C28F 		lw	$2,40($fp)
+ 829 08f8 00000000 		nop
+ 830 08fc 2A106200 		slt	$2,$3,$2
+ 831 0900 E8FF4014 		bne	$2,$0,$L18
+ 832 0904 00000000 		nop
+ 833              	
+ 834              	$LBE5 = .
+  69:tests/test_WikiApp.c ****   OutP("};\n");
+ 835              		.loc 1 70 0
+ 836 0908 0000023C 		lui	$2,%hi($LC15)
+ 837 090c AC004424 		addiu	$4,$2,%lo($LC15)
+ 838 0910 0000828F 		lw	$2,%call16(OutS)($28)
+ 839 0914 00000000 		nop
+ 840 0918 21C84000 		move	$25,$2
+ 841 091c 09F82003 		jalr	$25
+ 842 0920 00000000 		nop
+ 843              	
+ 844 0924 1000DC8F 		lw	$28,16($fp)
+ 845 0928 9000DD8F 		lw	$sp,144($fp)
+  70:tests/test_WikiApp.c **** }
+ 846              		.loc 1 71 0
+ 847 092c 21E8C003 		move	$sp,$fp
+ 848 0930 DC00BF8F 		lw	$31,220($sp)
+ 849 0934 D800BE8F 		lw	$fp,216($sp)
+ 850 0938 D400B78F 		lw	$23,212($sp)
+ 851 093c D000B68F 		lw	$22,208($sp)
+ 852 0940 CC00B58F 		lw	$21,204($sp)
+ 853 0944 C800B48F 		lw	$20,200($sp)
+ 854 0948 C400B38F 		lw	$19,196($sp)
+ 855 094c C000B28F 		lw	$18,192($sp)
+ 856 0950 BC00B18F 		lw	$17,188($sp)
+ 857 0954 B800B08F 		lw	$16,184($sp)
+ 858 0958 E000BD27 		addiu	$sp,$sp,224
+ 859 095c 0800E003 		j	$31
+ 860 0960 00000000 		nop
+ 861              	
+ 862              		.set	macro
+ 863              		.set	reorder
+ 864              		.end	TestLargeSeek
+ 865              	$LFE5:
+ 867              		.rdata
+ 868              		.align	2
+ 869              	$LC16:
+ 870 00b0 54657374 		.ascii	"Test NodesValid..\000"
+ 870      204E6F64 
+ 870      65735661 
+ 870      6C69642E 
+ 870      2E00
+ 871 00c2 0000     		.align	2
+ 872              	$LC17:
+ 873 00c4 496E7661 		.ascii	"Invalid len \000"
+ 873      6C696420 
+ 873      6C656E20 
+ 873      00
+ 874 00d1 000000   		.align	2
+ 875              	$LC18:
+ 876 00d4 20616464 		.ascii	" addr 0x\000"
+ 876      72203078 
+ 876      00
+ 877 00dd 000000   		.align	2
+ 878              	$LC19:
+ 879 00e0 496E7661 		.ascii	"Invalid depth \000"
+ 879      6C696420 
+ 879      64657074 
+ 879      682000
+ 880 00ef 00       		.align	2
+ 881              	$LC20:
+ 882 00f0 496E7661 		.ascii	"Invalid parent \000"
+ 882      6C696420 
+ 882      70617265 
+ 882      6E742000 
+ 883              		.align	2
+ 884              	$LC21:
+ 885 0100 42616420 		.ascii	"Bad match \000"
+ 885      6D617463 
+ 885      682000
+ 886 010b 00       		.align	2
+ 887              	$LC22:
+ 888 010c 75696E74 		.ascii	"uint32_t samples = {\000"
+ 888      33325F74 
+ 888      2073616D 
+ 888      706C6573 
+ 888      203D207B 
+ 889 0121 000000   		.align	2
+ 890              	$LC23:
+ 891 0124 7D0A00   		.ascii	"}\012\000"
+ 892              		.text
+ 893              		.align	2
+ 894              		.globl	TestNodesValid
+ 895              	$LFB6 = .
+  71:tests/test_WikiApp.c **** 
+  72:tests/test_WikiApp.c **** void TestNodesValid(WikiApp *wapp) {
+ 896              		.loc 1 73 0
+ 897              		.set	nomips16
+ 898              		.ent	TestNodesValid
+ 900              	TestNodesValid:
+ 901              		.frame	$fp,344,$31		# vars= 280, regs= 10/0, args= 16, gp= 8
+ 902              		.mask	0xc0ff0000,-4
+ 903              		.fmask	0x00000000,0
+ 904              		.set	noreorder
+ 905              		.set	nomacro
+ 906              		
+ 907 0964 A8FEBD27 		addiu	$sp,$sp,-344
+ 908              	$LCFI20:
+ 909 0968 5401BFAF 		sw	$31,340($sp)
+ 910              	$LCFI21:
+ 911 096c 5001BEAF 		sw	$fp,336($sp)
+ 912              	$LCFI22:
+ 913 0970 4C01B7AF 		sw	$23,332($sp)
+ 914              	$LCFI23:
+ 915 0974 4801B6AF 		sw	$22,328($sp)
+ 916              	$LCFI24:
+ 917 0978 4401B5AF 		sw	$21,324($sp)
+ 918              	$LCFI25:
+ 919 097c 4001B4AF 		sw	$20,320($sp)
+ 920              	$LCFI26:
+ 921 0980 3C01B3AF 		sw	$19,316($sp)
+ 922              	$LCFI27:
+ 923 0984 3801B2AF 		sw	$18,312($sp)
+ 924              	$LCFI28:
+ 925 0988 3401B1AF 		sw	$17,308($sp)
+ 926              	$LCFI29:
+ 927 098c 3001B0AF 		sw	$16,304($sp)
+ 928              	$LCFI30:
+ 929 0990 21F0A003 		move	$fp,$sp
+ 930              	$LCFI31:
+ 931 0994 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 932 0998 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 933 099c 1000BCAF 		.cprestore	16
+ 934 09a0 5801C4AF 		sw	$4,344($fp)
+ 935              		.loc 1 73 0
+ 936 09a4 2110A003 		move	$2,$sp
+ 937 09a8 F800C2AF 		sw	$2,248($fp)
+  73:tests/test_WikiApp.c ****   OutP("Test NodesValid..");
+ 938              		.loc 1 74 0
+ 939 09ac 0000023C 		lui	$2,%hi($LC16)
+ 940 09b0 B0004424 		addiu	$4,$2,%lo($LC16)
+ 941 09b4 0000828F 		lw	$2,%call16(OutS)($28)
+ 942 09b8 00000000 		nop
+ 943 09bc 21C84000 		move	$25,$2
+ 944 09c0 09F82003 		jalr	$25
+ 945 09c4 00000000 		nop
+ 946              	
+ 947 09c8 1000DC8F 		lw	$28,16($fp)
+  74:tests/test_WikiApp.c ****   const int nsample=18;
+ 948              		.loc 1 75 0
+ 949 09cc 12000224 		li	$2,18			# 0x12
+ 950 09d0 2400C2AF 		sw	$2,36($fp)
+  75:tests/test_WikiApp.c ****   uint32_t samples[] = {0x00000000, 0x00000080, 0x00000180, 0x00000280, 0x00000280, 0x00000a80, 0x0
+ 951              		.loc 1 76 0
+ 952 09d4 0000023C 		lui	$2,%hi(C.24.2499)
+ 953 09d8 3000C427 		addiu	$4,$fp,48
+ 954 09dc F8014324 		addiu	$3,$2,%lo(C.24.2499)
+ 955 09e0 48000224 		li	$2,72			# 0x48
+ 956 09e4 21286000 		move	$5,$3
+ 957 09e8 21304000 		move	$6,$2
+ 958 09ec 0000828F 		lw	$2,%call16(memcpy)($28)
+ 959 09f0 00000000 		nop
+ 960 09f4 21C84000 		move	$25,$2
+ 961 09f8 09F82003 		jalr	$25
+ 962 09fc 00000000 		nop
+ 963              	
+ 964 0a00 1000DC8F 		lw	$28,16($fp)
+  76:tests/test_WikiApp.c ****   uint64_t samples2[nsample];
+ 965              		.loc 1 77 0
+ 966 0a04 2400C28F 		lw	$2,36($fp)
+ 967 0a08 00000000 		nop
+ 968 0a0c FFFF4224 		addiu	$2,$2,-1
+ 969 0a10 2C00C2AF 		sw	$2,44($fp)
+ 970 0a14 2400C28F 		lw	$2,36($fp)
+ 971 0a18 00000000 		nop
+ 972 0a1c 21904000 		move	$18,$2
+ 973 0a20 21980000 		move	$19,$0
+ 974 0a24 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 975 0a28 24104202 		and	$2,$18,$2
+ 976 0a2c 1001C2AF 		sw	$2,272($fp)
+ 977 0a30 0F006232 		andi	$2,$19,0xf
+ 978 0a34 1401C2AF 		sw	$2,276($fp)
+ 979 0a38 1001D28F 		lw	$18,272($fp)
+ 980 0a3c 1401D38F 		lw	$19,276($fp)
+ 981 0a40 82161200 		srl	$2,$18,26
+ 982 0a44 80B91300 		sll	$23,$19,6
+ 983 0a48 25B85700 		or	$23,$2,$23
+ 984 0a4c 80B11200 		sll	$22,$18,6
+ 985 0a50 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 986 0a54 2410C202 		and	$2,$22,$2
+ 987 0a58 1801C2AF 		sw	$2,280($fp)
+ 988 0a5c 0F00E332 		andi	$3,$23,0xf
+ 989 0a60 1C01C3AF 		sw	$3,284($fp)
+ 990 0a64 1801D68F 		lw	$22,280($fp)
+ 991 0a68 1C01D78F 		lw	$23,284($fp)
+ 992 0a6c 2400C28F 		lw	$2,36($fp)
+ 993 0a70 00000000 		nop
+ 994 0a74 21804000 		move	$16,$2
+ 995 0a78 21880000 		move	$17,$0
+ 996 0a7c FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 997 0a80 24100202 		and	$2,$16,$2
+ 998 0a84 2001C2AF 		sw	$2,288($fp)
+ 999 0a88 0F002432 		andi	$4,$17,0xf
+ 1000 0a8c 2401C4AF 		sw	$4,292($fp)
+ 1001 0a90 2001D08F 		lw	$16,288($fp)
+ 1002 0a94 2401D18F 		lw	$17,292($fp)
+ 1003 0a98 82161000 		srl	$2,$16,26
+ 1004 0a9c 80A91100 		sll	$21,$17,6
+ 1005 0aa0 25A85500 		or	$21,$2,$21
+ 1006 0aa4 80A11000 		sll	$20,$16,6
+ 1007 0aa8 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 1008 0aac 24108202 		and	$2,$20,$2
+ 1009 0ab0 2801C2AF 		sw	$2,296($fp)
+ 1010 0ab4 0F00A532 		andi	$5,$21,0xf
+ 1011 0ab8 2C01C5AF 		sw	$5,300($fp)
+ 1012 0abc 2801D48F 		lw	$20,296($fp)
+ 1013 0ac0 2C01D58F 		lw	$21,300($fp)
+ 1014 0ac4 2400C28F 		lw	$2,36($fp)
+ 1015 0ac8 00000000 		nop
+ 1016 0acc C0100200 		sll	$2,$2,3
+ 1017 0ad0 07004224 		addiu	$2,$2,7
+ 1018 0ad4 07004224 		addiu	$2,$2,7
+ 1019 0ad8 C2100200 		srl	$2,$2,3
+ 1020 0adc C0100200 		sll	$2,$2,3
+ 1021 0ae0 23E8A203 		subu	$sp,$sp,$2
+ 1022 0ae4 1000A227 		addiu	$2,$sp,16
+ 1023 0ae8 07004224 		addiu	$2,$2,7
+ 1024 0aec C2100200 		srl	$2,$2,3
+ 1025 0af0 C0100200 		sll	$2,$2,3
+ 1026 0af4 2800C2AF 		sw	$2,40($fp)
+  77:tests/test_WikiApp.c **** 
+  78:tests/test_WikiApp.c ****   uint32_t a=0x1;
+ 1027              		.loc 1 79 0
+ 1028 0af8 01000224 		li	$2,1			# 0x1
+ 1029 0afc 2000C2AF 		sw	$2,32($fp)
+ 1030              	$LBB6 = .
+  79:tests/test_WikiApp.c ****   for (int i=0; i<nsample; ++i) {
+ 1031              		.loc 1 80 0
+ 1032 0b00 1C00C0AF 		sw	$0,28($fp)
+ 1033 0b04 24010010 		b	$L21
+ 1034 0b08 00000000 		nop
+ 1035              	
+ 1036              	$L28:
+ 1037              	$LBB7 = .
+  80:tests/test_WikiApp.c ****     Node n;
+  81:tests/test_WikiApp.c ****     LoadBlock(a*sizeof(Node), &n, &wapp->pageContext);
+ 1038              		.loc 1 82 0
+ 1039 0b0c 2000C28F 		lw	$2,32($fp)
+ 1040 0b10 00000000 		nop
+ 1041 0b14 C0210200 		sll	$4,$2,7
+ 1042 0b18 5801C28F 		lw	$2,344($fp)
+ 1043 0b1c 7800C327 		addiu	$3,$fp,120
+ 1044 0b20 21286000 		move	$5,$3
+ 1045 0b24 21304000 		move	$6,$2
+ 1046 0b28 0000828F 		lw	$2,%call16(LoadBlock)($28)
+ 1047 0b2c 00000000 		nop
+ 1048 0b30 21C84000 		move	$25,$2
+ 1049 0b34 09F82003 		jalr	$25
+ 1050 0b38 00000000 		nop
+ 1051              	
+ 1052 0b3c 1000DC8F 		lw	$28,16($fp)
+ 1053 0b40 00000000 		nop
+  82:tests/test_WikiApp.c ****     ERRORassert();
+ 1054              		.loc 1 83 0
+ 1055 0b44 0000828F 		lw	$2,%got(errorMsg)($28)
+ 1056 0b48 00000000 		nop
+ 1057 0b4c 0000428C 		lw	$2,0($2)
+ 1058 0b50 00000000 		nop
+ 1059 0b54 18004010 		beq	$2,$0,$L22
+ 1060 0b58 00000000 		nop
+ 1061              	
+ 1062 0b5c 0000023C 		lui	$2,%hi(__func__.2490)
+ 1063 0b60 40024424 		addiu	$4,$2,%lo(__func__.2490)
+ 1064 0b64 0000023C 		lui	$2,%hi($LC1)
+ 1065 0b68 08004524 		addiu	$5,$2,%lo($LC1)
+ 1066 0b6c 53000624 		li	$6,83			# 0x53
+ 1067 0b70 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 1068 0b74 00000000 		nop
+ 1069 0b78 21C84000 		move	$25,$2
+ 1070 0b7c 09F82003 		jalr	$25
+ 1071 0b80 00000000 		nop
+ 1072              	
+ 1073 0b84 1000DC8F 		lw	$28,16($fp)
+ 1074 0b88 0000023C 		lui	$2,%hi($LC2)
+ 1075 0b8c 20004424 		addiu	$4,$2,%lo($LC2)
+ 1076 0b90 0000023C 		lui	$2,%hi($LC1)
+ 1077 0b94 08004524 		addiu	$5,$2,%lo($LC1)
+ 1078 0b98 53000624 		li	$6,83			# 0x53
+ 1079 0b9c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2491)
+ 1080 0ba0 50024724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2491)
+ 1081 0ba4 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1082 0ba8 00000000 		nop
+ 1083 0bac 21C84000 		move	$25,$2
+ 1084 0bb0 09F82003 		jalr	$25
+ 1085 0bb4 00000000 		nop
+ 1086              	
+ 1087              	$L22:
+  83:tests/test_WikiApp.c ****     if (n.length > ItemsPerNode) {
+ 1088              		.loc 1 84 0
+ 1089 0bb8 7D00C293 		lbu	$2,125($fp)
+ 1090 0bbc 00000000 		nop
+ 1091 0bc0 1000422C 		sltu	$2,$2,16
+ 1092 0bc4 2C004014 		bne	$2,$0,$L23
+ 1093 0bc8 00000000 		nop
+ 1094              	
+  84:tests/test_WikiApp.c ****       OutP("Invalid len "); OutI(n.length); OutP(" addr 0x");
+ 1095              		.loc 1 85 0
+ 1096 0bcc 0000023C 		lui	$2,%hi($LC17)
+ 1097 0bd0 C4004424 		addiu	$4,$2,%lo($LC17)
+ 1098 0bd4 0000828F 		lw	$2,%call16(OutS)($28)
+ 1099 0bd8 00000000 		nop
+ 1100 0bdc 21C84000 		move	$25,$2
+ 1101 0be0 09F82003 		jalr	$25
+ 1102 0be4 00000000 		nop
+ 1103              	
+ 1104 0be8 1000DC8F 		lw	$28,16($fp)
+ 1105 0bec 7D00C293 		lbu	$2,125($fp)
+ 1106 0bf0 00000000 		nop
+ 1107 0bf4 21204000 		move	$4,$2
+ 1108 0bf8 0000828F 		lw	$2,%call16(OutI)($28)
+ 1109 0bfc 00000000 		nop
+ 1110 0c00 21C84000 		move	$25,$2
+ 1111 0c04 09F82003 		jalr	$25
+ 1112 0c08 00000000 		nop
+ 1113              	
+ 1114 0c0c 1000DC8F 		lw	$28,16($fp)
+ 1115 0c10 0000023C 		lui	$2,%hi($LC18)
+ 1116 0c14 D4004424 		addiu	$4,$2,%lo($LC18)
+ 1117 0c18 0000828F 		lw	$2,%call16(OutS)($28)
+ 1118 0c1c 00000000 		nop
+ 1119 0c20 21C84000 		move	$25,$2
+ 1120 0c24 09F82003 		jalr	$25
+ 1121 0c28 00000000 		nop
+ 1122              	
+ 1123 0c2c 1000DC8F 		lw	$28,16($fp)
+  85:tests/test_WikiApp.c ****       OutX(a*sizeof(Node)); OutP("\n");
+ 1124              		.loc 1 86 0
+ 1125 0c30 2000C28F 		lw	$2,32($fp)
+ 1126 0c34 00000000 		nop
+ 1127 0c38 C0110200 		sll	$2,$2,7
+ 1128 0c3c 21204000 		move	$4,$2
+ 1129 0c40 0000828F 		lw	$2,%call16(OutX)($28)
+ 1130 0c44 00000000 		nop
+ 1131 0c48 21C84000 		move	$25,$2
+ 1132 0c4c 09F82003 		jalr	$25
+ 1133 0c50 00000000 		nop
+ 1134              	
+ 1135 0c54 1000DC8F 		lw	$28,16($fp)
+ 1136 0c58 0000023C 		lui	$2,%hi($LC9)
+ 1137 0c5c 6C004424 		addiu	$4,$2,%lo($LC9)
+ 1138 0c60 0000828F 		lw	$2,%call16(OutS)($28)
+ 1139 0c64 00000000 		nop
+ 1140 0c68 21C84000 		move	$25,$2
+ 1141 0c6c 09F82003 		jalr	$25
+ 1142 0c70 00000000 		nop
+ 1143              	
+ 1144 0c74 1000DC8F 		lw	$28,16($fp)
+ 1145              	$L23:
+  86:tests/test_WikiApp.c ****     }
+  87:tests/test_WikiApp.c ****     if (n.depth > 9) {
+ 1146              		.loc 1 88 0
+ 1147 0c78 7C00C293 		lbu	$2,124($fp)
+ 1148 0c7c 00000000 		nop
+ 1149 0c80 0A00422C 		sltu	$2,$2,10
+ 1150 0c84 2C004014 		bne	$2,$0,$L24
+ 1151 0c88 00000000 		nop
+ 1152              	
+  88:tests/test_WikiApp.c ****       OutP("Invalid depth "); OutI(n.depth); OutP(" addr 0x");
+ 1153              		.loc 1 89 0
+ 1154 0c8c 0000023C 		lui	$2,%hi($LC19)
+ 1155 0c90 E0004424 		addiu	$4,$2,%lo($LC19)
+ 1156 0c94 0000828F 		lw	$2,%call16(OutS)($28)
+ 1157 0c98 00000000 		nop
+ 1158 0c9c 21C84000 		move	$25,$2
+ 1159 0ca0 09F82003 		jalr	$25
+ 1160 0ca4 00000000 		nop
+ 1161              	
+ 1162 0ca8 1000DC8F 		lw	$28,16($fp)
+ 1163 0cac 7C00C293 		lbu	$2,124($fp)
+ 1164 0cb0 00000000 		nop
+ 1165 0cb4 21204000 		move	$4,$2
+ 1166 0cb8 0000828F 		lw	$2,%call16(OutI)($28)
+ 1167 0cbc 00000000 		nop
+ 1168 0cc0 21C84000 		move	$25,$2
+ 1169 0cc4 09F82003 		jalr	$25
+ 1170 0cc8 00000000 		nop
+ 1171              	
+ 1172 0ccc 1000DC8F 		lw	$28,16($fp)
+ 1173 0cd0 0000023C 		lui	$2,%hi($LC18)
+ 1174 0cd4 D4004424 		addiu	$4,$2,%lo($LC18)
+ 1175 0cd8 0000828F 		lw	$2,%call16(OutS)($28)
+ 1176 0cdc 00000000 		nop
+ 1177 0ce0 21C84000 		move	$25,$2
+ 1178 0ce4 09F82003 		jalr	$25
+ 1179 0ce8 00000000 		nop
+ 1180              	
+ 1181 0cec 1000DC8F 		lw	$28,16($fp)
+  89:tests/test_WikiApp.c ****       OutX(a*sizeof(Node)); OutP("\n");
+ 1182              		.loc 1 90 0
+ 1183 0cf0 2000C28F 		lw	$2,32($fp)
+ 1184 0cf4 00000000 		nop
+ 1185 0cf8 C0110200 		sll	$2,$2,7
+ 1186 0cfc 21204000 		move	$4,$2
+ 1187 0d00 0000828F 		lw	$2,%call16(OutX)($28)
+ 1188 0d04 00000000 		nop
+ 1189 0d08 21C84000 		move	$25,$2
+ 1190 0d0c 09F82003 		jalr	$25
+ 1191 0d10 00000000 		nop
+ 1192              	
+ 1193 0d14 1000DC8F 		lw	$28,16($fp)
+ 1194 0d18 0000023C 		lui	$2,%hi($LC9)
+ 1195 0d1c 6C004424 		addiu	$4,$2,%lo($LC9)
+ 1196 0d20 0000828F 		lw	$2,%call16(OutS)($28)
+ 1197 0d24 00000000 		nop
+ 1198 0d28 21C84000 		move	$25,$2
+ 1199 0d2c 09F82003 		jalr	$25
+ 1200 0d30 00000000 		nop
+ 1201              	
+ 1202 0d34 1000DC8F 		lw	$28,16($fp)
+ 1203              	$L24:
+  90:tests/test_WikiApp.c ****     }
+  91:tests/test_WikiApp.c ****     if (n.parentNode == BAInvalid) { // only node 0 has parent Invalid
+ 1204              		.loc 1 92 0
+ 1205 0d38 7800C38F 		lw	$3,120($fp)
+ 1206 0d3c FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 1207 0d40 2C006214 		bne	$3,$2,$L25
+ 1208 0d44 00000000 		nop
+ 1209              	
+  92:tests/test_WikiApp.c ****       OutP("Invalid parent "); OutI(n.parentNode); OutP(" addr 0x");
+ 1210              		.loc 1 93 0
+ 1211 0d48 0000023C 		lui	$2,%hi($LC20)
+ 1212 0d4c F0004424 		addiu	$4,$2,%lo($LC20)
+ 1213 0d50 0000828F 		lw	$2,%call16(OutS)($28)
+ 1214 0d54 00000000 		nop
+ 1215 0d58 21C84000 		move	$25,$2
+ 1216 0d5c 09F82003 		jalr	$25
+ 1217 0d60 00000000 		nop
+ 1218              	
+ 1219 0d64 1000DC8F 		lw	$28,16($fp)
+ 1220 0d68 7800C28F 		lw	$2,120($fp)
+ 1221 0d6c 00000000 		nop
+ 1222 0d70 21204000 		move	$4,$2
+ 1223 0d74 0000828F 		lw	$2,%call16(OutI)($28)
+ 1224 0d78 00000000 		nop
+ 1225 0d7c 21C84000 		move	$25,$2
+ 1226 0d80 09F82003 		jalr	$25
+ 1227 0d84 00000000 		nop
+ 1228              	
+ 1229 0d88 1000DC8F 		lw	$28,16($fp)
+ 1230 0d8c 0000023C 		lui	$2,%hi($LC18)
+ 1231 0d90 D4004424 		addiu	$4,$2,%lo($LC18)
+ 1232 0d94 0000828F 		lw	$2,%call16(OutS)($28)
+ 1233 0d98 00000000 		nop
+ 1234 0d9c 21C84000 		move	$25,$2
+ 1235 0da0 09F82003 		jalr	$25
+ 1236 0da4 00000000 		nop
+ 1237              	
+ 1238 0da8 1000DC8F 		lw	$28,16($fp)
+  93:tests/test_WikiApp.c ****       OutX(a*sizeof(Node)); OutP("\n");
+ 1239              		.loc 1 94 0
+ 1240 0dac 2000C28F 		lw	$2,32($fp)
+ 1241 0db0 00000000 		nop
+ 1242 0db4 C0110200 		sll	$2,$2,7
+ 1243 0db8 21204000 		move	$4,$2
+ 1244 0dbc 0000828F 		lw	$2,%call16(OutX)($28)
+ 1245 0dc0 00000000 		nop
+ 1246 0dc4 21C84000 		move	$25,$2
+ 1247 0dc8 09F82003 		jalr	$25
+ 1248 0dcc 00000000 		nop
+ 1249              	
+ 1250 0dd0 1000DC8F 		lw	$28,16($fp)
+ 1251 0dd4 0000023C 		lui	$2,%hi($LC9)
+ 1252 0dd8 6C004424 		addiu	$4,$2,%lo($LC9)
+ 1253 0ddc 0000828F 		lw	$2,%call16(OutS)($28)
+ 1254 0de0 00000000 		nop
+ 1255 0de4 21C84000 		move	$25,$2
+ 1256 0de8 09F82003 		jalr	$25
+ 1257 0dec 00000000 		nop
+ 1258              	
+ 1259 0df0 1000DC8F 		lw	$28,16($fp)
+ 1260              	$L25:
+  94:tests/test_WikiApp.c ****     }
+  95:tests/test_WikiApp.c ****     samples2[i] = *((uint32_t *) &n);
+ 1261              		.loc 1 96 0
+ 1262 0df4 1C00C28F 		lw	$2,28($fp)
+ 1263 0df8 7800C327 		addiu	$3,$fp,120
+ 1264 0dfc 0000638C 		lw	$3,0($3)
+ 1265 0e00 00000000 		nop
+ 1266 0e04 0801C3AF 		sw	$3,264($fp)
+ 1267 0e08 21180000 		move	$3,$0
+ 1268 0e0c 0C01C3AF 		sw	$3,268($fp)
+ 1269 0e10 2800C38F 		lw	$3,40($fp)
+ 1270 0e14 C0100200 		sll	$2,$2,3
+ 1271 0e18 21106200 		addu	$2,$3,$2
+ 1272 0e1c 0801C48F 		lw	$4,264($fp)
+ 1273 0e20 0C01C58F 		lw	$5,268($fp)
+ 1274 0e24 000044AC 		sw	$4,0($2)
+ 1275 0e28 040045AC 		sw	$5,4($2)
+  96:tests/test_WikiApp.c ****     if (samples2[i] != samples[i]) {
+ 1276              		.loc 1 97 0
+ 1277 0e2c 1C00C28F 		lw	$2,28($fp)
+ 1278 0e30 2800C38F 		lw	$3,40($fp)
+ 1279 0e34 C0100200 		sll	$2,$2,3
+ 1280 0e38 21106200 		addu	$2,$3,$2
+ 1281 0e3c 0400438C 		lw	$3,4($2)
+ 1282 0e40 0000428C 		lw	$2,0($2)
+ 1283 0e44 1C00C48F 		lw	$4,28($fp)
+ 1284 0e48 00000000 		nop
+ 1285 0e4c 80200400 		sll	$4,$4,2
+ 1286 0e50 1800C527 		addiu	$5,$fp,24
+ 1287 0e54 2120A400 		addu	$4,$5,$4
+ 1288 0e58 1800848C 		lw	$4,24($4)
+ 1289 0e5c 00000000 		nop
+ 1290 0e60 0001C4AF 		sw	$4,256($fp)
+ 1291 0e64 21280000 		move	$5,$0
+ 1292 0e68 0401C5AF 		sw	$5,260($fp)
+ 1293 0e6c 0001C48F 		lw	$4,256($fp)
+ 1294 0e70 00000000 		nop
+ 1295 0e74 05004414 		bne	$2,$4,$L32
+ 1296 0e78 00000000 		nop
+ 1297              	
+ 1298 0e7c 0401C48F 		lw	$4,260($fp)
+ 1299 0e80 00000000 		nop
+ 1300 0e84 35006410 		beq	$3,$4,$L26
+ 1301 0e88 00000000 		nop
+ 1302              	
+ 1303              	$L32:
+  97:tests/test_WikiApp.c ****       OutP("Bad match "); OutX(samples[i]); OutP("!="); OutX(samples2[i]);OutP("\n");
+ 1304              		.loc 1 98 0
+ 1305 0e8c 0000023C 		lui	$2,%hi($LC21)
+ 1306 0e90 00014424 		addiu	$4,$2,%lo($LC21)
+ 1307 0e94 0000828F 		lw	$2,%call16(OutS)($28)
+ 1308 0e98 00000000 		nop
+ 1309 0e9c 21C84000 		move	$25,$2
+ 1310 0ea0 09F82003 		jalr	$25
+ 1311 0ea4 00000000 		nop
+ 1312              	
+ 1313 0ea8 1000DC8F 		lw	$28,16($fp)
+ 1314 0eac 1C00C28F 		lw	$2,28($fp)
+ 1315 0eb0 00000000 		nop
+ 1316 0eb4 80100200 		sll	$2,$2,2
+ 1317 0eb8 1800C327 		addiu	$3,$fp,24
+ 1318 0ebc 21106200 		addu	$2,$3,$2
+ 1319 0ec0 1800428C 		lw	$2,24($2)
+ 1320 0ec4 00000000 		nop
+ 1321 0ec8 21204000 		move	$4,$2
+ 1322 0ecc 0000828F 		lw	$2,%call16(OutX)($28)
+ 1323 0ed0 00000000 		nop
+ 1324 0ed4 21C84000 		move	$25,$2
+ 1325 0ed8 09F82003 		jalr	$25
+ 1326 0edc 00000000 		nop
+ 1327              	
+ 1328 0ee0 1000DC8F 		lw	$28,16($fp)
+ 1329 0ee4 0000023C 		lui	$2,%hi($LC8)
+ 1330 0ee8 68004424 		addiu	$4,$2,%lo($LC8)
+ 1331 0eec 0000828F 		lw	$2,%call16(OutS)($28)
+ 1332 0ef0 00000000 		nop
+ 1333 0ef4 21C84000 		move	$25,$2
+ 1334 0ef8 09F82003 		jalr	$25
+ 1335 0efc 00000000 		nop
+ 1336              	
+ 1337 0f00 1000DC8F 		lw	$28,16($fp)
+ 1338 0f04 1C00C28F 		lw	$2,28($fp)
+ 1339 0f08 2800C38F 		lw	$3,40($fp)
+ 1340 0f0c C0100200 		sll	$2,$2,3
+ 1341 0f10 21106200 		addu	$2,$3,$2
+ 1342 0f14 0400438C 		lw	$3,4($2)
+ 1343 0f18 0000428C 		lw	$2,0($2)
+ 1344 0f1c 00000000 		nop
+ 1345 0f20 21204000 		move	$4,$2
+ 1346 0f24 0000828F 		lw	$2,%call16(OutX)($28)
+ 1347 0f28 00000000 		nop
+ 1348 0f2c 21C84000 		move	$25,$2
+ 1349 0f30 09F82003 		jalr	$25
+ 1350 0f34 00000000 		nop
+ 1351              	
+ 1352 0f38 1000DC8F 		lw	$28,16($fp)
+ 1353 0f3c 0000023C 		lui	$2,%hi($LC9)
+ 1354 0f40 6C004424 		addiu	$4,$2,%lo($LC9)
+ 1355 0f44 0000828F 		lw	$2,%call16(OutS)($28)
+ 1356 0f48 00000000 		nop
+ 1357 0f4c 21C84000 		move	$25,$2
+ 1358 0f50 09F82003 		jalr	$25
+ 1359 0f54 00000000 		nop
+ 1360              	
+ 1361 0f58 1000DC8F 		lw	$28,16($fp)
+ 1362              	$L26:
+  98:tests/test_WikiApp.c ****     }
+  99:tests/test_WikiApp.c ****     a = a << 1;
+ 1363              		.loc 1 100 0
+ 1364 0f5c 2000C28F 		lw	$2,32($fp)
+ 1365 0f60 00000000 		nop
+ 1366 0f64 40100200 		sll	$2,$2,1
+ 1367 0f68 2000C2AF 		sw	$2,32($fp)
+ 100:tests/test_WikiApp.c ****     OutC('.');
+ 1368              		.loc 1 101 0
+ 1369 0f6c 2E000424 		li	$4,46			# 0x2e
+ 1370 0f70 0000828F 		lw	$2,%call16(OutC)($28)
+ 1371 0f74 00000000 		nop
+ 1372 0f78 21C84000 		move	$25,$2
+ 1373 0f7c 09F82003 		jalr	$25
+ 1374 0f80 00000000 		nop
+ 1375              	
+ 1376 0f84 1000DC8F 		lw	$28,16($fp)
+ 1377              	$LBE7 = .
+  80:tests/test_WikiApp.c ****   for (int i=0; i<nsample; ++i) {
+ 1378              		.loc 1 80 0
+ 1379 0f88 1C00C28F 		lw	$2,28($fp)
+ 1380 0f8c 00000000 		nop
+ 1381 0f90 01004224 		addiu	$2,$2,1
+ 1382 0f94 1C00C2AF 		sw	$2,28($fp)
+ 1383              	$L21:
+ 1384 0f98 1C00C38F 		lw	$3,28($fp)
+ 1385 0f9c 2400C28F 		lw	$2,36($fp)
+ 1386 0fa0 00000000 		nop
+ 1387 0fa4 2A106200 		slt	$2,$3,$2
+ 1388 0fa8 D8FE4014 		bne	$2,$0,$L28
+ 1389 0fac 00000000 		nop
+ 1390              	
+ 1391              	$LBE6 = .
+ 101:tests/test_WikiApp.c ****   }
+ 102:tests/test_WikiApp.c ****   OutC('\n');
+ 1392              		.loc 1 103 0
+ 1393 0fb0 0A000424 		li	$4,10			# 0xa
+ 1394 0fb4 0000828F 		lw	$2,%call16(OutC)($28)
+ 1395 0fb8 00000000 		nop
+ 1396 0fbc 21C84000 		move	$25,$2
+ 1397 0fc0 09F82003 		jalr	$25
+ 1398 0fc4 00000000 		nop
+ 1399              	
+ 1400 0fc8 1000DC8F 		lw	$28,16($fp)
+ 103:tests/test_WikiApp.c **** 
+ 104:tests/test_WikiApp.c ****   OutP("uint32_t samples = {");
+ 1401              		.loc 1 105 0
+ 1402 0fcc 0000023C 		lui	$2,%hi($LC22)
+ 1403 0fd0 0C014424 		addiu	$4,$2,%lo($LC22)
+ 1404 0fd4 0000828F 		lw	$2,%call16(OutS)($28)
+ 1405 0fd8 00000000 		nop
+ 1406 0fdc 21C84000 		move	$25,$2
+ 1407 0fe0 09F82003 		jalr	$25
+ 1408 0fe4 00000000 		nop
+ 1409              	
+ 1410 0fe8 1000DC8F 		lw	$28,16($fp)
+ 1411              	$LBB8 = .
+ 105:tests/test_WikiApp.c ****   for (int i=0; i<nsample; ++i)
+ 1412              		.loc 1 106 0
+ 1413 0fec 1800C0AF 		sw	$0,24($fp)
+ 1414 0ff0 15000010 		b	$L29
+ 1415 0ff4 00000000 		nop
+ 1416              	
+ 1417              	$L30:
+ 106:tests/test_WikiApp.c ****     printf_P(PSTR("0x%08x, "), (unsigned int) samples2[i]);
+ 1418              		.loc 1 107 0
+ 1419 0ff8 0000023C 		lui	$2,%hi($LC14)
+ 1420 0ffc A0004424 		addiu	$4,$2,%lo($LC14)
+ 1421 1000 1800C28F 		lw	$2,24($fp)
+ 1422 1004 2800C38F 		lw	$3,40($fp)
+ 1423 1008 C0100200 		sll	$2,$2,3
+ 1424 100c 21106200 		addu	$2,$3,$2
+ 1425 1010 0400438C 		lw	$3,4($2)
+ 1426 1014 0000428C 		lw	$2,0($2)
+ 1427 1018 00000000 		nop
+ 1428 101c 21284000 		move	$5,$2
+ 1429 1020 0000828F 		lw	$2,%call16(printf)($28)
+ 1430 1024 00000000 		nop
+ 1431 1028 21C84000 		move	$25,$2
+ 1432 102c 09F82003 		jalr	$25
+ 1433 1030 00000000 		nop
+ 1434              	
+ 1435 1034 1000DC8F 		lw	$28,16($fp)
+ 106:tests/test_WikiApp.c ****     printf_P(PSTR("0x%08x, "), (unsigned int) samples2[i]);
+ 1436              		.loc 1 106 0
+ 1437 1038 1800C28F 		lw	$2,24($fp)
+ 1438 103c 00000000 		nop
+ 1439 1040 01004224 		addiu	$2,$2,1
+ 1440 1044 1800C2AF 		sw	$2,24($fp)
+ 1441              	$L29:
+ 1442 1048 1800C38F 		lw	$3,24($fp)
+ 1443 104c 2400C28F 		lw	$2,36($fp)
+ 1444 1050 00000000 		nop
+ 1445 1054 2A106200 		slt	$2,$3,$2
+ 1446 1058 E7FF4014 		bne	$2,$0,$L30
+ 1447 105c 00000000 		nop
+ 1448              	
+ 1449              	$LBE8 = .
+ 107:tests/test_WikiApp.c ****   OutP("}\n");
+ 1450              		.loc 1 108 0
+ 1451 1060 0000023C 		lui	$2,%hi($LC23)
+ 1452 1064 24014424 		addiu	$4,$2,%lo($LC23)
+ 1453 1068 0000828F 		lw	$2,%call16(OutS)($28)
+ 1454 106c 00000000 		nop
+ 1455 1070 21C84000 		move	$25,$2
+ 1456 1074 09F82003 		jalr	$25
+ 1457 1078 00000000 		nop
+ 1458              	
+ 1459 107c 1000DC8F 		lw	$28,16($fp)
+ 1460 1080 F800DD8F 		lw	$sp,248($fp)
+ 108:tests/test_WikiApp.c **** }
+ 1461              		.loc 1 109 0
+ 1462 1084 21E8C003 		move	$sp,$fp
+ 1463 1088 5401BF8F 		lw	$31,340($sp)
+ 1464 108c 5001BE8F 		lw	$fp,336($sp)
+ 1465 1090 4C01B78F 		lw	$23,332($sp)
+ 1466 1094 4801B68F 		lw	$22,328($sp)
+ 1467 1098 4401B58F 		lw	$21,324($sp)
+ 1468 109c 4001B48F 		lw	$20,320($sp)
+ 1469 10a0 3C01B38F 		lw	$19,316($sp)
+ 1470 10a4 3801B28F 		lw	$18,312($sp)
+ 1471 10a8 3401B18F 		lw	$17,308($sp)
+ 1472 10ac 3001B08F 		lw	$16,304($sp)
+ 1473 10b0 5801BD27 		addiu	$sp,$sp,344
+ 1474 10b4 0800E003 		j	$31
+ 1475 10b8 00000000 		nop
+ 1476              	
+ 1477              		.set	macro
+ 1478              		.set	reorder
+ 1479              		.end	TestNodesValid
+ 1480              	$LFE6:
+ 1482              		.rdata
+ 1483 0127 00       		.align	2
+ 1484              	$LC24:
+ 1485 0128 72656375 		.ascii	"recur %i %i %lu\012\000"
+ 1485      72202569 
+ 1485      20256920 
+ 1485      256C750A 
+ 1485      00
+ 1486              		.text
+ 1487              		.align	2
+ 1488              		.globl	recur
+ 1489              	$LFB7 = .
+ 109:tests/test_WikiApp.c **** 
+ 110:tests/test_WikiApp.c **** int recur(int i) {
+ 1490              		.loc 1 111 0
+ 1491              		.set	nomips16
+ 1492              		.ent	recur
+ 1494              	recur:
+ 1495              		.frame	$fp,56,$31		# vars= 8, regs= 6/0, args= 16, gp= 8
+ 1496              		.mask	0xc00f0000,-4
+ 1497              		.fmask	0x00000000,0
+ 1498              		.set	noreorder
+ 1499              		.set	nomacro
+ 1500              		
+ 1501 10bc C8FFBD27 		addiu	$sp,$sp,-56
+ 1502              	$LCFI32:
+ 1503 10c0 3400BFAF 		sw	$31,52($sp)
+ 1504              	$LCFI33:
+ 1505 10c4 3000BEAF 		sw	$fp,48($sp)
+ 1506              	$LCFI34:
+ 1507 10c8 2C00B3AF 		sw	$19,44($sp)
+ 1508              	$LCFI35:
+ 1509 10cc 2800B2AF 		sw	$18,40($sp)
+ 1510              	$LCFI36:
+ 1511 10d0 2400B1AF 		sw	$17,36($sp)
+ 1512              	$LCFI37:
+ 1513 10d4 2000B0AF 		sw	$16,32($sp)
+ 1514              	$LCFI38:
+ 1515 10d8 21F0A003 		move	$fp,$sp
+ 1516              	$LCFI39:
+ 1517 10dc 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 1518 10e0 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 1519 10e4 1000BCAF 		.cprestore	16
+ 1520 10e8 3800C4AF 		sw	$4,56($fp)
+ 111:tests/test_WikiApp.c ****   uint64_t j = i*i;
+ 1521              		.loc 1 112 0
+ 1522 10ec 3800C38F 		lw	$3,56($fp)
+ 1523 10f0 3800C28F 		lw	$2,56($fp)
+ 1524 10f4 00000000 		nop
+ 1525 10f8 18006200 		mult	$3,$2
+ 1526 10fc 12100000 		mflo	$2
+ 1527 1100 1800C2AF 		sw	$2,24($fp)
+ 1528 1104 C3170200 		sra	$2,$2,31
+ 1529 1108 1C00C2AF 		sw	$2,28($fp)
+ 112:tests/test_WikiApp.c ****   printf_P(PSTR("recur %i %i %lu\n"),i,(unsigned int) j,(unsigned long) (TimerCount() >> 8) & 0xfff
+ 1530              		.loc 1 113 0
+ 1531 110c 0000023C 		lui	$2,%hi($LC24)
+ 1532 1110 28015324 		addiu	$19,$2,%lo($LC24)
+ 1533 1114 1800D28F 		lw	$18,24($fp)
+ 1534 1118 0000828F 		lw	$2,%call16(TimerCount)($28)
+ 1535 111c 00000000 		nop
+ 1536 1120 21C84000 		move	$25,$2
+ 1537 1124 09F82003 		jalr	$25
+ 1538 1128 00000000 		nop
+ 1539              	
+ 1540 112c 1000DC8F 		lw	$28,16($fp)
+ 1541 1130 00260300 		sll	$4,$3,24
+ 1542 1134 02820200 		srl	$16,$2,8
+ 1543 1138 25809000 		or	$16,$4,$16
+ 1544 113c 028A0300 		srl	$17,$3,8
+ 1545 1140 21100002 		move	$2,$16
+ 1546 1144 21206002 		move	$4,$19
+ 1547 1148 3800C58F 		lw	$5,56($fp)
+ 1548 114c 21304002 		move	$6,$18
+ 1549 1150 21384000 		move	$7,$2
+ 1550 1154 0000828F 		lw	$2,%call16(printf)($28)
+ 1551 1158 00000000 		nop
+ 1552 115c 21C84000 		move	$25,$2
+ 1553 1160 09F82003 		jalr	$25
+ 1554 1164 00000000 		nop
+ 1555              	
+ 1556 1168 1000DC8F 		lw	$28,16($fp)
+ 1557 116c 00000000 		nop
+ 113:tests/test_WikiApp.c ****   StackPrintInfo(stdout);
+ 1558              		.loc 1 114 0
+ 1559 1170 0000828F 		lw	$2,%got(stdout)($28)
+ 1560 1174 00000000 		nop
+ 1561 1178 0000428C 		lw	$2,0($2)
+ 1562 117c 00000000 		nop
+ 1563 1180 21204000 		move	$4,$2
+ 1564 1184 0000828F 		lw	$2,%call16(StackPrintInfo)($28)
+ 1565 1188 00000000 		nop
+ 1566 118c 21C84000 		move	$25,$2
+ 1567 1190 09F82003 		jalr	$25
+ 1568 1194 00000000 		nop
+ 1569              	
+ 1570 1198 1000DC8F 		lw	$28,16($fp)
+ 114:tests/test_WikiApp.c ****   DelayMs(100);
+ 1571              		.loc 1 115 0
+ 1572 119c 64000424 		li	$4,100			# 0x64
+ 1573 11a0 0000828F 		lw	$2,%call16(DelayMs)($28)
+ 1574 11a4 00000000 		nop
+ 1575 11a8 21C84000 		move	$25,$2
+ 1576 11ac 09F82003 		jalr	$25
+ 1577 11b0 00000000 		nop
+ 1578              	
+ 1579 11b4 1000DC8F 		lw	$28,16($fp)
+ 115:tests/test_WikiApp.c ****   --i;
+ 1580              		.loc 1 116 0
+ 1581 11b8 3800C28F 		lw	$2,56($fp)
+ 1582 11bc 00000000 		nop
+ 1583 11c0 FFFF4224 		addiu	$2,$2,-1
+ 1584 11c4 3800C2AF 		sw	$2,56($fp)
+ 116:tests/test_WikiApp.c ****   if (i)
+ 1585              		.loc 1 117 0
+ 1586 11c8 3800C28F 		lw	$2,56($fp)
+ 1587 11cc 00000000 		nop
+ 1588 11d0 05004010 		beq	$2,$0,$L34
+ 1589 11d4 00000000 		nop
+ 1590              	
+ 117:tests/test_WikiApp.c ****     recur(i);
+ 1591              		.loc 1 118 0
+ 1592 11d8 3800C48F 		lw	$4,56($fp)
+ 1593              		.option	pic0
+ 1594 11dc 0000000C 		jal	recur
+ 1595 11e0 00000000 		nop
+ 1596              	
+ 1597              		.option	pic2
+ 1598 11e4 1000DC8F 		lw	$28,16($fp)
+ 1599              	$L34:
+ 118:tests/test_WikiApp.c ****   return j;
+ 1600              		.loc 1 119 0
+ 1601 11e8 1800C28F 		lw	$2,24($fp)
+ 119:tests/test_WikiApp.c **** }
+ 1602              		.loc 1 120 0
+ 1603 11ec 21E8C003 		move	$sp,$fp
+ 1604 11f0 3400BF8F 		lw	$31,52($sp)
+ 1605 11f4 3000BE8F 		lw	$fp,48($sp)
+ 1606 11f8 2C00B38F 		lw	$19,44($sp)
+ 1607 11fc 2800B28F 		lw	$18,40($sp)
+ 1608 1200 2400B18F 		lw	$17,36($sp)
+ 1609 1204 2000B08F 		lw	$16,32($sp)
+ 1610 1208 3800BD27 		addiu	$sp,$sp,56
+ 1611 120c 0800E003 		j	$31
+ 1612 1210 00000000 		nop
+ 1613              	
+ 1614              		.set	macro
+ 1615              		.set	reorder
+ 1616              		.end	recur
+ 1617              	$LFE7:
+ 1619              		.rdata
+ 1620 0139 000000   		.align	2
+ 1621              	$LC25:
+ 1622 013c 74657374 		.ascii	"test_WikiApp\012\000"
+ 1622      5F57696B 
+ 1622      69417070 
+ 1622      0A00
+ 1623 014a 0000     		.align	2
+ 1624              	$LC26:
+ 1625 014c 41524D41 		.ascii	"ARMADILLO\000"
+ 1625      44494C4C 
+ 1625      4F00
+ 1626 0156 0000     		.align	2
+ 1627              	$LC27:
+ 1628 0158 43414449 		.ascii	"CADILLAC\000"
+ 1628      4C4C4143 
+ 1628      00
+ 1629 0161 000000   		.align	2
+ 1630              	$LC28:
+ 1631 0164 47484F53 		.ascii	"GHOST\000"
+ 1631      5400
+ 1632 016a 0000     		.align	2
+ 1633              	$LC29:
+ 1634 016c 4100     		.ascii	"A\000"
+ 1635 016e 0000     		.align	2
+ 1636              	$LC30:
+ 1637 0170 53656172 		.ascii	"Searching for \000"
+ 1637      6368696E 
+ 1637      6720666F 
+ 1637      722000
+ 1638 017f 00       		.align	2
+ 1639              	$LC31:
+ 1640 0180 2E2E00   		.ascii	"..\000"
+ 1641 0183 00       		.align	2
+ 1642              	$LC32:
+ 1643 0184 42616420 		.ascii	"Bad crc %lx != %lx\012\000"
+ 1643      63726320 
+ 1643      256C7820 
+ 1643      213D2025 
+ 1643      6C780A00 
+ 1644              		.align	2
+ 1645              	$LC33:
+ 1646 0198 52455155 		.ascii	"REQUIRE FAILURE %s\012\000"
+ 1646      49524520 
+ 1646      4641494C 
+ 1646      55524520 
+ 1646      25730A00 
+ 1647              		.align	2
+ 1648              	$LC34:
+ 1649 01ac 554E4B00 		.ascii	"UNK\000"
+ 1650              		.align	2
+ 1651              	$LC35:
+ 1652 01b0 464F554E 		.ascii	"FOUND \012\000"
+ 1652      44200A00 
+ 1653              		.align	2
+ 1654              	$LC36:
+ 1655 01b8 4E4F5420 		.ascii	"NOT FOUND\012\000"
+ 1655      464F554E 
+ 1655      440A00
+ 1656 01c3 00       		.align	2
+ 1657              	$LC37:
+ 1658 01c4 69497373 		.ascii	"iIss\000"
+ 1658      00
+ 1659 01c9 000000   		.align	2
+ 1660              	$LC38:
+ 1661 01cc 206C6576 		.ascii	" level=\000"
+ 1661      656C3D00 
+ 1662              		.align	2
+ 1663              	$LC39:
+ 1664 01d4 2000     		.ascii	" \000"
+ 1665 01d6 0000     		.align	2
+ 1666              	$LC40:
+ 1667 01d8 7469746C 		.ascii	"title=\000"
+ 1667      653D00
+ 1668 01df 00       		.align	2
+ 1669              	$LC41:
+ 1670 01e0 444F4E45 		.ascii	"DONE\012\000"
+ 1670      0A00
+ 1671              		.text
+ 1672              		.align	2
+ 1673              		.globl	main
+ 1674              	$LFB8 = .
+ 120:tests/test_WikiApp.c **** 
+ 121:tests/test_WikiApp.c **** int main(int argc, char **argv) {
+ 1675              		.loc 1 122 0
+ 1676              		.set	nomips16
+ 1677              		.ent	main
+ 1679              	main:
+ 1680              		.frame	$fp,720,$31		# vars= 672, regs= 3/0, args= 24, gp= 8
+ 1681              		.mask	0xc0010000,-4
+ 1682              		.fmask	0x00000000,0
+ 1683              		.set	noreorder
+ 1684              		.set	nomacro
+ 1685              		
+ 1686 1214 30FDBD27 		addiu	$sp,$sp,-720
+ 1687              	$LCFI40:
+ 1688 1218 CC02BFAF 		sw	$31,716($sp)
+ 1689              	$LCFI41:
+ 1690 121c C802BEAF 		sw	$fp,712($sp)
+ 1691              	$LCFI42:
+ 1692 1220 C402B0AF 		sw	$16,708($sp)
+ 1693              	$LCFI43:
+ 1694 1224 21F0A003 		move	$fp,$sp
+ 1695              	$LCFI44:
+ 1696 1228 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 1697 122c 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 1698 1230 1800BCAF 		.cprestore	24
+ 1699 1234 D002C4AF 		sw	$4,720($fp)
+ 1700 1238 D402C5AF 		sw	$5,724($fp)
+ 122:tests/test_WikiApp.c ****   PlatformInit();
+ 1701              		.loc 1 123 0
+ 1702 123c 0000828F 		lw	$2,%call16(PlatformInit)($28)
+ 1703 1240 00000000 		nop
+ 1704 1244 21C84000 		move	$25,$2
+ 1705 1248 09F82003 		jalr	$25
+ 1706 124c 00000000 		nop
+ 1707              	
+ 1708 1250 1800DC8F 		lw	$28,24($fp)
+ 123:tests/test_WikiApp.c ****   OutP("test_WikiApp\n");
+ 1709              		.loc 1 124 0
+ 1710 1254 0000023C 		lui	$2,%hi($LC25)
+ 1711 1258 3C014424 		addiu	$4,$2,%lo($LC25)
+ 1712 125c 0000828F 		lw	$2,%call16(OutS)($28)
+ 1713 1260 00000000 		nop
+ 1714 1264 21C84000 		move	$25,$2
+ 1715 1268 09F82003 		jalr	$25
+ 1716 126c 00000000 		nop
+ 1717              	
+ 1718 1270 1800DC8F 		lw	$28,24($fp)
+ 124:tests/test_WikiApp.c **** 
+ 125:tests/test_WikiApp.c ****   assert(sizeof(Node) == BlockSize);
+ 126:tests/test_WikiApp.c ****   assert(sizeof(unsigned long) >= 4); // Needed for pf_fseek to function
+ 127:tests/test_WikiApp.c **** 
+ 128:tests/test_WikiApp.c ****   WikiApp wapp;
+ 129:tests/test_WikiApp.c ****   WikiAppInit(&wapp);
+ 1719              		.loc 1 130 0
+ 1720 1274 3800C227 		addiu	$2,$fp,56
+ 1721 1278 21204000 		move	$4,$2
+ 1722 127c 0000828F 		lw	$2,%call16(WikiAppInit)($28)
+ 1723 1280 00000000 		nop
+ 1724 1284 21C84000 		move	$25,$2
+ 1725 1288 09F82003 		jalr	$25
+ 1726 128c 00000000 		nop
+ 1727              	
+ 1728 1290 1800DC8F 		lw	$28,24($fp)
+ 1729 1294 00000000 		nop
+ 130:tests/test_WikiApp.c ****   ERRORassert();
+ 1730              		.loc 1 131 0
+ 1731 1298 0000828F 		lw	$2,%got(errorMsg)($28)
+ 1732 129c 00000000 		nop
+ 1733 12a0 0000428C 		lw	$2,0($2)
+ 1734 12a4 00000000 		nop
+ 1735 12a8 18004010 		beq	$2,$0,$L37
+ 1736 12ac 00000000 		nop
+ 1737              	
+ 1738 12b0 0000023C 		lui	$2,%hi(__func__.2577)
+ 1739 12b4 E8014424 		addiu	$4,$2,%lo(__func__.2577)
+ 1740 12b8 0000023C 		lui	$2,%hi($LC1)
+ 1741 12bc 08004524 		addiu	$5,$2,%lo($LC1)
+ 1742 12c0 83000624 		li	$6,131			# 0x83
+ 1743 12c4 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 1744 12c8 00000000 		nop
+ 1745 12cc 21C84000 		move	$25,$2
+ 1746 12d0 09F82003 		jalr	$25
+ 1747 12d4 00000000 		nop
+ 1748              	
+ 1749 12d8 1800DC8F 		lw	$28,24($fp)
+ 1750 12dc 0000023C 		lui	$2,%hi($LC2)
+ 1751 12e0 20004424 		addiu	$4,$2,%lo($LC2)
+ 1752 12e4 0000023C 		lui	$2,%hi($LC1)
+ 1753 12e8 08004524 		addiu	$5,$2,%lo($LC1)
+ 1754 12ec 83000624 		li	$6,131			# 0x83
+ 1755 12f0 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2575)
+ 1756 12f4 F0014724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2575)
+ 1757 12f8 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1758 12fc 00000000 		nop
+ 1759 1300 21C84000 		move	$25,$2
+ 1760 1304 09F82003 		jalr	$25
+ 1761 1308 00000000 		nop
+ 1762              	
+ 1763              	$L37:
+ 131:tests/test_WikiApp.c **** 
+ 132:tests/test_WikiApp.c ****   //recur(10000);
+ 133:tests/test_WikiApp.c **** 
+ 134:tests/test_WikiApp.c ****   TestLargeSeek();
+ 1764              		.loc 1 135 0
+ 1765              		.option	pic0
+ 1766 130c 0000000C 		jal	TestLargeSeek
+ 1767 1310 00000000 		nop
+ 1768              	
+ 1769              		.option	pic2
+ 1770 1314 1800DC8F 		lw	$28,24($fp)
+ 135:tests/test_WikiApp.c ****   TestNodesValid(&wapp);
+ 1771              		.loc 1 136 0
+ 1772 1318 3800C227 		addiu	$2,$fp,56
+ 1773 131c 21204000 		move	$4,$2
+ 1774              		.option	pic0
+ 1775 1320 0000000C 		jal	TestNodesValid
+ 1776 1324 00000000 		nop
+ 1777              	
+ 1778              		.option	pic2
+ 1779 1328 1800DC8F 		lw	$28,24($fp)
+ 136:tests/test_WikiApp.c **** 
+ 137:tests/test_WikiApp.c **** #if 0
+ 138:tests/test_WikiApp.c ****   uint64_t addr[] = {0x0, 0x00d3e200};
+ 139:tests/test_WikiApp.c ****   for (int i=0; i<2; ++i) {
+ 140:tests/test_WikiApp.c ****     Node n;
+ 141:tests/test_WikiApp.c ****     uint64_t sample;
+ 142:tests/test_WikiApp.c ****     OutP("Block "); OutX(addr[i]); OutP("\n");
+ 143:tests/test_WikiApp.c ****     LoadBlock(addr[i], &n, &wapp.pageContext); 
+ 144:tests/test_WikiApp.c ****     PrintHexBlock((unsigned char *) &n, BlockSize/2);
+ 145:tests/test_WikiApp.c ****     sample = SeekAndRead(addr[i]);
+ 146:tests/test_WikiApp.c ****     OutP("SAMPLE=");
+ 147:tests/test_WikiApp.c ****     PrintHexBlock((unsigned char *) &sample, sizeof(uint64_t));
+ 148:tests/test_WikiApp.c ****     assert(sample == *((uint64_t *) &n));
+ 149:tests/test_WikiApp.c ****   }
+ 150:tests/test_WikiApp.c **** #endif
+ 151:tests/test_WikiApp.c **** 
+ 152:tests/test_WikiApp.c ****   //NodeVisitDFS(wapp.pageTree, &TestSanityVisitor, wapp.pageTree.topNode);
+ 153:tests/test_WikiApp.c ****   //NodeVisitDFS(wapp.pageTree, &PrintVisitor, wapp.pageTree.topNode);
+ 154:tests/test_WikiApp.c **** 
+ 155:tests/test_WikiApp.c ****   const char *titles[] = {"ARMADILLO", "CADILLAC","GHOST", "A", 0x0};
+ 1780              		.loc 1 156 0
+ 1781 132c 0000023C 		lui	$2,%hi($LC26)
+ 1782 1330 4C014224 		addiu	$2,$2,%lo($LC26)
+ 1783 1334 8C02C2AF 		sw	$2,652($fp)
+ 1784 1338 0000023C 		lui	$2,%hi($LC27)
+ 1785 133c 58014224 		addiu	$2,$2,%lo($LC27)
+ 1786 1340 9002C2AF 		sw	$2,656($fp)
+ 1787 1344 0000023C 		lui	$2,%hi($LC28)
+ 1788 1348 64014224 		addiu	$2,$2,%lo($LC28)
+ 1789 134c 9402C2AF 		sw	$2,660($fp)
+ 1790 1350 0000023C 		lui	$2,%hi($LC29)
+ 1791 1354 6C014224 		addiu	$2,$2,%lo($LC29)
+ 1792 1358 9802C2AF 		sw	$2,664($fp)
+ 1793 135c 9C02C0AF 		sw	$0,668($fp)
+ 156:tests/test_WikiApp.c ****   uint32_t crcs[] = {0x517bfbb3, 0x4f93eba7, 0xf4075211, 0xd3d99e8b};
+ 1794              		.loc 1 157 0
+ 1795 1360 7B51023C 		li	$2,1367015424			# 0x517b0000
+ 1796 1364 B3FB4234 		ori	$2,$2,0xfbb3
+ 1797 1368 A002C2AF 		sw	$2,672($fp)
+ 1798 136c 934F023C 		li	$2,1335033856			# 0x4f930000
+ 1799 1370 A7EB4234 		ori	$2,$2,0xeba7
+ 1800 1374 A402C2AF 		sw	$2,676($fp)
+ 1801 1378 07F4023C 		li	$2,-200867840			# 0xfffffffff4070000
+ 1802 137c 11524234 		ori	$2,$2,0x5211
+ 1803 1380 A802C2AF 		sw	$2,680($fp)
+ 1804 1384 D9D3023C 		li	$2,-740753408			# 0xffffffffd3d90000
+ 1805 1388 8B9E4234 		ori	$2,$2,0x9e8b
+ 1806 138c AC02C2AF 		sw	$2,684($fp)
+ 157:tests/test_WikiApp.c **** 
+ 158:tests/test_WikiApp.c ****   StackPrintInfo(stdout);
+ 1807              		.loc 1 159 0
+ 1808 1390 0000828F 		lw	$2,%got(stdout)($28)
+ 1809 1394 00000000 		nop
+ 1810 1398 0000428C 		lw	$2,0($2)
+ 1811 139c 00000000 		nop
+ 1812 13a0 21204000 		move	$4,$2
+ 1813 13a4 0000828F 		lw	$2,%call16(StackPrintInfo)($28)
+ 1814 13a8 00000000 		nop
+ 1815 13ac 21C84000 		move	$25,$2
+ 1816 13b0 09F82003 		jalr	$25
+ 1817 13b4 00000000 		nop
+ 1818              	
+ 1819 13b8 1800DC8F 		lw	$28,24($fp)
+ 1820              	$LBB9 = .
+ 159:tests/test_WikiApp.c **** 
+ 160:tests/test_WikiApp.c **** 
+ 161:tests/test_WikiApp.c ****   for (int i=0; titles[i] != 0x0; ++i) {
+ 1821              		.loc 1 162 0
+ 1822 13bc 3400C0AF 		sw	$0,52($fp)
+ 1823 13c0 D2010010 		b	$L38
+ 1824 13c4 00000000 		nop
+ 1825              	
+ 1826              	$L50:
+ 1827              	$LBB10 = .
+ 162:tests/test_WikiApp.c ****     OutP("Searching for "); OutS(titles[i]); 
+ 1828              		.loc 1 163 0
+ 1829 13c8 0000023C 		lui	$2,%hi($LC30)
+ 1830 13cc 70014424 		addiu	$4,$2,%lo($LC30)
+ 1831 13d0 0000828F 		lw	$2,%call16(OutS)($28)
+ 1832 13d4 00000000 		nop
+ 1833 13d8 21C84000 		move	$25,$2
+ 1834 13dc 09F82003 		jalr	$25
+ 1835 13e0 00000000 		nop
+ 1836              	
+ 1837 13e4 1800DC8F 		lw	$28,24($fp)
+ 1838 13e8 3400C28F 		lw	$2,52($fp)
+ 1839 13ec 00000000 		nop
+ 1840 13f0 80100200 		sll	$2,$2,2
+ 1841 13f4 2000C327 		addiu	$3,$fp,32
+ 1842 13f8 21106200 		addu	$2,$3,$2
+ 1843 13fc 6C02428C 		lw	$2,620($2)
+ 1844 1400 00000000 		nop
+ 1845 1404 21204000 		move	$4,$2
+ 1846 1408 0000828F 		lw	$2,%call16(OutS)($28)
+ 1847 140c 00000000 		nop
+ 1848 1410 21C84000 		move	$25,$2
+ 1849 1414 09F82003 		jalr	$25
+ 1850 1418 00000000 		nop
+ 1851              	
+ 1852 141c 1800DC8F 		lw	$28,24($fp)
+ 163:tests/test_WikiApp.c ****     OutP("..");
+ 1853              		.loc 1 164 0
+ 1854 1420 0000023C 		lui	$2,%hi($LC31)
+ 1855 1424 80014424 		addiu	$4,$2,%lo($LC31)
+ 1856 1428 0000828F 		lw	$2,%call16(OutS)($28)
+ 1857 142c 00000000 		nop
+ 1858 1430 21C84000 		move	$25,$2
+ 1859 1434 09F82003 		jalr	$25
+ 1860 1438 00000000 		nop
+ 1861              	
+ 1862 143c 1800DC8F 		lw	$28,24($fp)
+ 164:tests/test_WikiApp.c ****     uint32_t crc = CalcCRC(titles[i], strlen(titles[i]));
+ 1863              		.loc 1 165 0
+ 1864 1440 3400C28F 		lw	$2,52($fp)
+ 1865 1444 00000000 		nop
+ 1866 1448 80100200 		sll	$2,$2,2
+ 1867 144c 2000C327 		addiu	$3,$fp,32
+ 1868 1450 21106200 		addu	$2,$3,$2
+ 1869 1454 6C02508C 		lw	$16,620($2)
+ 1870 1458 3400C28F 		lw	$2,52($fp)
+ 1871 145c 00000000 		nop
+ 1872 1460 80100200 		sll	$2,$2,2
+ 1873 1464 2000C327 		addiu	$3,$fp,32
+ 1874 1468 21106200 		addu	$2,$3,$2
+ 1875 146c 6C02428C 		lw	$2,620($2)
+ 1876 1470 00000000 		nop
+ 1877 1474 21204000 		move	$4,$2
+ 1878 1478 0000828F 		lw	$2,%call16(strlen)($28)
+ 1879 147c 00000000 		nop
+ 1880 1480 21C84000 		move	$25,$2
+ 1881 1484 09F82003 		jalr	$25
+ 1882 1488 00000000 		nop
+ 1883              	
+ 1884 148c 1800DC8F 		lw	$28,24($fp)
+ 1885 1490 21200002 		move	$4,$16
+ 1886 1494 21284000 		move	$5,$2
+ 1887 1498 0000828F 		lw	$2,%call16(CalcCRC)($28)
+ 1888 149c 00000000 		nop
+ 1889 14a0 21C84000 		move	$25,$2
+ 1890 14a4 09F82003 		jalr	$25
+ 1891 14a8 00000000 		nop
+ 1892              	
+ 1893 14ac 1800DC8F 		lw	$28,24($fp)
+ 1894 14b0 3000C2AF 		sw	$2,48($fp)
+ 165:tests/test_WikiApp.c ****     if (crc != crcs[i]) {
+ 1895              		.loc 1 166 0
+ 1896 14b4 3400C28F 		lw	$2,52($fp)
+ 1897 14b8 00000000 		nop
+ 1898 14bc 80100200 		sll	$2,$2,2
+ 1899 14c0 2000C327 		addiu	$3,$fp,32
+ 1900 14c4 21106200 		addu	$2,$3,$2
+ 1901 14c8 8002438C 		lw	$3,640($2)
+ 1902 14cc 3000C28F 		lw	$2,48($fp)
+ 1903 14d0 00000000 		nop
+ 1904 14d4 12006210 		beq	$3,$2,$L39
+ 1905 14d8 00000000 		nop
+ 1906              	
+ 166:tests/test_WikiApp.c ****       printf_P(PSTR("Bad crc %lx != %lx\n"), (unsigned long)crc, (unsigned long)crcs[i]);
+ 1907              		.loc 1 167 0
+ 1908 14dc 0000023C 		lui	$2,%hi($LC32)
+ 1909 14e0 84014324 		addiu	$3,$2,%lo($LC32)
+ 1910 14e4 3400C28F 		lw	$2,52($fp)
+ 1911 14e8 00000000 		nop
+ 1912 14ec 80100200 		sll	$2,$2,2
+ 1913 14f0 2000C427 		addiu	$4,$fp,32
+ 1914 14f4 21108200 		addu	$2,$4,$2
+ 1915 14f8 8002428C 		lw	$2,640($2)
+ 1916 14fc 21206000 		move	$4,$3
+ 1917 1500 3000C58F 		lw	$5,48($fp)
+ 1918 1504 21304000 		move	$6,$2
+ 1919 1508 0000828F 		lw	$2,%call16(printf)($28)
+ 1920 150c 00000000 		nop
+ 1921 1510 21C84000 		move	$25,$2
+ 1922 1514 09F82003 		jalr	$25
+ 1923 1518 00000000 		nop
+ 1924              	
+ 1925 151c 1800DC8F 		lw	$28,24($fp)
+ 1926              	$L39:
+ 167:tests/test_WikiApp.c ****     }
+ 168:tests/test_WikiApp.c ****     require(crc == crcs[i]);
+ 1927              		.loc 1 169 0
+ 1928 1520 3400C28F 		lw	$2,52($fp)
+ 1929 1524 00000000 		nop
+ 1930 1528 80100200 		sll	$2,$2,2
+ 1931 152c 2000C327 		addiu	$3,$fp,32
+ 1932 1530 21106200 		addu	$2,$3,$2
+ 1933 1534 8002438C 		lw	$3,640($2)
+ 1934 1538 3000C28F 		lw	$2,48($fp)
+ 1935 153c 00000000 		nop
+ 1936 1540 12006210 		beq	$3,$2,$L40
+ 1937 1544 00000000 		nop
+ 1938              	
+ 1939 1548 0000828F 		lw	$2,%got(stderr)($28)
+ 1940 154c 00000000 		nop
+ 1941 1550 0000428C 		lw	$2,0($2)
+ 1942 1554 00000000 		nop
+ 1943 1558 21184000 		move	$3,$2
+ 1944 155c 0000023C 		lui	$2,%hi($LC33)
+ 1945 1560 98014224 		addiu	$2,$2,%lo($LC33)
+ 1946 1564 21206000 		move	$4,$3
+ 1947 1568 21284000 		move	$5,$2
+ 1948 156c 0000023C 		lui	$2,%hi($LC34)
+ 1949 1570 AC014624 		addiu	$6,$2,%lo($LC34)
+ 1950 1574 0000828F 		lw	$2,%call16(fprintf)($28)
+ 1951 1578 00000000 		nop
+ 1952 157c 21C84000 		move	$25,$2
+ 1953 1580 09F82003 		jalr	$25
+ 1954 1584 00000000 		nop
+ 1955              	
+ 1956 1588 1800DC8F 		lw	$28,24($fp)
+ 1957              	$L40:
+ 169:tests/test_WikiApp.c ****     int res = WikiAppSetTitle(&wapp, titles[i]);
+ 1958              		.loc 1 170 0
+ 1959 158c 3400C28F 		lw	$2,52($fp)
+ 1960 1590 00000000 		nop
+ 1961 1594 80100200 		sll	$2,$2,2
+ 1962 1598 2000C327 		addiu	$3,$fp,32
+ 1963 159c 21106200 		addu	$2,$3,$2
+ 1964 15a0 6C02428C 		lw	$2,620($2)
+ 1965 15a4 3800C327 		addiu	$3,$fp,56
+ 1966 15a8 21206000 		move	$4,$3
+ 1967 15ac 21284000 		move	$5,$2
+ 1968 15b0 0000828F 		lw	$2,%call16(WikiAppSetTitle)($28)
+ 1969 15b4 00000000 		nop
+ 1970 15b8 21C84000 		move	$25,$2
+ 1971 15bc 09F82003 		jalr	$25
+ 1972 15c0 00000000 		nop
+ 1973              	
+ 1974 15c4 1800DC8F 		lw	$28,24($fp)
+ 1975 15c8 2C00C2AF 		sw	$2,44($fp)
+ 170:tests/test_WikiApp.c ****     ERRORassert();
+ 1976              		.loc 1 171 0
+ 1977 15cc 0000828F 		lw	$2,%got(errorMsg)($28)
+ 1978 15d0 00000000 		nop
+ 1979 15d4 0000428C 		lw	$2,0($2)
+ 1980 15d8 00000000 		nop
+ 1981 15dc 18004010 		beq	$2,$0,$L41
+ 1982 15e0 00000000 		nop
+ 1983              	
+ 1984 15e4 0000023C 		lui	$2,%hi(__func__.2577)
+ 1985 15e8 E8014424 		addiu	$4,$2,%lo(__func__.2577)
+ 1986 15ec 0000023C 		lui	$2,%hi($LC1)
+ 1987 15f0 08004524 		addiu	$5,$2,%lo($LC1)
+ 1988 15f4 AB000624 		li	$6,171			# 0xab
+ 1989 15f8 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 1990 15fc 00000000 		nop
+ 1991 1600 21C84000 		move	$25,$2
+ 1992 1604 09F82003 		jalr	$25
+ 1993 1608 00000000 		nop
+ 1994              	
+ 1995 160c 1800DC8F 		lw	$28,24($fp)
+ 1996 1610 0000023C 		lui	$2,%hi($LC2)
+ 1997 1614 20004424 		addiu	$4,$2,%lo($LC2)
+ 1998 1618 0000023C 		lui	$2,%hi($LC1)
+ 1999 161c 08004524 		addiu	$5,$2,%lo($LC1)
+ 2000 1620 AB000624 		li	$6,171			# 0xab
+ 2001 1624 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2575)
+ 2002 1628 F0014724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2575)
+ 2003 162c 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 2004 1630 00000000 		nop
+ 2005 1634 21C84000 		move	$25,$2
+ 2006 1638 09F82003 		jalr	$25
+ 2007 163c 00000000 		nop
+ 2008              	
+ 2009              	$L41:
+ 171:tests/test_WikiApp.c ****     if (res) {
+ 2010              		.loc 1 172 0
+ 2011 1640 2C00C28F 		lw	$2,44($fp)
+ 2012 1644 00000000 		nop
+ 2013 1648 0B004010 		beq	$2,$0,$L42
+ 2014 164c 00000000 		nop
+ 2015              	
+ 172:tests/test_WikiApp.c ****       OutP("FOUND \n");
+ 2016              		.loc 1 173 0
+ 2017 1650 0000023C 		lui	$2,%hi($LC35)
+ 2018 1654 B0014424 		addiu	$4,$2,%lo($LC35)
+ 2019 1658 0000828F 		lw	$2,%call16(OutS)($28)
+ 2020 165c 00000000 		nop
+ 2021 1660 21C84000 		move	$25,$2
+ 2022 1664 09F82003 		jalr	$25
+ 2023 1668 00000000 		nop
+ 2024              	
+ 2025 166c 1800DC8F 		lw	$28,24($fp)
+ 2026 1670 09000010 		b	$L43
+ 2027 1674 00000000 		nop
+ 2028              	
+ 2029              	$L42:
+ 173:tests/test_WikiApp.c ****     } else {
+ 174:tests/test_WikiApp.c ****       OutP("NOT FOUND\n");
+ 2030              		.loc 1 175 0
+ 2031 1678 0000023C 		lui	$2,%hi($LC36)
+ 2032 167c B8014424 		addiu	$4,$2,%lo($LC36)
+ 2033 1680 0000828F 		lw	$2,%call16(OutS)($28)
+ 2034 1684 00000000 		nop
+ 2035 1688 21C84000 		move	$25,$2
+ 2036 168c 09F82003 		jalr	$25
+ 2037 1690 00000000 		nop
+ 2038              	
+ 2039 1694 1800DC8F 		lw	$28,24($fp)
+ 2040              	$L43:
+ 175:tests/test_WikiApp.c ****     }
+ 176:tests/test_WikiApp.c ****     BAT found = CursorNext(&wapp.toc.startCur);
+ 2041              		.loc 1 177 0
+ 2042 1698 3800C227 		addiu	$2,$fp,56
+ 2043 169c BC004224 		addiu	$2,$2,188
+ 2044 16a0 21204000 		move	$4,$2
+ 2045 16a4 0000828F 		lw	$2,%call16(CursorNext)($28)
+ 2046 16a8 00000000 		nop
+ 2047 16ac 21C84000 		move	$25,$2
+ 2048 16b0 09F82003 		jalr	$25
+ 2049 16b4 00000000 		nop
+ 2050              	
+ 2051 16b8 1800DC8F 		lw	$28,24($fp)
+ 2052 16bc 2800C2AF 		sw	$2,40($fp)
+ 177:tests/test_WikiApp.c ****     require(found != BAInvalid);
+ 2053              		.loc 1 178 0
+ 2054 16c0 2800C38F 		lw	$3,40($fp)
+ 2055 16c4 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 2056 16c8 12006214 		bne	$3,$2,$L44
+ 2057 16cc 00000000 		nop
+ 2058              	
+ 2059 16d0 0000828F 		lw	$2,%got(stderr)($28)
+ 2060 16d4 00000000 		nop
+ 2061 16d8 0000428C 		lw	$2,0($2)
+ 2062 16dc 00000000 		nop
+ 2063 16e0 21184000 		move	$3,$2
+ 2064 16e4 0000023C 		lui	$2,%hi($LC33)
+ 2065 16e8 98014224 		addiu	$2,$2,%lo($LC33)
+ 2066 16ec 21206000 		move	$4,$3
+ 2067 16f0 21284000 		move	$5,$2
+ 2068 16f4 0000023C 		lui	$2,%hi($LC34)
+ 2069 16f8 AC014624 		addiu	$6,$2,%lo($LC34)
+ 2070 16fc 0000828F 		lw	$2,%call16(fprintf)($28)
+ 2071 1700 00000000 		nop
+ 2072 1704 21C84000 		move	$25,$2
+ 2073 1708 09F82003 		jalr	$25
+ 2074 170c 00000000 		nop
+ 2075              	
+ 2076 1710 1800DC8F 		lw	$28,24($fp)
+ 2077              	$L44:
+ 178:tests/test_WikiApp.c ****     FileOpenRO(wapp.pageContext.blobFname);
+ 2078              		.loc 1 179 0
+ 2079 1714 4000C28F 		lw	$2,64($fp)
+ 2080 1718 00000000 		nop
+ 2081 171c 21204000 		move	$4,$2
+ 2082 1720 0000828F 		lw	$2,%call16(FileOpenRO)($28)
+ 2083 1724 00000000 		nop
+ 2084 1728 21C84000 		move	$25,$2
+ 2085 172c 09F82003 		jalr	$25
+ 2086 1730 00000000 		nop
+ 2087              	
+ 2088 1734 1800DC8F 		lw	$28,24($fp)
+ 2089 1738 00000000 		nop
+ 179:tests/test_WikiApp.c ****     ERRORassert();
+ 2090              		.loc 1 180 0
+ 2091 173c 0000828F 		lw	$2,%got(errorMsg)($28)
+ 2092 1740 00000000 		nop
+ 2093 1744 0000428C 		lw	$2,0($2)
+ 2094 1748 00000000 		nop
+ 2095 174c 18004010 		beq	$2,$0,$L45
+ 2096 1750 00000000 		nop
+ 2097              	
+ 2098 1754 0000023C 		lui	$2,%hi(__func__.2577)
+ 2099 1758 E8014424 		addiu	$4,$2,%lo(__func__.2577)
+ 2100 175c 0000023C 		lui	$2,%hi($LC1)
+ 2101 1760 08004524 		addiu	$5,$2,%lo($LC1)
+ 2102 1764 B4000624 		li	$6,180			# 0xb4
+ 2103 1768 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 2104 176c 00000000 		nop
+ 2105 1770 21C84000 		move	$25,$2
+ 2106 1774 09F82003 		jalr	$25
+ 2107 1778 00000000 		nop
+ 2108              	
+ 2109 177c 1800DC8F 		lw	$28,24($fp)
+ 2110 1780 0000023C 		lui	$2,%hi($LC2)
+ 2111 1784 20004424 		addiu	$4,$2,%lo($LC2)
+ 2112 1788 0000023C 		lui	$2,%hi($LC1)
+ 2113 178c 08004524 		addiu	$5,$2,%lo($LC1)
+ 2114 1790 B4000624 		li	$6,180			# 0xb4
+ 2115 1794 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2575)
+ 2116 1798 F0014724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2575)
+ 2117 179c 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 2118 17a0 00000000 		nop
+ 2119 17a4 21C84000 		move	$25,$2
+ 2120 17a8 09F82003 		jalr	$25
+ 2121 17ac 00000000 		nop
+ 2122              	
+ 2123              	$L45:
+ 180:tests/test_WikiApp.c ****     FILE *blob = FileGetHandle();
+ 2124              		.loc 1 181 0
+ 2125 17b0 0000828F 		lw	$2,%call16(FileGetHandle)($28)
+ 2126 17b4 00000000 		nop
+ 2127 17b8 21C84000 		move	$25,$2
+ 2128 17bc 09F82003 		jalr	$25
+ 2129 17c0 00000000 		nop
+ 2130              	
+ 2131 17c4 1800DC8F 		lw	$28,24($fp)
+ 2132 17c8 2400C2AF 		sw	$2,36($fp)
+ 181:tests/test_WikiApp.c ****     ERRORassert();
+ 2133              		.loc 1 182 0
+ 2134 17cc 0000828F 		lw	$2,%got(errorMsg)($28)
+ 2135 17d0 00000000 		nop
+ 2136 17d4 0000428C 		lw	$2,0($2)
+ 2137 17d8 00000000 		nop
+ 2138 17dc 18004010 		beq	$2,$0,$L46
+ 2139 17e0 00000000 		nop
+ 2140              	
+ 2141 17e4 0000023C 		lui	$2,%hi(__func__.2577)
+ 2142 17e8 E8014424 		addiu	$4,$2,%lo(__func__.2577)
+ 2143 17ec 0000023C 		lui	$2,%hi($LC1)
+ 2144 17f0 08004524 		addiu	$5,$2,%lo($LC1)
+ 2145 17f4 B6000624 		li	$6,182			# 0xb6
+ 2146 17f8 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 2147 17fc 00000000 		nop
+ 2148 1800 21C84000 		move	$25,$2
+ 2149 1804 09F82003 		jalr	$25
+ 2150 1808 00000000 		nop
+ 2151              	
+ 2152 180c 1800DC8F 		lw	$28,24($fp)
+ 2153 1810 0000023C 		lui	$2,%hi($LC2)
+ 2154 1814 20004424 		addiu	$4,$2,%lo($LC2)
+ 2155 1818 0000023C 		lui	$2,%hi($LC1)
+ 2156 181c 08004524 		addiu	$5,$2,%lo($LC1)
+ 2157 1820 B6000624 		li	$6,182			# 0xb6
+ 2158 1824 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2575)
+ 2159 1828 F0014724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2575)
+ 2160 182c 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 2161 1830 00000000 		nop
+ 2162 1834 21C84000 		move	$25,$2
+ 2163 1838 09F82003 		jalr	$25
+ 2164 183c 00000000 		nop
+ 2165              	
+ 2166              	$L46:
+ 182:tests/test_WikiApp.c ****     FileSeek(found);
+ 2167              		.loc 1 183 0
+ 2168 1840 2800C48F 		lw	$4,40($fp)
+ 2169 1844 0000828F 		lw	$2,%call16(FileSeek)($28)
+ 2170 1848 00000000 		nop
+ 2171 184c 21C84000 		move	$25,$2
+ 2172 1850 09F82003 		jalr	$25
+ 2173 1854 00000000 		nop
+ 2174              	
+ 2175 1858 1800DC8F 		lw	$28,24($fp)
+ 2176 185c 00000000 		nop
+ 183:tests/test_WikiApp.c ****     ERRORassert();
+ 2177              		.loc 1 184 0
+ 2178 1860 0000828F 		lw	$2,%got(errorMsg)($28)
+ 2179 1864 00000000 		nop
+ 2180 1868 0000428C 		lw	$2,0($2)
+ 2181 186c 00000000 		nop
+ 2182 1870 18004010 		beq	$2,$0,$L47
+ 2183 1874 00000000 		nop
+ 2184              	
+ 2185 1878 0000023C 		lui	$2,%hi(__func__.2577)
+ 2186 187c E8014424 		addiu	$4,$2,%lo(__func__.2577)
+ 2187 1880 0000023C 		lui	$2,%hi($LC1)
+ 2188 1884 08004524 		addiu	$5,$2,%lo($LC1)
+ 2189 1888 B8000624 		li	$6,184			# 0xb8
+ 2190 188c 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 2191 1890 00000000 		nop
+ 2192 1894 21C84000 		move	$25,$2
+ 2193 1898 09F82003 		jalr	$25
+ 2194 189c 00000000 		nop
+ 2195              	
+ 2196 18a0 1800DC8F 		lw	$28,24($fp)
+ 2197 18a4 0000023C 		lui	$2,%hi($LC2)
+ 2198 18a8 20004424 		addiu	$4,$2,%lo($LC2)
+ 2199 18ac 0000023C 		lui	$2,%hi($LC1)
+ 2200 18b0 08004524 		addiu	$5,$2,%lo($LC1)
+ 2201 18b4 B8000624 		li	$6,184			# 0xb8
+ 2202 18b8 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2575)
+ 2203 18bc F0014724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2575)
+ 2204 18c0 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 2205 18c4 00000000 		nop
+ 2206 18c8 21C84000 		move	$25,$2
+ 2207 18cc 09F82003 		jalr	$25
+ 2208 18d0 00000000 		nop
+ 2209              	
+ 2210              	$L47:
+ 184:tests/test_WikiApp.c ****     uint32_t level = SchemaGetInt(blob, WIKI_SCHEMA, WIKI_LEVEL);
+ 2211              		.loc 1 185 0
+ 2212 18d4 2400C48F 		lw	$4,36($fp)
+ 2213 18d8 0000023C 		lui	$2,%hi($LC37)
+ 2214 18dc C4014524 		addiu	$5,$2,%lo($LC37)
+ 2215 18e0 21300000 		move	$6,$0
+ 2216 18e4 0000828F 		lw	$2,%call16(SchemaGetInt)($28)
+ 2217 18e8 00000000 		nop
+ 2218 18ec 21C84000 		move	$25,$2
+ 2219 18f0 09F82003 		jalr	$25
+ 2220 18f4 00000000 		nop
+ 2221              	
+ 2222 18f8 1800DC8F 		lw	$28,24($fp)
+ 2223 18fc 2000C2AF 		sw	$2,32($fp)
+ 185:tests/test_WikiApp.c ****     OutP(" level="); OutI(level); OutP(" ");
+ 2224              		.loc 1 186 0
+ 2225 1900 0000023C 		lui	$2,%hi($LC38)
+ 2226 1904 CC014424 		addiu	$4,$2,%lo($LC38)
+ 2227 1908 0000828F 		lw	$2,%call16(OutS)($28)
+ 2228 190c 00000000 		nop
+ 2229 1910 21C84000 		move	$25,$2
+ 2230 1914 09F82003 		jalr	$25
+ 2231 1918 00000000 		nop
+ 2232              	
+ 2233 191c 1800DC8F 		lw	$28,24($fp)
+ 2234 1920 2000C48F 		lw	$4,32($fp)
+ 2235 1924 0000828F 		lw	$2,%call16(OutI)($28)
+ 2236 1928 00000000 		nop
+ 2237 192c 21C84000 		move	$25,$2
+ 2238 1930 09F82003 		jalr	$25
+ 2239 1934 00000000 		nop
+ 2240              	
+ 2241 1938 1800DC8F 		lw	$28,24($fp)
+ 2242 193c 0000023C 		lui	$2,%hi($LC39)
+ 2243 1940 D4014424 		addiu	$4,$2,%lo($LC39)
+ 2244 1944 0000828F 		lw	$2,%call16(OutS)($28)
+ 2245 1948 00000000 		nop
+ 2246 194c 21C84000 		move	$25,$2
+ 2247 1950 09F82003 		jalr	$25
+ 2248 1954 00000000 		nop
+ 2249              	
+ 2250 1958 1800DC8F 		lw	$28,24($fp)
+ 2251 195c 00000000 		nop
+ 186:tests/test_WikiApp.c ****     ERRORassert();
+ 2252              		.loc 1 187 0
+ 2253 1960 0000828F 		lw	$2,%got(errorMsg)($28)
+ 2254 1964 00000000 		nop
+ 2255 1968 0000428C 		lw	$2,0($2)
+ 2256 196c 00000000 		nop
+ 2257 1970 18004010 		beq	$2,$0,$L48
+ 2258 1974 00000000 		nop
+ 2259              	
+ 2260 1978 0000023C 		lui	$2,%hi(__func__.2577)
+ 2261 197c E8014424 		addiu	$4,$2,%lo(__func__.2577)
+ 2262 1980 0000023C 		lui	$2,%hi($LC1)
+ 2263 1984 08004524 		addiu	$5,$2,%lo($LC1)
+ 2264 1988 BB000624 		li	$6,187			# 0xbb
+ 2265 198c 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 2266 1990 00000000 		nop
+ 2267 1994 21C84000 		move	$25,$2
+ 2268 1998 09F82003 		jalr	$25
+ 2269 199c 00000000 		nop
+ 2270              	
+ 2271 19a0 1800DC8F 		lw	$28,24($fp)
+ 2272 19a4 0000023C 		lui	$2,%hi($LC2)
+ 2273 19a8 20004424 		addiu	$4,$2,%lo($LC2)
+ 2274 19ac 0000023C 		lui	$2,%hi($LC1)
+ 2275 19b0 08004524 		addiu	$5,$2,%lo($LC1)
+ 2276 19b4 BB000624 		li	$6,187			# 0xbb
+ 2277 19b8 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2575)
+ 2278 19bc F0014724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2575)
+ 2279 19c0 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 2280 19c4 00000000 		nop
+ 2281 19c8 21C84000 		move	$25,$2
+ 2282 19cc 09F82003 		jalr	$25
+ 2283 19d0 00000000 		nop
+ 2284              	
+ 2285              	$L48:
+ 187:tests/test_WikiApp.c ****     FileSeek(found);
+ 2286              		.loc 1 188 0
+ 2287 19d4 2800C48F 		lw	$4,40($fp)
+ 2288 19d8 0000828F 		lw	$2,%call16(FileSeek)($28)
+ 2289 19dc 00000000 		nop
+ 2290 19e0 21C84000 		move	$25,$2
+ 2291 19e4 09F82003 		jalr	$25
+ 2292 19e8 00000000 		nop
+ 2293              	
+ 2294 19ec 1800DC8F 		lw	$28,24($fp)
+ 2295 19f0 00000000 		nop
+ 188:tests/test_WikiApp.c ****     ERRORassert();
+ 2296              		.loc 1 189 0
+ 2297 19f4 0000828F 		lw	$2,%got(errorMsg)($28)
+ 2298 19f8 00000000 		nop
+ 2299 19fc 0000428C 		lw	$2,0($2)
+ 2300 1a00 00000000 		nop
+ 2301 1a04 18004010 		beq	$2,$0,$L49
+ 2302 1a08 00000000 		nop
+ 2303              	
+ 2304 1a0c 0000023C 		lui	$2,%hi(__func__.2577)
+ 2305 1a10 E8014424 		addiu	$4,$2,%lo(__func__.2577)
+ 2306 1a14 0000023C 		lui	$2,%hi($LC1)
+ 2307 1a18 08004524 		addiu	$5,$2,%lo($LC1)
+ 2308 1a1c BD000624 		li	$6,189			# 0xbd
+ 2309 1a20 0000828F 		lw	$2,%call16(ERRORprint2)($28)
+ 2310 1a24 00000000 		nop
+ 2311 1a28 21C84000 		move	$25,$2
+ 2312 1a2c 09F82003 		jalr	$25
+ 2313 1a30 00000000 		nop
+ 2314              	
+ 2315 1a34 1800DC8F 		lw	$28,24($fp)
+ 2316 1a38 0000023C 		lui	$2,%hi($LC2)
+ 2317 1a3c 20004424 		addiu	$4,$2,%lo($LC2)
+ 2318 1a40 0000023C 		lui	$2,%hi($LC1)
+ 2319 1a44 08004524 		addiu	$5,$2,%lo($LC1)
+ 2320 1a48 BD000624 		li	$6,189			# 0xbd
+ 2321 1a4c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2575)
+ 2322 1a50 F0014724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2575)
+ 2323 1a54 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 2324 1a58 00000000 		nop
+ 2325 1a5c 21C84000 		move	$25,$2
+ 2326 1a60 09F82003 		jalr	$25
+ 2327 1a64 00000000 		nop
+ 2328              	
+ 2329              	$L49:
+ 189:tests/test_WikiApp.c ****     char outBuf[12];
+ 190:tests/test_WikiApp.c ****     SchemaGetString(blob, WIKI_SCHEMA, WIKI_TITLE, outBuf, 12);
+ 2330              		.loc 1 191 0
+ 2331 1a68 B002C227 		addiu	$2,$fp,688
+ 2332 1a6c 0C000324 		li	$3,12			# 0xc
+ 2333 1a70 1000A3AF 		sw	$3,16($sp)
+ 2334 1a74 2400C48F 		lw	$4,36($fp)
+ 2335 1a78 0000033C 		lui	$3,%hi($LC37)
+ 2336 1a7c C4016524 		addiu	$5,$3,%lo($LC37)
+ 2337 1a80 02000624 		li	$6,2			# 0x2
+ 2338 1a84 21384000 		move	$7,$2
+ 2339 1a88 0000828F 		lw	$2,%call16(SchemaGetString)($28)
+ 2340 1a8c 00000000 		nop
+ 2341 1a90 21C84000 		move	$25,$2
+ 2342 1a94 09F82003 		jalr	$25
+ 2343 1a98 00000000 		nop
+ 2344              	
+ 2345 1a9c 1800DC8F 		lw	$28,24($fp)
+ 191:tests/test_WikiApp.c ****     OutP("title="); OutS(outBuf); OutC('\n'); 
+ 2346              		.loc 1 192 0
+ 2347 1aa0 0000023C 		lui	$2,%hi($LC40)
+ 2348 1aa4 D8014424 		addiu	$4,$2,%lo($LC40)
+ 2349 1aa8 0000828F 		lw	$2,%call16(OutS)($28)
+ 2350 1aac 00000000 		nop
+ 2351 1ab0 21C84000 		move	$25,$2
+ 2352 1ab4 09F82003 		jalr	$25
+ 2353 1ab8 00000000 		nop
+ 2354              	
+ 2355 1abc 1800DC8F 		lw	$28,24($fp)
+ 2356 1ac0 B002C227 		addiu	$2,$fp,688
+ 2357 1ac4 21204000 		move	$4,$2
+ 2358 1ac8 0000828F 		lw	$2,%call16(OutS)($28)
+ 2359 1acc 00000000 		nop
+ 2360 1ad0 21C84000 		move	$25,$2
+ 2361 1ad4 09F82003 		jalr	$25
+ 2362 1ad8 00000000 		nop
+ 2363              	
+ 2364 1adc 1800DC8F 		lw	$28,24($fp)
+ 2365 1ae0 0A000424 		li	$4,10			# 0xa
+ 2366 1ae4 0000828F 		lw	$2,%call16(OutC)($28)
+ 2367 1ae8 00000000 		nop
+ 2368 1aec 21C84000 		move	$25,$2
+ 2369 1af0 09F82003 		jalr	$25
+ 2370 1af4 00000000 		nop
+ 2371              	
+ 2372 1af8 1800DC8F 		lw	$28,24($fp)
+ 2373              	$LBE10 = .
+ 162:tests/test_WikiApp.c ****   for (int i=0; titles[i] != 0x0; ++i) {
+ 2374              		.loc 1 162 0
+ 2375 1afc 3400C28F 		lw	$2,52($fp)
+ 2376 1b00 00000000 		nop
+ 2377 1b04 01004224 		addiu	$2,$2,1
+ 2378 1b08 3400C2AF 		sw	$2,52($fp)
+ 2379              	$L38:
+ 2380 1b0c 3400C28F 		lw	$2,52($fp)
+ 2381 1b10 00000000 		nop
+ 2382 1b14 80100200 		sll	$2,$2,2
+ 2383 1b18 2000C327 		addiu	$3,$fp,32
+ 2384 1b1c 21106200 		addu	$2,$3,$2
+ 2385 1b20 6C02428C 		lw	$2,620($2)
+ 2386 1b24 00000000 		nop
+ 2387 1b28 27FE4014 		bne	$2,$0,$L50
+ 2388 1b2c 00000000 		nop
+ 2389              	
+ 2390              	$LBE9 = .
+ 192:tests/test_WikiApp.c ****   }
+ 193:tests/test_WikiApp.c ****   StackPrintInfo(stdout);
+ 2391              		.loc 1 194 0
+ 2392 1b30 0000828F 		lw	$2,%got(stdout)($28)
+ 2393 1b34 00000000 		nop
+ 2394 1b38 0000428C 		lw	$2,0($2)
+ 2395 1b3c 00000000 		nop
+ 2396 1b40 21204000 		move	$4,$2
+ 2397 1b44 0000828F 		lw	$2,%call16(StackPrintInfo)($28)
+ 2398 1b48 00000000 		nop
+ 2399 1b4c 21C84000 		move	$25,$2
+ 2400 1b50 09F82003 		jalr	$25
+ 2401 1b54 00000000 		nop
+ 2402              	
+ 2403 1b58 1800DC8F 		lw	$28,24($fp)
+ 194:tests/test_WikiApp.c **** 
+ 195:tests/test_WikiApp.c ****   OutP("DONE\n");
+ 2404              		.loc 1 196 0
+ 2405 1b5c 0000023C 		lui	$2,%hi($LC41)
+ 2406 1b60 E0014424 		addiu	$4,$2,%lo($LC41)
+ 2407 1b64 0000828F 		lw	$2,%call16(OutS)($28)
+ 2408 1b68 00000000 		nop
+ 2409 1b6c 21C84000 		move	$25,$2
+ 2410 1b70 09F82003 		jalr	$25
+ 2411 1b74 00000000 		nop
+ 2412              	
+ 2413 1b78 1800DC8F 		lw	$28,24($fp)
+ 196:tests/test_WikiApp.c ****   return 0;
+ 2414              		.loc 1 197 0
+ 2415 1b7c 21100000 		move	$2,$0
+ 197:tests/test_WikiApp.c **** }
+ 2416              		.loc 1 198 0
+ 2417 1b80 21E8C003 		move	$sp,$fp
+ 2418 1b84 CC02BF8F 		lw	$31,716($sp)
+ 2419 1b88 C802BE8F 		lw	$fp,712($sp)
+ 2420 1b8c C402B08F 		lw	$16,708($sp)
+ 2421 1b90 D002BD27 		addiu	$sp,$sp,720
+ 2422 1b94 0800E003 		j	$31
+ 2423 1b98 00000000 		nop
+ 2424              	
+ 2425              		.set	macro
+ 2426              		.set	reorder
+ 2427              		.end	main
+ 2428              	$LFE8:
+ 2430              		.rdata
+ 2431 01e6 0000     		.align	2
+ 2434              	__func__.2577:
+ 2435 01e8 6D61696E 		.ascii	"main\000"
+ 2435      00
+ 2436 01ed 000000   		.align	2
+ 2439              	__PRETTY_FUNCTION__.2575:
+ 2440 01f0 6D61696E 		.ascii	"main\000"
+ 2440      00
+ 2441 01f5 000000   		.align	2
+ 2444              	C.24.2499:
+ 2445 01f8 00000000 		.word	0
+ 2446 01fc 80000000 		.word	128
+ 2447 0200 80010000 		.word	384
+ 2448 0204 80020000 		.word	640
+ 2449 0208 80020000 		.word	640
+ 2450 020c 800A0000 		.word	2688
+ 2451 0210 801A0000 		.word	6784
+ 2452 0214 803A0000 		.word	14976
+ 2453 0218 007B0000 		.word	31488
+ 2454 021c 80FB0000 		.word	64384
+ 2455 0220 80FC0100 		.word	130176
+ 2456 0224 80FE0300 		.word	261760
+ 2457 0228 00FB0700 		.word	523008
+ 2458 022c 00FC0F00 		.word	1047552
+ 2459 0230 00FE1F00 		.word	2096640
+ 2460 0234 80FA3F00 		.word	4192896
+ 2461 0238 80FB7F00 		.word	8387456
+ 2462 023c 00FDFF00 		.word	16776448
+ 2463              		.align	2
+ 2466              	__func__.2490:
+ 2467 0240 54657374 		.ascii	"TestNodesValid\000"
+ 2467      4E6F6465 
+ 2467      7356616C 
+ 2467      696400
+ 2468 024f 00       		.align	2
+ 2471              	__PRETTY_FUNCTION__.2491:
+ 2472 0250 54657374 		.ascii	"TestNodesValid\000"
+ 2472      4E6F6465 
+ 2472      7356616C 
+ 2472      696400
+ 2473 025f 00       		.align	2
+ 2476              	__func__.2422:
+ 2477 0260 54657374 		.ascii	"TestLargeSeek\000"
+ 2477      4C617267 
+ 2477      65536565 
+ 2477      6B00
+ 2478 026e 0000     		.align	2
+ 2481              	__PRETTY_FUNCTION__.2423:
+ 2482 0270 54657374 		.ascii	"TestLargeSeek\000"
+ 2482      4C617267 
+ 2482      65536565 
+ 2482      6B00
+ 2483 027e 0000     		.align	2
+ 2486              	C.8.2440:
+ 2487 0280 72206163 		.word	1667309682
+ 2488 0284 20612070 		.word	1881170208
+ 2489 0288 65737461 		.word	1635021669
+ 2490 028c 2E20456E 		.word	1850023982
+ 2491 0290 6174696F 		.word	1869182049
+ 2492 0294 702F3134 		.word	875638640
+ 2493 0298 6B2E2041 		.word	1092628075
+ 2494 029c 20627920 		.word	544825888
+ 2495 02a0 74696F6E 		.word	1852795252
+ 2496 02a4 6C696576 		.word	1986357612
+ 2497 02a8 2F41472E 		.word	776421679
+ 2498 02ac 656E746C 		.word	1819569765
+ 2499 02b0 61746F72 		.word	1919906913
+ 2500 02b4 6F206178 		.word	2019631215
+ 2501 02b8 666F2020 		.word	538996582
+ 2502 02bc 66696365 		.word	1701013862
+ 2503 02c0 30387C79 		.word	2038183984
+ 2504 02c4 6E7B7B49 		.word	1232829294
+ 2505 02c8 696F6E2C 		.word	745434985
+ 2506 02cc 456E676C 		.word	1818717765
+ 2507 02d0 2C204275 		.word	1967267884
+ 2508 02d4 686F6F6C 		.word	1819242344
+ 2509 02d8 66207468 		.word	1752440934
+ 2510              		.align	2
+ 2513              	__func__.2405:
+ 2514 02dc 5365656B 		.ascii	"SeekAndRead\000"
+ 2514      416E6452 
+ 2514      65616400 
+ 2515              		.align	2
+ 2518              	__PRETTY_FUNCTION__.2406:
+ 2519 02e8 5365656B 		.ascii	"SeekAndRead\000"
+ 2519      416E6452 
+ 2519      65616400 
+ 2743              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 tests/test_WikiApp.c
+     /tmp/ccolji3m.s:26     .text:0000000000000000 PrintHexBlock
+     /tmp/ccolji3m.s:153    .text:0000000000000128 SeekAndRead
+     /tmp/ccolji3m.s:2513   .rodata:00000000000002dc __func__.2405
+     /tmp/ccolji3m.s:2518   .rodata:00000000000002e8 __PRETTY_FUNCTION__.2406
+     /tmp/ccolji3m.s:343    .text:00000000000002d8 TestLargeSeek
+     /tmp/ccolji3m.s:2476   .rodata:0000000000000260 __func__.2422
+     /tmp/ccolji3m.s:2481   .rodata:0000000000000270 __PRETTY_FUNCTION__.2423
+     /tmp/ccolji3m.s:2487   .rodata:0000000000000280 C.8.2440
+     /tmp/ccolji3m.s:900    .text:0000000000000964 TestNodesValid
+     /tmp/ccolji3m.s:2445   .rodata:00000000000001f8 C.24.2499
+     /tmp/ccolji3m.s:2466   .rodata:0000000000000240 __func__.2490
+     /tmp/ccolji3m.s:2471   .rodata:0000000000000250 __PRETTY_FUNCTION__.2491
+     /tmp/ccolji3m.s:1494   .text:00000000000010bc recur
+     /tmp/ccolji3m.s:1679   .text:0000000000001214 main
+     /tmp/ccolji3m.s:2434   .rodata:00000000000001e8 __func__.2577
+     /tmp/ccolji3m.s:2439   .rodata:00000000000001f0 __PRETTY_FUNCTION__.2575
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+printf
+OutC
+FileSeek
+errorMsg
+ERRORprint2
+__assert_fail
+FileRead
+OutS
+FileOpenRO
+memcpy
+FileSectorReadCount
+OutX
+OutI
+LoadBlock
+TimerCount
+stdout
+StackPrintInfo
+DelayMs
+PlatformInit
+WikiAppInit
+strlen
+CalcCRC
+stderr
+fprintf
+WikiAppSetTitle
+CursorNext
+FileGetHandle
+SchemaGetInt
+SchemaGetString

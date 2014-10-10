@@ -1,0 +1,6 @@
+--- 
+#path_to_data: ./data
+path_to_data: /usr/share/nightsky
+location:
+  latitude:  0.0
+  longitude: 0.0

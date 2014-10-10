@@ -1,0 +1,36 @@
+AC_INIT(configure.in)
+
+AM_INIT_AUTOMAKE(mydict-plugins,0.6.0)
+
+AC_PROG_CC
+
+AC_PROG_CXX
+
+AC_PROG_INSTALL
+dnl Try to generate a shared lib
+SAVE_LDFLAGS=$LDFLAGS
+LDFLAGS="-Wl,-bG"
+AC_MSG_CHECKING("for ${CC-cc} $LDFLAGS")
+AC_TRY_LINK([],[void test(void){}], ac_cc_so="yes", ac_cc_so="no")
+AC_MSG_RESULT($ac_cc_so)
+
+if test "$ac_cc_so" = "no"; then
+LDFLAGS="-shared"
+AC_MSG_CHECKING("for ${CC-cc} $LDFLAGS")
+AC_TRY_LINK([],[void test(void){}], ac_ld_so="yes", ac_ld_so="no")
+AC_MSG_RESULT($ac_ld_so)
+fi
+
+if test "$ac_ld_so" = "no"; then
+AC_CHECKING("Cannot determine how to create shared libraries")
+LDFLAGS_SHAREDLIB=``
+else
+LDFLAGS_SHAREDLIB=$LDFLAGS
+fi
+
+AC_SUBST(LDFLAGS_SHAREDLIB)
+CFLAGS=$SAVE_CFLAGS
+LDFLAGS=$SAVE_LDFLAGS
+
+AC_OUTPUT(Makefile ndict/Makefile demo/Makefile test/Makefile dict/Makefile babylon/Makefile stardict/Makefile)
+

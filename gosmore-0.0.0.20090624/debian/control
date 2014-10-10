@@ -1,0 +1,24 @@
+Source: gosmore
+Section: utils
+Priority: optional
+Maintainer: Debian GIS Project <pkg-grass-devel@lists.alioth.debian.org>
+Uploaders: Francesco Paolo Lovergine <frankie@debian.org>, Petter Reinholdtsen <pere@debian.org>, Andreas Putzo <andreas@putzo.net>
+DM-Upload-Allowed: yes
+Build-Depends: debhelper (>> 7.0.0), cdbs, libgtk2.0-dev, libxml2-dev
+Standards-Version: 3.8.2
+Homepage: http://wiki.openstreetmap.org/index.php/Gosmore
+Vcs-Browser: http://svn.debian.org/viewsvn/pkg-grass/packages/gosmore/trunk
+Vcs-Svn: svn://svn.debian.org/svn/pkg-grass/packages/gosmore/trunk
+
+Package: gosmore
+Priority: optional
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: gpsd
+Suggests: josm
+Description: Openstreetmap.org viewer / wayfinder / search client
+ Gosmore is a openstreetmap.org viewer and wayfinder with support for
+ speech syntesis and fetching the current location from gpsd.
+ .
+ This package requires additional data files which can be downloaded
+ freely from openstreetmap.org.

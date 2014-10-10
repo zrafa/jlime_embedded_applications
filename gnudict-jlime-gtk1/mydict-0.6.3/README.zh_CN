@@ -1,0 +1,36 @@
+gnuDict "我的字典" 发布 0.5.1 版本.
+
+*支持轻轻松松背单词 (.gds) http://www.pgy.com.cn
+*I18N 中文支持
+*国际音标显示
+插件技术支持Babylon字典,DICT
+
+快速安装
+===========
+1. 下载 
+mydict-0.5.x-1.i386.rpm # GTK+ 客户端
+mydict-plugins-0.5.x-1.i386.rpm # 不同插件
+mydict-dicts-gb-0.2.0.tar.gz # ndict dict
+babylon.dic.tar.gz # babylon dict
+
+2. 安装
+rpm -ivh mydict-0.5.x-1.i386.rpm
+rpm -ivh mydict-plugins-0.5.x-1.i386.rpm
+cd /usr/local/share/mydict
+gtar -zxvf mydict-dict-gb-0.2.0.tar.gz
+gtar -zxvf babylon.dic.tar.gz
+
+# /usr/sbin/chkfontpath -a /usr/local/share/mydict/ybfont
+# /usr/rc.d/init.d/xfs restart
+
+3. 运行
+mydict
+======
+gnuDict "我的字典" 有客户端和插件组成。
+
+它使用插件技术来支持不同的字典系统，如广泛存在的DICT server(RFC2229),
+Babylon字典和将来的网络字典DiCT。插件部分也将用于CFFD项目。
+
+它支持DICT server(RFC2229),Babylon字典.(英汉，汉英，英法，英德..)
+
+我在中英文RedHat 7.3 and Solaris 2.6 测试通过. Larry <caiyu@yahoo.com>

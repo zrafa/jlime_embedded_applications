@@ -1,0 +1,1 @@
+gcc -I/usr/local/jlime/mipsel-toolchain/usr/include/gtk-1.2/ -I /usr/local/jlime/mipsel-toolchain/usr/include/glib-1.2/  -I/usr/local/jlime/mipsel-toolchain/usr/lib/glib/include/  -Wall -L/usr/local/jlime/mipsel-toolchain/usr/lib -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXext -lX11 -lm -s  gtkedit.c   -o gtkedit

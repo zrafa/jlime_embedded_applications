@@ -1,0 +1,12 @@
+install mydict-dict package
+
+prepare /usr/share/gnudict/dicts dictionaries .
+
+ec3dict.txt 
+ec3dict.txt.index 
+
+本地字典,包括
+En-Ch(1):中英字典,详细的解释
+En-Ch(2):中英字典,简短的注解,可以 click <ADD> 背诵
+En-En:一般的英英字典,
+Ch-EN:拼音字典,

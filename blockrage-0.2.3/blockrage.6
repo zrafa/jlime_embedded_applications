@@ -1,0 +1,182 @@
+.TH BLOCKRAGE 6 "10 September 2005" "Block Rage"
+.SH NAME
+blockrage \- a falling-blocks arcade game
+.SH SYNOPSIS
+.B "blockrage"
+.P
+.B "blockrage "
+.I "[options]"
+.SH DESCRIPTION
+Block Rage is a "falling-blocks" arcade game, inspired by a DOS
+classic. It features a two-player hotseat mode. In the future
+it should also feature nice graphics and sound.
+.SH GLOBAL KEYS
+.TP
+.B Alt-Enter
+Toggle fullscreen mode
+.TP
+.B Alt-Backslash
+Toggle doublesize mode
+.TP
+.B PrintScreen
+Capture a screenshot to $HOME/blockrage-scr.pcx
+.TP
+.B P
+Pause the game
+.TP
+.B Alt-X
+Exit the program immediately
+.SH IN-GAME KEYS
+.TP
+.B P
+Pause the game
+.P
+.I Default key bindings for player 1:
+.TP
+.B Left Arrow
+move block left
+.TP
+.B  Right Arrow
+move block right
+.TP
+.B Up Arrow
+rotate block up
+.TP
+.B Down Arrow
+rotate block down
+.TP
+.B Right Shift
+drop block
+.P
+.I Default key bindings for player 2:
+.TP
+.B A
+move block left
+.TP
+.B D
+move block right
+.TP
+.B W
+rotate block up
+.TP
+.B S
+rotate block down
+.TP
+.B Q
+drop block
+
+.SH GAMEPLAY
+(Assuming you didn't change the default key settings.)
+Use left/right arrows to move the falling piece left/right,
+up/down arrows to cycle it's tiles and right shift to make it fall faster.
+.P
+Get three same pieces in a row (horizontal/vertical/diagonal) and boom!
+they dissappear and your score increases.
+You can earn even more points by inflicting chain reactions.
+A chain reaction happens when some pieces explode, the ones on top of them
+fall, and, forming a new line, explode again.
+.SH 2-PLAYER HOTSEAT MODE
+Default key settings for the other player are A,D (left,right)
+W,S (cycle), Q (drop).
+.P
+If you inflict a chain reaction in hotseat mode, your opponent
+will get an unpleasant surprise in the form of a row of tiles
+inserted to the bottom of his playing board.
+.SH OPTIONS
+You needn't really use them. Everything listed here can be set using
+the ingame menu.
+.TP
+.B "\-p <1|2>"
+sets the number of players
+.TP
+.B "+d <4|5|6>"
+sets the difficulty Easy/Medium/Hard
+.TP
+.B +l <1..10>
+sets the starting level
+.TP  
+.B +b <0,1,...>
+chooses a block set (piece graphics)
+.P
+.B +k1 <left> <right> <sh_up> <sh_down> <drop>
+.TP
+.B +k2 <left> <right> <sh_up> <sh_down> <drop>
+sets player 1/2 controls
+you must enter five decimal numbers corresponding to SDLK_* keycodes
+e.g. +k1 276 275 303 273 274
+.TP  
+.B +data <dataset>
+chooses a dataset. the format is identical to the format of blockrage.cfg.
+example: +data br320
+
+.SH THE RC FILES
+Typically you don't need to know anything about the game's RC and config
+files. They are designed so it just magically works... But if you are
+interested: the RC and config files can be of great use if you want to
+install on a multiuser system (you can customize default settings for
+the users, create a shared topten table, etc).
+
+When you start Block Rage, it tries to find in order:
+.TP
+.B 1. <EXECDIR>/blockrage.rc
+here <EXECDIR> is the directory where the blockrage[.exe] executable is
+situated.
+.P
+.B 2. $HOME/.blockrage/blockrage.rc
+.P
+.B 3. /etc/games/blockrage/blockrage.rc
+.P 
+Whichever is found first is processed. That is typically (1) if the game is
+run from the source directory, or (3) if the game is run from the UNIX FHS
+filesystem. Also any user can override the system-wide settings by creating
+the file (2).
+.P
+The .rc file contains 5 lines:
+.TP
+.B <sys-config-file>
+pathname of the system-wide config file
+.TP
+.B <user-config-file>
+pathname of the user's config file
+.TP
+.B <data-dir>/
+directory where the data files reside,
+trailed with slash
+.TP
+.B <topten-file>
+pathname of the file where topscores are stored
+.TP
+.B <dataset>
+name of the dataset to use (a data/ subdir)
+.P    
+In the source package's src/ directory the file blockrage.rc enables the game
+to be run directly from the src/ directory. The file blockrage-fhs.rc is the
+RC file for running from the live filesystem. 'make install' copies this file
+to /etc/games/blockrage/blockrage.rc. (3)
+.P    
+After processing the .rc file, the config files are processed.
+.SH THE CONFIG FILES
+First the game tries to read the <user-config-file>. If it doesn't exist
+(meaning this user is running the game for the first time), if falls back to
+<sys-config-file>. If that cannot be found either, defaults are assumed.
+  
+The config file contains the key bindings, starting level, tileset, etc.
+.SH ENVIRONMENT
+The HOME variable is used for ~ substitution in the RC file.
+.SH BUGS
+Might not work properly on big endian machines such as Solaris.
+The directcolor screenshot writing is a mess. Stuck ALT key
+when toggling fullscreen or doublesize in Windows.
+Switching from fullscreen to windowed mode fails on Windows.
+Audio skew is BIG on windows.
+And more...
+.SH AUTHOR
+Block Rage has been written in 1999-2005 by Jiri Svoboda
+<jirik.svoboda@seznam.cz>. (Please do not list this e-mail
+address on your webpage, or list it in other packages,
+before contacting me firts)
+.SH NOTES
+This manpage describes Block Rage version 0.2.2
+.SH SEE ALSO
+The Block Rage homepage at <http://blockrage.sourceforge.net>.
+Additional documentation is also available in the source distribution.

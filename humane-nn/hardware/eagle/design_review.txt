@@ -1,0 +1,286 @@
+Full Design Review - 12/15/09
+
+M Chip
+
+Pin-by-pin schematic compared to datasheet and package:
+1 pd3  DIO3 
+2 pd4 dio4
+3 GND DISCONNECTED! FIXED!
+4 VCC OK
+5 GND OK
+6 VCC DISCONNECTED! FIXED!
+7 xtal1 ok
+8 xtal2 ok
+9 pd5 dio5
+10 pd6 dio6
+11 pd7 dio7
+12 pb0 dio8
+13 pb1 dio9
+14 pb2 ss
+15 pb3 mosi
+16 pb4 miso
+17 pb5/sck sck
+18 avcc connected to vcc, ok (datasheet p4)
+19 ADC6 DISCONNECTED! NC OK
+20 aref aref header
+21 gnd agnd (not ref in datasheet to AGND, only GND) OK
+22 ADC7 DISCONNECTED NC OK
+23 pc0/adc0 
+24 pc1/adc1
+25 pc2/adc2
+26 pc3/adc3
+27 pc4/adc4
+28 pc5/adc5
+29 pc6/RESET
+30 pd0/rx
+31 pd1/tx
+32 pd2
+
+? MCHIP: 16MHz Xtal or 20MHz?
+
+Go 20Mhz!  Should not be a problem.  Maybe some baud rate misalignment with the
+other chips.
+
+? MCHIP: Xtal capacitor size justification?
+
+? Xtal package pin check to datasheet?
+
+V Chip
+
+? 16MHz Xtal or 20MHz or other?
+
+? Xtal capacitor size justification?
+
+Pin-by-pin schematic compared to datasheet and package:
+1 pd3  DIO3 
+2 pd4 dio4
+3 GND DISCONNECTED! FIXED!
+4 VCC OK
+5 GND OK
+6 VCC DISCONNECTED! FIXED!
+7 xtal1 ok
+8 xtal2 ok
+9 pd5 dio5
+10 pd6 dio6
+11 pd7 dio7
+12 pb0 dio1 (as per tellymate)
+13 pb1 into V DAC
+14 NC
+15 dac
+16
+17
+18
+19 ADC6 DISCONNECTED! NC OK
+20 NC 
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+
+P Chip
+
+Pin-by-pin schematic compared to datasheet and package:
+1 pd3  DIO3 
+2 pd4 dio4
+3 GND DISCONNECTED! FIXED!
+4 VCC OK
+5 GND OK
+6 VCC DISCONNECTED! FIXED!
+7 xtal1 ok
+8 xtal2 ok
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+
+? Pin 1 marked?  OK
+
+? Crystal capacitor value justification?  OK Atmega328 datasheet recommends 12 - 22 pF
+
+Video DAC
+
+? Diode Requirements?
+
+OK. Diodes make low outputs look like a disconnect - ie, they won't sink any current.  
+
+? Voltage levels expected?
+
+OK - taken from tellymate.  video device supplies 75 ohm termination.
+
+MOSI=0V, PB1=0,  OUT=0V (Sync level)
+MOSI=5V, PB1=0,  OUT=5V*75/(330 + 75)  = .93V (unused??)
+MOSI=0V, PB1=5V, OUT=5V*75/(1000 + 75)= .35V (black level)
+MOSI=5V, PB1=5V, OUT=5V*75/(248 + 75)= 1.16V (white level, slightly high)
+
+? Do I need termination resistor?
+
+OK - No.  some tellymate versions don't even have the option.
+
+VICSP
+
+? Pin 1 marked?  OK
+
+? Schematic vs ICSP pinout?
+
+? No buffer resistor on V RESET/DIO9?  
+OK - possible but unlikely contention with M Chip if software error.
+
+? Should/can KBCLK be on an interrupt line?
+
+PICSP
+
+? Pin 1 marked?  OK
+
+?Schematic vs ICSP pinout?
+
+? No buffer resistor on P RESET/DIO8?
+OK - possible but unlikely contention with M Chip if software error.
+
+? Buffer resistor sizing R30, R31 and R32?  OK
+
+? L1 LED silkscreen marking?
+
+USB IF
+
+? Justification for 2.2k pullup on D-?
+
+If P Chip output is high impedence, then this will pull D- to 3.6V, expected by
+spec (opposite of D+).
+
+? USB clamping diode spec? OK
+
+? Current through R50 and R51 during clamped operation?
+
+OK.  (5V - 3.6V)/68 = 20 mA
+
+? Main board power supply bypass capacitor sizes?
+
+OK.  Shotgun, but can be changed later if really needed.
+
+? Are Calibration marks appropriate? OK - adjusted according to web sources
+
+? USB connector grounding?
+
+FIXED - For shielded USB 2 cables, the shell must be connected to ground.
+Intel recommends an optional ferrite bead on ground, power, and shell as well.
+I'm skipping the ferrite.
+
+? Verify USB pinout to datasheets? OK
+
+? L2 power LED current calculation? OK - 5V/1000ohm = 5mA - low but used in Arduino
+
+? Keyboard connector pinout? OK
+
+? Arduino Power Expansion Header pinout?
+
+? Arduino Expansion Header orientations?  Power - Analog - DIO1 - DIO2
+
+? SD Card power requirements?
+
+27 - 90 mA?  http://forum.brighthand.com/showthread.php?t=187443
+
+-"The normal cards have a peak current of about 40mA when doing a write and the
+high-speed cards are about 60mA." -
+-"the spec allows an SDHC card to draw up to 200 mA. Although, we've found
+measured some high speed SDHC cards draw up to 450 mA."
+http://www.embeddedrelated.com/usenet/embedded/show/112554-1.php
+
+FIXED - Switched to 100mA regulator in same SOT89 package almost same price.
+(can go much higher if needed in same package and price)
+
+? Do I need 3.3V regulator bypass cap?
+
+FIXED - Uzebox had a 10uF cap, so I've added one.
+
+? Audio out value justification?
+
+? Is fuse too fussy?
+
+OK - Intel recommends a 500mA fuse.
+
+?IR2 recv pinout verification? OK
+
+? SD Card pinout verification? OK
+
+? SD Card connector grounding? FIXED - grounded 
+
+? IR LED current calculation? FIXED - Reduced to 13 mA, transistor remove.
+
+? IR LED PNP transistor selection and spec? FIXED - removed.
+
+? Full schematic CRC check? FIXED
+
+PCB
+
+? Silkscreen on via?
+
+OK - Mostly harmless except for legibility.  FreeDRM doesn't complain.  Will
+clean up as I see them.
+
+? Silkscreen clearances?
+
+? Via near bypass cap verification? OK
+
+? Trace clearance?
+
+? Board edge clearance?
+
+? Board thickness?
+
+? What other Atmega chips are compatible?
+
+BOM
+
+- Digikey order formation
+
+- Mouser order formation
+
+- Update BOM  DONE
+
+? Crystal footprint verification? OK
+
+? switch footprint verification?
+
+? RCA footprint verification?
+
+? RCA tip/shield orientation? OK
+
+? 0603 resistor footprint?
+
+? fuse footprint?
+
+? 0603 cap footprint?
+
+? Regulator footprint?
+
+? LED footprints?
+
+----

@@ -1,0 +1,2514 @@
+   1              		.section .mdebug.abi32
+   2              		.previous
+   3              		.gnu_attribute 4, 3
+   4              		.abicalls
+  12              	$Ltext0:
+  13              		.align	2
+  14              		.globl	ListGenCreate
+  15              	$LFB0 = .
+  16              		.file 1 "ui/ListView.c"
+   0:ui/ListView.c **** #include "ListView.h"
+   1:ui/ListView.c **** #include "vt52.h"
+   2:ui/ListView.c **** #include <ctype.h> // toupper
+   3:ui/ListView.c **** 
+   4:ui/ListView.c **** ListGen ListGenCreate(NextFunc next, RestartFunc restart, char *userData) {
+  17              		.loc 1 5 0
+  18              		.set	nomips16
+  19              		.ent	ListGenCreate
+  21              	ListGenCreate:
+  22              		.frame	$fp,40,$31		# vars= 24, regs= 1/0, args= 0, gp= 8
+  23              		.mask	0x40000000,-4
+  24              		.fmask	0x00000000,0
+  25              		.set	noreorder
+  26              		.set	nomacro
+  27              		
+  28 0000 D8FFBD27 		addiu	$sp,$sp,-40
+  29              	$LCFI0:
+  30 0004 2400BEAF 		sw	$fp,36($sp)
+  31              	$LCFI1:
+  32 0008 21F0A003 		move	$fp,$sp
+  33              	$LCFI2:
+  34 000c 21108000 		move	$2,$4
+  35 0010 2C00C5AF 		sw	$5,44($fp)
+  36 0014 3000C6AF 		sw	$6,48($fp)
+  37 0018 3400C7AF 		sw	$7,52($fp)
+   5:ui/ListView.c ****   ListGen gen;
+   6:ui/ListView.c ****   gen.next = next;
+  38              		.loc 1 7 0
+  39 001c 2C00C38F 		lw	$3,44($fp)
+  40 0020 00000000 		nop
+  41 0024 0800C3AF 		sw	$3,8($fp)
+   7:ui/ListView.c ****   gen.restart = restart;
+  42              		.loc 1 8 0
+  43 0028 3000C38F 		lw	$3,48($fp)
+  44 002c 00000000 		nop
+  45 0030 0C00C3AF 		sw	$3,12($fp)
+   8:ui/ListView.c ****   gen.userData = userData;
+  46              		.loc 1 9 0
+  47 0034 3400C38F 		lw	$3,52($fp)
+  48 0038 00000000 		nop
+  49 003c 1000C3AF 		sw	$3,16($fp)
+   9:ui/ListView.c ****   gen.lastIndex = -1;
+  50              		.loc 1 10 0
+  51 0040 FFFF0324 		li	$3,-1			# 0xffffffffffffffff
+  52 0044 1400C3AF 		sw	$3,20($fp)
+  10:ui/ListView.c ****   gen.length = -1;
+  53              		.loc 1 11 0
+  54 0048 FFFF0324 		li	$3,-1			# 0xffffffffffffffff
+  55 004c 1800C3AF 		sw	$3,24($fp)
+  11:ui/ListView.c ****   gen.dirty = 1;
+  56              		.loc 1 12 0
+  57 0050 01000324 		li	$3,1			# 0x1
+  58 0054 1C00C3A3 		sb	$3,28($fp)
+  12:ui/ListView.c ****   return gen;
+  59              		.loc 1 13 0
+  60 0058 0800C88F 		lw	$8,8($fp)
+  61 005c 0C00C78F 		lw	$7,12($fp)
+  62 0060 1000C68F 		lw	$6,16($fp)
+  63 0064 1400C58F 		lw	$5,20($fp)
+  64 0068 1800C48F 		lw	$4,24($fp)
+  65 006c 1C00C38F 		lw	$3,28($fp)
+  66 0070 000048AC 		sw	$8,0($2)
+  67 0074 040047AC 		sw	$7,4($2)
+  68 0078 080046AC 		sw	$6,8($2)
+  69 007c 0C0045AC 		sw	$5,12($2)
+  70 0080 100044AC 		sw	$4,16($2)
+  71 0084 140043AC 		sw	$3,20($2)
+  13:ui/ListView.c **** }
+  72              		.loc 1 14 0
+  73 0088 21E8C003 		move	$sp,$fp
+  74 008c 2400BE8F 		lw	$fp,36($sp)
+  75 0090 2800BD27 		addiu	$sp,$sp,40
+  76 0094 0800E003 		j	$31
+  77 0098 00000000 		nop
+  78              	
+  79              		.set	macro
+  80              		.set	reorder
+  81              		.end	ListGenCreate
+  82              	$LFE0:
+  84              		.rdata
+  85              		.align	2
+  86              	$LC0:
+  87 0000 67656E2D 		.ascii	"gen->next\000"
+  87      3E6E6578 
+  87      7400
+  88 000a 0000     		.align	2
+  89              	$LC1:
+  90 000c 75692F4C 		.ascii	"ui/ListView.c\000"
+  90      69737456 
+  90      6965772E 
+  90      6300
+  91              		.text
+  92              		.align	2
+  93              		.globl	ListGenNext
+  94              	$LFB1 = .
+  14:ui/ListView.c **** 
+  15:ui/ListView.c **** /** Write the next list item into outBuf, up to a maximum of outBufLen.
+  16:ui/ListView.c ****  *  Not output is written if outBuf == outBufLen == 0
+  17:ui/ListView.c ****  *  Returns 1 if an item was output, 0 if there are no more items **/
+  18:ui/ListView.c **** inline char ListGenNext(ListGen *gen, char *outBuf, unsigned char outBufLen) {
+  95              		.loc 1 19 0
+  96              		.set	nomips16
+  97              		.ent	ListGenNext
+  99              	ListGenNext:
+ 100              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 101              		.mask	0xc0000000,-4
+ 102              		.fmask	0x00000000,0
+ 103              		.set	noreorder
+ 104              		.set	nomacro
+ 105              		
+ 106 009c D8FFBD27 		addiu	$sp,$sp,-40
+ 107              	$LCFI3:
+ 108 00a0 2400BFAF 		sw	$31,36($sp)
+ 109              	$LCFI4:
+ 110 00a4 2000BEAF 		sw	$fp,32($sp)
+ 111              	$LCFI5:
+ 112 00a8 21F0A003 		move	$fp,$sp
+ 113              	$LCFI6:
+ 114 00ac 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 115 00b0 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 116 00b4 1000BCAF 		.cprestore	16
+ 117 00b8 2800C4AF 		sw	$4,40($fp)
+ 118 00bc 2C00C5AF 		sw	$5,44($fp)
+ 119 00c0 2110C000 		move	$2,$6
+ 120 00c4 3000C2A3 		sb	$2,48($fp)
+  19:ui/ListView.c ****   if ((gen->length >= 0) && (gen->lastIndex+1 >= gen->length))
+ 121              		.loc 1 20 0
+ 122 00c8 2800C28F 		lw	$2,40($fp)
+ 123 00cc 00000000 		nop
+ 124 00d0 1000428C 		lw	$2,16($2)
+ 125 00d4 00000000 		nop
+ 126 00d8 10004004 		bltz	$2,$L4
+ 127 00dc 00000000 		nop
+ 128              	
+ 129 00e0 2800C28F 		lw	$2,40($fp)
+ 130 00e4 00000000 		nop
+ 131 00e8 0C00428C 		lw	$2,12($2)
+ 132 00ec 00000000 		nop
+ 133 00f0 01004324 		addiu	$3,$2,1
+ 134 00f4 2800C28F 		lw	$2,40($fp)
+ 135 00f8 00000000 		nop
+ 136 00fc 1000428C 		lw	$2,16($2)
+ 137 0100 00000000 		nop
+ 138 0104 2A106200 		slt	$2,$3,$2
+ 139 0108 04004014 		bne	$2,$0,$L4
+ 140 010c 00000000 		nop
+ 141              	
+  20:ui/ListView.c ****     return 0;
+ 142              		.loc 1 21 0
+ 143 0110 21100000 		move	$2,$0
+ 144 0114 46000010 		b	$L5
+ 145 0118 00000000 		nop
+ 146              	
+ 147              	$L4:
+  21:ui/ListView.c ****   assert(gen->next);
+ 148              		.loc 1 22 0
+ 149 011c 2800C28F 		lw	$2,40($fp)
+ 150 0120 00000000 		nop
+ 151 0124 0000428C 		lw	$2,0($2)
+ 152 0128 00000000 		nop
+ 153 012c 0D004014 		bne	$2,$0,$L6
+ 154 0130 00000000 		nop
+ 155              	
+ 156 0134 0000023C 		lui	$2,%hi($LC0)
+ 157 0138 00004424 		addiu	$4,$2,%lo($LC0)
+ 158 013c 0000023C 		lui	$2,%hi($LC1)
+ 159 0140 0C004524 		addiu	$5,$2,%lo($LC1)
+ 160 0144 16000624 		li	$6,22			# 0x16
+ 161 0148 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1941)
+ 162 014c 7C004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1941)
+ 163 0150 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 164 0154 00000000 		nop
+ 165 0158 21C84000 		move	$25,$2
+ 166 015c 09F82003 		jalr	$25
+ 167 0160 00000000 		nop
+ 168              	
+ 169              	$L6:
+  22:ui/ListView.c ****   char res = (*gen->next)(gen, outBuf, outBufLen);
+ 170              		.loc 1 23 0
+ 171 0164 2800C28F 		lw	$2,40($fp)
+ 172 0168 00000000 		nop
+ 173 016c 0000428C 		lw	$2,0($2)
+ 174 0170 3000C393 		lbu	$3,48($fp)
+ 175 0174 2800C48F 		lw	$4,40($fp)
+ 176 0178 2C00C58F 		lw	$5,44($fp)
+ 177 017c 21306000 		move	$6,$3
+ 178 0180 21C84000 		move	$25,$2
+ 179 0184 09F82003 		jalr	$25
+ 180 0188 00000000 		nop
+ 181              	
+ 182 018c 1000DC8F 		lw	$28,16($fp)
+ 183 0190 1800C2A3 		sb	$2,24($fp)
+  23:ui/ListView.c ****   if (res == 1) 
+ 184              		.loc 1 24 0
+ 185 0194 1800C383 		lb	$3,24($fp)
+ 186 0198 01000224 		li	$2,1			# 0x1
+ 187 019c 09006214 		bne	$3,$2,$L7
+ 188 01a0 00000000 		nop
+ 189              	
+  24:ui/ListView.c ****     ++gen->lastIndex;
+ 190              		.loc 1 25 0
+ 191 01a4 2800C28F 		lw	$2,40($fp)
+ 192 01a8 00000000 		nop
+ 193 01ac 0C00428C 		lw	$2,12($2)
+ 194 01b0 00000000 		nop
+ 195 01b4 01004324 		addiu	$3,$2,1
+ 196 01b8 2800C28F 		lw	$2,40($fp)
+ 197 01bc 00000000 		nop
+ 198 01c0 0C0043AC 		sw	$3,12($2)
+ 199              	$L7:
+  25:ui/ListView.c ****   if ((gen->length < 0) && (-gen->length - 1 <= gen->lastIndex))
+ 200              		.loc 1 26 0
+ 201 01c4 2800C28F 		lw	$2,40($fp)
+ 202 01c8 00000000 		nop
+ 203 01cc 1000428C 		lw	$2,16($2)
+ 204 01d0 00000000 		nop
+ 205 01d4 15004104 		bgez	$2,$L8
+ 206 01d8 00000000 		nop
+ 207              	
+ 208 01dc 2800C28F 		lw	$2,40($fp)
+ 209 01e0 00000000 		nop
+ 210 01e4 1000428C 		lw	$2,16($2)
+ 211 01e8 00000000 		nop
+ 212 01ec 27180200 		nor	$3,$0,$2
+ 213 01f0 2800C28F 		lw	$2,40($fp)
+ 214 01f4 00000000 		nop
+ 215 01f8 0C00428C 		lw	$2,12($2)
+ 216 01fc 00000000 		nop
+ 217 0200 2A104300 		slt	$2,$2,$3
+ 218 0204 09004014 		bne	$2,$0,$L8
+ 219 0208 00000000 		nop
+ 220              	
+  26:ui/ListView.c ****     gen->length = -(gen->lastIndex + 2);
+ 221              		.loc 1 27 0
+ 222 020c 2800C28F 		lw	$2,40($fp)
+ 223 0210 00000000 		nop
+ 224 0214 0C00428C 		lw	$2,12($2)
+ 225 0218 FEFF0324 		li	$3,-2			# 0xfffffffffffffffe
+ 226 021c 23186200 		subu	$3,$3,$2
+ 227 0220 2800C28F 		lw	$2,40($fp)
+ 228 0224 00000000 		nop
+ 229 0228 100043AC 		sw	$3,16($2)
+ 230              	$L8:
+  27:ui/ListView.c ****   return res;
+ 231              		.loc 1 28 0
+ 232 022c 1800C283 		lb	$2,24($fp)
+ 233              	$L5:
+  28:ui/ListView.c **** }
+ 234              		.loc 1 29 0
+ 235 0230 21E8C003 		move	$sp,$fp
+ 236 0234 2400BF8F 		lw	$31,36($sp)
+ 237 0238 2000BE8F 		lw	$fp,32($sp)
+ 238 023c 2800BD27 		addiu	$sp,$sp,40
+ 239 0240 0800E003 		j	$31
+ 240 0244 00000000 		nop
+ 241              	
+ 242              		.set	macro
+ 243              		.set	reorder
+ 244              		.end	ListGenNext
+ 245              	$LFE1:
+ 247              		.rdata
+ 248 001a 0000     		.align	2
+ 249              	$LC2:
+ 250 001c 67656E2D 		.ascii	"gen->restart\000"
+ 250      3E726573 
+ 250      74617274 
+ 250      00
+ 251              		.text
+ 252              		.align	2
+ 253              		.globl	ListGenRestart
+ 254              	$LFB2 = .
+  29:ui/ListView.c **** 
+  30:ui/ListView.c **** /** Restart the list from the beginning **/
+  31:ui/ListView.c **** inline void ListGenRestart(ListGen *gen) {
+ 255              		.loc 1 32 0
+ 256              		.set	nomips16
+ 257              		.ent	ListGenRestart
+ 259              	ListGenRestart:
+ 260              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 261              		.mask	0xc0000000,-4
+ 262              		.fmask	0x00000000,0
+ 263              		.set	noreorder
+ 264              		.set	nomacro
+ 265              		
+ 266 0248 E0FFBD27 		addiu	$sp,$sp,-32
+ 267              	$LCFI7:
+ 268 024c 1C00BFAF 		sw	$31,28($sp)
+ 269              	$LCFI8:
+ 270 0250 1800BEAF 		sw	$fp,24($sp)
+ 271              	$LCFI9:
+ 272 0254 21F0A003 		move	$fp,$sp
+ 273              	$LCFI10:
+ 274 0258 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 275 025c 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 276 0260 1000BCAF 		.cprestore	16
+ 277 0264 2000C4AF 		sw	$4,32($fp)
+  32:ui/ListView.c ****   gen->lastIndex = -1;
+ 278              		.loc 1 33 0
+ 279 0268 2000C28F 		lw	$2,32($fp)
+ 280 026c FFFF0324 		li	$3,-1			# 0xffffffffffffffff
+ 281 0270 0C0043AC 		sw	$3,12($2)
+  33:ui/ListView.c ****   assert(gen->restart);
+ 282              		.loc 1 34 0
+ 283 0274 2000C28F 		lw	$2,32($fp)
+ 284 0278 00000000 		nop
+ 285 027c 0400428C 		lw	$2,4($2)
+ 286 0280 00000000 		nop
+ 287 0284 0D004014 		bne	$2,$0,$L11
+ 288 0288 00000000 		nop
+ 289              	
+ 290 028c 0000023C 		lui	$2,%hi($LC2)
+ 291 0290 1C004424 		addiu	$4,$2,%lo($LC2)
+ 292 0294 0000023C 		lui	$2,%hi($LC1)
+ 293 0298 0C004524 		addiu	$5,$2,%lo($LC1)
+ 294 029c 22000624 		li	$6,34			# 0x22
+ 295 02a0 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.1975)
+ 296 02a4 6C004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.1975)
+ 297 02a8 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 298 02ac 00000000 		nop
+ 299 02b0 21C84000 		move	$25,$2
+ 300 02b4 09F82003 		jalr	$25
+ 301 02b8 00000000 		nop
+ 302              	
+ 303              	$L11:
+  34:ui/ListView.c ****   (*gen->restart)(gen);
+ 304              		.loc 1 35 0
+ 305 02bc 2000C28F 		lw	$2,32($fp)
+ 306 02c0 00000000 		nop
+ 307 02c4 0400428C 		lw	$2,4($2)
+ 308 02c8 2000C48F 		lw	$4,32($fp)
+ 309 02cc 21C84000 		move	$25,$2
+ 310 02d0 09F82003 		jalr	$25
+ 311 02d4 00000000 		nop
+ 312              	
+ 313 02d8 1000DC8F 		lw	$28,16($fp)
+  35:ui/ListView.c **** }
+ 314              		.loc 1 36 0
+ 315 02dc 21E8C003 		move	$sp,$fp
+ 316 02e0 1C00BF8F 		lw	$31,28($sp)
+ 317 02e4 1800BE8F 		lw	$fp,24($sp)
+ 318 02e8 2000BD27 		addiu	$sp,$sp,32
+ 319 02ec 0800E003 		j	$31
+ 320 02f0 00000000 		nop
+ 321              	
+ 322              		.set	macro
+ 323              		.set	reorder
+ 324              		.end	ListGenRestart
+ 325              	$LFE2:
+ 327              		.align	2
+ 328              		.globl	ListGenGet
+ 329              	$LFB3 = .
+  36:ui/ListView.c **** 
+  37:ui/ListView.c **** /** Get a particular list item, if it exists - not necessarily efficient **/
+  38:ui/ListView.c **** char ListGenGet(ListGen *gen, int index, char *outBuf, unsigned char outBufLen) {
+ 330              		.loc 1 39 0
+ 331              		.set	nomips16
+ 332              		.ent	ListGenGet
+ 334              	ListGenGet:
+ 335              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 336              		.mask	0xc0000000,-4
+ 337              		.fmask	0x00000000,0
+ 338              		.set	noreorder
+ 339              		.set	nomacro
+ 340              		
+ 341 02f4 D8FFBD27 		addiu	$sp,$sp,-40
+ 342              	$LCFI11:
+ 343 02f8 2400BFAF 		sw	$31,36($sp)
+ 344              	$LCFI12:
+ 345 02fc 2000BEAF 		sw	$fp,32($sp)
+ 346              	$LCFI13:
+ 347 0300 21F0A003 		move	$fp,$sp
+ 348              	$LCFI14:
+ 349 0304 2800C4AF 		sw	$4,40($fp)
+ 350 0308 2C00C5AF 		sw	$5,44($fp)
+ 351 030c 3000C6AF 		sw	$6,48($fp)
+ 352 0310 2110E000 		move	$2,$7
+ 353 0314 3400C2A3 		sb	$2,52($fp)
+  39:ui/ListView.c ****   /* Is index past known end of list */
+  40:ui/ListView.c ****   if ((gen->length >= 0) && (index >= gen->length))
+ 354              		.loc 1 41 0
+ 355 0318 2800C28F 		lw	$2,40($fp)
+ 356 031c 00000000 		nop
+ 357 0320 1000428C 		lw	$2,16($2)
+ 358 0324 00000000 		nop
+ 359 0328 0C004004 		bltz	$2,$L14
+ 360 032c 00000000 		nop
+ 361              	
+ 362 0330 2800C28F 		lw	$2,40($fp)
+ 363 0334 00000000 		nop
+ 364 0338 1000438C 		lw	$3,16($2)
+ 365 033c 2C00C28F 		lw	$2,44($fp)
+ 366 0340 00000000 		nop
+ 367 0344 2A104300 		slt	$2,$2,$3
+ 368 0348 04004014 		bne	$2,$0,$L14
+ 369 034c 00000000 		nop
+ 370              	
+  41:ui/ListView.c ****     return 0;
+ 371              		.loc 1 42 0
+ 372 0350 21100000 		move	$2,$0
+ 373 0354 30000010 		b	$L15
+ 374 0358 00000000 		nop
+ 375              	
+ 376              	$L14:
+  42:ui/ListView.c ****   /* Must we start from 0? */
+  43:ui/ListView.c ****   if (gen->lastIndex >= index)
+ 377              		.loc 1 44 0
+ 378 035c 2800C28F 		lw	$2,40($fp)
+ 379 0360 00000000 		nop
+ 380 0364 0C00438C 		lw	$3,12($2)
+ 381 0368 2C00C28F 		lw	$2,44($fp)
+ 382 036c 00000000 		nop
+ 383 0370 2A106200 		slt	$2,$3,$2
+ 384 0374 04004014 		bne	$2,$0,$L16
+ 385 0378 00000000 		nop
+ 386              	
+  44:ui/ListView.c ****     ListGenRestart(gen);
+ 387              		.loc 1 45 0
+ 388 037c 2800C48F 		lw	$4,40($fp)
+ 389              		.option	pic0
+ 390 0380 0000000C 		jal	ListGenRestart
+ 391 0384 00000000 		nop
+ 392              	
+ 393              		.option	pic2
+ 394              	$L16:
+ 395              	$LBB2 = .
+  45:ui/ListView.c ****   for (int i=gen->lastIndex; i<index-1; ++i) {
+ 396              		.loc 1 46 0
+ 397 0388 2800C28F 		lw	$2,40($fp)
+ 398 038c 00000000 		nop
+ 399 0390 0C00428C 		lw	$2,12($2)
+ 400 0394 00000000 		nop
+ 401 0398 1800C2AF 		sw	$2,24($fp)
+ 402 039c 10000010 		b	$L17
+ 403 03a0 00000000 		nop
+ 404              	
+ 405              	$L19:
+  46:ui/ListView.c ****     if (!ListGenNext(gen, 0x0, outBufLen))
+ 406              		.loc 1 47 0
+ 407 03a4 3400C293 		lbu	$2,52($fp)
+ 408 03a8 2800C48F 		lw	$4,40($fp)
+ 409 03ac 21280000 		move	$5,$0
+ 410 03b0 21304000 		move	$6,$2
+ 411              		.option	pic0
+ 412 03b4 0000000C 		jal	ListGenNext
+ 413 03b8 00000000 		nop
+ 414              	
+ 415              		.option	pic2
+ 416 03bc 04004014 		bne	$2,$0,$L18
+ 417 03c0 00000000 		nop
+ 418              	
+  47:ui/ListView.c ****       return 0;
+ 419              		.loc 1 48 0
+ 420 03c4 21100000 		move	$2,$0
+ 421 03c8 13000010 		b	$L15
+ 422 03cc 00000000 		nop
+ 423              	
+ 424              	$L18:
+  46:ui/ListView.c ****     if (!ListGenNext(gen, 0x0, outBufLen))
+ 425              		.loc 1 46 0
+ 426 03d0 1800C28F 		lw	$2,24($fp)
+ 427 03d4 00000000 		nop
+ 428 03d8 01004224 		addiu	$2,$2,1
+ 429 03dc 1800C2AF 		sw	$2,24($fp)
+ 430              	$L17:
+ 431 03e0 2C00C28F 		lw	$2,44($fp)
+ 432 03e4 00000000 		nop
+ 433 03e8 FFFF4324 		addiu	$3,$2,-1
+ 434 03ec 1800C28F 		lw	$2,24($fp)
+ 435 03f0 00000000 		nop
+ 436 03f4 2A104300 		slt	$2,$2,$3
+ 437 03f8 EAFF4014 		bne	$2,$0,$L19
+ 438 03fc 00000000 		nop
+ 439              	
+ 440              	$LBE2 = .
+  48:ui/ListView.c ****   }
+  49:ui/ListView.c ****   return ListGenNext(gen, outBuf, outBufLen);
+ 441              		.loc 1 50 0
+ 442 0400 3400C293 		lbu	$2,52($fp)
+ 443 0404 2800C48F 		lw	$4,40($fp)
+ 444 0408 3000C58F 		lw	$5,48($fp)
+ 445 040c 21304000 		move	$6,$2
+ 446              		.option	pic0
+ 447 0410 0000000C 		jal	ListGenNext
+ 448 0414 00000000 		nop
+ 449              	
+ 450              		.option	pic2
+ 451              	$L15:
+  50:ui/ListView.c **** }
+ 452              		.loc 1 51 0
+ 453 0418 21E8C003 		move	$sp,$fp
+ 454 041c 2400BF8F 		lw	$31,36($sp)
+ 455 0420 2000BE8F 		lw	$fp,32($sp)
+ 456 0424 2800BD27 		addiu	$sp,$sp,40
+ 457 0428 0800E003 		j	$31
+ 458 042c 00000000 		nop
+ 459              	
+ 460              		.set	macro
+ 461              		.set	reorder
+ 462              		.end	ListGenGet
+ 463              	$LFE3:
+ 465              		.align	2
+ 466              		.globl	ListGenExists
+ 467              	$LFB4 = .
+  51:ui/ListView.c **** 
+  52:ui/ListView.c **** char ListGenExists(ListGen *gen, int index, unsigned char outBufLen) {
+ 468              		.loc 1 53 0
+ 469              		.set	nomips16
+ 470              		.ent	ListGenExists
+ 472              	ListGenExists:
+ 473              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 474              		.mask	0xc0000000,-4
+ 475              		.fmask	0x00000000,0
+ 476              		.set	noreorder
+ 477              		.set	nomacro
+ 478              		
+ 479 0430 E0FFBD27 		addiu	$sp,$sp,-32
+ 480              	$LCFI15:
+ 481 0434 1C00BFAF 		sw	$31,28($sp)
+ 482              	$LCFI16:
+ 483 0438 1800BEAF 		sw	$fp,24($sp)
+ 484              	$LCFI17:
+ 485 043c 21F0A003 		move	$fp,$sp
+ 486              	$LCFI18:
+ 487 0440 2000C4AF 		sw	$4,32($fp)
+ 488 0444 2400C5AF 		sw	$5,36($fp)
+ 489 0448 2110C000 		move	$2,$6
+ 490 044c 2800C2A3 		sb	$2,40($fp)
+  53:ui/ListView.c ****   if ((gen->length < 0) && (index < -gen->length - 1))
+ 491              		.loc 1 54 0
+ 492 0450 2000C28F 		lw	$2,32($fp)
+ 493 0454 00000000 		nop
+ 494 0458 1000428C 		lw	$2,16($2)
+ 495 045c 00000000 		nop
+ 496 0460 0E004104 		bgez	$2,$L22
+ 497 0464 00000000 		nop
+ 498              	
+ 499 0468 2000C28F 		lw	$2,32($fp)
+ 500 046c 00000000 		nop
+ 501 0470 1000428C 		lw	$2,16($2)
+ 502 0474 00000000 		nop
+ 503 0478 27180200 		nor	$3,$0,$2
+ 504 047c 2400C28F 		lw	$2,36($fp)
+ 505 0480 00000000 		nop
+ 506 0484 2A104300 		slt	$2,$2,$3
+ 507 0488 04004010 		beq	$2,$0,$L22
+ 508 048c 00000000 		nop
+ 509              	
+  54:ui/ListView.c ****     return 1; // smaller than known minimum length
+ 510              		.loc 1 55 0
+ 511 0490 01000224 		li	$2,1			# 0x1
+ 512 0494 16000010 		b	$L23
+ 513 0498 00000000 		nop
+ 514              	
+ 515              	$L22:
+  55:ui/ListView.c ****   else if (gen->length >= 0) 
+ 516              		.loc 1 56 0
+ 517 049c 2000C28F 		lw	$2,32($fp)
+ 518 04a0 00000000 		nop
+ 519 04a4 1000428C 		lw	$2,16($2)
+ 520 04a8 00000000 		nop
+ 521 04ac 09004004 		bltz	$2,$L24
+ 522 04b0 00000000 		nop
+ 523              	
+  56:ui/ListView.c ****     return index < gen->length;
+ 524              		.loc 1 57 0
+ 525 04b4 2000C28F 		lw	$2,32($fp)
+ 526 04b8 00000000 		nop
+ 527 04bc 1000438C 		lw	$3,16($2)
+ 528 04c0 2400C28F 		lw	$2,36($fp)
+ 529 04c4 00000000 		nop
+ 530 04c8 2A104300 		slt	$2,$2,$3
+ 531 04cc 08000010 		b	$L23
+ 532 04d0 00000000 		nop
+ 533              	
+ 534              	$L24:
+  57:ui/ListView.c ****   return ListGenGet(gen, index, 0x0, outBufLen);
+ 535              		.loc 1 58 0
+ 536 04d4 2800C293 		lbu	$2,40($fp)
+ 537 04d8 2000C48F 		lw	$4,32($fp)
+ 538 04dc 2400C58F 		lw	$5,36($fp)
+ 539 04e0 21300000 		move	$6,$0
+ 540 04e4 21384000 		move	$7,$2
+ 541              		.option	pic0
+ 542 04e8 0000000C 		jal	ListGenGet
+ 543 04ec 00000000 		nop
+ 544              	
+ 545              		.option	pic2
+ 546              	$L23:
+  58:ui/ListView.c **** }
+ 547              		.loc 1 59 0
+ 548 04f0 21E8C003 		move	$sp,$fp
+ 549 04f4 1C00BF8F 		lw	$31,28($sp)
+ 550 04f8 1800BE8F 		lw	$fp,24($sp)
+ 551 04fc 2000BD27 		addiu	$sp,$sp,32
+ 552 0500 0800E003 		j	$31
+ 553 0504 00000000 		nop
+ 554              	
+ 555              		.set	macro
+ 556              		.set	reorder
+ 557              		.end	ListGenExists
+ 558              	$LFE4:
+ 560              		.align	2
+ 561              		.globl	ListGenModified
+ 562              	$LFB5 = .
+  59:ui/ListView.c **** 
+  60:ui/ListView.c **** void ListGenModified(ListGen *gen) {
+ 563              		.loc 1 61 0
+ 564              		.set	nomips16
+ 565              		.ent	ListGenModified
+ 567              	ListGenModified:
+ 568              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 569              		.mask	0xc0000000,-4
+ 570              		.fmask	0x00000000,0
+ 571              		.set	noreorder
+ 572              		.set	nomacro
+ 573              		
+ 574 0508 E0FFBD27 		addiu	$sp,$sp,-32
+ 575              	$LCFI19:
+ 576 050c 1C00BFAF 		sw	$31,28($sp)
+ 577              	$LCFI20:
+ 578 0510 1800BEAF 		sw	$fp,24($sp)
+ 579              	$LCFI21:
+ 580 0514 21F0A003 		move	$fp,$sp
+ 581              	$LCFI22:
+ 582 0518 2000C4AF 		sw	$4,32($fp)
+  61:ui/ListView.c ****   gen->length = -1;
+ 583              		.loc 1 62 0
+ 584 051c 2000C28F 		lw	$2,32($fp)
+ 585 0520 FFFF0324 		li	$3,-1			# 0xffffffffffffffff
+ 586 0524 100043AC 		sw	$3,16($2)
+  62:ui/ListView.c ****   gen->dirty = 1;
+ 587              		.loc 1 63 0
+ 588 0528 2000C28F 		lw	$2,32($fp)
+ 589 052c 01000324 		li	$3,1			# 0x1
+ 590 0530 140043A0 		sb	$3,20($2)
+  63:ui/ListView.c ****   ListGenRestart(gen);
+ 591              		.loc 1 64 0
+ 592 0534 2000C48F 		lw	$4,32($fp)
+ 593              		.option	pic0
+ 594 0538 0000000C 		jal	ListGenRestart
+ 595 053c 00000000 		nop
+ 596              	
+ 597              		.option	pic2
+  64:ui/ListView.c **** }
+ 598              		.loc 1 65 0
+ 599 0540 21E8C003 		move	$sp,$fp
+ 600 0544 1C00BF8F 		lw	$31,28($sp)
+ 601 0548 1800BE8F 		lw	$fp,24($sp)
+ 602 054c 2000BD27 		addiu	$sp,$sp,32
+ 603 0550 0800E003 		j	$31
+ 604 0554 00000000 		nop
+ 605              	
+ 606              		.set	macro
+ 607              		.set	reorder
+ 608              		.end	ListGenModified
+ 609              	$LFE5:
+ 611              		.align	2
+ 612              		.globl	ListViewCreate
+ 613              	$LFB6 = .
+  65:ui/ListView.c **** 
+  66:ui/ListView.c **** ListView ListViewCreate(ListGen gen, unsigned char y, unsigned char rows, int minFocus, unsigned ch
+ 614              		.loc 1 67 0
+ 615              		.set	nomips16
+ 616              		.ent	ListViewCreate
+ 618              	ListViewCreate:
+ 619              		.frame	$fp,112,$31		# vars= 72, regs= 3/0, args= 16, gp= 8
+ 620              		.mask	0xc0010000,-4
+ 621              		.fmask	0x00000000,0
+ 622              		.set	noreorder
+ 623              		.set	nomacro
+ 624              		
+ 625 0558 90FFBD27 		addiu	$sp,$sp,-112
+ 626              	$LCFI23:
+ 627 055c 6C00BFAF 		sw	$31,108($sp)
+ 628              	$LCFI24:
+ 629 0560 6800BEAF 		sw	$fp,104($sp)
+ 630              	$LCFI25:
+ 631 0564 6400B0AF 		sw	$16,100($sp)
+ 632              	$LCFI26:
+ 633 0568 21F0A003 		move	$fp,$sp
+ 634              	$LCFI27:
+ 635 056c 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 636 0570 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 637 0574 1000BCAF 		.cprestore	16
+ 638 0578 21808000 		move	$16,$4
+ 639 057c 7400C5AF 		sw	$5,116($fp)
+ 640 0580 7800C6AF 		sw	$6,120($fp)
+ 641 0584 7C00C7AF 		sw	$7,124($fp)
+ 642 0588 8C00C48F 		lw	$4,140($fp)
+ 643 058c 9000C38F 		lw	$3,144($fp)
+ 644 0590 9800C28F 		lw	$2,152($fp)
+ 645 0594 5000C4A3 		sb	$4,80($fp)
+ 646 0598 5400C3A3 		sb	$3,84($fp)
+ 647 059c 5800C2A3 		sb	$2,88($fp)
+  67:ui/ListView.c ****   ListView view;
+  68:ui/ListView.c ****   view.gen = gen;
+ 648              		.loc 1 69 0
+ 649 05a0 7400C78F 		lw	$7,116($fp)
+ 650 05a4 7800C68F 		lw	$6,120($fp)
+ 651 05a8 7C00C58F 		lw	$5,124($fp)
+ 652 05ac 8000C48F 		lw	$4,128($fp)
+ 653 05b0 8400C38F 		lw	$3,132($fp)
+ 654 05b4 8800C28F 		lw	$2,136($fp)
+ 655 05b8 1800C7AF 		sw	$7,24($fp)
+ 656 05bc 1C00C6AF 		sw	$6,28($fp)
+ 657 05c0 2000C5AF 		sw	$5,32($fp)
+ 658 05c4 2400C4AF 		sw	$4,36($fp)
+ 659 05c8 2800C3AF 		sw	$3,40($fp)
+ 660 05cc 2C00C2AF 		sw	$2,44($fp)
+  69:ui/ListView.c ****   view.offset = 0;
+ 661              		.loc 1 70 0
+ 662 05d0 3000C0AF 		sw	$0,48($fp)
+  70:ui/ListView.c ****   view.rows = rows;
+ 663              		.loc 1 71 0
+ 664 05d4 5400C293 		lbu	$2,84($fp)
+ 665 05d8 00000000 		nop
+ 666 05dc 3400C2A3 		sb	$2,52($fp)
+  71:ui/ListView.c ****   view.y = y;
+ 667              		.loc 1 72 0
+ 668 05e0 5000C293 		lbu	$2,80($fp)
+ 669 05e4 00000000 		nop
+ 670 05e8 3500C2A3 		sb	$2,53($fp)
+  72:ui/ListView.c ****   view.focus = minFocus;
+ 671              		.loc 1 73 0
+ 672 05ec 9400C28F 		lw	$2,148($fp)
+ 673 05f0 00000000 		nop
+ 674 05f4 3800C2AF 		sw	$2,56($fp)
+  73:ui/ListView.c ****   view.minFocus = minFocus;
+ 675              		.loc 1 74 0
+ 676 05f8 9400C28F 		lw	$2,148($fp)
+ 677 05fc 00000000 		nop
+ 678 0600 4400C2AF 		sw	$2,68($fp)
+  74:ui/ListView.c ****   view.lastDrawnRow = 0;
+ 679              		.loc 1 75 0
+ 680 0604 3C00C0AF 		sw	$0,60($fp)
+  75:ui/ListView.c ****   view.lastDrawnFocus = -1;
+ 681              		.loc 1 76 0
+ 682 0608 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 683 060c 4000C2AF 		sw	$2,64($fp)
+  76:ui/ListView.c ****   view.scrollJump = scrollJump;
+ 684              		.loc 1 77 0
+ 685 0610 5800C293 		lbu	$2,88($fp)
+ 686 0614 00000000 		nop
+ 687 0618 4800C2A3 		sb	$2,72($fp)
+  77:ui/ListView.c ****   return view;
+ 688              		.loc 1 78 0
+ 689 061c 21200002 		move	$4,$16
+ 690 0620 1800C327 		addiu	$3,$fp,24
+ 691 0624 34000224 		li	$2,52			# 0x34
+ 692 0628 21286000 		move	$5,$3
+ 693 062c 21304000 		move	$6,$2
+ 694 0630 0000828F 		lw	$2,%call16(memcpy)($28)
+ 695 0634 00000000 		nop
+ 696 0638 21C84000 		move	$25,$2
+ 697 063c 09F82003 		jalr	$25
+ 698 0640 00000000 		nop
+ 699              	
+ 700 0644 1000DC8F 		lw	$28,16($fp)
+  78:ui/ListView.c **** }
+ 701              		.loc 1 79 0
+ 702 0648 21100002 		move	$2,$16
+ 703 064c 21E8C003 		move	$sp,$fp
+ 704 0650 6C00BF8F 		lw	$31,108($sp)
+ 705 0654 6800BE8F 		lw	$fp,104($sp)
+ 706 0658 6400B08F 		lw	$16,100($sp)
+ 707 065c 7000BD27 		addiu	$sp,$sp,112
+ 708 0660 0800E003 		j	$31
+ 709 0664 00000000 		nop
+ 710              	
+ 711              		.set	macro
+ 712              		.set	reorder
+ 713              		.end	ListViewCreate
+ 714              	$LFE6:
+ 716              		.align	2
+ 717              		.globl	DrawFocusChar
+ 718              	$LFB7 = .
+  79:ui/ListView.c **** 
+  80:ui/ListView.c **** void DrawFocusChar(int focus, int offset, int rows, int y, char c) {
+ 719              		.loc 1 81 0
+ 720              		.set	nomips16
+ 721              		.ent	DrawFocusChar
+ 723              	DrawFocusChar:
+ 724              		.frame	$fp,48,$31		# vars= 16, regs= 2/0, args= 16, gp= 8
+ 725              		.mask	0xc0000000,-4
+ 726              		.fmask	0x00000000,0
+ 727              		.set	noreorder
+ 728              		.set	nomacro
+ 729              		
+ 730 0668 D0FFBD27 		addiu	$sp,$sp,-48
+ 731              	$LCFI28:
+ 732 066c 2C00BFAF 		sw	$31,44($sp)
+ 733              	$LCFI29:
+ 734 0670 2800BEAF 		sw	$fp,40($sp)
+ 735              	$LCFI30:
+ 736 0674 21F0A003 		move	$fp,$sp
+ 737              	$LCFI31:
+ 738 0678 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 739 067c 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 740 0680 1000BCAF 		.cprestore	16
+ 741 0684 3000C4AF 		sw	$4,48($fp)
+ 742 0688 3400C5AF 		sw	$5,52($fp)
+ 743 068c 3800C6AF 		sw	$6,56($fp)
+ 744 0690 3C00C7AF 		sw	$7,60($fp)
+ 745 0694 4000C28F 		lw	$2,64($fp)
+ 746 0698 00000000 		nop
+ 747 069c 2000C2A3 		sb	$2,32($fp)
+  81:ui/ListView.c ****   if (focus == -1)
+ 748              		.loc 1 82 0
+ 749 06a0 3000C38F 		lw	$3,48($fp)
+ 750 06a4 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 751 06a8 2B006210 		beq	$3,$2,$L36
+ 752 06ac 00000000 		nop
+ 753              	
+ 754              	$L31:
+  82:ui/ListView.c ****     return;
+  83:ui/ListView.c ****   int f = focus - offset;
+ 755              		.loc 1 84 0
+ 756 06b0 3000C38F 		lw	$3,48($fp)
+ 757 06b4 3400C28F 		lw	$2,52($fp)
+ 758 06b8 00000000 		nop
+ 759 06bc 23106200 		subu	$2,$3,$2
+ 760 06c0 1800C2AF 		sw	$2,24($fp)
+  84:ui/ListView.c ****   if ((f < 0) || (f > rows))
+ 761              		.loc 1 85 0
+ 762 06c4 1800C28F 		lw	$2,24($fp)
+ 763 06c8 00000000 		nop
+ 764 06cc 25004004 		bltz	$2,$L37
+ 765 06d0 00000000 		nop
+ 766              	
+ 767 06d4 1800C38F 		lw	$3,24($fp)
+ 768 06d8 3800C28F 		lw	$2,56($fp)
+ 769 06dc 00000000 		nop
+ 770 06e0 2A104300 		slt	$2,$2,$3
+ 771 06e4 22004014 		bne	$2,$0,$L38
+ 772 06e8 00000000 		nop
+ 773              	
+ 774              	$L34:
+  85:ui/ListView.c ****     return;
+  86:ui/ListView.c ****   vposition(stdout, f + y, 0);
+ 775              		.loc 1 87 0
+ 776 06ec 0000828F 		lw	$2,%got(stdout)($28)
+ 777 06f0 00000000 		nop
+ 778 06f4 0000438C 		lw	$3,0($2)
+ 779 06f8 1800C48F 		lw	$4,24($fp)
+ 780 06fc 3C00C28F 		lw	$2,60($fp)
+ 781 0700 00000000 		nop
+ 782 0704 21108200 		addu	$2,$4,$2
+ 783 0708 21206000 		move	$4,$3
+ 784 070c 21284000 		move	$5,$2
+ 785 0710 21300000 		move	$6,$0
+ 786 0714 0000828F 		lw	$2,%call16(vposition)($28)
+ 787 0718 00000000 		nop
+ 788 071c 21C84000 		move	$25,$2
+ 789 0720 09F82003 		jalr	$25
+ 790 0724 00000000 		nop
+ 791              	
+ 792 0728 1000DC8F 		lw	$28,16($fp)
+  87:ui/ListView.c ****   printf("%c", c);
+ 793              		.loc 1 88 0
+ 794 072c 2000C283 		lb	$2,32($fp)
+ 795 0730 00000000 		nop
+ 796 0734 21204000 		move	$4,$2
+ 797 0738 0000828F 		lw	$2,%call16(putchar)($28)
+ 798 073c 00000000 		nop
+ 799 0740 21C84000 		move	$25,$2
+ 800 0744 09F82003 		jalr	$25
+ 801 0748 00000000 		nop
+ 802              	
+ 803 074c 1000DC8F 		lw	$28,16($fp)
+ 804 0750 08000010 		b	$L35
+ 805 0754 00000000 		nop
+ 806              	
+ 807              	$L36:
+  83:ui/ListView.c ****     return;
+ 808              		.loc 1 83 0
+ 809 0758 00000000 		nop
+ 810 075c 05000010 		b	$L35
+ 811 0760 00000000 		nop
+ 812              	
+ 813              	$L37:
+  86:ui/ListView.c ****     return;
+ 814              		.loc 1 86 0
+ 815 0764 00000000 		nop
+ 816 0768 02000010 		b	$L35
+ 817 076c 00000000 		nop
+ 818              	
+ 819              	$L38:
+ 820 0770 00000000 		nop
+ 821              	$L35:
+  88:ui/ListView.c **** }
+ 822              		.loc 1 89 0
+ 823 0774 21E8C003 		move	$sp,$fp
+ 824 0778 2C00BF8F 		lw	$31,44($sp)
+ 825 077c 2800BE8F 		lw	$fp,40($sp)
+ 826 0780 3000BD27 		addiu	$sp,$sp,48
+ 827 0784 0800E003 		j	$31
+ 828 0788 00000000 		nop
+ 829              	
+ 830              		.set	macro
+ 831              		.set	reorder
+ 832              		.end	DrawFocusChar
+ 833              	$LFE7:
+ 835              		.align	2
+ 836              		.globl	ListViewDrawFocus
+ 837              	$LFB8 = .
+  89:ui/ListView.c **** 
+  90:ui/ListView.c **** void ListViewDrawFocus(ListView *view) {
+ 838              		.loc 1 91 0
+ 839              		.set	nomips16
+ 840              		.ent	ListViewDrawFocus
+ 842              	ListViewDrawFocus:
+ 843              		.frame	$fp,40,$31		# vars= 0, regs= 2/0, args= 24, gp= 8
+ 844              		.mask	0xc0000000,-4
+ 845              		.fmask	0x00000000,0
+ 846              		.set	noreorder
+ 847              		.set	nomacro
+ 848              		
+ 849 078c D8FFBD27 		addiu	$sp,$sp,-40
+ 850              	$LCFI32:
+ 851 0790 2400BFAF 		sw	$31,36($sp)
+ 852              	$LCFI33:
+ 853 0794 2000BEAF 		sw	$fp,32($sp)
+ 854              	$LCFI34:
+ 855 0798 21F0A003 		move	$fp,$sp
+ 856              	$LCFI35:
+ 857 079c 2800C4AF 		sw	$4,40($fp)
+  91:ui/ListView.c ****   DrawFocusChar(view->lastDrawnFocus, view->offset, view->rows, view->y, ' ');
+ 858              		.loc 1 92 0
+ 859 07a0 2800C28F 		lw	$2,40($fp)
+ 860 07a4 00000000 		nop
+ 861 07a8 2800448C 		lw	$4,40($2)
+ 862 07ac 2800C28F 		lw	$2,40($fp)
+ 863 07b0 00000000 		nop
+ 864 07b4 1800458C 		lw	$5,24($2)
+ 865 07b8 2800C28F 		lw	$2,40($fp)
+ 866 07bc 00000000 		nop
+ 867 07c0 1C004290 		lbu	$2,28($2)
+ 868 07c4 00000000 		nop
+ 869 07c8 21184000 		move	$3,$2
+ 870 07cc 2800C28F 		lw	$2,40($fp)
+ 871 07d0 00000000 		nop
+ 872 07d4 1D004290 		lbu	$2,29($2)
+ 873 07d8 20000624 		li	$6,32			# 0x20
+ 874 07dc 1000A6AF 		sw	$6,16($sp)
+ 875 07e0 21306000 		move	$6,$3
+ 876 07e4 21384000 		move	$7,$2
+ 877              		.option	pic0
+ 878 07e8 0000000C 		jal	DrawFocusChar
+ 879 07ec 00000000 		nop
+ 880              	
+ 881              		.option	pic2
+  92:ui/ListView.c ****   DrawFocusChar(view->focus, view->offset, view->rows, view->y, '>');
+ 882              		.loc 1 93 0
+ 883 07f0 2800C28F 		lw	$2,40($fp)
+ 884 07f4 00000000 		nop
+ 885 07f8 2000448C 		lw	$4,32($2)
+ 886 07fc 2800C28F 		lw	$2,40($fp)
+ 887 0800 00000000 		nop
+ 888 0804 1800458C 		lw	$5,24($2)
+ 889 0808 2800C28F 		lw	$2,40($fp)
+ 890 080c 00000000 		nop
+ 891 0810 1C004290 		lbu	$2,28($2)
+ 892 0814 00000000 		nop
+ 893 0818 21184000 		move	$3,$2
+ 894 081c 2800C28F 		lw	$2,40($fp)
+ 895 0820 00000000 		nop
+ 896 0824 1D004290 		lbu	$2,29($2)
+ 897 0828 3E000624 		li	$6,62			# 0x3e
+ 898 082c 1000A6AF 		sw	$6,16($sp)
+ 899 0830 21306000 		move	$6,$3
+ 900 0834 21384000 		move	$7,$2
+ 901              		.option	pic0
+ 902 0838 0000000C 		jal	DrawFocusChar
+ 903 083c 00000000 		nop
+ 904              	
+ 905              		.option	pic2
+  93:ui/ListView.c ****   view->lastDrawnFocus = view->focus;
+ 906              		.loc 1 94 0
+ 907 0840 2800C28F 		lw	$2,40($fp)
+ 908 0844 00000000 		nop
+ 909 0848 2000438C 		lw	$3,32($2)
+ 910 084c 2800C28F 		lw	$2,40($fp)
+ 911 0850 00000000 		nop
+ 912 0854 280043AC 		sw	$3,40($2)
+  94:ui/ListView.c **** }
+ 913              		.loc 1 95 0
+ 914 0858 21E8C003 		move	$sp,$fp
+ 915 085c 2400BF8F 		lw	$31,36($sp)
+ 916 0860 2000BE8F 		lw	$fp,32($sp)
+ 917 0864 2800BD27 		addiu	$sp,$sp,40
+ 918 0868 0800E003 		j	$31
+ 919 086c 00000000 		nop
+ 920              	
+ 921              		.set	macro
+ 922              		.set	reorder
+ 923              		.end	ListViewDrawFocus
+ 924              	$LFE8:
+ 926              		.rdata
+ 927 0029 000000   		.align	2
+ 928              	$LC3:
+ 929 002c 20257300 		.ascii	" %s\000"
+ 930              		.text
+ 931              		.align	2
+ 932              		.globl	ListViewDraw
+ 933              	$LFB9 = .
+  95:ui/ListView.c **** 
+  96:ui/ListView.c **** /** Draw the list to screen **/
+  97:ui/ListView.c **** char ListViewDraw(ListView *view) {
+ 934              		.loc 1 98 0
+ 935              		.set	nomips16
+ 936              		.ent	ListViewDraw
+ 938              	ListViewDraw:
+ 939              		.frame	$fp,80,$31		# vars= 48, regs= 2/0, args= 16, gp= 8
+ 940              		.mask	0xc0000000,-4
+ 941              		.fmask	0x00000000,0
+ 942              		.set	noreorder
+ 943              		.set	nomacro
+ 944              		
+ 945 0870 B0FFBD27 		addiu	$sp,$sp,-80
+ 946              	$LCFI36:
+ 947 0874 4C00BFAF 		sw	$31,76($sp)
+ 948              	$LCFI37:
+ 949 0878 4800BEAF 		sw	$fp,72($sp)
+ 950              	$LCFI38:
+ 951 087c 21F0A003 		move	$fp,$sp
+ 952              	$LCFI39:
+ 953 0880 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 954 0884 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 955 0888 1000BCAF 		.cprestore	16
+ 956 088c 5000C4AF 		sw	$4,80($fp)
+  98:ui/ListView.c ****   ListViewDrawFocus(view);
+ 957              		.loc 1 99 0
+ 958 0890 5000C48F 		lw	$4,80($fp)
+ 959              		.option	pic0
+ 960 0894 0000000C 		jal	ListViewDrawFocus
+ 961 0898 00000000 		nop
+ 962              	
+ 963              		.option	pic2
+ 964 089c 1000DC8F 		lw	$28,16($fp)
+  99:ui/ListView.c **** 
+ 100:ui/ListView.c ****   /* Restart if list redraw is dirty */
+ 101:ui/ListView.c ****   if (view->gen.dirty) {
+ 965              		.loc 1 102 0
+ 966 08a0 5000C28F 		lw	$2,80($fp)
+ 967 08a4 00000000 		nop
+ 968 08a8 14004280 		lb	$2,20($2)
+ 969 08ac 00000000 		nop
+ 970 08b0 0D004010 		beq	$2,$0,$L42
+ 971 08b4 00000000 		nop
+ 972              	
+ 102:ui/ListView.c ****     view->gen.dirty = 0;
+ 973              		.loc 1 103 0
+ 974 08b8 5000C28F 		lw	$2,80($fp)
+ 975 08bc 00000000 		nop
+ 976 08c0 140040A0 		sb	$0,20($2)
+ 103:ui/ListView.c ****     view->lastDrawnRow = 0;
+ 977              		.loc 1 104 0
+ 978 08c4 5000C28F 		lw	$2,80($fp)
+ 979 08c8 00000000 		nop
+ 980 08cc 240040AC 		sw	$0,36($2)
+ 104:ui/ListView.c ****     /* Reset list */
+ 105:ui/ListView.c ****     ListGenRestart(&view->gen);
+ 981              		.loc 1 106 0
+ 982 08d0 5000C28F 		lw	$2,80($fp)
+ 983 08d4 00000000 		nop
+ 984 08d8 21204000 		move	$4,$2
+ 985              		.option	pic0
+ 986 08dc 0000000C 		jal	ListGenRestart
+ 987 08e0 00000000 		nop
+ 988              	
+ 989              		.option	pic2
+ 990 08e4 1000DC8F 		lw	$28,16($fp)
+ 991              	$L42:
+ 106:ui/ListView.c ****   }
+ 107:ui/ListView.c **** 
+ 108:ui/ListView.c ****   /* Apply offset */
+ 109:ui/ListView.c ****   if (view->lastDrawnRow < view->offset) {
+ 992              		.loc 1 110 0
+ 993 08e8 5000C28F 		lw	$2,80($fp)
+ 994 08ec 00000000 		nop
+ 995 08f0 2400438C 		lw	$3,36($2)
+ 996 08f4 5000C28F 		lw	$2,80($fp)
+ 997 08f8 00000000 		nop
+ 998 08fc 1800428C 		lw	$2,24($2)
+ 999 0900 00000000 		nop
+ 1000 0904 2A106200 		slt	$2,$3,$2
+ 1001 0908 14004010 		beq	$2,$0,$L43
+ 1002 090c 00000000 		nop
+ 1003              	
+ 110:ui/ListView.c ****     ListGenNext(&view->gen, 0x0, LISTGEN_STRING_MAX);
+ 1004              		.loc 1 111 0
+ 1005 0910 5000C28F 		lw	$2,80($fp)
+ 1006 0914 00000000 		nop
+ 1007 0918 21204000 		move	$4,$2
+ 1008 091c 21280000 		move	$5,$0
+ 1009 0920 25000624 		li	$6,37			# 0x25
+ 1010              		.option	pic0
+ 1011 0924 0000000C 		jal	ListGenNext
+ 1012 0928 00000000 		nop
+ 1013              	
+ 1014              		.option	pic2
+ 1015 092c 1000DC8F 		lw	$28,16($fp)
+ 111:ui/ListView.c ****     ++view->lastDrawnRow;
+ 1016              		.loc 1 112 0
+ 1017 0930 5000C28F 		lw	$2,80($fp)
+ 1018 0934 00000000 		nop
+ 1019 0938 2400428C 		lw	$2,36($2)
+ 1020 093c 00000000 		nop
+ 1021 0940 01004324 		addiu	$3,$2,1
+ 1022 0944 5000C28F 		lw	$2,80($fp)
+ 1023 0948 00000000 		nop
+ 1024 094c 240043AC 		sw	$3,36($2)
+ 112:ui/ListView.c ****     return 0;
+ 1025              		.loc 1 113 0
+ 1026 0950 21100000 		move	$2,$0
+ 1027 0954 6E000010 		b	$L44
+ 1028 0958 00000000 		nop
+ 1029              	
+ 1030              	$L43:
+ 113:ui/ListView.c ****   }
+ 114:ui/ListView.c **** 
+ 115:ui/ListView.c ****   int startRow = view->y + view->lastDrawnRow - view->offset;
+ 1031              		.loc 1 116 0
+ 1032 095c 5000C28F 		lw	$2,80($fp)
+ 1033 0960 00000000 		nop
+ 1034 0964 1D004290 		lbu	$2,29($2)
+ 1035 0968 00000000 		nop
+ 1036 096c 21184000 		move	$3,$2
+ 1037 0970 5000C28F 		lw	$2,80($fp)
+ 1038 0974 00000000 		nop
+ 1039 0978 2400428C 		lw	$2,36($2)
+ 1040 097c 00000000 		nop
+ 1041 0980 21186200 		addu	$3,$3,$2
+ 1042 0984 5000C28F 		lw	$2,80($fp)
+ 1043 0988 00000000 		nop
+ 1044 098c 1800428C 		lw	$2,24($2)
+ 1045 0990 00000000 		nop
+ 1046 0994 23106200 		subu	$2,$3,$2
+ 1047 0998 1C00C2AF 		sw	$2,28($fp)
+ 116:ui/ListView.c ****   vposition(stdout, startRow, 0);
+ 1048              		.loc 1 117 0
+ 1049 099c 0000828F 		lw	$2,%got(stdout)($28)
+ 1050 09a0 00000000 		nop
+ 1051 09a4 0000428C 		lw	$2,0($2)
+ 1052 09a8 00000000 		nop
+ 1053 09ac 21204000 		move	$4,$2
+ 1054 09b0 1C00C58F 		lw	$5,28($fp)
+ 1055 09b4 21300000 		move	$6,$0
+ 1056 09b8 0000828F 		lw	$2,%call16(vposition)($28)
+ 1057 09bc 00000000 		nop
+ 1058 09c0 21C84000 		move	$25,$2
+ 1059 09c4 09F82003 		jalr	$25
+ 1060 09c8 00000000 		nop
+ 1061              	
+ 1062 09cc 1000DC8F 		lw	$28,16($fp)
+ 1063 09d0 00000000 		nop
+ 117:ui/ListView.c ****   vclearlines(stdout, startRow, view->y + view->rows);
+ 1064              		.loc 1 118 0
+ 1065 09d4 0000828F 		lw	$2,%got(stdout)($28)
+ 1066 09d8 00000000 		nop
+ 1067 09dc 0000438C 		lw	$3,0($2)
+ 1068 09e0 5000C28F 		lw	$2,80($fp)
+ 1069 09e4 00000000 		nop
+ 1070 09e8 1D004290 		lbu	$2,29($2)
+ 1071 09ec 00000000 		nop
+ 1072 09f0 21204000 		move	$4,$2
+ 1073 09f4 5000C28F 		lw	$2,80($fp)
+ 1074 09f8 00000000 		nop
+ 1075 09fc 1C004290 		lbu	$2,28($2)
+ 1076 0a00 00000000 		nop
+ 1077 0a04 21108200 		addu	$2,$4,$2
+ 1078 0a08 21206000 		move	$4,$3
+ 1079 0a0c 1C00C58F 		lw	$5,28($fp)
+ 1080 0a10 21304000 		move	$6,$2
+ 1081 0a14 0000828F 		lw	$2,%call16(vclearlines)($28)
+ 1082 0a18 00000000 		nop
+ 1083 0a1c 21C84000 		move	$25,$2
+ 1084 0a20 09F82003 		jalr	$25
+ 1085 0a24 00000000 		nop
+ 1086              	
+ 1087 0a28 1000DC8F 		lw	$28,16($fp)
+ 118:ui/ListView.c **** 
+ 119:ui/ListView.c ****   /* Output rows */
+ 120:ui/ListView.c ****   if (view->lastDrawnRow - view->offset < view->rows) {
+ 1088              		.loc 1 121 0
+ 1089 0a2c 5000C28F 		lw	$2,80($fp)
+ 1090 0a30 00000000 		nop
+ 1091 0a34 2400438C 		lw	$3,36($2)
+ 1092 0a38 5000C28F 		lw	$2,80($fp)
+ 1093 0a3c 00000000 		nop
+ 1094 0a40 1800428C 		lw	$2,24($2)
+ 1095 0a44 00000000 		nop
+ 1096 0a48 23186200 		subu	$3,$3,$2
+ 1097 0a4c 5000C28F 		lw	$2,80($fp)
+ 1098 0a50 00000000 		nop
+ 1099 0a54 1C004290 		lbu	$2,28($2)
+ 1100 0a58 00000000 		nop
+ 1101 0a5c 2A106200 		slt	$2,$3,$2
+ 1102 0a60 2A004010 		beq	$2,$0,$L45
+ 1103 0a64 00000000 		nop
+ 1104              	
+ 1105              	$LBB3 = .
+ 121:ui/ListView.c ****     char out[LISTGEN_STRING_MAX];
+ 122:ui/ListView.c ****     int moreToCome = ListGenNext(&view->gen, out, LISTGEN_STRING_MAX);
+ 1106              		.loc 1 123 0
+ 1107 0a68 5000C38F 		lw	$3,80($fp)
+ 1108 0a6c 2000C227 		addiu	$2,$fp,32
+ 1109 0a70 21206000 		move	$4,$3
+ 1110 0a74 21284000 		move	$5,$2
+ 1111 0a78 25000624 		li	$6,37			# 0x25
+ 1112              		.option	pic0
+ 1113 0a7c 0000000C 		jal	ListGenNext
+ 1114 0a80 00000000 		nop
+ 1115              	
+ 1116              		.option	pic2
+ 1117 0a84 1000DC8F 		lw	$28,16($fp)
+ 1118 0a88 1800C2AF 		sw	$2,24($fp)
+ 123:ui/ListView.c ****     if (!moreToCome) {
+ 1119              		.loc 1 124 0
+ 1120 0a8c 1800C28F 		lw	$2,24($fp)
+ 1121 0a90 00000000 		nop
+ 1122 0a94 07004014 		bne	$2,$0,$L46
+ 1123 0a98 00000000 		nop
+ 1124              	
+ 124:ui/ListView.c ****       view->gen.dirty = 1; // will always restart
+ 1125              		.loc 1 125 0
+ 1126 0a9c 5000C28F 		lw	$2,80($fp)
+ 1127 0aa0 01000324 		li	$3,1			# 0x1
+ 1128 0aa4 140043A0 		sb	$3,20($2)
+ 125:ui/ListView.c ****       return 1;
+ 1129              		.loc 1 126 0
+ 1130 0aa8 01000224 		li	$2,1			# 0x1
+ 1131 0aac 18000010 		b	$L44
+ 1132 0ab0 00000000 		nop
+ 1133              	
+ 1134              	$L46:
+ 126:ui/ListView.c ****     }
+ 127:ui/ListView.c ****     //printf(" %i %s", view->lastDrawnRow - view->offset, out);
+ 128:ui/ListView.c ****     printf(" %s", out);
+ 1135              		.loc 1 129 0
+ 1136 0ab4 0000023C 		lui	$2,%hi($LC3)
+ 1137 0ab8 2C004324 		addiu	$3,$2,%lo($LC3)
+ 1138 0abc 2000C227 		addiu	$2,$fp,32
+ 1139 0ac0 21206000 		move	$4,$3
+ 1140 0ac4 21284000 		move	$5,$2
+ 1141 0ac8 0000828F 		lw	$2,%call16(printf)($28)
+ 1142 0acc 00000000 		nop
+ 1143 0ad0 21C84000 		move	$25,$2
+ 1144 0ad4 09F82003 		jalr	$25
+ 1145 0ad8 00000000 		nop
+ 1146              	
+ 1147 0adc 1000DC8F 		lw	$28,16($fp)
+ 129:ui/ListView.c ****     ++view->lastDrawnRow;
+ 1148              		.loc 1 130 0
+ 1149 0ae0 5000C28F 		lw	$2,80($fp)
+ 1150 0ae4 00000000 		nop
+ 1151 0ae8 2400428C 		lw	$2,36($2)
+ 1152 0aec 00000000 		nop
+ 1153 0af0 01004324 		addiu	$3,$2,1
+ 1154 0af4 5000C28F 		lw	$2,80($fp)
+ 1155 0af8 00000000 		nop
+ 1156 0afc 240043AC 		sw	$3,36($2)
+ 130:ui/ListView.c ****     return 0;
+ 1157              		.loc 1 131 0
+ 1158 0b00 21100000 		move	$2,$0
+ 1159 0b04 02000010 		b	$L44
+ 1160 0b08 00000000 		nop
+ 1161              	
+ 1162              	$L45:
+ 1163              	$LBE3 = .
+ 131:ui/ListView.c ****   }
+ 132:ui/ListView.c **** 
+ 133:ui/ListView.c ****   return 1;
+ 1164              		.loc 1 134 0
+ 1165 0b0c 01000224 		li	$2,1			# 0x1
+ 1166              	$L44:
+ 134:ui/ListView.c **** }
+ 1167              		.loc 1 135 0
+ 1168 0b10 21E8C003 		move	$sp,$fp
+ 1169 0b14 4C00BF8F 		lw	$31,76($sp)
+ 1170 0b18 4800BE8F 		lw	$fp,72($sp)
+ 1171 0b1c 5000BD27 		addiu	$sp,$sp,80
+ 1172 0b20 0800E003 		j	$31
+ 1173 0b24 00000000 		nop
+ 1174              	
+ 1175              		.set	macro
+ 1176              		.set	reorder
+ 1177              		.end	ListViewDraw
+ 1178              	$LFE9:
+ 1180              		.align	2
+ 1181              		.globl	ListViewSetFocus
+ 1182              	$LFB10 = .
+ 135:ui/ListView.c **** 
+ 136:ui/ListView.c **** void ListViewSetFocus(ListView *view, int position) {
+ 1183              		.loc 1 137 0
+ 1184              		.set	nomips16
+ 1185              		.ent	ListViewSetFocus
+ 1187              	ListViewSetFocus:
+ 1188              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 1189              		.mask	0xc0000000,-4
+ 1190              		.fmask	0x00000000,0
+ 1191              		.set	noreorder
+ 1192              		.set	nomacro
+ 1193              		
+ 1194 0b28 D8FFBD27 		addiu	$sp,$sp,-40
+ 1195              	$LCFI40:
+ 1196 0b2c 2400BFAF 		sw	$31,36($sp)
+ 1197              	$LCFI41:
+ 1198 0b30 2000BEAF 		sw	$fp,32($sp)
+ 1199              	$LCFI42:
+ 1200 0b34 21F0A003 		move	$fp,$sp
+ 1201              	$LCFI43:
+ 1202 0b38 2800C4AF 		sw	$4,40($fp)
+ 1203 0b3c 2C00C5AF 		sw	$5,44($fp)
+ 137:ui/ListView.c ****   if (position < 0) {
+ 1204              		.loc 1 138 0
+ 1205 0b40 2C00C28F 		lw	$2,44($fp)
+ 1206 0b44 00000000 		nop
+ 1207 0b48 0C004104 		bgez	$2,$L49
+ 1208 0b4c 00000000 		nop
+ 1209              	
+ 138:ui/ListView.c ****     position = view->minFocus;
+ 1210              		.loc 1 139 0
+ 1211 0b50 2800C28F 		lw	$2,40($fp)
+ 1212 0b54 00000000 		nop
+ 1213 0b58 2C00428C 		lw	$2,44($2)
+ 1214 0b5c 00000000 		nop
+ 1215 0b60 2C00C2AF 		sw	$2,44($fp)
+ 139:ui/ListView.c ****     view->focus = view->minFocus;
+ 1216              		.loc 1 140 0
+ 1217 0b64 2800C28F 		lw	$2,40($fp)
+ 1218 0b68 00000000 		nop
+ 1219 0b6c 2C00438C 		lw	$3,44($2)
+ 1220 0b70 2800C28F 		lw	$2,40($fp)
+ 1221 0b74 00000000 		nop
+ 1222 0b78 200043AC 		sw	$3,32($2)
+ 1223              	$L49:
+ 140:ui/ListView.c ****   }
+ 141:ui/ListView.c ****   if (!ListGenExists(&view->gen, position, LISTGEN_STRING_MAX))
+ 1224              		.loc 1 142 0
+ 1225 0b7c 2800C28F 		lw	$2,40($fp)
+ 1226 0b80 00000000 		nop
+ 1227 0b84 21204000 		move	$4,$2
+ 1228 0b88 2C00C58F 		lw	$5,44($fp)
+ 1229 0b8c 25000624 		li	$6,37			# 0x25
+ 1230              		.option	pic0
+ 1231 0b90 0000000C 		jal	ListGenExists
+ 1232 0b94 00000000 		nop
+ 1233              	
+ 1234              		.option	pic2
+ 1235 0b98 48004010 		beq	$2,$0,$L55
+ 1236 0b9c 00000000 		nop
+ 1237              	
+ 1238              	$L50:
+ 142:ui/ListView.c ****     return; // do nothing, past end of list
+ 143:ui/ListView.c ****   view->focus = position;
+ 1239              		.loc 1 144 0
+ 1240 0ba0 2800C28F 		lw	$2,40($fp)
+ 1241 0ba4 2C00C38F 		lw	$3,44($fp)
+ 1242 0ba8 00000000 		nop
+ 1243 0bac 200043AC 		sw	$3,32($2)
+ 144:ui/ListView.c ****   if (position != -1 && position < view->offset) {
+ 1244              		.loc 1 145 0
+ 1245 0bb0 2C00C38F 		lw	$3,44($fp)
+ 1246 0bb4 FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 1247 0bb8 1B006210 		beq	$3,$2,$L52
+ 1248 0bbc 00000000 		nop
+ 1249              	
+ 1250 0bc0 2800C28F 		lw	$2,40($fp)
+ 1251 0bc4 00000000 		nop
+ 1252 0bc8 1800438C 		lw	$3,24($2)
+ 1253 0bcc 2C00C28F 		lw	$2,44($fp)
+ 1254 0bd0 00000000 		nop
+ 1255 0bd4 2A104300 		slt	$2,$2,$3
+ 1256 0bd8 13004010 		beq	$2,$0,$L52
+ 1257 0bdc 00000000 		nop
+ 1258              	
+ 1259              	$LBB4 = .
+ 145:ui/ListView.c ****     int x = position - view->scrollJump;
+ 1260              		.loc 1 146 0
+ 1261 0be0 2800C28F 		lw	$2,40($fp)
+ 1262 0be4 00000000 		nop
+ 1263 0be8 30004290 		lbu	$2,48($2)
+ 1264 0bec 2C00C38F 		lw	$3,44($fp)
+ 1265 0bf0 00000000 		nop
+ 1266 0bf4 23106200 		subu	$2,$3,$2
+ 1267 0bf8 1800C2AF 		sw	$2,24($fp)
+ 146:ui/ListView.c ****     view->offset = x > 0 ? x : 0;
+ 1268              		.loc 1 147 0
+ 1269 0bfc 1800C28F 		lw	$2,24($fp)
+ 1270 0c00 00000000 		nop
+ 1271 0c04 02004104 		bgez	$2,$L53
+ 1272 0c08 00000000 		nop
+ 1273              	
+ 1274 0c0c 21100000 		move	$2,$0
+ 1275              	$L53:
+ 1276 0c10 2800C38F 		lw	$3,40($fp)
+ 1277 0c14 00000000 		nop
+ 1278 0c18 180062AC 		sw	$2,24($3)
+ 147:ui/ListView.c ****     view->gen.dirty = 1;
+ 1279              		.loc 1 148 0
+ 1280 0c1c 2800C28F 		lw	$2,40($fp)
+ 1281 0c20 01000324 		li	$3,1			# 0x1
+ 1282 0c24 140043A0 		sb	$3,20($2)
+ 1283              	$L52:
+ 1284              	$LBE4 = .
+ 148:ui/ListView.c ****   }
+ 149:ui/ListView.c ****   if (position != -1 && position >= view->offset + view->rows) {
+ 1285              		.loc 1 150 0
+ 1286 0c28 2C00C38F 		lw	$3,44($fp)
+ 1287 0c2c FFFF0224 		li	$2,-1			# 0xffffffffffffffff
+ 1288 0c30 23006210 		beq	$3,$2,$L54
+ 1289 0c34 00000000 		nop
+ 1290              	
+ 1291 0c38 2800C28F 		lw	$2,40($fp)
+ 1292 0c3c 00000000 		nop
+ 1293 0c40 1800438C 		lw	$3,24($2)
+ 1294 0c44 2800C28F 		lw	$2,40($fp)
+ 1295 0c48 00000000 		nop
+ 1296 0c4c 1C004290 		lbu	$2,28($2)
+ 1297 0c50 00000000 		nop
+ 1298 0c54 21186200 		addu	$3,$3,$2
+ 1299 0c58 2C00C28F 		lw	$2,44($fp)
+ 1300 0c5c 00000000 		nop
+ 1301 0c60 2A104300 		slt	$2,$2,$3
+ 1302 0c64 16004014 		bne	$2,$0,$L54
+ 1303 0c68 00000000 		nop
+ 1304              	
+ 150:ui/ListView.c ****     view->offset = position - view->rows + 1 + view->scrollJump;
+ 1305              		.loc 1 151 0
+ 1306 0c6c 2800C28F 		lw	$2,40($fp)
+ 1307 0c70 00000000 		nop
+ 1308 0c74 1C004290 		lbu	$2,28($2)
+ 1309 0c78 2C00C38F 		lw	$3,44($fp)
+ 1310 0c7c 00000000 		nop
+ 1311 0c80 23106200 		subu	$2,$3,$2
+ 1312 0c84 01004324 		addiu	$3,$2,1
+ 1313 0c88 2800C28F 		lw	$2,40($fp)
+ 1314 0c8c 00000000 		nop
+ 1315 0c90 30004290 		lbu	$2,48($2)
+ 1316 0c94 00000000 		nop
+ 1317 0c98 21186200 		addu	$3,$3,$2
+ 1318 0c9c 2800C28F 		lw	$2,40($fp)
+ 1319 0ca0 00000000 		nop
+ 1320 0ca4 180043AC 		sw	$3,24($2)
+ 151:ui/ListView.c ****     view->gen.dirty = 1;
+ 1321              		.loc 1 152 0
+ 1322 0ca8 2800C28F 		lw	$2,40($fp)
+ 1323 0cac 01000324 		li	$3,1			# 0x1
+ 1324 0cb0 140043A0 		sb	$3,20($2)
+ 1325 0cb4 02000010 		b	$L54
+ 1326 0cb8 00000000 		nop
+ 1327              	
+ 1328              	$L55:
+ 143:ui/ListView.c ****     return; // do nothing, past end of list
+ 1329              		.loc 1 143 0
+ 1330 0cbc 00000000 		nop
+ 1331              	$L54:
+ 152:ui/ListView.c ****   }
+ 153:ui/ListView.c **** }
+ 1332              		.loc 1 154 0
+ 1333 0cc0 21E8C003 		move	$sp,$fp
+ 1334 0cc4 2400BF8F 		lw	$31,36($sp)
+ 1335 0cc8 2000BE8F 		lw	$fp,32($sp)
+ 1336 0ccc 2800BD27 		addiu	$sp,$sp,40
+ 1337 0cd0 0800E003 		j	$31
+ 1338 0cd4 00000000 		nop
+ 1339              	
+ 1340              		.set	macro
+ 1341              		.set	reorder
+ 1342              		.end	ListViewSetFocus
+ 1343              	$LFE10:
+ 1345              		.align	2
+ 1346              		.globl	ListViewGetFocus
+ 1347              	$LFB11 = .
+ 154:ui/ListView.c **** 
+ 155:ui/ListView.c **** int ListViewGetFocus(ListView *view) {
+ 1348              		.loc 1 156 0
+ 1349              		.set	nomips16
+ 1350              		.ent	ListViewGetFocus
+ 1352              	ListViewGetFocus:
+ 1353              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+ 1354              		.mask	0x40000000,-4
+ 1355              		.fmask	0x00000000,0
+ 1356              		.set	noreorder
+ 1357              		.set	nomacro
+ 1358              		
+ 1359 0cd8 F8FFBD27 		addiu	$sp,$sp,-8
+ 1360              	$LCFI44:
+ 1361 0cdc 0400BEAF 		sw	$fp,4($sp)
+ 1362              	$LCFI45:
+ 1363 0ce0 21F0A003 		move	$fp,$sp
+ 1364              	$LCFI46:
+ 1365 0ce4 0800C4AF 		sw	$4,8($fp)
+ 156:ui/ListView.c ****   return view->focus;
+ 1366              		.loc 1 157 0
+ 1367 0ce8 0800C28F 		lw	$2,8($fp)
+ 1368 0cec 00000000 		nop
+ 1369 0cf0 2000428C 		lw	$2,32($2)
+ 157:ui/ListView.c **** }
+ 1370              		.loc 1 158 0
+ 1371 0cf4 21E8C003 		move	$sp,$fp
+ 1372 0cf8 0400BE8F 		lw	$fp,4($sp)
+ 1373 0cfc 0800BD27 		addiu	$sp,$sp,8
+ 1374 0d00 0800E003 		j	$31
+ 1375 0d04 00000000 		nop
+ 1376              	
+ 1377              		.set	macro
+ 1378              		.set	reorder
+ 1379              		.end	ListViewGetFocus
+ 1380              	$LFE11:
+ 1382              		.align	2
+ 1383              		.globl	ListViewFocusNext
+ 1384              	$LFB12 = .
+ 158:ui/ListView.c **** 
+ 159:ui/ListView.c **** void ListViewFocusNext(ListView *view) {
+ 1385              		.loc 1 160 0
+ 1386              		.set	nomips16
+ 1387              		.ent	ListViewFocusNext
+ 1389              	ListViewFocusNext:
+ 1390              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 1391              		.mask	0xc0000000,-4
+ 1392              		.fmask	0x00000000,0
+ 1393              		.set	noreorder
+ 1394              		.set	nomacro
+ 1395              		
+ 1396 0d08 E0FFBD27 		addiu	$sp,$sp,-32
+ 1397              	$LCFI47:
+ 1398 0d0c 1C00BFAF 		sw	$31,28($sp)
+ 1399              	$LCFI48:
+ 1400 0d10 1800BEAF 		sw	$fp,24($sp)
+ 1401              	$LCFI49:
+ 1402 0d14 21F0A003 		move	$fp,$sp
+ 1403              	$LCFI50:
+ 1404 0d18 2000C4AF 		sw	$4,32($fp)
+ 160:ui/ListView.c ****   ListViewSetFocus(view, ListViewGetFocus(view) + 1);  
+ 1405              		.loc 1 161 0
+ 1406 0d1c 2000C48F 		lw	$4,32($fp)
+ 1407              		.option	pic0
+ 1408 0d20 0000000C 		jal	ListViewGetFocus
+ 1409 0d24 00000000 		nop
+ 1410              	
+ 1411              		.option	pic2
+ 1412 0d28 01004224 		addiu	$2,$2,1
+ 1413 0d2c 2000C48F 		lw	$4,32($fp)
+ 1414 0d30 21284000 		move	$5,$2
+ 1415              		.option	pic0
+ 1416 0d34 0000000C 		jal	ListViewSetFocus
+ 1417 0d38 00000000 		nop
+ 1418              	
+ 1419              		.option	pic2
+ 161:ui/ListView.c **** }
+ 1420              		.loc 1 162 0
+ 1421 0d3c 21E8C003 		move	$sp,$fp
+ 1422 0d40 1C00BF8F 		lw	$31,28($sp)
+ 1423 0d44 1800BE8F 		lw	$fp,24($sp)
+ 1424 0d48 2000BD27 		addiu	$sp,$sp,32
+ 1425 0d4c 0800E003 		j	$31
+ 1426 0d50 00000000 		nop
+ 1427              	
+ 1428              		.set	macro
+ 1429              		.set	reorder
+ 1430              		.end	ListViewFocusNext
+ 1431              	$LFE12:
+ 1433              		.align	2
+ 1434              		.globl	ListViewFocusPrev
+ 1435              	$LFB13 = .
+ 162:ui/ListView.c **** 
+ 163:ui/ListView.c **** void ListViewFocusPrev(ListView *view) {
+ 1436              		.loc 1 164 0
+ 1437              		.set	nomips16
+ 1438              		.ent	ListViewFocusPrev
+ 1440              	ListViewFocusPrev:
+ 1441              		.frame	$fp,32,$31		# vars= 0, regs= 2/0, args= 16, gp= 8
+ 1442              		.mask	0xc0000000,-4
+ 1443              		.fmask	0x00000000,0
+ 1444              		.set	noreorder
+ 1445              		.set	nomacro
+ 1446              		
+ 1447 0d54 E0FFBD27 		addiu	$sp,$sp,-32
+ 1448              	$LCFI51:
+ 1449 0d58 1C00BFAF 		sw	$31,28($sp)
+ 1450              	$LCFI52:
+ 1451 0d5c 1800BEAF 		sw	$fp,24($sp)
+ 1452              	$LCFI53:
+ 1453 0d60 21F0A003 		move	$fp,$sp
+ 1454              	$LCFI54:
+ 1455 0d64 2000C4AF 		sw	$4,32($fp)
+ 164:ui/ListView.c ****   ListViewSetFocus(view, ListViewGetFocus(view) - 1);  
+ 1456              		.loc 1 165 0
+ 1457 0d68 2000C48F 		lw	$4,32($fp)
+ 1458              		.option	pic0
+ 1459 0d6c 0000000C 		jal	ListViewGetFocus
+ 1460 0d70 00000000 		nop
+ 1461              	
+ 1462              		.option	pic2
+ 1463 0d74 FFFF4224 		addiu	$2,$2,-1
+ 1464 0d78 2000C48F 		lw	$4,32($fp)
+ 1465 0d7c 21284000 		move	$5,$2
+ 1466              		.option	pic0
+ 1467 0d80 0000000C 		jal	ListViewSetFocus
+ 1468 0d84 00000000 		nop
+ 1469              	
+ 1470              		.option	pic2
+ 165:ui/ListView.c **** }
+ 1471              		.loc 1 166 0
+ 1472 0d88 21E8C003 		move	$sp,$fp
+ 1473 0d8c 1C00BF8F 		lw	$31,28($sp)
+ 1474 0d90 1800BE8F 		lw	$fp,24($sp)
+ 1475 0d94 2000BD27 		addiu	$sp,$sp,32
+ 1476 0d98 0800E003 		j	$31
+ 1477 0d9c 00000000 		nop
+ 1478              	
+ 1479              		.set	macro
+ 1480              		.set	reorder
+ 1481              		.end	ListViewFocusPrev
+ 1482              	$LFE13:
+ 1484              		.align	2
+ 1485              		.globl	ListViewForceRedraw
+ 1486              	$LFB14 = .
+ 166:ui/ListView.c **** 
+ 167:ui/ListView.c **** void ListViewForceRedraw(ListView *view) {
+ 1487              		.loc 1 168 0
+ 1488              		.set	nomips16
+ 1489              		.ent	ListViewForceRedraw
+ 1491              	ListViewForceRedraw:
+ 1492              		.frame	$fp,8,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+ 1493              		.mask	0x40000000,-4
+ 1494              		.fmask	0x00000000,0
+ 1495              		.set	noreorder
+ 1496              		.set	nomacro
+ 1497              		
+ 1498 0da0 F8FFBD27 		addiu	$sp,$sp,-8
+ 1499              	$LCFI55:
+ 1500 0da4 0400BEAF 		sw	$fp,4($sp)
+ 1501              	$LCFI56:
+ 1502 0da8 21F0A003 		move	$fp,$sp
+ 1503              	$LCFI57:
+ 1504 0dac 0800C4AF 		sw	$4,8($fp)
+ 168:ui/ListView.c ****   view->gen.dirty = 1;
+ 1505              		.loc 1 169 0
+ 1506 0db0 0800C28F 		lw	$2,8($fp)
+ 1507 0db4 01000324 		li	$3,1			# 0x1
+ 1508 0db8 140043A0 		sb	$3,20($2)
+ 169:ui/ListView.c **** }
+ 1509              		.loc 1 170 0
+ 1510 0dbc 21E8C003 		move	$sp,$fp
+ 1511 0dc0 0400BE8F 		lw	$fp,4($sp)
+ 1512 0dc4 0800BD27 		addiu	$sp,$sp,8
+ 1513 0dc8 0800E003 		j	$31
+ 1514 0dcc 00000000 		nop
+ 1515              	
+ 1516              		.set	macro
+ 1517              		.set	reorder
+ 1518              		.end	ListViewForceRedraw
+ 1519              	$LFE14:
+ 1521              		.align	2
+ 1522              		.globl	PrefixCompare
+ 1523              	$LFB15 = .
+ 170:ui/ListView.c **** 
+ 171:ui/ListView.c **** char PrefixCompare(char *prefix, char *buf) {
+ 1524              		.loc 1 172 0
+ 1525              		.set	nomips16
+ 1526              		.ent	PrefixCompare
+ 1528              	PrefixCompare:
+ 1529              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 1530              		.mask	0xc0000000,-4
+ 1531              		.fmask	0x00000000,0
+ 1532              		.set	noreorder
+ 1533              		.set	nomacro
+ 1534              		
+ 1535 0dd0 D8FFBD27 		addiu	$sp,$sp,-40
+ 1536              	$LCFI58:
+ 1537 0dd4 2400BFAF 		sw	$31,36($sp)
+ 1538              	$LCFI59:
+ 1539 0dd8 2000BEAF 		sw	$fp,32($sp)
+ 1540              	$LCFI60:
+ 1541 0ddc 21F0A003 		move	$fp,$sp
+ 1542              	$LCFI61:
+ 1543 0de0 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 1544 0de4 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 1545 0de8 1000BCAF 		.cprestore	16
+ 1546 0dec 2800C4AF 		sw	$4,40($fp)
+ 1547 0df0 2C00C5AF 		sw	$5,44($fp)
+ 172:ui/ListView.c ****   /* ignore preceeding whitespace */
+ 173:ui/ListView.c ****   for (; (*buf == ' '); ++buf)
+ 1548              		.loc 1 174 0
+ 1549 0df4 05000010 		b	$L65
+ 1550 0df8 00000000 		nop
+ 1551              	
+ 1552              	$L66:
+ 1553 0dfc 2C00C28F 		lw	$2,44($fp)
+ 1554 0e00 00000000 		nop
+ 1555 0e04 01004224 		addiu	$2,$2,1
+ 1556 0e08 2C00C2AF 		sw	$2,44($fp)
+ 1557              	$L65:
+ 1558 0e0c 2C00C28F 		lw	$2,44($fp)
+ 1559 0e10 00000000 		nop
+ 1560 0e14 00004380 		lb	$3,0($2)
+ 1561 0e18 20000224 		li	$2,32			# 0x20
+ 1562 0e1c F7FF6210 		beq	$3,$2,$L66
+ 1563 0e20 00000000 		nop
+ 1564              	
+ 174:ui/ListView.c ****     ;
+ 175:ui/ListView.c ****   int i;
+ 176:ui/ListView.c ****   for (i=0; prefix[i] != 0x0; ++i) {
+ 1565              		.loc 1 177 0
+ 1566 0e24 1C00C0AF 		sw	$0,28($fp)
+ 1567 0e28 29000010 		b	$L67
+ 1568 0e2c 00000000 		nop
+ 1569              	
+ 1570              	$L70:
+ 1571              	$LBB5 = .
+ 177:ui/ListView.c ****     char bufcap = toupper(buf[i]);
+ 1572              		.loc 1 178 0
+ 1573 0e30 1C00C28F 		lw	$2,28($fp)
+ 1574 0e34 2C00C38F 		lw	$3,44($fp)
+ 1575 0e38 00000000 		nop
+ 1576 0e3c 21106200 		addu	$2,$3,$2
+ 1577 0e40 00004280 		lb	$2,0($2)
+ 1578 0e44 00000000 		nop
+ 1579 0e48 21204000 		move	$4,$2
+ 1580 0e4c 0000828F 		lw	$2,%call16(toupper)($28)
+ 1581 0e50 00000000 		nop
+ 1582 0e54 21C84000 		move	$25,$2
+ 1583 0e58 09F82003 		jalr	$25
+ 1584 0e5c 00000000 		nop
+ 1585              	
+ 1586 0e60 1000DC8F 		lw	$28,16($fp)
+ 1587 0e64 1900C2A3 		sb	$2,25($fp)
+ 178:ui/ListView.c ****     char prefixcap = toupper(prefix[i]);
+ 1588              		.loc 1 179 0
+ 1589 0e68 1C00C28F 		lw	$2,28($fp)
+ 1590 0e6c 2800C38F 		lw	$3,40($fp)
+ 1591 0e70 00000000 		nop
+ 1592 0e74 21106200 		addu	$2,$3,$2
+ 1593 0e78 00004280 		lb	$2,0($2)
+ 1594 0e7c 00000000 		nop
+ 1595 0e80 21204000 		move	$4,$2
+ 1596 0e84 0000828F 		lw	$2,%call16(toupper)($28)
+ 1597 0e88 00000000 		nop
+ 1598 0e8c 21C84000 		move	$25,$2
+ 1599 0e90 09F82003 		jalr	$25
+ 1600 0e94 00000000 		nop
+ 1601              	
+ 1602 0e98 1000DC8F 		lw	$28,16($fp)
+ 1603 0e9c 1800C2A3 		sb	$2,24($fp)
+ 179:ui/ListView.c ****     if (bufcap != prefixcap)
+ 1604              		.loc 1 180 0
+ 1605 0ea0 1900C383 		lb	$3,25($fp)
+ 1606 0ea4 1800C283 		lb	$2,24($fp)
+ 1607 0ea8 00000000 		nop
+ 1608 0eac 04006210 		beq	$3,$2,$L68
+ 1609 0eb0 00000000 		nop
+ 1610              	
+ 180:ui/ListView.c ****       return 1;
+ 1611              		.loc 1 181 0
+ 1612 0eb4 01000224 		li	$2,1			# 0x1
+ 1613 0eb8 0E000010 		b	$L69
+ 1614 0ebc 00000000 		nop
+ 1615              	
+ 1616              	$L68:
+ 1617              	$LBE5 = .
+ 177:ui/ListView.c ****   for (i=0; prefix[i] != 0x0; ++i) {
+ 1618              		.loc 1 177 0
+ 1619 0ec0 1C00C28F 		lw	$2,28($fp)
+ 1620 0ec4 00000000 		nop
+ 1621 0ec8 01004224 		addiu	$2,$2,1
+ 1622 0ecc 1C00C2AF 		sw	$2,28($fp)
+ 1623              	$L67:
+ 1624 0ed0 1C00C28F 		lw	$2,28($fp)
+ 1625 0ed4 2800C38F 		lw	$3,40($fp)
+ 1626 0ed8 00000000 		nop
+ 1627 0edc 21106200 		addu	$2,$3,$2
+ 1628 0ee0 00004280 		lb	$2,0($2)
+ 1629 0ee4 00000000 		nop
+ 1630 0ee8 D1FF4014 		bne	$2,$0,$L70
+ 1631 0eec 00000000 		nop
+ 1632              	
+ 181:ui/ListView.c ****   }
+ 182:ui/ListView.c ****   return 0;
+ 1633              		.loc 1 183 0
+ 1634 0ef0 21100000 		move	$2,$0
+ 1635              	$L69:
+ 183:ui/ListView.c **** }
+ 1636              		.loc 1 184 0
+ 1637 0ef4 21E8C003 		move	$sp,$fp
+ 1638 0ef8 2400BF8F 		lw	$31,36($sp)
+ 1639 0efc 2000BE8F 		lw	$fp,32($sp)
+ 1640 0f00 2800BD27 		addiu	$sp,$sp,40
+ 1641 0f04 0800E003 		j	$31
+ 1642 0f08 00000000 		nop
+ 1643              	
+ 1644              		.set	macro
+ 1645              		.set	reorder
+ 1646              		.end	PrefixCompare
+ 1647              	$LFE15:
+ 1649              		.align	2
+ 1650              		.globl	PrefixFilterNext
+ 1651              	$LFB16 = .
+ 184:ui/ListView.c **** 
+ 185:ui/ListView.c **** char PrefixFilterNext(ListGen *gen, char *outBuf, unsigned char outBufLen) {
+ 1652              		.loc 1 186 0
+ 1653              		.set	nomips16
+ 1654              		.ent	PrefixFilterNext
+ 1656              	PrefixFilterNext:
+ 1657              		.frame	$fp,88,$31		# vars= 56, regs= 2/0, args= 16, gp= 8
+ 1658              		.mask	0xc0000000,-4
+ 1659              		.fmask	0x00000000,0
+ 1660              		.set	noreorder
+ 1661              		.set	nomacro
+ 1662              		
+ 1663 0f0c A8FFBD27 		addiu	$sp,$sp,-88
+ 1664              	$LCFI62:
+ 1665 0f10 5400BFAF 		sw	$31,84($sp)
+ 1666              	$LCFI63:
+ 1667 0f14 5000BEAF 		sw	$fp,80($sp)
+ 1668              	$LCFI64:
+ 1669 0f18 21F0A003 		move	$fp,$sp
+ 1670              	$LCFI65:
+ 1671 0f1c 5800C4AF 		sw	$4,88($fp)
+ 1672 0f20 5C00C5AF 		sw	$5,92($fp)
+ 1673 0f24 2110C000 		move	$2,$6
+ 1674 0f28 6000C2A3 		sb	$2,96($fp)
+ 186:ui/ListView.c ****   PrefixFilter *filt = (PrefixFilter*) gen->userData;
+ 1675              		.loc 1 187 0
+ 1676 0f2c 5800C28F 		lw	$2,88($fp)
+ 1677 0f30 00000000 		nop
+ 1678 0f34 0800428C 		lw	$2,8($2)
+ 1679 0f38 00000000 		nop
+ 1680 0f3c 2000C2AF 		sw	$2,32($fp)
+ 1681 0f40 02000010 		b	$L80
+ 1682 0f44 00000000 		nop
+ 1683              	
+ 1684              	$L82:
+ 187:ui/ListView.c ****   char buf[LISTGEN_STRING_MAX];
+ 188:ui/ListView.c ****   while (1) {
+ 189:ui/ListView.c ****     char notend = ListGenNext(&filt->gen, buf, LISTGEN_STRING_MAX);
+ 190:ui/ListView.c ****     if (!notend)
+ 191:ui/ListView.c ****       return 0;
+ 192:ui/ListView.c ****     if (!PrefixCompare(filt->prefix, buf)) {
+ 193:ui/ListView.c ****       if (outBuf) {
+ 194:ui/ListView.c ****         int i;
+ 195:ui/ListView.c ****         for (i=0; (i < outBufLen-1) && (buf[i] != 0x0); ++i)
+ 196:ui/ListView.c ****           outBuf[i] = buf[i];
+ 197:ui/ListView.c ****         outBuf[i] = 0x0;
+ 198:ui/ListView.c ****       }
+ 199:ui/ListView.c ****       return 1;
+ 200:ui/ListView.c ****     }
+ 201:ui/ListView.c ****   }
+ 1685              		.loc 1 202 0
+ 1686 0f48 00000000 		nop
+ 1687              	$L80:
+ 1688              	$LBB6 = .
+ 190:ui/ListView.c ****     char notend = ListGenNext(&filt->gen, buf, LISTGEN_STRING_MAX);
+ 1689              		.loc 1 190 0
+ 1690 0f4c 2000C38F 		lw	$3,32($fp)
+ 1691 0f50 2400C227 		addiu	$2,$fp,36
+ 1692 0f54 21206000 		move	$4,$3
+ 1693 0f58 21284000 		move	$5,$2
+ 1694 0f5c 25000624 		li	$6,37			# 0x25
+ 1695              		.option	pic0
+ 1696 0f60 0000000C 		jal	ListGenNext
+ 1697 0f64 00000000 		nop
+ 1698              	
+ 1699              		.option	pic2
+ 1700 0f68 1C00C2A3 		sb	$2,28($fp)
+ 191:ui/ListView.c ****     if (!notend)
+ 1701              		.loc 1 191 0
+ 1702 0f6c 1C00C283 		lb	$2,28($fp)
+ 1703 0f70 00000000 		nop
+ 1704 0f74 04004014 		bne	$2,$0,$L73
+ 1705 0f78 00000000 		nop
+ 1706              	
+ 192:ui/ListView.c ****       return 0;
+ 1707              		.loc 1 192 0
+ 1708 0f7c 21100000 		move	$2,$0
+ 1709 0f80 35000010 		b	$L74
+ 1710 0f84 00000000 		nop
+ 1711              	
+ 1712              	$L73:
+ 193:ui/ListView.c ****     if (!PrefixCompare(filt->prefix, buf)) {
+ 1713              		.loc 1 193 0
+ 1714 0f88 2000C28F 		lw	$2,32($fp)
+ 1715 0f8c 00000000 		nop
+ 1716 0f90 1800438C 		lw	$3,24($2)
+ 1717 0f94 2400C227 		addiu	$2,$fp,36
+ 1718 0f98 21206000 		move	$4,$3
+ 1719 0f9c 21284000 		move	$5,$2
+ 1720              		.option	pic0
+ 1721 0fa0 0000000C 		jal	PrefixCompare
+ 1722 0fa4 00000000 		nop
+ 1723              	
+ 1724              		.option	pic2
+ 1725 0fa8 E7FF4014 		bne	$2,$0,$L82
+ 1726 0fac 00000000 		nop
+ 1727              	
+ 194:ui/ListView.c ****       if (outBuf) {
+ 1728              		.loc 1 194 0
+ 1729 0fb0 5C00C28F 		lw	$2,92($fp)
+ 1730 0fb4 00000000 		nop
+ 1731 0fb8 26004010 		beq	$2,$0,$L76
+ 1732 0fbc 00000000 		nop
+ 1733              	
+ 1734              	$LBB7 = .
+ 196:ui/ListView.c ****         for (i=0; (i < outBufLen-1) && (buf[i] != 0x0); ++i)
+ 1735              		.loc 1 196 0
+ 1736 0fc0 1800C0AF 		sw	$0,24($fp)
+ 1737 0fc4 0F000010 		b	$L77
+ 1738 0fc8 00000000 		nop
+ 1739              	
+ 1740              	$L79:
+ 197:ui/ListView.c ****           outBuf[i] = buf[i];
+ 1741              		.loc 1 197 0
+ 1742 0fcc 1800C28F 		lw	$2,24($fp)
+ 1743 0fd0 5C00C38F 		lw	$3,92($fp)
+ 1744 0fd4 00000000 		nop
+ 1745 0fd8 21106200 		addu	$2,$3,$2
+ 1746 0fdc 1800C38F 		lw	$3,24($fp)
+ 1747 0fe0 1800C427 		addiu	$4,$fp,24
+ 1748 0fe4 21188300 		addu	$3,$4,$3
+ 1749 0fe8 0C006380 		lb	$3,12($3)
+ 1750 0fec 00000000 		nop
+ 1751 0ff0 000043A0 		sb	$3,0($2)
+ 196:ui/ListView.c ****         for (i=0; (i < outBufLen-1) && (buf[i] != 0x0); ++i)
+ 1752              		.loc 1 196 0
+ 1753 0ff4 1800C28F 		lw	$2,24($fp)
+ 1754 0ff8 00000000 		nop
+ 1755 0ffc 01004224 		addiu	$2,$2,1
+ 1756 1000 1800C2AF 		sw	$2,24($fp)
+ 1757              	$L77:
+ 1758 1004 6000C293 		lbu	$2,96($fp)
+ 1759 1008 00000000 		nop
+ 1760 100c FFFF4324 		addiu	$3,$2,-1
+ 1761 1010 1800C28F 		lw	$2,24($fp)
+ 1762 1014 00000000 		nop
+ 1763 1018 2A104300 		slt	$2,$2,$3
+ 1764 101c 08004010 		beq	$2,$0,$L78
+ 1765 1020 00000000 		nop
+ 1766              	
+ 1767 1024 1800C28F 		lw	$2,24($fp)
+ 1768 1028 1800C327 		addiu	$3,$fp,24
+ 1769 102c 21106200 		addu	$2,$3,$2
+ 1770 1030 0C004280 		lb	$2,12($2)
+ 1771 1034 00000000 		nop
+ 1772 1038 E4FF4014 		bne	$2,$0,$L79
+ 1773 103c 00000000 		nop
+ 1774              	
+ 1775              	$L78:
+ 198:ui/ListView.c ****         outBuf[i] = 0x0;
+ 1776              		.loc 1 198 0
+ 1777 1040 1800C28F 		lw	$2,24($fp)
+ 1778 1044 5C00C38F 		lw	$3,92($fp)
+ 1779 1048 00000000 		nop
+ 1780 104c 21106200 		addu	$2,$3,$2
+ 1781 1050 000040A0 		sb	$0,0($2)
+ 1782              	$L76:
+ 1783              	$LBE7 = .
+ 200:ui/ListView.c ****       return 1;
+ 1784              		.loc 1 200 0
+ 1785 1054 01000224 		li	$2,1			# 0x1
+ 1786              	$L74:
+ 1787              	$LBE6 = .
+ 202:ui/ListView.c **** }
+ 1788              		.loc 1 203 0
+ 1789 1058 21E8C003 		move	$sp,$fp
+ 1790 105c 5400BF8F 		lw	$31,84($sp)
+ 1791 1060 5000BE8F 		lw	$fp,80($sp)
+ 1792 1064 5800BD27 		addiu	$sp,$sp,88
+ 1793 1068 0800E003 		j	$31
+ 1794 106c 00000000 		nop
+ 1795              	
+ 1796              		.set	macro
+ 1797              		.set	reorder
+ 1798              		.end	PrefixFilterNext
+ 1799              	$LFE16:
+ 1801              		.align	2
+ 1802              		.globl	PrefixFilterRestart
+ 1803              	$LFB17 = .
+ 203:ui/ListView.c **** 
+ 204:ui/ListView.c **** void PrefixFilterRestart(ListGen *gen) {
+ 1804              		.loc 1 205 0
+ 1805              		.set	nomips16
+ 1806              		.ent	PrefixFilterRestart
+ 1808              	PrefixFilterRestart:
+ 1809              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 1810              		.mask	0xc0000000,-4
+ 1811              		.fmask	0x00000000,0
+ 1812              		.set	noreorder
+ 1813              		.set	nomacro
+ 1814              		
+ 1815 1070 D8FFBD27 		addiu	$sp,$sp,-40
+ 1816              	$LCFI66:
+ 1817 1074 2400BFAF 		sw	$31,36($sp)
+ 1818              	$LCFI67:
+ 1819 1078 2000BEAF 		sw	$fp,32($sp)
+ 1820              	$LCFI68:
+ 1821 107c 21F0A003 		move	$fp,$sp
+ 1822              	$LCFI69:
+ 1823 1080 2800C4AF 		sw	$4,40($fp)
+ 205:ui/ListView.c ****   PrefixFilter *filt = (PrefixFilter*) gen->userData;
+ 1824              		.loc 1 206 0
+ 1825 1084 2800C28F 		lw	$2,40($fp)
+ 1826 1088 00000000 		nop
+ 1827 108c 0800428C 		lw	$2,8($2)
+ 1828 1090 00000000 		nop
+ 1829 1094 1800C2AF 		sw	$2,24($fp)
+ 206:ui/ListView.c ****   ListGenRestart(&filt->gen);
+ 1830              		.loc 1 207 0
+ 1831 1098 1800C28F 		lw	$2,24($fp)
+ 1832 109c 00000000 		nop
+ 1833 10a0 21204000 		move	$4,$2
+ 1834              		.option	pic0
+ 1835 10a4 0000000C 		jal	ListGenRestart
+ 1836 10a8 00000000 		nop
+ 1837              	
+ 1838              		.option	pic2
+ 207:ui/ListView.c **** }
+ 1839              		.loc 1 208 0
+ 1840 10ac 21E8C003 		move	$sp,$fp
+ 1841 10b0 2400BF8F 		lw	$31,36($sp)
+ 1842 10b4 2000BE8F 		lw	$fp,32($sp)
+ 1843 10b8 2800BD27 		addiu	$sp,$sp,40
+ 1844 10bc 0800E003 		j	$31
+ 1845 10c0 00000000 		nop
+ 1846              	
+ 1847              		.set	macro
+ 1848              		.set	reorder
+ 1849              		.end	PrefixFilterRestart
+ 1850              	$LFE17:
+ 1852              		.rdata
+ 1853              		.align	2
+ 1854              	$LC4:
+ 1855 0030 66696C74 		.ascii	"filt && prefix\000"
+ 1855      20262620 
+ 1855      70726566 
+ 1855      697800
+ 1856              		.text
+ 1857              		.align	2
+ 1858              		.globl	PrefixFilterCreate
+ 1859              	$LFB18 = .
+ 208:ui/ListView.c **** 
+ 209:ui/ListView.c **** ListGen PrefixFilterCreate(PrefixFilter *filt, char *prefix, ListGen gen) {
+ 1860              		.loc 1 210 0
+ 1861              		.set	nomips16
+ 1862              		.ent	PrefixFilterCreate
+ 1864              	PrefixFilterCreate:
+ 1865              		.frame	$fp,64,$31		# vars= 24, regs= 3/0, args= 16, gp= 8
+ 1866              		.mask	0xc0010000,-4
+ 1867              		.fmask	0x00000000,0
+ 1868              		.set	noreorder
+ 1869              		.set	nomacro
+ 1870              		
+ 1871 10c4 C0FFBD27 		addiu	$sp,$sp,-64
+ 1872              	$LCFI70:
+ 1873 10c8 3C00BFAF 		sw	$31,60($sp)
+ 1874              	$LCFI71:
+ 1875 10cc 3800BEAF 		sw	$fp,56($sp)
+ 1876              	$LCFI72:
+ 1877 10d0 3400B0AF 		sw	$16,52($sp)
+ 1878              	$LCFI73:
+ 1879 10d4 21F0A003 		move	$fp,$sp
+ 1880              	$LCFI74:
+ 1881 10d8 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 1882 10dc 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 1883 10e0 1000BCAF 		.cprestore	16
+ 1884 10e4 21808000 		move	$16,$4
+ 1885 10e8 4400C5AF 		sw	$5,68($fp)
+ 1886 10ec 4800C6AF 		sw	$6,72($fp)
+ 1887 10f0 4C00C7AF 		sw	$7,76($fp)
+ 210:ui/ListView.c ****   assert(filt && prefix);
+ 1888              		.loc 1 211 0
+ 1889 10f4 4400C28F 		lw	$2,68($fp)
+ 1890 10f8 00000000 		nop
+ 1891 10fc 05004010 		beq	$2,$0,$L86
+ 1892 1100 00000000 		nop
+ 1893              	
+ 1894 1104 4800C28F 		lw	$2,72($fp)
+ 1895 1108 00000000 		nop
+ 1896 110c 0D004014 		bne	$2,$0,$L87
+ 1897 1110 00000000 		nop
+ 1898              	
+ 1899              	$L86:
+ 1900 1114 0000023C 		lui	$2,%hi($LC4)
+ 1901 1118 30004424 		addiu	$4,$2,%lo($LC4)
+ 1902 111c 0000023C 		lui	$2,%hi($LC1)
+ 1903 1120 0C004524 		addiu	$5,$2,%lo($LC1)
+ 1904 1124 D3000624 		li	$6,211			# 0xd3
+ 1905 1128 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2242)
+ 1906 112c 58004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2242)
+ 1907 1130 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 1908 1134 00000000 		nop
+ 1909 1138 21C84000 		move	$25,$2
+ 1910 113c 09F82003 		jalr	$25
+ 1911 1140 00000000 		nop
+ 1912              	
+ 1913              	$L87:
+ 211:ui/ListView.c ****   filt->prefix = prefix;
+ 1914              		.loc 1 212 0
+ 1915 1144 4400C28F 		lw	$2,68($fp)
+ 1916 1148 4800C38F 		lw	$3,72($fp)
+ 1917 114c 00000000 		nop
+ 1918 1150 180043AC 		sw	$3,24($2)
+ 212:ui/ListView.c ****   filt->gen = gen;
+ 1919              		.loc 1 213 0
+ 1920 1154 4400C28F 		lw	$2,68($fp)
+ 1921 1158 4C00C88F 		lw	$8,76($fp)
+ 1922 115c 5000C78F 		lw	$7,80($fp)
+ 1923 1160 5400C68F 		lw	$6,84($fp)
+ 1924 1164 5800C58F 		lw	$5,88($fp)
+ 1925 1168 5C00C48F 		lw	$4,92($fp)
+ 1926 116c 6000C38F 		lw	$3,96($fp)
+ 1927 1170 000048AC 		sw	$8,0($2)
+ 1928 1174 040047AC 		sw	$7,4($2)
+ 1929 1178 080046AC 		sw	$6,8($2)
+ 1930 117c 0C0045AC 		sw	$5,12($2)
+ 1931 1180 100044AC 		sw	$4,16($2)
+ 1932 1184 140043AC 		sw	$3,20($2)
+ 213:ui/ListView.c ****   ListGen filtgen = ListGenCreate(PrefixFilterNext, PrefixFilterRestart, (void *) filt);
+ 1933              		.loc 1 214 0
+ 1934 1188 4400C28F 		lw	$2,68($fp)
+ 1935 118c 1800C327 		addiu	$3,$fp,24
+ 1936 1190 21206000 		move	$4,$3
+ 1937 1194 0000033C 		lui	$3,%hi(PrefixFilterNext)
+ 1938 1198 00006524 		addiu	$5,$3,%lo(PrefixFilterNext)
+ 1939 119c 0000033C 		lui	$3,%hi(PrefixFilterRestart)
+ 1940 11a0 00006624 		addiu	$6,$3,%lo(PrefixFilterRestart)
+ 1941 11a4 21384000 		move	$7,$2
+ 1942              		.option	pic0
+ 1943 11a8 0000000C 		jal	ListGenCreate
+ 1944 11ac 00000000 		nop
+ 1945              	
+ 1946              		.option	pic2
+ 1947 11b0 1000DC8F 		lw	$28,16($fp)
+ 214:ui/ListView.c ****   return filtgen;
+ 1948              		.loc 1 215 0
+ 1949 11b4 1800C78F 		lw	$7,24($fp)
+ 1950 11b8 1C00C68F 		lw	$6,28($fp)
+ 1951 11bc 2000C58F 		lw	$5,32($fp)
+ 1952 11c0 2400C48F 		lw	$4,36($fp)
+ 1953 11c4 2800C38F 		lw	$3,40($fp)
+ 1954 11c8 2C00C28F 		lw	$2,44($fp)
+ 1955 11cc 000007AE 		sw	$7,0($16)
+ 1956 11d0 040006AE 		sw	$6,4($16)
+ 1957 11d4 080005AE 		sw	$5,8($16)
+ 1958 11d8 0C0004AE 		sw	$4,12($16)
+ 1959 11dc 100003AE 		sw	$3,16($16)
+ 1960 11e0 140002AE 		sw	$2,20($16)
+ 215:ui/ListView.c **** }
+ 1961              		.loc 1 216 0
+ 1962 11e4 21100002 		move	$2,$16
+ 1963 11e8 21E8C003 		move	$sp,$fp
+ 1964 11ec 3C00BF8F 		lw	$31,60($sp)
+ 1965 11f0 3800BE8F 		lw	$fp,56($sp)
+ 1966 11f4 3400B08F 		lw	$16,52($sp)
+ 1967 11f8 4000BD27 		addiu	$sp,$sp,64
+ 1968 11fc 0800E003 		j	$31
+ 1969 1200 00000000 		nop
+ 1970              	
+ 1971              		.set	macro
+ 1972              		.set	reorder
+ 1973              		.end	PrefixFilterCreate
+ 1974              	$LFE18:
+ 1976              		.align	2
+ 1977              		.globl	ConcatGenNext
+ 1978              	$LFB19 = .
+ 216:ui/ListView.c **** 
+ 217:ui/ListView.c **** char ConcatGenNext(ListGen *gen, char *outBuf, unsigned char outBufLen) {
+ 1979              		.loc 1 218 0
+ 1980              		.set	nomips16
+ 1981              		.ent	ConcatGenNext
+ 1983              	ConcatGenNext:
+ 1984              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 1985              		.mask	0xc0000000,-4
+ 1986              		.fmask	0x00000000,0
+ 1987              		.set	noreorder
+ 1988              		.set	nomacro
+ 1989              		
+ 1990 1204 D8FFBD27 		addiu	$sp,$sp,-40
+ 1991              	$LCFI75:
+ 1992 1208 2400BFAF 		sw	$31,36($sp)
+ 1993              	$LCFI76:
+ 1994 120c 2000BEAF 		sw	$fp,32($sp)
+ 1995              	$LCFI77:
+ 1996 1210 21F0A003 		move	$fp,$sp
+ 1997              	$LCFI78:
+ 1998 1214 2800C4AF 		sw	$4,40($fp)
+ 1999 1218 2C00C5AF 		sw	$5,44($fp)
+ 2000 121c 2110C000 		move	$2,$6
+ 2001 1220 3000C2A3 		sb	$2,48($fp)
+ 218:ui/ListView.c ****   ConcatGen *ccgen = (ConcatGen *) gen->userData;
+ 2002              		.loc 1 219 0
+ 2003 1224 2800C28F 		lw	$2,40($fp)
+ 2004 1228 00000000 		nop
+ 2005 122c 0800428C 		lw	$2,8($2)
+ 2006 1230 00000000 		nop
+ 2007 1234 1C00C2AF 		sw	$2,28($fp)
+ 219:ui/ListView.c ****   int notend = ListGenNext(&ccgen->gen1, outBuf, outBufLen);
+ 2008              		.loc 1 220 0
+ 2009 1238 1C00C38F 		lw	$3,28($fp)
+ 2010 123c 3000C293 		lbu	$2,48($fp)
+ 2011 1240 21206000 		move	$4,$3
+ 2012 1244 2C00C58F 		lw	$5,44($fp)
+ 2013 1248 21304000 		move	$6,$2
+ 2014              		.option	pic0
+ 2015 124c 0000000C 		jal	ListGenNext
+ 2016 1250 00000000 		nop
+ 2017              	
+ 2018              		.option	pic2
+ 2019 1254 1800C2AF 		sw	$2,24($fp)
+ 220:ui/ListView.c ****   if (notend)
+ 2020              		.loc 1 221 0
+ 2021 1258 1800C28F 		lw	$2,24($fp)
+ 2022 125c 00000000 		nop
+ 2023 1260 07004010 		beq	$2,$0,$L90
+ 2024 1264 00000000 		nop
+ 2025              	
+ 221:ui/ListView.c ****     return notend;
+ 2026              		.loc 1 222 0
+ 2027 1268 1800C28F 		lw	$2,24($fp)
+ 2028 126c 00000000 		nop
+ 2029 1270 00160200 		sll	$2,$2,24
+ 2030 1274 03160200 		sra	$2,$2,24
+ 2031 1278 0A000010 		b	$L91
+ 2032 127c 00000000 		nop
+ 2033              	
+ 2034              	$L90:
+ 222:ui/ListView.c ****   else
+ 223:ui/ListView.c ****     return ListGenNext(&ccgen->gen2, outBuf, outBufLen);
+ 2035              		.loc 1 224 0
+ 2036 1280 1C00C28F 		lw	$2,28($fp)
+ 2037 1284 00000000 		nop
+ 2038 1288 18004324 		addiu	$3,$2,24
+ 2039 128c 3000C293 		lbu	$2,48($fp)
+ 2040 1290 21206000 		move	$4,$3
+ 2041 1294 2C00C58F 		lw	$5,44($fp)
+ 2042 1298 21304000 		move	$6,$2
+ 2043              		.option	pic0
+ 2044 129c 0000000C 		jal	ListGenNext
+ 2045 12a0 00000000 		nop
+ 2046              	
+ 2047              		.option	pic2
+ 2048              	$L91:
+ 224:ui/ListView.c **** }
+ 2049              		.loc 1 225 0
+ 2050 12a4 21E8C003 		move	$sp,$fp
+ 2051 12a8 2400BF8F 		lw	$31,36($sp)
+ 2052 12ac 2000BE8F 		lw	$fp,32($sp)
+ 2053 12b0 2800BD27 		addiu	$sp,$sp,40
+ 2054 12b4 0800E003 		j	$31
+ 2055 12b8 00000000 		nop
+ 2056              	
+ 2057              		.set	macro
+ 2058              		.set	reorder
+ 2059              		.end	ConcatGenNext
+ 2060              	$LFE19:
+ 2062              		.align	2
+ 2063              		.globl	ConcatGenRestart
+ 2064              	$LFB20 = .
+ 225:ui/ListView.c **** 
+ 226:ui/ListView.c **** void ConcatGenRestart(ListGen *gen) {
+ 2065              		.loc 1 227 0
+ 2066              		.set	nomips16
+ 2067              		.ent	ConcatGenRestart
+ 2069              	ConcatGenRestart:
+ 2070              		.frame	$fp,40,$31		# vars= 8, regs= 2/0, args= 16, gp= 8
+ 2071              		.mask	0xc0000000,-4
+ 2072              		.fmask	0x00000000,0
+ 2073              		.set	noreorder
+ 2074              		.set	nomacro
+ 2075              		
+ 2076 12bc D8FFBD27 		addiu	$sp,$sp,-40
+ 2077              	$LCFI79:
+ 2078 12c0 2400BFAF 		sw	$31,36($sp)
+ 2079              	$LCFI80:
+ 2080 12c4 2000BEAF 		sw	$fp,32($sp)
+ 2081              	$LCFI81:
+ 2082 12c8 21F0A003 		move	$fp,$sp
+ 2083              	$LCFI82:
+ 2084 12cc 2800C4AF 		sw	$4,40($fp)
+ 227:ui/ListView.c ****   ConcatGen *ccgen = (ConcatGen *) gen->userData;
+ 2085              		.loc 1 228 0
+ 2086 12d0 2800C28F 		lw	$2,40($fp)
+ 2087 12d4 00000000 		nop
+ 2088 12d8 0800428C 		lw	$2,8($2)
+ 2089 12dc 00000000 		nop
+ 2090 12e0 1800C2AF 		sw	$2,24($fp)
+ 228:ui/ListView.c ****   ListGenRestart(&ccgen->gen1);
+ 2091              		.loc 1 229 0
+ 2092 12e4 1800C28F 		lw	$2,24($fp)
+ 2093 12e8 00000000 		nop
+ 2094 12ec 21204000 		move	$4,$2
+ 2095              		.option	pic0
+ 2096 12f0 0000000C 		jal	ListGenRestart
+ 2097 12f4 00000000 		nop
+ 2098              	
+ 2099              		.option	pic2
+ 229:ui/ListView.c ****   ListGenRestart(&ccgen->gen2);
+ 2100              		.loc 1 230 0
+ 2101 12f8 1800C28F 		lw	$2,24($fp)
+ 2102 12fc 00000000 		nop
+ 2103 1300 18004224 		addiu	$2,$2,24
+ 2104 1304 21204000 		move	$4,$2
+ 2105              		.option	pic0
+ 2106 1308 0000000C 		jal	ListGenRestart
+ 2107 130c 00000000 		nop
+ 2108              	
+ 2109              		.option	pic2
+ 230:ui/ListView.c **** }
+ 2110              		.loc 1 231 0
+ 2111 1310 21E8C003 		move	$sp,$fp
+ 2112 1314 2400BF8F 		lw	$31,36($sp)
+ 2113 1318 2000BE8F 		lw	$fp,32($sp)
+ 2114 131c 2800BD27 		addiu	$sp,$sp,40
+ 2115 1320 0800E003 		j	$31
+ 2116 1324 00000000 		nop
+ 2117              	
+ 2118              		.set	macro
+ 2119              		.set	reorder
+ 2120              		.end	ConcatGenRestart
+ 2121              	$LFE20:
+ 2123              		.rdata
+ 2124 003f 00       		.align	2
+ 2125              	$LC5:
+ 2126 0040 63636765 		.ascii	"ccgen\000"
+ 2126      6E00
+ 2127              		.text
+ 2128              		.align	2
+ 2129              		.globl	ConcatGenCreate
+ 2130              	$LFB21 = .
+ 231:ui/ListView.c **** 
+ 232:ui/ListView.c **** ListGen ConcatGenCreate(ConcatGen *ccgen, ListGen gen1, ListGen gen2) {
+ 2131              		.loc 1 233 0
+ 2132              		.set	nomips16
+ 2133              		.ent	ConcatGenCreate
+ 2135              	ConcatGenCreate:
+ 2136              		.frame	$fp,40,$31		# vars= 0, regs= 3/0, args= 16, gp= 8
+ 2137              		.mask	0xc0010000,-4
+ 2138              		.fmask	0x00000000,0
+ 2139              		.set	noreorder
+ 2140              		.set	nomacro
+ 2141              		
+ 2142 1328 D8FFBD27 		addiu	$sp,$sp,-40
+ 2143              	$LCFI83:
+ 2144 132c 2400BFAF 		sw	$31,36($sp)
+ 2145              	$LCFI84:
+ 2146 1330 2000BEAF 		sw	$fp,32($sp)
+ 2147              	$LCFI85:
+ 2148 1334 1C00B0AF 		sw	$16,28($sp)
+ 2149              	$LCFI86:
+ 2150 1338 21F0A003 		move	$fp,$sp
+ 2151              	$LCFI87:
+ 2152 133c 00001C3C 		lui	$28,%hi(__gnu_local_gp)
+ 2153 1340 00009C27 		addiu	$28,$28,%lo(__gnu_local_gp)
+ 2154 1344 1000BCAF 		.cprestore	16
+ 2155 1348 21808000 		move	$16,$4
+ 2156 134c 2C00C5AF 		sw	$5,44($fp)
+ 2157 1350 3000C6AF 		sw	$6,48($fp)
+ 2158 1354 3400C7AF 		sw	$7,52($fp)
+ 233:ui/ListView.c ****   assert(ccgen);
+ 2159              		.loc 1 234 0
+ 2160 1358 2C00C28F 		lw	$2,44($fp)
+ 2161 135c 00000000 		nop
+ 2162 1360 0D004014 		bne	$2,$0,$L96
+ 2163 1364 00000000 		nop
+ 2164              	
+ 2165 1368 0000023C 		lui	$2,%hi($LC5)
+ 2166 136c 40004424 		addiu	$4,$2,%lo($LC5)
+ 2167 1370 0000023C 		lui	$2,%hi($LC1)
+ 2168 1374 0C004524 		addiu	$5,$2,%lo($LC1)
+ 2169 1378 EA000624 		li	$6,234			# 0xea
+ 2170 137c 0000023C 		lui	$2,%hi(__PRETTY_FUNCTION__.2278)
+ 2171 1380 48004724 		addiu	$7,$2,%lo(__PRETTY_FUNCTION__.2278)
+ 2172 1384 0000828F 		lw	$2,%call16(__assert_fail)($28)
+ 2173 1388 00000000 		nop
+ 2174 138c 21C84000 		move	$25,$2
+ 2175 1390 09F82003 		jalr	$25
+ 2176 1394 00000000 		nop
+ 2177              	
+ 2178              	$L96:
+ 234:ui/ListView.c ****   ccgen->gen1 = gen1;
+ 2179              		.loc 1 235 0
+ 2180 1398 2C00C28F 		lw	$2,44($fp)
+ 2181 139c 3000C88F 		lw	$8,48($fp)
+ 2182 13a0 3400C78F 		lw	$7,52($fp)
+ 2183 13a4 3800C68F 		lw	$6,56($fp)
+ 2184 13a8 3C00C58F 		lw	$5,60($fp)
+ 2185 13ac 4000C48F 		lw	$4,64($fp)
+ 2186 13b0 4400C38F 		lw	$3,68($fp)
+ 2187 13b4 000048AC 		sw	$8,0($2)
+ 2188 13b8 040047AC 		sw	$7,4($2)
+ 2189 13bc 080046AC 		sw	$6,8($2)
+ 2190 13c0 0C0045AC 		sw	$5,12($2)
+ 2191 13c4 100044AC 		sw	$4,16($2)
+ 2192 13c8 140043AC 		sw	$3,20($2)
+ 235:ui/ListView.c ****   ccgen->gen2 = gen2;
+ 2193              		.loc 1 236 0
+ 2194 13cc 2C00C28F 		lw	$2,44($fp)
+ 2195 13d0 4800C88F 		lw	$8,72($fp)
+ 2196 13d4 4C00C78F 		lw	$7,76($fp)
+ 2197 13d8 5000C68F 		lw	$6,80($fp)
+ 2198 13dc 5400C58F 		lw	$5,84($fp)
+ 2199 13e0 5800C48F 		lw	$4,88($fp)
+ 2200 13e4 5C00C38F 		lw	$3,92($fp)
+ 2201 13e8 180048AC 		sw	$8,24($2)
+ 2202 13ec 1C0047AC 		sw	$7,28($2)
+ 2203 13f0 200046AC 		sw	$6,32($2)
+ 2204 13f4 240045AC 		sw	$5,36($2)
+ 2205 13f8 280044AC 		sw	$4,40($2)
+ 2206 13fc 2C0043AC 		sw	$3,44($2)
+ 236:ui/ListView.c ****   return ListGenCreate(ConcatGenNext, ConcatGenRestart, (void *) ccgen);
+ 2207              		.loc 1 237 0
+ 2208 1400 2C00C28F 		lw	$2,44($fp)
+ 2209 1404 21200002 		move	$4,$16
+ 2210 1408 0000033C 		lui	$3,%hi(ConcatGenNext)
+ 2211 140c 00006524 		addiu	$5,$3,%lo(ConcatGenNext)
+ 2212 1410 0000033C 		lui	$3,%hi(ConcatGenRestart)
+ 2213 1414 00006624 		addiu	$6,$3,%lo(ConcatGenRestart)
+ 2214 1418 21384000 		move	$7,$2
+ 2215              		.option	pic0
+ 2216 141c 0000000C 		jal	ListGenCreate
+ 2217 1420 00000000 		nop
+ 2218              	
+ 2219              		.option	pic2
+ 2220 1424 1000DC8F 		lw	$28,16($fp)
+ 237:ui/ListView.c **** }
+ 2221              		.loc 1 238 0
+ 2222 1428 21100002 		move	$2,$16
+ 2223 142c 21E8C003 		move	$sp,$fp
+ 2224 1430 2400BF8F 		lw	$31,36($sp)
+ 2225 1434 2000BE8F 		lw	$fp,32($sp)
+ 2226 1438 1C00B08F 		lw	$16,28($sp)
+ 2227 143c 2800BD27 		addiu	$sp,$sp,40
+ 2228 1440 0800E003 		j	$31
+ 2229 1444 00000000 		nop
+ 2230              	
+ 2231              		.set	macro
+ 2232              		.set	reorder
+ 2233              		.end	ConcatGenCreate
+ 2234              	$LFE21:
+ 2236              		.rdata
+ 2237 0046 0000     		.align	2
+ 2240              	__PRETTY_FUNCTION__.2278:
+ 2241 0048 436F6E63 		.ascii	"ConcatGenCreate\000"
+ 2241      61744765 
+ 2241      6E437265 
+ 2241      61746500 
+ 2242              		.align	2
+ 2245              	__PRETTY_FUNCTION__.2242:
+ 2246 0058 50726566 		.ascii	"PrefixFilterCreate\000"
+ 2246      69784669 
+ 2246      6C746572 
+ 2246      43726561 
+ 2246      746500
+ 2247 006b 00       		.align	2
+ 2250              	__PRETTY_FUNCTION__.1975:
+ 2251 006c 4C697374 		.ascii	"ListGenRestart\000"
+ 2251      47656E52 
+ 2251      65737461 
+ 2251      727400
+ 2252 007b 00       		.align	2
+ 2255              	__PRETTY_FUNCTION__.1941:
+ 2256 007c 4C697374 		.ascii	"ListGenNext\000"
+ 2256      47656E4E 
+ 2256      65787400 
+ 2801              	$Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ui/ListView.c
+     /tmp/ccHMwEhi.s:21     .text:0000000000000000 ListGenCreate
+     /tmp/ccHMwEhi.s:99     .text:000000000000009c ListGenNext
+     /tmp/ccHMwEhi.s:2255   .rodata:000000000000007c __PRETTY_FUNCTION__.1941
+     /tmp/ccHMwEhi.s:259    .text:0000000000000248 ListGenRestart
+     /tmp/ccHMwEhi.s:2250   .rodata:000000000000006c __PRETTY_FUNCTION__.1975
+     /tmp/ccHMwEhi.s:334    .text:00000000000002f4 ListGenGet
+     /tmp/ccHMwEhi.s:472    .text:0000000000000430 ListGenExists
+     /tmp/ccHMwEhi.s:567    .text:0000000000000508 ListGenModified
+     /tmp/ccHMwEhi.s:618    .text:0000000000000558 ListViewCreate
+     /tmp/ccHMwEhi.s:723    .text:0000000000000668 DrawFocusChar
+     /tmp/ccHMwEhi.s:842    .text:000000000000078c ListViewDrawFocus
+     /tmp/ccHMwEhi.s:938    .text:0000000000000870 ListViewDraw
+     /tmp/ccHMwEhi.s:1187   .text:0000000000000b28 ListViewSetFocus
+     /tmp/ccHMwEhi.s:1352   .text:0000000000000cd8 ListViewGetFocus
+     /tmp/ccHMwEhi.s:1389   .text:0000000000000d08 ListViewFocusNext
+     /tmp/ccHMwEhi.s:1440   .text:0000000000000d54 ListViewFocusPrev
+     /tmp/ccHMwEhi.s:1491   .text:0000000000000da0 ListViewForceRedraw
+     /tmp/ccHMwEhi.s:1528   .text:0000000000000dd0 PrefixCompare
+     /tmp/ccHMwEhi.s:1656   .text:0000000000000f0c PrefixFilterNext
+     /tmp/ccHMwEhi.s:1808   .text:0000000000001070 PrefixFilterRestart
+     /tmp/ccHMwEhi.s:1864   .text:00000000000010c4 PrefixFilterCreate
+     /tmp/ccHMwEhi.s:2245   .rodata:0000000000000058 __PRETTY_FUNCTION__.2242
+     /tmp/ccHMwEhi.s:1983   .text:0000000000001204 ConcatGenNext
+     /tmp/ccHMwEhi.s:2069   .text:00000000000012bc ConcatGenRestart
+     /tmp/ccHMwEhi.s:2135   .text:0000000000001328 ConcatGenCreate
+     /tmp/ccHMwEhi.s:2240   .rodata:0000000000000048 __PRETTY_FUNCTION__.2278
+
+UNDEFINED SYMBOLS
+__gnu_local_gp
+__assert_fail
+memcpy
+stdout
+vposition
+putchar
+vclearlines
+printf
+toupper

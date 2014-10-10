@@ -1,0 +1,5 @@
+#!/bin/sh
+./gnurobbo > gnurobbolog.txt
+sync
+cd /usr/gp2x
+exec ./gp2xmenu

@@ -1,0 +1,46 @@
+#!/bin/sh
+#test compiler
+
+CMP="mipsel-linux-uclibc-gcc -mips32"
+
+if 
+$CMP -v >/dev/null
+then
+  echo "Use compiler $CMP for building"
+else
+  echo "Not found compiler $CMP"
+  exit 1
+fi
+
+
+#build libmad
+export CC="$CMP"
+export CFLAGS="-O3"
+echo "++++ build libmad +++"
+cd madlib/libmad-0.15.1b
+./configure  --host=x86-redhat-linux --build=i386-redhat-linux --target=mipsel-linux --enable-fpm=mips  --disable-shared
+make
+unset CC CFLAGS
+cd -
+
+#build mplayer
+BLDDIR=`pwd`
+echo "++++ build mplayer for Jz4740 +++"
+./configure --host-cc=gcc --cc="$CMP" --target=mips-linux-uclibc --enable-cross-compile  --enable-fbdev --enable-ossaudio --disable-esd --disable-x11 --disable-xinerama --disable-vm --enable-libamr_nb --disable-real --enable-faad-fixed --disable-ivtv --disable-mp3lib --enable-mad --with-extraincdir=$BLDDIR/madlib/libmad-0.15.1b --with-extralibdir=$BLDDIR/madlib/libmad-0.15.1b/.libs
+sed -e 's/CONFIG_WMAV1_DECODER/CONFIG_FIXWMAV1_DECODER/g'  \
+    -e 's/CONFIG_WMAV2_DECODER/CONFIG_FIXWMAV2_DECODER/g' config.mak > t.mak
+rm -f config.mak
+mv t.mak config.mak
+cp mod_jz4740/jz4740_ipu.h ./
+cp mod_jz4740/libavsync.a ./
+cp mod_jz4740/jz47_soc.c ./
+cp mod_jz4740/mplayer.c ./
+cp mod_jz4740/mencoder.c ./
+cp mod_jz4740/Makefile ./
+#cp mod_jz4740/librv89.a librv89/librv89.a
+echo "++++ build amr codec for mplayer +++"
+cd amr
+make
+cd -
+make
+

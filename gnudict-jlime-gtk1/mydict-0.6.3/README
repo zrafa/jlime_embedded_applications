@@ -1,0 +1,47 @@
+See more on http://gnudict.sourceforge.net
+
+========== QUICK INSTALL ====================
+Please download packages from
+http://sourceforge.net/projects/gnudict
+or
+http://cosoft.org.cn/projects/gnudict
+
+mydict-0.6.x.rpm
+mydict-plugins-0.5.x.rpm
+mydict-dict-gb-0.2.0.tar.gz
+babylon.dic.tar.gz
+
+>>>>>>>>>>>>>
+Step by step
+>>>>>>>>>>>>>
+
+rpm -ivh mydict-0.6.x.rpm
+rpm -ivh mydict-plugins-0.5.x.rpm
+cd /usr/local/share/mydict
+gtar -zxvf mydict-dict-gb-0.2.0.tar.gz
+gtar -zxvf babylon.dic.tar.gz
+
+# if you don't have chinese platform 
+# download mydict-fonts.0.1.0.tar.gz  
+# gtar -zxvf mydict-fonts.0.1.0.tar.gz
+# xset +fp /usr/local/share/mydict/xfonts
+
+# if you have chinese platform
+# you can add phonetic fonts manually
+#
+# /usr/sbin/chkfontpath -a /usr/local/share/mydict/ybfont
+# /usr/rc.d/init.d/xfs restart
+#
+
+/usr/local/bin/mydict
+
+====  Directory arrangement
+
+/usr/local/share/mydict/plugins/  system plugins - from mydict-plugins 
+$HOME/.mydict/plugins             holds private plugins
+
+/usr/local/share/mydict/xfonts/   phonetic (yinbiao) and default chinese fonts 
+/usr/local/share/mydict/dicts/    local KDIC format dictionary 
+/usr/local/share/mydict/babylon/  babylon's dictionaries
+
+Contact Larry Cai <caiyu@yahoo.com>

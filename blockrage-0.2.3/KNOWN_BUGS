@@ -1,0 +1,35 @@
+
+                    Block Rage 0.2.3 - KNOWN PROBLEMS
+                    =================================
+
+* not enough frames will be dropped if your machine is EXTREMELY slow
+  (displays about 1 frame/second) due to numeric overflow
+  -- you are highly unlikely to encounter that :)
+
+(windows problems are possibly caused by SDL misbehavior)
+* windows: when you toggle fullscreen or doublesize with ALT+Enter/Backslash,
+    ALT gets stuck and you must press and release it again
+    (otherwise instead of Enter - select in menu you get ALT+Enter)
+
+* windows: switching from fullscreen to windowed mode doesn't work
+    for some unknown reason under WinXP the window does not appear
+    in this case
+
+* windows: the audio skew is BIG
+
+* the directcolor screenshot writing is a mess
+
+* security
+	- no protection for shared topscore table yet
+
+* highscores
+	- there is only one topten table for all difficulties/starting levels,
+	  thus on multiuser systems with shared table this might be unfair
+
+* background speed
+	- currently, some background will slow down if your machine is slow
+	and Block Rage drops frames
+
+* configuration
+	- the fullscreen and doublesize settings are not
+	  accessible from the menu

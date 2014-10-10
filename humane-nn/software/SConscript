@@ -1,0 +1,105 @@
+#!/usr/bin/env python
+# This File Called from SConstruct, which sets ARCH up
+Import('ARCH','BuildDir')
+if ARCH == 'avr':
+  Import('F_CPU', 'AVR_CPU')
+
+USE_FAT_IMAGE = False
+
+# -gstabs add C source and line into into assembly output (-adhlns)
+if ARCH == 'avr':
+  OptimizeFlag = ["-Os", "-ggdb", "-gstabs"]
+  USE_KEYBOARD=True
+else:
+  #OptimizeFlag = ["-O0", "-ggdb", "-gstabs"]
+  OptimizeFlag = ["-O0", "-ggdb"]
+  USE_KEYBOARD=False
+
+env = DefaultEnvironment()
+env.Append(CFLAGS = "-std=c99 -Wa,-adhlns=${TARGET}.lst") # C ONLY
+env.Append(CCFLAGS = "-Winvalid-pch -Wall -Wno-long-long -pedantic ") # C & C++
+env.Append(LINKFLAGS = " -Wl,-Map,${TARGET}.map -Wl,-gc-sections -Wl,--relax") # add -s to strip
+env.Append(CXXFLAGS = "") # C++ ONLY
+env.Append(CPPPATH = [".."])
+env.Append(CPPPATH = ["#"])
+env.Append(LIBPATH = [BuildDir])
+
+env.Append(CPPPATH = ["#/bgtree"])
+env.Append(LIBPATH = [BuildDir + "/bgtree"])
+
+env.Append(CPPPATH = ["#/uCmorse"])
+env.Append(LIBPATH = [BuildDir + "/uCmorse"])
+
+env.Append(CPPPATH = ["#/platform"])
+env.Append(LIBPATH = [BuildDir + "/platform"])
+
+env.Append(CPPPATH = ["#/ui"])
+env.Append(LIBPATH = [BuildDir + "/ui"])
+
+env.Append(CPPPATH = ["#/apps"])
+env.Append(LIBPATH = [BuildDir + "/apps"])
+
+# Turn on single Node cache in LoadBlock(). Uses sizeof(Node) RAM
+#env.Append(CFLAGS = "-DUSE_BGTREE_CACHE")
+
+if ARCH != 'avr':
+  env.Append(CPPPATH = ["#/pfatfs-stdio/"])
+  env.Append(LIBPATH = [BuildDir + "/pfatfs-stdio/"])
+else:
+  env.Append(CFLAGS = "-DUSE_SD_CACHE -DSD_CACHE_SIZE=128")
+  env.Append(CFLAGS = "-DUSE_TIMER_STACK_CHECK")
+  env.Append(CFLAGS = "-DTINYERRORS")
+  #env.Append(CFLAGS = "-D__ASSERT_USE_STDERR"); #see avr/include/assert.h
+  env.Append(CPPPATH = ["#/3rdParty/pfatfs/avr"])
+  env.Append(LIBPATH = [BuildDir + "/3rdParty/pfatfs/avr"])
+  # Use minimal avr-libc printf implementation
+  env.Append(LINKFLAGS = "-Wl,-u,vfprintf -lprintf_min")
+  if USE_KEYBOARD:
+    env.Append(CFLAGS = "-DUSE_KEYBOARD")
+
+env.Append(CCFLAGS = OptimizeFlag)
+env.Append(ASFLAGS = OptimizeFlag)
+
+## Standard set of libraries for sub-projects to use
+HiLibs = ['Ui', 'Platform', 'bgTree', 'LoadBlock', 'Errors', 'uCmorse', 'inmorse']
+
+ObjCopyHexCmd=""
+if ARCH == "avr":
+  # the AVR Build Environment
+  env = env.Clone()
+  env.Replace( CC = "avr-gcc" )
+  env.Replace( CXX = "avr-g++" )
+  env.Append( CCFLAGS = " -mmcu=" + AVR_CPU + " -fdata-sections -ffunction-sections -fsigned-char -DAVR -DUSE_VT52 -DF_CPU="+F_CPU )
+  #31443
+  #env.Append( CCFLAGS = "-funsigned-bitfields") # No change in size
+  #env.Append( CCFLAGS = "-fpack-struct") # No change in size
+  env.Append( CCFLAGS = "-fshort-enums") # 31349
+  env.Append( CCFLAGS = "-mcall-prologues") # 28965
+  env.Append( CCFLAGS = "--param inline-call-cost=2") # 27929
+  #env.Append( CCFLAGS = "-finline-limit=3") # 27931
+  #env.Append( CCFLAGS = "-fno-inline") # error
+  #env.Append( CCFLAGS = "--combine -fwhole-program" )
+  env.Append( CCFLAGS = "-fno-split-wide-types") # 
+  env.Append( LINKFLAGS = " -mmcu=" + AVR_CPU )
+  env.Replace( AS = "avr-gcc" )
+  env.Append( ASFLAGS = " -x assembler-with-cpp -c -mmcu=" + AVR_CPU + " -Wa,-gstabs -DAVR -DF_CPU="+F_CPU)
+  env.Append( CPPPATH = "/usr/local/avr/avr/include" )
+  ObjCopyHexCmd = "avr-objcopy -O ihex -R .eeprom "
+
+if ARCH != "avr":
+  env.ParseConfig("pkg-config sdl --cflags --libs")
+
+env.Library("Errors.c")
+env.Library("LoadBlock.c")
+
+import os
+os.system('cd ../..; cscope -b -R -s. -s/usr/local/avr/avr/include')
+
+Export('env', 'ARCH', 'ObjCopyHexCmd', 'HiLibs', 'USE_FAT_IMAGE', 'USE_KEYBOARD')
+SConscript('platform/SConscript')
+SConscript('ui/SConscript')
+SConscript('bgtree/SConscript')
+SConscript('tests/SConscript')
+SConscript('apps/SConscript')
+SConscript('uCmorse/SConscript')
+

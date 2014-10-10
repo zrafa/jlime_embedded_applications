@@ -1,0 +1,135 @@
+idct.lo: idct.c \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/string.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/features.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/cdefs.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/wordsize.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/gnu/stubs.h \
+ /mnt/sda6/programas/stuff/tmp/cross/mipsel/lib/gcc/mipsel-linux/4.4.2/include/stddef.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/string.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/string2.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/stdlib.h \
+ internal.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/types.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/types.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/typesizes.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/time.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/endian.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/endian.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/byteswap.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/select.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/select.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sigset.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/time.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/sysmacros.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/pthreadtypes.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/alloca.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/limits.h \
+ /mnt/sda6/programas/stuff/tmp/cross/mipsel/lib/gcc/mipsel-linux/4.4.2/include-fixed/limits.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/posix1_lim.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/local_lim.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/linux/limits.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/posix2_lim.h \
+ ../config.h ../include/theora/codec.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ogg/ogg.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ogg/os_types.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ogg/config_types.h \
+ ../include/theora/theora.h ocintrin.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/math.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/huge_val.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/mathdef.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sgidefs.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/mathcalls.h \
+ /mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/mathinline.h \
+ huffman.h quant.h dct.h
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/string.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/features.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/cdefs.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/wordsize.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/gnu/stubs.h:
+
+/mnt/sda6/programas/stuff/tmp/cross/mipsel/lib/gcc/mipsel-linux/4.4.2/include/stddef.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/string.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/string2.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/stdlib.h:
+
+internal.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/types.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/types.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/typesizes.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/time.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/endian.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/endian.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/byteswap.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/select.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/select.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/sigset.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/time.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sys/sysmacros.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/pthreadtypes.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/alloca.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/limits.h:
+
+/mnt/sda6/programas/stuff/tmp/cross/mipsel/lib/gcc/mipsel-linux/4.4.2/include-fixed/limits.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/posix1_lim.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/local_lim.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/linux/limits.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/posix2_lim.h:
+
+../config.h:
+
+../include/theora/codec.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ogg/ogg.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ogg/os_types.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/ogg/config_types.h:
+
+../include/theora/theora.h:
+
+ocintrin.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/math.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/huge_val.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/mathdef.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/sgidefs.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/mathcalls.h:
+
+/mnt/sda6/programas/stuff/tmp/staging/mipsel-linux/usr/include/bits/mathinline.h:
+
+huffman.h:
+
+quant.h:
+
+dct.h:
